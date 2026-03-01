@@ -16,21 +16,18 @@ const socialLinks = [
   },
   {
     name: "Instagram",
-    handle: "@nisha.global",
     url: "https://instagram.com/nisha.global",
     icon: FaInstagram,
     color: "text-pink-600",
   },
   {
     name: "Facebook Page",
-    handle: "NishaGlobal Education",
     url: "https://www.facebook.com/profile.php?id=61588627138300",
     icon: FaFacebook,
     color: "text-blue-700",
   },
   {
     name: "YouTube",
-    handle: "NishaGlobal Education",
     url: "https://www.youtube.com/@NishaglobalEducation",
     icon: FaYoutube,
     color: "text-red-600",
@@ -114,26 +111,29 @@ const submit = () => {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-2">
-              {socialLinks.map((s) => {
-                const Icon = s.icon;
-                return (
-                  <a
-                    key={s.name}
-                    href={s.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 rounded-xl border bg-white px-3 py-2 hover:bg-gray-100 transition"
-                  >
-                    <Icon className={`text-lg ${s.color}`} />
-                    <div className="leading-tight">
-                      <div className="text-xs font-semibold">{s.name}</div>
-                      <div className="text-[11px] text-gray-600">{s.handle}</div>
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+  {socialLinks.map((s) => {
+    const Icon = s.icon;
+
+    return (
+      <a
+        key={s.name}
+        href={s.url}
+        target="_blank"
+        rel="noreferrer"
+        className="flex items-center justify-center gap-2 rounded-xl border bg-white px-4 py-2 hover:bg-gray-100 transition"
+      >
+        <Icon className={`text-lg ${s.color}`} />
+
+        <div className="leading-tight">
+          <div className="text-xs font-semibold whitespace-nowrap">
+            {s.name}
+          </div>
+        </div>
+      </a>
+    );
+  })}
+</div>
           </div>
         </div>
       </div>
