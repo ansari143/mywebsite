@@ -5,6 +5,29 @@
 :root {
   color-scheme: light;
 }
+
 body {
   @apply bg-gray-50 text-gray-900;
+}
+
+/* ✅ ADD THIS AT THE BOTTOM */
+@media print {
+
+  /* hide buttons, navigation, social links */
+  .no-print {
+    display: none !important;
+  }
+
+  /* make certificate full white */
+  body {
+    background: white !important;
+  }
+
+  /* remove shadows when printing */
+  .shadow-sm,
+  .shadow,
+  .shadow-lg {
+    box-shadow: none !important;
+  }
+
 }
