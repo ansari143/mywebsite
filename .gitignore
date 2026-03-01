@@ -1,0 +1,53 @@
+# Next.js build output
+.next/
+out/
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+# Testing
+/coverage
+
+# Production
+/build
+/dist
+/public/build
+/out
+
+# Environment variables
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# OS and Editor files
+.DS_Store
+*.seed
+*.pid
+*.pid.lock
+.vscode/
+
+# Optional caches
+.npm
+.eslintcache
+.stylelintcache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+.node_repl_history
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Output of 'npm pack'
+*.tgz
