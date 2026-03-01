@@ -31,7 +31,7 @@ const socialLinks = [
   {
     name: "YouTube",
     handle: "NishaGlobal Education",
-    url: "https://youtube.com/@SDigital-Tips",
+    url: "https://www.youtube.com/@NishaglobalEducation",
     icon: FaYoutube,
     color: "text-red-600",
   },
