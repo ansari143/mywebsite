@@ -1,32 +1,45 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
     <div className="space-y-10">
-      <section className="rounded-2xl bg-white p-6 sm:p-8 shadow-sm">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-          Choose the Right Stream After 10th — with Smart Career Tests
-        </h1>
-        <p className="mt-3 text-sm sm:text-base text-gray-600">
-          Engineering, Medical, Government Jobs, Teacher, Aviation, Nursing, BCom and more.
-          Take a 50-question test and get score-based guidance + action plan.
-        </p>
+    <section className="rounded-2xl bg-white p-6 sm:p-8 shadow-sm text-center">
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-3">
-          <Link
-            href="/tests"
-            className="w-full sm:w-auto rounded-xl bg-blue-600 px-5 py-3 text-center text-white hover:bg-blue-700"
-          >
-            Start Career Test
-          </Link>
-          <Link
-            href="/tests"
-            className="w-full sm:w-auto rounded-xl border px-5 py-3 text-center hover:bg-gray-50"
-          >
-            Explore Streams
-          </Link>
-        </div>
-      </section>
+  <Image
+    src="/logo.png"
+    alt="Nishaglobal Education"
+    width={120}
+    height={120}
+    className="mx-auto mb-4"
+    priority
+  />
+
+  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+    Choose the Right Stream After 10th — with Smart Career Tests
+  </h1>
+
+  <p className="mt-3 text-sm sm:text-base text-gray-600">
+    Engineering, Medical, Government Jobs, Teacher, Aviation, Nursing, BCom and more.
+    Take a 50-question test and get score-based guidance + action plan.
+  </p>
+
+  <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+    <Link
+      href="/tests"
+      className="w-full sm:w-auto rounded-xl bg-blue-600 px-5 py-3 text-center text-white hover:bg-blue-700"
+    >
+      Start Career Test
+    </Link>
+    <Link
+      href="/tests"
+      className="w-full sm:w-auto rounded-xl border px-5 py-3 text-center hover:bg-gray-50"
+    >
+      Explore Streams
+    </Link>
+  </div>
+
+</section>
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {[
