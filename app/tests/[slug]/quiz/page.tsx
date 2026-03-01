@@ -16,32 +16,42 @@ export default function QuizPage() {
   const questions = test?.questions ?? [];
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, "A" | "B" | "C" | "D">>({});
-
+ const [lang, setLang] = useState<"EN" | "HI" | "BOTH">("BOTH");
   if (!test) {
     return <div className="rounded-2xl bg-white p-8 shadow-sm">Test not found.</div>;
   }
 
   const q = questions[index];
   const selected = answers[q.id];
+  const answeredCount = Object.keys(answers).length;
+const total = questions.length;
+const allAnswered = answeredCount === total;
 
   const onSelect = (opt: "A" | "B" | "C" | "D") => {
     setAnswers((prev) => ({ ...prev, [q.id]: opt }));
   };
 
-  const submit = () => {
-    const total = questions.length;
-    let correct = 0;
-    for (const ques of questions) {
-      if (answers[ques.id] === ques.correct) correct++;
-    }
-    const percent = Math.round((correct / total) * 100);
+ const submit = () => {
+  const total = questions.length;
 
-    sessionStorage.setItem(
-      "nge_result",
-      JSON.stringify({ slug: test.slug, title: test.title, percent, correct, total })
-    );
-    router.push("/result");
-  };
+  // ✅ validation: must answer all questions
+  if (Object.keys(answers).length !== total) {
+    alert(`Please answer all ${total} questions before submitting.`);
+    return;
+  }
+
+  let correct = 0;
+  for (const ques of questions) {
+    if (answers[ques.id] === ques.correct) correct++;
+  }
+  const percent = Math.round((correct / total) * 100);
+
+  sessionStorage.setItem(
+    "nge_result",
+    JSON.stringify({ slug: test.slug, title: test.title, percent, correct, total })
+  );
+  router.push("/result");
+};
 
   return (
     <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
@@ -54,24 +64,48 @@ export default function QuizPage() {
             Answered: {Object.keys(answers).length}/{questions.length}
           </p>
         </div>
-
-        <h2 className="mt-4 text-lg font-semibold">{q.text}</h2>
+        <div className="mt-3 inline-flex rounded-xl border bg-white p-1">
+  {(["EN", "HI", "BOTH"] as const).map((l) => (
+    <button
+      key={l}
+      onClick={() => setLang(l)}
+      className={[
+        "rounded-lg px-3 py-1 text-sm transition",
+        lang === l ? "bg-blue-600 text-white" : "text-gray-700 hover:bg-gray-50",
+      ].join(" ")}
+      type="button"
+    >
+      {l === "EN" ? "English" : l === "HI" ? "Hindi" : "Both"}
+    </button>
+  ))}
+</div>
+        <h2 className="mt-4 text-lg font-semibold">
+  {(lang === "EN" || lang === "BOTH") && <div>{q.text}</div>}
+  {(lang === "HI" || lang === "BOTH") && q.hi && (
+    <div className="mt-1 text-base font-normal text-gray-700">{q.hi}</div>
+  )}
+</h2>
 
         <div className="mt-4 grid gap-3">
-          {q.options.map((opt) => (
-            <button
-              key={opt.id}
-              onClick={() => onSelect(opt.id)}
-              className={[
-                "rounded-xl border p-4 text-left hover:bg-gray-50 active:scale-[0.99] transition",
-                selected === opt.id ? "border-blue-600 bg-blue-50" : "",
-              ].join(" ")}
-            >
-              <span className="font-semibold mr-2">{opt.id}.</span>
-              {opt.text}
-            </button>
-          ))}
-        </div>
+  {q.options.map((opt) => (
+    <button
+      key={opt.id}
+      onClick={() => onSelect(opt.id)}
+      className={[
+        "rounded-xl border p-4 text-left hover:bg-gray-50 active:scale-[0.99] transition",
+        selected === opt.id ? "border-blue-600 bg-blue-50" : "",
+      ].join(" ")}
+    >
+      <span className="font-semibold mr-2">{opt.id}.</span>
+     <div className="inline-flex flex-col">
+  {(lang === "EN" || lang === "BOTH") && <span>{opt.text}</span>}
+  {(lang === "HI" || lang === "BOTH") && opt.hi && (
+    <span className="text-sm text-gray-600 mt-1">{opt.hi}</span>
+  )}
+</div>
+    </button>
+  ))}
+</div>
 
         <div className="mt-6 flex gap-3">
           <button
@@ -90,12 +124,16 @@ export default function QuizPage() {
               Next
             </button>
           ) : (
-            <button
-              onClick={submit}
-              className="w-full sm:w-auto rounded-xl bg-green-600 px-4 py-2 text-white hover:bg-green-700"
-            >
-              Submit
-            </button>
+           <button
+  onClick={submit}
+  disabled={!allAnswered}
+  className={[
+    "w-full sm:w-auto rounded-xl px-4 py-2 text-white",
+    allAnswered ? "bg-green-600 hover:bg-green-700" : "bg-gray-400 cursor-not-allowed",
+  ].join(" ")}
+>
+  Submit
+</button>
           )}
         </div>
       </div>
