@@ -3,8 +3,39 @@
 import { useMemo, useState } from "react";
 import { getTestBySlug } from "@/data/tests";
 import { useRouter, useParams  } from "next/navigation";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function QuizPage() {
+const socialLinks = [
+  {
+    name: "Facebook",
+    handle: "NishaGlobal Education",
+    url: "https://www.facebook.com/global.nisha",
+    icon: FaFacebook,
+    color: "text-blue-600",
+  },
+  {
+    name: "Instagram",
+    handle: "@nisha.global",
+    url: "https://instagram.com/nisha.global",
+    icon: FaInstagram,
+    color: "text-pink-600",
+  },
+  {
+    name: "Facebook Page",
+    handle: "NishaGlobal Education",
+    url: "https://www.facebook.com/profile.php?id=61588627138300",
+    icon: FaFacebook,
+    color: "text-blue-700",
+  },
+  {
+    name: "YouTube",
+    handle: "NishaGlobal Education",
+    url: "https://youtube.com/@SDigital-Tips",
+    icon: FaYoutube,
+    color: "text-red-600",
+  },
+] as const;
   const router = useRouter();
 
   const params = useParams();
@@ -56,6 +87,45 @@ const allAnswered = answeredCount === total;
   return (
     <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
       <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="grid gap-6">
+    {/* ✅ Sticky Follow Header */}
+    <div className="sticky top-0 z-50 -mx-4 sm:-mx-6 lg:mx-0">
+      <div className="bg-white/90 backdrop-blur border-b">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-semibold">🎓 Nishaglobal Education</p>
+              <p className="text-xs text-gray-600">
+                Follow for career guidance, mock tests & education videos
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {socialLinks.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <a
+                    key={s.name}
+                    href={s.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 rounded-xl border bg-white px-3 py-2 hover:bg-gray-100 transition"
+                  >
+                    <Icon className={`text-lg ${s.color}`} />
+                    <div className="leading-tight">
+                      <div className="text-xs font-semibold">{s.name}</div>
+                      <div className="text-[11px] text-gray-600">{s.handle}</div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <p className="text-sm text-gray-600">
             {test.title} • Question {index + 1}/{questions.length}
