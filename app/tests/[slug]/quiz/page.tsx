@@ -36,6 +36,8 @@ const socialLinks = [
     color: "text-red-600",
   },
 ] as const;
+const [showMissing, setShowMissing] = useState(false);
+const [missingNums, setMissingNums] = useState<number[]>([]);
   const router = useRouter();
 
   const params = useParams();
@@ -62,25 +64,37 @@ const allAnswered = answeredCount === total;
     setAnswers((prev) => ({ ...prev, [q.id]: opt }));
   };
 
- const submit = () => {
-  const total = questions.length;
+  const getMissingQuestionNumbers = () => {
+  const missing: number[] = [];
+  questions.forEach((qq, i) => {
+    if (!answers[qq.id]) missing.push(i + 1); // question number (1-based)
+  });
+  return missing;
+};
+const submit = () => {
+  const missing = getMissingQuestionNumbers();
 
-  // ✅ validation: must answer all questions
-  if (Object.keys(answers).length !== total) {
-    alert(`Please answer all ${total} questions before submitting.`);
+  // ✅ if any missing, show popup with numbers
+  if (missing.length > 0) {
+    setMissingNums(missing);
+    setShowMissing(true);
     return;
   }
 
+  const total = questions.length;
   let correct = 0;
+
   for (const ques of questions) {
     if (answers[ques.id] === ques.correct) correct++;
   }
+
   const percent = Math.round((correct / total) * 100);
 
   sessionStorage.setItem(
     "nge_result",
     JSON.stringify({ slug: test.slug, title: test.title, percent, correct, total })
   );
+
   router.push("/result");
 };
 
@@ -194,13 +208,9 @@ const allAnswered = answeredCount === total;
               Next
             </button>
           ) : (
-           <button
+       <button
   onClick={submit}
-  disabled={!allAnswered}
-  className={[
-    "w-full sm:w-auto rounded-xl px-4 py-2 text-white",
-    allAnswered ? "bg-green-600 hover:bg-green-700" : "bg-gray-400 cursor-not-allowed",
-  ].join(" ")}
+  className="w-full sm:w-auto rounded-xl bg-green-600 px-4 py-2 text-white hover:bg-green-700"
 >
   Submit
 </button>
@@ -231,6 +241,59 @@ const allAnswered = answeredCount === total;
           })}
         </div>
       </aside>
+      {showMissing && (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    {/* overlay */}
+    <button
+      type="button"
+      onClick={() => setShowMissing(false)}
+      className="absolute inset-0 bg-black/40"
+      aria-label="Close"
+    />
+
+    {/* modal */}
+    <div className="relative w-full max-w-lg rounded-2xl bg-white p-5 shadow-xl">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-lg font-semibold text-red-600">⚠️ Incomplete Quiz</p>
+          <p className="mt-1 text-sm text-gray-700">
+            You have not attempted the following question(s). Please attempt them before submitting.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setShowMissing(false)}
+          className="rounded-lg border px-3 py-1 text-sm hover:bg-gray-50"
+        >
+          Close
+        </button>
+      </div>
+
+      <div className="mt-4">
+        <div className="flex flex-wrap gap-2">
+          {missingNums.map((n) => (
+            <button
+              key={n}
+              type="button"
+              onClick={() => {
+                setIndex(n - 1);        // ✅ jump to that question
+                setShowMissing(false);  // ✅ close popup
+              }}
+              className="rounded-lg border px-3 py-2 text-sm hover:bg-gray-50"
+            >
+              Q{n}
+            </button>
+          ))}
+        </div>
+
+        <p className="mt-3 text-xs text-gray-500">
+          Tip: Tap any question number above to jump directly to it.
+        </p>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }
