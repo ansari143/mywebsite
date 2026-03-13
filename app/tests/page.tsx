@@ -13,14 +13,11 @@ export default function TestsHub() {
             <div className="text-3xl">{t.icon}</div>
             <h3 className="mt-2 font-semibold">{t.title}</h3>
             <p className="mt-2 text-sm text-gray-600">{t.summary}</p>
-
-            <div className="mt-3 flex flex-wrap gap-2">
-              {t.bestFor.map((b) => (
-                <span key={b} className="rounded-full bg-gray-100 px-3 py-1 text-xs">
-                  {b}
-                </span>
-              ))}
-            </div>
+<div className="mt-3 flex flex-wrap gap-x-3 text-sm text-gray-600">
+  {t.bestFor.map((b) => (
+    <span key={b}>{b}</span>
+  ))}
+</div>
 
             <div className="mt-5 flex flex-col sm:flex-row gap-3">
               <Link
