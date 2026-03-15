@@ -1,24 +1,22 @@
 import "./globals.css";
-import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Nishaglobal Education",
-  description: "Career mock tests after 10th to choose the right stream.",
+  description: "Career guidance and high-demand skills learning platform.",
 };
 
-export const viewport = {
-  width: "device-width",
-  initialScale: 1,
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-gray-50 text-gray-900">
         <Navbar />
-        <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
           {children}
         </main>
         <Footer />

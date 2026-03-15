@@ -46,7 +46,7 @@ const [missingNums, setMissingNums] = useState<number[]>([]);
   const questions = test?.questions ?? [];
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, "A" | "B" | "C" | "D">>({});
- const [lang, setLang] = useState<"EN" | "HI" | "BOTH">("BOTH");
+ const [lang, setLang] = useState<"EN" | "HI" | "BOTH">("EN");
   if (!test) {
     return <div className="rounded-2xl bg-white p-8 shadow-sm">Test not found.</div>;
   }

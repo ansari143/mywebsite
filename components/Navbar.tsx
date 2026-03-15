@@ -22,21 +22,26 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <nav className="hidden md:flex gap-6 text-sm">
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex gap-6 text-sm font-medium">
           <Link className="hover:text-blue-600" href="/">
             Home
           </Link>
+
           <Link className="hover:text-blue-600" href="/tests">
             Career Tests
           </Link>
+
           <Link className="hover:text-blue-600" href="/resources">
             Resources
           </Link>
+
           <Link className="hover:text-blue-600" href="/skills">
-            High-Demand Skills
+            Skills
           </Link>
         </nav>
 
+        {/* Mobile Button */}
         <button
           className="rounded-lg border px-3 py-2 text-sm md:hidden"
           onClick={() => setOpen((v) => !v)}
@@ -46,20 +51,24 @@ export default function Navbar() {
         </button>
       </div>
 
+      {/* Mobile Menu */}
       {open && (
         <div className="border-t bg-white md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 text-sm">
             <Link onClick={() => setOpen(false)} href="/">
               Home
             </Link>
+
             <Link onClick={() => setOpen(false)} href="/tests">
               Career Tests
             </Link>
+
             <Link onClick={() => setOpen(false)} href="/resources">
               Resources
             </Link>
+
             <Link onClick={() => setOpen(false)} href="/skills">
-              High-Demand Skills
+              Skills
             </Link>
           </div>
         </div>
