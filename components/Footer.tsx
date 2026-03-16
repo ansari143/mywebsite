@@ -1,10 +1,18 @@
 import Link from "next/link";
+import { FaYoutube, FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
 export default function Footer() {
+  const socialLinks = {
+     youtube: "https://www.youtube.com/@NishaglobalEducation",
+    instagram: "https://www.instagram.com/nisha.global",
+    facebook: "https://www.facebook.com/global.nisha",
+    linkedin: "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
+  };
+
   return (
     <footer className="mt-12 border-t border-gray-200 bg-white">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-4">
           <div>
             <h3 className="text-lg font-semibold text-slate-900">
               Nishaglobal Education
@@ -33,8 +41,8 @@ export default function Footer() {
                 Skills
               </Link>
               <Link href="/skills/ai-roadmap" className="hover:text-blue-600">
-  AI Roadmap
-</Link>
+                AI Roadmap
+              </Link>
             </div>
           </div>
 
@@ -52,6 +60,58 @@ export default function Footer() {
               <Link href="/terms-and-conditions" className="hover:text-blue-600">
                 Terms & Conditions
               </Link>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-900">
+              Follow Us
+            </h4>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              Follow Nishaglobal Education for career tips, resources, and
+              future-ready skills.
+            </p>
+
+            <div className="mt-4 flex items-center gap-3">
+              <a
+                href={socialLinks.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+              >
+                <FaYoutube size={18} />
+              </a>
+
+              <a
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-pink-200 hover:bg-pink-50 hover:text-pink-600"
+              >
+                <FaInstagram size={18} />
+              </a>
+
+              <a
+                href={socialLinks.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
+              >
+                <FaFacebookF size={16} />
+              </a>
+
+              <a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700"
+              >
+                <FaLinkedinIn size={16} />
+              </a>
             </div>
           </div>
         </div>

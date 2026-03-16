@@ -2,9 +2,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { FaYoutube, FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+
+  const socialLinks = {
+    youtube: "https://www.youtube.com/@NishaglobalEducation",
+    instagram: "https://www.instagram.com/nisha.global",
+    facebook: "https://www.facebook.com/global.nisha",
+    linkedin: "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b bg-white/90 backdrop-blur">
@@ -22,26 +30,62 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex gap-6 text-sm font-medium">
-          <Link className="hover:text-blue-600" href="/">
-            Home
-          </Link>
+        <div className="hidden items-center gap-6 md:flex">
+          <nav className="flex gap-6 text-sm font-medium">
+            <Link className="hover:text-blue-600" href="/">
+              Home
+            </Link>
+            <Link className="hover:text-blue-600" href="/tests">
+              Career Tests
+            </Link>
+            <Link className="hover:text-blue-600" href="/resources">
+              Resources
+            </Link>
+            <Link className="hover:text-blue-600" href="/skills">
+              Skills
+            </Link>
+          </nav>
 
-          <Link className="hover:text-blue-600" href="/tests">
-            Career Tests
-          </Link>
+          <div className="flex items-center gap-3 border-l pl-4 text-gray-500">
+            <a
+              href={socialLinks.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="transition hover:text-red-600"
+            >
+              <FaYoutube size={16} />
+            </a>
+            <a
+              href={socialLinks.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="transition hover:text-pink-600"
+            >
+              <FaInstagram size={16} />
+            </a>
+            <a
+              href={socialLinks.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="transition hover:text-blue-600"
+            >
+              <FaFacebookF size={15} />
+            </a>
+            <a
+              href={socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="transition hover:text-sky-700"
+            >
+              <FaLinkedinIn size={15} />
+            </a>
+          </div>
+        </div>
 
-          <Link className="hover:text-blue-600" href="/resources">
-            Resources
-          </Link>
-
-          <Link className="hover:text-blue-600" href="/skills">
-            Skills
-          </Link>
-        </nav>
-
-        {/* Mobile Button */}
         <button
           className="rounded-lg border px-3 py-2 text-sm md:hidden"
           onClick={() => setOpen((v) => !v)}
@@ -51,25 +95,60 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {open && (
         <div className="border-t bg-white md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 text-sm">
             <Link onClick={() => setOpen(false)} href="/">
               Home
             </Link>
-
             <Link onClick={() => setOpen(false)} href="/tests">
               Career Tests
             </Link>
-
             <Link onClick={() => setOpen(false)} href="/resources">
               Resources
             </Link>
-
             <Link onClick={() => setOpen(false)} href="/skills">
               Skills
             </Link>
+
+            <div className="mt-2 flex items-center gap-4 border-t pt-3 text-gray-500">
+              <a
+                href={socialLinks.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="transition hover:text-red-600"
+              >
+                <FaYoutube size={18} />
+              </a>
+              <a
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="transition hover:text-pink-600"
+              >
+                <FaInstagram size={18} />
+              </a>
+              <a
+                href={socialLinks.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="transition hover:text-blue-600"
+              >
+                <FaFacebookF size={17} />
+              </a>
+              <a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="transition hover:text-sky-700"
+              >
+                <FaLinkedinIn size={17} />
+              </a>
+            </div>
           </div>
         </div>
       )}
