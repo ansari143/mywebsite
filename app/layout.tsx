@@ -29,7 +29,8 @@ export default function RootLayout({
        "https://www.facebook.com/global.nisha",
       "https://instagram.com/nisha.global",
        "https://www.youtube.com/@NishaglobalEducation",
-       "https://www.facebook.com/profile.php?id=61588627138300"
+       "https://www.facebook.com/profile.php?id=61588627138300",
+       "https://www.linkedin.com/in/nishaglobal-education-9818713b7/"
     ],
   };
 
