@@ -44,6 +44,9 @@ export default function Footer() {
               <Link href="/skills/ai-roadmap" className="hover:text-blue-600">
                 AI Roadmap
               </Link>
+              <Link href="/contact" className="hover:text-blue-600">
+  Contact
+</Link>
             </div>
           </div>
 
