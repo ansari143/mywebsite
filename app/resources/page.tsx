@@ -76,7 +76,8 @@ export default function ResourcesPage() {
           <p className="mt-4 text-base leading-7 text-gray-600 sm:text-lg">
             Explore practical career guidance resources for students after 10th
             and 12th. Learn about stream selection, entrance exam basics,
-            scholarships, and long-term career planning in one place.
+            scholarships, fee ranges, colleges, and long-term career planning
+            in one place.
           </p>
         </div>
       </section>
@@ -126,13 +127,14 @@ export default function ResourcesPage() {
           <p>
             Nisha Global Education provides educational and informational
             content to help students and parents understand career options,
-            academic pathways, entrance exams, scholarships, and stream
-            selection after 10th and 12th.
+            academic pathways, entrance exams, scholarships, stream
+            selection, and practical planning after 10th and 12th.
           </p>
           <p>
             We try to keep information accurate and useful, but eligibility
-            criteria, admission rules, scholarship availability, exam patterns,
-            and educational policies may change over time.
+            criteria, age limits, admission rules, scholarship availability, fee
+            ranges, exam patterns, and educational policies may change over
+            time.
           </p>
           <p>
             Users should always verify important information from official
@@ -144,7 +146,9 @@ export default function ResourcesPage() {
             Nisha Global Education is an independent educational guidance
             platform and is not affiliated with or endorsed by any government
             body, university, board, or examination authority unless explicitly
-            stated.
+            stated. Promotional or featured listings, when published, should be
+            treated as labeled informational content and not as admission
+            guarantees.
           </p>
         </div>
       </section>

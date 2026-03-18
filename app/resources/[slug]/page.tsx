@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { resourcePages } from "@/data/resourcePages";
+import { streamResourceDetails } from "@/data/streamResourceDetails";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -32,11 +33,28 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-3 text-sm leading-7 text-gray-700 sm:text-base">
+      {items.map((item) => (
+        <li key={item} className="flex gap-3">
+          <span className="mt-2 h-2 w-2 rounded-full bg-blue-600" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default async function ResourceDetailPage({ params }: Props) {
   const { slug } = await params;
   const page = resourcePages.find((item) => item.slug === slug);
 
   if (!page) return notFound();
+
+  const streamDetail = page.resourceDetailKey
+    ? streamResourceDetails[page.resourceDetailKey]
+    : null;
 
   const faqSchema = page.faq
     ? {
@@ -110,6 +128,35 @@ export default async function ResourceDetailPage({ params }: Props) {
         </div>
       </section>
 
+      {streamDetail && (
+        <section className="space-y-6 rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 sm:p-8">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex rounded-full border border-blue-200 bg-white px-3 py-1 text-sm font-semibold text-blue-700">
+              {streamDetail.label} Resource Snapshot
+            </span>
+            <span className="text-sm text-gray-600">
+              Practical planning details students and parents usually ask for
+            </span>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {streamDetail.quickFacts.map((fact) => (
+              <div
+                key={fact.label}
+                className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm"
+              >
+                <div className="text-xs font-semibold uppercase tracking-wide text-blue-700">
+                  {fact.label}
+                </div>
+                <div className="mt-2 text-sm font-semibold leading-6 text-gray-900">
+                  {fact.value}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
         <div className="space-y-6">
           {page.sections.map((section) => (
@@ -128,6 +175,128 @@ export default async function ResourceDetailPage({ params }: Props) {
               </div>
             </section>
           ))}
+
+          {streamDetail && (
+            <>
+              <section className="grid gap-6 lg:grid-cols-2">
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold text-gray-900">Eligibility</h2>
+                  <div className="mt-4">
+                    <BulletList items={streamDetail.eligibility} />
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold text-gray-900">10th / 12th Percentage Guidance</h2>
+                  <div className="mt-4">
+                    <BulletList items={streamDetail.percentageGuidance} />
+                  </div>
+                </div>
+              </section>
+
+              <section className="grid gap-6 lg:grid-cols-2">
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold text-gray-900">Age Limit and Entrance Exams</h2>
+                  <div className="mt-4 space-y-6">
+                    <div>
+                      <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">Age limit</h3>
+                      <div className="mt-3">
+                        <BulletList items={streamDetail.ageLimit} />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">Entrance exams</h3>
+                      <div className="mt-3">
+                        <BulletList items={streamDetail.entranceExams} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold text-gray-900">Course Length and Fee Structure</h2>
+                  <div className="mt-4 space-y-6">
+                    <div>
+                      <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">Length of course</h3>
+                      <div className="mt-3">
+                        <BulletList items={streamDetail.courseLength} />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">Fee structure range</h3>
+                      <div className="mt-3">
+                        <BulletList items={streamDetail.feeStructure} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section className="grid gap-6 lg:grid-cols-2">
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold text-gray-900">Recommended Colleges and Institutes</h2>
+                  <div className="mt-4">
+                    <BulletList items={streamDetail.topColleges} />
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold text-gray-900">Online vs Offline Availability</h2>
+                  <div className="mt-4">
+                    <BulletList items={streamDetail.onlineOffline} />
+                  </div>
+                </div>
+              </section>
+
+              <section className="grid gap-6 lg:grid-cols-2">
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold text-gray-900">Abroad Opportunities</h2>
+                  <div className="mt-4">
+                    <BulletList items={streamDetail.abroadOpportunities} />
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold text-gray-900">Placement Preparation</h2>
+                  <div className="mt-4">
+                    <BulletList items={streamDetail.placementPreparation} />
+                  </div>
+                </div>
+              </section>
+
+              <section className="grid gap-6 lg:grid-cols-2">
+                <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-6">
+                  <h2 className="text-xl font-semibold text-gray-900">How to Improve Job Chances</h2>
+                  <div className="mt-4">
+                    <BulletList items={streamDetail.jobSuggestions} />
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-amber-100 bg-amber-50 p-6">
+                  <h2 className="text-xl font-semibold text-gray-900">Advertisement and Sponsored Content</h2>
+                  <div className="mt-4">
+                    <BulletList items={streamDetail.advertisementNote} />
+                  </div>
+                </div>
+              </section>
+
+              <section className="rounded-2xl border border-blue-100 bg-blue-50 p-6">
+                <h2 className="text-xl font-semibold text-gray-900">Need More Help?</h2>
+                <p className="mt-3 text-sm leading-7 text-gray-700 sm:text-base">
+                  If you still have questions about eligibility, fees, colleges, institutes, or the right path for your profile, use the Contact section and mention your class, stream, marks, and goal so you can get more relevant guidance.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Link
+                    href="/contact"
+                    className="inline-flex rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                  >
+                    Contact for Guidance
+                  </Link>
+                  <Link
+                    href="/tests"
+                    className="inline-flex rounded-xl border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-100"
+                  >
+                    Take Free Career Test
+                  </Link>
+                </div>
+              </section>
+            </>
+          )}
 
           {page.faq && (
             <section className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
@@ -157,18 +326,14 @@ export default async function ResourceDetailPage({ params }: Props) {
             <h2 className="text-lg font-semibold text-gray-900">Disclaimer</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-gray-600">
               <p>
-                This content is provided for educational and informational
-                purposes only.
+                This content is provided for educational and informational purposes only.
               </p>
               <p>
-                Entrance exams, eligibility rules, admission processes,
-                scholarship availability, and academic policies may change over
-                time.
+                Eligibility, age rules, entrance exams, fee structure, counselling, admissions, and placement trends may change over time and may differ across states, institutes, and categories.
               </p>
+              {streamDetail && <p>{streamDetail.officialNote}</p>}
               <p>
-                Students and parents should always verify final details from
-                official boards, universities, examination authorities, and
-                government portals before making academic or career decisions.
+                Students and parents should always verify final details from official boards, examination authorities, universities, colleges, regulators, and government portals before making academic, payment, or career decisions.
               </p>
             </div>
           </section>
@@ -183,7 +348,7 @@ export default async function ResourceDetailPage({ params }: Props) {
             <div className="mt-4 grid gap-3">
               {resourcePages
                 .filter((item) => item.slug !== page.slug)
-                .slice(0, 8)
+                .slice(0, 18)
                 .map((item) => (
                   <Link
                     key={item.slug}
@@ -201,15 +366,29 @@ export default async function ResourceDetailPage({ params }: Props) {
               Need Career Guidance?
             </h2>
             <p className="mt-2 text-sm leading-6 text-gray-600">
-              Explore career paths, stream comparisons, and exam basics to make
-              a smarter decision after 10th or 12th.
+              Explore career paths, stream comparisons, fee ranges, entrance exam basics, and planning support to make a smarter decision after 10th or 12th.
             </p>
-            <Link
-              href="/tests"
-              className="mt-4 inline-flex rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-            >
-              Take Career Test
-            </Link>
+            <div className="mt-4 flex flex-col gap-3">
+              <Link
+                href="/tests"
+                className="inline-flex rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+              >
+                Take Career Test
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex rounded-xl border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-100"
+              >
+                Ask a Question
+              </Link>
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-amber-100 bg-amber-50 p-5">
+            <h2 className="text-lg font-semibold text-gray-900">For Institutes and Advertisers</h2>
+            <p className="mt-2 text-sm leading-6 text-gray-700">
+              Colleges, coaching institutes, and educational partners can connect through the Contact section for transparent featured listings, sponsored content, or collaboration enquiries.
+            </p>
           </section>
         </aside>
       </div>

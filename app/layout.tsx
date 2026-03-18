@@ -9,6 +9,11 @@ export const metadata = {
   alternates: {
     canonical: "https://nishaglobaleducation.com",
   },
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({

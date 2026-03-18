@@ -36,7 +36,7 @@ export default function ContactPage() {
           <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
             If you have questions about career guidance, stream selection,
             educational resources, aviation careers, or high-demand skills,
-            feel free to contact us.
+            feel free to contact us. You can also reach out for college suggestions, institute questions, admission planning, or collaboration and advertisement enquiries.
           </p>
         </div>
       </section>
@@ -112,7 +112,10 @@ export default function ContactPage() {
                 <option value="After 10th Guidance">After 10th Guidance</option>
                 <option value="After 12th Guidance">After 12th Guidance</option>
                 <option value="Aviation Career">Aviation Career</option>
+                <option value="College / Institute Guidance">College / Institute Guidance</option>
+                <option value="Admission and Eligibility Question">Admission and Eligibility Question</option>
                 <option value="High-Demand Skills">High-Demand Skills</option>
+                <option value="Advertisement / Sponsored Listing">Advertisement / Sponsored Listing</option>
                 <option value="Collaboration">Collaboration</option>
                 <option value="Other">Other</option>
               </select>

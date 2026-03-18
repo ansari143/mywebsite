@@ -1,8 +1,11 @@
+import type { StreamResourceKey } from "@/data/streamResourceDetails";
+
 export type ResourcePage = {
   slug: string;
   title: string;
   description: string;
   intro: string;
+  resourceDetailKey?: StreamResourceKey;
   sections: {
     title: string;
     content: string[];
@@ -138,6 +141,7 @@ export const resourcePages: ResourcePage[] = [
     "Explore aviation career options for students after 12th including pilot, cabin crew, airport ground staff, customer service, and aviation management roles.",
   intro:
     "Aviation offers exciting career opportunities for students who are interested in travel, communication, discipline, customer service, and airport operations. This guide helps students understand the broad aviation career landscape after 12th in a simple and practical way.",
+  resourceDetailKey: "aviation",
   sections: [
     {
       title: "What Aviation Careers Include",
@@ -722,4 +726,231 @@ export const resourcePages: ResourcePage[] = [
       }
     ]
   }
+
+,
+  {
+    slug: "engineering-careers",
+    title: "Engineering Career Guide After 12th",
+    description:
+      "Understand engineering eligibility, entrance exams, fees, top colleges, placement strategy, and abroad opportunities after 12th.",
+    intro:
+      "Engineering is one of the most popular career paths after 12th Science, but students often need more than just a list of branches. This guide brings together the practical details students and parents usually ask for, including eligibility, entrance exams, fee ranges, top college suggestions, course length, placement strategy, and abroad options.",
+    resourceDetailKey: "engineering",
+    sections: [
+      {
+        title: "Why Students Choose Engineering",
+        content: [
+          "Engineering can lead to careers in software, AI, electronics, civil, mechanical, robotics, design, data, and many other technical fields.",
+          "The best branch is not always the most famous one. Students should compare branch interest, college quality, placements, fees, and future skills demand before deciding.",
+          "A strong engineering choice is usually a mix of academic fit, affordable ROI, and job readiness."
+        ]
+      },
+      {
+        title: "How to Decide Smartly",
+        content: [
+          "Students should first confirm whether they actually enjoy mathematics, logic, technology, or problem-solving rather than choosing engineering only because others are choosing it.",
+          "Branch selection matters, but college quality, location, exposure, internships, and skills often matter just as much for long-term outcomes.",
+          "This page below gives a practical checklist you can use before taking admission."
+        ]
+      }
+    ],
+    faq: [
+      {
+        question: "Is JEE mandatory for every engineering college?",
+        answer:
+          "No. JEE Main is important for many national and counselling routes, but state exams and private university admissions also exist."
+      },
+      {
+        question: "Which branch has the best placement?",
+        answer:
+          "Computer Science and related branches often have strong placement demand, but the best branch for you depends on your interest, college quality, and skills."
+      }
+    ]
+  },
+  {
+    slug: "medical-careers",
+    title: "Medical Career Guide After 12th",
+    description:
+      "Understand NEET, MBBS eligibility, fee ranges, medical college options, abroad pathways, and practical planning after 12th PCB.",
+    intro:
+      "Medical careers attract students who want a respected and meaningful profession, but the path is competitive and long-term. This guide explains the practical details students need to understand before committing to medical study after 12th.",
+    resourceDetailKey: "medical",
+    sections: [
+      {
+        title: "Medical Is More Than MBBS",
+        content: [
+          "MBBS is the most well-known route, but students can also explore BDS, BAMS, BHMS, nursing, physiotherapy, optometry, radiology, lab sciences, and other healthcare careers.",
+          "The right choice depends on NEET performance, budget, career goals, and whether the student wants long-duration doctor training or a healthcare career with a different pathway."
+        ]
+      },
+      {
+        title: "What Students Must Evaluate",
+        content: [
+          "Students should compare the cost of study, bond rules, patient exposure, internship quality, and future PG or abroad plans before joining any medical college.",
+          "A college should never be chosen only by advertisement. Hospital quality and clinical exposure matter a lot."
+        ]
+      }
+    ],
+    faq: [
+      {
+        question: "Is NEET required for MBBS?",
+        answer:
+          "Yes. NEET-UG is the central admission route for MBBS in India under the current system."
+      },
+      {
+        question: "Can I work abroad after MBBS?",
+        answer:
+          "Yes, but you usually need additional licensing exams and registration steps depending on the destination country."
+      }
+    ]
+  },
+  {
+    slug: "government-jobs-guide",
+    title: "Government Jobs Guide for Students",
+    description:
+      "Learn how government job eligibility, age limits, exam routes, coaching choices, and preparation strategy work after 10th, 12th, or graduation.",
+    intro:
+      "Government jobs attract students because of stability, respect, and long-term security. But there is no single government-job path. This guide helps students understand how to choose the right exam route based on qualification, age, and preparation time.",
+    resourceDetailKey: "government",
+    sections: [
+      {
+        title: "Why Planning Matters",
+        content: [
+          "Many students waste years because they prepare for too many exams at once without a clear strategy.",
+          "The smart approach is to shortlist exams by qualification level, age window, syllabus overlap, and personal interest."
+        ]
+      },
+      {
+        title: "Exam Strategy First",
+        content: [
+          "The best government-job journey starts with exam clarity, a realistic timeline, previous-year paper analysis, and consistent mock-test practice.",
+          "Coaching is optional for many students if self-discipline is strong."
+        ]
+      }
+    ],
+    faq: [
+      {
+        question: "Can I start government job preparation after 12th?",
+        answer:
+          "Yes. Some exams are open after 12th, while others require graduation."
+      },
+      {
+        question: "Do government jobs require high percentage?",
+        answer:
+          "Many do not require a high percentage, but the required qualification must be completed from a recognized board or university."
+      }
+    ]
+  },
+  {
+    slug: "teacher-careers",
+    title: "Teacher Career Guide After 12th and Graduation",
+    description:
+      "Learn teacher eligibility, B.Ed and D.El.Ed routes, CTET, fee ranges, school opportunities, and long-term teaching growth options.",
+    intro:
+      "Teaching is a respected career for students who enjoy explaining, mentoring, and helping others learn. This guide explains the practical pathways students can follow for school teaching careers in India and beyond.",
+    resourceDetailKey: "teacher",
+    sections: [
+      {
+        title: "Teaching Is a Skill Career",
+        content: [
+          "A good teacher needs communication, patience, subject clarity, lesson planning, and classroom confidence, not only a degree.",
+          "Students should choose teaching if they genuinely enjoy guiding others and can stay consistent in long-term preparation."
+        ]
+      },
+      {
+        title: "Choose the Right Level",
+        content: [
+          "Primary, upper-primary, secondary, and senior-secondary teaching routes can differ in eligibility and training, so students should decide early which level they want to target.",
+          "This page below organizes the practical details clearly."
+        ]
+      }
+    ],
+    faq: [
+      {
+        question: "Is CTET enough to become a teacher?",
+        answer:
+          "CTET is an important eligibility step for many school routes, but final recruitment also depends on the school, board, vacancy, and recruitment rules."
+      },
+      {
+        question: "Can I become a teacher after 12th?",
+        answer:
+          "For some elementary teaching pathways, you can begin teacher-training planning after 12th, but many school-teaching jobs later require graduation and professional teacher education."
+      }
+    ]
+  },
+  {
+    slug: "nursing-careers",
+    title: "Nursing Career Guide After 12th",
+    description:
+      "Explore B.Sc Nursing eligibility, fees, top colleges, hospital training, abroad opportunities, and job-readiness planning after 12th PCB.",
+    intro:
+      "Nursing is a strong career path for students who want healthcare service, stability, and global demand. This guide explains the practical details students and parents usually want before choosing B.Sc Nursing or related nursing routes.",
+    resourceDetailKey: "nursing",
+    sections: [
+      {
+        title: "Why Nursing Is a Strong Option",
+        content: [
+          "Nursing combines healthcare service, patient interaction, hospital skills, and global employment demand.",
+          "It can be a very practical option for students who want a professional healthcare career without following the full doctor pathway."
+        ]
+      },
+      {
+        title: "How to Choose a Good Nursing College",
+        content: [
+          "Hospital attachment, clinical exposure, hostel safety, discipline, faculty, and recognition matter more than only brochure design or advertising.",
+          "Students should compare fee, training quality, and real placement support carefully before joining."
+        ]
+      }
+    ],
+    faq: [
+      {
+        question: "Is nursing good for abroad opportunities?",
+        answer:
+          "Yes. Nursing is one of the strongest healthcare paths for international demand, but licensing and registration steps apply."
+      },
+      {
+        question: "Is B.Sc Nursing only for girls?",
+        answer:
+          "No. Nursing is a professional healthcare career open to eligible students, subject to institute-specific rules where applicable."
+      }
+    ]
+  },
+  {
+    slug: "bcom-careers",
+    title: "BCom Career Guide After 12th",
+    description:
+      "Learn BCom eligibility, CUET routes, fee ranges, top commerce colleges, finance skill building, placement planning, and abroad options.",
+    intro:
+      "BCom is one of the most practical and flexible options after 12th for students interested in business, accounting, finance, taxation, banking, and management. This guide explains how to evaluate BCom properly instead of seeing it as only a basic degree.",
+    resourceDetailKey: "bcom",
+    sections: [
+      {
+        title: "Why BCom Can Be Powerful",
+        content: [
+          "BCom can lead to finance, accounts, tax, banking, business operations, analytics, professional courses, and management pathways.",
+          "Its value increases significantly when students add internships and job-ready skills such as Excel, accounting tools, communication, or professional certifications."
+        ]
+      },
+      {
+        title: "How to Make BCom High Value",
+        content: [
+          "Students should not stop at the degree only. The strongest BCom profiles usually combine the degree with CA, CMA, CS, MBA planning, banking preparation, or finance tools.",
+          "Below is a practical checklist for choosing the right BCom path."
+        ]
+      }
+    ],
+    faq: [
+      {
+        question: "Is BCom good without CA?",
+        answer:
+          "Yes, but BCom becomes much stronger when students add internships, finance tools, banking prep, or postgraduate planning."
+      },
+      {
+        question: "Can non-Commerce students do BCom?",
+        answer:
+          "In many universities yes, but exact eligibility and subject requirements depend on the university and its current admission policy."
+      }
+    ]
+  }
+
 ];
