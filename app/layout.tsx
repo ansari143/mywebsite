@@ -1,7 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Script from "next/script";
+
 export const metadata = {
   metadataBase: new URL("https://nishaglobaleducation.com"),
   title: {
@@ -42,6 +42,9 @@ export const metadata = {
       "Career guidance, educational resources, free career tests, and future-ready skills learning for students after 10th and 12th.",
     images: ["/logo.png"],
   },
+  verification: {
+  google: "ca-pub-4660063806042510",
+},
 };
 
 export default function RootLayout({
@@ -94,13 +97,21 @@ export default function RootLayout({
     },
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://nishaglobaleducation.com/resources?query={search_term_string}",
+      target:
+        "https://nishaglobaleducation.com/resources?query={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };
 
   return (
     <html lang="en">
+  <head>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660063806042510"
+      crossOrigin="anonymous"
+    ></script>
+  </head>
       <body className="bg-gray-50 text-gray-900">
         <script
           type="application/ld+json"
@@ -110,12 +121,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        <Script
-  async
-  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660063806042510"
-  crossOrigin="anonymous"
-  strategy="afterInteractive"
-/>
 
         <Navbar />
 
