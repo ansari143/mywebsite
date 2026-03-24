@@ -1,41 +1,42 @@
 import Link from "next/link";
-import Image from "next/image";
 import SkillsPreview from "@/components/SkillsPreview";
 import SkillsRoadmapPreview from "@/components/SkillsRoadmapPreview";
 
 export default function HomePage() {
   return (
     <div className="space-y-10">
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 text-center shadow-sm sm:p-8">
-        <Image
-          src="/logo.png"
-          alt="Nishaglobal Education"
-          width={120}
-          height={120}
-          className="mx-auto mb-4"
-          priority
-        />
-
-        <h1 className="text-2xl font-bold sm:text-3xl lg:text-4xl">
-          Choose the Right Stream After 10th — with Smart Career Tests
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 text-center shadow-sm sm:p-8 lg:p-10">
+        <h1 className="mx-auto max-w-5xl text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+          Choose the Right Stream After 10th — Take a Free Career Test
         </h1>
 
-        <p className="mx-auto mt-3 max-w-3xl text-sm text-gray-600 sm:text-base">
+        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-gray-600 sm:text-lg">
           Engineering, Medical, Government Jobs, Teacher, Aviation, Nursing,
-          BCom and more. Take a 50-question test and get score-based guidance
+          BCom and more. Take a{" "}
+          <span className="font-semibold text-slate-900">
+            free 50-question test
+          </span>{" "}
+          and get{" "}
+          <span className="font-semibold text-slate-900">
+            score-based guidance
+          </span>{" "}
           with practical next steps.
         </p>
 
-        <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+        <p className="mt-4 text-sm font-medium text-green-600 sm:text-base">
+          ✔️ 100% Free &nbsp; ✔️ 50 Questions &nbsp; ✔️ Instant Result
+        </p>
+
+        <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href="/tests"
-            className="w-full rounded-xl bg-blue-600 px-5 py-3 text-center text-white hover:bg-blue-700 sm:w-auto"
+            className="w-full rounded-xl bg-blue-600 px-6 py-3 text-center font-semibold text-white hover:bg-blue-700 sm:w-auto"
           >
-            Start Career Test
+            Start Free Career Test 🚀
           </Link>
           <Link
             href="/resources"
-            className="w-full rounded-xl border px-5 py-3 text-center hover:bg-gray-50 sm:w-auto"
+            className="w-full rounded-xl border border-gray-300 px-6 py-3 text-center font-medium text-slate-700 hover:bg-gray-50 sm:w-auto"
           >
             Explore Resources
           </Link>
@@ -46,15 +47,15 @@ export default function HomePage() {
         {[
           {
             title: "1) Choose Test",
-            desc: "Pick your career or stream test from the test hub.",
+            desc: "Pick your stream and start your free career test.",
           },
           {
             title: "2) Answer 50 Questions",
-            desc: "Complete a simple and mobile-friendly MCQ-based quiz.",
+            desc: "Complete a simple, fast, and mobile-friendly MCQ test.",
           },
           {
-            title: "3) Get Guidance",
-            desc: "See your score, recommendation, and useful next steps.",
+            title: "3) Get Instant Guidance",
+            desc: "See your score, best-fit stream, and clear next steps.",
           },
         ].map((x) => (
           <div
@@ -78,9 +79,8 @@ export default function HomePage() {
           </h2>
 
           <p className="mt-3 text-base leading-7 text-slate-600">
-            Explore practical guides for stream selection, entrance exam basics,
-            scholarships, aviation careers, and career planning after 10th and
-            12th.
+            Explore practical guides for stream selection, entrance exams,
+            scholarships, aviation careers, and planning after 10th and 12th.
           </p>
 
           <div className="mt-5">
@@ -95,7 +95,6 @@ export default function HomePage() {
       </section>
 
       <SkillsPreview />
-
       <SkillsRoadmapPreview />
     </div>
   );

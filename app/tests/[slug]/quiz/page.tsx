@@ -191,31 +191,36 @@ const submit = () => {
   ))}
 </div>
 
-        <div className="mt-6 flex gap-3">
-          <button
-            disabled={index === 0}
-            onClick={() => setIndex((i) => Math.max(0, i - 1))}
-            className="w-full sm:w-auto rounded-xl border px-4 py-2 disabled:opacity-50"
-          >
-            Previous
-          </button>
+       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+  <button
+    disabled={index === 0}
+    onClick={() => setIndex((i) => Math.max(0, i - 1))}
+    className="w-full sm:w-auto rounded-xl border px-4 py-2 disabled:opacity-50"
+  >
+    Previous
+  </button>
 
-          {index < questions.length - 1 ? (
-            <button
-              onClick={() => setIndex((i) => Math.min(questions.length - 1, i + 1))}
-              className="w-full sm:w-auto rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-            >
-              Next
-            </button>
-          ) : (
-       <button
-  onClick={submit}
-  className="w-full sm:w-auto rounded-xl bg-green-600 px-4 py-2 text-white hover:bg-green-700"
->
-  Submit
-</button>
-          )}
-        </div>
+  <button
+    type="button"
+    onClick={() => setIndex((i) => Math.min(questions.length - 1, i + 1))}
+    disabled={index === questions.length - 1}
+    className="w-full sm:w-auto rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+  >
+    Next
+  </button>
+
+  <button
+    type="button"
+    onClick={submit}
+    className={`w-full sm:w-auto rounded-xl px-4 py-2 text-white transition ${
+      allAnswered
+        ? "bg-green-600 hover:bg-green-700"
+        : "bg-green-400 hover:bg-green-500"
+    }`}
+  >
+    Submit
+  </button>
+</div>
       </div>
 
       <aside className="rounded-2xl bg-white p-6 shadow-sm h-fit lg:sticky lg:top-24">
