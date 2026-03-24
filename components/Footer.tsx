@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { FaYoutube, FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { FaYoutube, FaInstagram, FaFacebookF, FaLinkedinIn, FaEnvelope } from "react-icons/fa";
 
 export default function Footer() {
-   const socialLinks = {
+  const socialLinks = {
     youtube: "https://www.youtube.com/@NishaglobalEducation",
     instagram: "https://www.instagram.com/nisha.global",
     facebookProfile: "https://www.facebook.com/global.nisha",
@@ -22,6 +22,12 @@ export default function Footer() {
               Career guidance, educational resources, and future-ready skill
               learning for students after 10th and 12th.
             </p>
+            <a
+              href="mailto:nishaglobaleducation@gmail.com"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:underline"
+            >
+              <FaEnvelope /> nishaglobaleducation@gmail.com
+            </a>
           </div>
 
           <div>
@@ -29,41 +35,23 @@ export default function Footer() {
               Quick Links
             </h4>
             <div className="mt-3 flex flex-col gap-2 text-sm text-slate-600">
-              <Link href="/" className="hover:text-blue-600">
-                Home
-              </Link>
-              <Link href="/tests" className="hover:text-blue-600">
-                Career Tests
-              </Link>
-              <Link href="/resources" className="hover:text-blue-600">
-                Resources
-              </Link>
-              <Link href="/skills" className="hover:text-blue-600">
-                Skills
-              </Link>
-              <Link href="/skills/ai-roadmap" className="hover:text-blue-600">
-                AI Roadmap
-              </Link>
-              <Link href="/contact" className="hover:text-blue-600">
-  Contact
-</Link>
+              <Link href="/" className="hover:text-blue-600">Home</Link>
+              <Link href="/about" className="hover:text-blue-600">About Us</Link>
+              <Link href="/tests" className="hover:text-blue-600">Career Tests</Link>
+              <Link href="/resources" className="hover:text-blue-600">Resources</Link>
+              <Link href="/skills" className="hover:text-blue-600">Skills</Link>
+              <Link href="/contact" className="hover:text-blue-600">Contact</Link>
             </div>
           </div>
 
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-900">
-              Policies
+              Trust & Policies
             </h4>
             <div className="mt-3 flex flex-col gap-2 text-sm text-slate-600">
-              <Link href="/disclaimer" className="hover:text-blue-600">
-                Disclaimer
-              </Link>
-              <Link href="/privacy-policy" className="hover:text-blue-600">
-                Privacy Policy
-              </Link>
-              <Link href="/terms-and-conditions" className="hover:text-blue-600">
-                Terms & Conditions
-              </Link>
+              <Link href="/disclaimer" className="hover:text-blue-600">Disclaimer</Link>
+              <Link href="/privacy-policy" className="hover:text-blue-600">Privacy Policy</Link>
+              <Link href="/terms-and-conditions" className="hover:text-blue-600">Terms & Conditions</Link>
             </div>
           </div>
 
@@ -77,53 +65,51 @@ export default function Footer() {
             </p>
 
             <div className="mt-4 flex flex-col gap-3 text-sm text-slate-600">
+              <a
+                href={socialLinks.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-red-600"
+              >
+                <FaYoutube /> YouTube Channel
+              </a>
 
-  <a
-    href={socialLinks.youtube}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-2 hover:text-red-600"
-  >
-    <FaYoutube /> YouTube Channel
-  </a>
+              <a
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-pink-600"
+              >
+                <FaInstagram /> Instagram
+              </a>
 
-  <a
-    href={socialLinks.instagram}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-2 hover:text-pink-600"
-  >
-    <FaInstagram /> Instagram
-  </a>
+              <a
+                href={socialLinks.facebookPage}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-blue-600"
+              >
+                <FaFacebookF /> Facebook Page
+              </a>
 
-  <a
-    href={socialLinks.facebookPage}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-2 hover:text-blue-600"
-  >
-    <FaFacebookF /> Facebook Page
-  </a>
+              <a
+                href={socialLinks.facebookProfile}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-blue-600"
+              >
+                <FaFacebookF /> Facebook Profile
+              </a>
 
-  <a
-    href={socialLinks.facebookProfile}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-2 hover:text-blue-600"
-  >
-    <FaFacebookF /> Facebook Profile
-  </a>
-
-  <a
-    href={socialLinks.linkedin}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-2 hover:text-sky-700"
-  >
-    <FaLinkedinIn /> LinkedIn
-  </a>
-
-</div>
+              <a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-sky-700"
+              >
+                <FaLinkedinIn /> LinkedIn
+              </a>
+            </div>
           </div>
         </div>
 

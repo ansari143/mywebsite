@@ -14,6 +14,15 @@ export default function Navbar() {
     linkedin: "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
   };
 
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About Us" },
+    { href: "/tests", label: "Career Tests" },
+    { href: "/resources", label: "Resources" },
+    { href: "/skills", label: "Skills" },
+    { href: "/contact", label: "Contact" },
+  ];
+
   return (
     <header className="sticky top-0 z-50 border-b bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
@@ -32,18 +41,11 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-6 md:flex">
           <nav className="flex gap-6 text-sm font-medium">
-            <Link className="hover:text-blue-600" href="/">
-              Home
-            </Link>
-            <Link className="hover:text-blue-600" href="/tests">
-              Career Tests
-            </Link>
-            <Link className="hover:text-blue-600" href="/resources">
-              Resources
-            </Link>
-            <Link className="hover:text-blue-600" href="/skills">
-              Skills
-            </Link>
+            {navLinks.map((item) => (
+              <Link key={item.href} className="hover:text-blue-600" href={item.href}>
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           <div className="flex items-center gap-3 border-l pl-4 text-gray-500">
@@ -98,18 +100,11 @@ export default function Navbar() {
       {open && (
         <div className="border-t bg-white md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 text-sm">
-            <Link onClick={() => setOpen(false)} href="/">
-              Home
-            </Link>
-            <Link onClick={() => setOpen(false)} href="/tests">
-              Career Tests
-            </Link>
-            <Link onClick={() => setOpen(false)} href="/resources">
-              Resources
-            </Link>
-            <Link onClick={() => setOpen(false)} href="/skills">
-              Skills
-            </Link>
+            {navLinks.map((item) => (
+              <Link key={item.href} onClick={() => setOpen(false)} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
 
             <div className="mt-2 flex items-center gap-4 border-t pt-3 text-gray-500">
               <a

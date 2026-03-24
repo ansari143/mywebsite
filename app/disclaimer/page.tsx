@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Disclaimer | Nishaglobal Education",
+  title: "Disclaimer",
   description: "Disclaimer for Nishaglobal Education website.",
   alternates: {
     canonical: "https://nishaglobaleducation.com/disclaimer",
@@ -33,23 +33,23 @@ export default function DisclaimerPage() {
 
       <div className="mt-5 space-y-4 text-sm leading-7 text-slate-600 sm:text-base">
         <p>
-          The career tests, stream suggestions, quizzes, resources, and skill
-          guides published on Nishaglobal Education are intended for general
-          educational and informational purposes only.
+          The career tests, stream suggestions, quizzes, resources, articles,
+          and skill guides published on Nishaglobal Education are intended for
+          general educational and informational purposes only.
         </p>
 
         <p>
-          Test results, stream suggestions, eligibility notes, age limits, fee
-          ranges, college examples, placement tips, and abroad guidance are
-          designed to help students and parents do initial planning. They are
-          not a substitute for official notifications, admission bulletins,
-          regulator guidelines, counselling authorities, or professional
-          academic advice.
+          Test results, score-based suggestions, eligibility notes, age limits,
+          fee ranges, college examples, institute examples, placement tips, and
+          abroad guidance are designed to help students and parents do initial
+          planning. They are not a substitute for official notifications,
+          admission bulletins, regulator guidelines, counselling authorities, or
+          professional academic advice.
         </p>
 
         <p>
           We try to present useful and practical information, but educational
-          rules, entrance patterns, reservation policies, counselling systems,
+          rules, entrance patterns, counselling systems, reservation policies,
           fee structures, placement trends, licensing requirements, and study
           pathways may change over time and may differ by institute, state,
           country, category, and admission year.
@@ -57,16 +57,16 @@ export default function DisclaimerPage() {
 
         <p>
           Any college, institute, coaching, or course examples mentioned on the
-          website are shared for guidance and discovery purposes. Their mention
+          website are shared for awareness and guidance purposes. Their mention
           does not mean endorsement, guaranteed admission, guaranteed job,
           guaranteed visa, or guaranteed placement unless expressly stated.
         </p>
 
         <p>
-          Any featured, sponsored, partner, or advertisement content will be
-          intended as labeled promotional content. Users should perform their
-          own due diligence before making any payment, enrolment, or career
-          decision.
+          Any advertisements, sponsored content, collaborations, affiliate-style
+          references, or featured listings should be treated as promotional or
+          informational material. Users should perform their own due diligence
+          before making any payment, enrolment, or career decision.
         </p>
 
         <p>

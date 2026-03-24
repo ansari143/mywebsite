@@ -1,19 +1,19 @@
 export const metadata = {
-  title: "Terms & Conditions | Nishaglobal Education",
+  title: "Terms & Conditions",
   description:
-    "Terms and Conditions for using the Nishaglobal Education website, including career tests, educational resources, and contact submissions.",
+    "Terms and Conditions for Nishaglobal Education covering website use, educational content, user responsibility, advertisements, and external links.",
   alternates: {
     canonical: "https://nishaglobaleducation.com/terms-and-conditions",
   },
 };
 
-export default function TermsPage() {
+export default function TermsAndConditionsPage() {
   const termsSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: "Terms & Conditions",
     description:
-      "Terms and Conditions for using the Nishaglobal Education website, including career tests, educational resources, and contact submissions.",
+      "Terms and Conditions for Nishaglobal Education covering website use, educational content, user responsibility, advertisements, and external links.",
     url: "https://nishaglobaleducation.com/terms-and-conditions",
     isPartOf: {
       "@type": "WebSite",
@@ -33,89 +33,96 @@ export default function TermsPage() {
         Terms & Conditions
       </h1>
 
-      <p className="mt-2 text-sm text-slate-500">Last updated: March 2026</p>
+      <p className="mt-2 text-sm text-slate-500">Last updated: March 24, 2026</p>
 
       <div className="mt-6 space-y-5 text-sm leading-7 text-slate-600 sm:text-base">
         <p>
-          Welcome to Nishaglobal Education. By accessing or using this website,
-          you agree to these Terms & Conditions.
+          By accessing or using Nishaglobal Education, you agree to these Terms
+          & Conditions. If you do not agree, please do not use the website.
         </p>
 
-        <h2 className="font-semibold text-slate-900">Use of Website</h2>
+        <h2 className="font-semibold text-slate-900">Purpose of the Website</h2>
         <p>
-          This website provides educational information, career guidance
-          resources, stream suggestions, quizzes, and learning-related content
-          for general informational use. You agree to use the website lawfully
-          and responsibly.
+          Nishaglobal Education publishes career guidance, educational
+          resources, career tests, and skills-related content for informational
+          and educational purposes. The website is designed to help students and
+          parents explore options after 10th and 12th.
         </p>
 
-        <h2 className="font-semibold text-slate-900">Career Tests and Guidance</h2>
+        <h2 className="font-semibold text-slate-900">No Guarantee of Outcome</h2>
         <p>
-          Career tests, result pages, stream suggestions, and resource notes are
-          guidance tools only. They do not constitute guaranteed admission,
-          guaranteed eligibility, guaranteed selection, guaranteed placement, or
-          professional counselling advice.
+          Career tests, articles, score-based suggestions, eligibility notes,
+          fee ranges, college examples, institution examples, placement
+          information, and abroad opportunities are intended to support initial
+          planning only. They do not guarantee admission, scholarships, jobs,
+          ranks, salaries, visas, licensing, or placement.
         </p>
 
-        <h2 className="font-semibold text-slate-900">Content Accuracy and Updates</h2>
+        <h2 className="font-semibold text-slate-900">User Responsibility</h2>
         <p>
-          We aim to keep information useful and practical, but educational
-          policies, entrance rules, fee ranges, age limits, counselling systems,
-          institution details, placement trends, and abroad pathways may change
-          over time. Users must verify important details from official sources
-          before making decisions or payments.
+          You agree to use the website lawfully and responsibly. You are
+          responsible for verifying important details from official sources
+          before making decisions related to education, counselling, admission,
+          payments, travel, training, employment, or visas.
         </p>
 
-        <h2 className="font-semibold text-slate-900">Featured Listings, Ads, and Sponsored Content</h2>
+        <h2 className="font-semibold text-slate-900">Accuracy of Information</h2>
         <p>
-          From time to time, the website may display featured colleges,
-          institutes, courses, products, collaborations, advertisements, or
-          sponsored educational content. Such content should be treated as
-          informational or promotional in nature and not as a guarantee of
-          admission, job, rank, visa, or outcome.
+          We try to keep content practical and useful, but educational rules,
+          age limits, reservation policies, counselling systems, institution
+          details, admission processes, fee structures, and entrance exam
+          requirements may change over time. Content may not always reflect the
+          latest official update at every moment.
+        </p>
+
+        <h2 className="font-semibold text-slate-900">Advertisements and Sponsored Content</h2>
+        <p>
+          The website may display advertisements, sponsored content, partner
+          listings, or affiliate-style promotional placements in the future.
+          Such content should be treated as informational or promotional in
+          nature and not as a personal recommendation or guaranteed result.
         </p>
 
         <h2 className="font-semibold text-slate-900">Intellectual Property</h2>
         <p>
-          Unless otherwise stated, text, layout, branding, tests, resource
-          content, graphics, and educational materials on this website belong to
-          Nishaglobal Education. Content should not be copied, reproduced,
-          republished, or redistributed without permission.
-        </p>
-
-        <h2 className="font-semibold text-slate-900">User Submissions</h2>
-        <p>
-          By submitting a message, enquiry, or form through the website, you
-          confirm that the information provided is accurate to the best of your
-          knowledge and does not violate any law or third-party rights.
+          Unless otherwise stated, the website content, branding, text, tests,
+          educational materials, graphics, and layout belong to Nishaglobal
+          Education. Content should not be copied, reproduced, republished, or
+          redistributed without permission.
         </p>
 
         <h2 className="font-semibold text-slate-900">External Links</h2>
         <p>
-          This website may contain links to external websites, official portals,
-          or third-party services. We are not responsible for their content,
-          admission processes, privacy practices, products, or policies.
+          This website may link to third-party websites, official portals,
+          colleges, exam authorities, social media pages, or other resources.
+          We are not responsible for their content, services, admissions,
+          payment systems, policies, or privacy practices.
         </p>
 
         <h2 className="font-semibold text-slate-900">Limitation of Liability</h2>
         <p>
           Nishaglobal Education is not responsible for losses, dissatisfaction,
-          enrolment outcomes, payment disputes, admission results, recruitment
-          results, or career decisions made on the basis of website content,
-          third-party claims, or partner representations.
+          rejected applications, failed admissions, payment disputes,
+          recruitment outcomes, or decisions made on the basis of website
+          content, advertisements, or third-party claims.
         </p>
 
-        <h2 className="font-semibold text-slate-900">Changes to Terms</h2>
+        <h2 className="font-semibold text-slate-900">Changes to These Terms</h2>
         <p>
           These Terms & Conditions may be updated from time to time. Continued
-          use of the website after updates indicates acceptance of the revised
-          terms.
+          use of the website after changes are posted indicates acceptance of
+          the revised terms.
         </p>
 
         <h2 className="font-semibold text-slate-900">Contact</h2>
         <p>
-          If you have questions regarding these terms, you may contact the
-          Nishaglobal Education team through the website.
+          If you have questions regarding these terms, please contact
+          Nishaglobal Education through the Contact page or email
+          {" "}
+          <a className="font-medium text-blue-700 hover:underline" href="mailto:nishaglobaleducation@gmail.com">
+            nishaglobaleducation@gmail.com
+          </a>
+          .
         </p>
 
         <p className="pt-4 text-sm text-slate-500">

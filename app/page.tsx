@@ -68,8 +68,8 @@ export default function HomePage() {
         ))}
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <div className="max-w-3xl">
+      <section className="grid gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
           <div className="inline-flex rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700">
             Career Guidance
           </div>
@@ -91,6 +91,46 @@ export default function HomePage() {
               View Resources
             </Link>
           </div>
+        </div>
+
+        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+          <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+            About Us
+          </div>
+          <h2 className="mt-4 text-2xl font-bold text-slate-900">Why students trust Nishaglobal Education</h2>
+          <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+            We focus on simple, practical, and educational guidance for
+            students exploring career options after 10th and 12th. Our content
+            is designed to help users understand choices more clearly before
+            making important academic decisions.
+          </p>
+          <div className="mt-5">
+            <Link
+              href="/about"
+              className="inline-flex rounded-xl border border-gray-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-gray-50"
+            >
+              Read About Us
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">Why this website is useful</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            "Free student-friendly career tests",
+            "Simple and practical guidance",
+            "Educational resources for planning",
+            "Contact support for general questions",
+          ].map((item) => (
+            <div
+              key={item}
+              className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium text-slate-700"
+            >
+              {item}
+            </div>
+          ))}
         </div>
       </section>
 

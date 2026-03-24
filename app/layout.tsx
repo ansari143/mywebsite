@@ -3,9 +3,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Nishaglobal Education",
+  metadataBase: new URL("https://nishaglobaleducation.com"),
+  title: {
+    default: "Nishaglobal Education",
+    template: "%s | Nishaglobal Education",
+  },
   description:
-    "Career guidance, educational resources, career tests, and high-demand skills learning for students after 10th and 12th.",
+    "Career guidance, educational resources, free career tests, and future-ready skills learning for students after 10th and 12th.",
   alternates: {
     canonical: "https://nishaglobaleducation.com",
   },
@@ -14,28 +18,61 @@ export const metadata = {
     shortcut: "/icon.png",
     apple: "/icon.png",
   },
+  openGraph: {
+    title: "Nishaglobal Education",
+    description:
+      "Career guidance, educational resources, free career tests, and future-ready skills learning for students after 10th and 12th.",
+    url: "https://nishaglobaleducation.com",
+    siteName: "Nishaglobal Education",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Nishaglobal Education",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nishaglobal Education",
+    description:
+      "Career guidance, educational resources, free career tests, and future-ready skills learning for students after 10th and 12th.",
+    images: ["/logo.png"],
+  },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     name: "Nishaglobal Education",
     url: "https://nishaglobaleducation.com",
     logo: "https://nishaglobaleducation.com/logo.png",
+    image: "https://nishaglobaleducation.com/logo.png",
+    email: "nishaglobaleducation@gmail.com",
     description:
-      "Nishaglobal Education provides career guidance, educational resources, career tests, and high-demand skills learning for students after 10th and 12th.",
+      "Nishaglobal Education provides career guidance, educational resources, free career tests, and high-demand skills learning for students after 10th and 12th.",
     sameAs: [
-      // Add official social profile links here later if available
-       "https://www.facebook.com/global.nisha",
+      "https://www.facebook.com/global.nisha",
       "https://instagram.com/nisha.global",
-       "https://www.youtube.com/@NishaglobalEducation",
-       "https://www.facebook.com/profile.php?id=61588627138300",
-       "https://www.linkedin.com/in/nishaglobal-education-9818713b7/"
+      "https://www.youtube.com/@NishaglobalEducation",
+      "https://www.facebook.com/profile.php?id=61588627138300",
+      "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
+    ],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: "nishaglobaleducation@gmail.com",
+        availableLanguage: ["English", "Hindi"],
+      },
     ],
   };
 
@@ -45,7 +82,7 @@ export default function RootLayout({
     name: "Nishaglobal Education",
     url: "https://nishaglobaleducation.com",
     description:
-      "Career guidance, educational resources, career tests, and high-demand skills learning for students after 10th and 12th.",
+      "Career guidance, educational resources, free career tests, and future-ready skills learning for students after 10th and 12th.",
     publisher: {
       "@type": "EducationalOrganization",
       name: "Nishaglobal Education",
@@ -54,6 +91,11 @@ export default function RootLayout({
         "@type": "ImageObject",
         url: "https://nishaglobaleducation.com/logo.png",
       },
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://nishaglobaleducation.com/resources?query={search_term_string}",
+      "query-input": "required name=search_term_string",
     },
   };
 
