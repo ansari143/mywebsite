@@ -1,7 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import Script from "next/script";
 export const metadata = {
   metadataBase: new URL("https://nishaglobaleducation.com"),
   title: {
@@ -110,6 +110,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        <Script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660063806042510"
+  crossOrigin="anonymous"
+  strategy="afterInteractive"
+/>
 
         <Navbar />
 
