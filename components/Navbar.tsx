@@ -16,9 +16,11 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About Us" },
     { href: "/tests", label: "Career Tests" },
+    { href: "/global-careers", label: "Global Careers" },
+    { href: "/study-abroad", label: "Study Abroad" },
     { href: "/resources", label: "Resources" },
+    { href: "/blog", label: "Blog" },
     { href: "/skills", label: "Skills" },
     { href: "/contact", label: "Contact" },
   ];
@@ -34,55 +36,42 @@ export default function Navbar() {
             height={50}
             priority
           />
-          <span className="hidden text-lg font-semibold sm:block">
-            Nishaglobal Education
-          </span>
+          <div className="hidden sm:block">
+            <span className="block text-lg font-semibold text-slate-900">
+              Nishaglobal Education
+            </span>
+            <span className="block text-xs text-slate-500">
+              Career guidance for students worldwide
+            </span>
+          </div>
         </Link>
 
         <div className="hidden items-center gap-6 md:flex">
-          <nav className="flex gap-6 text-sm font-medium">
+          <nav className="flex gap-5 text-sm font-medium">
             {navLinks.map((item) => (
-              <Link key={item.href} className="hover:text-blue-600" href={item.href}>
-                {item.label}
-              </Link>
+             <Link
+  key={item.href}
+  className={`hover:text-blue-600 ${
+    item.href === "/blog" ? "font-semibold text-blue-700" : ""
+  }`}
+  href={item.href}
+>
+  {item.label}
+</Link>
             ))}
           </nav>
 
           <div className="flex items-center gap-3 border-l pl-4 text-gray-500">
-            <a
-              href={socialLinks.youtube}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-              className="transition hover:text-red-600"
-            >
+            <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition hover:text-red-600">
               <FaYoutube size={16} />
             </a>
-            <a
-              href={socialLinks.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="transition hover:text-pink-600"
-            >
+            <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition hover:text-pink-600">
               <FaInstagram size={16} />
             </a>
-            <a
-              href={socialLinks.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="transition hover:text-blue-600"
-            >
+            <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition hover:text-blue-600">
               <FaFacebookF size={15} />
             </a>
-            <a
-              href={socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="transition hover:text-sky-700"
-            >
+            <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition hover:text-sky-700">
               <FaLinkedinIn size={15} />
             </a>
           </div>
@@ -101,46 +90,27 @@ export default function Navbar() {
         <div className="border-t bg-white md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 text-sm">
             {navLinks.map((item) => (
-              <Link key={item.href} onClick={() => setOpen(false)} href={item.href}>
-                {item.label}
-              </Link>
+              <Link
+  key={item.href}
+  onClick={() => setOpen(false)}
+  href={item.href}
+  className={item.href === "/blog" ? "font-semibold text-blue-700" : ""}
+>
+  {item.label}
+</Link>
             ))}
 
             <div className="mt-2 flex items-center gap-4 border-t pt-3 text-gray-500">
-              <a
-                href={socialLinks.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="transition hover:text-red-600"
-              >
+              <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition hover:text-red-600">
                 <FaYoutube size={18} />
               </a>
-              <a
-                href={socialLinks.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="transition hover:text-pink-600"
-              >
+              <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition hover:text-pink-600">
                 <FaInstagram size={18} />
               </a>
-              <a
-                href={socialLinks.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="transition hover:text-blue-600"
-              >
+              <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition hover:text-blue-600">
                 <FaFacebookF size={17} />
               </a>
-              <a
-                href={socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="transition hover:text-sky-700"
-              >
+              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition hover:text-sky-700">
                 <FaLinkedinIn size={17} />
               </a>
             </div>

@@ -9,7 +9,7 @@ export const metadata = {
     template: "%s | Nishaglobal Education",
   },
   description:
-    "Career guidance, educational resources, free career tests, and future-ready skills learning for students after 10th and 12th.",
+    "Career guidance for students worldwide, including free career tests, study abroad guides, educational resources, and future-ready skills learning.",
   alternates: {
     canonical: "https://nishaglobaleducation.com",
   },
@@ -21,7 +21,7 @@ export const metadata = {
   openGraph: {
     title: "Nishaglobal Education",
     description:
-      "Career guidance, educational resources, free career tests, and future-ready skills learning for students after 10th and 12th.",
+      "Helping students choose careers in India and abroad through free career tests, global education guides, resources, and future-ready skills.",
     url: "https://nishaglobaleducation.com",
     siteName: "Nishaglobal Education",
     locale: "en_US",
@@ -39,12 +39,12 @@ export const metadata = {
     card: "summary_large_image",
     title: "Nishaglobal Education",
     description:
-      "Career guidance, educational resources, free career tests, and future-ready skills learning for students after 10th and 12th.",
+      "Career guidance for students worldwide, including free career tests, study abroad guides, educational resources, and future-ready skills learning.",
     images: ["/logo.png"],
   },
   verification: {
-  google: "ca-pub-4660063806042510",
-},
+    google: "ca-pub-4660063806042510",
+  },
 };
 
 export default function RootLayout({
@@ -61,7 +61,9 @@ export default function RootLayout({
     image: "https://nishaglobaleducation.com/logo.png",
     email: "nishaglobaleducation@gmail.com",
     description:
-      "Nishaglobal Education provides career guidance, educational resources, free career tests, and high-demand skills learning for students after 10th and 12th.",
+      "Nishaglobal Education provides career guidance, educational resources, study abroad guidance, free career tests, and future-ready skills learning for students worldwide.",
+    areaServed: "Worldwide",
+    availableLanguage: ["English", "Hindi"],
     sameAs: [
       "https://www.facebook.com/global.nisha",
       "https://instagram.com/nisha.global",
@@ -85,7 +87,7 @@ export default function RootLayout({
     name: "Nishaglobal Education",
     url: "https://nishaglobaleducation.com",
     description:
-      "Career guidance, educational resources, free career tests, and future-ready skills learning for students after 10th and 12th.",
+      "Career guidance for students worldwide, including study abroad guides, free career tests, educational resources, and future-ready skills.",
     publisher: {
       "@type": "EducationalOrganization",
       name: "Nishaglobal Education",
@@ -105,13 +107,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-  <head>
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660063806042510"
-      crossOrigin="anonymous"
-    ></script>
-  </head>
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660063806042510"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body className="bg-gray-50 text-gray-900">
         <script
           type="application/ld+json"

@@ -1,140 +1,105 @@
-export const metadata = {
-  title: "Privacy Policy",
-  description:
-    "Privacy Policy for Nishaglobal Education covering website usage, forms, analytics, cookies, and user information protection.",
-  alternates: {
-    canonical: "https://nishaglobaleducation.com/privacy-policy",
-  },
-};
+<div className="mt-6 space-y-5 text-sm leading-7 text-slate-600 sm:text-base">
 
-export default function PrivacyPolicyPage() {
-  const privacySchema = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: "Privacy Policy",
-    description:
-      "Privacy Policy for Nishaglobal Education covering website usage, forms, analytics, cookies, and user information protection.",
-    url: "https://nishaglobaleducation.com/privacy-policy",
-    isPartOf: {
-      "@type": "WebSite",
-      name: "Nishaglobal Education",
-      url: "https://nishaglobaleducation.com",
-    },
-  };
+  <p>
+    Nishaglobal Education respects your privacy and is committed to handling information responsibly.
+    This Privacy Policy explains what information may be collected through the website, how it may be used,
+    and how we protect user data for a global audience.
+  </p>
 
-  return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(privacySchema) }}
-      />
+  <h2 className="font-semibold text-slate-900">Information We May Collect</h2>
+  <p>
+    We may collect limited technical and user-provided information, including:
+  </p>
+  <ul className="list-disc ml-6">
+    <li>Browser type, device type, and operating system</li>
+    <li>General location (country-level)</li>
+    <li>Pages visited, time spent, and referral sources</li>
+    <li>Name, email address, country, and message (if submitted via contact forms)</li>
+    <li>Education-related inputs (such as stream, interest, or preferences)</li>
+  </ul>
 
-      <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
-        Privacy Policy
-      </h1>
+  <h2 className="font-semibold text-slate-900">How Information May Be Used</h2>
+  <p>
+    Information may be used to:
+  </p>
+  <ul className="list-disc ml-6">
+    <li>Respond to user enquiries</li>
+    <li>Provide career and study abroad guidance</li>
+    <li>Improve website content and user experience</li>
+    <li>Analyze website traffic and performance</li>
+    <li>Maintain security and prevent misuse</li>
+  </ul>
 
-      <p className="mt-2 text-sm text-slate-500">Last updated: March 24, 2026</p>
+  <p>
+    We do not sell personal information submitted through this website.
+  </p>
 
-      <div className="mt-6 space-y-5 text-sm leading-7 text-slate-600 sm:text-base">
-        <p>
-          Nishaglobal Education respects your privacy and is committed to
-          protecting information shared while using this website.
-        </p>
+  <h2 className="font-semibold text-slate-900">Career Tests and Result Data</h2>
+  <p>
+    If you use career tests or assessment tools, your inputs may be processed to generate educational guidance.
+    These results are intended for self-reflection and planning only and do not represent official advice,
+    guaranteed outcomes, or permanent personal records.
+  </p>
 
-        <h2 className="font-semibold text-slate-900">Information We Collect</h2>
-        <p>
-          We may collect limited information such as browser type, device type,
-          pages visited, referral source, and general usage statistics to
-          improve the website experience. If you submit details through forms,
-          contact pages, career guidance requests, or advertisement enquiries,
-          we may receive personal information such as your name, email address,
-          class, marks, stream interest, subject, or message that you choose to
-          share.
-        </p>
+  <h2 className="font-semibold text-slate-900">Cookies, Analytics, and Advertising</h2>
+  <p>
+    The website may use cookies and analytics tools to enhance functionality and understand user behavior.
+    These technologies help improve content, performance, and user experience.
+  </p>
 
-        <h2 className="font-semibold text-slate-900">How We Use Information</h2>
-        <p>
-          Information may be used to respond to questions, improve educational
-          content, understand which resources users find helpful, maintain site
-          security and performance, and review collaboration or sponsored
-          listing enquiries. We do not sell personal information submitted
-          through the website.
-        </p>
+  <p>
+    Users can manage or disable cookies through their browser settings.
+  </p>
 
-        <h2 className="font-semibold text-slate-900">Career Tests and Guidance Data</h2>
-        <p>
-          If you use a career test or similar tool, your answers and result data
-          may be processed to show score-based guidance. Such guidance is meant
-          for educational support only and should not be treated as an official
-          academic recommendation, permanent personal profile, or guaranteed
-          outcome.
-        </p>
+  <h2 className="font-semibold text-slate-900">Google AdSense and Third-Party Services</h2>
+  <p>
+    Nishaglobal Education may display advertisements through services such as Google AdSense.
+    These services may use cookies or similar technologies to show ads based on user visits to this
+    and other websites.
+  </p>
 
-        <h2 className="font-semibold text-slate-900">Cookies, Analytics, and Advertising</h2>
-        <p>
-          This website may use cookies or similar technologies to remember basic
-          preferences, understand traffic, improve performance, and support
-          website analytics. We may also use advertising services, including
-          Google AdSense or similar providers, which may use cookies to serve
-          ads based on user visits. Third-party vendors may use cookies to show
-          personalized or non-personalized ads according to their own policies
-          and user settings.
-        </p>
+  <p>
+    Third-party providers (such as analytics and advertising partners) operate under their own privacy policies.
+    Users are encouraged to review those policies directly.
+  </p>
 
-        <h2 className="font-semibold text-slate-900">Third-Party Services and Links</h2>
-        <p>
-          We may use third-party tools such as form handlers, analytics
-          providers, embedded content, advertisement partners, and outbound
-          links to official resources or external websites. We are not
-          responsible for the privacy practices, content, or policies of those
-          third-party websites and services.
-        </p>
+  <h2 className="font-semibold text-slate-900">Global Users</h2>
+  <p>
+    Our website is accessible worldwide. By using this platform, you acknowledge that your information
+    may be processed in accordance with this Privacy Policy regardless of your country of residence.
+  </p>
 
-        <h2 className="font-semibold text-slate-900">Data Security</h2>
-        <p>
-          We take reasonable steps to protect information shared with us.
-          However, no website, online transmission, or storage method can be
-          guaranteed to be completely secure.
-        </p>
+  <h2 className="font-semibold text-slate-900">External Links</h2>
+  <p>
+    This website may contain links to external websites, universities, official portals, and third-party platforms.
+    We are not responsible for the privacy practices, content, or services of those external sites.
+  </p>
 
-        <h2 className="font-semibold text-slate-900">Children and Student Users</h2>
-        <p>
-          Our content is intended for students, parents, and general users. We
-          do not knowingly request highly sensitive personal information from
-          minors. Students should avoid sharing unnecessary sensitive personal
-          data through forms, comments, or messages.
-        </p>
+  <h2 className="font-semibold text-slate-900">Children and Student Use</h2>
+  <p>
+    Some content is intended for students and families. Users should avoid sharing sensitive personal
+    information through general forms. Parents or guardians should guide younger users when appropriate.
+  </p>
 
-        <h2 className="font-semibold text-slate-900">Your Choices</h2>
-        <p>
-          You may choose not to submit personal information through forms or
-          emails. You can also manage cookie preferences through your browser
-          settings, although doing so may affect parts of the website
-          experience.
-        </p>
+  <h2 className="font-semibold text-slate-900">Data Security</h2>
+  <p>
+    We take reasonable steps to protect user data. However, no method of transmission over the internet
+    is completely secure. Users should avoid sharing highly sensitive information unless required through
+    a secure and official process.
+  </p>
 
-        <h2 className="font-semibold text-slate-900">Policy Updates</h2>
-        <p>
-          This Privacy Policy may be updated periodically to reflect website,
-          legal, advertising, or operational changes. Continued use of the
-          website indicates acceptance of the updated policy.
-        </p>
+  <h2 className="font-semibold text-slate-900">Policy Updates</h2>
+  <p>
+    This Privacy Policy may be updated periodically to reflect changes in services, legal requirements,
+    or website functionality. Continued use of the website after updates indicates acceptance of the revised policy.
+  </p>
 
-        <h2 className="font-semibold text-slate-900">Contact</h2>
-        <p>
-          If you have privacy-related questions, you may contact Nishaglobal
-          Education through the Contact page or email us at
-          {" "}
-          <a className="font-medium text-blue-700 hover:underline" href="mailto:nishaglobaleducation@gmail.com">
-            nishaglobaleducation@gmail.com
-          </a>
-          .
-        </p>
+  <h2 className="font-semibold text-slate-900">Contact</h2>
+  <p>
+    For privacy-related questions, please contact Nishaglobal Education via the Contact page or email:
+    <a className="font-medium text-blue-700 hover:underline ml-1" href="mailto:nishaglobaleducation@gmail.com">
+      nishaglobaleducation@gmail.com
+    </a>
+  </p>
 
-        <p className="pt-4 text-sm text-slate-500">
-          © 2026 Nishaglobal Education. All rights reserved.
-        </p>
-      </div>
-    </div>
-  );
-}
+</div>

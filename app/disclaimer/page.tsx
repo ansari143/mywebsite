@@ -27,61 +27,78 @@ export default function DisclaimerPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(disclaimerSchema) }}
       />
 
-      <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
-        Disclaimer
-      </h1>
+      <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">Disclaimer</h1>
 
       <div className="mt-5 space-y-4 text-sm leading-7 text-slate-600 sm:text-base">
-        <p>
-          The career tests, stream suggestions, quizzes, resources, articles,
-          and skill guides published on Nishaglobal Education are intended for
-          general educational and informational purposes only.
-        </p>
 
-        <p>
-          Test results, score-based suggestions, eligibility notes, age limits,
-          fee ranges, college examples, institute examples, placement tips, and
-          abroad guidance are designed to help students and parents do initial
-          planning. They are not a substitute for official notifications,
-          admission bulletins, regulator guidelines, counselling authorities, or
-          professional academic advice.
-        </p>
+  <p>
+    The career tests, stream suggestions, quizzes, study abroad guides, global career content,
+    educational resources, articles, and skill-based guidance published on Nishaglobal Education
+    are provided for general informational and educational purposes only.
+  </p>
 
-        <p>
-          We try to present useful and practical information, but educational
-          rules, entrance patterns, counselling systems, reservation policies,
-          fee structures, placement trends, licensing requirements, and study
-          pathways may change over time and may differ by institute, state,
-          country, category, and admission year.
-        </p>
+  <p>
+    Any test result, score-based suggestion, eligibility summary, fee range, salary example,
+    college or university reference, scholarship mention, work opportunity, or immigration pathway
+    discussed on this website is intended to support early-stage planning and awareness.
+  </p>
 
-        <p>
-          Any college, institute, coaching, or course examples mentioned on the
-          website are shared for awareness and guidance purposes. Their mention
-          does not mean endorsement, guaranteed admission, guaranteed job,
-          guaranteed visa, or guaranteed placement unless expressly stated.
-        </p>
+  <p>
+    This information should not be considered official advice, professional counselling,
+    or a guarantee of admission, visa approval, job placement, scholarship, income, licensing,
+    or long-term settlement.
+  </p>
 
-        <p>
-          Any advertisements, sponsored content, collaborations, affiliate-style
-          references, or featured listings should be treated as promotional or
-          informational material. Users should perform their own due diligence
-          before making any payment, enrolment, or career decision.
-        </p>
+  <h2 className="font-semibold text-slate-900">No Professional or Legal Advice</h2>
+  <p>
+    Nishaglobal Education does not provide legal, immigration, financial, or licensed career counselling services.
+    Users should consult qualified professionals or official authorities for decisions related to admissions,
+    visas, immigration, finances, or employment.
+  </p>
 
-        <p>
-          Users should always verify important details from official sources and
-          discuss major academic or career decisions with parents, teachers,
-          qualified counsellors, or the relevant institution.
-        </p>
+  <h2 className="font-semibold text-slate-900">Changing Policies and Information</h2>
+  <p>
+    Educational rules, visa procedures, immigration pathways, work regulations, tuition fees,
+    scholarship criteria, and institutional policies may change over time.
+    Information on this website may not always reflect the latest official updates.
+  </p>
 
-        <p>
-          Nishaglobal Education is an independent guidance platform and is not
-          affiliated with any government body, examination authority,
-          university, airline, hospital, recruiter, or training institute
-          unless explicitly stated.
-        </p>
-      </div>
+  <h2 className="font-semibold text-slate-900">No Affiliation</h2>
+  <p>
+    Nishaglobal Education is an independent educational guidance platform.
+    We are not affiliated with any government body, immigration authority, examination board,
+    university, recruiter, airline, hospital, or training institute unless explicitly stated.
+  </p>
+
+  <h2 className="font-semibold text-slate-900">Third-Party Content and Advertisements</h2>
+  <p>
+    The website may display advertisements, sponsored content, affiliate links,
+    or partner listings. These are provided for informational or promotional purposes only.
+    We do not guarantee or endorse the services, admissions, outcomes, or claims made by third parties.
+  </p>
+
+  <h2 className="font-semibold text-slate-900">User Responsibility</h2>
+  <p>
+    Users are responsible for verifying all critical information directly from official sources
+    such as government portals, embassies, universities, regulatory bodies, and authorized institutions
+    before making academic, financial, travel, or career decisions.
+  </p>
+
+  <h2 className="font-semibold text-slate-900">Global Use</h2>
+  <p>
+    This website is accessible worldwide. Users from different countries should ensure that
+    they comply with their local laws, regulations, and requirements when using this platform
+    or acting on its content.
+  </p>
+
+  <h2 className="font-semibold text-slate-900">Limitation of Liability</h2>
+  <p>
+    Nishaglobal Education is not responsible for any direct or indirect loss, including but not limited to
+    admission rejection, visa denial, financial loss, incorrect decisions, or third-party actions,
+    resulting from the use of website content or reliance on provided information.
+  </p>
+
+</div>
     </div>
   );
 }
