@@ -43,7 +43,7 @@ export const metadata = {
     images: ["/logo.png"],
   },
   verification: {
-    google: "ca-pub-4660063806042510",
+    google: "ca-pub-8565540588287869",
   },
 };
 
@@ -110,7 +110,7 @@ export default function RootLayout({
       <head>
         <script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660063806042510"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8565540588287869"
           crossOrigin="anonymous"
         ></script>
       </head>
