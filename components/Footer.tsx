@@ -83,6 +83,22 @@ export default function Footer() {
           </div>
         </div>
 
+
+        <div className="mt-8 rounded-2xl border border-blue-100 bg-blue-50 p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-semibold text-slate-900">Need help after taking a test?</p>
+              <p className="mt-1 text-sm leading-6 text-slate-600">
+                Use the contact page to ask questions, explore resources, or continue with country guides and blogs.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/contact" className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">Contact Us</Link>
+              <Link href="/resources" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Browse Resources</Link>
+            </div>
+          </div>
+        </div>
+
         <div className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4">
           <p className="text-sm leading-7 text-slate-700">
             <span className="font-semibold text-slate-900">Important:</span>{" "}

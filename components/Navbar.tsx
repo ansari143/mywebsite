@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
@@ -41,25 +42,26 @@ export default function Navbar() {
               Nishaglobal Education
             </span>
             <span className="block text-xs text-slate-500">
-              Career guidance for students worldwide
+              Career guidance for students in India and worldwide
             </span>
           </div>
         </Link>
 
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-5 md:flex">
           <nav className="flex gap-5 text-sm font-medium">
             {navLinks.map((item) => (
-             <Link
-  key={item.href}
-  className={`hover:text-blue-600 ${
-    item.href === "/blog" ? "font-semibold text-blue-700" : ""
-  }`}
-  href={item.href}
->
-  {item.label}
-</Link>
+              <Link key={item.href} className="text-slate-700 hover:text-blue-600" href={item.href}>
+                {item.label}
+              </Link>
             ))}
           </nav>
+
+          <Link
+            href="/tests"
+            className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            Free Test
+          </Link>
 
           <div className="flex items-center gap-3 border-l pl-4 text-gray-500">
             <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition hover:text-red-600">
@@ -89,15 +91,23 @@ export default function Navbar() {
       {open && (
         <div className="border-t bg-white md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 text-sm">
+            <Link
+              href="/tests"
+              onClick={() => setOpen(false)}
+              className="rounded-xl bg-blue-600 px-4 py-2 text-center font-semibold text-white"
+            >
+              Start Free Career Test
+            </Link>
+
             {navLinks.map((item) => (
               <Link
-  key={item.href}
-  onClick={() => setOpen(false)}
-  href={item.href}
-  className={item.href === "/blog" ? "font-semibold text-blue-700" : ""}
->
-  {item.label}
-</Link>
+                key={item.href}
+                onClick={() => setOpen(false)}
+                href={item.href}
+                className="text-slate-700"
+              >
+                {item.label}
+              </Link>
             ))}
 
             <div className="mt-2 flex items-center gap-4 border-t pt-3 text-gray-500">
