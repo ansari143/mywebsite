@@ -96,6 +96,17 @@ export default function QuizPage() {
 
     const percent = Math.round((correct / total) * 100);
 
+    const questionDetails = questions.map((ques) => ({
+      id: ques.id,
+      text: ques.text,
+      hi: ques.hi,
+      topic: ques.topic,
+      options: ques.options,
+      userAnswer: answers[ques.id],
+      correctAnswer: ques.correct,
+      isCorrect: answers[ques.id] === ques.correct,
+    }));
+
     sessionStorage.setItem(
       "nge_result",
       JSON.stringify({
@@ -108,6 +119,8 @@ export default function QuizPage() {
         attemptedOn: new Date().toISOString(),
       })
     );
+
+    sessionStorage.setItem("nge_result_details", JSON.stringify(questionDetails));
 
     router.push("/result");
   };

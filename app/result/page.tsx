@@ -18,6 +18,17 @@ type ResultPayload = {
   attemptedOn?: string;
 };
 
+type QuestionDetail = {
+  id: string;
+  text: string;
+  hi?: string;
+  topic?: string;
+  options: { id: "A" | "B" | "C" | "D"; text: string; hi?: string }[];
+  userAnswer: "A" | "B" | "C" | "D";
+  correctAnswer: "A" | "B" | "C" | "D";
+  isCorrect: boolean;
+};
+
 function guidance(percent: number) {
   if (percent >= 90) {
     return {
@@ -73,12 +84,16 @@ function readinessBand(percent: number) {
 
 export default function ResultPage() {
   const [data, setData] = useState<ResultPayload | null>(null);
+  const [questionDetails, setQuestionDetails] = useState<QuestionDetail[]>([]);
   const [studentName, setStudentName] = useState("");
   const certRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const raw = sessionStorage.getItem("nge_result");
     if (raw) setData(JSON.parse(raw));
+
+    const detailsRaw = sessionStorage.getItem("nge_result_details");
+    if (detailsRaw) setQuestionDetails(JSON.parse(detailsRaw));
 
     const savedName = sessionStorage.getItem("nge_student_name");
     if (savedName) setStudentName(savedName);
@@ -110,6 +125,10 @@ export default function ResultPage() {
       .sort((a, b) => a[1].percent - b[1].percent)
       .slice(0, 3);
   }, [data?.topicScores]);
+
+  const wrongQuestions = useMemo(() => {
+    return questionDetails.filter(q => !q.isCorrect);
+  }, [questionDetails]);
 
   const backup = useMemo(() => {
     if (!currentTest || !insight) return tests.filter((t) => t.slug !== data?.slug).slice(0, 3);
@@ -302,6 +321,48 @@ export default function ResultPage() {
               </div>
             </div>
           </section>
+
+          {wrongQuestions.length > 0 && (
+            <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+              <h2 className="text-2xl font-bold text-slate-900">Review Incorrect Answers</h2>
+              <div className="mt-5 space-y-6">
+                {wrongQuestions.map((q, index) => (
+                  <div key={q.id} className="rounded-2xl border border-red-200 bg-red-50 p-5">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-600 text-sm font-semibold text-white">
+                        {index + 1}
+                      </span>
+                      <div className="flex-1">
+                        <p className="font-semibold text-slate-900">{q.text}</p>
+                        {q.hi && <p className="mt-1 text-sm text-gray-700">{q.hi}</p>}
+                        <div className="mt-4 grid gap-2">
+                          {q.options.map((opt) => {
+                            const isUser = opt.id === q.userAnswer;
+                            const isCorrect = opt.id === q.correctAnswer;
+                            return (
+                              <div
+                                key={opt.id}
+                                className={`rounded-lg border p-3 ${
+                                  isCorrect ? "border-green-500 bg-green-100" :
+                                  isUser ? "border-red-500 bg-red-100" :
+                                  "border-gray-200 bg-white"
+                                }`}
+                              >
+                                <span className="font-semibold">{opt.id}.</span> {opt.text}
+                                {opt.hi && <div className="mt-1 text-sm text-gray-600">{opt.hi}</div>}
+                                {isCorrect && <span className="ml-2 text-green-700 font-semibold">✓ Correct</span>}
+                                {isUser && !isCorrect && <span className="ml-2 text-red-700 font-semibold">✗ Your choice</span>}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {insight && (
             <section className="grid gap-6 xl:grid-cols-2">
