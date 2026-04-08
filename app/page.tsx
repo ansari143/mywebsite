@@ -155,7 +155,7 @@ export default function HomePage() {
           <span className="rounded-full bg-white px-3 py-1 shadow-sm">Free career tests</span>
           <span className="rounded-full bg-white px-3 py-1 shadow-sm">India-focused guidance</span>
           <span className="rounded-full bg-white px-3 py-1 shadow-sm">Global study options</span>
-          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Blogs + skills</span>
+          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Practice + tests + skills</span>
         </div>
 
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
@@ -226,6 +226,66 @@ export default function HomePage() {
           <div className="inline-flex rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700">
             Popular student routes
           </div>
+          {/* Practice Tests Section */}
+<section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+  <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div>
+      <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+        New practice zone
+      </div>
+
+      <h2 className="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl">
+        Practice Tests to build real confidence
+      </h2>
+
+      <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
+        Students can now practice IELTS and Engineering Entrance questions with instant scoring,
+        detailed explanations, and topic-wise improvement tracking.
+      </p>
+    </div>
+
+    <Link
+      href="/practice-tests"
+      className="inline-flex rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+    >
+      View All Practice Tests
+    </Link>
+  </div>
+
+  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+    {/* IELTS */}
+    <Link
+      href="/practice-tests/ielts"
+      className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
+    >
+      <p className="text-lg font-semibold text-slate-900">
+        IELTS Practice Tests
+      </p>
+      <p className="mt-2 text-sm leading-6 text-slate-600">
+        Improve grammar, vocabulary, reading, and sentence accuracy with English-only IELTS practice sets.
+      </p>
+      <span className="mt-3 inline-block text-sm font-medium text-blue-700">
+        Start IELTS practice →
+      </span>
+    </Link>
+
+    {/* Engineering */}
+    <Link
+      href="/practice-tests/engineering-entrance"
+      className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
+    >
+      <p className="text-lg font-semibold text-slate-900">
+        Engineering Entrance Practice
+      </p>
+      <p className="mt-2 text-sm leading-6 text-slate-600">
+        Practice math, physics, chemistry, and logical reasoning questions designed for beginners.
+      </p>
+      <span className="mt-3 inline-block text-sm font-medium text-blue-700">
+        Start engineering practice →
+      </span>
+    </Link>
+  </div>
+</section>
           <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
             Start with the most searched tests on your platform
           </h2>

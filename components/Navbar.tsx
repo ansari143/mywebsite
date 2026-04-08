@@ -18,6 +18,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/tests", label: "Career Tests" },
+    { href: "/practice-tests", label: "Practice Tests" },
     { href: "/global-careers", label: "Global Careers" },
     { href: "/study-abroad", label: "Study Abroad" },
     { href: "/resources", label: "Resources" },
@@ -50,7 +51,11 @@ export default function Navbar() {
         <div className="hidden items-center gap-5 md:flex">
           <nav className="flex gap-5 text-sm font-medium">
             {navLinks.map((item) => (
-              <Link key={item.href} className="text-slate-700 hover:text-blue-600" href={item.href}>
+              <Link
+                key={item.href}
+                className="text-slate-700 hover:text-blue-600"
+                href={item.href}
+              >
                 {item.label}
               </Link>
             ))}
@@ -64,16 +69,40 @@ export default function Navbar() {
           </Link>
 
           <div className="flex items-center gap-3 border-l pl-4 text-gray-500">
-            <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition hover:text-red-600">
+            <a
+              href={socialLinks.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="transition hover:text-red-600"
+            >
               <FaYoutube size={16} />
             </a>
-            <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition hover:text-pink-600">
+            <a
+              href={socialLinks.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="transition hover:text-pink-600"
+            >
               <FaInstagram size={16} />
             </a>
-            <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition hover:text-blue-600">
+            <a
+              href={socialLinks.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="transition hover:text-blue-600"
+            >
               <FaFacebookF size={15} />
             </a>
-            <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition hover:text-sky-700">
+            <a
+              href={socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="transition hover:text-sky-700"
+            >
               <FaLinkedinIn size={15} />
             </a>
           </div>
@@ -111,16 +140,40 @@ export default function Navbar() {
             ))}
 
             <div className="mt-2 flex items-center gap-4 border-t pt-3 text-gray-500">
-              <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition hover:text-red-600">
+              <a
+                href={socialLinks.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="transition hover:text-red-600"
+              >
                 <FaYoutube size={18} />
               </a>
-              <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition hover:text-pink-600">
+              <a
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="transition hover:text-pink-600"
+              >
                 <FaInstagram size={18} />
               </a>
-              <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition hover:text-blue-600">
+              <a
+                href={socialLinks.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="transition hover:text-blue-600"
+              >
                 <FaFacebookF size={17} />
               </a>
-              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition hover:text-sky-700">
+              <a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="transition hover:text-sky-700"
+              >
                 <FaLinkedinIn size={17} />
               </a>
             </div>
