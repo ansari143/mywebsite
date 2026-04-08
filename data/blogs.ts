@@ -7,6 +7,41 @@ export type BlogPost = {
 };
 
 export const blogPosts: BlogPost[] = [
+  // ✅ NEW SEO PRACTICE BLOGS (ADD AT TOP FOR PRIORITY)
+  {
+    slug: "ielts-practice-questions-with-answers",
+    title: "Free IELTS Practice Questions with Answers",
+    description:
+      "Practice IELTS grammar, reading, and vocabulary with explanation-based questions and clear answers.",
+    category: "IELTS Practice",
+    href: "/blog/ielts-practice-questions-with-answers",
+  },
+  {
+    slug: "ielts-grammar-practice-for-beginners",
+    title: "IELTS Grammar Practice for Beginners",
+    description:
+      "Improve IELTS grammar with beginner-friendly practice questions, answers, and explanations.",
+    category: "IELTS Grammar",
+    href: "/blog/ielts-grammar-practice-for-beginners",
+  },
+  {
+    slug: "engineering-entrance-questions-with-answers",
+    title: "Engineering Entrance Questions with Answers",
+    description:
+      "Practice engineering entrance questions for math, physics, chemistry, and logic with explanations.",
+    category: "Engineering Practice",
+    href: "/blog/engineering-entrance-questions-with-answers",
+  },
+  {
+    slug: "beginner-engineering-practice-math-physics-chemistry",
+    title: "Beginner Math Physics Chemistry Practice for Engineering",
+    description:
+      "Build strong engineering basics with practice questions in math, physics, and chemistry.",
+    category: "Engineering Foundation",
+    href: "/blog/beginner-engineering-practice-math-physics-chemistry",
+  },
+
+  // ✅ EXISTING BLOGS
   {
     slug: "top-careers-usa-2026",
     title: "Top 10 High Paying Careers in USA 2026",
