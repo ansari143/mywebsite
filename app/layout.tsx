@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   metadataBase: new URL("https://nishaglobaleducation.com"),
@@ -129,6 +130,7 @@ export default function RootLayout({
         <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
           {children}
         </main>
+         <Analytics />
 
         <Footer />
       </body>
