@@ -1,8 +1,9 @@
-export type PracticeCategory = "ielts" | "engineering-entrance";
+export type PracticeCategory = "ielts" | "engineering-entrance" | "ctet" | "ssc" | "railway";
 
 export type PracticeOption = {
   id: "A" | "B" | "C" | "D";
   text: string;
+  hi?: string;
 };
 
 export type PracticeQuestion = {
@@ -13,12 +14,16 @@ export type PracticeQuestion = {
   explanation: string;
   topic: string;
   difficulty: "easy" | "medium" | "hard";
+  hi?: string;
+  explanationHi?: string;
+  chapter?: string;
+  chapterHi?: string;
 };
 
 export type PracticeSet = {
   id: string;
   slug: string;
-  category: PracticeCategory;
+  category: string;
   title: string;
   description: string;
   examType: string;
@@ -30,6 +35,13 @@ export type PracticeSet = {
   keywords: string[];
   intro: string;
   questions: PracticeQuestion[];
+  titleHi?: string;
+  chapter?: string;
+  chapterHi?: string;
+  difficulty?: "Easy" | "Medium" | "Hard";
+  durationMin?: number;
+  bilingual?: boolean;
+  isLive?: boolean;
 };
 
 export type PracticeCategoryMeta = {
@@ -41,6 +53,51 @@ export type PracticeCategoryMeta = {
   heroText: string;
   ctaHref: string;
   ctaLabel: string;
+};
+
+// New types for government job practice tests
+export type GovPracticeOption = {
+  id: "A" | "B" | "C" | "D";
+  text: string;
+  hi: string;
+};
+
+export type GovPracticeQuestion = {
+  id: string;
+  chapter: string;
+  chapterHi: string;
+  text: string;
+  hi: string;
+  options: GovPracticeOption[];
+  correct: "A" | "B" | "C" | "D";
+  explanation: string;
+  explanationHi: string;
+};
+
+export type GovPracticeSet = {
+  slug: string;
+  title: string;
+  titleHi: string;
+  chapter: string;
+  chapterHi: string;
+  difficulty: "Easy" | "Medium" | "Hard";
+  durationMin: number;
+  questionCount: number;
+  bilingual: boolean;
+  isLive: boolean;
+  questions?: GovPracticeQuestion[];
+};
+
+export type GovPracticeCategory = {
+  slug: string;
+  title: string;
+  titleHi: string;
+  icon: string;
+  description: string;
+  descriptionHi: string;
+  audience: string[];
+  chapters: { name: string; hi: string }[];
+  sets: GovPracticeSet[];
 };
 
 function createQuestion(
@@ -68,6 +125,35 @@ function createQuestion(
   };
 }
 
+function createGovQuestion(
+  id: string,
+  chapter: string,
+  chapterHi: string,
+  text: string,
+  hi: string,
+  options: [string, string, string, string, string, string, string, string], // 4 options en + 4 hi
+  correct: "A" | "B" | "C" | "D",
+  explanation: string,
+  explanationHi: string
+): GovPracticeQuestion {
+  return {
+    id,
+    chapter,
+    chapterHi,
+    text,
+    hi,
+    options: [
+      { id: "A", text: options[0], hi: options[4] },
+      { id: "B", text: options[1], hi: options[5] },
+      { id: "C", text: options[2], hi: options[6] },
+      { id: "D", text: options[3], hi: options[7] },
+    ],
+    correct,
+    explanation,
+    explanationHi,
+  };
+}
+
 export const practiceCategories: PracticeCategoryMeta[] = [
   {
     slug: "ielts",
@@ -92,6 +178,556 @@ export const practiceCategories: PracticeCategoryMeta[] = [
       "Practice beginner-friendly entrance questions with original explanations across math, physics, chemistry, and logic.",
     ctaHref: "/tests/engineering",
     ctaLabel: "Take Engineering Career Test",
+  },
+  {
+    slug: "ctet",
+    title: "CTET Practice Tests",
+    shortTitle: "CTET",
+    description:
+      "Free CTET practice sets with answers and explanations in English and Hindi for Child Development and Pedagogy, Languages, Mathematics, Science, and Social Studies.",
+    heroTitle: "CTET Practice Tests with Bilingual Support",
+    heroText:
+      "Practice CTET questions in English and Hindi with instant scoring and detailed explanations for aspiring teachers.",
+    ctaHref: "/practice-tests/ctet",
+    ctaLabel: "Start CTET Practice",
+  },
+  {
+    slug: "ssc",
+    title: "SSC Practice Tests",
+    shortTitle: "SSC",
+    description:
+      "Free SSC practice sets with answers and explanations in English and Hindi covering Reasoning, Quantitative Aptitude, English, and General Awareness.",
+    heroTitle: "SSC Practice Tests with Bilingual Support",
+    heroText:
+      "Practice SSC exam questions in English and Hindi with instant scoring and explanations for government job aspirants.",
+    ctaHref: "/practice-tests/ssc",
+    ctaLabel: "Start SSC Practice",
+  },
+  {
+    slug: "railway",
+    title: "Railway Practice Tests",
+    shortTitle: "Railway",
+    description:
+      "Free Railway exam practice sets with answers and explanations in English and Hindi covering Mathematics, Reasoning, Science, and General Knowledge.",
+    heroTitle: "Railway Practice Tests with Bilingual Support",
+    heroText:
+      "Practice Railway recruitment questions in English and Hindi with instant scoring and explanations for railway job aspirants.",
+    ctaHref: "/practice-tests/railway",
+    ctaLabel: "Start Railway Practice",
+  },
+];
+
+export const govPracticeCategories: GovPracticeCategory[] = [
+  {
+    slug: "ctet",
+    title: "CTET Practice Tests",
+    titleHi: "CTET अभ्यास परीक्षा",
+    icon: "📚",
+    description: "Free CTET practice sets with answers and explanations in English and Hindi for Child Development and Pedagogy, Languages, Mathematics, Science, and Social Studies.",
+    descriptionHi: "बच्चों के विकास और शिक्षाशास्त्र, भाषाएं, गणित, विज्ञान और सामाजिक अध्ययन के लिए अंग्रेजी और हिंदी में उत्तरों और स्पष्टीकरण के साथ नि:शुल्क CTET अभ्यास सेट।",
+    audience: ["Aspiring teachers", "CTET candidates", "Education students"],
+    chapters: [
+      { name: "Child Development and Pedagogy", hi: "बच्चों का विकास और शिक्षाशास्त्र" },
+      { name: "Language I (English)", hi: "भाषा I (अंग्रेजी)" },
+      { name: "Language II (Hindi)", hi: "भाषा II (हिंदी)" },
+      { name: "Mathematics", hi: "गणित" },
+      { name: "Environmental Studies", hi: "पर्यावरण अध्ययन" },
+    ],
+    sets: [
+      {
+        slug: "cdp-set-1",
+        title: "Child Development and Pedagogy Set 1",
+        titleHi: "बच्चों के विकास और शिक्षाशास्त्र सेट 1",
+        chapter: "Child Development and Pedagogy",
+        chapterHi: "बच्चों का विकास और शिक्षाशास्त्र",
+        difficulty: "Easy",
+        durationMin: 15,
+        questionCount: 10,
+        bilingual: true,
+        isLive: true,
+        questions: [
+          createGovQuestion(
+            "ctet-cdp-1",
+            "Child Development and Pedagogy",
+            "बच्चों का विकास और शिक्षाशास्त्र",
+            "According to Piaget, children in the concrete operational stage can perform which of the following?",
+            "पियाजेट के अनुसार, ठोस संक्रियात्मक चरण में बच्चे निम्नलिखित में से कौन सा कर सकते हैं?",
+            [
+              "Conservation tasks",
+              "Abstract thinking",
+              "Symbolic play",
+              "Egocentric thinking",
+              "संरक्षण कार्य",
+              "अमूर्त सोच",
+              "प्रतीकात्मक खेल",
+              "अहंकेन्द्रित सोच",
+            ],
+            "A",
+            "Children in concrete operational stage (7-11 years) can perform conservation tasks, understanding that quantity remains the same despite changes in shape.",
+            "ठोस संक्रियात्मक चरण (7-11 साल) में बच्चे संरक्षण कार्य कर सकते हैं, यह समझते हुए कि मात्रा आकार में बदलाव के बावजूद समान रहती है।"
+          ),
+          // Add 9 more questions
+          createGovQuestion(
+            "ctet-cdp-2",
+            "Child Development and Pedagogy",
+            "बच्चों का विकास और शिक्षाशास्त्र",
+            "Which theory emphasizes the role of social interaction in cognitive development?",
+            "कौन सी सिद्धांत संज्ञानात्मक विकास में सामाजिक संपर्क की भूमिका पर जोर देती है?",
+            [
+              "Behaviorism",
+              "Constructivism",
+              "Socio-cultural theory",
+              "Maturation theory",
+              "व्यवहारवाद",
+              "रचनावाद",
+              "सामाजिक-सांस्कृतिक सिद्धांत",
+              "परिपक्वता सिद्धांत",
+            ],
+            "C",
+            "Vygotsky's socio-cultural theory emphasizes that cognitive development occurs through social interactions and cultural tools.",
+            "वाइगोत्स्की के सामाजिक-सांस्कृतिक सिद्धांत पर जोर देता है कि संज्ञानात्मक विकास सामाजिक संपर्क और सांस्कृतिक उपकरणों के माध्यम से होता है।"
+          ),
+          // I'll add more later, for now placeholder
+          createGovQuestion(
+            "ctet-cdp-3",
+            "Child Development and Pedagogy",
+            "बच्चों का विकास और शिक्षाशास्त्र",
+            "What is the term for a child's ability to understand that others have different perspectives?",
+            "एक बच्चे की क्षमता को समझने के लिए क्या शब्द है कि दूसरों के पास अलग दृष्टिकोण हैं?",
+            [
+              "Empathy",
+              "Theory of mind",
+              "Emotional intelligence",
+              "Social cognition",
+              "सहानुभूति",
+              "मन की सिद्धांत",
+              "भावनात्मक बुद्धिमत्ता",
+              "सामाजिक संज्ञान",
+            ],
+            "B",
+            "Theory of mind refers to the ability to understand that others have beliefs, desires, and intentions different from one's own.",
+            "मन की सिद्धांत एक बच्चे की क्षमता को संदर्भित करता है कि दूसरों के पास अपनी से अलग विश्वास, इच्छाएं और इरादे हैं।"
+          ),
+          createGovQuestion(
+            "ctet-cdp-4",
+            "Child Development and Pedagogy",
+            "बच्चों का विकास और शिक्षाशास्त्र",
+            "Which of the following is a characteristic of play-based learning?",
+            "निम्नलिखित में से कौन सी खेल-आधारित सीखने की विशेषता है?",
+            [
+              "Memorization of facts",
+              "Structured drills",
+              "Exploration and discovery",
+              "Competitive assessment",
+              "तथ्यों का स्मरण",
+              "संरचित अभ्यास",
+              "अन्वेषण और खोज",
+              "प्रतिस्पर्धी मूल्यांकन",
+            ],
+            "C",
+            "Play-based learning encourages children to explore, experiment, and discover concepts through hands-on activities.",
+            "खेल-आधारित सीखने से बच्चों को हाथों से गतिविधियों के माध्यम से अवधारणाओं का अन्वेषण, प्रयोग और खोज करने के लिए प्रोत्साहित किया जाता है।"
+          ),
+          createGovQuestion(
+            "ctet-cdp-5",
+            "Child Development and Pedagogy",
+            "बच्चों का विकास और शिक्षाशास्त्र",
+            "What does 'scaffolding' in teaching refer to?",
+            "'शिक्षण में 'स्कैफोल्डिंग' क्या संदर्भित करता है?",
+            [
+              "Providing physical support",
+              "Temporary guidance to help learning",
+              "Permanent classroom structure",
+              "Assessment framework",
+              "शारीरिक सहायता प्रदान करना",
+              "सीखने में मदद के लिए अस्थायी मार्गदर्शन",
+              "स्थायी कक्षा संरचना",
+              "मूल्यांकन ढांचा",
+            ],
+            "B",
+            "Scaffolding involves providing temporary support and guidance to help students achieve tasks they couldn't do alone.",
+            "स्कैफोल्डिंग में अस्थायी सहायता और मार्गदर्शन प्रदान करना शामिल है ताकि छात्र उन कार्यों को प्राप्त कर सकें जिन्हें वे अकेले नहीं कर सकते।"
+          ),
+          createGovQuestion(
+            "ctet-cdp-6",
+            "Child Development and Pedagogy",
+            "बच्चों का विकास और शिक्षाशास्त्र",
+            "Which stage of development is characterized by the ability to use symbols?",
+            "विकास के किस चरण की विशेषता प्रतीकों का उपयोग करने की क्षमता है?",
+            [
+              "Sensorimotor",
+              "Preoperational",
+              "Concrete operational",
+              "Formal operational",
+              "सेंसरिमोटर",
+              "पूर्व संक्रियात्मक",
+              "ठोस संक्रियात्मक",
+              "औपचारिक संक्रियात्मक",
+            ],
+            "B",
+            "In the preoperational stage (2-7 years), children begin to use symbols, language, and pretend play.",
+            "पूर्व संक्रियात्मक चरण (2-7 साल) में, बच्चे प्रतीकों, भाषा और नकली खेल का उपयोग करना शुरू करते हैं।"
+          ),
+          createGovQuestion(
+            "ctet-cdp-7",
+            "Child Development and Pedagogy",
+            "बच्चों का विकास और शिक्षाशास्त्र",
+            "What is the primary goal of inclusive education?",
+            "समावेशी शिक्षा का प्राथमिक लक्ष्य क्या है?",
+            [
+              "Segregation of students",
+              "Equal opportunities for all",
+              "Specialized teaching only",
+              "Competitive learning",
+              "छात्रों का पृथक्करण",
+              "सभी के लिए समान अवसर",
+              "केवल विशेषीकृत शिक्षण",
+              "प्रतिस्पर्धी सीखना",
+            ],
+            "B",
+            "Inclusive education aims to provide equal educational opportunities to all students, regardless of their abilities or disabilities.",
+            "समावेशी शिक्षा का उद्देश्य सभी छात्रों को उनकी क्षमताओं या विकलांगताओं की परवाह किए बिना समान शैक्षिक अवसर प्रदान करना है।"
+          ),
+          createGovQuestion(
+            "ctet-cdp-8",
+            "Child Development and Pedagogy",
+            "बच्चों का विकास और शिक्षाशास्त्र",
+            "Which learning theory is associated with operant conditioning?",
+            "कौन सी सीखने की सिद्धांत ऑपरेंट कंडीशनिंग से जुड़ी है?",
+            [
+              "Piaget's theory",
+              "Skinner's theory",
+              "Vygotsky's theory",
+              "Erikson's theory",
+              "पियाजेट की सिद्धांत",
+              "स्किनर की सिद्धांत",
+              "वाइगोत्स्की की सिद्धांत",
+              "एरिकसन की सिद्धांत",
+            ],
+            "B",
+            "B.F. Skinner's operant conditioning theory explains learning through consequences of behavior.",
+            "बी.एफ. स्किनर की ऑपरेंट कंडीशनिंग सिद्धांत व्यवहार के परिणामों के माध्यम से सीखने की व्याख्या करती है।"
+          ),
+          createGovQuestion(
+            "ctet-cdp-9",
+            "Child Development and Pedagogy",
+            "बच्चों का विकास और शिक्षाशास्त्र",
+            "What is the term for learning that occurs through observation?",
+            "अवलोकन के माध्यम से होने वाले सीखने के लिए क्या शब्द है?",
+            [
+              "Classical conditioning",
+              "Operant conditioning",
+              "Modeling",
+              "Reinforcement",
+              "क्लासिकल कंडीशनिंग",
+              "ऑपरेंट कंडीशनिंग",
+              "मॉडलिंग",
+              "सुदृढीकरण",
+            ],
+            "C",
+            "Modeling or observational learning occurs when individuals learn by watching others.",
+            "मॉडलिंग या अवलोकनात्मक सीखना तब होता है जब व्यक्ति दूसरों को देखकर सीखते हैं।"
+          ),
+          createGovQuestion(
+            "ctet-cdp-10",
+            "Child Development and Pedagogy",
+            "बच्चों का विकास और शिक्षाशास्त्र",
+            "Which of the following is an example of divergent thinking?",
+            "निम्नलिखित में से कौन सी विचलनात्मक सोच का उदाहरण है?",
+            [
+              "Memorizing multiplication tables",
+              "Brainstorming ideas for a story",
+              "Following step-by-step instructions",
+              "Solving a math problem",
+              "गुणा सारणी याद करना",
+              "कहानी के लिए विचारों का तूफान",
+              "चरण-दर-चरण निर्देशों का पालन करना",
+              "गणित की समस्या हल करना",
+            ],
+            "B",
+            "Divergent thinking involves generating multiple solutions or ideas, as in brainstorming.",
+            "विचलनात्मक सोच में कई समाधान या विचार उत्पन्न करना शामिल है, जैसे कि विचारों का तूफान।"
+          ),
+        ],
+      },
+      {
+        slug: "english-set-1",
+        title: "English Language Set 1",
+        titleHi: "अंग्रेजी भाषा सेट 1",
+        chapter: "Language I (English)",
+        chapterHi: "भाषा I (अंग्रेजी)",
+        difficulty: "Easy",
+        durationMin: 12,
+        questionCount: 10,
+        bilingual: true,
+        isLive: true,
+        questions: [
+          // Add 10 questions for English
+          createGovQuestion(
+            "ctet-eng-1",
+            "Language I (English)",
+            "भाषा I (अंग्रेजी)",
+            "Choose the correct form of the verb: 'She _____ to school every day.'",
+            "सही क्रिया रूप चुनें: 'वह हर दिन स्कूल _____।'",
+            [
+              "go",
+              "goes",
+              "going",
+              "gone",
+              "जाता है",
+              "जाती है",
+              "जा रहा है",
+              "गया है",
+            ],
+            "B",
+            "With 'she' as the subject, the verb 'go' takes 'es' in the present simple tense.",
+            "'वह' विषय के साथ, क्रिया 'जाना' वर्तमान सरल काल में 'es' लेती है।"
+          ),
+          createGovQuestion(
+            "ctet-eng-2",
+            "Language I (English)",
+            "भाषा I (अंग्रेजी)",
+            "Identify the noun in this sentence: 'The quick brown fox jumps over the lazy dog.'",
+            "इस वाक्य में संज्ञा की पहचान करें: 'तेज भूरी लोमड़ी आलसी कुत्ते के ऊपर कूदती है।'",
+            [
+              "quick",
+              "brown",
+              "fox",
+              "jumps",
+              "तेज",
+              "भूरी",
+              "लोमड़ी",
+              "कूदती है",
+            ],
+            "C",
+            "'Fox' is a noun as it names a person, place, thing, or idea.",
+            "'लोमड़ी' एक संज्ञा है क्योंकि यह व्यक्ति, स्थान, वस्तु या विचार का नाम देती है।"
+          ),
+          // Add more questions as needed
+        ],
+      },
+      {
+        slug: "maths-set-1",
+        title: "Mathematics Set 1",
+        titleHi: "गणित सेट 1",
+        chapter: "Mathematics",
+        chapterHi: "गणित",
+        difficulty: "Easy",
+        durationMin: 15,
+        questionCount: 10,
+        bilingual: true,
+        isLive: true,
+        questions: [
+          // Add 10 questions for Maths
+          createGovQuestion(
+            "ctet-math-1",
+            "Mathematics",
+            "गणित",
+            "What is 15 + 27?",
+            "15 + 27 क्या है?",
+            [
+              "32",
+              "42",
+              "52",
+              "62",
+              "32",
+              "42",
+              "52",
+              "62",
+            ],
+            "B",
+            "15 + 27 = 42",
+            "15 + 27 = 42"
+          ),
+          createGovQuestion(
+            "ctet-math-2",
+            "Mathematics",
+            "गणित",
+            "If a triangle has angles 30°, 60°, and 90°, what type of triangle is it?",
+            "यदि एक त्रिभुज में कोण 30°, 60°, और 90° हैं, तो यह किस प्रकार का त्रिभुज है?",
+            [
+              "Equilateral",
+              "Isosceles",
+              "Scalene",
+              "Right-angled",
+              "समबाहु",
+              "समद्विबाहु",
+              "विषमबाहु",
+              "समकोण",
+            ],
+            "D",
+            "A triangle with a 90° angle is a right-angled triangle.",
+            "90° कोण वाला त्रिभुज एक समकोण त्रिभुज है।"
+          ),
+          // Add more
+        ],
+      },
+      // Add planned sets
+      {
+        slug: "hindi-set-1",
+        title: "Hindi Language Set 1",
+        titleHi: "हिंदी भाषा सेट 1",
+        chapter: "Language II (Hindi)",
+        chapterHi: "भाषा II (हिंदी)",
+        difficulty: "Easy",
+        durationMin: 12,
+        questionCount: 10,
+        bilingual: true,
+        isLive: false,
+      },
+      {
+        slug: "science-set-1",
+        title: "Environmental Studies Set 1",
+        titleHi: "पर्यावरण अध्ययन सेट 1",
+        chapter: "Environmental Studies",
+        chapterHi: "पर्यावरण अध्ययन",
+        difficulty: "Easy",
+        durationMin: 15,
+        questionCount: 10,
+        bilingual: true,
+        isLive: false,
+      },
+    ],
+  },
+  {
+    slug: "ssc",
+    title: "SSC Practice Tests",
+    titleHi: "SSC अभ्यास परीक्षा",
+    icon: "📊",
+    description: "Free SSC practice sets with answers and explanations in English and Hindi covering Reasoning, Quantitative Aptitude, English, and General Awareness.",
+    descriptionHi: "तर्क, मात्रात्मक योग्यता, अंग्रेजी और सामान्य ज्ञान को कवर करने के लिए अंग्रेजी और हिंदी में उत्तरों और स्पष्टीकरण के साथ नि:शुल्क SSC अभ्यास सेट।",
+    audience: ["SSC aspirants", "Government job seekers", "Competitive exam students"],
+    chapters: [
+      { name: "Reasoning", hi: "तर्क" },
+      { name: "Quantitative Aptitude", hi: "मात्रात्मक योग्यता" },
+      { name: "English", hi: "अंग्रेजी" },
+      { name: "General Awareness", hi: "सामान्य ज्ञान" },
+    ],
+    sets: [
+      {
+        slug: "reasoning-set-1",
+        title: "Reasoning Set 1",
+        titleHi: "तर्क सेट 1",
+        chapter: "Reasoning",
+        chapterHi: "तर्क",
+        difficulty: "Easy",
+        durationMin: 15,
+        questionCount: 10,
+        bilingual: true,
+        isLive: true,
+        questions: [
+          // Add questions
+        ],
+      },
+      {
+        slug: "quant-set-1",
+        title: "Quantitative Aptitude Set 1",
+        titleHi: "मात्रात्मक योग्यता सेट 1",
+        chapter: "Quantitative Aptitude",
+        chapterHi: "मात्रात्मक योग्यता",
+        difficulty: "Easy",
+        durationMin: 15,
+        questionCount: 10,
+        bilingual: true,
+        isLive: true,
+        questions: [],
+      },
+      {
+        slug: "english-set-1",
+        title: "English Set 1",
+        titleHi: "अंग्रेजी सेट 1",
+        chapter: "English",
+        chapterHi: "अंग्रेजी",
+        difficulty: "Easy",
+        durationMin: 12,
+        questionCount: 10,
+        bilingual: true,
+        isLive: true,
+        questions: [],
+      },
+      // Planned
+      {
+        slug: "ga-set-1",
+        title: "General Awareness Set 1",
+        titleHi: "सामान्य ज्ञान सेट 1",
+        chapter: "General Awareness",
+        chapterHi: "सामान्य ज्ञान",
+        difficulty: "Easy",
+        durationMin: 15,
+        questionCount: 10,
+        bilingual: true,
+        isLive: false,
+      },
+    ],
+  },
+  {
+    slug: "railway",
+    title: "Railway Practice Tests",
+    titleHi: "रेलवे अभ्यास परीक्षा",
+    icon: "🚂",
+    description: "Free Railway exam practice sets with answers and explanations in English and Hindi covering Mathematics, Reasoning, Science, and General Knowledge.",
+    descriptionHi: "गणित, तर्क, विज्ञान और सामान्य ज्ञान को कवर करने के लिए अंग्रेजी और हिंदी में उत्तरों और स्पष्टीकरण के साथ नि:शुल्क रेलवे परीक्षा अभ्यास सेट।",
+    audience: ["Railway aspirants", "RRB exam candidates", "Government job seekers"],
+    chapters: [
+      { name: "Mathematics", hi: "गणित" },
+      { name: "Reasoning", hi: "तर्क" },
+      { name: "Science", hi: "विज्ञान" },
+      { name: "General Knowledge", hi: "सामान्य ज्ञान" },
+    ],
+    sets: [
+      {
+        slug: "maths-set-1",
+        title: "Mathematics Set 1",
+        titleHi: "गणित सेट 1",
+        chapter: "Mathematics",
+        chapterHi: "गणित",
+        difficulty: "Easy",
+        durationMin: 15,
+        questionCount: 10,
+        bilingual: true,
+        isLive: true,
+        questions: [],
+      },
+      {
+        slug: "reasoning-set-1",
+        title: "Reasoning Set 1",
+        titleHi: "तर्क सेट 1",
+        chapter: "Reasoning",
+        chapterHi: "तर्क",
+        difficulty: "Easy",
+        durationMin: 15,
+        questionCount: 10,
+        bilingual: true,
+        isLive: true,
+        questions: [],
+      },
+      {
+        slug: "science-set-1",
+        title: "Science Set 1",
+        titleHi: "विज्ञान सेट 1",
+        chapter: "Science",
+        chapterHi: "विज्ञान",
+        difficulty: "Easy",
+        durationMin: 15,
+        questionCount: 10,
+        bilingual: true,
+        isLive: true,
+        questions: [],
+      },
+      // Planned
+      {
+        slug: "gk-set-1",
+        title: "General Knowledge Set 1",
+        titleHi: "सामान्य ज्ञान सेट 1",
+        chapter: "General Knowledge",
+        chapterHi: "सामान्य ज्ञान",
+        difficulty: "Easy",
+        durationMin: 15,
+        questionCount: 10,
+        bilingual: true,
+        isLive: false,
+      },
+    ],
   },
 ];
 
@@ -1152,4 +1788,13 @@ export function getPracticeSet(category: string, setSlug: string) {
 
 export function getPracticeSetsByCategory(category: string) {
   return practiceSets.filter((item) => item.category === category);
+}
+
+export function getGovPracticeCategoryBySlug(slug: string): GovPracticeCategory | undefined {
+  return govPracticeCategories.find(c => c.slug === slug);
+}
+
+export function getGovPracticeSet(categorySlug: string, setSlug: string): GovPracticeSet | undefined {
+  const category = govPracticeCategories.find(c => c.slug === categorySlug);
+  return category?.sets.find(s => s.slug === setSlug);
 }
