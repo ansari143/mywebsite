@@ -15,7 +15,7 @@ export default function PracticeQuiz({ categorySlug, categoryTitle, set }: Props
   const [answers, setAnswers] = useState<Record<string, "A" | "B" | "C" | "D">>({});
   const [submitted, setSubmitted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [language, setLanguage] = useState<"en" | "hi" | "both">("both");
+  const [language, setLanguage] = useState<"en" | "hi" | "both">("en");
 
   const categoryData = getGovPracticeCategoryBySlug(categorySlug);
   const otherLiveSets = categoryData?.sets.filter(s => s.isLive && s.slug !== set.slug) || [];

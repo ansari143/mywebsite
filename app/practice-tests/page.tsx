@@ -1,11 +1,15 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { practiceCategories, practiceSets } from "@/data/practiceTests";
+import {
+  practiceCategories,
+  practiceSets,
+  govPracticeCategories,
+} from "@/data/practiceTests";
 
 export const metadata: Metadata = {
   title: "Practice Tests",
   description:
-    "Free English-only practice tests for IELTS and engineering entrance preparation with answers and explanations.",
+    "Free practice tests for IELTS, engineering entrance, CTET, SSC, and Railway with answers and explanations.",
 };
 
 export default function PracticeTestsHubPage() {
@@ -16,12 +20,10 @@ export default function PracticeTestsHubPage() {
           Practice zone
         </div>
         <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">
-          Practice Tests for IELTS and Engineering Entrance
+          Practice Tests for IELTS, Engineering Entrance, and Government Exams
         </h1>
         <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-          Practice original English-only question sets with instant scoring,
-          answers, and short explanations. Use this section to build confidence,
-          then move into your full career guidance pages.
+          Practice original question sets with instant scoring, answers, and short explanations. English is the default language for practice tests, with bilingual support for government exam sets.
         </p>
 
         <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700">
@@ -40,9 +42,13 @@ export default function PracticeTestsHubPage() {
 
       <section className="grid gap-4 md:grid-cols-2">
         {practiceCategories.map((category) => {
-          const count = practiceSets.filter(
-            (item) => item.category === category.slug
-          ).length;
+          const govCategory = govPracticeCategories.find(
+            (item) => item.slug === category.slug
+          );
+          const count = govCategory
+            ? govCategory.sets.filter((set) => set.isLive).length
+            : practiceSets.filter((item) => item.category === category.slug)
+                .length;
 
           return (
             <div
