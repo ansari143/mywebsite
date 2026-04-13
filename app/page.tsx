@@ -160,7 +160,7 @@ export default function HomePage() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-4xl text-base leading-7 text-gray-600 sm:text-lg">
-          Unlike generic sites, Nishaglobal combines India's education system with global options, offering free tests, practical guides, and real student examples. Whether you're choosing a stream after 10th, preparing for JEE, or planning study abroad, get trustworthy guidance that saves time and reduces confusion.
+          Unlike generic sites, Nishaglobal combines India&apos;s education system with global options, offering free tests, practical guides, and real student examples. Whether you&apos;re choosing a stream after 10th, preparing for JEE, or planning study abroad, get trustworthy guidance that saves time and reduces confusion.
         </p>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-slate-700">
@@ -348,7 +348,7 @@ export default function HomePage() {
           <div>
             <h2 className="text-2xl font-bold text-slate-900">Explore by destination</h2>
             <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
-              Choose your study destination based on budget, career goals, and lifestyle. Each guide includes visa timelines, scholarship tips, and success stories from Indian students who've studied there.
+              Choose your study destination based on budget, career goals, and lifestyle. Each guide includes visa timelines, scholarship tips, and success stories from Indian students who&apos;ve studied there.
             </p>
           </div>
           <Link
