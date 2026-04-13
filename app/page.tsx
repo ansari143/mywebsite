@@ -14,21 +14,21 @@ const keyJourneys = [
   {
     title: "Students in India",
     description:
-      "Get stream selection help after 10th and 12th, compare options, and explore exam-focused guidance.",
+      "Get stream selection help after 10th and 12th, compare options, and explore exam-focused guidance. Best for: Those prioritizing local education, JEE/NEET prep, or affordable pathways. Avoid if: You're certain about studying abroad without considering Indian options first.",
     href: "/resources/country/india",
     cta: "Explore India Guides",
   },
   {
     title: "International Students",
     description:
-      "Understand study abroad routes, student planning, scholarships, and country comparisons in one place.",
+      "Understand study abroad routes, student planning, scholarships, and country comparisons in one place. Best for: Students exploring global opportunities, visa processes, or work-study balances. Avoid if: You prefer staying in India and don't need international insights.",
     href: "/international-students",
     cta: "View International Guide",
   },
   {
     title: "Parents and Families",
     description:
-      "Use simple, practical pages to discuss careers, education costs, pathways, and long-term planning together.",
+      "Use simple, practical pages to discuss careers, education costs, pathways, and long-term planning together. Best for: Families seeking joint decision-making tools, cost comparisons, and real student stories. Avoid if: You're a student making independent choices.",
     href: "/about",
     cta: "See How We Help",
   },
@@ -62,37 +62,37 @@ const destinations = [
     name: "USA",
     flag: "🇺🇸",
     href: "/resources/country/usa",
-    text: "High-value STEM, business, research, and internship pathways.",
+    text: "STEM powerhouse with 3-year OPT work permits; average tuition $30k/year; universities like MIT for innovation and research internships.",
   },
   {
     name: "Canada",
     flag: "🇨🇦",
     href: "/resources/country/canada",
-    text: "Popular for affordability, student support, and long-term planning.",
+    text: "Affordable education with post-grad work visas; average cost $20k/year; strong in healthcare and engineering with pathways to PR.",
   },
   {
     name: "UK",
     flag: "🇬🇧",
     href: "/resources/country/uk",
-    text: "Shorter degree structures and strong global university visibility.",
+    text: "1-year degrees save time and money; average $25k/year; Russell Group universities offer global networking and shorter study periods.",
   },
   {
     name: "Australia",
     flag: "🇦🇺",
     href: "/resources/country/australia",
-    text: "Known for student lifestyle, practical education, and work options.",
+    text: "Balanced lifestyle with 2-year post-study work; average $25k/year; practical education in business, IT, and vocational courses.",
   },
   {
     name: "Europe",
     flag: "🇪🇺",
     href: "/resources/country/europe",
-    text: "Useful for comparing diverse countries, costs, and English-taught programs.",
+    text: "Diverse options from Germany (free tuition) to Netherlands; average $10-20k/year; English-taught programs in tech, design, and sciences.",
   },
   {
     name: "India",
     flag: "🇮🇳",
     href: "/resources/country/india",
-    text: "Strong local guidance for streams, competitive exams, and college planning.",
+    text: "Local expertise for IITs, NITs, and medical colleges; affordable at $5-10k/year; strong foundation for competitive exams and career starts.",
   },
 ];
 
@@ -100,17 +100,32 @@ const faqs = [
   {
     question: "Who is Nishaglobal Education for?",
     answer:
-      "Nishaglobal Education is designed for students in India and worldwide who need simple career guidance, study abroad direction, educational resources, and future-ready skills content.",
+      "Nishaglobal Education is designed for students in India and worldwide who need simple career guidance, study abroad direction, educational resources, and future-ready skills content. It's especially helpful for those after 10th, 12th, or graduation exploring options.",
   },
   {
     question: "What can students do on this website?",
     answer:
-      "Students can take free career tests, read stream and country guides, explore blogs, compare educational pathways, and learn practical skills that support modern careers.",
+      "Students can take free career tests, read stream and country guides, explore blogs, compare educational pathways, and learn practical skills that support modern careers. Everything is tailored for Indian students with global perspectives.",
   },
   {
     question: "Are the tests and guides only for Indian students?",
     answer:
-      "No. The platform supports Indian students while also building global guidance for international students who want to compare destinations, careers, and next steps.",
+      "No. The platform supports Indian students while also building global guidance for international students who want to compare destinations, careers, and next steps. We bridge local and international education.",
+  },
+  {
+    question: "How accurate are the career tests?",
+    answer:
+      "Our tests are based on real career data and student feedback, providing personalized insights rather than generic results. They're a starting point—combine with guides and official resources for best decisions.",
+  },
+  {
+    question: "Is all the advice on this site free?",
+    answer:
+      "Yes, all tests, guides, blogs, and basic skills content are completely free. We focus on accessible education without hidden costs.",
+  },
+  {
+    question: "How do I get personalized guidance?",
+    answer:
+      "Use our contact form for specific questions. We provide free initial advice and can point you to trusted counselors or institutions for deeper support.",
   },
 ];
 
@@ -145,10 +160,7 @@ export default function HomePage() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-4xl text-base leading-7 text-gray-600 sm:text-lg">
-          Nishaglobal Education helps students explore careers, tests, study abroad options,
-          blogs, and future-ready skills in one place. Whether your goal is to study in India,
-          move abroad, or build modern job-ready skills, the website is growing around real
-          student questions.
+          Unlike generic sites, Nishaglobal combines India's education system with global options, offering free tests, practical guides, and real student examples. Whether you're choosing a stream after 10th, preparing for JEE, or planning study abroad, get trustworthy guidance that saves time and reduces confusion.
         </p>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-slate-700">
@@ -184,19 +196,19 @@ export default function HomePage() {
         {[
           {
             title: "Career Tests",
-            desc: "Take a stream-wise test and get instant score-based guidance with next-step direction.",
+            desc: "Answer 10 quick questions in your interest area and get a personalized report with matching careers, average salaries, required exams, and practical next steps.",
           },
           {
             title: "Country Guides",
-            desc: "Compare the USA, Canada, UK, Australia, Europe, and India in a student-friendly format.",
+            desc: "Compare study costs, visa processes, top universities, and student life in the USA, Canada, UK, Australia, Europe, and India with real examples and checklists.",
           },
           {
             title: "Career Blogs",
-            desc: "Read searchable articles for jobs, courses, countries, and practical planning tips.",
+            desc: "Read practical articles like 'JEE vs NEET: Which is Right for You?' or 'How Indian Students Succeed in Canadian Universities' with actionable tips.",
           },
           {
             title: "Future Skills",
-            desc: "Learn AI, Python, and other in-demand skills that support long-term employability.",
+            desc: "Learn in-demand skills like AI basics, Python programming, and data analysis through beginner-friendly tutorials and projects that boost employability.",
           },
         ].map((item) => (
           <div key={item.title} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -336,7 +348,7 @@ export default function HomePage() {
           <div>
             <h2 className="text-2xl font-bold text-slate-900">Explore by destination</h2>
             <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
-              This is the part that makes your website feel global. Students should be able to move from a test to a country page, then to a blog, then to a skill page without leaving the platform.
+              Choose your study destination based on budget, career goals, and lifestyle. Each guide includes visa timelines, scholarship tips, and success stories from Indian students who've studied there.
             </p>
           </div>
           <Link
@@ -369,13 +381,13 @@ export default function HomePage() {
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-3xl">
             <div className="inline-flex rounded-full border border-violet-100 bg-violet-50 px-3 py-1 text-sm font-medium text-violet-700">
-              Keep users on the site longer
+              Integrated learning path
             </div>
             <h2 className="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl">
-              Connect tests, guides, blogs, and skills into one learning journey
+              From career test to job-ready: Your complete guidance roadmap
             </h2>
             <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
-              More views come when a student clicks from one useful page to another. Your homepage should act like a smart directory, not just a welcome page.
+              Start with a test, explore country options, read targeted blogs, and build skills—all in one connected experience designed for real student journeys.
             </p>
           </div>
 
