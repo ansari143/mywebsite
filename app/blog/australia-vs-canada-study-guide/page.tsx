@@ -9,6 +9,11 @@ export const metadata = {
   },
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
 export default function AustraliaVsCanadaPage() {
   return (
     <main className="max-w-5xl mx-auto px-4 py-10 space-y-8">

@@ -48,7 +48,7 @@ export default async function StartPage({
         <ul className="mt-4 space-y-3 text-gray-700">
           <li>• Answer honestly for the most useful guidance.</li>
           <li>• Choose the best answer from A, B, C, or D for each question.</li>
-          <li>• You will get instant score-based guidance plus topic-wise strengths and next steps.</li>
+          <li>• You will get instant score-based guidance, topic-wise strengths, and practical next steps.</li>
           <li>• The result is educational guidance only, not a final admission or career decision.</li>
         </ul>
 

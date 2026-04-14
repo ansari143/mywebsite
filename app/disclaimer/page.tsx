@@ -7,6 +7,11 @@ export const metadata = {
   },
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
 export default function DisclaimerPage() {
   const disclaimerSchema = {
     "@context": "https://schema.org",

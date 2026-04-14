@@ -7,6 +7,11 @@ export const metadata: Metadata = {
     "Practice free IELTS questions with answers and explanations. Improve grammar, vocabulary, and reading skills step by step.",
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
 export default function IELTSPracticeQuestionsPage() {
   return (
     <SeoBlogArticle

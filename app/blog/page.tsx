@@ -10,6 +10,11 @@ export const metadata = {
   },
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
 const blogTopics = [
   "Careers after 10th and 12th",
   "Study abroad comparisons",
@@ -113,8 +118,8 @@ export default function BlogIndexPage() {
         </h2>
 
         <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
-          These explanation-based articles are designed to bring students from
-          Google search into your full practice and career guidance system.
+          These explanation-based articles are designed to guide students from
+          Google search into our practice and career guidance system.
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">

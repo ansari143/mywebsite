@@ -1,7 +1,10 @@
 import type { MetadataRoute } from "next";
 import { resourcePages } from "@/data/resourcePages";
 import { countryResourcesWithTopics } from "@/data/countryResources";
-// import { practiceCategories, govPracticeCategories } from "@/data/practiceTests";
+import { practiceCategories, govPracticeCategories } from "@/data/practiceTests";
+import { blogPosts } from "@/data/blogs";
+import { tests } from "@/data/tests";
+import { skillsPages } from "@/data/skillsPages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://nishaglobaleducation.com";
@@ -9,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/about",
+    "/blog",
     "/contact",
     "/disclaimer",
     "/privacy-policy",
@@ -27,12 +31,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/study-in-australia",
     "/study-in-europe",
     "/practice-tests",
+    "/result",
   ];
 
-  // const practiceRoutes = practiceCategories.map((cat) => `/practice-tests/${cat.slug}`);
-  // const govSetRoutes = govPracticeCategories.flatMap((cat) =>
-  //   cat.sets.filter((set) => set.isLive).map((set) => `/practice-tests/${cat.slug}/${set.slug}`)
-  // );
+  const practiceRoutes = practiceCategories.map((cat) => `/practice-tests/${cat.slug}`);
+  const govSetRoutes = govPracticeCategories.flatMap((cat) =>
+    cat.sets.filter((set) => set.isLive).map((set) => `/practice-tests/${cat.slug}/${set.slug}`)
+  );
 
   const resourceRoutes = resourcePages.map((page) => `/resources/${page.slug}`);
   const countryRoutes = countryResourcesWithTopics.flatMap((country) => [
@@ -40,7 +45,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...country.topics.map((topic) => `/resources/country/${country.slug}/${topic.slug}`),
   ]);
 
-  return [...staticRoutes, ...resourceRoutes, ...countryRoutes].map((route) => ({
+  const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
+  const testRoutes = tests.flatMap((test) => [
+    `/tests/${test.slug}`,
+    `/tests/${test.slug}/start`,
+    `/tests/${test.slug}/quiz`,
+    `/tests/${test.slug}/result`,
+  ]);
+  const skillRoutes = skillsPages.map((skill) => `/skills/${skill.slug}`);
+
+  return [...staticRoutes, ...resourceRoutes, ...countryRoutes, ...practiceRoutes, ...govSetRoutes, ...blogRoutes, ...testRoutes, ...skillRoutes].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: route === "" ? "weekly" : "monthly",

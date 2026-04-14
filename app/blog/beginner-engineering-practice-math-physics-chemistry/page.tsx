@@ -7,6 +7,11 @@ export const metadata: Metadata = {
     "Beginner engineering practice for math, physics, and chemistry with answers and explanations.",
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
 export default function BeginnerEngineeringPracticePage() {
   return (
     <SeoBlogArticle

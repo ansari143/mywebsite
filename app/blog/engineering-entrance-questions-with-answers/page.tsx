@@ -7,6 +7,11 @@ export const metadata: Metadata = {
     "Practice engineering entrance questions with answers and explanations for math, physics, chemistry, and logic.",
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
 export default function EngineeringQuestionsPage() {
   return (
     <SeoBlogArticle

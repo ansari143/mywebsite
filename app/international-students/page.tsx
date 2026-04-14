@@ -10,6 +10,11 @@ export const metadata = {
   },
 };
 
+export const generateViewport = () => ({
+  width: 'device-width',
+  initialScale: 1,
+});
+
 export default function InternationalStudentsPage() {
   const guide = careerGuides.find(g => g.slug === 'international-students');
   if (!guide) return null;

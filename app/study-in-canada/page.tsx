@@ -11,6 +11,11 @@ export const metadata = {
   },
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
 export default function StudyInCanadaPage() {
   return <StudyPageTemplate guide={guide} />;
 }

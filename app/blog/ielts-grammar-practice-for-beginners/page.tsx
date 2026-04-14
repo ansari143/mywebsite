@@ -7,6 +7,11 @@ export const metadata: Metadata = {
     "IELTS grammar practice for beginners with answers and explanations. Improve sentence accuracy, articles, tenses, and prepositions.",
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
 export default function IELTSGrammarPracticePage() {
   return (
     <SeoBlogArticle

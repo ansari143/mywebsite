@@ -66,7 +66,7 @@ export default function AIRoadmapPage() {
 
           <p className="mt-4 text-base leading-8 text-slate-600">
             If you want to build AI applications or become an AI developer,
-            follow this simple roadmap. Start with Python fundamentals and move
+            follow this clear roadmap. Start with Python fundamentals and move
             step-by-step toward AI agents, workflows, and monitoring tools.
           </p>
         </div>
@@ -108,8 +108,8 @@ export default function AIRoadmapPage() {
         <p className="mt-3 text-sm leading-7 text-slate-700">
           Do not try to learn everything at once. Focus on one step at a time.
           Start with Python basics, then understand prompts, and gradually move
-          into frameworks like LangChain and LangGraph. Practice small projects
-          to build real experience.
+          into frameworks like LangChain and LangGraph. Build small projects to
+          gain practical experience.
         </p>
       </section>
     </div>

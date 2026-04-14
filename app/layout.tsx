@@ -48,64 +48,69 @@ export const metadata = {
   },
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  name: "Nishaglobal Education",
+  url: "https://nishaglobaleducation.com",
+  logo: "https://nishaglobaleducation.com/logo.png",
+  image: "https://nishaglobaleducation.com/logo.png",
+  email: "nishaglobaleducation@gmail.com",
+  description:
+    "Nishaglobal Education provides career guidance, educational resources, study abroad guidance, free career tests, and future-ready skills learning for students worldwide.",
+  areaServed: "Worldwide",
+  availableLanguage: ["English", "Hindi"],
+  sameAs: [
+    "https://www.facebook.com/global.nisha",
+    "https://instagram.com/nisha.global",
+    "https://www.youtube.com/@NishaglobalEducation",
+    "https://www.facebook.com/profile.php?id=61588627138300",
+    "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: "nishaglobaleducation@gmail.com",
+      availableLanguage: ["English", "Hindi"],
+    },
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Nishaglobal Education",
+  url: "https://nishaglobaleducation.com",
+  description:
+    "Career guidance for students worldwide, including study abroad guides, free career tests, educational resources, and future-ready skills.",
+  publisher: {
+    "@type": "EducationalOrganization",
+    name: "Nishaglobal Education",
+    url: "https://nishaglobaleducation.com",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://nishaglobaleducation.com/logo.png",
+    },
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target:
+      "https://nishaglobaleducation.com/resources?query={search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    name: "Nishaglobal Education",
-    url: "https://nishaglobaleducation.com",
-    logo: "https://nishaglobaleducation.com/logo.png",
-    image: "https://nishaglobaleducation.com/logo.png",
-    email: "nishaglobaleducation@gmail.com",
-    description:
-      "Nishaglobal Education provides career guidance, educational resources, study abroad guidance, free career tests, and future-ready skills learning for students worldwide.",
-    areaServed: "Worldwide",
-    availableLanguage: ["English", "Hindi"],
-    sameAs: [
-      "https://www.facebook.com/global.nisha",
-      "https://instagram.com/nisha.global",
-      "https://www.youtube.com/@NishaglobalEducation",
-      "https://www.facebook.com/profile.php?id=61588627138300",
-      "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
-    ],
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        contactType: "customer support",
-        email: "nishaglobaleducation@gmail.com",
-        availableLanguage: ["English", "Hindi"],
-      },
-    ],
-  };
-
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Nishaglobal Education",
-    url: "https://nishaglobaleducation.com",
-    description:
-      "Career guidance for students worldwide, including study abroad guides, free career tests, educational resources, and future-ready skills.",
-    publisher: {
-      "@type": "EducationalOrganization",
-      name: "Nishaglobal Education",
-      url: "https://nishaglobaleducation.com",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://nishaglobaleducation.com/logo.png",
-      },
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target:
-        "https://nishaglobaleducation.com/resources?query={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
-  };
-
   return (
     <html lang="en">
       <head>
@@ -115,7 +120,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         ></script>
       </head>
-      <body suppressHydrationWarning className="bg-gray-50 text-gray-900">
+      <body className="bg-gray-50 text-gray-900">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

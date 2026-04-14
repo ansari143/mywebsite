@@ -9,6 +9,11 @@ export const metadata = {
   },
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
 const destinations = [
   {
     href: "/study-in-usa",
@@ -70,12 +75,6 @@ export default function StudyAbroadPage() {
           <h2 className="text-lg font-semibold text-slate-900">Who Should Avoid This Path</h2>
           <p className="mt-2 text-slate-700">
             Students who are not prepared for the additional costs and complexities of international study, those who prefer local education systems, or individuals facing visa restrictions that limit their options.
-          </p>
-        </div>
-        <div className="mt-4">
-          <h2 className="text-lg font-semibold text-slate-900">Who Should Avoid Studying Abroad</h2>
-          <p className="mt-2 text-slate-700">
-            Students who prefer familiar environments or have family commitments limiting relocation, those in budget constraints unable to afford international fees, or individuals in fields better served by local institutions.
           </p>
         </div>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">

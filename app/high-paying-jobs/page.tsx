@@ -10,6 +10,11 @@ export const metadata = {
   },
 };
 
+export const generateViewport = () => ({
+  width: 'device-width',
+  initialScale: 1,
+});
+
 export default function HighPayingJobsPage() {
   const guide = careerGuides.find(g => g.slug === 'high-paying-jobs');
   if (!guide) return null;

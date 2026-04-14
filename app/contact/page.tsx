@@ -1,3 +1,5 @@
+import TrustComponent from "@/components/TrustComponent";
+
 export const metadata = {
   title: "Contact | Nishaglobal Education",
   description:
@@ -6,6 +8,11 @@ export const metadata = {
     canonical: "https://nishaglobaleducation.com/contact",
   },
 };
+
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
 
 export default function ContactPage() {
   const contactSchema = {
@@ -66,6 +73,19 @@ export default function ContactPage() {
         </div>
       </section>
 
+      <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">How we support you</h2>
+        <p className="mt-3 text-sm leading-7 text-slate-600">
+          Our team reviews messages from students and parents, and we respond within 3 working days. We do not share your personal details without consent.
+        </p>
+        <TrustComponent
+          author="Nishaglobal Education support team"
+          reviewedBy="Student success and education advisors"
+          lastUpdated="April 2026"
+          disclaimer="We provide informational guidance only. Always verify admissions, visa, scholarship, and career decisions with official sources."
+        />
+      </section>
+
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
         <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
           <h2 className="text-xl font-semibold text-slate-900">
@@ -76,6 +96,9 @@ export default function ContactPage() {
             Use this form if you need guidance about careers, study abroad,
             global skills, scholarships, admissions, country-specific education
             options, or partnership opportunities.
+          </p>
+          <p className="mt-3 text-sm leading-7 text-slate-500">
+            Please do not share sensitive personal documents here. Provide enough detail for us to understand your goals, and we will reply with helpful next steps.
           </p>
 
           <form

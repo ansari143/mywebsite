@@ -1,3 +1,5 @@
+import TrustComponent from "@/components/TrustComponent";
+
 export const metadata = {
   title: "About Us | Nishaglobal Education",
   description:
@@ -6,6 +8,11 @@ export const metadata = {
     canonical: "https://nishaglobaleducation.com/about",
   },
 };
+
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
 
 export default function AboutPage() {
   const aboutSchema = {
@@ -53,6 +60,21 @@ export default function AboutPage() {
             clearer, and more practical. We aim to simplify confusing choices by offering accessible career tests,
             educational resources, study abroad content, and future-ready skills guidance in a format students and families can understand.
           </p>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm sm:p-8">
+        <div className="max-w-4xl">
+          <h2 className="text-2xl font-bold text-slate-900">Trusted guidance for students and parents</h2>
+          <p className="mt-3 text-slate-600">
+            We review content with education specialists, focus on verified sources, and update our guidance regularly so students and families can make confident decisions.
+          </p>
+          <TrustComponent
+            author="Nishaglobal Education editorial team"
+            reviewedBy="Education advisors and student support specialists"
+            lastUpdated="April 2026"
+            disclaimer="Our guidance is educational and practical, but not a substitute for official admissions, visa, or financial advice."
+          />
         </div>
       </section>
 

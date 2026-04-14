@@ -11,6 +11,11 @@ export const metadata = {
   },
 };
 
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
+
 const cardGradients = [
   "from-blue-50 to-indigo-50",
   "from-emerald-50 to-teal-50",
@@ -65,21 +70,59 @@ export default function ResourcesPage() {
           </div>
 
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Resources Organized by Country and Career Topic
+            Career Resources: Country-Specific Guidance for Global Students
           </h1>
 
           <p className="mt-4 text-base leading-7 text-gray-600 sm:text-lg">
-            Explore student guidance by country first, then go deeper into study options, scholarships, visa basics, jobs, and career planning. This structure is more useful for global visitors and stronger for long-term SEO growth.
+            Navigate international education and career opportunities with targeted resources organized by destination country. Whether you&apos;re exploring study abroad options or planning your professional path, find practical insights tailored to specific markets and requirements.
           </p>
+
+          <div className="mt-6 space-y-4">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">Who This Resource Hub Is For</h3>
+              <p className="mt-2 text-gray-600">
+                Students researching specific countries for education or work, parents seeking location-specific guidance, and professionals planning international career moves. Ideal for those who want detailed, country-focused information rather than generic global advice.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">Who Should Look Elsewhere</h3>
+              <p className="mt-2 text-gray-600">
+                Those seeking quick overviews or basic information. This hub is designed for in-depth research, so if you need surface-level answers, start with our main career guides instead.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-slate-50 p-6 sm:p-8">
+        <h2 className="text-2xl font-bold text-gray-900">Resource Organization Strategy</h2>
+        <p className="mt-3 text-gray-600">
+          Our resources follow user search patterns: most students start with country intent (&quot;study in Canada&quot; or &quot;jobs in Australia&quot;), then explore specific topics. This structure provides faster access to relevant information and better supports informed decision-making.
+        </p>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-xl bg-white p-4">
+            <h3 className="font-semibold text-gray-900">Country-First Approach</h3>
+            <p className="mt-2 text-sm text-gray-600">
+              Start with destination-specific hubs covering education systems, visa requirements, job markets, and cultural insights.
+            </p>
+          </div>
+          <div className="rounded-xl bg-white p-4">
+            <h3 className="font-semibold text-gray-900">Topic-Deep Dives</h3>
+            <p className="mt-2 text-sm text-gray-600">
+              Explore specialized guides on scholarships, entrance exams, career planning, and skill development.
+            </p>
+          </div>
         </div>
       </section>
 
       <section className="space-y-5">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-semibold text-gray-900">Explore by country</h2>
+            <h2 className="text-2xl font-semibold text-gray-900">Explore by Country</h2>
             <p className="mt-2 text-sm leading-6 text-gray-600 sm:text-base">
-              Visitors usually search with country intent, so these hubs make the website clearer and easier to scale globally.
+              Country-specific resources provide localized insights on education systems, immigration policies, job markets, and cultural adaptation. Each hub includes practical guides for students and professionals.
             </p>
           </div>
         </div>
@@ -124,9 +167,9 @@ export default function ResourcesPage() {
 
       <section className="space-y-5">
         <div>
-          <h2 className="text-2xl font-semibold text-gray-900">Core guidance library</h2>
+          <h2 className="text-2xl font-semibold text-gray-900">Specialized Topic Guides</h2>
           <p className="mt-2 text-sm leading-6 text-gray-600 sm:text-base">
-            Keep your existing foundational resources for stream selection, career comparisons, and student decision-making.
+            Deep-dive resources covering essential topics for career planning, academic success, and international opportunities. These guides provide practical frameworks and actionable advice.
           </p>
         </div>
 
@@ -158,8 +201,74 @@ export default function ResourcesPage() {
         </div>
       </section>
 
+      <section className="rounded-3xl border border-gray-200 bg-blue-50 p-6 sm:p-8">
+        <h2 className="text-2xl font-bold text-gray-900">How to Use These Resources Effectively</h2>
+        <div className="mt-4 space-y-4">
+          <div className="flex gap-4">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">1</div>
+            <div>
+              <h3 className="font-semibold text-gray-900">Start with Your Target Country</h3>
+              <p className="mt-1 text-sm text-gray-600">Choose 2-3 countries that match your academic profile and career goals, then explore their specific requirements and opportunities.</p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">2</div>
+            <div>
+              <h3 className="font-semibold text-gray-900">Cross-Reference with Topic Guides</h3>
+              <p className="mt-1 text-sm text-gray-600">Use specialized guides to understand broader concepts like entrance exams, scholarships, or career planning alongside country-specific information.</p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">3</div>
+            <div>
+              <h3 className="font-semibold text-gray-900">Create a Personal Action Plan</h3>
+              <p className="mt-1 text-sm text-gray-600">Document key deadlines, requirements, and next steps for each country you&apos;re considering to stay organized throughout your research process.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 sm:p-8">
+        <h2 className="text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
+        <div className="mt-6 space-y-4">
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+            <h3 className="text-base font-semibold text-gray-900">How often is the information updated?</h3>
+            <p className="mt-2 text-sm text-gray-600">Country resources are reviewed quarterly, with major policy changes updated immediately. Topic guides are refreshed annually or when significant developments occur in the field.</p>
+          </div>
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+            <h3 className="text-base font-semibold text-gray-900">Can I contribute to these resources?</h3>
+            <p className="mt-2 text-sm text-gray-600">We welcome feedback from students and educators. Contact us with suggestions for new topics or corrections to existing information.</p>
+          </div>
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+            <h3 className="text-base font-semibold text-gray-900">Are these resources free to use?</h3>
+            <p className="mt-2 text-sm text-gray-600">Yes, all resources are completely free. We believe in providing accessible educational guidance to help students make informed decisions about their future.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">Ready to Start Your Research?</h2>
+        <p className="mt-4 text-slate-700">
+          Choose your target country or explore a specific topic to begin building your international education and career plan.
+        </p>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <Link
+            href="/study-abroad"
+            className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            Explore Study Abroad Options
+          </Link>
+          <Link
+            href="/tests"
+            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            Take Career Assessment
+          </Link>
+        </div>
+      </section>
+
       <section className="rounded-3xl border border-gray-200 bg-gray-50 p-6 sm:p-8">
-        <h2 className="text-xl font-semibold text-gray-900">Disclaimer</h2>
+        <h2 className="text-xl font-semibold text-gray-900">Educational Disclaimer</h2>
         <div className="mt-3 space-y-3 text-sm leading-7 text-gray-600">
           <p>
             Nishaglobal Education provides educational and informational content to help students and parents understand career options, academic pathways, entrance exams, scholarships, stream selection, global education planning, and practical next steps.

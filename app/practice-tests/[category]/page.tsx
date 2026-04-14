@@ -205,7 +205,7 @@ export default async function PracticeCategoryPage({ params }: Props) {
             Next step after practice
           </h2>
           <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">
-            Practice improves performance. Career guidance helps students choose the
+            Practice improves performance and confidence. Career guidance helps students choose the
             right direction. Use both together on Nishaglobal Education.
           </p>
 
