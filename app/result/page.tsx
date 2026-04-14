@@ -534,7 +534,7 @@ export default function ResultPage() {
           <div className="mt-8 flex flex-col gap-6 border-t pt-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs uppercase tracking-wide text-gray-500">Issued on</p>
-              <p className="mt-1 font-medium text-slate-900">{issuedOn}</p>
+              <p suppressHydrationWarning className="mt-1 font-medium text-slate-900">{issuedOn}</p>
             </div>
             <div className="text-center">
               <QRCode value={qrValue} size={84} />

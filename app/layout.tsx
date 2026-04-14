@@ -115,7 +115,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         ></script>
       </head>
-      <body className="bg-gray-50 text-gray-900">
+      <body suppressHydrationWarning className="bg-gray-50 text-gray-900">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
