@@ -1,9 +1,9 @@
 export const metadata = {
-  title: "About Us | Nishaglobal Education",
+  title: "Privacy Policy | Nishaglobal Education",
   description:
-  "Nishaglobal Education is a global career guidance platform helping students choose the right career, explore study abroad options, take career tests, and learn future-ready skills like AI, data, and technology.",
+    "Privacy Policy for Nishaglobal Education covering data collection, usage, cookies, and user rights for our global career guidance platform.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/about",
+    canonical: "https://nishaglobaleducation.com/privacy-policy",
   },
 };
 
@@ -12,33 +12,29 @@ export const generateViewport = () => ({
   initialScale: 1,
 });
 
-export default function AboutPage() {
-  const aboutSchema = {
+export default function PrivacyPolicyPage() {
+  const privacySchema = {
     "@context": "https://schema.org",
-    "@type": "AboutPage",
-    name: "About Nishaglobal Education",
-    url: "https://nishaglobaleducation.com/about",
-     description:
-  "Nishaglobal Education is a global career guidance platform helping students choose the right career, explore study abroad options, take career tests, and learn future-ready skills like AI, data, and technology.",
-    mainEntity: {
-      "@type": "EducationalOrganization",
+    "@type": "WebPage",
+    name: "Privacy Policy",
+    description:
+      "Privacy Policy for Nishaglobal Education covering data collection, usage, cookies, and user rights for our global career guidance platform.",
+    url: "https://nishaglobaleducation.com/privacy-policy",
+    isPartOf: {
+      "@type": "WebSite",
       name: "Nishaglobal Education",
       url: "https://nishaglobaleducation.com",
-      logo: "https://nishaglobaleducation.com/logo.png",
-      email: "nishaglobaleducation@gmail.com",
-       sameAs: [
-      "https://www.facebook.com/global.nisha",
-      "https://instagram.com/nisha.global",
-      "https://www.youtube.com/@NishaglobalEducation",
-      "https://www.facebook.com/profile.php?id=61588627138300",
-      "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
-    ],
     },
   };
 
   return (
-<div className="mt-6 space-y-5 text-sm leading-7 text-slate-600 sm:text-base">
+    <div className="space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(privacySchema) }}
+      />
 
+      <div className="mt-6 space-y-5 text-sm leading-7 text-slate-600 sm:text-base">
   <p>
     Nishaglobal Education respects your privacy and is committed to protecting your information.
     This Privacy Policy explains what data may be collected, how it is used, and how it is handled
@@ -166,8 +162,8 @@ export default function AboutPage() {
       </a>
     </li>
   </ul>
-
-</div>
+      </div>
+    </div>
   );
 }
 

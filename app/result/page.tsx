@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { tests } from "@/data/tests";
 import { testInsights } from "@/data/testInsights";
@@ -491,7 +492,7 @@ export default function ResultPage() {
         style={{ border: "8px solid #D4AF37" }}
       >
         <div className="flex justify-center pt-8">
-          <img src="/logo.png" alt="Nishaglobal Education" width={120} height={120} style={{ objectFit: "contain" }} />
+          <Image src="/logo.png" alt="Nishaglobal Education" width={120} height={120} style={{ objectFit: "contain" }} />
         </div>
         <div className="mt-4 border-y bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-6 sm:px-10">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">

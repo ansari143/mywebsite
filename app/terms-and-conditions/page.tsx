@@ -1,9 +1,9 @@
 export const metadata = {
-  title: "About Us | Nishaglobal Education",
+  title: "Terms & Conditions | Nishaglobal Education",
   description:
-  "Nishaglobal Education is a global career guidance platform helping students choose the right career, explore study abroad options, take career tests, and learn future-ready skills like AI, data, and technology.",
+    "Terms and Conditions for using Nishaglobal Education, covering website usage, career guidance, educational content, and user responsibilities.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/about",
+    canonical: "https://nishaglobaleducation.com/terms-and-conditions",
   },
 };
 
@@ -12,33 +12,34 @@ export const generateViewport = () => ({
   initialScale: 1,
 });
 
-export default function AboutPage() {
-  const aboutSchema = {
+export default function TermsAndConditionsPage() {
+  const termsSchema = {
     "@context": "https://schema.org",
-    "@type": "AboutPage",
-    name: "About Nishaglobal Education",
-    url: "https://nishaglobaleducation.com/about",
+    "@type": "WebPage",
+    name: "Terms & Conditions",
     description:
-  "Nishaglobal Education is a global career guidance platform helping students choose the right career, explore study abroad options, take career tests, and learn future-ready skills like AI, data, and technology.",
-    mainEntity: {
-      "@type": "EducationalOrganization",
+      "Terms and Conditions for using Nishaglobal Education, covering website usage, career guidance, educational content, and user responsibilities.",
+    url: "https://nishaglobaleducation.com/terms-and-conditions",
+    isPartOf: {
+      "@type": "WebSite",
       name: "Nishaglobal Education",
       url: "https://nishaglobaleducation.com",
-      logo: "https://nishaglobaleducation.com/logo.png",
-      email: "nishaglobaleducation@gmail.com",
-       sameAs: [
-      "https://www.facebook.com/global.nisha",
-      "https://instagram.com/nisha.global",
-      "https://www.youtube.com/@NishaglobalEducation",
-      "https://www.facebook.com/profile.php?id=61588627138300",
-      "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
-    ],
     },
   };
 
   return (
+    <div className="space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(termsSchema) }}
+      />
 
-<div className="mt-6 space-y-5 text-sm leading-7 text-slate-600 sm:text-base">
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
+          Terms & Conditions
+        </h1>
+
+        <div className="mt-6 space-y-5 text-sm leading-7 text-slate-600 sm:text-base">
 
   <p>
     By accessing or using Nishaglobal Education, you agree to these Terms & Conditions.
@@ -149,17 +150,14 @@ export default function AboutPage() {
   </p>
 
   <h2 className="font-semibold text-slate-900">Contact</h2>
-  <p>
-    For any questions regarding these terms, please contact:
-    <a className="ml-1 font-medium text-blue-700 hover:underline" href="mailto:nishaglobaleducation@gmail.com">
-      nishaglobaleducation@gmail.com
-    </a>
-    or visit
-    <a className="ml-1 font-medium text-blue-700 hover:underline" href="/contact">
-      /contact
-    </a>
-  </p>
-
-</div>
-  );
+          <p>
+            For any questions regarding these terms, please contact:
+            <a className="ml-1 font-medium text-blue-700 hover:underline" href="mailto:nishaglobaleducation@gmail.com">nishaglobaleducation@gmail.com</a>
+            or visit
+            <a className="ml-1 font-medium text-blue-700 hover:underline" href="/contact">/contact</a>
+          </p>
+        </div>
+      </section>
+    </div>
+    );
 }

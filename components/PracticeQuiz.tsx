@@ -20,7 +20,7 @@ export default function PracticeQuiz({ categorySlug, categoryTitle, set }: Props
   const categoryData = getGovPracticeCategoryBySlug(categorySlug);
   const otherLiveSets = categoryData?.sets.filter(s => s.isLive && s.slug !== set.slug) || [];
 
-  const questions = set.questions || [];
+  const questions = useMemo(() => set.questions || [], [set.questions]);
   const total = questions.length;
   const answeredCount = Object.keys(answers).length;
   const allAnswered = answeredCount === total;
@@ -113,7 +113,6 @@ export default function PracticeQuiz({ categorySlug, categoryTitle, set }: Props
           <h3 className="text-xl font-bold text-slate-900">Review Answers</h3>
           {questions.map((q, index) => {
             const userAnswer = answers[q.id];
-            const isCorrect = userAnswer === q.correct;
             return (
               <div key={q.id} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
                 <div className="flex items-start justify-between">
