@@ -50,7 +50,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     `/tests/${test.slug}`,
     `/tests/${test.slug}/start`,
     `/tests/${test.slug}/quiz`,
-    `/tests/${test.slug}/result`,
   ]);
   const skillRoutes = skillsPages.map((skill) => `/skills/${skill.slug}`);
 
