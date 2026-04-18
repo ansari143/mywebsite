@@ -2,22 +2,21 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import type { GovPracticeSet } from "@/data/practiceTests";
-import { getGovPracticeCategoryBySlug } from "@/data/practiceTests";
+import type { GovPracticeSet, GovPracticeCategory } from "@/data/practiceTests";
 
 type Props = {
   categorySlug: string;
   categoryTitle: string;
   set: GovPracticeSet;
+  categoryData?: GovPracticeCategory;
 };
 
-export default function PracticeQuiz({ categorySlug, categoryTitle, set }: Props) {
+export default function PracticeQuiz({ categorySlug, categoryTitle, set, categoryData }: Props) {
   const [answers, setAnswers] = useState<Record<string, "A" | "B" | "C" | "D">>({});
   const [submitted, setSubmitted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [language, setLanguage] = useState<"en" | "hi" | "both">("en");
 
-  const categoryData = getGovPracticeCategoryBySlug(categorySlug);
   const otherLiveSets = categoryData?.sets.filter(s => s.isLive && s.slug !== set.slug) || [];
 
   const questions = useMemo(() => set.questions || [], [set.questions]);

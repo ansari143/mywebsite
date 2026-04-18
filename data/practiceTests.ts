@@ -27,6 +27,9 @@ export type PracticeSet = {
   title: string;
   description: string;
   examType: string;
+  examSlug?: "jee-main" | "jee-advanced" | "comedk" | "wbjee" | "kcet";
+  examName?: string;
+  sectionLabel?: string;
   level: "beginner" | "intermediate" | "advanced";
   questionCount: number;
   estimatedMinutes: number;
@@ -41,7 +44,26 @@ export type PracticeSet = {
   difficulty?: "Easy" | "Medium" | "Hard";
   durationMin?: number;
   bilingual?: boolean;
+  isOriginal?: boolean;
   isLive?: boolean;
+};
+
+export type ExamRule = {
+  examSlug: "jee-main" | "jee-advanced" | "comedk" | "wbjee" | "kcet";
+  examName: string;
+  shortName: string;
+  officialBody: string;
+  officialUrl: string;
+  mode: string;
+  duration: string;
+  totalQuestions?: number;
+  totalMarks?: number;
+  subjects: string[];
+  marking: string;
+  negativeMarking: string;
+  languages?: string[];
+  note?: string;
+  disclaimer?: string;
 };
 
 export type PracticeCategoryMeta = {
@@ -153,6 +175,94 @@ function createGovQuestion(
     explanationHi,
   };
 }
+
+export const engineeringExamRules: ExamRule[] = [
+  {
+    examSlug: "jee-main",
+    examName: "JEE Main",
+    shortName: "JEE Main",
+    officialBody: "National Testing Agency (NTA)",
+    officialUrl: "https://jeemain.nta.nic.in/",
+    mode: "Computer Based Test (CBT)",
+    duration: "3 hours",
+    totalQuestions: 75,
+    totalMarks: 300,
+    subjects: ["Mathematics", "Physics", "Chemistry"],
+    marking: "+4 correct, -1 incorrect, 0 unattempted",
+    negativeMarking: "Yes, in Section A and Section B",
+    note: "Each subject has 20 MCQs and 5 numerical-value questions.",
+    disclaimer:
+      "Practice sets on this page are original simulated questions based on the latest public exam pattern. They are not official NTA papers.",
+  },
+  {
+    examSlug: "jee-advanced",
+    examName: "JEE Advanced",
+    shortName: "JEE Advanced",
+    officialBody: "JEE Advanced / Organizing IIT",
+    officialUrl: "https://jeeadv.ac.in/",
+    mode: "Computer Based Test (CBT)",
+    duration: "2 papers of 3 hours each",
+    subjects: ["Physics", "Chemistry", "Mathematics"],
+    marking: "Varies by question type and year",
+    negativeMarking: "May apply for some questions",
+    note: "Both papers are compulsory. Pattern is not fixed in the same way as JEE Main.",
+    disclaimer:
+      "Do not hardcode one fixed official question count for JEE Advanced. Use simulated sets and clearly label them as pattern-based practice.",
+  },
+  {
+    examSlug: "comedk",
+    examName: "COMEDK",
+    shortName: "COMEDK",
+    officialBody: "COMEDK",
+    officialUrl: "https://www.comedk.org/",
+    mode: "Computer Based Test (CBT)",
+    duration: "As per admit card slot",
+    totalQuestions: 180,
+    totalMarks: 180,
+    subjects: ["Physics", "Chemistry", "Mathematics"],
+    marking: "+1 correct",
+    negativeMarking: "No negative marking",
+    languages: ["English"],
+    note: "60 MCQs each in Physics, Chemistry, and Mathematics.",
+    disclaimer:
+      "Practice sets here are original and not official COMEDK question papers.",
+  },
+  {
+    examSlug: "wbjee",
+    examName: "WBJEE",
+    shortName: "WBJEE",
+    officialBody: "WBJEEB",
+    officialUrl: "https://wbjeeb.nic.in/wbjee/",
+    mode: "Offline OMR",
+    duration: "4 hours total (2 hours Paper 1 + 2 hours Paper 2)",
+    totalQuestions: 155,
+    totalMarks: 200,
+    subjects: ["Mathematics", "Physics", "Chemistry"],
+    marking: "Category 1: +1, Category 2/3: +2",
+    negativeMarking: "Category 1: -0.25, Category 2: -0.5, Category 3: none",
+    note: "Paper 1 is Mathematics. Paper 2 is Physics + Chemistry.",
+    disclaimer:
+      "Use original WBJEE-style questions only. Do not copy official board papers.",
+  },
+  {
+    examSlug: "kcet",
+    examName: "KCET",
+    shortName: "KCET",
+    officialBody: "Karnataka Examinations Authority (KEA)",
+    officialUrl: "https://cetonline.karnataka.gov.in/",
+    mode: "Pen-paper based examination",
+    duration: "1 hour 20 minutes per subject session",
+    totalQuestions: 180,
+    totalMarks: 180,
+    subjects: ["Mathematics", "Physics", "Chemistry"],
+    marking: "+1 correct",
+    negativeMarking: "No negative marking",
+    languages: ["English", "Kannada"],
+    note: "60 questions each in Mathematics, Physics, and Chemistry.",
+    disclaimer:
+      "Pattern should be rechecked against the latest KEA notice each year.",
+  },
+];
 
 export const practiceCategories: PracticeCategoryMeta[] = [
   {
@@ -3445,10 +3555,896 @@ export const practiceSets: PracticeSet[] = [
       ),
     ],
   },
+  {
+    id: "jee-main-physics-set-1",
+    slug: "jee-main-physics-practice-set-1",
+    category: "engineering-entrance",
+    title: "JEE Main Physics Practice Set 1",
+    description:
+      "Original JEE Main style physics practice questions with answer explanations and pattern-based difficulty.",
+    examType: "JEE Main",
+    examSlug: "jee-main",
+    examName: "JEE Main",
+    sectionLabel: "Physics Practice Set",
+    level: "intermediate",
+    questionCount: 6,
+    estimatedMinutes: 18,
+    seoTitle:
+      "JEE Main Physics Practice Questions – Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice original JEE Main-style physics questions with explanations. This pattern-based set helps build confidence in physics concepts.",
+    keywords: [
+      "JEE Main physics practice",
+      "JEE Main physics questions",
+      "physics practice set",
+      "engineering entrance physics",
+      "original JEE practice",
+    ],
+    intro:
+      "This practice set is designed to help you build JEE Main physics problem solving with original, exam-style questions and clear explanations.",
+    isOriginal: true,
+    isLive: true,
+    questions: [
+      createQuestion(
+        "jee-main-phys-1",
+        "A body moves with constant acceleration of 2 m/s². What is its velocity after 5 seconds if initial velocity is 4 m/s?",
+        ["10 m/s", "14 m/s", "6 m/s", "12 m/s"],
+        "B",
+        "Use v = u + at. v = 4 + (2 × 5) = 14 m/s.",
+        "kinematics",
+        "medium"
+      ),
+      createQuestion(
+        "jee-main-phys-2",
+        "Which of the following is the SI unit of electric resistance?",
+        ["Ohm", "Ampere", "Volt", "Watt"],
+        "A",
+        "Resistance is measured in ohms.",
+        "electricity",
+        "easy"
+      ),
+      createQuestion(
+        "jee-main-phys-3",
+        "A ray of light enters water from air. Which quantity remains constant?",
+        ["Speed", "Frequency", "Wavelength", "Direction"],
+        "B",
+        "Frequency remains constant when light moves between media.",
+        "optics",
+        "medium"
+      ),
+      createQuestion(
+        "jee-main-phys-4",
+        "A 2 kg mass is lifted 5 m vertically upward. What is the increase in gravitational potential energy? (g = 10 m/s²)",
+        ["50 J", "100 J", "20 J", "10 J"],
+        "B",
+        "ΔPE = mgh = 2 × 10 × 5 = 100 J.",
+        "mechanics",
+        "easy"
+      ),
+      createQuestion(
+        "jee-main-phys-5",
+        "Which force acts to oppose the relative motion between two surfaces in contact?",
+        ["Gravitational force", "Normal force", "Frictional force", "Tension force"],
+        "C",
+        "Friction opposes relative motion between surfaces.",
+        "mechanics",
+        "easy"
+      ),
+      createQuestion(
+        "jee-main-phys-6",
+        "An object is moving in uniform circular motion. Which statement is true?",
+        ["Speed changes constantly", "Velocity is constant", "Centripetal force acts toward the center", "No force acts on the object"],
+        "C",
+        "In uniform circular motion, centripetal force acts toward the center of the circle.",
+        "dynamics",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "jee-main-chemistry-set-1",
+    slug: "jee-main-chemistry-practice-set-1",
+    category: "engineering-entrance",
+    title: "JEE Main Chemistry Practice Set 1",
+    description:
+      "Original JEE Main chemistry questions that focus on basics, reactions, and periodic trends.",
+    examType: "JEE Main",
+    examSlug: "jee-main",
+    examName: "JEE Main",
+    sectionLabel: "Chemistry Practice Set",
+    level: "intermediate",
+    questionCount: 6,
+    estimatedMinutes: 18,
+    seoTitle:
+      "JEE Main Chemistry Practice Questions – Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice original chemistry questions for JEE Main with answer explanations. This set covers periodic trends, reactions, and physical chemistry basics.",
+    keywords: [
+      "JEE Main chemistry practice",
+      "JEE Main chemistry questions",
+      "chemistry practice set",
+      "engineering entrance chemistry",
+      "original JEE chemistry",
+    ],
+    intro:
+      "Practice this chemistry set to build familiarity with JEE Main-style problems in physical, inorganic, and organic chemistry.",
+    isOriginal: true,
+    isLive: true,
+    questions: [
+      createQuestion(
+        "jee-main-chem-1",
+        "Which gas is released when zinc reacts with dilute hydrochloric acid?",
+        ["Oxygen", "Hydrogen", "Carbon dioxide", "Nitrogen"],
+        "B",
+        "Zinc and dilute hydrochloric acid produce hydrogen gas.",
+        "inorganic chemistry",
+        "easy"
+      ),
+      createQuestion(
+        "jee-main-chem-2",
+        "What is the pH of a neutral aqueous solution at 25°C?",
+        ["7", "1", "14", "4"],
+        "A",
+        "Neutral water at 25°C has pH 7.",
+        "physical chemistry",
+        "easy"
+      ),
+      createQuestion(
+        "jee-main-chem-3",
+        "Which element has the electronic configuration [Ne] 3s² 3p¹?",
+        ["Aluminium", "Magnesium", "Silicon", "Phosphorus"],
+        "A",
+        "Aluminium has configuration [Ne] 3s² 3p¹.",
+        "periodic table",
+        "medium"
+      ),
+      createQuestion(
+        "jee-main-chem-4",
+        "What is the functional group in ethanol?",
+        ["Carboxyl", "Amine", "Hydroxyl", "Aldehyde"],
+        "C",
+        "Ethanol contains a hydroxyl (–OH) group.",
+        "organic chemistry",
+        "medium"
+      ),
+      createQuestion(
+        "jee-main-chem-5",
+        "Which of these is a strong acid?",
+        ["Acetic acid", "Hydrochloric acid", "Ammonia", "Sodium hydroxide"],
+        "B",
+        "Hydrochloric acid is a strong acid.",
+        "physical chemistry",
+        "easy"
+      ),
+      createQuestion(
+        "jee-main-chem-6",
+        "Which of the following is an alkali metal?",
+        ["Calcium", "Lithium", "Aluminium", "Copper"],
+        "B",
+        "Lithium is an alkali metal in group 1.",
+        "periodic trends",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "jee-main-math-set-1",
+    slug: "jee-main-mathematics-practice-set-1",
+    category: "engineering-entrance",
+    title: "JEE Main Mathematics Practice Set 1",
+    description:
+      "Original JEE Main mathematics questions covering algebra, coordinate geometry, and functions.",
+    examType: "JEE Main",
+    examSlug: "jee-main",
+    examName: "JEE Main",
+    sectionLabel: "Mathematics Practice Set",
+    level: "intermediate",
+    questionCount: 6,
+    estimatedMinutes: 18,
+    seoTitle:
+      "JEE Main Mathematics Practice Questions – Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice original JEE Main-style mathematics questions with step-by-step explanations. This set includes algebra and coordinate geometry problems.",
+    keywords: [
+      "JEE Main math practice",
+      "JEE Main mathematics questions",
+      "math practice set",
+      "engineering entrance math",
+      "original JEE math",
+    ],
+    intro:
+      "Build your JEE Main math skills with original practice questions that help you understand problem-solving techniques.",
+    isOriginal: true,
+    isLive: true,
+    questions: [
+      createQuestion(
+        "jee-main-math-1",
+        "What is the solution of the equation 2x − 5 = 9?",
+        ["2", "4", "7", "14"],
+        "C",
+        "Add 5 to both sides and divide by 2: x = 7.",
+        "algebra",
+        "easy"
+      ),
+      createQuestion(
+        "jee-main-math-2",
+        "If the slope of a line is 3 and it passes through (1, 2), what is its equation?",
+        ["y = 3x + 1", "y = 3x - 1", "y = 2x + 3", "y = 3x + 2"],
+        "A",
+        "Use y − 2 = 3(x − 1) to get y = 3x − 1? Wait, check: y = 3x - 1 + 2 = 3x + 1.",
+        "coordinate geometry",
+        "medium"
+      ),
+      createQuestion(
+        "jee-main-math-3",
+        "If x² = 49, what are the possible values of x?",
+        ["7 only", "−7 only", "7 or −7", "0"],
+        "C",
+        "Both 7 and -7 satisfy x² = 49.",
+        "quadratic equations",
+        "easy"
+      ),
+      createQuestion(
+        "jee-main-math-4",
+        "What is the derivative of f(x) = x²?",
+        ["2x", "x", "x²", "1"],
+        "A",
+        "The derivative of x² is 2x.",
+        "calculus",
+        "medium"
+      ),
+      createQuestion(
+        "jee-main-math-5",
+        "The pairs (2, 4) and (5, 10) lie on the same line through the origin. What is the slope of this line?",
+        ["2", "3", "4", "5"],
+        "A",
+        "Slope = rise/run = 4/2 = 2 and also 10/5 = 2.",
+        "coordinate geometry",
+        "medium"
+      ),
+      createQuestion(
+        "jee-main-math-6",
+        "If a = 2 and b = 3, what is the value of a² + b²?",
+        ["5", "10", "13", "25"],
+        "C",
+        "2² + 3² = 4 + 9 = 13.",
+        "algebra",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "jee-advanced-mixed-set-1",
+    slug: "jee-advanced-mixed-practice-set-1",
+    category: "engineering-entrance",
+    title: "JEE Advanced Mixed Practice Set 1",
+    description:
+      "Pattern-based JEE Advanced practice with a mix of physics, chemistry, and mathematics questions.",
+    examType: "JEE Advanced",
+    examSlug: "jee-advanced",
+    examName: "JEE Advanced",
+    sectionLabel: "Mixed Practice Set",
+    level: "advanced",
+    questionCount: 6,
+    estimatedMinutes: 25,
+    seoTitle:
+      "JEE Advanced Mixed Practice Questions – Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice original, pattern-based JEE Advanced questions with answer explanations. This set mixes physics, chemistry, and math problems.",
+    keywords: [
+      "JEE Advanced practice questions",
+      "JEE Advanced mixed set",
+      "advanced engineering entrance",
+      "physics chemistry math practice",
+      "original JEE Advanced practice",
+    ],
+    intro:
+      "Use this set for pattern-based JEE Advanced preparation with a mix of subjects and explanation-driven practice.",
+    isOriginal: true,
+    isLive: true,
+    questions: [
+      createQuestion(
+        "jee-adv-1",
+        "If sinθ = 3/5 and θ is acute, what is cosθ?",
+        ["4/5", "3/4", "5/3", "1/5"],
+        "A",
+        "For an acute angle, cosθ = √(1 − sin²θ) = √(1 − 9/25) = 4/5.",
+        "trigonometry",
+        "hard"
+      ),
+      createQuestion(
+        "jee-adv-2",
+        "Which compound is the conjugate base of acetic acid?",
+        ["CH3COOH", "CH3COO−", "HCO3−", "CH3CHO"],
+        "B",
+        "The conjugate base of acetic acid is the acetate ion CH3COO−.",
+        "organic chemistry",
+        "hard"
+      ),
+      createQuestion(
+        "jee-adv-3",
+        "A particle moves with displacement x = 2t² − 5t + 3. What is its acceleration?",
+        ["4 m/s²", "−5 m/s²", "4t − 5", "2 m/s²"],
+        "A",
+        "Acceleration is the second derivative of displacement: d²x/dt² = 4.",
+        "mechanics",
+        "medium"
+      ),
+      createQuestion(
+        "jee-adv-4",
+        "Which of these matrices is singular?",
+        ["[[1,0],[0,1]]", "[[1,2],[2,4]]", "[[2,0],[0,2]]", "[[0,1],[1,0]]"],
+        "B",
+        "The determinant of [[1,2],[2,4]] is 1×4 − 2×2 = 0, so it is singular.",
+        "linear algebra",
+        "hard"
+      ),
+      createQuestion(
+        "jee-adv-5",
+        "If a solution has pH 3, its hydrogen ion concentration is 10⁻³ M. What is its hydroxide ion concentration?",
+        ["10⁻¹ M", "10⁻³ M", "10⁻¹¹ M", "10⁻⁷ M"],
+        "C",
+        "Kw = 10⁻¹⁴, so [OH−] = 10⁻¹¹ M.",
+        "physical chemistry",
+        "hard"
+      ),
+      createQuestion(
+        "jee-adv-6",
+        "A circle has radius 5. What is the length of an arc subtended by a 60° angle?",
+        ["(5π)/3", "(π)/3", "(10π)/3", "(5π)/6"],
+        "A",
+        "Arc length = θ (in radians) × r = (π/3) × 5 = 5π/3.",
+        "geometry",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "comedk-math-set-1",
+    slug: "comedk-mathematics-practice-set-1",
+    category: "engineering-entrance",
+    title: "COMEDK Mathematics Practice Set 1",
+    description:
+      "Original COMEDK-style math questions focused on algebra, geometry, and arithmetic reasoning.",
+    examType: "COMEDK",
+    examSlug: "comedk",
+    examName: "COMEDK",
+    sectionLabel: "Mathematics Practice Set",
+    level: "intermediate",
+    questionCount: 6,
+    estimatedMinutes: 18,
+    seoTitle:
+      "COMEDK Mathematics Practice Questions – Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice original COMEDK mathematics questions with answers and explanations. This set supports pattern-based preparation for COMEDK aspirants.",
+    keywords: [
+      "COMEDK math practice",
+      "COMEDK questions",
+      "mathematics practice set",
+      "engineering entrance COMEDK",
+      "original COMEDK practice",
+    ],
+    intro:
+      "Practice these original math questions to improve speed and accuracy for COMEDK-style exam preparation.",
+    isOriginal: true,
+    isLive: true,
+    questions: [
+      createQuestion(
+        "comedk-math-1",
+        "If x + 3 = 8, what is the value of x?",
+        ["3", "4", "5", "6"],
+        "C",
+        "Subtract 3 from both sides to get x = 5.",
+        "algebra",
+        "easy"
+      ),
+      createQuestion(
+        "comedk-math-2",
+        "What is the area of a rectangle with length 7 and width 4?",
+        ["11", "28", "14", "22"],
+        "B",
+        "Area = length × width = 7 × 4 = 28.",
+        "geometry",
+        "easy"
+      ),
+      createQuestion(
+        "comedk-math-3",
+        "The ratio of boys to girls is 3:2. If there are 15 boys, how many girls are there?",
+        ["10", "12", "8", "9"],
+        "A",
+        "For ratio 3:2, girls = (2/3) × 15 = 10.",
+        "ratio",
+        "medium"
+      ),
+      createQuestion(
+        "comedk-math-4",
+        "Solve for y: 2y − 4 = 10.",
+        ["6", "7", "8", "5"],
+        "B",
+        "Add 4 to get 2y = 14 then y = 7.",
+        "algebra",
+        "medium"
+      ),
+      createQuestion(
+        "comedk-math-5",
+        "A right-angled triangle has legs 3 and 4. What is the hypotenuse?",
+        ["5", "6", "7", "8"],
+        "A",
+        "Pythagoras gives hypotenuse √(3² + 4²) = 5.",
+        "geometry",
+        "easy"
+      ),
+      createQuestion(
+        "comedk-math-6",
+        "If a number is increased by 20% and then decreased by 20%, the final value is:",
+        ["Same as original", "4% less", "2% less", "4% more"],
+        "B",
+        "A 20% increase followed by a 20% decrease results in 4% net decrease.",
+        "percentages",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "wbjee-math-set-1",
+    slug: "wbjee-mathematics-practice-set-1",
+    category: "engineering-entrance",
+    title: "WBJEE Mathematics Practice Set 1",
+    description:
+      "Original WBJEE-style math questions for algebra, functions, and calculation speed.",
+    examType: "WBJEE",
+    examSlug: "wbjee",
+    examName: "WBJEE",
+    sectionLabel: "Mathematics Practice Set",
+    level: "intermediate",
+    questionCount: 6,
+    estimatedMinutes: 18,
+    seoTitle:
+      "WBJEE Mathematics Practice Questions – Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice original WBJEE mathematics questions with answers and explanations. This set focuses on algebra, geometry, and basic calculation skills.",
+    keywords: [
+      "WBJEE math practice",
+      "WBJEE mathematics questions",
+      "math practice set",
+      "WBJEE problems",
+      "original WBJEE practice",
+    ],
+    intro:
+      "Use this set to strengthen WBJEE mathematics preparation with original questions and solution explanations.",
+    isOriginal: true,
+    isLive: true,
+    questions: [
+      createQuestion(
+        "wbjee-math-1",
+        "What is 15% of 200?",
+        ["25", "30", "35", "40"],
+        "B",
+        "15% of 200 is 30.",
+        "percentages",
+        "easy"
+      ),
+      createQuestion(
+        "wbjee-math-2",
+        "If y = 2x + 3 and x = 2, what is y?",
+        ["5", "6", "7", "8"],
+        "C",
+        "Substitute x = 2: y = 2 × 2 + 3 = 7.",
+        "algebra",
+        "easy"
+      ),
+      createQuestion(
+        "wbjee-math-3",
+        "If the perimeter of a square is 20 cm, what is the side length?",
+        ["4 cm", "5 cm", "6 cm", "8 cm"],
+        "B",
+        "Side length = perimeter / 4 = 5 cm.",
+        "geometry",
+        "medium"
+      ),
+      createQuestion(
+        "wbjee-math-4",
+        "Which value is equal to 3² × 3³?",
+        ["3⁵", "3⁶", "3⁴", "3⁷"],
+        "A",
+        "When multiplying powers with same base, add exponents: 3² × 3³ = 3⁵.",
+        "algebra",
+        "easy"
+      ),
+      createQuestion(
+        "wbjee-math-5",
+        "Which of these sets of numbers is in arithmetic progression?",
+        ["2, 4, 8", "3, 6, 9", "5, 8, 11", "1, 2, 4"],
+        "C",
+        "The difference is constant: 8 − 5 = 3 and 11 − 8 = 3.",
+        "sequence",
+        "medium"
+      ),
+      createQuestion(
+        "wbjee-math-6",
+        "What is the product of 4 and 0.25?",
+        ["1", "0.5", "0.25", "2"],
+        "A",
+        "4 × 0.25 = 1.",
+        "arithmetic",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "wbjee-pc-set-1",
+    slug: "wbjee-physics-chemistry-practice-set-1",
+    category: "engineering-entrance",
+    title: "WBJEE Physics and Chemistry Practice Set 1",
+    description:
+      "Original WBJEE-style practice set for physics and chemistry with balanced questions and answer explanations.",
+    examType: "WBJEE",
+    examSlug: "wbjee",
+    examName: "WBJEE",
+    sectionLabel: "Physics & Chemistry Practice Set",
+    level: "intermediate",
+    questionCount: 6,
+    estimatedMinutes: 18,
+    seoTitle:
+      "WBJEE Physics and Chemistry Practice Questions – Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice original WBJEE physics and chemistry questions with answers and explanations. This set supports pattern-based preparation for category 2 and 3 questions.",
+    keywords: [
+      "WBJEE physics practice",
+      "WBJEE chemistry practice",
+      "WBJEE question set",
+      "physics chemistry practice",
+      "original WBJEE practice",
+    ],
+    intro:
+      "Practice original WBJEE-style questions in physics and chemistry to develop exam familiarity and conceptual clarity.",
+    isOriginal: true,
+    isLive: true,
+    questions: [
+      createQuestion(
+        "wbjee-pc-1",
+        "In a chemical reaction, which of these is a physical change?",
+        ["Rusting of iron", "Melting of ice", "Combustion of petrol", "Formation of salt"],
+        "B",
+        "Melting of ice is a physical change because the substance remains water.",
+        "chemistry",
+        "easy"
+      ),
+      createQuestion(
+        "wbjee-pc-2",
+        "A current of 2 A passes through a conductor for 3 seconds. How much charge flows?",
+        ["2 C", "3 C", "5 C", "6 C"],
+        "D",
+        "Charge = current × time = 2 × 3 = 6 coulombs.",
+        "electricity",
+        "medium"
+      ),
+      createQuestion(
+        "wbjee-pc-3",
+        "Which molecule is polar?",
+        ["CO2", "H2", "H2O", "N2"],
+        "C",
+        "Water is polar because of its bent shape and unequal electron distribution.",
+        "chemistry",
+        "medium"
+      ),
+      createQuestion(
+        "wbjee-pc-4",
+        "Which of these is a vector quantity?",
+        ["Mass", "Speed", "Force", "Temperature"],
+        "C",
+        "Force has both magnitude and direction, so it is a vector.",
+        "physics",
+        "easy"
+      ),
+      createQuestion(
+        "wbjee-pc-5",
+        "What is the chemical formula of water?",
+        ["H2", "O2", "H2O", "CO2"],
+        "C",
+        "Water is H2O.",
+        "chemistry",
+        "easy"
+      ),
+      createQuestion(
+        "wbjee-pc-6",
+        "A body weighing 10 N is held stationary. What is the net force on the body?",
+        ["10 N downward", "10 N upward", "0 N", "Cannot say"],
+        "C",
+        "When the body is stationary, forces balance and net force is 0 N.",
+        "mechanics",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "kcet-math-set-1",
+    slug: "kcet-mathematics-practice-set-1",
+    category: "engineering-entrance",
+    title: "KCET Mathematics Practice Set 1",
+    description:
+      "Original KCET mathematics questions with algebra, arithmetic, and coordinate geometry.",
+    examType: "KCET",
+    examSlug: "kcet",
+    examName: "KCET",
+    sectionLabel: "Mathematics Practice Set",
+    level: "intermediate",
+    questionCount: 6,
+    estimatedMinutes: 18,
+    seoTitle:
+      "KCET Mathematics Practice Questions – Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice original KCET mathematics questions with answers and explanations. This set helps you build accuracy for paper-based entrance preparation.",
+    keywords: [
+      "KCET math practice",
+      "KCET mathematics questions",
+      "KCET practice set",
+      "engineering entrance KCET",
+      "original KCET practice",
+    ],
+    intro:
+      "Practice this KCET math set to improve speed and precision in algebra and coordinate geometry.",
+    isOriginal: true,
+    isLive: true,
+    questions: [
+      createQuestion(
+        "kcet-math-1",
+        "What is the value of 7 × 8?",
+        ["48", "54", "56", "64"],
+        "C",
+        "7 × 8 = 56.",
+        "arithmetic",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-math-2",
+        "If x = 3 and y = 4, what is x² + y²?",
+        ["12", "25", "7", "24"],
+        "B",
+        "x² + y² = 9 + 16 = 25.",
+        "algebra",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-math-3",
+        "A line passes through points (0, 0) and (2, 2). What is its slope?",
+        ["1", "2", "0", "−1"],
+        "A",
+        "Slope = (2 − 0)/(2 − 0) = 1.",
+        "coordinate geometry",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-math-4",
+        "What is the perimeter of a square with side 5 cm?",
+        ["20 cm", "25 cm", "10 cm", "15 cm"],
+        "A",
+        "Perimeter = 4 × side = 20 cm.",
+        "geometry",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-math-5",
+        "Which number is a prime number?",
+        ["9", "11", "12", "15"],
+        "B",
+        "11 is prime because it has only two distinct positive divisors.",
+        "number theory",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-math-6",
+        "What is 50% of 80?",
+        ["30", "40", "50", "60"],
+        "B",
+        "50% of 80 is 40.",
+        "percentages",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "kcet-physics-set-1",
+    slug: "kcet-physics-practice-set-1",
+    category: "engineering-entrance",
+    title: "KCET Physics Practice Set 1",
+    description:
+      "Original KCET-style physics questions covering motion, force, and basic electricity.",
+    examType: "KCET",
+    examSlug: "kcet",
+    examName: "KCET",
+    sectionLabel: "Physics Practice Set",
+    level: "intermediate",
+    questionCount: 6,
+    estimatedMinutes: 18,
+    seoTitle:
+      "KCET Physics Practice Questions – Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice original KCET physics questions with answers and explanations. This set is useful for paper-based exam preparation.",
+    keywords: [
+      "KCET physics practice",
+      "KCET physics questions",
+      "physics practice set",
+      "engineering entrance KCET",
+      "original KCET physics",
+    ],
+    intro:
+      "Practice this KCET physics set to build comfort with motion, forces, and electricity questions.",
+    isOriginal: true,
+    isLive: true,
+    questions: [
+      createQuestion(
+        "kcet-phys-1",
+        "A ball is thrown upward. Which force acts on it while rising?",
+        ["Friction", "Gravity", "Magnetic force", "Tension"],
+        "B",
+        "Gravity acts downward on the ball throughout its motion.",
+        "mechanics",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-phys-2",
+        "If a current of 4 A flows for 5 seconds, how much charge passes through a wire?",
+        ["20 C", "9 C", "1.25 C", "40 C"],
+        "A",
+        "Charge = current × time, so 4 × 5 = 20 C.",
+        "electricity",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-phys-3",
+        "Which property does not change when light enters a new medium?",
+        ["Speed", "Wavelength", "Frequency", "Direction"],
+        "C",
+        "Frequency remains constant as light passes between media.",
+        "optics",
+        "medium"
+      ),
+      createQuestion(
+        "kcet-phys-4",
+        "What is the SI unit of force?",
+        ["Newton", "Joule", "Watt", "Pascal"],
+        "A",
+        "Force is measured in newtons.",
+        "mechanics",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-phys-5",
+        "A 5 kg object is in free fall near Earth's surface. What is its weight approximately? (g = 10 m/s²)",
+        ["5 N", "10 N", "50 N", "500 N"],
+        "C",
+        "Weight = mg = 5 × 10 = 50 N.",
+        "mechanics",
+        "medium"
+      ),
+      createQuestion(
+        "kcet-phys-6",
+        "Which of the following quantities is a scalar?",
+        ["Velocity", "Acceleration", "Momentum", "Speed"],
+        "D",
+        "Speed is scalar because it has magnitude only.",
+        "physics",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "kcet-chemistry-set-1",
+    slug: "kcet-chemistry-practice-set-1",
+    category: "engineering-entrance",
+    title: "KCET Chemistry Practice Set 1",
+    description:
+      "Original KCET chemistry questions focused on acids, bases, atomic structure, and reactions.",
+    examType: "KCET",
+    examSlug: "kcet",
+    examName: "KCET",
+    sectionLabel: "Chemistry Practice Set",
+    level: "intermediate",
+    questionCount: 6,
+    estimatedMinutes: 18,
+    seoTitle:
+      "KCET Chemistry Practice Questions – Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice original KCET chemistry questions with answers and explanations. This set covers core chemistry concepts for exam preparation.",
+    keywords: [
+      "KCET chemistry practice",
+      "KCET chemistry questions",
+      "chemistry practice set",
+      "engineering entrance KCET",
+      "original KCET chemistry",
+    ],
+    intro:
+      "Use this KCET chemistry set to practice solid question solving and concept review in basic chemistry topics.",
+    isOriginal: true,
+    isLive: true,
+    questions: [
+      createQuestion(
+        "kcet-chem-1",
+        "Which of the following is a noble gas?",
+        ["Oxygen", "Nitrogen", "Helium", "Chlorine"],
+        "C",
+        "Helium is a noble gas with stable electron configuration.",
+        "periodic trends",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-chem-2",
+        "What is the pH of a strong acid solution?",
+        ["2", "7", "12", "14"],
+        "A",
+        "Strong acid solutions have low pH values, typically below 3.",
+        "physical chemistry",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-chem-3",
+        "Which element has atomic number 1?",
+        ["Helium", "Hydrogen", "Oxygen", "Carbon"],
+        "B",
+        "Hydrogen has atomic number 1.",
+        "atomic structure",
+        "easy"
+      ),
+      createQuestion(
+        "kcet-chem-4",
+        "Which substance is a base?",
+        ["HCl", "NaOH", "CO2", "CH4"],
+        "B",
+        "Sodium hydroxide is a base.",
+        "acid-base chemistry",
+        "medium"
+      ),
+      createQuestion(
+        "kcet-chem-5",
+        "What gas is given off when baking soda reacts with vinegar?",
+        ["Oxygen", "Carbon dioxide", "Hydrogen", "Nitrogen"],
+        "B",
+        "Carbon dioxide gas is released in that reaction.",
+        "chemical reactions",
+        "medium"
+      ),
+      createQuestion(
+        "kcet-chem-6",
+        "Which of these is an ionic compound?",
+        ["CO2", "H2O", "NaCl", "C6H12O6"],
+        "C",
+        "Sodium chloride is an ionic compound.",
+        "chemical bonding",
+        "medium"
+      ),
+    ],
+  },
 ];
 
 export function getPracticeCategory(slug: string) {
   return practiceCategories.find((item) => item.slug === slug);
+}
+
+export function getEngineeringExamRules() {
+  return engineeringExamRules;
+}
+
+export function getEngineeringExamRuleBySlug(
+  examSlug: "jee-main" | "jee-advanced" | "comedk" | "wbjee" | "kcet"
+) {
+  return engineeringExamRules.find((item) => item.examSlug === examSlug);
+}
+
+export function getEngineeringPracticeGroups() {
+  return engineeringExamRules.map((exam) => ({
+    ...exam,
+    sets: practiceSets.filter(
+      (set) =>
+        set.category === "engineering-entrance" &&
+        set.examSlug === exam.examSlug &&
+        set.isLive !== false
+    ),
+  }));
+}
+
+export function getPracticeSetBySlug(slug: string) {
+  return practiceSets.find((item) => item.slug === slug);
 }
 
 export function getPracticeSet(category: string, setSlug: string) {

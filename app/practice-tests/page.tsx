@@ -7,9 +7,10 @@ import {
 } from "@/data/practiceTests";
 
 export const metadata: Metadata = {
-  title: "Practice Tests",
+  title:
+    "Free Practice Tests for Engineering Entrance, IELTS, CTET, SSC and Railway",
   description:
-    "Free practice tests for IELTS, engineering entrance, CTET, SSC, and Railway with answers and explanations.",
+    "Take free original practice tests with instant scoring and explanations for JEE Main, JEE Advanced, COMEDK, WBJEE, KCET, IELTS, CTET, SSC, and Railway exams.",
 };
 
 export default function PracticeTestsHubPage() {
