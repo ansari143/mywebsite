@@ -10,18 +10,33 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { setId } = await params;
+  const { category, setId } = await params;
   const set = getPracticeSetBySlug(setId);
+  const govSet = getGovPracticeSet(category, setId);
 
-  if (!set) {
+  if (govSet) {
+    if (!govSet.isLive) {
+      return {
+        title: `${govSet.title} - Coming Soon`,
+        description: `Practice set for ${govSet.title} is under development.`,
+        robots: "noindex",
+      };
+    }
     return {
-      title: "Practice Test",
+      title: govSet.title,
+      description: `Practice ${govSet.title} with ${govSet.questionCount} questions.`,
+    };
+  }
+
+  if (set) {
+    return {
+      title: `Start ${set.title}`,
+      description: `Begin your ${set.examType} practice test with ${set.questionCount} questions.`,
     };
   }
 
   return {
-    title: `Start ${set.title}`,
-    description: `Begin your ${set.examType} practice test with ${set.questionCount} questions.`,
+    title: "Practice Test",
   };
 }
 
