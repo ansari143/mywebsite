@@ -35,11 +35,39 @@ export default async function PracticeCategoryPage({ params }: Props) {
   const { category } = await params;
   const categoryData = getPracticeCategory(category);
   const govCategoryData = getGovPracticeCategoryBySlug(category);
+  const isEngineering = category === "engineering-entrance";
 
   if (!categoryData && !govCategoryData) return notFound();
 
   const isGov = !!govCategoryData;
   const data = govCategoryData || categoryData!;
+
+  const engineeringFaqs = [
+    {
+      q: "Which exam should I prepare for first: JEE Main, JEE Advanced, or state CET exams?",
+      a: "Start with JEE Main level fundamentals because it builds core PCM confidence. Move to JEE Advanced after you can consistently solve moderate JEE Main problems. Choose COMEDK, WBJEE, or KCET practice in parallel if those exams match your target colleges and state preferences.",
+    },
+    {
+      q: "How should I use these practice sets if I am in Class 11 or Class 12?",
+      a: "Use a three-phase cycle: foundation practice first, exam-specific sets second, and timed revision rounds third. Focus on accuracy in the first two weeks, then increase speed while keeping an error notebook for repeated weak areas.",
+    },
+    {
+      q: "How often should I take practice tests each week?",
+      a: "For most students, 4 to 6 short sessions per week works well: two concept sessions, two timed sessions, and one or two revision sessions. Keep at least one day for analysis so mistakes become learning points.",
+    },
+    {
+      q: "Are these official exam papers?",
+      a: "No. These are original, pattern-based practice questions created for learning and self-assessment. Always verify final exam rules, syllabus, and notices from official exam websites.",
+    },
+    {
+      q: "What score should I target before moving to harder sets?",
+      a: "A practical benchmark is 70%+ accuracy in beginner sets and 60%+ in timed exam-style sets before increasing difficulty. If accuracy drops below this, return to topic-wise practice for one week.",
+    },
+    {
+      q: "I am weak in one subject. Should I still do mixed sets?",
+      a: "Yes, but keep the ratio balanced. Spend around 60% of practice time on your weak subject and 40% on mixed sets to maintain overall exam rhythm and confidence.",
+    },
+  ];
 
   return (
     <div className="space-y-8">
@@ -53,6 +81,19 @@ export default async function PracticeCategoryPage({ params }: Props) {
         <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
           {data.description}
         </p>
+        {isEngineering && (
+          <div className="mt-5 max-w-4xl space-y-3 text-sm leading-7 text-slate-700">
+            <p>
+              This page is designed for students who want practical engineering entrance preparation without guesswork.
+              You can start from beginner-level mixed questions, then move into exam-specific tracks like JEE Main,
+              JEE Advanced, COMEDK, WBJEE, and KCET.
+            </p>
+            <p>
+              Every practice set is built for step-by-step learning: attempt, review explanations, and identify your weak
+              topics before taking the next set. This approach helps you improve consistency, not just one-time scores.
+            </p>
+          </div>
+        )}
         {isGov && (
           <div className="mt-4 flex flex-wrap gap-2">
             {govCategoryData!.audience.map((aud) => (
@@ -63,6 +104,61 @@ export default async function PracticeCategoryPage({ params }: Props) {
           </div>
         )}
       </section>
+
+      {isEngineering && (
+        <section className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+            <h2 className="text-xl font-bold text-emerald-900">Who should choose this</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
+              <li>Class 11-12 students preparing for PCM-based engineering entrance exams.</li>
+              <li>Drop-year aspirants who need structured revision with short timed practice.</li>
+              <li>Students who want explanation-based learning before full-length mocks.</li>
+              <li>Beginners who are not sure which exam path to prioritize yet.</li>
+            </ul>
+          </div>
+          <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+            <h2 className="text-xl font-bold text-rose-900">Who should avoid this format</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
+              <li>Students looking only for official previous-year papers in raw PDF format.</li>
+              <li>Aspirants who already score high and need only advanced full-length mocks.</li>
+              <li>Learners who are not ready to review mistakes after every practice round.</li>
+              <li>Students aiming for non-PCM career tracks that need different test patterns.</li>
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {isEngineering && (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-bold text-slate-900">Step-by-step practice roadmap</h2>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 1: Foundation (Week 1-2)</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Start with beginner sets to stabilize algebra, arithmetic speed, mechanics basics, and chemistry fundamentals.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 2: Exam Track (Week 3-6)</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Pick your target exam track and solve exam-style sets regularly. Track accuracy separately for each subject.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 3: Timed Rounds (Week 7-8)</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Attempt sets under strict time limits. Build decision speed: skip, solve, review, and attempt strategy.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 4: Revision Loop (Ongoing)</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Maintain an error log by topic. Re-attempt weak-topic sets after 3-5 days to convert mistakes into retention.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {isGov && (
         <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -299,6 +395,38 @@ export default async function PracticeCategoryPage({ params }: Props) {
         </div>
       </section>
 
+      {isEngineering && (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+          <div className="mt-4 space-y-3">
+            {engineeringFaqs.map((faq) => (
+              <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
+                <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {isEngineering && (
+        <section className="rounded-3xl border border-blue-200 bg-blue-50 p-6">
+          <h2 className="text-xl font-bold text-blue-950">Content trust and update policy</h2>
+          <div className="mt-3 space-y-2 text-sm leading-7 text-blue-900">
+            <p>
+              Practice questions are original and created for educational self-assessment. They are not official question papers.
+            </p>
+            <p>
+              Exam pattern references are reviewed periodically, and students should still verify final details from official
+              exam portals before making application or preparation decisions.
+            </p>
+            <p>
+              Last reviewed: April 2026. If you find a pattern mismatch, contact us and we will update it.
+            </p>
+          </div>
+        </section>
+      )}
+
       {categoryData && !isGov && (
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="text-xl font-bold text-slate-900">
@@ -309,13 +437,29 @@ export default async function PracticeCategoryPage({ params }: Props) {
             right direction. Use both together on Nishaglobal Education.
           </p>
 
-          <div className="mt-6">
+          <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href={categoryData.ctaHref}
               className="inline-block rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50"
             >
               {categoryData.ctaLabel}
             </Link>
+            {isEngineering && (
+              <>
+                <Link
+                  href="/study-abroad"
+                  className="inline-block rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50"
+                >
+                  Explore Study Abroad Paths
+                </Link>
+                <Link
+                  href="/resources"
+                  className="inline-block rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50"
+                >
+                  Browse Student Resources
+                </Link>
+              </>
+            )}
           </div>
         </section>
       )}

@@ -1,5 +1,20 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { tests } from "@/data/tests";
+
+export const metadata: Metadata = {
+  title: "Free Career Tests | Find Your Best Academic and Career Path | Nishaglobal Education",
+  description:
+    "Take free career tests for engineering, medical, government jobs, aviation, and more. Get instant scores, topic-wise insights, and personalized guidance to choose the right stream.",
+  alternates: {
+    canonical: "https://nishaglobaleducation.com/tests",
+  },
+};
+
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+});
 
 export default function TestsHub() {
   return (

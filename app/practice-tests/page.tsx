@@ -185,24 +185,24 @@ export default function PracticeTestsHubPage() {
       </section>
 
       <section className="rounded-3xl border border-gray-200 bg-white p-6 sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
-        <div className="mt-6 space-y-4">
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
-            <h3 className="text-base font-semibold text-slate-900">Are these official practice tests?</h3>
-            <p className="mt-2 text-sm text-slate-600">No, these are original practice tests designed to simulate exam conditions. They help you prepare but are not affiliated with official exam bodies.</p>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
-            <h3 className="text-base font-semibold text-slate-900">Can I review my answers after submitting?</h3>
-            <p className="mt-2 text-sm text-slate-600">Yes, after completing any test, you can review all questions with correct answers, explanations, and your performance analysis.</p>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
-            <h3 className="text-base font-semibold text-slate-900">How often are new tests added?</h3>
-            <p className="mt-2 text-sm text-slate-600">We regularly add new question sets based on the latest exam patterns. Check back frequently for updated content.</p>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
-            <h3 className="text-base font-semibold text-slate-900">Are practice tests available in multiple languages?</h3>
-            <p className="mt-2 text-sm text-slate-600">English is the primary language. Some government exam categories include bilingual support for regional language speakers.</p>
-          </div>
+        <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+        <div className="mt-6 space-y-3">
+          <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <summary className="cursor-pointer text-sm font-semibold text-slate-900">Are these official practice tests?</summary>
+            <p className="mt-3 text-sm leading-7 text-slate-600">No, these are original practice tests designed to simulate exam conditions. They help you prepare but are not affiliated with official exam bodies.</p>
+          </details>
+          <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <summary className="cursor-pointer text-sm font-semibold text-slate-900">Can I review my answers after submitting?</summary>
+            <p className="mt-3 text-sm leading-7 text-slate-600">Yes, after completing any test, you can review all questions with correct answers, explanations, and your performance analysis.</p>
+          </details>
+          <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <summary className="cursor-pointer text-sm font-semibold text-slate-900">How often are new tests added?</summary>
+            <p className="mt-3 text-sm leading-7 text-slate-600">We regularly add new question sets based on the latest exam patterns. Check back frequently for updated content.</p>
+          </details>
+          <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <summary className="cursor-pointer text-sm font-semibold text-slate-900">Are practice tests available in multiple languages?</summary>
+            <p className="mt-3 text-sm leading-7 text-slate-600">English is the primary language. Some government exam categories include bilingual support for regional language speakers.</p>
+          </details>
         </div>
       </section>
 

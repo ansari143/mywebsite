@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import SeoBlogArticle from "@/components/SeoBlogArticle";
 
 export const metadata: Metadata = {
-  title: "Beginner Math Physics Chemistry Practice for Engineering",
+  title: "Beginner Math Physics Chemistry Practice for Engineering | Nishaglobal Education",
   description:
-    "Beginner engineering practice for math, physics, and chemistry with answers and explanations.",
+    "Beginner engineering practice for math, physics, and chemistry with answers and explanations. Build your foundation before JEE Main, COMEDK, WBJEE, or KCET preparation.",
+  alternates: {
+    canonical: "https://nishaglobaleducation.com/blog/beginner-engineering-practice-math-physics-chemistry",
+  },
 };
 
 export const generateViewport = () => ({
@@ -74,6 +77,18 @@ export default function BeginnerEngineeringPracticePage() {
       ctaPrimaryLabel="Open Engineering Practice"
       ctaSecondaryHref="/tests/engineering"
       ctaSecondaryLabel="Take Career Test"
+      faqs={[
+        { question: "Why is math so important for engineering entrance?", answer: "Mathematics forms the backbone of all engineering entrance exams. Algebra, coordinate geometry, calculus, and trigonometry together account for roughly one-third to half of total marks in JEE Main and Advanced. Strong math foundation also makes physics problem-solving faster and more accurate." },
+        { question: "How do beginners start chemistry for engineering entrance?", answer: "Start with NCERT Class 11 and 12 chemistry for conceptual clarity. Physical chemistry has the strongest overlap with math skills. Inorganic chemistry relies more on memory of reactions and periodic trends. Organic chemistry benefits most from understanding mechanisms rather than memorizing reactions blindly." },
+        { question: "What is the best way to remember physics formulas for entrance exams?", answer: "Understand the derivation or meaning behind each formula rather than memorizing it mechanically. When you understand why F = ma, you are less likely to confuse or forget it. Practice applying formulas in varied question types, not just standard problems." },
+        { question: "How should beginners manage study time across three subjects?", answer: "A common effective split is 40% math, 35% physics, and 25% chemistry in early preparation. Adjust this as you identify weak areas. Do not spend all time on your strongest subject. Progress in weak areas has a greater impact on your overall score than marginal improvement in areas where you are already strong." },
+      ]}
+      trustInfo={{
+        author: "Nishaglobal Education editorial team",
+        reviewedBy: "Engineering entrance preparation specialists",
+        lastUpdated: "April 2026",
+        disclaimer: "Practice questions are original and for educational self-assessment. Not affiliated with NTA, COMEDK, WBJEEB, or KEA. Verify exam patterns from official sources.",
+      }}
     />
   );
 }

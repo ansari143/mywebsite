@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import SeoBlogArticle from "@/components/SeoBlogArticle";
 
 export const metadata: Metadata = {
-  title: "Free IELTS Practice Questions with Answers",
+  title: "Free IELTS Practice Questions with Answers | Nishaglobal Education",
   description:
-    "Practice free IELTS questions with answers and explanations. Improve grammar, vocabulary, and reading skills step by step.",
+    "Practice free IELTS questions with answers and explanations. Improve grammar, vocabulary, and reading skills with sample questions and step-by-step explanations.",
+  alternates: {
+    canonical: "https://nishaglobaleducation.com/blog/ielts-practice-questions-with-answers",
+  },
 };
 
 export const generateViewport = () => ({
@@ -85,6 +88,19 @@ export default function IELTSPracticeQuestionsPage() {
       ctaPrimaryLabel="Practice Full IELTS Sets"
       ctaSecondaryHref="/study-abroad"
       ctaSecondaryLabel="Explore Study Abroad"
+      faqs={[
+        { question: "How many sections does IELTS have?", answer: "IELTS has four sections: Listening, Reading, Writing, and Speaking. Academic and General Training tests share Listening and Speaking but differ in Reading and Writing tasks." },
+        { question: "What is a good IELTS score for study abroad?", answer: "Most universities require an overall band score of 6.0 to 7.5 depending on the program and country. UK universities often require 6.5 to 7.0 for postgraduate programs. Always check the specific university requirement." },
+        { question: "How long does IELTS preparation take?", answer: "Students with intermediate English usually need 2 to 4 months of consistent practice. Students starting from lower levels may need 4 to 6 months. Daily practice of 45 to 60 minutes is more effective than occasional long sessions." },
+        { question: "Can I improve my IELTS score by practicing grammar alone?", answer: "Grammar is important but only one part of the score. Vocabulary range, task achievement, coherence, and pronunciation also affect your band score. Combine grammar practice with full reading passages and listening exercises for better results." },
+        { question: "How often can I retake IELTS?", answer: "There is no limit on retakes. You can take IELTS as often as you like. However, most students benefit from at least 4 to 8 weeks of focused preparation between attempts to see meaningful improvement." },
+      ]}
+      trustInfo={{
+        author: "Nishaglobal Education editorial team",
+        reviewedBy: "English language and IELTS preparation specialists",
+        lastUpdated: "April 2026",
+        disclaimer: "These practice questions are original and for educational self-assessment only. They are not official IELTS materials. Always verify current exam format from the British Council or IDP IELTS website.",
+      }}
     />
   );
 }

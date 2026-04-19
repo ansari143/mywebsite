@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import SeoBlogArticle from "@/components/SeoBlogArticle";
 
 export const metadata: Metadata = {
-  title: "Engineering Entrance Questions with Answers",
+  title: "Engineering Entrance Questions with Answers | Nishaglobal Education",
   description:
-    "Practice engineering entrance questions with answers and explanations for math, physics, chemistry, and logic.",
+    "Practice engineering entrance questions with answers and explanations for math, physics, chemistry, and logical reasoning. Build your foundation for JEE Main, JEE Advanced, COMEDK, and state CETs.",
+  alternates: {
+    canonical: "https://nishaglobaleducation.com/blog/engineering-entrance-questions-with-answers",
+  },
 };
 
 export const generateViewport = () => ({
@@ -65,6 +68,19 @@ export default function EngineeringQuestionsPage() {
       ctaPrimaryLabel="Practice Engineering Sets"
       ctaSecondaryHref="/tests/engineering"
       ctaSecondaryLabel="Take Engineering Career Test"
+      faqs={[
+        { question: "Which subjects are most important for engineering entrance exams?", answer: "Mathematics is the most consistently weighted subject across JEE Main, JEE Advanced, COMEDK, WBJEE, and KCET. Physics follows closely. Chemistry tends to be more factual and can be improved faster with focused revision. Starting with math and physics fundamentals gives the strongest overall foundation." },
+        { question: "How many hours per day should I practice for JEE Main preparation?", answer: "Quality matters more than hours. 4 to 6 hours of focused daily study with regular breaks is more effective than longer but unfocused sessions. Include at least one subject-specific set per day, an error review session, and one mixed set per week to build exam pattern familiarity." },
+        { question: "Is it possible to crack JEE Main in 6 months from scratch?", answer: "Yes, with disciplined preparation, especially if you have strong math basics. Focus on NCERT concepts first, then practice previous-year-style questions, then move to mock tests. Six months is achievable for JEE Main qualifying scores if you start from Class 11 level fundamentals." },
+        { question: "What is the difference between JEE Main and JEE Advanced?", answer: "JEE Main is the national qualifying exam for NITs, IIITs, and GFTIs, and also the gateway to sit for JEE Advanced. JEE Advanced is for IIT admissions only and is significantly harder with more complex question formats. You must qualify JEE Main first before attempting JEE Advanced." },
+        { question: "Should I attempt all questions in engineering entrance exams?", answer: "Not always. JEE Main has negative marking, so skipping questions you're unsure about is often smarter than guessing. COMEDK and KCET have no negative marking, so attempting all questions makes sense there. Understand the marking scheme of your specific target exam before setting your attempt strategy." },
+      ]}
+      trustInfo={{
+        author: "Nishaglobal Education editorial team",
+        reviewedBy: "Engineering entrance preparation specialists",
+        lastUpdated: "April 2026",
+        disclaimer: "These practice questions are original and for educational self-assessment only. They are not official NTA, COMEDK, WBJEEB, or KEA question papers. Always verify exam patterns from official exam websites.",
+      }}
     />
   );
 }

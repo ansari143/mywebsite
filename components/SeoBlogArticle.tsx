@@ -14,6 +14,13 @@ type SectionItem = {
   qaItems?: QAItem[];
 };
 
+type TrustInfo = {
+  author?: string;
+  reviewedBy?: string;
+  lastUpdated?: string;
+  disclaimer?: string;
+};
+
 type SeoBlogArticleProps = {
   badge: string;
   title: string;
@@ -25,6 +32,8 @@ type SeoBlogArticleProps = {
   ctaPrimaryLabel: string;
   ctaSecondaryHref?: string;
   ctaSecondaryLabel?: string;
+  trustInfo?: TrustInfo;
+  faqs?: { question: string; answer: string }[];
 };
 
 export default function SeoBlogArticle({
@@ -38,6 +47,8 @@ export default function SeoBlogArticle({
   ctaPrimaryLabel,
   ctaSecondaryHref,
   ctaSecondaryLabel,
+  trustInfo,
+  faqs,
 }: SeoBlogArticleProps) {
   return (
     <div className="space-y-8">
@@ -154,6 +165,34 @@ export default function SeoBlogArticle({
           )}
         </div>
       </section>
+
+      {faqs && faqs.length > 0 && (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
+          <div className="mt-5 space-y-3">
+            {faqs.map((faq) => (
+              <details key={faq.question} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.question}</summary>
+                <p className="mt-3 text-sm leading-7 text-slate-600">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {trustInfo && (
+        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-slate-900">Trust &amp; Transparency</h2>
+          <div className="mt-3 space-y-2 text-sm leading-7 text-slate-700">
+            {trustInfo.author && <p><span className="font-semibold">Author:</span> {trustInfo.author}</p>}
+            {trustInfo.reviewedBy && <p><span className="font-semibold">Reviewed by:</span> {trustInfo.reviewedBy}</p>}
+            {trustInfo.lastUpdated && <p><span className="font-semibold">Last updated:</span> {trustInfo.lastUpdated}</p>}
+            {trustInfo.disclaimer && (
+              <p className="mt-2 border-t border-amber-200 pt-3 italic text-slate-600">{trustInfo.disclaimer}</p>
+            )}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

@@ -282,7 +282,7 @@ export const practiceCategories: PracticeCategoryMeta[] = [
     title: "Engineering Entrance Practice Tests",
     shortTitle: "Engineering Entrance",
     description:
-      "Free engineering entrance practice sets covering math, physics, chemistry, logical reasoning, and beginner aptitude.",
+      "Free engineering entrance practice tests with original questions, exam-pattern guidance, and step-by-step preparation support for JEE Main, JEE Advanced, COMEDK, WBJEE, and KCET aspirants.",
     heroTitle: "Engineering Entrance Practice Questions",
     heroText:
       "Practice beginner-friendly entrance questions with original explanations across math, physics, chemistry, and logic.",
@@ -2798,7 +2798,7 @@ export const practiceSets: PracticeSet[] = [
     category: "engineering-entrance",
     title: "Engineering Entrance Practice Questions – Set 1",
     description:
-      "Beginner engineering entrance practice with math, physics, chemistry, and basic logical reasoning.",
+      "Foundation set to build confidence in core formulas, units, and beginner-level PCM reasoning before exam-specific preparation.",
     examType: "Engineering Entrance",
     level: "beginner",
     questionCount: 10,
@@ -2920,7 +2920,7 @@ export const practiceSets: PracticeSet[] = [
     category: "engineering-entrance",
     title: "Engineering Entrance Practice Questions – Set 2",
     description:
-      "Second beginner engineering entrance set focused on algebra, units, patterns, motion, and core science basics.",
+      "Speed-building set focused on algebra accuracy, pattern recognition, and quick concept application under short time pressure.",
     examType: "Engineering Entrance",
     level: "beginner",
     questionCount: 10,
@@ -3322,7 +3322,7 @@ export const practiceSets: PracticeSet[] = [
     category: "engineering-entrance",
     title: "Engineering Entrance Practice Questions – Set 3",
     description:
-      "English-only engineering entrance practice focused on math basics, physics concepts, chemistry symbols, and logical thinking.",
+      "Mixed practice set for strengthening physics-math transitions, quick calculations, and topic switching similar to real exam flow.",
     examType: "Engineering Entrance",
     level: "beginner",
     questionCount: 10,
@@ -3444,7 +3444,7 @@ export const practiceSets: PracticeSet[] = [
     category: "engineering-entrance",
     title: "Engineering Entrance Practice Questions – Set 4",
     description:
-      "English-only beginner engineering practice with equations, units, chemistry basics, geometry, and reasoning patterns.",
+      "Revision-oriented foundation set to identify weak topics early and prepare for timed JEE/CET style question attempts.",
     examType: "Engineering Entrance",
     level: "beginner",
     questionCount: 10,
