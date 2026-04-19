@@ -40,6 +40,7 @@ export default async function PracticeCategoryPage({ params }: Props) {
   const isIelts = category === "ielts";
   const isCtet = category === "ctet";
   const isSsc = category === "ssc";
+  const isRailway = category === "railway";
 
   if (!categoryData && !govCategoryData) return notFound();
 
@@ -48,6 +49,25 @@ export default async function PracticeCategoryPage({ params }: Props) {
   const ieltsGroups = isIelts ? getIeltsPracticeGroups() : [];
   const ieltsFoundationSets = isIelts
     ? getPracticeSetsByCategory(category).filter((set) => !set.practiceGroup)
+    : [];
+  const railwayTrackOrder = [
+    "RRB Group D CBT",
+    "RRB NTPC CBT-1",
+    "RRB ALP/Technician CBT-1",
+    "RRB Ticket Clerk / TT CBT",
+  ];
+  const railwayLiveSets = isRailway && govCategoryData
+    ? [...govCategoryData.sets.filter((set) => set.isLive)].sort((a, b) => {
+        const chapterA = railwayTrackOrder.findIndex((track) => a.title.includes(track));
+        const chapterB = railwayTrackOrder.findIndex((track) => b.title.includes(track));
+        const safeA = chapterA === -1 ? 999 : chapterA;
+        const safeB = chapterB === -1 ? 999 : chapterB;
+        if (safeA !== safeB) return safeA - safeB;
+
+        const aNumber = Number(a.slug.split("-").pop() || 0);
+        const bNumber = Number(b.slug.split("-").pop() || 0);
+        return aNumber - bNumber;
+      })
     : [];
 
   const engineeringFaqs = [
@@ -138,6 +158,25 @@ export default async function PracticeCategoryPage({ params }: Props) {
     },
   ];
 
+  const railwayFaqs = [
+    {
+      q: "Which Railway exam patterns are available on this page?",
+      a: "This page includes four official-style tracks with full-length mocks: RRB Group D CBT (100 questions, 90 minutes), RRB NTPC CBT-1 (100 questions, 90 minutes), RRB ALP/Technician CBT-1 (75 questions, 60 minutes), and RRB Ticket Clerk/TT pattern (100 questions, 90 minutes).",
+    },
+    {
+      q: "How many mocks are available per Railway pattern?",
+      a: "Each major pattern includes 5 full-length bilingual practice mocks, so you can build speed and consistency through repeated timed rounds instead of one-time attempts.",
+    },
+    {
+      q: "Should I start with Group D, NTPC, ALP, or TT mocks first?",
+      a: "Start with the pattern closest to your target post. If you are unsure, begin with Group D or NTPC to stabilize fundamentals, then move to ALP/Technician and TT tracks for pattern-specific preparation.",
+    },
+    {
+      q: "Are these official Railway previous-year papers?",
+      a: "No. These are original bilingual practice sets created for realistic pattern-based self-assessment. Always verify latest syllabus, normalization rules, and notices from the official RRB websites.",
+    },
+  ];
+
   return (
     <div className="space-y-8">
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
@@ -200,6 +239,19 @@ export default async function PracticeCategoryPage({ params }: Props) {
             <p>
               Follow a simple cycle: attempt, analyze, and revise. Improve accuracy in Reasoning and Quant first,
               then strengthen English and General Awareness consistency across weekly timed rounds in all three tracks.
+            </p>
+          </div>
+        )}
+        {isRailway && (
+          <div className="mt-5 max-w-4xl space-y-3 text-sm leading-7 text-slate-700">
+            <p>
+              This Railway page is built for practical RRB preparation with bilingual support and full-length
+              official-style tracks. You can practice Group D, NTPC CBT-1, ALP/Technician CBT-1, and
+              Ticket Clerk/TT patterns with realistic time limits.
+            </p>
+            <p>
+              Follow a simple loop: attempt under timer, analyze errors by section, and re-attempt weak areas.
+              This gives better score stability than random topic hopping before the exam.
             </p>
           </div>
         )}
@@ -381,6 +433,29 @@ export default async function PracticeCategoryPage({ params }: Props) {
         </section>
       )}
 
+      {isRailway && (
+        <section className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+            <h2 className="text-xl font-bold text-emerald-900">Who should choose this</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
+              <li>RRB aspirants targeting Group D, NTPC, ALP/Technician, or TT/Ticket Clerk posts.</li>
+              <li>Candidates who want bilingual practice with realistic exam timing pressure.</li>
+              <li>Students who need repeated full-length mocks instead of only short chapter tests.</li>
+              <li>Repeat aspirants focusing on speed, accuracy, and negative-marking control.</li>
+            </ul>
+          </div>
+          <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+            <h2 className="text-xl font-bold text-rose-900">Who should avoid this format</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
+              <li>Candidates looking only for copied official previous-year Railway question papers.</li>
+              <li>Users who skip answer analysis and only attempt mocks without review.</li>
+              <li>Students preparing only descriptive or interview-only stages at this moment.</li>
+              <li>Learners expecting shortcut preparation without section-wise discipline.</li>
+            </ul>
+          </div>
+        </section>
+      )}
+
       {isSsc && (
         <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
           <h2 className="text-2xl font-bold text-slate-900">Step-by-step SSC practice roadmap</h2>
@@ -413,6 +488,38 @@ export default async function PracticeCategoryPage({ params }: Props) {
         </section>
       )}
 
+      {isRailway && (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-bold text-slate-900">Step-by-step Railway practice roadmap</h2>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 1: Pick your target pattern</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Choose Group D, NTPC, ALP/Technician, or Ticket Clerk/TT based on your target recruitment notice and post preference.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 2: Start with timed full mocks</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Attempt full papers under exact pattern timing (60 or 90 minutes) to build exam pacing and section switching skill.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 3: Analyze section error types</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Separate errors into concept gaps, calculation mistakes, and time-pressure mistakes so your revision remains focused.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 4: Repeat weak sections weekly</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Re-attempt one mock from the same track every week and track whether accuracy holds under timer pressure.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {isSsc && (
         <section className="rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm sm:p-8">
           <div className="inline-flex rounded-full border border-sky-200 bg-white px-3 py-1 text-sm font-medium text-sky-700">
@@ -435,6 +542,40 @@ export default async function PracticeCategoryPage({ params }: Props) {
             <div className="rounded-2xl border border-sky-100 bg-white p-4">
               <p className="text-sm font-semibold text-slate-900">Tier II Full Mocks</p>
               <p className="mt-2 text-sm leading-7 text-slate-600">150 questions in 120 minutes for advanced practice and exam stamina.</p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {isRailway && (
+        <section className="rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm sm:p-8">
+          <div className="inline-flex rounded-full border border-sky-200 bg-white px-3 py-1 text-sm font-medium text-sky-700">
+            Railway Official-Style Mock Patterns
+          </div>
+          <h2 className="mt-4 text-2xl font-bold text-slate-900">How these Railway tracks map to real exam practice</h2>
+          <p className="mt-3 max-w-4xl text-base leading-7 text-slate-700">
+            This page includes four practical Railway mock tracks. Use the track that matches your post target,
+            and solve each mock under strict timing so your speed and decision quality improve together.
+          </p>
+          <p className="mt-2 text-sm leading-7 text-slate-700">
+            Recommended attempt order: Group D, NTPC CBT-1, ALP/Technician CBT-1, then Ticket Clerk/TT.
+          </p>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">RRB Group D CBT</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">100 questions in 90 minutes with balanced math, reasoning, science, and GA coverage.</p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">RRB NTPC CBT-1</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">100 questions in 90 minutes focused on mathematics, reasoning, and general awareness.</p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">RRB ALP/Technician CBT-1</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">75 questions in 60 minutes to train fast decision-making and section balance.</p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">RRB Ticket Clerk / TT</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">100 questions in 90 minutes following practical NTPC-style objective structure.</p>
             </div>
           </div>
         </section>
@@ -574,7 +715,7 @@ export default async function PracticeCategoryPage({ params }: Props) {
         <div className="grid gap-4">
           {isGov ? (
             <>
-              {govCategoryData.sets.filter(s => s.isLive).map((set) => (
+              {(isRailway ? railwayLiveSets : govCategoryData.sets.filter((s) => s.isLive)).map((set) => (
                 <div
                   key={set.slug}
                   className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
@@ -610,7 +751,7 @@ export default async function PracticeCategoryPage({ params }: Props) {
                         href={`/practice-tests/${category}/${set.slug}`}
                         className="rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white hover:bg-blue-700"
                       >
-                        Start Practice Test
+                        {isRailway ? "Start Railway Mock" : "Start Practice Test"}
                       </Link>
                     </div>
                   </div>
@@ -942,6 +1083,20 @@ export default async function PracticeCategoryPage({ params }: Props) {
         </section>
       )}
 
+      {isRailway && (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+          <div className="mt-4 space-y-3">
+            {railwayFaqs.map((faq) => (
+              <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
+                <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
       {isCtet && (
         <section className="rounded-3xl border border-blue-200 bg-blue-50 p-6">
           <h2 className="text-xl font-bold text-blue-950">Content trust and update policy</h2>
@@ -1003,6 +1158,23 @@ export default async function PracticeCategoryPage({ params }: Props) {
             </p>
             <p>
               Full-length sets follow practical SSC Tier I, CHSL, and Tier II patterns used for preparation (100Q/60 min for Tier I and CHSL, 150Q/120 min for Tier II), but candidates should verify latest notices from official SSC sources.
+            </p>
+            <p>
+              Last reviewed: April 2026.
+            </p>
+          </div>
+        </section>
+      )}
+
+      {isRailway && (
+        <section className="rounded-3xl border border-blue-200 bg-blue-50 p-6">
+          <h2 className="text-xl font-bold text-blue-950">Content trust and update policy</h2>
+          <div className="mt-3 space-y-2 text-sm leading-7 text-blue-900">
+            <p>
+              Railway questions on this page are original bilingual practice content for educational self-assessment.
+            </p>
+            <p>
+              Full-length tracks are built on practical official-style patterns for RRB Group D, NTPC CBT-1, ALP/Technician CBT-1, and Ticket Clerk/TT. Candidates should still verify final notifications from official RRB zones.
             </p>
             <p>
               Last reviewed: April 2026.
