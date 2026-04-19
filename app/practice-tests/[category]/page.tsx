@@ -160,6 +160,51 @@ export default async function PracticeCategoryPage({ params }: Props) {
         </section>
       )}
 
+      {isEngineering && (
+        <section className="rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm sm:p-8">
+          <div className="inline-flex rounded-full border border-sky-200 bg-white px-3 py-1 text-sm font-medium text-sky-700">
+            COMEDK Full-Length Pattern
+          </div>
+          <h2 className="mt-4 text-2xl font-bold text-slate-900">How to use the 180-question COMEDK sets</h2>
+          <p className="mt-3 max-w-4xl text-base leading-7 text-slate-700">
+            The COMEDK track on this page now follows a full-length practice pattern with 180 original questions in each set:
+            60 Mathematics, 60 Physics, and 60 Chemistry. This is useful for students who want realistic stamina practice,
+            balanced subject switching, and a better idea of how accuracy changes over a longer paper.
+          </p>
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">60 Mathematics</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Use this block to test algebra, geometry, trigonometry, coordinate geometry, and speed-based calculation control.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">60 Physics</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Focus on formula recall, units, direct application, and quick interpretation of mechanics, optics, and electricity questions.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">60 Chemistry</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Treat this section as a mix of concept recall and elimination strategy across physical, organic, and inorganic chemistry.
+              </p>
+            </div>
+          </div>
+          <div className="mt-5 rounded-2xl border border-sky-100 bg-white p-5 text-sm leading-7 text-slate-700">
+            <p>
+              A practical way to use these sets is to first complete them in timed pages, then review results subject by subject.
+              If your Mathematics score drops because of speed, train shorter math rounds separately. If Chemistry accuracy drops,
+              revise factual weak spots before starting the next full-length set.
+            </p>
+            <p className="mt-3">
+              These are original pattern-based practice sets, not official COMEDK papers. Use them for learning, timing practice,
+              and weakness analysis alongside official syllabus and exam notices.
+            </p>
+          </div>
+        </section>
+      )}
+
       {isGov && (
         <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
           <h2 className="text-xl font-bold text-slate-900">Chapters Covered</h2>

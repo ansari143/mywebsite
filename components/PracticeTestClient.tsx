@@ -13,10 +13,79 @@ export default function PracticeTestClient({ set }: Props) {
     {}
   );
   const [submitted, setSubmitted] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const total = set.questions.length;
+  const isLongTest = total >= 120;
+  const questionsPerPage = isLongTest ? 20 : total;
+  const totalPages = Math.ceil(total / questionsPerPage);
   const answeredCount = Object.keys(answers).length;
   const allAnswered = answeredCount === total;
+
+  const pageQuestions = useMemo(() => {
+    if (!isLongTest) {
+      return set.questions;
+    }
+
+    const startIndex = (currentPage - 1) * questionsPerPage;
+    return set.questions.slice(startIndex, startIndex + questionsPerPage);
+  }, [currentPage, isLongTest, questionsPerPage, set.questions]);
+
+  const pageAnsweredCount = useMemo(
+    () => pageQuestions.filter((question) => answers[question.id]).length,
+    [answers, pageQuestions]
+  );
+
+  const subjectJumpLinks = useMemo(() => {
+    if (!isLongTest) {
+      return [] as Array<{ label: string; page: number; range: string }>;
+    }
+
+    const links: Array<{ label: string; page: number; range: string }> = [];
+    const seen = new Set<string>();
+
+    set.questions.forEach((question, index) => {
+      let label = "";
+
+      if (question.id.includes("-math-")) {
+        label = "Mathematics";
+      } else if (question.id.includes("-phys-")) {
+        label = "Physics";
+      } else if (question.id.includes("-chem-")) {
+        label = "Chemistry";
+      }
+
+      if (!label || seen.has(label)) {
+        return;
+      }
+
+      seen.add(label);
+
+      const page = Math.floor(index / questionsPerPage) + 1;
+      const startQuestion = index + 1;
+      const endQuestion = Math.min(index + 60, total);
+
+      links.push({
+        label,
+        page,
+        range: `Questions ${startQuestion}-${endQuestion}`,
+      });
+    });
+
+    return links;
+  }, [isLongTest, questionsPerPage, set.questions, total]);
+
+  const visiblePages = useMemo(() => {
+    if (!isLongTest) {
+      return [] as number[];
+    }
+
+    const startPage = Math.max(1, currentPage - 2);
+    const endPage = Math.min(totalPages, startPage + 4);
+    const firstPage = Math.max(1, endPage - 4);
+
+    return Array.from({ length: endPage - firstPage + 1 }, (_, index) => firstPage + index);
+  }, [currentPage, isLongTest, totalPages]);
 
   const result = useMemo(() => {
     let correct = 0;
@@ -84,6 +153,10 @@ export default function PracticeTestClient({ set }: Props) {
     }));
   };
 
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="space-y-6">
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
@@ -127,12 +200,87 @@ export default function PracticeTestClient({ set }: Props) {
             Answered: {answeredCount}/{total}
           </div>
         </div>
+
+        {isLongTest && (
+          <div className="mt-5 space-y-4">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">Long-test navigation</p>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">
+                    Use subject jump links or page buttons to move through the 180-question paper without losing answers.
+                  </p>
+                </div>
+                <div className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-slate-700">
+                  Page {currentPage} of {totalPages} • {pageAnsweredCount}/{pageQuestions.length} answered on this page
+                </div>
+              </div>
+
+              {subjectJumpLinks.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {subjectJumpLinks.map((item) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      onClick={() => goToPage(item.page)}
+                      className={[
+                        "rounded-full border px-4 py-2 text-sm font-semibold transition",
+                        currentPage === item.page
+                          ? "border-blue-600 bg-blue-600 text-white"
+                          : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100",
+                      ].join(" ")}
+                    >
+                      {item.label} • {item.range}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => goToPage(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  Previous Page
+                </button>
+                {visiblePages.map((page) => (
+                  <button
+                    key={page}
+                    type="button"
+                    onClick={() => goToPage(page)}
+                    className={[
+                      "rounded-xl border px-4 py-2 text-sm font-semibold transition",
+                      currentPage === page
+                        ? "border-blue-600 bg-blue-600 text-white"
+                        : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100",
+                    ].join(" ")}
+                  >
+                    Page {page}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => goToPage(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  Next Page
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       <div className="space-y-5">
-        {set.questions.map((q, index) => {
+        {pageQuestions.map((q, index) => {
           const userAnswer = answers[q.id];
           const isCorrect = userAnswer === q.correctAnswer;
+          const questionNumber = isLongTest
+            ? (currentPage - 1) * questionsPerPage + index + 1
+            : index + 1;
 
           return (
             <section
@@ -142,7 +290,7 @@ export default function PracticeTestClient({ set }: Props) {
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <p className="text-sm font-semibold text-blue-700">
-                    Question {index + 1}
+                    Question {questionNumber}
                   </p>
                   <h3 className="mt-2 text-lg font-semibold text-slate-900">
                     {q.question}
@@ -239,12 +387,19 @@ export default function PracticeTestClient({ set }: Props) {
             onClick={() => {
               setAnswers({});
               setSubmitted(false);
+              setCurrentPage(1);
             }}
             className="w-full rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto"
           >
             Reset Answers
           </button>
         </div>
+
+        {isLongTest && !allAnswered && (
+          <p className="mt-3 text-sm text-slate-600">
+            You can move page by page while your answers stay saved. Submission remains available after all {total} questions are answered.
+          </p>
+        )}
 
         {!allAnswered && (
           <p className="mt-3 text-sm text-amber-700">

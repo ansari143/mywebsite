@@ -176,6 +176,730 @@ function createGovQuestion(
   };
 }
 
+function createGeneratedQuestion(
+  id: string,
+  question: string,
+  correctText: string,
+  distractors: [string, string, string],
+  explanation: string,
+  topic: string,
+  difficulty: "easy" | "medium" | "hard",
+  seed: number
+): PracticeQuestion {
+  const correctIndex = seed % 4;
+  const options: string[] = [];
+  let distractorIndex = 0;
+
+  for (let index = 0; index < 4; index += 1) {
+    if (index === correctIndex) {
+      options.push(correctText);
+    } else {
+      options.push(distractors[distractorIndex]);
+      distractorIndex += 1;
+    }
+  }
+
+  const optionIds: Array<"A" | "B" | "C" | "D"> = ["A", "B", "C", "D"];
+
+  return createQuestion(
+    id,
+    question,
+    options as [string, string, string, string],
+    optionIds[correctIndex],
+    explanation,
+    topic,
+    difficulty
+  );
+}
+
+function formatValue(value: number) {
+  if (Number.isInteger(value)) {
+    return `${value}`;
+  }
+
+  return value.toFixed(2).replace(/\.00$/, "").replace(/0$/, "");
+}
+
+function createComedkMathQuestions(setNumber: number): PracticeQuestion[] {
+  const questions: PracticeQuestion[] = [];
+  const trigAnswers = [
+    { label: "sin 30°", value: "1/2" },
+    { label: "cos 60°", value: "1/2" },
+    { label: "tan 45°", value: "1" },
+    { label: "sin 90°", value: "1" },
+    { label: "cos 0°", value: "1" },
+  ] as const;
+
+  for (let round = 0; round < 5; round += 1) {
+    const seed = setNumber * 100 + round * 20;
+
+    const linearAnswer = setNumber + round + 4;
+    const linearCoefficient = round + 2;
+    const linearConstant = setNumber + round + 5;
+    const linearRhs = linearCoefficient * linearAnswer + linearConstant;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 1}`,
+        `If ${linearCoefficient}x + ${linearConstant} = ${linearRhs}, what is x?`,
+        `${linearAnswer}`,
+        [`${linearAnswer - 1}`, `${linearAnswer + 1}`, `${linearAnswer + 2}`],
+        `Subtract ${linearConstant} from both sides and divide by ${linearCoefficient}.`,
+        "algebra",
+        "easy",
+        seed + 1
+      )
+    );
+
+    const rootOne = setNumber + round + 2;
+    const rootTwo = round + 3;
+    const rootSum = rootOne + rootTwo;
+    const rootProduct = rootOne * rootTwo;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 6}`,
+        `One root of x² - ${rootSum}x + ${rootProduct} = 0 is ${rootOne}. What is the other root?`,
+        `${rootTwo}`,
+        [`${rootTwo + 1}`, `${rootTwo - 1}`, `${rootSum}`],
+        `For x² - ${rootSum}x + ${rootProduct} = 0, the product of roots is ${rootProduct}. Since one root is ${rootOne}, the other root is ${rootProduct}/${rootOne} = ${rootTwo}.`,
+        "quadratic equations",
+        "medium",
+        seed + 2
+      )
+    );
+
+    const percentBase = 200 + setNumber * 20 + round * 10;
+    const percentRate = 10 + round * 5;
+    const increasedValue = percentBase + (percentBase * percentRate) / 100;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 11}`,
+        `A quantity of ${percentBase} is increased by ${percentRate}%. What is the new value?`,
+        `${formatValue(increasedValue)}`,
+        [
+          `${formatValue(percentBase + (percentBase * (percentRate - 5)) / 100)}`,
+          `${formatValue(percentBase + percentRate)}`,
+          `${formatValue(percentBase - (percentBase * percentRate) / 100)}`,
+        ],
+        `${percentRate}% of ${percentBase} is ${(percentBase * percentRate) / 100}, so the new value is ${formatValue(increasedValue)}.`,
+        "percentages",
+        "easy",
+        seed + 3
+      )
+    );
+
+    const principal = 1000 + setNumber * 200 + round * 100;
+    const interestRate = 5 + round;
+    const time = 2 + (setNumber % 2);
+    const simpleInterest = (principal * interestRate * time) / 100;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 16}`,
+        `What is the simple interest on Rs. ${principal} at ${interestRate}% per annum for ${time} years?`,
+        `${formatValue(simpleInterest)}`,
+        [
+          `${formatValue(simpleInterest + 20)}`,
+          `${formatValue(simpleInterest - 20)}`,
+          `${formatValue(principal * interestRate / 100)}`,
+        ],
+        `Simple interest = (P × R × T)/100 = (${principal} × ${interestRate} × ${time})/100 = ${formatValue(simpleInterest)}.`,
+        "simple interest",
+        "medium",
+        seed + 4
+      )
+    );
+
+    const apFirst = setNumber + round + 3;
+    const apDifference = round + 2;
+    const apTerm = 8 + setNumber;
+    const apAnswer = apFirst + (apTerm - 1) * apDifference;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 21}`,
+        `Find the ${apTerm}th term of an AP whose first term is ${apFirst} and common difference is ${apDifference}.`,
+        `${apAnswer}`,
+        [`${apAnswer - apDifference}`, `${apAnswer + apDifference}`, `${apFirst + apTerm * apDifference}`],
+        `Use a_n = a + (n - 1)d = ${apFirst} + (${apTerm} - 1) × ${apDifference} = ${apAnswer}.`,
+        "progressions",
+        "medium",
+        seed + 5
+      )
+    );
+
+    const xOne = round + 1;
+    const yOne = setNumber + round + 2;
+    const xTwo = xOne + 2;
+    const slope = setNumber + round + 1;
+    const yTwo = yOne + 2 * slope;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 26}`,
+        `What is the slope of the line passing through (${xOne}, ${yOne}) and (${xTwo}, ${yTwo})?`,
+        `${slope}`,
+        [`${slope - 1}`, `${slope + 1}`, `${yTwo - yOne}`],
+        `Slope = (y₂ - y₁)/(x₂ - x₁) = (${yTwo} - ${yOne})/(${xTwo} - ${xOne}) = ${slope}.`,
+        "coordinate geometry",
+        "medium",
+        seed + 6
+      )
+    );
+
+    const totalBalls = 10 + setNumber + round;
+    const redBalls = 3 + round;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 31}`,
+        `A bag contains ${redBalls} red balls and ${totalBalls - redBalls} blue balls. What is the probability of drawing a red ball?`,
+        `${redBalls}/${totalBalls}`,
+        [
+          `${totalBalls - redBalls}/${totalBalls}`,
+          `${redBalls}/${totalBalls - 1}`,
+          `${redBalls + 1}/${totalBalls}`,
+        ],
+        `Probability = favorable outcomes / total outcomes = ${redBalls}/${totalBalls}.`,
+        "probability",
+        "easy",
+        seed + 7
+      )
+    );
+
+    const triangleBase = 8 + round + setNumber;
+    const triangleHeight = 6 + round * 2;
+    const triangleArea = (triangleBase * triangleHeight) / 2;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 36}`,
+        `What is the area of a triangle with base ${triangleBase} cm and height ${triangleHeight} cm?`,
+        `${triangleArea}`,
+        [`${triangleBase * triangleHeight}`, `${triangleArea - triangleBase}`, `${triangleArea + triangleHeight}`],
+        `Area of triangle = 1/2 × base × height = 1/2 × ${triangleBase} × ${triangleHeight} = ${triangleArea}.`,
+        "geometry",
+        "easy",
+        seed + 8
+      )
+    );
+
+    const logPower = setNumber + round + 2;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 41}`,
+        `What is the value of log₁₀(10^${logPower})?`,
+        `${logPower}`,
+        [`${logPower - 1}`, `${logPower + 1}`, `${10 ** Math.min(logPower, 3)}`],
+        `log₁₀(10^n) = n, so the answer is ${logPower}.`,
+        "logarithms",
+        "easy",
+        seed + 9
+      )
+    );
+
+    const determinantA = setNumber + round + 2;
+    const determinantB = round + 1;
+    const determinantC = setNumber;
+    const determinantD = round + 4;
+    const determinantAnswer = determinantA * determinantD - determinantB * determinantC;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 46}`,
+        `Find the determinant of the matrix [[${determinantA}, ${determinantB}], [${determinantC}, ${determinantD}]].`,
+        `${determinantAnswer}`,
+        [`${determinantA * determinantD + determinantB * determinantC}`, `${determinantAnswer + 2}`, `${determinantAnswer - 2}`],
+        `For a 2 × 2 matrix [[a, b], [c, d]], determinant = ad - bc = ${determinantA} × ${determinantD} - ${determinantB} × ${determinantC} = ${determinantAnswer}.`,
+        "matrices",
+        "medium",
+        seed + 10
+      )
+    );
+
+    const trig = trigAnswers[round];
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 51}`,
+        `What is the value of ${trig.label}?`,
+        trig.value,
+        trig.value === "1/2" ? ["0", "1", "√3/2"] : ["1/2", "√3/2", "0"],
+        `${trig.label} = ${trig.value}.`,
+        "trigonometry",
+        "easy",
+        seed + 11
+      )
+    );
+
+    const inequalityConstant = setNumber + round + 7;
+    const inequalityAnswer = inequalityConstant - 2;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-math-${round + 56}`,
+        `Solve the inequality x + 2 > ${inequalityConstant}.`,
+        `x > ${inequalityAnswer}`,
+        [`x < ${inequalityAnswer}`, `x > ${inequalityAnswer + 1}`, `x < ${inequalityAnswer + 1}`],
+        `Subtract 2 from both sides to get x > ${inequalityAnswer}.`,
+        "inequalities",
+        "easy",
+        seed + 12
+      )
+    );
+  }
+
+  return questions;
+}
+
+function createComedkPhysicsQuestions(setNumber: number): PracticeQuestion[] {
+  const questions: PracticeQuestion[] = [];
+
+  for (let round = 0; round < 5; round += 1) {
+    const seed = setNumber * 100 + round * 20;
+
+    const initialVelocity = round + 1;
+    const acceleration = setNumber + round + 2;
+    const time = round + 4;
+    const finalVelocity = initialVelocity + acceleration * time;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 1}`,
+        `A particle has initial velocity ${initialVelocity} m/s and acceleration ${acceleration} m/s² for ${time} s. What is its final velocity?`,
+        `${finalVelocity} m/s`,
+        [`${finalVelocity - acceleration} m/s`, `${finalVelocity + acceleration} m/s`, `${acceleration * time} m/s`],
+        `Use v = u + at = ${initialVelocity} + ${acceleration} × ${time} = ${finalVelocity} m/s.`,
+        "kinematics",
+        "easy",
+        seed + 21
+      )
+    );
+
+    const mass = round + 2;
+    const accelerationTwo = setNumber + round + 3;
+    const force = mass * accelerationTwo;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 6}`,
+        `What force is needed to accelerate a ${mass} kg body at ${accelerationTwo} m/s²?`,
+        `${force} N`,
+        [`${force - mass} N`, `${force + mass} N`, `${accelerationTwo} N`],
+        `From F = ma, force = ${mass} × ${accelerationTwo} = ${force} N.`,
+        "laws of motion",
+        "easy",
+        seed + 22
+      )
+    );
+
+    const workForce = 10 + setNumber + round;
+    const distance = 4 + round;
+    const work = workForce * distance;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 11}`,
+        `A constant force of ${workForce} N moves an object through ${distance} m in the same direction. What is the work done?`,
+        `${work} J`,
+        [`${work + 10} J`, `${work - 10} J`, `${workForce + distance} J`],
+        `Work = force × distance = ${workForce} × ${distance} = ${work} J.`,
+        "work and energy",
+        "easy",
+        seed + 23
+      )
+    );
+
+    const powerWork = 120 + round * 20;
+    const powerTime = 4 + setNumber;
+    const power = powerWork / powerTime;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 16}`,
+        `If ${powerWork} J of work is done in ${powerTime} s, what is the power?`,
+        `${formatValue(power)} W`,
+        [`${formatValue(power + 5)} W`, `${formatValue(powerWork - powerTime)} W`, `${formatValue(powerTime)} W`],
+        `Power = work / time = ${powerWork}/${powerTime} = ${formatValue(power)} W.`,
+        "power",
+        "medium",
+        seed + 24
+      )
+    );
+
+    const momentumMass = round + 3;
+    const momentumVelocity = setNumber + round + 4;
+    const momentum = momentumMass * momentumVelocity;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 21}`,
+        `What is the momentum of a ${momentumMass} kg object moving at ${momentumVelocity} m/s?`,
+        `${momentum} kg m/s`,
+        [`${momentumVelocity} kg m/s`, `${momentum + 5} kg m/s`, `${momentum - 5} kg m/s`],
+        `Momentum = mv = ${momentumMass} × ${momentumVelocity} = ${momentum} kg m/s.`,
+        "momentum",
+        "easy",
+        seed + 25
+      )
+    );
+
+    const keMass = round + 2;
+    const keVelocity = setNumber + round + 3;
+    const kineticEnergy = 0.5 * keMass * keVelocity * keVelocity;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 26}`,
+        `Find the kinetic energy of a ${keMass} kg body moving at ${keVelocity} m/s.`,
+        `${formatValue(kineticEnergy)} J`,
+        [`${formatValue(kineticEnergy + 5)} J`, `${formatValue(keMass * keVelocity)} J`, `${formatValue(kineticEnergy - 5)} J`],
+        `Kinetic energy = 1/2 mv² = 1/2 × ${keMass} × ${keVelocity}² = ${formatValue(kineticEnergy)} J.`,
+        "work and energy",
+        "medium",
+        seed + 26
+      )
+    );
+
+    const peMass = round + 1;
+    const peHeight = setNumber + round + 5;
+    const potentialEnergy = peMass * 10 * peHeight;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 31}`,
+        `A ${peMass} kg body is lifted to a height of ${peHeight} m. Take g = 10 m/s². What is the gain in potential energy?`,
+        `${potentialEnergy} J`,
+        [`${potentialEnergy - 10} J`, `${potentialEnergy + 10} J`, `${peMass * peHeight} J`],
+        `Potential energy = mgh = ${peMass} × 10 × ${peHeight} = ${potentialEnergy} J.`,
+        "gravitation",
+        "easy",
+        seed + 27
+      )
+    );
+
+    const current = round + 2;
+    const chargeTime = setNumber + round + 4;
+    const charge = current * chargeTime;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 36}`,
+        `A current of ${current} A flows for ${chargeTime} s. How much charge passes through the circuit?`,
+        `${charge} C`,
+        [`${charge - current} C`, `${charge + current} C`, `${chargeTime} C`],
+        `Charge Q = It = ${current} × ${chargeTime} = ${charge} C.`,
+        "current electricity",
+        "easy",
+        seed + 28
+      )
+    );
+
+    const resistanceOne = round + 2;
+    const resistanceTwo = setNumber + round + 3;
+    const seriesResistance = resistanceOne + resistanceTwo;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 41}`,
+        `Two resistors of ${resistanceOne} Ω and ${resistanceTwo} Ω are connected in series. What is the equivalent resistance?`,
+        `${seriesResistance} Ω`,
+        [`${resistanceOne * resistanceTwo} Ω`, `${seriesResistance - 1} Ω`, `${resistanceTwo - resistanceOne} Ω`],
+        `Series resistances add directly: ${resistanceOne} + ${resistanceTwo} = ${seriesResistance} Ω.`,
+        "current electricity",
+        "easy",
+        seed + 29
+      )
+    );
+
+    const parallelResistanceOne = 2 * (round + 2);
+    const parallelResistanceTwo = 2 * (setNumber + round + 2);
+    const parallelResistance = (parallelResistanceOne * parallelResistanceTwo) / (parallelResistanceOne + parallelResistanceTwo);
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 46}`,
+        `Two resistors of ${parallelResistanceOne} Ω and ${parallelResistanceTwo} Ω are connected in parallel. What is the equivalent resistance?`,
+        `${formatValue(parallelResistance)} Ω`,
+        [`${parallelResistanceOne + parallelResistanceTwo} Ω`, `${formatValue(parallelResistance + 1)} Ω`, `${formatValue(parallelResistanceOne - 1)} Ω`],
+        `For parallel resistors, R = (R₁R₂)/(R₁ + R₂) = (${parallelResistanceOne} × ${parallelResistanceTwo})/(${parallelResistanceOne} + ${parallelResistanceTwo}) = ${formatValue(parallelResistance)} Ω.`,
+        "current electricity",
+        "medium",
+        seed + 30
+      )
+    );
+
+    const focalLength = round + 1;
+    const lensPower = 1 / focalLength;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 51}`,
+        `A lens has focal length ${focalLength} m. What is its power?`,
+        `${formatValue(lensPower)} D`,
+        [`${focalLength} D`, `${formatValue(lensPower + 1)} D`, `${formatValue(1 / (focalLength + 1))} D`],
+        `Power of a lens P = 1/f, so P = 1/${focalLength} = ${formatValue(lensPower)} D.`,
+        "optics",
+        "medium",
+        seed + 31
+      )
+    );
+
+    const waveFrequency = 40 + round * 10;
+    const wavelength = setNumber + round + 2;
+    const waveSpeed = waveFrequency * wavelength;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-phys-${round + 56}`,
+        `A wave has frequency ${waveFrequency} Hz and wavelength ${wavelength} m. What is its speed?`,
+        `${waveSpeed} m/s`,
+        [`${waveFrequency + wavelength} m/s`, `${waveSpeed - waveFrequency} m/s`, `${waveSpeed + wavelength} m/s`],
+        `Wave speed v = fλ = ${waveFrequency} × ${wavelength} = ${waveSpeed} m/s.`,
+        "waves",
+        "medium",
+        seed + 32
+      )
+    );
+  }
+
+  return questions;
+}
+
+function createComedkChemistryQuestions(setNumber: number): PracticeQuestion[] {
+  const questions: PracticeQuestion[] = [];
+  const molarMassData = [
+    { formula: "H₂O", mass: 18, distractors: ["16", "20", "22"] as [string, string, string] },
+    { formula: "CO₂", mass: 44, distractors: ["28", "40", "48"] as [string, string, string] },
+    { formula: "NH₃", mass: 17, distractors: ["14", "18", "20"] as [string, string, string] },
+    { formula: "CH₄", mass: 16, distractors: ["14", "18", "20"] as [string, string, string] },
+    { formula: "NaOH", mass: 40, distractors: ["23", "39", "56"] as [string, string, string] },
+  ] as const;
+  const functionalGroups = [
+    { compound: "ethanol", answer: "Hydroxyl", distractors: ["Carboxyl", "Aldehyde", "Amine"] as [string, string, string] },
+    { compound: "ethanoic acid", answer: "Carboxyl", distractors: ["Hydroxyl", "Ketone", "Amine"] as [string, string, string] },
+    { compound: "propanone", answer: "Ketone", distractors: ["Aldehyde", "Carboxyl", "Amide"] as [string, string, string] },
+    { compound: "methanal", answer: "Aldehyde", distractors: ["Hydroxyl", "Ketone", "Ester"] as [string, string, string] },
+    { compound: "ethylamine", answer: "Amine", distractors: ["Amide", "Carboxyl", "Hydroxyl"] as [string, string, string] },
+  ] as const;
+  const oxidationStates = [
+    { compound: "H₂SO₄", element: "sulfur", value: "+6", distractors: ["+4", "+2", "-2"] as [string, string, string] },
+    { compound: "HNO₃", element: "nitrogen", value: "+5", distractors: ["+3", "+1", "-3"] as [string, string, string] },
+    { compound: "KMnO₄", element: "manganese", value: "+7", distractors: ["+2", "+4", "+6"] as [string, string, string] },
+    { compound: "SO₂", element: "sulfur", value: "+4", distractors: ["+2", "+6", "-2"] as [string, string, string] },
+    { compound: "K₂Cr₂O₇", element: "chromium", value: "+6", distractors: ["+3", "+4", "+7"] as [string, string, string] },
+  ] as const;
+
+  for (let round = 0; round < 5; round += 1) {
+    const seed = setNumber * 100 + round * 20;
+    const phValue = round + 1;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 1}`,
+        `If the hydrogen ion concentration of a solution is 10^- ${phValue} mol/L, what is its pH?`.replace("^- ", "^-") ,
+        `${phValue}`,
+        [`${phValue + 1}`, `${Math.max(0, phValue - 1)}`, `${14 - phValue}`],
+        `pH = -log[H⁺]. If [H⁺] = 10^-${phValue}, then pH = ${phValue}.`,
+        "physical chemistry",
+        "easy",
+        seed + 41
+      )
+    );
+
+    const molar = molarMassData[round];
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 6}`,
+        `What is the molar mass of ${molar.formula}?`,
+        `${molar.mass} g/mol`,
+        [`${molar.distractors[0]} g/mol`, `${molar.distractors[1]} g/mol`, `${molar.distractors[2]} g/mol`],
+        `The molar mass of ${molar.formula} is ${molar.mass} g/mol.`,
+        "mole concept",
+        "easy",
+        seed + 42
+      )
+    );
+
+    const oxidation = oxidationStates[round];
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 11}`,
+        `What is the oxidation state of ${oxidation.element} in ${oxidation.compound}?`,
+        oxidation.value,
+        oxidation.distractors,
+        `Using the standard oxidation number rules, the oxidation state of ${oxidation.element} in ${oxidation.compound} is ${oxidation.value}.`,
+        "redox chemistry",
+        "medium",
+        seed + 43
+      )
+    );
+
+    const sodiumValency = 1;
+    const oxygenValency = 2;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 16}`,
+        `What is the correct formula of the compound formed by sodium (valency ${sodiumValency}) and oxygen (valency ${oxygenValency})?`,
+        "Na2O",
+        ["NaO", "NaO2", "Na2O2"],
+        `Cross the valencies 1 and 2 to get Na₂O.`,
+        "chemical bonding",
+        "easy",
+        seed + 44
+      )
+    );
+
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 21}`,
+        "Which gas is released when zinc reacts with dilute hydrochloric acid?",
+        "Hydrogen",
+        ["Oxygen", "Nitrogen", "Carbon dioxide"],
+        "Zinc reacts with dilute hydrochloric acid to release hydrogen gas.",
+        "chemical reactions",
+        "easy",
+        seed + 45
+      )
+    );
+
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 26}`,
+        "Which of the following is a strong acid?",
+        "Hydrochloric acid",
+        ["Acetic acid", "Ammonia", "Sodium bicarbonate"],
+        "Hydrochloric acid is a strong acid that ionizes almost completely in water.",
+        "acids and bases",
+        "easy",
+        seed + 46
+      )
+    );
+
+    const group = functionalGroups[round];
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 31}`,
+        `Which functional group is present in ${group.compound}?`,
+        group.answer,
+        group.distractors,
+        `${group.compound} contains the ${group.answer.toLowerCase()} functional group.`,
+        "organic chemistry",
+        "medium",
+        seed + 47
+      )
+    );
+
+    const alkaliMetals = ["Lithium", "Sodium", "Potassium", "Rubidium", "Cesium"] as const;
+    const selectedMetal = alkaliMetals[round];
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 36}`,
+        "Which of the following is an alkali metal?",
+        selectedMetal,
+        ["Calcium", "Aluminium", "Zinc"],
+        `${selectedMetal} belongs to Group 1 of the periodic table and is an alkali metal.`,
+        "periodic table",
+        "easy",
+        seed + 48
+      )
+    );
+
+    const masses = [18, 44, 34, 98, 36.5] as const;
+    const moleMass = masses[round];
+    const moles = round + 2;
+    const sampleMass = moleMass * moles;
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 41}`,
+        `How many moles are present in ${sampleMass} g of a substance with molar mass ${moleMass} g/mol?`,
+        `${moles}`,
+        [`${moles + 1}`, `${moles - 1}`, `${sampleMass / (moleMass / 2)}`],
+        `Moles = mass / molar mass = ${sampleMass}/${moleMass} = ${moles}.`,
+        "mole concept",
+        "medium",
+        seed + 49
+      )
+    );
+
+    const electronicConfigs = [
+      { config: "2, 8, 1", element: "Sodium", distractors: ["Magnesium", "Aluminium", "Neon"] as [string, string, string] },
+      { config: "2, 8, 7", element: "Chlorine", distractors: ["Argon", "Sulfur", "Calcium"] as [string, string, string] },
+      { config: "2, 8, 8, 1", element: "Potassium", distractors: ["Calcium", "Scandium", "Argon"] as [string, string, string] },
+      { config: "2, 8, 3", element: "Aluminium", distractors: ["Silicon", "Magnesium", "Phosphorus"] as [string, string, string] },
+      { config: "2, 6", element: "Oxygen", distractors: ["Nitrogen", "Fluorine", "Carbon"] as [string, string, string] },
+    ] as const;
+    const config = electronicConfigs[round];
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 46}`,
+        `Which element has the electronic configuration ${config.config}?`,
+        config.element,
+        config.distractors,
+        `${config.element} has the electronic configuration ${config.config}.`,
+        "atomic structure",
+        "medium",
+        seed + 50
+      )
+    );
+
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 51}`,
+        "Which of the following is a covalent compound?",
+        "Water",
+        ["Sodium chloride", "Magnesium oxide", "Calcium chloride"],
+        "Water is covalent because atoms share electrons in the molecule.",
+        "chemical bonding",
+        "easy",
+        seed + 51
+      )
+    );
+
+    const commonNames = [
+      { formula: "Ca(OH)2", name: "Slaked lime", distractors: ["Quick lime", "Baking soda", "Bleaching powder"] as [string, string, string] },
+      { formula: "NaHCO3", name: "Baking soda", distractors: ["Washing soda", "Bleaching powder", "Plaster of Paris"] as [string, string, string] },
+      { formula: "CaO", name: "Quick lime", distractors: ["Slaked lime", "Gypsum", "Saltpeter"] as [string, string, string] },
+      { formula: "CaSO4·1/2H2O", name: "Plaster of Paris", distractors: ["Gypsum", "Bleaching powder", "Quick lime"] as [string, string, string] },
+      { formula: "Na2CO3·10H2O", name: "Washing soda", distractors: ["Baking soda", "Caustic soda", "Plaster of Paris"] as [string, string, string] },
+    ] as const;
+    const commonName = commonNames[round];
+    questions.push(
+      createGeneratedQuestion(
+        `comedk-set${setNumber}-chem-${round + 56}`,
+        `What is the common name of ${commonName.formula}?`,
+        commonName.name,
+        commonName.distractors,
+        `${commonName.formula} is commonly known as ${commonName.name}.`,
+        "common compounds",
+        "easy",
+        seed + 52
+      )
+    );
+  }
+
+  return questions;
+}
+
+function createComedkPracticeSet(setNumber: number): PracticeSet {
+  const questions = [
+    ...createComedkMathQuestions(setNumber),
+    ...createComedkPhysicsQuestions(setNumber),
+    ...createComedkChemistryQuestions(setNumber),
+  ];
+
+  const level = setNumber >= 4 ? "advanced" : "intermediate";
+
+  return {
+    id: `comedk-mixed-set-${setNumber}`,
+    slug: `comedk-practice-set-${setNumber}`,
+    category: "engineering-entrance",
+    title: `COMEDK Practice Set ${setNumber}`,
+    description:
+      `Original COMEDK-style full-length set with 180 unique questions: 60 mathematics, 60 physics, and 60 chemistry.`,
+    examType: "COMEDK",
+    examSlug: "comedk",
+    examName: "COMEDK",
+    sectionLabel: "Full PCM Practice Set",
+    level,
+    questionCount: questions.length,
+    estimatedMinutes: 180,
+    seoTitle: `COMEDK Practice Questions – Set ${setNumber} | Nishaglobal Education`,
+    seoDescription:
+      `Practice a full COMEDK-style set with 180 original questions across mathematics, physics, and chemistry with answers and explanations.`,
+    keywords: [
+      `COMEDK practice set ${setNumber}`,
+      "COMEDK 180 questions",
+      "COMEDK mathematics physics chemistry",
+      "engineering entrance COMEDK mock",
+      "original COMEDK practice",
+    ],
+    intro:
+      "Use this full-length COMEDK set for serious exam practice, balanced subject revision, and explanation-based learning.",
+    isOriginal: true,
+    isLive: true,
+    questions,
+  };
+}
+
 export const engineeringExamRules: ExamRule[] = [
   {
     examSlug: "jee-main",
@@ -3899,92 +4623,11 @@ export const practiceSets: PracticeSet[] = [
       ),
     ],
   },
-  {
-    id: "comedk-math-set-1",
-    slug: "comedk-mathematics-practice-set-1",
-    category: "engineering-entrance",
-    title: "COMEDK Mathematics Practice Set 1",
-    description:
-      "Original COMEDK-style math questions focused on algebra, geometry, and arithmetic reasoning.",
-    examType: "COMEDK",
-    examSlug: "comedk",
-    examName: "COMEDK",
-    sectionLabel: "Mathematics Practice Set",
-    level: "intermediate",
-    questionCount: 6,
-    estimatedMinutes: 18,
-    seoTitle:
-      "COMEDK Mathematics Practice Questions – Set 1 | Nishaglobal Education",
-    seoDescription:
-      "Practice original COMEDK mathematics questions with answers and explanations. This set supports pattern-based preparation for COMEDK aspirants.",
-    keywords: [
-      "COMEDK math practice",
-      "COMEDK questions",
-      "mathematics practice set",
-      "engineering entrance COMEDK",
-      "original COMEDK practice",
-    ],
-    intro:
-      "Practice these original math questions to improve speed and accuracy for COMEDK-style exam preparation.",
-    isOriginal: true,
-    isLive: true,
-    questions: [
-      createQuestion(
-        "comedk-math-1",
-        "If x + 3 = 8, what is the value of x?",
-        ["3", "4", "5", "6"],
-        "C",
-        "Subtract 3 from both sides to get x = 5.",
-        "algebra",
-        "easy"
-      ),
-      createQuestion(
-        "comedk-math-2",
-        "What is the area of a rectangle with length 7 and width 4?",
-        ["11", "28", "14", "22"],
-        "B",
-        "Area = length × width = 7 × 4 = 28.",
-        "geometry",
-        "easy"
-      ),
-      createQuestion(
-        "comedk-math-3",
-        "The ratio of boys to girls is 3:2. If there are 15 boys, how many girls are there?",
-        ["10", "12", "8", "9"],
-        "A",
-        "For ratio 3:2, girls = (2/3) × 15 = 10.",
-        "ratio",
-        "medium"
-      ),
-      createQuestion(
-        "comedk-math-4",
-        "Solve for y: 2y − 4 = 10.",
-        ["6", "7", "8", "5"],
-        "B",
-        "Add 4 to get 2y = 14 then y = 7.",
-        "algebra",
-        "medium"
-      ),
-      createQuestion(
-        "comedk-math-5",
-        "A right-angled triangle has legs 3 and 4. What is the hypotenuse?",
-        ["5", "6", "7", "8"],
-        "A",
-        "Pythagoras gives hypotenuse √(3² + 4²) = 5.",
-        "geometry",
-        "easy"
-      ),
-      createQuestion(
-        "comedk-math-6",
-        "If a number is increased by 20% and then decreased by 20%, the final value is:",
-        ["Same as original", "4% less", "2% less", "4% more"],
-        "B",
-        "A 20% increase followed by a 20% decrease results in 4% net decrease.",
-        "percentages",
-        "medium"
-      ),
-    ],
-  },
+  createComedkPracticeSet(1),
+  createComedkPracticeSet(2),
+  createComedkPracticeSet(3),
+  createComedkPracticeSet(4),
+  createComedkPracticeSet(5),
   {
     id: "wbjee-math-set-1",
     slug: "wbjee-mathematics-practice-set-1",
