@@ -4519,6 +4519,611 @@ export const engineeringExamRules: ExamRule[] = [
   },
 ];
 
+type RailwayPatternConfig = {
+  key: "group-d" | "ntpc-cbt-1" | "alp-technician-cbt-1" | "ticket-clerk-tt";
+  slugPrefix: string;
+  title: string;
+  titleHi: string;
+  chapter: string;
+  chapterHi: string;
+  questionCount: number;
+  durationMin: number;
+  mathCount: number;
+  reasoningCount: number;
+  scienceCount: number;
+  gaCount: number;
+};
+
+function createRailwayMathQuestions(patternKey: string, setNumber: number, count: number): GovPracticeQuestion[] {
+  return Array.from({ length: count }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 6000 + qNo;
+    const maxPattern = setNumber <= 2 ? 4 : setNumber <= 4 ? 5 : 6;
+    const pattern = index % maxPattern;
+
+    if (pattern === 0) {
+      const a = 36 + setNumber + qNo;
+      const b = 14 + (qNo % 9);
+      const ans = a + b;
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-math-${qNo}`,
+        "Mathematics",
+        "गणित",
+        `Find the value: ${a} + ${b}`,
+        `मान ज्ञात करें: ${a} + ${b}`,
+        { en: `${ans}`, hi: `${ans}` },
+        [
+          { en: `${ans - 2}`, hi: `${ans - 2}` },
+          { en: `${ans + 2}`, hi: `${ans + 2}` },
+          { en: `${ans + 4}`, hi: `${ans + 4}` },
+        ],
+        "Use direct addition.",
+        "सीधा जोड़ करें।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      const base = 120 + qNo * 2;
+      const percent = 25;
+      const ans = (base * percent) / 100;
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-math-${qNo}`,
+        "Mathematics",
+        "गणित",
+        `What is ${percent}% of ${base}?`,
+        `${base} का ${percent}% कितना है?`,
+        { en: `${ans}`, hi: `${ans}` },
+        [
+          { en: `${ans - 3}`, hi: `${ans - 3}` },
+          { en: `${ans + 3}`, hi: `${ans + 3}` },
+          { en: `${ans + 6}`, hi: `${ans + 6}` },
+        ],
+        "Percentage = (percent/100) x number.",
+        "प्रतिशत = (प्रतिशत/100) x संख्या।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const speed = 36 + (qNo % 10);
+      const time = 2 + (setNumber % 3);
+      const ans = speed * time;
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-math-${qNo}`,
+        "Mathematics",
+        "गणित",
+        `A train runs at ${speed} km/h for ${time} hours. Distance is:`,
+        `एक ट्रेन ${speed} किमी/घंटा की गति से ${time} घंटे चलती है। दूरी है:`,
+        { en: `${ans} km`, hi: `${ans} किमी` },
+        [
+          { en: `${ans - speed} km`, hi: `${ans - speed} किमी` },
+          { en: `${ans + speed} km`, hi: `${ans + speed} किमी` },
+          { en: `${ans + 12} km`, hi: `${ans + 12} किमी` },
+        ],
+        "Distance = Speed x Time.",
+        "दूरी = गति x समय।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      const cp = 180 + qNo * 4;
+      const sp = cp + 36;
+      const profit = ((sp - cp) / cp) * 100;
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-math-${qNo}`,
+        "Mathematics",
+        "गणित",
+        `An item is bought for Rs. ${cp} and sold for Rs. ${sp}. Profit % is:`,
+        `एक वस्तु Rs. ${cp} में खरीदी गई और Rs. ${sp} में बेची गई। लाभ % है:`,
+        { en: `${formatValue(profit)}%`, hi: `${formatValue(profit)}%` },
+        [
+          { en: `${formatValue(profit - 5)}%`, hi: `${formatValue(profit - 5)}%` },
+          { en: `${formatValue(profit + 5)}%`, hi: `${formatValue(profit + 5)}%` },
+          { en: `${formatValue(profit + 10)}%`, hi: `${formatValue(profit + 10)}%` },
+        ],
+        "Profit% = ((SP - CP) / CP) x 100.",
+        "लाभ% = ((विक्रय - लागत) / लागत) x 100।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      const p = 1000 + qNo * 20;
+      const r = 8;
+      const t = 2;
+      const si = (p * r * t) / 100;
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-math-${qNo}`,
+        "Mathematics",
+        "गणित",
+        `Simple Interest on Rs. ${p} at ${r}% for ${t} years is:`,
+        `Rs. ${p} पर ${r}% दर से ${t} वर्षों का साधारण ब्याज है:`,
+        { en: `Rs. ${si}`, hi: `Rs. ${si}` },
+        [
+          { en: `Rs. ${si - 80}`, hi: `Rs. ${si - 80}` },
+          { en: `Rs. ${si + 80}`, hi: `Rs. ${si + 80}` },
+          { en: `Rs. ${si + 160}`, hi: `Rs. ${si + 160}` },
+        ],
+        "SI = (P x R x T) / 100.",
+        "SI = (मूलधन x दर x समय) / 100।",
+        seed
+      );
+    }
+
+    const a = 48 + qNo;
+    const b = 6 + (qNo % 6);
+    const ans = a / b;
+    return createSeededGovQuestion(
+      `${patternKey}-set${setNumber}-math-${qNo}`,
+      "Mathematics",
+      "गणित",
+      `Find: ${a} / ${b}`,
+      `ज्ञात करें: ${a} / ${b}`,
+      { en: `${formatValue(ans)}`, hi: `${formatValue(ans)}` },
+      [
+        { en: `${formatValue(ans - 1)}`, hi: `${formatValue(ans - 1)}` },
+        { en: `${formatValue(ans + 1)}`, hi: `${formatValue(ans + 1)}` },
+        { en: `${formatValue(ans + 2)}`, hi: `${formatValue(ans + 2)}` },
+      ],
+      "Use standard division.",
+      "सामान्य भाग करें।",
+      seed
+    );
+  });
+}
+
+function createRailwayReasoningQuestions(patternKey: string, setNumber: number, count: number): GovPracticeQuestion[] {
+  return Array.from({ length: count }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 7000 + qNo;
+    const maxPattern = setNumber <= 2 ? 4 : setNumber <= 4 ? 5 : 6;
+    const pattern = index % maxPattern;
+
+    if (pattern === 0) {
+      const start = 4 + setNumber + qNo;
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        `Find the next term: ${start}, ${start + 3}, ${start + 6}, ${start + 9}, ?`,
+        `अगला पद ज्ञात करें: ${start}, ${start + 3}, ${start + 6}, ${start + 9}, ?`,
+        { en: `${start + 12}`, hi: `${start + 12}` },
+        [
+          { en: `${start + 11}`, hi: `${start + 11}` },
+          { en: `${start + 13}`, hi: `${start + 13}` },
+          { en: `${start + 15}`, hi: `${start + 15}` },
+        ],
+        "The series increases by +3 each step.",
+        "श्रृंखला हर बार +3 से बढ़ रही है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "Book : Read :: Food : ?",
+        "Book : Read :: Food : ?",
+        { en: "Eat", hi: "खाना" },
+        [
+          { en: "Write", hi: "लिखना" },
+          { en: "Cook", hi: "पकाना" },
+          { en: "Buy", hi: "खरीदना" },
+        ],
+        "A book is read, food is eaten.",
+        "पुस्तक पढ़ी जाती है, भोजन खाया जाता है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "If CAT is coded as DBU, then DOG is coded as:",
+        "यदि CAT को DBU लिखा जाए, तो DOG लिखा जाएगा:",
+        { en: "EPH", hi: "EPH" },
+        [
+          { en: "EOG", hi: "EOG" },
+          { en: "EOH", hi: "EOH" },
+          { en: "FPH", hi: "FPH" },
+        ],
+        "Each letter is shifted by +1 in alphabet.",
+        "हर अक्षर को वर्णमाला में +1 शिफ्ट किया गया है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "A walks 4 km North, then 3 km East. Shortest distance from start is:",
+        "A 4 किमी उत्तर और फिर 3 किमी पूर्व चलता है। प्रारंभ बिंदु से न्यूनतम दूरी है:",
+        { en: "5 km", hi: "5 किमी" },
+        [
+          { en: "7 km", hi: "7 किमी" },
+          { en: "6 km", hi: "6 किमी" },
+          { en: "4 km", hi: "4 किमी" },
+        ],
+        "Use Pythagoras: sqrt(4^2 + 3^2) = 5.",
+        "पाइथागोरस नियम: sqrt(4^2 + 3^2) = 5।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "A is mother of B and B is sister of C. How is A related to C?",
+        "A, B की माता है और B, C की बहन है। A, C से कैसे संबंधित है?",
+        { en: "Mother", hi: "माता" },
+        [
+          { en: "Sister", hi: "बहन" },
+          { en: "Grandmother", hi: "दादी" },
+          { en: "Aunt", hi: "चाची" },
+        ],
+        "If B and C are siblings and A is B's mother, A is also C's mother.",
+        "यदि B और C भाई-बहन हैं और A, B की माता है, तो A, C की भी माता है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `${patternKey}-set${setNumber}-reason-${qNo}`,
+      "Reasoning",
+      "तर्क",
+      "All trains are vehicles. Some vehicles are electric. Therefore:",
+      "सभी ट्रेनें वाहन हैं। कुछ वाहन इलेक्ट्रिक हैं। इसलिए:",
+      { en: "Some trains may be electric", hi: "कुछ ट्रेनें इलेक्ट्रिक हो सकती हैं" },
+      [
+        { en: "All trains are electric", hi: "सभी ट्रेनें इलेक्ट्रिक हैं" },
+        { en: "No train is electric", hi: "कोई ट्रेन इलेक्ट्रिक नहीं है" },
+        { en: "Cannot be determined", hi: "निर्धारित नहीं किया जा सकता" },
+      ],
+      "Only a possibility can be concluded from the given statements.",
+      "दिए गए कथनों से केवल संभावना निकाली जा सकती है।",
+      seed
+    );
+  });
+}
+
+function createRailwayScienceQuestions(patternKey: string, setNumber: number, count: number): GovPracticeQuestion[] {
+  return Array.from({ length: count }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 8000 + qNo;
+    const maxPattern = setNumber <= 2 ? 4 : setNumber <= 4 ? 5 : 6;
+    const pattern = index % maxPattern;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-science-${qNo}`,
+        "Science",
+        "विज्ञान",
+        "The SI unit of force is:",
+        "बल की SI इकाई है:",
+        { en: "Newton", hi: "न्यूटन" },
+        [
+          { en: "Joule", hi: "जूल" },
+          { en: "Watt", hi: "वाट" },
+          { en: "Pascal", hi: "पास्कल" },
+        ],
+        "Force is measured in Newton.",
+        "बल को न्यूटन में मापा जाता है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-science-${qNo}`,
+        "Science",
+        "विज्ञान",
+        "Which gas is most abundant in Earth's atmosphere?",
+        "पृथ्वी के वायुमंडल में सबसे अधिक मात्रा में कौन सी गैस है?",
+        { en: "Nitrogen", hi: "नाइट्रोजन" },
+        [
+          { en: "Oxygen", hi: "ऑक्सीजन" },
+          { en: "Carbon dioxide", hi: "कार्बन डाइऑक्साइड" },
+          { en: "Hydrogen", hi: "हाइड्रोजन" },
+        ],
+        "Nitrogen is about 78% of atmosphere.",
+        "वायुमंडल में नाइट्रोजन लगभग 78% है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-science-${qNo}`,
+        "Science",
+        "विज्ञान",
+        "The boiling point of water at normal pressure is:",
+        "सामान्य दाब पर पानी का क्वथनांक है:",
+        { en: "100 deg C", hi: "100 डिग्री C" },
+        [
+          { en: "90 deg C", hi: "90 डिग्री C" },
+          { en: "95 deg C", hi: "95 डिग्री C" },
+          { en: "110 deg C", hi: "110 डिग्री C" },
+        ],
+        "Water boils at 100 deg C under standard conditions.",
+        "मानक दशाओं में पानी 100 डिग्री C पर उबलता है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-science-${qNo}`,
+        "Science",
+        "विज्ञान",
+        "Which vitamin is formed in our body with sunlight?",
+        "सूर्य के प्रकाश से शरीर में कौन सा विटामिन बनता है?",
+        { en: "Vitamin D", hi: "विटामिन D" },
+        [
+          { en: "Vitamin A", hi: "विटामिन A" },
+          { en: "Vitamin B12", hi: "विटामिन B12" },
+          { en: "Vitamin C", hi: "विटामिन C" },
+        ],
+        "Sunlight helps in synthesis of Vitamin D.",
+        "सूर्य का प्रकाश विटामिन D के संश्लेषण में सहायक है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-science-${qNo}`,
+        "Science",
+        "विज्ञान",
+        "Which part of human body pumps blood?",
+        "मानव शरीर में रक्त पंप करने वाला अंग है:",
+        { en: "Heart", hi: "हृदय" },
+        [
+          { en: "Liver", hi: "यकृत" },
+          { en: "Lungs", hi: "फेफड़े" },
+          { en: "Kidney", hi: "गुर्दा" },
+        ],
+        "Heart pumps blood throughout the body.",
+        "हृदय पूरे शरीर में रक्त पंप करता है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `${patternKey}-set${setNumber}-science-${qNo}`,
+      "Science",
+      "विज्ञान",
+      "The chemical formula of common salt is:",
+      "साधारण नमक का रासायनिक सूत्र है:",
+      { en: "NaCl", hi: "NaCl" },
+      [
+        { en: "H2O", hi: "H2O" },
+        { en: "CO2", hi: "CO2" },
+        { en: "O2", hi: "O2" },
+      ],
+      "Common salt is sodium chloride (NaCl).",
+      "साधारण नमक सोडियम क्लोराइड (NaCl) है।",
+      seed
+    );
+  });
+}
+
+function createRailwayGaQuestions(patternKey: string, setNumber: number, count: number): GovPracticeQuestion[] {
+  return Array.from({ length: count }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 9000 + qNo;
+    const maxPattern = setNumber <= 2 ? 4 : setNumber <= 4 ? 5 : 6;
+    const pattern = index % maxPattern;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य जागरूकता",
+        "The Constitution of India came into force on:",
+        "भारत का संविधान लागू हुआ:",
+        { en: "26 January 1950", hi: "26 जनवरी 1950" },
+        [
+          { en: "15 August 1947", hi: "15 अगस्त 1947" },
+          { en: "26 November 1949", hi: "26 नवंबर 1949" },
+          { en: "2 October 1950", hi: "2 अक्टूबर 1950" },
+        ],
+        "Constitution came into effect on 26 January 1950.",
+        "संविधान 26 जनवरी 1950 को प्रभावी हुआ।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य जागरूकता",
+        "Indian Railways is governed under which ministry?",
+        "भारतीय रेलवे किस मंत्रालय के अंतर्गत आता है?",
+        { en: "Ministry of Railways", hi: "रेल मंत्रालय" },
+        [
+          { en: "Ministry of Transport", hi: "परिवहन मंत्रालय" },
+          { en: "Ministry of Home Affairs", hi: "गृह मंत्रालय" },
+          { en: "Ministry of Industry", hi: "उद्योग मंत्रालय" },
+        ],
+        "Indian Railways functions under Ministry of Railways.",
+        "भारतीय रेलवे रेल मंत्रालय के अंतर्गत कार्य करता है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य जागरूकता",
+        "Who is known as the Father of the Indian Constitution?",
+        "भारतीय संविधान के जनक किसे कहा जाता है?",
+        { en: "Dr. B. R. Ambedkar", hi: "डॉ. बी. आर. अंबेडकर" },
+        [
+          { en: "Mahatma Gandhi", hi: "महात्मा गांधी" },
+          { en: "Jawaharlal Nehru", hi: "जवाहरलाल नेहरू" },
+          { en: "Sardar Patel", hi: "सरदार पटेल" },
+        ],
+        "Dr. B. R. Ambedkar chaired the drafting committee.",
+        "डॉ. बी. आर. अंबेडकर मसौदा समिति के अध्यक्ष थे।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य जागरूकता",
+        "The currency of Japan is:",
+        "जापान की मुद्रा है:",
+        { en: "Yen", hi: "येन" },
+        [
+          { en: "Won", hi: "वॉन" },
+          { en: "Euro", hi: "यूरो" },
+          { en: "Peso", hi: "पेसो" },
+        ],
+        "The official currency of Japan is Yen.",
+        "जापान की आधिकारिक मुद्रा येन है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `${patternKey}-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य जागरूकता",
+        "Which is the longest river in India?",
+        "भारत की सबसे लंबी नदी कौन सी है?",
+        { en: "Ganga", hi: "गंगा" },
+        [
+          { en: "Yamuna", hi: "यमुना" },
+          { en: "Godavari", hi: "गोदावरी" },
+          { en: "Narmada", hi: "नर्मदा" },
+        ],
+        "Ganga is considered the longest river in India in standard GK exams.",
+        "सामान्य GK में गंगा को भारत की सबसे लंबी नदी माना जाता है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `${patternKey}-set${setNumber}-ga-${qNo}`,
+      "General Awareness",
+      "सामान्य जागरूकता",
+      "Who wrote the national song 'Vande Mataram'?",
+      "राष्ट्रीय गीत 'वंदे मातरम्' किसने लिखा?",
+      { en: "Bankim Chandra Chattopadhyay", hi: "बंकिम चंद्र चट्टोपाध्याय" },
+      [
+        { en: "Rabindranath Tagore", hi: "रवींद्रनाथ टैगोर" },
+        { en: "Subramania Bharati", hi: "सुब्रमण्यम भारती" },
+        { en: "Sarojini Naidu", hi: "सरोजिनी नायडू" },
+      ],
+      "Vande Mataram was written by Bankim Chandra Chattopadhyay.",
+      "वंदे मातरम् बंकिम चंद्र चट्टोपाध्याय ने लिखा था।",
+      seed
+    );
+  });
+}
+
+function generateRailwayPatternSets(config: RailwayPatternConfig, totalSets = 5): GovPracticeSet[] {
+  return Array.from({ length: totalSets }, (_, index) => {
+    const setNumber = index + 1;
+    const questions = [
+      ...createRailwayMathQuestions(config.key, setNumber, config.mathCount),
+      ...createRailwayReasoningQuestions(config.key, setNumber, config.reasoningCount),
+      ...createRailwayScienceQuestions(config.key, setNumber, config.scienceCount),
+      ...createRailwayGaQuestions(config.key, setNumber, config.gaCount),
+    ];
+
+    return {
+      slug: `${config.slugPrefix}-mock-${setNumber}`,
+      title: `${config.title} Mock Test ${setNumber}`,
+      titleHi: `${config.titleHi} मॉक टेस्ट ${setNumber}`,
+      chapter: config.chapter,
+      chapterHi: config.chapterHi,
+      difficulty: setNumber <= 2 ? "Easy" : setNumber <= 4 ? "Medium" : "Hard",
+      durationMin: config.durationMin,
+      questionCount: config.questionCount,
+      bilingual: true,
+      isLive: true,
+      questions,
+    };
+  });
+}
+
+const railwayGroupDConfig: RailwayPatternConfig = {
+  key: "group-d",
+  slugPrefix: "rrb-group-d",
+  title: "RRB Group D CBT",
+  titleHi: "RRB ग्रुप D CBT",
+  chapter: "Official-style Group D pattern (Math 25, Reasoning 30, Science 25, GA 20)",
+  chapterHi: "ऑफिशियल-स्टाइल ग्रुप D पैटर्न (गणित 25, तर्क 30, विज्ञान 25, GA 20)",
+  questionCount: 100,
+  durationMin: 90,
+  mathCount: 25,
+  reasoningCount: 30,
+  scienceCount: 25,
+  gaCount: 20,
+};
+
+const railwayNtpcConfig: RailwayPatternConfig = {
+  key: "ntpc-cbt-1",
+  slugPrefix: "rrb-ntpc-cbt-1",
+  title: "RRB NTPC CBT-1",
+  titleHi: "RRB NTPC CBT-1",
+  chapter: "Official-style NTPC CBT-1 pattern (Math 30, Reasoning 30, GA 40)",
+  chapterHi: "ऑफिशियल-स्टाइल NTPC CBT-1 पैटर्न (गणित 30, तर्क 30, GA 40)",
+  questionCount: 100,
+  durationMin: 90,
+  mathCount: 30,
+  reasoningCount: 30,
+  scienceCount: 10,
+  gaCount: 30,
+};
+
+const railwayAlpTechnicianConfig: RailwayPatternConfig = {
+  key: "alp-technician-cbt-1",
+  slugPrefix: "rrb-alp-technician-cbt-1",
+  title: "RRB ALP/Technician CBT-1",
+  titleHi: "RRB ALP/टेक्नीशियन CBT-1",
+  chapter: "Official-style ALP/Technician CBT-1 pattern (Math, Reasoning, Science, Current Affairs)",
+  chapterHi: "ऑफिशियल-स्टाइल ALP/टेक्नीशियन CBT-1 पैटर्न (गणित, तर्क, विज्ञान, करेंट अफेयर्स)",
+  questionCount: 75,
+  durationMin: 60,
+  mathCount: 20,
+  reasoningCount: 25,
+  scienceCount: 20,
+  gaCount: 10,
+};
+
+const railwayTicketClerkTtConfig: RailwayPatternConfig = {
+  key: "ticket-clerk-tt",
+  slugPrefix: "rrb-ticket-clerk-tt",
+  title: "RRB Ticket Clerk / TT CBT",
+  titleHi: "RRB टिकट क्लर्क / TT CBT",
+  chapter: "Official-style Ticket Clerk / TT pattern (Math 30, Reasoning 30, GA 40)",
+  chapterHi: "ऑफिशियल-स्टाइल टिकट क्लर्क / TT पैटर्न (गणित 30, तर्क 30, GA 40)",
+  questionCount: 100,
+  durationMin: 90,
+  mathCount: 30,
+  reasoningCount: 30,
+  scienceCount: 10,
+  gaCount: 30,
+};
+
 export const practiceCategories: PracticeCategoryMeta[] = [
   {
     slug: "ielts",
@@ -4573,10 +5178,10 @@ export const practiceCategories: PracticeCategoryMeta[] = [
     title: "Railway Practice Tests",
     shortTitle: "Railway",
     description:
-      "Free Railway exam practice sets with answers and explanations in English and Hindi covering Mathematics, Reasoning, Science, and General Knowledge.",
+      "Free Railway bilingual practice tests with answers and explanations in English and Hindi, including official-style RRB Group D CBT, NTPC CBT-1, ALP/Technician CBT-1, and Ticket Clerk/TT patterns with 5 full-length mocks in each track.",
     heroTitle: "Railway Practice Tests with Bilingual Support",
     heroText:
-      "Practice Railway recruitment questions in English and Hindi with instant scoring and explanations for railway job aspirants.",
+      "Practice Railway recruitment questions in English and Hindi with instant scoring, pattern-based full-length mocks, and practical section-wise exam preparation.",
     ctaHref: "/practice-tests/railway",
     ctaLabel: "Start Railway Practice",
   },
@@ -5440,683 +6045,21 @@ export const govPracticeCategories: GovPracticeCategory[] = [
     titleHi: "रेलवे अभ्यास परीक्षा",
     icon: "🚂",
     description:
-      "Free Railway exam practice sets with answers and explanations in English and Hindi covering Mathematics, Reasoning, Science, and General Knowledge.",
+      "Free Railway bilingual practice tests with answers and explanations in English and Hindi, including official-style full-length mocks for RRB Group D CBT, NTPC CBT-1, ALP/Technician CBT-1, and Ticket Clerk/TT patterns.",
     descriptionHi:
-      "गणित, तर्क, विज्ञान और सामान्य ज्ञान को कवर करने के लिए अंग्रेजी और हिंदी में उत्तरों और स्पष्टीकरण के साथ नि:शुल्क रेलवे परीक्षा अभ्यास सेट।",
+      "अंग्रेजी और हिंदी में उत्तर व स्पष्टीकरण के साथ रेलवे के लिए ऑफिशियल-स्टाइल फुल-लेंथ मॉक: RRB ग्रुप D CBT, NTPC CBT-1, ALP/टेक्नीशियन CBT-1 और टिकट क्लर्क/TT पैटर्न।",
     audience: ["Railway aspirants", "RRB exam candidates", "Government job seekers"],
     chapters: [
-      { name: "Mathematics", hi: "गणित" },
-      { name: "Reasoning", hi: "तर्क" },
-      { name: "Science", hi: "विज्ञान" },
-      { name: "General Knowledge", hi: "सामान्य ज्ञान" },
+      { name: "RRB Group D CBT", hi: "RRB ग्रुप D CBT" },
+      { name: "RRB NTPC CBT-1", hi: "RRB NTPC CBT-1" },
+      { name: "RRB ALP/Technician CBT-1", hi: "RRB ALP/टेक्नीशियन CBT-1" },
+      { name: "RRB Ticket Clerk / TT CBT", hi: "RRB टिकट क्लर्क / TT CBT" },
     ],
     sets: [
-      {
-        slug: "maths-set-1",
-        title: "Mathematics Set 1",
-        titleHi: "गणित सेट 1",
-        chapter: "Mathematics",
-        chapterHi: "गणित",
-        difficulty: "Easy",
-        durationMin: 15,
-        questionCount: 10,
-        bilingual: true,
-        isLive: true,
-        questions: [
-          createGovQuestion(
-            "rail-math-1",
-            "Mathematics",
-            "गणित",
-            "What is 18 + 27?",
-            "18 + 27 क्या है?",
-            [
-              "35",
-              "45",
-              "55",
-              "65",
-              "35",
-              "45",
-              "55",
-              "65",
-            ],
-            "B",
-            "18 + 27 = 45.",
-            "18 + 27 = 45।"
-          ),
-          createGovQuestion(
-            "rail-math-2",
-            "Mathematics",
-            "गणित",
-            "What is 9 × 7?",
-            "9 × 7 क्या है?",
-            [
-              "56",
-              "63",
-              "72",
-              "81",
-              "56",
-              "63",
-              "72",
-              "81",
-            ],
-            "B",
-            "9 × 7 = 63.",
-            "9 × 7 = 63।"
-          ),
-          createGovQuestion(
-            "rail-math-3",
-            "Mathematics",
-            "गणित",
-            "What is 144 ÷ 12?",
-            "144 ÷ 12 क्या है?",
-            [
-              "10",
-              "11",
-              "12",
-              "13",
-              "10",
-              "11",
-              "12",
-              "13",
-            ],
-            "C",
-            "144 ÷ 12 = 12.",
-            "144 ÷ 12 = 12।"
-          ),
-          createGovQuestion(
-            "rail-math-4",
-            "Mathematics",
-            "गणित",
-            "What is one-fourth of 80?",
-            "80 का एक-चौथाई क्या है?",
-            [
-              "10",
-              "20",
-              "30",
-              "40",
-              "10",
-              "20",
-              "30",
-              "40",
-            ],
-            "B",
-            "80 ÷ 4 = 20.",
-            "80 ÷ 4 = 20।"
-          ),
-          createGovQuestion(
-            "rail-math-5",
-            "Mathematics",
-            "गणित",
-            "The value of 2² + 3² is:",
-            "2² + 3² का मान है:",
-            [
-              "10",
-              "11",
-              "12",
-              "13",
-              "10",
-              "11",
-              "12",
-              "13",
-            ],
-            "D",
-            "2² = 4 and 3² = 9, so total is 13.",
-            "2² = 4 और 3² = 9, इसलिए कुल 13 है।"
-          ),
-          createGovQuestion(
-            "rail-math-6",
-            "Mathematics",
-            "गणित",
-            "If one pen costs ₹12, then 5 pens cost:",
-            "यदि एक पेन की कीमत ₹12 है, तो 5 पेन की कीमत होगी:",
-            [
-              "₹50",
-              "₹55",
-              "₹60",
-              "₹65",
-              "₹50",
-              "₹55",
-              "₹60",
-              "₹65",
-            ],
-            "C",
-            "12 × 5 = 60.",
-            "12 × 5 = 60।"
-          ),
-          createGovQuestion(
-            "rail-math-7",
-            "Mathematics",
-            "गणित",
-            "What is 30% of 90?",
-            "90 का 30% कितना है?",
-            [
-              "18",
-              "24",
-              "27",
-              "30",
-              "18",
-              "24",
-              "27",
-              "30",
-            ],
-            "C",
-            "30% of 90 = 27.",
-            "90 का 30% = 27।"
-          ),
-          createGovQuestion(
-            "rail-math-8",
-            "Mathematics",
-            "गणित",
-            "The HCF of 12 and 18 is:",
-            "12 और 18 का HCF है:",
-            [
-              "3",
-              "6",
-              "9",
-              "12",
-              "3",
-              "6",
-              "9",
-              "12",
-            ],
-            "B",
-            "The HCF of 12 and 18 is 6.",
-            "12 और 18 का HCF 6 है।"
-          ),
-          createGovQuestion(
-            "rail-math-9",
-            "Mathematics",
-            "गणित",
-            "A shopkeeper gives ₹5 discount on ₹50. Final price is:",
-            "एक दुकानदार ₹50 पर ₹5 की छूट देता है। अंतिम कीमत है:",
-            [
-              "₹40",
-              "₹45",
-              "₹50",
-              "₹55",
-              "₹40",
-              "₹45",
-              "₹50",
-              "₹55",
-            ],
-            "B",
-            "₹50 - ₹5 = ₹45.",
-            "₹50 - ₹5 = ₹45।"
-          ),
-          createGovQuestion(
-            "rail-math-10",
-            "Mathematics",
-            "गणित",
-            "Find the next number: 5, 10, 15, 20, ?",
-            "अगली संख्या ज्ञात करें: 5, 10, 15, 20, ?",
-            [
-              "21",
-              "24",
-              "25",
-              "30",
-              "21",
-              "24",
-              "25",
-              "30",
-            ],
-            "C",
-            "The pattern increases by 5, so the next number is 25.",
-            "यह क्रम 5-5 से बढ़ रहा है, इसलिए अगली संख्या 25 है।"
-          ),
-        ],
-      },
-      {
-        slug: "reasoning-set-1",
-        title: "Reasoning Set 1",
-        titleHi: "तर्क सेट 1",
-        chapter: "Reasoning",
-        chapterHi: "तर्क",
-        difficulty: "Easy",
-        durationMin: 15,
-        bilingual: true,
-        questionCount: 10,
-        isLive: true,
-        questions: [
-          createGovQuestion(
-            "rail-reason-1",
-            "Reasoning",
-            "तर्क",
-            "Choose the odd one out: Rose, Lotus, Tulip, Mango",
-            "विषम पद चुनें: Rose, Lotus, Tulip, Mango",
-            [
-              "Rose",
-              "Lotus",
-              "Tulip",
-              "Mango",
-              "Rose",
-              "Lotus",
-              "Tulip",
-              "Mango",
-            ],
-            "D",
-            "Mango is a fruit, while the others are flowers.",
-            "Mango एक फल है, जबकि बाकी फूल हैं।"
-          ),
-          createGovQuestion(
-            "rail-reason-2",
-            "Reasoning",
-            "तर्क",
-            "Complete the series: A, C, E, G, ?",
-            "श्रृंखला पूरी करें: A, C, E, G, ?",
-            [
-              "H",
-              "I",
-              "J",
-              "K",
-              "H",
-              "I",
-              "J",
-              "K",
-            ],
-            "B",
-            "The letters increase by skipping one each time: A, C, E, G, I.",
-            "प्रत्येक बार एक अक्षर छोड़कर अगला अक्षर लिया गया है: A, C, E, G, I।"
-          ),
-          createGovQuestion(
-            "rail-reason-3",
-            "Reasoning",
-            "तर्क",
-            "If 5 + 3 = 16 and 4 + 2 = 12, then 6 + 1 = ?",
-            "यदि 5 + 3 = 16 और 4 + 2 = 12, तो 6 + 1 = ?",
-            [
-              "12",
-              "14",
-              "16",
-              "18",
-              "12",
-              "14",
-              "16",
-              "18",
-            ],
-            "B",
-            "The rule is 2 × (sum), so 2 × (6 + 1) = 14.",
-            "नियम है 2 × (योग), इसलिए 2 × (6 + 1) = 14।"
-          ),
-          createGovQuestion(
-            "rail-reason-4",
-            "Reasoning",
-            "तर्क",
-            "Mirror image questions mostly test:",
-            "Mirror image प्रश्न मुख्य रूप से किसका परीक्षण करते हैं?",
-            [
-              "Language",
-              "Spatial understanding",
-              "Essay writing",
-              "Science facts",
-              "भाषा",
-              "स्थानिक समझ",
-              "निबंध लेखन",
-              "विज्ञान तथ्य",
-            ],
-            "B",
-            "Mirror image questions test spatial understanding.",
-            "Mirror image प्रश्न स्थानिक समझ की जाँच करते हैं।"
-          ),
-          createGovQuestion(
-            "rail-reason-5",
-            "Reasoning",
-            "तर्क",
-            "Find the missing number: 7, 14, 21, __, 35",
-            "लुप्त संख्या ज्ञात करें: 7, 14, 21, __, 35",
-            [
-              "24",
-              "27",
-              "28",
-              "30",
-              "24",
-              "27",
-              "28",
-              "30",
-            ],
-            "C",
-            "The pattern is multiples of 7, so the missing number is 28.",
-            "यह 7 के गुणजों की श्रृंखला है, इसलिए लुप्त संख्या 28 है।"
-          ),
-          createGovQuestion(
-            "rail-reason-6",
-            "Reasoning",
-            "तर्क",
-            "Choose the different one: Monday, Tuesday, January, Friday",
-            "भिन्न पद चुनें: Monday, Tuesday, January, Friday",
-            [
-              "Monday",
-              "Tuesday",
-              "January",
-              "Friday",
-              "Monday",
-              "Tuesday",
-              "January",
-              "Friday",
-            ],
-            "C",
-            "January is a month, the others are weekdays.",
-            "January एक महीना है, बाकी सप्ताह के दिन हैं।"
-          ),
-          createGovQuestion(
-            "rail-reason-7",
-            "Reasoning",
-            "तर्क",
-            "Find the next term: 1, 4, 9, 16, ?",
-            "अगला पद ज्ञात करें: 1, 4, 9, 16, ?",
-            [
-              "20",
-              "25",
-              "36",
-              "49",
-              "20",
-              "25",
-              "36",
-              "49",
-            ],
-            "B",
-            "These are square numbers: 1², 2², 3², 4², so next is 5² = 25.",
-            "ये वर्ग संख्याएँ हैं: 1², 2², 3², 4², इसलिए अगला 5² = 25 होगा।"
-          ),
-          createGovQuestion(
-            "rail-reason-8",
-            "Reasoning",
-            "तर्क",
-            "Book : Read :: Food : ?",
-            "Book : Read :: Food : ?",
-            [
-              "Cook",
-              "Eat",
-              "Write",
-              "Buy",
-              "पकाना",
-              "खाना",
-              "लिखना",
-              "खरीदना",
-            ],
-            "B",
-            "A book is read, food is eaten.",
-            "पुस्तक पढ़ी जाती है, भोजन खाया जाता है।"
-          ),
-          createGovQuestion(
-            "rail-reason-9",
-            "Reasoning",
-            "तर्क",
-            "How many letters are there between A and F in the English alphabet?",
-            "अंग्रेजी वर्णमाला में A और F के बीच कितने अक्षर हैं?",
-            [
-              "3",
-              "4",
-              "5",
-              "6",
-              "3",
-              "4",
-              "5",
-              "6",
-            ],
-            "B",
-            "B, C, D and E come between A and F, so there are 4 letters.",
-            "A और F के बीच B, C, D और E आते हैं, इसलिए 4 अक्षर हैं।"
-          ),
-          createGovQuestion(
-            "rail-reason-10",
-            "Reasoning",
-            "तर्क",
-            "Which shape has 3 sides?",
-            "किस आकृति की 3 भुजाएँ होती हैं?",
-            [
-              "Square",
-              "Circle",
-              "Triangle",
-              "Rectangle",
-              "वर्ग",
-              "वृत्त",
-              "त्रिभुज",
-              "आयत",
-            ],
-            "C",
-            "A triangle has 3 sides.",
-            "त्रिभुज की 3 भुजाएँ होती हैं।"
-          ),
-        ],
-      },
-      {
-        slug: "science-set-1",
-        title: "Science Set 1",
-        titleHi: "विज्ञान सेट 1",
-        chapter: "Science",
-        chapterHi: "विज्ञान",
-        difficulty: "Easy",
-        durationMin: 15,
-        questionCount: 10,
-        bilingual: true,
-        isLive: true,
-        questions: [
-          createGovQuestion(
-            "rail-sci-1",
-            "Science",
-            "विज्ञान",
-            "The boiling point of water at normal pressure is:",
-            "सामान्य दाब पर पानी का क्वथनांक है:",
-            [
-              "90°C",
-              "95°C",
-              "100°C",
-              "110°C",
-              "90°C",
-              "95°C",
-              "100°C",
-              "110°C",
-            ],
-            "C",
-            "Water boils at 100°C at normal atmospheric pressure.",
-            "सामान्य वायुदाब पर पानी 100°C पर उबलता है।"
-          ),
-          createGovQuestion(
-            "rail-sci-2",
-            "Science",
-            "विज्ञान",
-            "Plants prepare food by the process of:",
-            "पौधे भोजन किस प्रक्रिया से बनाते हैं?",
-            [
-              "Respiration",
-              "Photosynthesis",
-              "Digestion",
-              "Transpiration",
-              "श्वसन",
-              "प्रकाश संश्लेषण",
-              "पाचन",
-              "वाष्पोत्सर्जन",
-            ],
-            "B",
-            "Plants prepare food through photosynthesis.",
-            "पौधे प्रकाश संश्लेषण द्वारा भोजन बनाते हैं।"
-          ),
-          createGovQuestion(
-            "rail-sci-3",
-            "Science",
-            "विज्ञान",
-            "The largest organ in the human body is:",
-            "मानव शरीर का सबसे बड़ा अंग है:",
-            [
-              "Heart",
-              "Liver",
-              "Skin",
-              "Lungs",
-              "हृदय",
-              "यकृत",
-              "त्वचा",
-              "फेफड़े",
-            ],
-            "C",
-            "Skin is the largest organ in the human body.",
-            "त्वचा मानव शरीर का सबसे बड़ा अंग है।"
-          ),
-          createGovQuestion(
-            "rail-sci-4",
-            "Science",
-            "विज्ञान",
-            "Which gas is most abundant in Earth's atmosphere?",
-            "पृथ्वी के वायुमंडल में सबसे अधिक कौन सी गैस है?",
-            [
-              "Oxygen",
-              "Nitrogen",
-              "Carbon dioxide",
-              "Hydrogen",
-              "ऑक्सीजन",
-              "नाइट्रोजन",
-              "कार्बन डाइऑक्साइड",
-              "हाइड्रोजन",
-            ],
-            "B",
-            "Nitrogen is the most abundant gas in the atmosphere.",
-            "वायुमंडल में नाइट्रोजन सबसे अधिक मात्रा में पाई जाती है।"
-          ),
-          createGovQuestion(
-            "rail-sci-5",
-            "Science",
-            "विज्ञान",
-            "The SI unit of force is:",
-            "बल की SI इकाई है:",
-            [
-              "Joule",
-              "Watt",
-              "Newton",
-              "Pascal",
-              "जूल",
-              "वाट",
-              "न्यूटन",
-              "पास्कल",
-            ],
-            "C",
-            "The SI unit of force is Newton.",
-            "बल की SI इकाई न्यूटन है।"
-          ),
-          createGovQuestion(
-            "rail-sci-6",
-            "Science",
-            "विज्ञान",
-            "Which part of a plant conducts water?",
-            "पौधे का कौन सा भाग जल का परिवहन करता है?",
-            [
-              "Phloem",
-              "Xylem",
-              "Leaf",
-              "Petal",
-              "फ्लोएम",
-              "जाइलम",
-              "पत्ता",
-              "पंखुड़ी",
-            ],
-            "B",
-            "Xylem carries water from roots to other parts.",
-            "जाइलम जड़ों से जल को अन्य भागों तक पहुँचाता है।"
-          ),
-          createGovQuestion(
-            "rail-sci-7",
-            "Science",
-            "विज्ञान",
-            "Which vitamin is mainly obtained from sunlight?",
-            "मुख्य रूप से सूर्य के प्रकाश से कौन सा विटामिन प्राप्त होता है?",
-            [
-              "Vitamin A",
-              "Vitamin B",
-              "Vitamin C",
-              "Vitamin D",
-              "विटामिन A",
-              "विटामिन B",
-              "विटामिन C",
-              "विटामिन D",
-            ],
-            "D",
-            "Vitamin D is formed in the body with the help of sunlight.",
-            "सूर्य के प्रकाश की सहायता से शरीर में विटामिन D बनता है।"
-          ),
-          createGovQuestion(
-            "rail-sci-8",
-            "Science",
-            "विज्ञान",
-            "The chemical formula of water is:",
-            "पानी का रासायनिक सूत्र है:",
-            [
-              "CO2",
-              "H2O",
-              "O2",
-              "NaCl",
-              "CO2",
-              "H2O",
-              "O2",
-              "NaCl",
-            ],
-            "B",
-            "Water is represented by H2O.",
-            "पानी को H2O द्वारा दर्शाया जाता है।"
-          ),
-          createGovQuestion(
-            "rail-sci-9",
-            "Science",
-            "विज्ञान",
-            "The nearest star to Earth is:",
-            "पृथ्वी के सबसे निकट स्थित तारा है:",
-            [
-              "Moon",
-              "Mars",
-              "Sun",
-              "Venus",
-              "चंद्रमा",
-              "मंगल",
-              "सूर्य",
-              "शुक्र",
-            ],
-            "C",
-            "The Sun is the nearest star to Earth.",
-            "सूर्य पृथ्वी का सबसे निकट स्थित तारा है।"
-          ),
-          createGovQuestion(
-            "rail-sci-10",
-            "Science",
-            "विज्ञान",
-            "Which organ pumps blood in the human body?",
-            "मानव शरीर में रक्त कौन सा अंग पंप करता है?",
-            [
-              "Brain",
-              "Liver",
-              "Heart",
-              "Kidney",
-              "मस्तिष्क",
-              "यकृत",
-              "हृदय",
-              "गुर्दा",
-            ],
-            "C",
-            "The heart pumps blood throughout the body.",
-            "हृदय पूरे शरीर में रक्त पंप करता है।"
-          ),
-        ],
-      },
-      {
-  slug: "gk-set-1",
-  title: "General Knowledge Set 1",
-  titleHi: "सामान्य ज्ञान सेट 1",
-  chapter: "General Knowledge",
-  chapterHi: "सामान्य ज्ञान",
-  difficulty: "Easy",
-  durationMin: 15,
-  questionCount: 10,
-  bilingual: true,
-  isLive: true,
-  questions: [
-    createGovQuestion("rail-gk-1","GK","GK","Capital of India?","भारत की राजधानी?",["Delhi","Mumbai","Chennai","Kolkata","दिल्ली","मुंबई","चेन्नई","कोलकाता"],"A","Delhi capital.","दिल्ली राजधानी।"),
-    createGovQuestion("rail-gk-2","GK","GK","Currency of India?","भारत की मुद्रा?",["Rupee","Dollar","Euro","Yen","रुपया","डॉलर","यूरो","येन"],"A","Rupee currency.","रुपया मुद्रा।"),
-    createGovQuestion("rail-gk-3","GK","GK","National animal?","राष्ट्रीय पशु?",["Tiger","Lion","Dog","Elephant","बाघ","शेर","कुत्ता","हाथी"],"A","Tiger national animal.","बाघ राष्ट्रीय पशु।"),
-    createGovQuestion("rail-gk-4","GK","GK","National bird?","राष्ट्रीय पक्षी?",["Peacock","Crow","Parrot","Sparrow","मोर","कौवा","तोता","गौरैया"],"A","Peacock bird.","मोर पक्षी।"),
-    createGovQuestion("rail-gk-5","GK","GK","India independence year?","भारत स्वतंत्रता वर्ष?",["1947","1950","1945","1960","1947","1950","1945","1960"],"A","India independent 1947.","भारत 1947 में स्वतंत्र हुआ।"),
-    createGovQuestion("rail-gk-6","GK","GK","Largest ocean?","सबसे बड़ा महासागर?",["Pacific","Atlantic","Indian","Arctic","प्रशांत","अटलांटिक","हिंद","आर्कटिक"],"A","Pacific largest.","प्रशांत सबसे बड़ा।"),
-    createGovQuestion("rail-gk-7","GK","GK","Earth shape?","पृथ्वी का आकार?",["Round","Flat","Square","Triangle","गोल","समतल","चौकोर","त्रिकोण"],"A","Earth is round.","पृथ्वी गोल है।"),
-    createGovQuestion("rail-gk-8","GK","GK","Sun is a:","सूर्य क्या है?",["Star","Planet","Moon","None","तारा","ग्रह","चंद्रमा","कोई नहीं"],"A","Sun is star.","सूर्य तारा है।"),
-    createGovQuestion("rail-gk-9","GK","GK","National flower?","राष्ट्रीय फूल?",["Lotus","Rose","Lily","Sunflower","कमल","गुलाब","लिली","सूरजमुखी"],"A","Lotus flower.","कमल फूल।"),
-    createGovQuestion("rail-gk-10","GK","GK","Which is a festival?","कौन सा त्योहार है?",["Diwali","Table","Chair","Pen","दीवाली","मेज","कुर्सी","पेन"],"A","Diwali festival.","दीवाली त्योहार।"),
-  ],
-},
+      ...generateRailwayPatternSets(railwayGroupDConfig, 5),
+      ...generateRailwayPatternSets(railwayNtpcConfig, 5),
+      ...generateRailwayPatternSets(railwayAlpTechnicianConfig, 5),
+      ...generateRailwayPatternSets(railwayTicketClerkTtConfig, 5),
     ],
   },
 ];
