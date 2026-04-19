@@ -51,7 +51,7 @@ export default async function PracticeCategoryPage({ params }: Props) {
   const engineeringFaqs = [
     {
       q: "Which exam should I prepare for first: JEE Main, JEE Advanced, or state CET exams?",
-      a: "Start with JEE Main level fundamentals because it builds core PCM confidence. Move to JEE Advanced after you can consistently solve moderate JEE Main problems. Choose COMEDK, WBJEE, or KCET practice in parallel if those exams match your target colleges and state preferences.",
+      a: "Follow the sequence on this page: COMEDK, KCET, WBJEE, JEE Main, and then JEE Advanced. This flow helps many students build speed and confidence first, then move to tougher national-level pressure and problem depth.",
     },
     {
       q: "How should I use these practice sets if I am in Class 11 or Class 12?",
@@ -114,8 +114,8 @@ export default async function PracticeCategoryPage({ params }: Props) {
           <div className="mt-5 max-w-4xl space-y-3 text-sm leading-7 text-slate-700">
             <p>
               This page is designed for students who want practical engineering entrance preparation without guesswork.
-              You can start from beginner-level mixed questions, then move into exam-specific tracks like JEE Main,
-              JEE Advanced, COMEDK, WBJEE, and KCET.
+              You can start from beginner-level mixed questions, then move into exam-specific tracks in this order:
+              COMEDK, KCET, WBJEE, JEE Main, and JEE Advanced.
             </p>
             <p>
               Every practice set is built for step-by-step learning: attempt, review explanations, and identify your weak
