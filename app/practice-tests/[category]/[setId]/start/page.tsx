@@ -50,13 +50,6 @@ export default async function PracticeSetStartPage({ params }: Props) {
 
   if (govSet) {
     if (!govSet.isLive) {
-      return {
-        title: `${govSet.title} - Coming Soon`,
-        description: `Practice set for ${govSet.title} is under development.`,
-        robots: "noindex",
-      };
-    }
-    if (!govSet.isLive) {
       return (
         <div className="space-y-6">
           <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm text-center">
