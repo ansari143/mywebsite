@@ -6,6 +6,7 @@ import {
   getPracticeSetsByCategory,
   getGovPracticeCategoryBySlug,
   getEngineeringPracticeGroups,
+  getIeltsPracticeGroups,
 } from "@/data/practiceTests";
 
 type Props = {
@@ -36,11 +37,16 @@ export default async function PracticeCategoryPage({ params }: Props) {
   const categoryData = getPracticeCategory(category);
   const govCategoryData = getGovPracticeCategoryBySlug(category);
   const isEngineering = category === "engineering-entrance";
+  const isIelts = category === "ielts";
 
   if (!categoryData && !govCategoryData) return notFound();
 
   const isGov = !!govCategoryData;
   const data = govCategoryData || categoryData!;
+  const ieltsGroups = isIelts ? getIeltsPracticeGroups() : [];
+  const ieltsFoundationSets = isIelts
+    ? getPracticeSetsByCategory(category).filter((set) => !set.practiceGroup)
+    : [];
 
   const engineeringFaqs = [
     {
@@ -69,6 +75,29 @@ export default async function PracticeCategoryPage({ params }: Props) {
     },
   ];
 
+  const ieltsFaqs = [
+    {
+      q: "Which IELTS practice track should I choose first: Academic or General Training?",
+      a: "Choose Academic if you are applying to universities, colleges, or academic pathway programs. Choose General Training if you are preparing for work, migration, or practical everyday English requirements. Listening and Speaking matter to both groups, so those tracks are useful for everyone.",
+    },
+    {
+      q: "Can students, employees, and immigrants all use this page?",
+      a: "Yes. Students can focus on Academic Reading, Writing, and Speaking. Employees and migration applicants can focus on General Training Reading, Writing strategy, Speaking, and Listening. The page is structured so each user group can choose the right section instead of guessing.",
+    },
+    {
+      q: "Do these tests match the real IELTS exactly?",
+      a: "They are original, exam-pattern-based practice tests. Listening and reading sets are closer to real section counts and timing. Writing and speaking sets use objective practice because real IELTS Writing and Speaking still require human evaluation for full band scoring.",
+    },
+    {
+      q: "How should I use these practice tests every week?",
+      a: "A practical weekly plan is two skill-building sessions, one timed reading or listening session, one writing or speaking strategy session, and one review day. If you are weak in one skill, give that area two sessions instead of one.",
+    },
+    {
+      q: "What score goal should I set before moving to harder IELTS sets?",
+      a: "For objective practice on this page, aim for around 70% accuracy in foundation sets and at least 75% in your target skill area before moving into stricter timed practice. For band targets, combine these tests with real writing and speaking feedback.",
+    },
+  ];
+
   return (
     <div className="space-y-8">
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
@@ -94,6 +123,20 @@ export default async function PracticeCategoryPage({ params }: Props) {
             </p>
           </div>
         )}
+        {isIelts && (
+          <div className="mt-5 max-w-4xl space-y-3 text-sm leading-7 text-slate-700">
+            <p>
+              This IELTS page is structured for three major user groups: students preparing for study abroad,
+              employees aiming for work-related English proof, and immigrants preparing for migration pathways.
+              Instead of one thin mixed page, you can now choose section-based tracks that match the real IELTS structure more closely.
+            </p>
+            <p>
+              Start with the correct route first: Academic Reading for study-focused goals, General Training Reading for
+              work or migration goals, and Listening, Writing, and Speaking practice for all candidate types. Every set is designed
+              for attempt-review-repeat learning so you improve accuracy, confidence, and exam judgment together.
+            </p>
+          </div>
+        )}
         {isGov && (
           <div className="mt-4 flex flex-wrap gap-2">
             {govCategoryData!.audience.map((aud) => (
@@ -104,6 +147,104 @@ export default async function PracticeCategoryPage({ params }: Props) {
           </div>
         )}
       </section>
+
+      {isIelts && (
+        <section className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+            <h2 className="text-xl font-bold text-emerald-900">Who should choose this</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
+              <li>Students preparing for study abroad admissions and university English requirements.</li>
+              <li>Working professionals who need IELTS for jobs, licensing, or relocation plans.</li>
+              <li>Immigration applicants preparing for General Training and practical English use cases.</li>
+              <li>Learners who want explanation-based practice before full mock testing or paid coaching.</li>
+            </ul>
+          </div>
+          <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+            <h2 className="text-xl font-bold text-rose-900">Who should avoid this format</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
+              <li>Candidates who want only official Cambridge books or copyrighted past papers.</li>
+              <li>Learners expecting live speaking evaluation or scored essay correction on this page alone.</li>
+              <li>Users who want shortcuts without reviewing explanations and recurring mistakes.</li>
+              <li>People who still have not decided whether they need IELTS Academic or General Training.</li>
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {isIelts && (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-bold text-slate-900">Step-by-step IELTS practice roadmap</h2>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 1: Choose the correct exam route</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Pick Academic if your goal is university or higher education. Pick General Training if your goal is work,
+                migration, or practical English proof.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 2: Build one skill at a time</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Start with Listening or Reading sets to improve objective accuracy first. Then add Writing strategy and Speaking confidence practice.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 3: Add timed rounds</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Use 40-question listening and reading sets under realistic timing. Track careless errors separately from vocabulary or comprehension gaps.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">Step 4: Review by skill, not only score</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                After every set, ask whether the mistake came from weak vocabulary, slow reading, poor concentration, weak task structure, or short spoken answers.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {isIelts && (
+        <section className="rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm sm:p-8">
+          <div className="inline-flex rounded-full border border-sky-200 bg-white px-3 py-1 text-sm font-medium text-sky-700">
+            IELTS Format At A Glance
+          </div>
+          <h2 className="mt-4 text-2xl font-bold text-slate-900">How these IELTS practice tests map to real exam needs</h2>
+          <p className="mt-3 max-w-4xl text-base leading-7 text-slate-700">
+            IELTS has four core skill areas: Listening, Reading, Writing, and Speaking. Academic and General Training candidates share
+            Listening and Speaking, while Reading and Writing expectations differ depending on the route. This page separates those paths
+            so students, employees, and immigrants can practice with more purpose.
+          </p>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">Listening</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">40 transcript-based questions to train detail capture, focus, and answer checking.</p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">Academic Reading</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">For study abroad applicants who need stronger passage analysis and academic vocabulary control.</p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">General Reading</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">For employees and immigrants handling notices, workplace messages, and practical English texts.</p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">Writing and Speaking</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">Objective strategy practice to improve structure, fluency habits, and common band-limiting decisions.</p>
+            </div>
+          </div>
+          <div className="mt-5 grid gap-4 lg:grid-cols-2">
+            <div className="rounded-2xl border border-sky-100 bg-white p-5 text-sm leading-7 text-slate-700">
+              <p className="font-semibold text-slate-900">Choose IELTS Academic if</p>
+              <p className="mt-2">You are applying to universities, colleges, or student pathways and need stronger academic reading and writing support.</p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-5 text-sm leading-7 text-slate-700">
+              <p className="font-semibold text-slate-900">Choose IELTS General Training if</p>
+              <p className="mt-2">You are preparing for migration, work-related English proof, or practical everyday reading tasks instead of academic passages.</p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {isEngineering && (
         <section className="grid gap-4 lg:grid-cols-2">
@@ -397,6 +538,107 @@ export default async function PracticeCategoryPage({ params }: Props) {
                 </div>
               </div>
             ))
+          ) : isIelts ? (
+            <>
+              {ieltsGroups.map((group) => (
+                <div key={group.key} className="space-y-6">
+                  <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                      <div className="max-w-3xl">
+                        <div className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-medium text-slate-700">
+                          {group.shortName}
+                        </div>
+                        <h3 className="mt-4 text-2xl font-bold text-slate-900">{group.title}</h3>
+                        <p className="mt-3 text-sm leading-7 text-slate-600">{group.description}</p>
+                        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                          <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
+                            <div className="font-semibold text-slate-900">Real-test format</div>
+                            <div className="mt-1">{group.format}</div>
+                          </div>
+                          <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
+                            <div className="font-semibold text-slate-900">Real-test timing</div>
+                            <div className="mt-1">{group.duration}</div>
+                          </div>
+                        </div>
+                        <p className="mt-4 text-sm leading-7 text-slate-600">{group.bestFor}</p>
+                        <p className="mt-4 rounded-2xl bg-slate-50 p-4 text-sm leading-7 text-slate-600">{group.note}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4">
+                    {group.sets.map((set) => (
+                      <div
+                        key={set.slug}
+                        className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
+                      >
+                        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                          <div className="max-w-3xl">
+                            <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">
+                              {set.sectionLabel || set.examType}
+                            </span>
+                            <h4 className="mt-4 text-2xl font-bold text-slate-900">{set.title}</h4>
+                            <p className="mt-3 text-sm leading-7 text-slate-600">{set.description}</p>
+                            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700">
+                              <span className="rounded-full bg-slate-100 px-3 py-1">{set.questionCount} Questions</span>
+                              <span className="rounded-full bg-slate-100 px-3 py-1">~{set.estimatedMinutes} min</span>
+                              <span className="rounded-full bg-slate-100 px-3 py-1 capitalize">{set.level}</span>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                            <Link
+                              href={`/practice-tests/${set.category}/${set.slug}`}
+                              className="rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white hover:bg-blue-700"
+                            >
+                              View Practice Set
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+
+              {ieltsFoundationSets.length > 0 && (
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-slate-900">Foundation English Basics</h3>
+                  <p className="text-sm leading-7 text-slate-600">
+                    These shorter sets are useful before moving into section-based IELTS practice if you still need grammar,
+                    vocabulary, and short reading confidence.
+                  </p>
+                  <div className="grid gap-4">
+                    {ieltsFoundationSets.map((set) => (
+                      <div
+                        key={set.slug}
+                        className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
+                      >
+                        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                          <div className="max-w-3xl">
+                            <h4 className="text-2xl font-bold text-slate-900">{set.title}</h4>
+                            <p className="mt-3 text-sm leading-7 text-slate-600">{set.description}</p>
+                            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700">
+                              <span className="rounded-full bg-slate-100 px-3 py-1">{set.questionCount} Questions</span>
+                              <span className="rounded-full bg-slate-100 px-3 py-1">~{set.estimatedMinutes} min</span>
+                              <span className="rounded-full bg-slate-100 px-3 py-1 capitalize">{set.level}</span>
+                            </div>
+                          </div>
+                          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                            <Link
+                              href={`/practice-tests/${set.category}/${set.slug}`}
+                              className="rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white hover:bg-blue-700"
+                            >
+                              Start Foundation Set
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
           ) : (
             getPracticeSetsByCategory(category).map((set) => (
               <div
@@ -454,6 +696,20 @@ export default async function PracticeCategoryPage({ params }: Props) {
         </section>
       )}
 
+      {isIelts && (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+          <div className="mt-4 space-y-3">
+            {ieltsFaqs.map((faq) => (
+              <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
+                <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
       {isEngineering && (
         <section className="rounded-3xl border border-blue-200 bg-blue-50 p-6">
           <h2 className="text-xl font-bold text-blue-950">Content trust and update policy</h2>
@@ -467,6 +723,23 @@ export default async function PracticeCategoryPage({ params }: Props) {
             </p>
             <p>
               Last reviewed: April 2026. If you find a pattern mismatch, contact us and we will update it.
+            </p>
+          </div>
+        </section>
+      )}
+
+      {isIelts && (
+        <section className="rounded-3xl border border-blue-200 bg-blue-50 p-6">
+          <h2 className="text-xl font-bold text-blue-950">Content trust and update policy</h2>
+          <div className="mt-3 space-y-2 text-sm leading-7 text-blue-900">
+            <p>
+              IELTS practice questions on this page are original and created for educational self-assessment. They are not official IELTS or Cambridge materials.
+            </p>
+            <p>
+              Listening and reading sets are designed to be closer to real section counts and timing, but writing and speaking still need human feedback for full band evaluation.
+            </p>
+            <p>
+              Last reviewed: April 2026. Candidates should still verify the latest format and score-use rules from British Council or IDP IELTS before booking the exam.
             </p>
           </div>
         </section>
@@ -502,6 +775,22 @@ export default async function PracticeCategoryPage({ params }: Props) {
                   className="inline-block rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50"
                 >
                   Browse Student Resources
+                </Link>
+              </>
+            )}
+            {isIelts && (
+              <>
+                <Link
+                  href="/global-careers"
+                  className="inline-block rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50"
+                >
+                  Explore Global Careers
+                </Link>
+                <Link
+                  href="/resources"
+                  className="inline-block rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50"
+                >
+                  Browse Visa And Study Resources
                 </Link>
               </>
             )}

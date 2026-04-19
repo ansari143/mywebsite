@@ -24,6 +24,7 @@ export type PracticeSet = {
   id: string;
   slug: string;
   category: string;
+  practiceGroup?: string;
   title: string;
   description: string;
   examType: string;
@@ -47,6 +48,13 @@ export type PracticeSet = {
   isOriginal?: boolean;
   isLive?: boolean;
 };
+
+type IeltsPracticeGroupKey =
+  | "ielts-listening"
+  | "ielts-academic-reading"
+  | "ielts-general-reading"
+  | "ielts-writing"
+  | "ielts-speaking";
 
 export type ExamRule = {
   examSlug: "jee-main" | "jee-advanced" | "comedk" | "wbjee" | "kcet";
@@ -76,6 +84,74 @@ export type PracticeCategoryMeta = {
   ctaHref: string;
   ctaLabel: string;
 };
+
+const ieltsPracticeGroupMeta = [
+  {
+    key: "ielts-listening" as const,
+    title: "Listening Practice",
+    shortName: "Listening",
+    description:
+      "Transcript-based listening practice for section flow, detail capture, note completion, and distractor control.",
+    duration: "About 30 minutes in the real IELTS Listening test, plus answer transfer on paper.",
+    format: "40 questions across 4 sections",
+    bestFor:
+      "All IELTS candidates including students, employees, and immigrants because Listening is common to Academic and General Training.",
+    note:
+      "These practice sets use transcript-style prompts instead of live audio, so they train comprehension strategy and detail accuracy rather than accent exposure alone.",
+  },
+  {
+    key: "ielts-academic-reading" as const,
+    title: "Academic Reading Practice",
+    shortName: "Academic Reading",
+    description:
+      "Academic reading sets for students targeting university admission and applicants who need stronger passage analysis under time pressure.",
+    duration: "60 minutes in the real IELTS Academic Reading test.",
+    format: "40 questions from 3 longer passages",
+    bestFor:
+      "Students preparing for study abroad applications, pathway programs, and academic admissions.",
+    note:
+      "This site uses objective question types to strengthen skimming, scanning, vocabulary in context, and evidence-based answer selection.",
+  },
+  {
+    key: "ielts-general-reading" as const,
+    title: "General Training Reading Practice",
+    shortName: "General Reading",
+    description:
+      "General Training reading sets built around notices, workplace messages, service information, and practical everyday English.",
+    duration: "60 minutes in the real IELTS General Training Reading test.",
+    format: "40 questions from social, workplace, and general interest texts",
+    bestFor:
+      "Employees, job-seekers, and migration applicants preparing for IELTS General Training.",
+    note:
+      "Use these sets to improve fast information retrieval, instruction-reading, and practical English accuracy in work and migration contexts.",
+  },
+  {
+    key: "ielts-writing" as const,
+    title: "Writing Strategy Practice",
+    shortName: "Writing",
+    description:
+      "Objective writing-preparation sets that help learners understand structure, task response, coherence, overview writing, and band-relevant planning.",
+    duration: "60 minutes in the real IELTS Writing test.",
+    format: "2 tasks in the real exam; these practice sets use objective checks for planning and scoring logic",
+    bestFor:
+      "Students, working professionals, and immigrants who need clearer task structure before full written practice with teacher feedback.",
+    note:
+      "These are not a replacement for real written evaluation. They are designed to improve planning quality and reduce common task mistakes.",
+  },
+  {
+    key: "ielts-speaking" as const,
+    title: "Speaking Confidence Practice",
+    shortName: "Speaking",
+    description:
+      "Speaking-preparation sets for Part 1, cue-card planning, follow-up ideas, fluency habits, and score-limiting mistakes.",
+    duration: "11 to 14 minutes in the real IELTS Speaking test.",
+    format: "3 speaking parts in a live examiner interview; these sets use objective prompts to train response quality",
+    bestFor:
+      "Candidates who freeze during interviews, give short answers, or need better structure for common speaking topics.",
+    note:
+      "Use these sets with voice practice. Objective questions help you understand what a strong spoken response should include.",
+  },
+];
 
 // New types for government job practice tests
 export type GovPracticeOption = {
@@ -900,6 +976,480 @@ function createComedkPracticeSet(setNumber: number): PracticeSet {
   };
 }
 
+function createIeltsListeningQuestions(setNumber: number): PracticeQuestion[] {
+  const scenarios = [
+    { place: "student services desk", purpose: "ID collection", keyword: "passport photo", topic: "note completion" },
+    { place: "college orientation hall", purpose: "campus tour", keyword: "main reception", topic: "short dialogue" },
+    { place: "library help counter", purpose: "membership renewal", keyword: "reference section", topic: "form completion" },
+    { place: "language center office", purpose: "course registration", keyword: "placement check", topic: "schedule detail" },
+    { place: "conference venue", purpose: "speaker briefing", keyword: "front entrance", topic: "multiple choice" },
+    { place: "health clinic reception", purpose: "appointment booking", keyword: "insurance card", topic: "practical information" },
+    { place: "training workshop room", purpose: "skills seminar", keyword: "group activity", topic: "summary completion" },
+    { place: "travel information desk", purpose: "weekend booking", keyword: "return platform", topic: "table completion" },
+    { place: "housing office", purpose: "room inspection", keyword: "maintenance form", topic: "short answer" },
+    { place: "community center", purpose: "volunteer induction", keyword: "safety badge", topic: "instruction follow-up" },
+  ] as const;
+
+  return scenarios.flatMap((scenario, round) => {
+    const seed = setNumber * 200 + round * 10;
+    const startHour = 8 + ((round + setNumber) % 4);
+    const startMinute = round % 2 === 0 ? "15" : "45";
+    const startTime = `${startHour}:${startMinute} AM`;
+    const fee = 20 + setNumber * 5 + round * 3;
+    const room = 100 + setNumber * 20 + round * 7;
+    const limit = 12 + setNumber + round;
+
+    return [
+      createGeneratedQuestion(
+        `ielts-listening-${setNumber}-${round + 1}`,
+        `Transcript: 'The ${scenario.purpose} session at the ${scenario.place} starts at ${startTime}. Please arrive ten minutes early.' What time does the session start?`,
+        startTime,
+        [`${startHour}:00 AM`, `${startHour}:${startMinute === "15" ? "45" : "15"} AM`, `${startHour + 1}:15 AM`],
+        `The speaker directly says the ${scenario.purpose} session starts at ${startTime}.`,
+        "listening timing",
+        "easy",
+        seed + 1
+      ),
+      createGeneratedQuestion(
+        `ielts-listening-${setNumber}-${round + 11}`,
+        `Transcript: 'For the ${scenario.purpose}, the fee is $${fee}, and you should pay online before you visit the ${scenario.place}.' What is the fee?`,
+        `$${fee}`,
+        [`$${fee - 5}`, `$${fee + 5}`, `$${fee + 10}`],
+        `The amount stated in the transcript is $${fee}.`,
+        "listening detail",
+        "easy",
+        seed + 2
+      ),
+      createGeneratedQuestion(
+        `ielts-listening-${setNumber}-${round + 21}`,
+        `Transcript: 'Please wait outside Room ${room} near the ${scenario.keyword}. Staff will call your number when the ${scenario.purpose} begins.' Where should the listener wait?`,
+        `Outside Room ${room} near the ${scenario.keyword}`,
+        [`Inside Room ${room}`, `Outside Room ${room - 1}`, "At the main exit"],
+        `The instruction is to wait outside Room ${room} near the ${scenario.keyword}.`,
+        `listening ${scenario.topic}`,
+        "medium",
+        seed + 3
+      ),
+      createGeneratedQuestion(
+        `ielts-listening-${setNumber}-${round + 31}`,
+        `Transcript: 'Only ${limit} people can join each ${scenario.purpose} group, so late arrivals may need to book another date.' What is the group limit?`,
+        `${limit} people`,
+        [`${limit - 2} people`, `${limit + 2} people`, `${limit + 5} people`],
+        `The speaker says only ${limit} people can join each group.`,
+        "listening capacity",
+        "medium",
+        seed + 4
+      ),
+    ];
+  });
+}
+
+function createIeltsAcademicReadingQuestions(setNumber: number): PracticeQuestion[] {
+  const topics = [
+    { subject: "urban farming", benefit: "local food supply", caution: "high setup cost", keyword: "sustainable", synonym: "long-term" },
+    { subject: "sleep research", benefit: "memory consolidation", caution: "screen exposure", keyword: "restore", synonym: "renew" },
+    { subject: "museum education", benefit: "visual learning", caution: "limited context", keyword: "engage", synonym: "involve" },
+    { subject: "remote teamwork", benefit: "location flexibility", caution: "communication gaps", keyword: "collaborative", synonym: "cooperative" },
+    { subject: "public transport planning", benefit: "reduced congestion", caution: "funding delays", keyword: "efficient", synonym: "productive" },
+    { subject: "marine conservation", benefit: "biodiversity protection", caution: "illegal fishing", keyword: "fragile", synonym: "delicate" },
+    { subject: "language immersion", benefit: "faster fluency", caution: "initial discomfort", keyword: "acquire", synonym: "gain" },
+    { subject: "solar energy use", benefit: "lower emissions", caution: "weather dependence", keyword: "generate", synonym: "produce" },
+    { subject: "workplace mentoring", benefit: "skill transfer", caution: "time pressure", keyword: "guidance", synonym: "support" },
+    { subject: "student budgeting", benefit: "better control of spending", caution: "unplanned purchases", keyword: "allocate", synonym: "distribute" },
+  ] as const;
+
+  return topics.flatMap((topic, round) => {
+    const seed = setNumber * 300 + round * 10;
+    const sampleSize = 80 + setNumber * 20 + round * 10;
+    const improvement = 10 + setNumber * 3 + round;
+
+    return [
+      createGeneratedQuestion(
+        `ielts-academic-reading-${setNumber}-${round + 1}`,
+        `Passage: 'A recent study on ${topic.subject} found that one major advantage is ${topic.benefit}. However, researchers still warn about ${topic.caution}.' What is the main benefit mentioned?`,
+        topic.benefit,
+        [topic.caution, `${topic.subject} publicity`, "longer holidays"],
+        `The passage directly identifies ${topic.benefit} as the main advantage.`,
+        "academic reading main idea",
+        "easy",
+        seed + 1
+      ),
+      createGeneratedQuestion(
+        `ielts-academic-reading-${setNumber}-${round + 11}`,
+        `In the passage, the word '${topic.keyword}' is closest in meaning to:`,
+        topic.synonym,
+        ["delay", "ignore", "replace"],
+        `In this context, '${topic.keyword}' is closest in meaning to '${topic.synonym}'.`,
+        "academic reading vocabulary",
+        "medium",
+        seed + 2
+      ),
+      createGeneratedQuestion(
+        `ielts-academic-reading-${setNumber}-${round + 21}`,
+        `Passage detail: 'The researchers surveyed ${sampleSize} participants, and ${improvement}% reported a positive change after the intervention.' How many participants were surveyed?`,
+        `${sampleSize}`,
+        [`${sampleSize - 10}`, `${sampleSize + 10}`, `${improvement}`],
+        `The passage clearly says the researchers surveyed ${sampleSize} participants.`,
+        "academic reading detail",
+        "easy",
+        seed + 3
+      ),
+      createGeneratedQuestion(
+        `ielts-academic-reading-${setNumber}-${round + 31}`,
+        `Based on the passage, what is the writer most likely recommending?`,
+        `Use ${topic.subject} carefully while monitoring ${topic.caution}`,
+        [
+          `Avoid ${topic.subject} completely`,
+          `Focus only on advertising ${topic.subject}`,
+          "Ignore any limitations in the research",
+        ],
+        `The passage presents a benefit but also a caution, so the balanced recommendation is to use ${topic.subject} while monitoring ${topic.caution}.`,
+        "academic reading inference",
+        "hard",
+        seed + 4
+      ),
+    ];
+  });
+}
+
+function createIeltsGeneralReadingQuestions(setNumber: number): PracticeQuestion[] {
+  const notices = [
+    { textType: "job advert", action: "submit a CV", condition: "two references", place: "HR desk", keyword: "closing date" },
+    { textType: "tenant notice", action: "report repairs online", condition: "include flat number", place: "housing portal", keyword: "urgent issue" },
+    { textType: "staff memo", action: "book leave early", condition: "manager approval", place: "internal system", keyword: "peak period" },
+    { textType: "community notice", action: "register children in advance", condition: "bring proof of age", place: "reception office", keyword: "limited seats" },
+    { textType: "bank message", action: "update address details", condition: "show photo ID", place: "local branch", keyword: "security check" },
+    { textType: "travel leaflet", action: "arrive before boarding", condition: "carry printed ticket", place: "platform gate", keyword: "late arrivals" },
+    { textType: "training email", action: "confirm attendance", condition: "reply by Friday", place: "course inbox", keyword: "waiting list" },
+    { textType: "college notice", action: "renew ID card", condition: "pay the replacement fee", place: "student office", keyword: "lost card" },
+    { textType: "clinic reminder", action: "fast before the test", condition: "drink only water", place: "test center", keyword: "morning appointment" },
+    { textType: "warehouse instruction", action: "wear safety boots", condition: "sign the shift log", place: "entry station", keyword: "site rules" },
+  ] as const;
+
+  return notices.flatMap((notice, round) => {
+    const seed = setNumber * 400 + round * 10;
+    const dayOptions = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const;
+    const correctDay = dayOptions[(round + setNumber) % dayOptions.length];
+    const fee = 15 + setNumber * 4 + round * 2;
+
+    return [
+      createGeneratedQuestion(
+        `ielts-general-reading-${setNumber}-${round + 1}`,
+        `Notice: 'In this ${notice.textType}, applicants must ${notice.action} and provide ${notice.condition}.' What must the reader do?`,
+        notice.action,
+        [notice.condition, "wait for a phone call only", "bring a family member"],
+        `The notice directly tells the reader to ${notice.action}.`,
+        "general reading instruction",
+        "easy",
+        seed + 1
+      ),
+      createGeneratedQuestion(
+        `ielts-general-reading-${setNumber}-${round + 11}`,
+        `Notice: 'If you need help, visit the ${notice.place}. Staff are available every ${correctDay} afternoon.' When are staff available?`,
+        `${correctDay} afternoon`,
+        ["Monday morning", `${correctDay} morning`, "Saturday afternoon"],
+        `The notice states that staff are available every ${correctDay} afternoon.`,
+        "general reading detail",
+        "easy",
+        seed + 2
+      ),
+      createGeneratedQuestion(
+        `ielts-general-reading-${setNumber}-${round + 21}`,
+        `Notice: 'A fee of $${fee} applies, especially in cases involving ${notice.keyword}.' What fee is mentioned?`,
+        `$${fee}`,
+        [`$${fee - 5}`, `$${fee + 5}`, `$${fee + 10}`],
+        `The notice clearly mentions a fee of $${fee}.`,
+        "general reading scanning",
+        "medium",
+        seed + 3
+      ),
+      createGeneratedQuestion(
+        `ielts-general-reading-${setNumber}-${round + 31}`,
+        `What is the main purpose of this ${notice.textType}?`,
+        `To explain how readers should respond and what condition they must meet`,
+        [
+          "To tell readers to ignore deadlines",
+          "To advertise entertainment options",
+          "To compare several unrelated services",
+        ],
+        `The purpose is practical instruction: it explains the action required and the condition readers must meet.`,
+        "general reading purpose",
+        "medium",
+        seed + 4
+      ),
+    ];
+  });
+}
+
+function createIeltsWritingStrategyQuestions(setNumber: number): PracticeQuestion[] {
+  const topics = [
+    { focus: "Task 1 overview", rule: "summarize the main trend", mistake: "listing every number", keyword: "overview" },
+    { focus: "Task 2 introduction", rule: "state a clear position", mistake: "copying the prompt", keyword: "position" },
+    { focus: "coherence", rule: "group related ideas together", mistake: "jumping between points", keyword: "logical flow" },
+    { focus: "supporting examples", rule: "use relevant explanation", mistake: "adding unrelated stories", keyword: "development" },
+    { focus: "formal tone", rule: "avoid slang", mistake: "using texting language", keyword: "register" },
+    { focus: "paragraphing", rule: "give each main idea its own paragraph", mistake: "writing one long block", keyword: "organization" },
+  ] as const;
+
+  return topics.flatMap((topic, round) => {
+    const seed = setNumber * 500 + round * 10;
+    const minutes = round < 2 ? 20 : 40;
+
+    return [
+      createGeneratedQuestion(
+        `ielts-writing-${setNumber}-${round + 1}`,
+        `In IELTS Writing, what is the strongest approach for ${topic.focus}?`,
+        topic.rule,
+        [topic.mistake, "memorize one answer for every question", "ignore the task type"],
+        `For ${topic.focus}, the stronger approach is to ${topic.rule}.`,
+        "writing strategy",
+        "easy",
+        seed + 1
+      ),
+      createGeneratedQuestion(
+        `ielts-writing-${setNumber}-${round + 11}`,
+        `Which mistake most often weakens ${topic.focus}?`,
+        topic.mistake,
+        [topic.rule, "using paragraphs clearly", "planning before writing"],
+        `${topic.mistake} is the mistake that weakens ${topic.focus} most directly.`,
+        "writing error control",
+        "medium",
+        seed + 2
+      ),
+      createGeneratedQuestion(
+        `ielts-writing-${setNumber}-${round + 21}`,
+        `A student has about ${minutes} minutes for this stage of writing practice. What should the student protect first?`,
+        `${topic.keyword} and task focus`,
+        ["handwriting speed only", "complex vocabulary without planning", "memorized sentences from social media"],
+        `Good IELTS writing starts with ${topic.keyword} and task focus before stylistic detail.`,
+        "writing planning",
+        "medium",
+        seed + 3
+      ),
+      createGeneratedQuestion(
+        `ielts-writing-${setNumber}-${round + 31}`,
+        `Which action is most likely to improve band performance for ${topic.focus}?`,
+        `Plan quickly, answer the task directly, and review for grammar before finishing`,
+        [
+          "Spend most of the time copying the prompt",
+          "Write without checking whether ideas connect",
+          "Use difficult words even when they are inaccurate",
+        ],
+        `Direct task response, quick planning, and review are more valuable than forced complexity.`,
+        "writing band awareness",
+        "hard",
+        seed + 4
+      ),
+    ];
+  });
+}
+
+function createIeltsSpeakingQuestions(setNumber: number): PracticeQuestion[] {
+  const topics = [
+    { part: "Part 1", target: "give a direct answer and add one detail", weak: "one-word replies", keyword: "natural extension" },
+    { part: "Part 2", target: "cover all cue-card points", weak: "speaking without structure", keyword: "cue-card planning" },
+    { part: "Part 3", target: "explain reasons and comparisons", weak: "repeating the same idea", keyword: "deeper answer" },
+    { part: "fluency", target: "keep speaking at a steady pace", weak: "long silent pauses", keyword: "flow" },
+    { part: "pronunciation", target: "speak clearly and stress key words", weak: "rushing every sentence", keyword: "clarity" },
+    { part: "vocabulary range", target: "use familiar varied words accurately", weak: "forcing difficult words incorrectly", keyword: "accurate variety" },
+  ] as const;
+
+  return topics.flatMap((topic, round) => {
+    const seed = setNumber * 600 + round * 10;
+    const prepSeconds = 60 - round * 5;
+
+    return [
+      createGeneratedQuestion(
+        `ielts-speaking-${setNumber}-${round + 1}`,
+        `For IELTS Speaking ${topic.part}, what is usually the best response habit?`,
+        topic.target,
+        [topic.weak, "memorize a full script and repeat it exactly", "stop after every sentence to translate mentally"],
+        `A stronger speaking score comes from ${topic.target}.`,
+        "speaking strategy",
+        "easy",
+        seed + 1
+      ),
+      createGeneratedQuestion(
+        `ielts-speaking-${setNumber}-${round + 11}`,
+        `Which habit most often lowers performance in IELTS Speaking ${topic.part}?`,
+        topic.weak,
+        [topic.target, "using one relevant example", "asking for clarification once when needed"],
+        `${topic.weak} often reduces fluency or development.`,
+        "speaking mistakes",
+        "medium",
+        seed + 2
+      ),
+      createGeneratedQuestion(
+        `ielts-speaking-${setNumber}-${round + 21}`,
+        `A learner has about ${prepSeconds} seconds to organize an answer. What should the learner focus on first?`,
+        topic.keyword,
+        ["perfect grammar in every line before speaking", "memorizing advanced idioms", "adding as many long words as possible"],
+        `In short prep time, ${topic.keyword} matters more than forced complexity.`,
+        "speaking preparation",
+        "medium",
+        seed + 3
+      ),
+      createGeneratedQuestion(
+        `ielts-speaking-${setNumber}-${round + 31}`,
+        `What is the most practical way to improve IELTS Speaking after this practice set?`,
+        `Record yourself, check whether your answer is clear, and expand weak ideas`,
+        [
+          "Read model answers silently without speaking",
+          "Memorize ten fixed introductions for every topic",
+          "Avoid listening to your own mistakes",
+        ],
+        `Speaking improves fastest when learners record, review, and expand their own answers.`,
+        "speaking review",
+        "hard",
+        seed + 4
+      ),
+    ];
+  });
+}
+
+function createIeltsPracticeSet(
+  key: IeltsPracticeGroupKey,
+  setNumber: number
+): PracticeSet {
+  const baseMeta: Record<
+    IeltsPracticeGroupKey,
+    {
+      title: string;
+      slug: string;
+      description: string;
+      minutes: number;
+      level: "beginner" | "intermediate" | "advanced";
+      intro: string;
+      sectionLabel: string;
+      keywords: string[];
+    }
+  > = {
+    "ielts-listening": {
+      title: `IELTS Listening Mock Test - Set ${setNumber}`,
+      slug: `ielts-listening-mock-test-${setNumber}`,
+      description:
+        "Transcript-based IELTS Listening practice with 40 objective questions designed to improve detail capture, timing, and distractor control.",
+      minutes: 40,
+      level: setNumber === 1 ? "beginner" : "intermediate",
+      intro:
+        "Use this set to practice listening-style concentration, fast detail capture, and answer checking without rushing.",
+      sectionLabel: "Listening Mock Test",
+      keywords: [
+        "IELTS listening practice",
+        "IELTS listening mock test",
+        "IELTS listening answers",
+        "IELTS practice for students and immigrants",
+        `IELTS listening set ${setNumber}`,
+      ],
+    },
+    "ielts-academic-reading": {
+      title: `IELTS Academic Reading Practice Test - Set ${setNumber}`,
+      slug: `ielts-academic-reading-practice-test-${setNumber}`,
+      description:
+        "Academic reading practice with 40 questions for passage analysis, vocabulary in context, inference, and detail tracking under IELTS-style timing.",
+      minutes: 60,
+      level: setNumber === 1 ? "beginner" : "intermediate",
+      intro:
+        "Use this set if you need stronger academic reading control for university-focused IELTS preparation.",
+      sectionLabel: "Academic Reading Mock Test",
+      keywords: [
+        "IELTS academic reading practice",
+        "IELTS reading mock",
+        "IELTS study abroad reading",
+        "IELTS academic reading answers",
+        `IELTS academic reading set ${setNumber}`,
+      ],
+    },
+    "ielts-general-reading": {
+      title: `IELTS General Training Reading Practice Test - Set ${setNumber}`,
+      slug: `ielts-general-training-reading-practice-test-${setNumber}`,
+      description:
+        "General Training reading practice with 40 questions based on notices, emails, work messages, and practical English situations.",
+      minutes: 60,
+      level: setNumber === 1 ? "beginner" : "intermediate",
+      intro:
+        "Use this set if you are preparing for work, migration, or general English use cases through IELTS General Training.",
+      sectionLabel: "General Training Reading Mock Test",
+      keywords: [
+        "IELTS general reading practice",
+        "IELTS migration reading",
+        "IELTS general training mock",
+        "IELTS work visa English practice",
+        `IELTS general reading set ${setNumber}`,
+      ],
+    },
+    "ielts-writing": {
+      title: `IELTS Writing Strategy Practice Test - Set ${setNumber}`,
+      slug: `ielts-writing-strategy-practice-test-${setNumber}`,
+      description:
+        "Objective IELTS Writing preparation with questions on structure, task response, overview writing, coherence, and common band-limiting mistakes.",
+      minutes: 45,
+      level: "intermediate",
+      intro:
+        "Use this set before full essay practice if you need a clearer understanding of what good IELTS Writing actually requires.",
+      sectionLabel: "Writing Strategy Practice",
+      keywords: [
+        "IELTS writing strategy",
+        "IELTS writing practice questions",
+        "IELTS writing task response",
+        "IELTS writing band improvement",
+        `IELTS writing set ${setNumber}`,
+      ],
+    },
+    "ielts-speaking": {
+      title: `IELTS Speaking Confidence Practice Test - Set ${setNumber}`,
+      slug: `ielts-speaking-confidence-practice-test-${setNumber}`,
+      description:
+        "Objective IELTS Speaking preparation with questions on Part 1, cue cards, follow-up answers, fluency habits, and confidence-building strategy.",
+      minutes: 35,
+      level: "intermediate",
+      intro:
+        "Use this set to understand what strong IELTS Speaking answers should sound like before live voice practice.",
+      sectionLabel: "Speaking Confidence Practice",
+      keywords: [
+        "IELTS speaking practice",
+        "IELTS speaking cue card",
+        "IELTS speaking confidence",
+        "IELTS speaking improvement",
+        `IELTS speaking set ${setNumber}`,
+      ],
+    },
+  };
+
+  const config = baseMeta[key];
+  const questions =
+    key === "ielts-listening"
+      ? createIeltsListeningQuestions(setNumber)
+      : key === "ielts-academic-reading"
+        ? createIeltsAcademicReadingQuestions(setNumber)
+        : key === "ielts-general-reading"
+          ? createIeltsGeneralReadingQuestions(setNumber)
+          : key === "ielts-writing"
+            ? createIeltsWritingStrategyQuestions(setNumber)
+            : createIeltsSpeakingQuestions(setNumber);
+
+  return {
+    id: `${key}-set-${setNumber}`,
+    slug: config.slug,
+    category: "ielts",
+    practiceGroup: key,
+    title: config.title,
+    description: config.description,
+    examType: "IELTS",
+    sectionLabel: config.sectionLabel,
+    level: config.level,
+    questionCount: questions.length,
+    estimatedMinutes: config.minutes,
+    seoTitle: `${config.title} | Nishaglobal Education`,
+    seoDescription: `${config.description} Use answer explanations and exam-pattern guidance for better IELTS preparation.`,
+    keywords: config.keywords,
+    intro: config.intro,
+    isOriginal: true,
+    isLive: true,
+    questions,
+  };
+}
+
 export const engineeringExamRules: ExamRule[] = [
   {
     examSlug: "jee-main",
@@ -994,10 +1544,10 @@ export const practiceCategories: PracticeCategoryMeta[] = [
     title: "IELTS Practice Tests",
     shortTitle: "IELTS",
     description:
-      "Free IELTS practice sets with answers and explanations for grammar, vocabulary, reading, sentence correction, and academic English basics.",
+      "Free IELTS practice tests for Listening, Academic Reading, General Training Reading, Writing strategy, and Speaking confidence with answer explanations and exam-pattern guidance.",
     heroTitle: "IELTS Practice Tests with Answers and Explanations",
     heroText:
-      "Use these English-only IELTS practice sets to build grammar accuracy, reading confidence, and vocabulary step by step.",
+      "Use these English-only IELTS practice tests to prepare for study abroad, work, and migration goals with section-based practice that is closer to the real exam structure.",
     ctaHref: "/study-abroad",
     ctaLabel: "Explore Study Abroad Guidance",
   },
@@ -4040,6 +4590,16 @@ export const practiceSets: PracticeSet[] = [
       ),
     ],
   },
+  createIeltsPracticeSet("ielts-listening", 1),
+  createIeltsPracticeSet("ielts-listening", 2),
+  createIeltsPracticeSet("ielts-academic-reading", 1),
+  createIeltsPracticeSet("ielts-academic-reading", 2),
+  createIeltsPracticeSet("ielts-general-reading", 1),
+  createIeltsPracticeSet("ielts-general-reading", 2),
+  createIeltsPracticeSet("ielts-writing", 1),
+  createIeltsPracticeSet("ielts-writing", 2),
+  createIeltsPracticeSet("ielts-speaking", 1),
+  createIeltsPracticeSet("ielts-speaking", 2),
   {
     id: "engineering-set-3",
     slug: "engineering-entrance-physics-math-set-3",
@@ -5081,6 +5641,18 @@ export function getEngineeringPracticeGroups() {
       (set) =>
         set.category === "engineering-entrance" &&
         set.examSlug === exam.examSlug &&
+        set.isLive !== false
+    ),
+  }));
+}
+
+export function getIeltsPracticeGroups() {
+  return ieltsPracticeGroupMeta.map((group) => ({
+    ...group,
+    sets: practiceSets.filter(
+      (set) =>
+        set.category === "ielts" &&
+        set.practiceGroup === group.key &&
         set.isLive !== false
     ),
   }));
