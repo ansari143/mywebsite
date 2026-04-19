@@ -1662,6 +1662,1621 @@ function generateCtetP2FullLengthSets(): GovPracticeSet[] {
   });
 }
 
+function createSscReasoningQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 35 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 1200 + qNo;
+    const pattern = index % 7;
+
+    if (pattern === 0) {
+      const start = 4 + setNumber + qNo;
+      const answer = start + 15;
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        `Find the next number in series: ${start}, ${start + 3}, ${start + 6}, ${start + 9}, ?`,
+        `श्रृंखला में अगली संख्या ज्ञात करें: ${start}, ${start + 3}, ${start + 6}, ${start + 9}, ?`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer - 3}`, hi: `${answer - 3}` },
+          { en: `${answer + 3}`, hi: `${answer + 3}` },
+          { en: `${answer + 6}`, hi: `${answer + 6}` },
+        ],
+        "The pattern increases by 3 each step.",
+        "प्रत्येक चरण में 3 की वृद्धि हो रही है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "Book : Read :: Food : ?",
+        "Book : Read :: Food : ?",
+        { en: "Eat", hi: "खाना" },
+        [
+          { en: "Write", hi: "लिखना" },
+          { en: "Cook", hi: "पकाना" },
+          { en: "Buy", hi: "खरीदना" },
+        ],
+        "A book is read; food is eaten.",
+        "पुस्तक पढ़ी जाती है; भोजन खाया जाता है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const ageA = 18 + ((setNumber + qNo) % 5);
+      const ageB = ageA + 4;
+      const answer = ageB - ageA;
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        `Riya is ${ageA} years old and Neha is ${ageB} years old. What is the age difference?`,
+        `रिया ${ageA} वर्ष की है और नेहा ${ageB} वर्ष की है। आयु का अंतर कितना है?`,
+        { en: `${answer} years`, hi: `${answer} वर्ष` },
+        [
+          { en: `${answer + 1} years`, hi: `${answer + 1} वर्ष` },
+          { en: `${answer + 2} years`, hi: `${answer + 2} वर्ष` },
+          { en: `${answer - 1} years`, hi: `${answer - 1} वर्ष` },
+        ],
+        "Subtract the smaller age from the larger age.",
+        "बड़ी आयु में से छोटी आयु घटाएं।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "Choose the odd one out.",
+        "विषम पद चुनें।",
+        { en: "Car", hi: "कार" },
+        [
+          { en: "Triangle", hi: "त्रिभुज" },
+          { en: "Square", hi: "वर्ग" },
+          { en: "Circle", hi: "वृत्त" },
+        ],
+        "Triangle, square, and circle are geometric shapes, while car is a vehicle.",
+        "त्रिभुज, वर्ग और वृत्त ज्यामितीय आकृतियां हैं, जबकि कार एक वाहन है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      const relations = [
+        { q: "A is mother of B, B is mother of C. What is A to C?", qHi: "A, B की माता है, B, C की माता है। A, C से क्या है?", ans: "Grandmother", ansHi: "दादी", wrong: ["Mother", "Sister", "Aunt"] as [string, string, string], wrongHi: ["माता", "बहन", "आंटी"] as [string, string, string] },
+        { q: "M is brother of N, N is brother of O. If P is sister of O, what is M to P?", qHi: "M, N का भाई है, N, O का भाई है। यदि P, O की बहन है, तो M, P से क्या है?", ans: "Brother", ansHi: "भाई", wrong: ["Sister", "Cousin", "Uncle"] as [string, string, string], wrongHi: ["बहन", "चचेरा भाई", "चाचा"] as [string, string, string] },
+        { q: "X is wife of Y, Y is father of Z. What is X to Z?", qHi: "X, Y की पत्नी है, Y, Z का पिता है। X, Z से क्या है?", ans: "Mother", ansHi: "माता", wrong: ["Grandmother", "Sister", "Wife"] as [string, string, string], wrongHi: ["दादी", "बहन", "पत्नी"] as [string, string, string] },
+      ];
+      const rel = relations[qNo % relations.length];
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        rel.q,
+        rel.qHi,
+        { en: rel.ans, hi: rel.ansHi },
+        [
+          { en: rel.wrong[0], hi: rel.wrongHi[0] },
+          { en: rel.wrong[1], hi: rel.wrongHi[1] },
+          { en: rel.wrong[2], hi: rel.wrongHi[2] },
+        ],
+        "Trace family relationships step by step.",
+        "परिवार के रिश्ते को चरण दर चरण समझें।",
+        seed
+      );
+    }
+
+    if (pattern === 5) {
+      const directions = [
+        { q: "P goes 5 km North, then 3 km East. How far is P from starting point?", qHi: "P 5 किमी उत्तर में जाता है, फिर 3 किमी पूर्व में। P शुरुआत से कितना दूर है?", ans: "√34 km", ansHi: "√34 किमी", wrong: ["8 km", "√40 km", "2 km"] as [string, string, string], wrongHi: ["8 किमी", "√40 किमी", "2 किमी"] as [string, string, string] },
+      ];
+      const dir = directions[qNo % directions.length];
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        dir.q,
+        dir.qHi,
+        { en: dir.ans, hi: dir.ansHi },
+        [
+          { en: dir.wrong[0], hi: dir.wrongHi[0] },
+          { en: dir.wrong[1], hi: dir.wrongHi[1] },
+          { en: dir.wrong[2], hi: dir.wrongHi[2] },
+        ],
+        "Use Pythagoras theorem for net displacement.",
+        "शुद्ध विस्थापन के लिए पाइथागोरस प्रमेय का प्रयोग करें।",
+        seed
+      );
+    }
+
+    if (pattern === 6) {
+      const logics = [
+        { q: "All cats are animals. Some animals are wild. Therefore:", qHi: "सभी बिल्लियां जानवर हैं। कुछ जानवर जंगली हैं। इसलिए:", ans: "Some cats may be wild", ansHi: "कुछ बिल्लियां जंगली हो सकती हैं", wrong: ["All cats are wild", "No cat is wild", "Cannot be determined"] as [string, string, string], wrongHi: ["सभी बिल्लियां जंगली हैं", "कोई बिल्ली जंगली नहीं है", "निर्धारित नहीं किया जा सकता"] as [string, string, string] },
+      ];
+      const logic = logics[qNo % logics.length];
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        logic.q,
+        logic.qHi,
+        { en: logic.ans, hi: logic.ansHi },
+        [
+          { en: logic.wrong[0], hi: logic.wrongHi[0] },
+          { en: logic.wrong[1], hi: logic.wrongHi[1] },
+          { en: logic.wrong[2], hi: logic.wrongHi[2] },
+        ],
+        "Apply logical rules for valid conclusions.",
+        "मान्य निष्कर्षों के लिए तार्किक नियम लागू करें।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ssc-tier1-set${setNumber}-reason-${qNo}`,
+      "Reasoning",
+      "तर्क",
+      "If all roses are flowers and some flowers are red, then:",
+      "यदि सभी गुलाब फूल हैं और कुछ फूल लाल हैं, तो:",
+      { en: "Some roses may be red", hi: "कुछ गुलाब लाल हो सकते हैं" },
+      [
+        { en: "All roses are red", hi: "सभी गुलाब लाल हैं" },
+        { en: "No rose is red", hi: "कोई गुलाब लाल नहीं है" },
+        { en: "All red things are roses", hi: "सभी लाल वस्तुएं गुलाब हैं" },
+      ],
+      "Only a possibility can be concluded, not a definite all-or-none statement.",
+      "यहां केवल संभावना निकाली जा सकती है, निश्चित निष्कर्ष नहीं।",
+      seed
+    );
+  });
+}
+
+function createSscQuantQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 35 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 1300 + qNo;
+    const pattern = index % 7;
+
+    if (pattern === 0) {
+      const base = 120 + setNumber * 10 + qNo;
+      const percent = 20;
+      const answer = (base * percent) / 100;
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `What is ${percent}% of ${base}?`,
+        `${base} का ${percent}% कितना है?`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer - 2}`, hi: `${answer - 2}` },
+          { en: `${answer + 2}`, hi: `${answer + 2}` },
+          { en: `${answer + 4}`, hi: `${answer + 4}` },
+        ],
+        "Percentage value = (percent/100) x number.",
+        "प्रतिशत मान = (प्रतिशत/100) x संख्या।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      const a = 30 + setNumber + qNo;
+      const b = 15 + (qNo % 8);
+      const answer = a - b;
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `Find: ${a} - ${b}`,
+        `ज्ञात करें: ${a} - ${b}`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer - 1}`, hi: `${answer - 1}` },
+          { en: `${answer + 1}`, hi: `${answer + 1}` },
+          { en: `${answer + 3}`, hi: `${answer + 3}` },
+        ],
+        "Subtract directly.",
+        "सीधा घटाव करें।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const speed = 40 + (qNo % 10);
+      const time = 2 + (setNumber % 3);
+      const answer = speed * time;
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `A train moves at ${speed} km/h for ${time} hours. Distance covered is:`,
+        `एक ट्रेन ${speed} किमी/घंटा की गति से ${time} घंटे चलती है। तय दूरी होगी:`,
+        { en: `${answer} km`, hi: `${answer} किमी` },
+        [
+          { en: `${answer - speed} km`, hi: `${answer - speed} किमी` },
+          { en: `${answer + speed} km`, hi: `${answer + speed} किमी` },
+          { en: `${answer + 10} km`, hi: `${answer + 10} किमी` },
+        ],
+        "Distance = Speed x Time.",
+        "दूरी = गति x समय।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      const numerator = 3 + (qNo % 3);
+      const denominator = 5;
+      const value = 50 + setNumber * 10;
+      const answer = (numerator * value) / denominator;
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `What is ${numerator}/${denominator} of ${value}?`,
+        `${value} का ${numerator}/${denominator} कितना है?`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer - 5}`, hi: `${answer - 5}` },
+          { en: `${answer + 5}`, hi: `${answer + 5}` },
+          { en: `${answer + 10}`, hi: `${answer + 10}` },
+        ],
+        "Fraction of a number = (numerator/denominator) x number.",
+        "किसी संख्या का भिन्न = (अंश/हर) x संख्या।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      const cp = 100 + setNumber * 10 + qNo;
+      const sp = cp + 20;
+      const profit = sp - cp;
+      const profitPercent = (profit / cp) * 100;
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `An article is bought for Rs. ${cp} and sold for Rs. ${sp}. Profit percent is:`,
+        `एक वस्तु Rs. ${cp} में खरीदी जाती है और Rs. ${sp} में बेची जाती है। लाभ प्रतिशत है:`,
+        { en: `${profitPercent.toFixed(1)}%`, hi: `${profitPercent.toFixed(1)}%` },
+        [
+          { en: `${(profitPercent - 5).toFixed(1)}%`, hi: `${(profitPercent - 5).toFixed(1)}%` },
+          { en: `${(profitPercent + 5).toFixed(1)}%`, hi: `${(profitPercent + 5).toFixed(1)}%` },
+          { en: `${(profitPercent + 10).toFixed(1)}%`, hi: `${(profitPercent + 10).toFixed(1)}%` },
+        ],
+        `Profit % = [(SP - CP) / CP] × 100.`,
+        `लाभ % = [(विक्रय - लागत) / लागत] × 100।`,
+        seed
+      );
+    }
+
+    if (pattern === 5) {
+      const principal = 1000 + setNumber * 100 + qNo * 10;
+      const rate = 8;
+      const time = 2;
+      const si = (principal * rate * time) / 100;
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `Simple Interest on Rs. ${principal} at ${rate}% per annum for ${time} years:`,
+        `Rs. ${principal} पर ${rate}% प्रति वर्ष ${time} वर्षों के लिए साधारण ब्याज:`,
+        { en: `Rs. ${si}`, hi: `Rs. ${si}` },
+        [
+          { en: `Rs. ${si - 100}`, hi: `Rs. ${si - 100}` },
+          { en: `Rs. ${si + 100}`, hi: `Rs. ${si + 100}` },
+          { en: `Rs. ${si + 200}`, hi: `Rs. ${si + 200}` },
+        ],
+        `SI = (P × R × T) / 100.`,
+        `SI = (मूलधन × दर × समय) / 100।`,
+        seed
+      );
+    }
+
+    if (pattern === 6) {
+      const total = 150 + qNo * 5;
+      const boys = 90 + qNo;
+      const girls = total - boys;
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `In a school, total students are ${total}. Boys are ${boys}. Girls are:`,
+        `एक स्कूल में कुल छात्र ${total} हैं। लड़के ${boys} हैं। लड़कियां हैं:`,
+        { en: `${girls}`, hi: `${girls}` },
+        [
+          { en: `${girls - 1}`, hi: `${girls - 1}` },
+          { en: `${girls + 1}`, hi: `${girls + 1}` },
+          { en: `${girls + 5}`, hi: `${girls + 5}` },
+        ],
+        "Girls = Total - Boys.",
+        "लड़कियां = कुल - लड़के।",
+        seed
+      );
+    }
+
+    const n = 9 + (qNo % 8);
+    const answer = n * n;
+    return createSeededGovQuestion(
+      `ssc-tier1-set${setNumber}-quant-${qNo}`,
+      "Quantitative Aptitude",
+      "मात्रात्मक योग्यता",
+      `What is the square of ${n}?`,
+      `${n} का वर्ग कितना है?`,
+      { en: `${answer}`, hi: `${answer}` },
+      [
+        { en: `${answer - n}`, hi: `${answer - n}` },
+        { en: `${answer + n}`, hi: `${answer + n}` },
+        { en: `${answer + 1}`, hi: `${answer + 1}` },
+      ],
+      `Square means ${n} x ${n} = ${answer}.`,
+      `वर्ग का अर्थ ${n} x ${n} = ${answer} है।`,
+      seed
+    );
+  });
+}
+
+function createSscEnglishQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 35 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 1400 + qNo;
+    const pattern = index % 7;
+
+    if (pattern === 0) {
+      const synonyms = [
+        { word: "rapid", ans: "fast", wrong: ["slow", "late", "soft"] as [string, string, string], hi: "तेज" },
+        { word: "ancient", ans: "old", wrong: ["new", "fresh", "future"] as [string, string, string], hi: "पुराना" },
+        { word: "brave", ans: "courageous", wrong: ["weak", "afraid", "silent"] as [string, string, string], hi: "साहसी" },
+        { word: "benevolent", ans: "kind", wrong: ["cruel", "angry", "proud"] as [string, string, string], hi: "दयालु" },
+        { word: "resilient", ans: "strong", wrong: ["weak", "fragile", "delicate"] as [string, string, string], hi: "मजबूत" },
+      ];
+      const syn = synonyms[qNo % synonyms.length];
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        `Find the synonym of '${syn.word}':`,
+        `'${syn.word}' का पर्यायवाची चुनें:`,
+        { en: syn.ans, hi: syn.hi },
+        [
+          { en: syn.wrong[0], hi: syn.wrong[0] },
+          { en: syn.wrong[1], hi: syn.wrong[1] },
+          { en: syn.wrong[2], hi: syn.wrong[2] },
+        ],
+        `The closest meaning of '${syn.word}' is '${syn.ans}'.`,
+        `'${syn.word}' का निकटतम अर्थ '${syn.ans}' है।`,
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      const synonyms2 = [
+        { word: "diligent", ans: "hardworking", wrong: ["lazy", "smart", "careful"] as [string, string, string], hi: "मेहनती" },
+        { word: "obsolete", ans: "outdated", wrong: ["modern", "useful", "expensive"] as [string, string, string], hi: "पुरातन" },
+        { word: "enigma", ans: "mystery", wrong: ["problem", "secret", "puzzle"] as [string, string, string], hi: "रहस्य" },
+      ];
+      const item = synonyms2[qNo % synonyms2.length];
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        `Choose the synonym of '${item.word}'.`,
+        `'${item.word}' का समानार्थी चुनें।`,
+        { en: item.ans, hi: item.hi },
+        [
+          { en: item.wrong[0], hi: item.wrong[0] },
+          { en: item.wrong[1], hi: item.wrong[1] },
+          { en: item.wrong[2], hi: item.wrong[2] },
+        ],
+        `The closest meaning of '${item.word}' is '${item.ans}'.`,
+        `'${item.word}' का निकटतम अर्थ '${item.ans}' है।`,
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Choose the antonym of 'increase'.",
+        "'increase' का विलोम चुनें।",
+        { en: "decrease", hi: "घटना" },
+        [
+          { en: "raise", hi: "बढ़ाना" },
+          { en: "expand", hi: "फैलाना" },
+          { en: "improve", hi: "सुधारना" },
+        ],
+        "'Decrease' is opposite in meaning to 'increase'.",
+        "'decrease', 'increase' का विपरीत अर्थ देता है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Fill in the blank: 'He has lived here ___ 2019.'",
+        "रिक्त स्थान भरें: 'He has lived here ___ 2019.'",
+        { en: "since", hi: "since" },
+        [
+          { en: "for", hi: "for" },
+          { en: "from", hi: "from" },
+          { en: "by", hi: "by" },
+        ],
+        "'Since' is used with a point of time.",
+        "'Since' का प्रयोग समय बिंदु के साथ होता है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Choose the correct form: He _____ to the gym every day.",
+        "सही रूप चुनें: He _____ to the gym every day.",
+        { en: "goes", hi: "जाता है" },
+        [
+          { en: "go", hi: "जाना" },
+          { en: "gone", hi: "गया है" },
+          { en: "going", hi: "जा रहा है" },
+        ],
+        "Third person singular present uses 'goes' (not 'go').",
+        "तीसरे व्यक्ति की एकवचन में 'goes' का प्रयोग होता है।",
+        seed
+      );
+    }
+
+    if (pattern === 5) {
+      const prepositions = [
+        { q: "The book is _____ the table.", qHi: "किताब मेज _____ है।", ans: "on", ansHi: "पर", wrong: ["in", "at", "by"] as [string, string, string], wrongHi: ["में", "पर", "द्वारा"] as [string, string, string] },
+        { q: "She is interested _____ music.", qHi: "वह संगीत _____ रुचि रखती है।", ans: "in", ansHi: "में", wrong: ["on", "at", "by"] as [string, string, string], wrongHi: ["पर", "पर", "द्वारा"] as [string, string, string] },
+      ];
+      const prep = prepositions[qNo % prepositions.length];
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        prep.q,
+        prep.qHi,
+        { en: prep.ans, hi: prep.ansHi },
+        [
+          { en: prep.wrong[0], hi: prep.wrongHi[0] },
+          { en: prep.wrong[1], hi: prep.wrongHi[1] },
+          { en: prep.wrong[2], hi: prep.wrongHi[2] },
+        ],
+        "Learn common preposition usage patterns.",
+        "सामान्य पूर्वसर्ग उपयोग पैटर्न सीखें।",
+        seed
+      );
+    }
+
+    if (pattern === 6) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Choose the correctly punctuated sentence.",
+        "सही विराम चिह्न वाला वाक्य चुनें।",
+        { en: "Let's eat, children.", hi: "Let's eat, children." },
+        [
+          { en: "Lets eat children.", hi: "Lets eat children." },
+          { en: "Lets eat, children.", hi: "Lets eat, children." },
+          { en: "Let's eat children.", hi: "Let's eat children." },
+        ],
+        "Apostrophe in let's and comma before children make it correct.",
+        "Let's में apostrophe और children से पहले comma इसे सही बनाते हैं।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ssc-tier1-set${setNumber}-eng-${qNo}`,
+      "English",
+      "अंग्रेजी",
+      "Choose the antonym of 'bright':",
+      "'bright' का विलोम शब्द चुनें:",
+      { en: "dim", hi: "मद्धिम" },
+      [
+        { en: "light", hi: "प्रकाश" },
+        { en: "shiny", hi: "चमकदार" },
+        { en: "clear", hi: "स्पष्ट" },
+      ],
+      "Antonym means opposite meaning.",
+      "विलोम का अर्थ है विपरीत अर्थ।",
+      seed
+    );
+  });
+}
+
+function createSscGaQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 35 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 1500 + qNo;
+    const pattern = index % 7;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Which is the capital of India?",
+        "भारत की राजधानी कौन सी है?",
+        { en: "New Delhi", hi: "नई दिल्ली" },
+        [
+          { en: "Mumbai", hi: "मुंबई" },
+          { en: "Kolkata", hi: "कोलकाता" },
+          { en: "Chennai", hi: "चेन्नई" },
+        ],
+        "New Delhi is the capital city of India.",
+        "नई दिल्ली भारत की राजधानी है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Indian Constitution came into effect on:",
+        "भारतीय संविधान लागू हुआ:",
+        { en: "26 January 1950", hi: "26 जनवरी 1950" },
+        [
+          { en: "15 August 1947", hi: "15 अगस्त 1947" },
+          { en: "2 October 1947", hi: "2 अक्टूबर 1947" },
+          { en: "26 November 1949", hi: "26 नवंबर 1949" },
+        ],
+        "Constitution came into force on Republic Day, 26 January 1950.",
+        "संविधान गणतंत्र दिवस 26 जनवरी 1950 को लागू हुआ।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Largest planet in the solar system is:",
+        "सौर मंडल का सबसे बड़ा ग्रह है:",
+        { en: "Jupiter", hi: "बृहस्पति" },
+        [
+          { en: "Mars", hi: "मंगल" },
+          { en: "Earth", hi: "पृथ्वी" },
+          { en: "Venus", hi: "शुक्र" },
+        ],
+        "Jupiter is the largest planet in our solar system.",
+        "बृहस्पति हमारे सौर मंडल का सबसे बड़ा ग्रह है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Which Indian river is known as the 'Sorrow of Bihar' in geography questions?",
+        "किस भारतीय नदी को भूगोल में 'बिहार का शोक' कहा जाता है?",
+        { en: "Kosi", hi: "कोसी" },
+        [
+          { en: "Yamuna", hi: "यमुना" },
+          { en: "Godavari", hi: "गोदावरी" },
+          { en: "Narmada", hi: "नर्मदा" },
+        ],
+        "Kosi is often called the Sorrow of Bihar due to frequent flooding.",
+        "कोसी नदी को बार-बार बाढ़ के कारण बिहार का शोक कहा जाता है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Which article of the Indian Constitution defines Fundamental Rights?",
+        "भारतीय संविधान का कौन सा अनुच्छेद मौलिक अधिकारों को परिभाषित करता है?",
+        { en: "Article 12-35", hi: "अनुच्छेद 12-35" },
+        [
+          { en: "Article 1-11", hi: "अनुच्छेद 1-11" },
+          { en: "Article 36-51", hi: "अनुच्छेद 36-51" },
+          { en: "Article 52-61", hi: "अनुच्छेद 52-61" },
+        ],
+        "Articles 12-35 of the Constitution cover Fundamental Rights.",
+        "संविधान के अनुच्छेद 12-35 मौलिक अधिकारों को कवर करते हैं।",
+        seed
+      );
+    }
+
+    if (pattern === 5) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Who is known as the 'Father of the Nation' in India?",
+        "भारत में 'राष्ट्र के पिता' के रूप में जाने जाते हैं:",
+        { en: "Mahatma Gandhi", hi: "महात्मा गांधी" },
+        [
+          { en: "Jawaharlal Nehru", hi: "जवाहरलाल नेहरू" },
+          { en: "Sardar Patel", hi: "सरदार पटेल" },
+          { en: "Dr. B.R. Ambedkar", hi: "डॉ. बी.आर. अंबेडकर" },
+        ],
+        "Mahatma Gandhi is called the Father of the Nation for his role in independence.",
+        "महात्मा गांधी को स्वतंत्रता में उनकी भूमिका के लिए राष्ट्र के पिता कहा जाता है।",
+        seed
+      );
+    }
+
+    if (pattern === 6) {
+      return createSeededGovQuestion(
+        `ssc-tier1-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "What is the currency of Japan?",
+        "जापान की मुद्रा क्या है?",
+        { en: "Yen", hi: "येन" },
+        [
+          { en: "Won", hi: "वॉन" },
+          { en: "Peso", hi: "पेसो" },
+          { en: "Baht", hi: "बाहत" },
+        ],
+        "Japan's currency is the Japanese Yen (¥).",
+        "जापान की मुद्रा जापानी येन (¥) है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ssc-tier1-set${setNumber}-ga-${qNo}`,
+      "General Awareness",
+      "सामान्य ज्ञान",
+      "Who wrote the national song 'Vande Mataram'?",
+      "राष्ट्रीय गीत 'वंदे मातरम्' किसने लिखा?",
+      { en: "Bankim Chandra Chattopadhyay", hi: "बंकिम चंद्र चट्टोपाध्याय" },
+      [
+        { en: "Rabindranath Tagore", hi: "रवींद्रनाथ टैगोर" },
+        { en: "Subramania Bharati", hi: "सुब्रमण्यम भारती" },
+        { en: "Sarojini Naidu", hi: "सरोजिनी नायडू" },
+      ],
+      "Vande Mataram was written by Bankim Chandra Chattopadhyay.",
+      "वंदे मातरम् बंकिम चंद्र चट्टोपाध्याय ने लिखा था।",
+      seed
+    );
+  });
+}
+
+function generateSscFullLengthSets(): GovPracticeSet[] {
+  return Array.from({ length: 5 }, (_, index) => {
+    const setNumber = index + 1;
+    const questions = [
+      ...createSscReasoningQuestions(setNumber),
+      ...createSscQuantQuestions(setNumber),
+      ...createSscEnglishQuestions(setNumber),
+      ...createSscGaQuestions(setNumber),
+    ];
+
+    return {
+      slug: `ssc-tier-1-full-mock-${setNumber}`,
+      title: `SSC Tier I Full Mock Test ${setNumber}`,
+      titleHi: `SSC टियर I फुल मॉक टेस्ट ${setNumber}`,
+      chapter: "Full Syllabus (Reasoning, Quantitative Aptitude, English, General Awareness)",
+      chapterHi: "पूर्ण पाठ्यक्रम (तर्क, मात्रात्मक योग्यता, अंग्रेजी, सामान्य ज्ञान)",
+      difficulty: setNumber <= 2 ? "Easy" : setNumber <= 4 ? "Medium" : "Hard",
+      durationMin: 60,
+      questionCount: 100,
+      bilingual: true,
+      isLive: true,
+      questions,
+    };
+  });
+}
+
+function createSscChslReasoningQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 25 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 1600 + qNo;
+    const pattern = index % 5;
+
+    if (pattern === 0) {
+      const base = 5 + setNumber + qNo;
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        `Find the missing term: ${base}, ${base + 2}, ${base + 6}, ${base + 12}, ?`,
+        `लुप्त पद ज्ञात करें: ${base}, ${base + 2}, ${base + 6}, ${base + 12}, ?`,
+        { en: `${base + 20}`, hi: `${base + 20}` },
+        [
+          { en: `${base + 18}`, hi: `${base + 18}` },
+          { en: `${base + 22}`, hi: `${base + 22}` },
+          { en: `${base + 24}`, hi: `${base + 24}` },
+        ],
+        "Differences are +2, +4, +6, so next is +8.",
+        "अंतर +2, +4, +6 है, इसलिए अगला +8 होगा।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "Clock : Time :: Thermometer : ?",
+        "Clock : Time :: Thermometer : ?",
+        { en: "Temperature", hi: "तापमान" },
+        [
+          { en: "Pressure", hi: "दाब" },
+          { en: "Humidity", hi: "आर्द्रता" },
+          { en: "Volume", hi: "आयतन" },
+        ],
+        "Clock measures time, thermometer measures temperature.",
+        "घड़ी समय मापती है, थर्मामीटर तापमान मापता है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "If A = 1, B = 2, ... then value of CAB is:",
+        "यदि A = 1, B = 2, ... तो CAB का मान है:",
+        { en: "6", hi: "6" },
+        [
+          { en: "5", hi: "5" },
+          { en: "7", hi: "7" },
+          { en: "8", hi: "8" },
+        ],
+        "C + A + B = 3 + 1 + 2 = 6.",
+        "C + A + B = 3 + 1 + 2 = 6।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "Choose the odd pair.",
+        "विषम युग्म चुनें।",
+        { en: "Pen : Ink", hi: "पेन : स्याही" },
+        [
+          { en: "Car : Petrol", hi: "कार : पेट्रोल" },
+          { en: "Body : Blood", hi: "शरीर : रक्त" },
+          { en: "Lamp : Electricity", hi: "लैंप : बिजली" },
+        ],
+        "Pen uses ink as writing medium, unlike energy/fluid source relation in others.",
+        "पेन-स्याही संबंध अन्य ऊर्जा/प्रवाहक संबंधों से अलग है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ssc-chsl-set${setNumber}-reason-${qNo}`,
+      "Reasoning",
+      "तर्क",
+      "A is taller than B, B is taller than C. Then:",
+      "A, B से लंबा है और B, C से लंबा है। तब:",
+      { en: "A is taller than C", hi: "A, C से लंबा है" },
+      [
+        { en: "C is taller than A", hi: "C, A से लंबा है" },
+        { en: "A and C are equal", hi: "A और C बराबर हैं" },
+        { en: "Cannot be determined", hi: "निर्धारित नहीं किया जा सकता" },
+      ],
+      "By transitive comparison, A must be taller than C.",
+      "संक्रमण नियम के अनुसार A, C से लंबा होगा।",
+      seed
+    );
+  });
+}
+
+function createSscChslQuantQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 25 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 1700 + qNo;
+    const pattern = index % 5;
+
+    if (pattern === 0) {
+      const a = 24 + setNumber + qNo;
+      const b = 6 + (qNo % 7);
+      const answer = a / b;
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `Find: ${a} / ${b}`,
+        `ज्ञात करें: ${a} / ${b}`,
+        { en: `${Math.floor(answer)}`, hi: `${Math.floor(answer)}` },
+        [
+          { en: `${Math.floor(answer) + 1}`, hi: `${Math.floor(answer) + 1}` },
+          { en: `${Math.floor(answer) + 2}`, hi: `${Math.floor(answer) + 2}` },
+          { en: `${Math.floor(answer) - 1}`, hi: `${Math.floor(answer) - 1}` },
+        ],
+        "Perform direct division and choose the integer result.",
+        "सीधा भाग करके पूर्णांक परिणाम चुनें।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      const principal = 800 + setNumber * 100 + qNo * 5;
+      const rate = 10;
+      const time = 2;
+      const si = (principal * rate * time) / 100;
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `Simple interest on Rs. ${principal} at ${rate}% p.a. for ${time} years is:`,
+        `Rs. ${principal} पर ${rate}% वार्षिक दर से ${time} वर्ष का साधारण ब्याज है:`,
+        { en: `${si}`, hi: `${si}` },
+        [
+          { en: `${si + 10}`, hi: `${si + 10}` },
+          { en: `${si - 10}`, hi: `${si - 10}` },
+          { en: `${principal * rate / 100}`, hi: `${principal * rate / 100}` },
+        ],
+        "SI = (P x R x T)/100.",
+        "साधारण ब्याज = (P x R x T)/100।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const cp = 200 + setNumber * 20 + qNo;
+      const sp = cp + 40;
+      const profit = sp - cp;
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `If cost price is Rs. ${cp} and selling price is Rs. ${sp}, profit is:`,
+        `यदि क्रय मूल्य Rs. ${cp} और विक्रय मूल्य Rs. ${sp} है, तो लाभ है:`,
+        { en: `Rs. ${profit}`, hi: `Rs. ${profit}` },
+        [
+          { en: `Rs. ${profit + 10}`, hi: `Rs. ${profit + 10}` },
+          { en: `Rs. ${profit - 10}`, hi: `Rs. ${profit - 10}` },
+          { en: `Rs. ${sp}`, hi: `Rs. ${sp}` },
+        ],
+        "Profit = SP - CP.",
+        "लाभ = विक्रय मूल्य - क्रय मूल्य।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      const total = 70 + setNumber * 5 + qNo;
+      const part = 35;
+      const answer = (part * total) / 100;
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `What is ${part}% of ${total}?`,
+        `${total} का ${part}% कितना है?`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer + 1}`, hi: `${answer + 1}` },
+          { en: `${answer - 1}`, hi: `${answer - 1}` },
+          { en: `${answer + 3}`, hi: `${answer + 3}` },
+        ],
+        "Percentage of a number = (percentage/100) x number.",
+        "प्रतिशत मान = (प्रतिशत/100) x संख्या।",
+        seed
+      );
+    }
+
+    const hcfA = 18 + (qNo % 4) * 6;
+    const hcfB = 30 + (qNo % 3) * 6;
+    return createSeededGovQuestion(
+      `ssc-chsl-set${setNumber}-quant-${qNo}`,
+      "Quantitative Aptitude",
+      "मात्रात्मक योग्यता",
+      `HCF of ${hcfA} and ${hcfB} is:`,
+      `${hcfA} और ${hcfB} का HCF है:`,
+      { en: "6", hi: "6" },
+      [
+        { en: "3", hi: "3" },
+        { en: "9", hi: "9" },
+        { en: "12", hi: "12" },
+      ],
+      "Greatest common divisor of these values is 6.",
+      "इन संख्याओं का महत्तम समापवर्तक 6 है।",
+      seed
+    );
+  });
+}
+
+function createSscChslEnglishQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 25 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 1800 + qNo;
+    const pattern = index % 5;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Choose the correctly spelt word.",
+        "सही वर्तनी वाला शब्द चुनें।",
+        { en: "Environment", hi: "Environment" },
+        [
+          { en: "Enviroment", hi: "Enviroment" },
+          { en: "Envirnoment", hi: "Envirnoment" },
+          { en: "Enviornment", hi: "Enviornment" },
+        ],
+        "'Environment' is the correct spelling.",
+        "'Environment' सही वर्तनी है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Choose the synonym of 'assist'.",
+        "'assist' का समानार्थी शब्द चुनें।",
+        { en: "help", hi: "मदद करना" },
+        [
+          { en: "refuse", hi: "इंकार करना" },
+          { en: "delay", hi: "देरी करना" },
+          { en: "hide", hi: "छिपाना" },
+        ],
+        "'Help' is closest in meaning to 'assist'.",
+        "'Help', 'assist' का निकटतम अर्थ है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Choose the antonym of 'temporary'.",
+        "'temporary' का विलोम शब्द चुनें।",
+        { en: "permanent", hi: "स्थायी" },
+        [
+          { en: "short", hi: "छोटा" },
+          { en: "brief", hi: "संक्षिप्त" },
+          { en: "fragile", hi: "नाजुक" },
+        ],
+        "'Permanent' is opposite in meaning to 'temporary'.",
+        "'Permanent', 'temporary' का विपरीत अर्थ है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Fill in the blank: She is good ___ mathematics.",
+        "रिक्त स्थान भरें: She is good ___ mathematics.",
+        { en: "at", hi: "at" },
+        [
+          { en: "in", hi: "in" },
+          { en: "on", hi: "on" },
+          { en: "for", hi: "for" },
+        ],
+        "The correct preposition is 'good at'.",
+        "सही preposition 'good at' है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ssc-chsl-set${setNumber}-eng-${qNo}`,
+      "English",
+      "अंग्रेजी",
+      "Choose the correct one-word substitution: 'A person who speaks many languages'.",
+      "एक शब्द चुनें: 'A person who speaks many languages'.",
+      { en: "Polyglot", hi: "बहुभाषी" },
+      [
+        { en: "Scholar", hi: "विद्वान" },
+        { en: "Orator", hi: "वक्ता" },
+        { en: "Poet", hi: "कवि" },
+      ],
+      "A person who speaks many languages is called a polyglot.",
+      "जो व्यक्ति कई भाषाएं बोलता है उसे polyglot कहते हैं।",
+      seed
+    );
+  });
+}
+
+function createSscChslGaQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 25 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 1900 + qNo;
+    const pattern = index % 5;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Who is known as the Father of the Indian Constitution?",
+        "भारतीय संविधान के जनक किसे कहा जाता है?",
+        { en: "Dr. B. R. Ambedkar", hi: "डॉ. बी. आर. अंबेडकर" },
+        [
+          { en: "Mahatma Gandhi", hi: "महात्मा गांधी" },
+          { en: "Jawaharlal Nehru", hi: "जवाहरलाल नेहरू" },
+          { en: "Sardar Patel", hi: "सरदार पटेल" },
+        ],
+        "Dr. B. R. Ambedkar chaired the drafting committee.",
+        "डॉ. बी. आर. अंबेडकर ने प्रारूप समिति की अध्यक्षता की थी।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Which planet is called the Red Planet?",
+        "किस ग्रह को लाल ग्रह कहा जाता है?",
+        { en: "Mars", hi: "मंगल" },
+        [
+          { en: "Venus", hi: "शुक्र" },
+          { en: "Saturn", hi: "शनि" },
+          { en: "Mercury", hi: "बुध" },
+        ],
+        "Mars appears reddish due to iron oxide on its surface.",
+        "मंगल ग्रह की सतह पर आयरन ऑक्साइड के कारण वह लाल दिखता है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "The national currency of Japan is:",
+        "जापान की राष्ट्रीय मुद्रा है:",
+        { en: "Yen", hi: "येन" },
+        [
+          { en: "Won", hi: "वोन" },
+          { en: "Dollar", hi: "डॉलर" },
+          { en: "Euro", hi: "यूरो" },
+        ],
+        "Japan uses Yen as its currency.",
+        "जापान की मुद्रा येन है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ssc-chsl-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Which gas is essential for human respiration?",
+        "मानव श्वसन के लिए कौन सी गैस आवश्यक है?",
+        { en: "Oxygen", hi: "ऑक्सीजन" },
+        [
+          { en: "Nitrogen", hi: "नाइट्रोजन" },
+          { en: "Hydrogen", hi: "हाइड्रोजन" },
+          { en: "Helium", hi: "हीलियम" },
+        ],
+        "Humans inhale oxygen for respiration.",
+        "मनुष्य श्वसन के लिए ऑक्सीजन लेते हैं।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ssc-chsl-set${setNumber}-ga-${qNo}`,
+      "General Awareness",
+      "सामान्य ज्ञान",
+      "Which movement was started by Mahatma Gandhi in 1942?",
+      "1942 में महात्मा गांधी ने कौन सा आंदोलन शुरू किया?",
+      { en: "Quit India Movement", hi: "भारत छोड़ो आंदोलन" },
+      [
+        { en: "Non-Cooperation Movement", hi: "असहयोग आंदोलन" },
+        { en: "Swadeshi Movement", hi: "स्वदेशी आंदोलन" },
+        { en: "Khilafat Movement", hi: "खिलाफत आंदोलन" },
+      ],
+      "The Quit India Movement was launched in August 1942.",
+      "भारत छोड़ो आंदोलन अगस्त 1942 में शुरू हुआ था।",
+      seed
+    );
+  });
+}
+
+function generateSscChslFullLengthSets(): GovPracticeSet[] {
+  return Array.from({ length: 5 }, (_, index) => {
+    const setNumber = index + 1;
+    const questions = [
+      ...createSscChslReasoningQuestions(setNumber),
+      ...createSscChslQuantQuestions(setNumber),
+      ...createSscChslEnglishQuestions(setNumber),
+      ...createSscChslGaQuestions(setNumber),
+    ];
+
+    return {
+      slug: `ssc-chsl-full-mock-${setNumber}`,
+      title: `SSC CHSL Full Mock Test ${setNumber}`,
+      titleHi: `SSC CHSL फुल मॉक टेस्ट ${setNumber}`,
+      chapter: "CHSL Pattern (Reasoning, Quantitative Aptitude, English, General Awareness)",
+      chapterHi: "CHSL पैटर्न (तर्क, मात्रात्मक योग्यता, अंग्रेजी, सामान्य ज्ञान)",
+      difficulty: setNumber <= 2 ? "Easy" : setNumber <= 4 ? "Medium" : "Hard",
+      durationMin: 60,
+      questionCount: 100,
+      bilingual: true,
+      isLive: true,
+      questions,
+    };
+  });
+}
+
+function createSscTier2QuantQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 40 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 2000 + qNo;
+    const pattern = index % 5;
+
+    if (pattern === 0) {
+      const a = 120 + setNumber * 4 + qNo;
+      const b = 45 + (qNo % 12);
+      const answer = a - b;
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `Evaluate: ${a} - ${b}`,
+        `हल करें: ${a} - ${b}`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer + 2}`, hi: `${answer + 2}` },
+          { en: `${answer - 2}`, hi: `${answer - 2}` },
+          { en: `${answer + 4}`, hi: `${answer + 4}` },
+        ],
+        "Use direct subtraction.",
+        "सीधा घटाव करें।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      const base = 240 + setNumber * 8 + qNo;
+      const percent = 25;
+      const answer = (base * percent) / 100;
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `What is ${percent}% of ${base}?`,
+        `${base} का ${percent}% कितना है?`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer + 3}`, hi: `${answer + 3}` },
+          { en: `${answer - 3}`, hi: `${answer - 3}` },
+          { en: `${answer + 6}`, hi: `${answer + 6}` },
+        ],
+        "Percentage = (percent/100) x number.",
+        "प्रतिशत = (प्रतिशत/100) x संख्या।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const principal = 1500 + setNumber * 100 + qNo * 10;
+      const rate = 8;
+      const time = 2;
+      const answer = (principal * rate * time) / 100;
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `Simple interest on Rs. ${principal} at ${rate}% p.a. for ${time} years is:`,
+        `Rs. ${principal} पर ${rate}% वार्षिक दर से ${time} वर्ष का साधारण ब्याज है:`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer + 20}`, hi: `${answer + 20}` },
+          { en: `${answer - 20}`, hi: `${answer - 20}` },
+          { en: `${(principal * rate) / 100}`, hi: `${(principal * rate) / 100}` },
+        ],
+        "Use SI = (P x R x T)/100.",
+        "SI = (P x R x T)/100 का प्रयोग करें।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      const speed = 35 + (qNo % 15);
+      const time = 3;
+      const answer = speed * time;
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-quant-${qNo}`,
+        "Quantitative Aptitude",
+        "मात्रात्मक योग्यता",
+        `At ${speed} km/h for ${time} hours, distance covered is:`,
+        `${speed} किमी/घंटा की गति से ${time} घंटे में तय दूरी है:`,
+        { en: `${answer} km`, hi: `${answer} किमी` },
+        [
+          { en: `${answer + 10} km`, hi: `${answer + 10} किमी` },
+          { en: `${answer - 10} km`, hi: `${answer - 10} किमी` },
+          { en: `${answer + 5} km`, hi: `${answer + 5} किमी` },
+        ],
+        "Distance = Speed x Time.",
+        "दूरी = गति x समय।",
+        seed
+      );
+    }
+
+    const n = 15 + (qNo % 10);
+    const answer = n * n;
+    return createSeededGovQuestion(
+      `ssc-tier2-set${setNumber}-quant-${qNo}`,
+      "Quantitative Aptitude",
+      "मात्रात्मक योग्यता",
+      `Square of ${n} is:`,
+      `${n} का वर्ग है:`,
+      { en: `${answer}`, hi: `${answer}` },
+      [
+        { en: `${answer + n}`, hi: `${answer + n}` },
+        { en: `${answer - n}`, hi: `${answer - n}` },
+        { en: `${answer + 1}`, hi: `${answer + 1}` },
+      ],
+      `Square means ${n} x ${n}.`,
+      `वर्ग का अर्थ ${n} x ${n} होता है।`,
+      seed
+    );
+  });
+}
+
+function createSscTier2EnglishQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 40 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 2100 + qNo;
+    const pattern = index % 5;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Choose the synonym of 'abundant'.",
+        "'abundant' का समानार्थी चुनें।",
+        { en: "plentiful", hi: "प्रचुर" },
+        [
+          { en: "scarce", hi: "दुर्लभ" },
+          { en: "minimal", hi: "न्यूनतम" },
+          { en: "empty", hi: "खाली" },
+        ],
+        "'Plentiful' is closest in meaning to 'abundant'.",
+        "'plentiful' का अर्थ 'abundant' के सबसे निकट है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Choose the antonym of 'transparent'.",
+        "'transparent' का विलोम चुनें।",
+        { en: "opaque", hi: "अपारदर्शी" },
+        [
+          { en: "clear", hi: "स्पष्ट" },
+          { en: "visible", hi: "दृश्य" },
+          { en: "bright", hi: "उज्ज्वल" },
+        ],
+        "'Opaque' is opposite in meaning to 'transparent'.",
+        "'opaque' का अर्थ 'transparent' का विपरीत है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Choose the correct one-word substitution: 'A person who studies weather'.",
+        "एक शब्द चुनें: 'A person who studies weather'.",
+        { en: "Meteorologist", hi: "मौसम वैज्ञानिक" },
+        [
+          { en: "Biologist", hi: "जीव वैज्ञानिक" },
+          { en: "Geologist", hi: "भूविज्ञानी" },
+          { en: "Astronomer", hi: "खगोलशास्त्री" },
+        ],
+        "A weather scientist is called a meteorologist.",
+        "मौसम का अध्ययन करने वाले को meteorologist कहते हैं।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-eng-${qNo}`,
+        "English",
+        "अंग्रेजी",
+        "Fill in the blank: Hard work leads ___ success.",
+        "रिक्त स्थान भरें: Hard work leads ___ success.",
+        { en: "to", hi: "to" },
+        [
+          { en: "in", hi: "in" },
+          { en: "for", hi: "for" },
+          { en: "at", hi: "at" },
+        ],
+        "The correct phrase is 'leads to'.",
+        "सही वाक्यांश 'leads to' है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ssc-tier2-set${setNumber}-eng-${qNo}`,
+      "English",
+      "अंग्रेजी",
+      "Choose the correctly spelt word.",
+      "सही वर्तनी वाला शब्द चुनें।",
+      { en: "Conscience", hi: "Conscience" },
+      [
+        { en: "Consciense", hi: "Consciense" },
+        { en: "Conscince", hi: "Conscince" },
+        { en: "Consience", hi: "Consience" },
+      ],
+      "'Conscience' is the correct spelling.",
+      "'Conscience' सही वर्तनी है।",
+      seed
+    );
+  });
+}
+
+function createSscTier2ReasoningQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 35 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 2200 + qNo;
+    const pattern = index % 5;
+
+    if (pattern === 0) {
+      const x = 3 + (qNo % 7);
+      const answer = x * 2 + 5;
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        `If f(x) = 2x + 5, then f(${x}) = ?`,
+        `यदि f(x) = 2x + 5 है, तो f(${x}) = ?`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer + 2}`, hi: `${answer + 2}` },
+          { en: `${answer - 2}`, hi: `${answer - 2}` },
+          { en: `${answer + 3}`, hi: `${answer + 3}` },
+        ],
+        "Substitute x into the expression.",
+        "x का मान अभिव्यक्ति में रखें।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "All squares are rectangles. Some rectangles are circles. Then:",
+        "सभी वर्ग आयत हैं। कुछ आयत वृत्त हैं। तब:",
+        { en: "Some squares may be circles", hi: "कुछ वर्ग वृत्त हो सकते हैं" },
+        [
+          { en: "All squares are circles", hi: "सभी वर्ग वृत्त हैं" },
+          { en: "No square is a circle", hi: "कोई वर्ग वृत्त नहीं है" },
+          { en: "All circles are squares", hi: "सभी वृत्त वर्ग हैं" },
+        ],
+        "Only a possibility can be concluded.",
+        "यहां केवल संभावना का निष्कर्ष निकलेगा।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "Choose the odd one out: 8, 27, 64, 100, 125",
+        "विषम पद चुनें: 8, 27, 64, 100, 125",
+        { en: "100", hi: "100" },
+        [
+          { en: "8", hi: "8" },
+          { en: "27", hi: "27" },
+          { en: "64", hi: "64" },
+        ],
+        "8, 27, 64, 125 are cubes; 100 is not.",
+        "8, 27, 64, 125 घन हैं; 100 नहीं है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-reason-${qNo}`,
+        "Reasoning",
+        "तर्क",
+        "Mirror image type questions mainly test:",
+        "Mirror image प्रकार के प्रश्न मुख्यतः किसकी जांच करते हैं?",
+        { en: "Spatial ability", hi: "स्थानिक क्षमता" },
+        [
+          { en: "Vocabulary", hi: "शब्दावली" },
+          { en: "Arithmetic", hi: "अंकगणित" },
+          { en: "Grammar", hi: "व्याकरण" },
+        ],
+        "Mirror-image problems assess spatial and visual reasoning.",
+        "Mirror-image प्रश्न स्थानिक और दृश्य तर्क क्षमता जांचते हैं।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ssc-tier2-set${setNumber}-reason-${qNo}`,
+      "Reasoning",
+      "तर्क",
+      "If FRIEND is coded as GSJFOE, then CROWN is coded as:",
+      "यदि FRIEND को GSJFOE लिखा जाए, तो CROWN को लिखा जाएगा:",
+      { en: "DSPXO", hi: "DSPXO" },
+      [
+        { en: "CRPWN", hi: "CRPWN" },
+        { en: "DQPXO", hi: "DQPXO" },
+        { en: "ESQYP", hi: "ESQYP" },
+      ],
+      "Each letter is shifted one step forward in the alphabet.",
+      "प्रत्येक अक्षर वर्णमाला में एक कदम आगे बढ़ता है।",
+      seed
+    );
+  });
+}
+
+function createSscTier2GaQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 35 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 2300 + qNo;
+    const pattern = index % 5;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Which Article of the Indian Constitution deals with Equality before Law?",
+        "भारतीय संविधान का कौन सा अनुच्छेद कानून के समक्ष समानता से संबंधित है?",
+        { en: "Article 14", hi: "अनुच्छेद 14" },
+        [
+          { en: "Article 19", hi: "अनुच्छेद 19" },
+          { en: "Article 21", hi: "अनुच्छेद 21" },
+          { en: "Article 32", hi: "अनुच्छेद 32" },
+        ],
+        "Article 14 guarantees equality before law and equal protection of laws.",
+        "अनुच्छेद 14 कानून के समक्ष समानता सुनिश्चित करता है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Who gave the call 'Do or Die' during the freedom movement?",
+        "स्वतंत्रता आंदोलन में 'करो या मरो' का नारा किसने दिया?",
+        { en: "Mahatma Gandhi", hi: "महात्मा गांधी" },
+        [
+          { en: "Subhas Chandra Bose", hi: "सुभाष चंद्र बोस" },
+          { en: "Bal Gangadhar Tilak", hi: "बाल गंगाधर तिलक" },
+          { en: "Jawaharlal Nehru", hi: "जवाहरलाल नेहरू" },
+        ],
+        "'Do or Die' was given by Mahatma Gandhi in 1942.",
+        "'करो या मरो' का नारा महात्मा गांधी ने 1942 में दिया।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "Which vitamin is mainly produced in the body with sunlight exposure?",
+        "सूर्य प्रकाश के संपर्क से शरीर में मुख्य रूप से कौन सा विटामिन बनता है?",
+        { en: "Vitamin D", hi: "विटामिन D" },
+        [
+          { en: "Vitamin A", hi: "विटामिन A" },
+          { en: "Vitamin B12", hi: "विटामिन B12" },
+          { en: "Vitamin C", hi: "विटामिन C" },
+        ],
+        "Vitamin D synthesis is linked with sunlight exposure.",
+        "विटामिन D का निर्माण सूर्य प्रकाश से जुड़ा है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ssc-tier2-set${setNumber}-ga-${qNo}`,
+        "General Awareness",
+        "सामान्य ज्ञान",
+        "The SI unit of electric resistance is:",
+        "विद्युत प्रतिरोध की SI इकाई है:",
+        { en: "Ohm", hi: "ओम" },
+        [
+          { en: "Ampere", hi: "एम्पियर" },
+          { en: "Volt", hi: "वोल्ट" },
+          { en: "Watt", hi: "वाट" },
+        ],
+        "Resistance is measured in ohm.",
+        "प्रतिरोध को ओम में मापा जाता है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ssc-tier2-set${setNumber}-ga-${qNo}`,
+      "General Awareness",
+      "सामान्य ज्ञान",
+      "Which Indian state has the longest coastline?",
+      "भारत के किस राज्य की समुद्री तटरेखा सबसे लंबी है?",
+      { en: "Gujarat", hi: "गुजरात" },
+      [
+        { en: "Maharashtra", hi: "महाराष्ट्र" },
+        { en: "Tamil Nadu", hi: "तमिलनाडु" },
+        { en: "Andhra Pradesh", hi: "आंध्र प्रदेश" },
+      ],
+      "Gujarat has the longest coastline among Indian states.",
+      "भारतीय राज्यों में सबसे लंबी तटरेखा गुजरात की है।",
+      seed
+    );
+  });
+}
+
+function generateSscTier2FullLengthSets(): GovPracticeSet[] {
+  return Array.from({ length: 5 }, (_, index) => {
+    const setNumber = index + 1;
+    const questions = [
+      ...createSscTier2QuantQuestions(setNumber),
+      ...createSscTier2EnglishQuestions(setNumber),
+      ...createSscTier2ReasoningQuestions(setNumber),
+      ...createSscTier2GaQuestions(setNumber),
+    ];
+
+    return {
+      slug: `ssc-tier-2-full-mock-${setNumber}`,
+      title: `SSC Tier II Full Mock Test ${setNumber}`,
+      titleHi: `SSC टियर II फुल मॉक टेस्ट ${setNumber}`,
+      chapter: "Tier II Pattern (Advanced Quant, English, Reasoning, General Awareness)",
+      chapterHi: "टियर II पैटर्न (उन्नत क्वांट, अंग्रेजी, तर्क, सामान्य ज्ञान)",
+      difficulty: setNumber <= 2 ? "Easy" : setNumber <= 4 ? "Medium" : "Hard",
+      durationMin: 120,
+      questionCount: 150,
+      bilingual: true,
+      isLive: true,
+      questions,
+    };
+  });
+}
+
 function createComedkMathQuestions(setNumber: number): PracticeQuestion[] {
   const questions: PracticeQuestion[] = [];
   const trigAnswers = [
@@ -2946,10 +4561,10 @@ export const practiceCategories: PracticeCategoryMeta[] = [
     title: "SSC Practice Tests",
     shortTitle: "SSC",
     description:
-      "Free SSC practice sets with answers and explanations in English and Hindi covering Reasoning, Quantitative Aptitude, English, and General Awareness.",
+      "Free SSC bilingual practice sets with answers and explanations in English and Hindi, including 5 full-length Tier I mocks, 5 full-length CHSL mocks, and 5 full-length Tier II mocks, plus topic-wise training for Reasoning, Quantitative Aptitude, English, and General Awareness.",
     heroTitle: "SSC Practice Tests with Bilingual Support",
     heroText:
-      "Practice SSC exam questions in English and Hindi with instant scoring and explanations for government job aspirants.",
+      "Practice SSC exam questions in English and Hindi with instant scoring, explanations, and official-pattern Tier I, CHSL, and Tier II full mocks.",
     ctaHref: "/practice-tests/ssc",
     ctaLabel: "Start SSC Practice",
   },
@@ -3133,11 +4748,14 @@ export const govPracticeCategories: GovPracticeCategory[] = [
     titleHi: "SSC अभ्यास परीक्षा",
     icon: "📊",
     description:
-      "Free SSC practice sets with answers and explanations in English and Hindi covering Reasoning, Quantitative Aptitude, English, and General Awareness.",
+      "Free SSC bilingual practice sets with answers and explanations in English and Hindi, including 5 full-length Tier I mocks, 5 full-length CHSL mocks, and 5 full-length Tier II mocks, plus topic-wise training for Reasoning, Quantitative Aptitude, English, and General Awareness.",
     descriptionHi:
-      "तर्क, मात्रात्मक योग्यता, अंग्रेजी और सामान्य ज्ञान को कवर करने के लिए अंग्रेजी और हिंदी में उत्तरों और स्पष्टीकरण के साथ नि:शुल्क SSC अभ्यास सेट।",
+      "अंग्रेजी और हिंदी में उत्तर व स्पष्टीकरण के साथ नि:शुल्क SSC द्विभाषी अभ्यास सेट, जिनमें 5 फुल-लेंथ टियर I मॉक, 5 फुल-लेंथ CHSL मॉक और 5 फुल-लेंथ टियर II मॉक, तथा तर्क, मात्रात्मक योग्यता, अंग्रेजी व सामान्य ज्ञान का विषय-वार अभ्यास शामिल है।",
     audience: ["SSC aspirants", "Government job seekers", "Competitive exam students"],
     chapters: [
+      { name: "SSC Tier I Full Mock", hi: "SSC टियर I फुल मॉक" },
+      { name: "SSC CHSL Full Mock", hi: "SSC CHSL फुल मॉक" },
+      { name: "SSC Tier II Full Mock", hi: "SSC टियर II फुल मॉक" },
       { name: "Reasoning", hi: "तर्क" },
       { name: "Quantitative Aptitude", hi: "मात्रात्मक योग्यता" },
       { name: "English", hi: "अंग्रेजी" },
@@ -3809,7 +5427,10 @@ export const govPracticeCategories: GovPracticeCategory[] = [
     createGovQuestion("ssc-ga-9","GA","GA","National flower?","राष्ट्रीय फूल?",["Lotus","Rose","Sunflower","Lily","कमल","गुलाब","सूरजमुखी","लिली"],"A","Lotus is national flower.","कमल राष्ट्रीय फूल है।"),
     createGovQuestion("ssc-ga-10","GA","GA","Who wrote Ramayana?","रामायण किसने लिखी?",["Valmiki","Tulsidas","Kalidas","None","वाल्मीकि","तुलसीदास","कालिदास","कोई नहीं"],"A","Valmiki wrote Ramayana.","वाल्मीकि ने रामायण लिखी।"),
   ],
-}
+},
+  ...generateSscFullLengthSets(),
+  ...generateSscChslFullLengthSets(),
+  ...generateSscTier2FullLengthSets(),
     ],
   },
 
