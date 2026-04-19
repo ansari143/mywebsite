@@ -38,6 +38,7 @@ export default async function PracticeCategoryPage({ params }: Props) {
   const govCategoryData = getGovPracticeCategoryBySlug(category);
   const isEngineering = category === "engineering-entrance";
   const isIelts = category === "ielts";
+  const isCtet = category === "ctet";
 
   if (!categoryData && !govCategoryData) return notFound();
 
@@ -98,6 +99,25 @@ export default async function PracticeCategoryPage({ params }: Props) {
     },
   ];
 
+  const ctetFaqs = [
+    {
+      q: "How many questions are there in CTET Paper I?",
+      a: "CTET Paper I has 150 questions with 150 marks and 150 minutes duration. This page includes full-length bilingual mocks with the same total question count for realistic practice.",
+    },
+    {
+      q: "Is there negative marking in CTET?",
+      a: "No, CTET does not use negative marking in the standard pattern. You should still avoid random guessing and use elimination with concept clarity.",
+    },
+    {
+      q: "Which sections should I prioritize first?",
+      a: "Start with Child Development and Pedagogy plus your weaker language section, then Mathematics and EVS. Use full-length mocks after topic-wise confidence becomes stable.",
+    },
+    {
+      q: "Are these official CTET papers?",
+      a: "No. These are original bilingual practice questions designed for self-assessment. Always verify final syllabus and notices from the official CBSE CTET portal.",
+    },
+  ];
+
   return (
     <div className="space-y-8">
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
@@ -134,6 +154,19 @@ export default async function PracticeCategoryPage({ params }: Props) {
               Start with the correct route first: Academic Reading for study-focused goals, General Training Reading for
               work or migration goals, and Listening, Writing, and Speaking practice for all candidate types. Every set is designed
               for attempt-review-repeat learning so you improve accuracy, confidence, and exam judgment together.
+            </p>
+          </div>
+        )}
+        {isCtet && (
+          <div className="mt-5 max-w-4xl space-y-3 text-sm leading-7 text-slate-700">
+            <p>
+              This CTET page is built for practical teacher exam preparation in both English and Hindi.
+              You can begin with chapter-wise sets and then shift to full-length Paper I mocks with 150 questions,
+              150 marks, and 150-minute timing for realistic exam rhythm.
+            </p>
+            <p>
+              Use the attempt-review-repeat cycle after every set. Focus first on concept gaps,
+              then on speed and section balancing so your final mock accuracy becomes consistent.
             </p>
           </div>
         )}
@@ -265,6 +298,62 @@ export default async function PracticeCategoryPage({ params }: Props) {
               <li>Learners who are not ready to review mistakes after every practice round.</li>
               <li>Students aiming for non-PCM career tracks that need different test patterns.</li>
             </ul>
+          </div>
+        </section>
+      )}
+
+      {isCtet && (
+        <section className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+            <h2 className="text-xl font-bold text-emerald-900">Who should choose this</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
+              <li>First-time CTET candidates who need clear bilingual concept building.</li>
+              <li>Repeat aspirants who want full-length 150-question practice with review.</li>
+              <li>Teacher education students preparing pedagogy plus school-subject sections.</li>
+              <li>Working learners who need short chapter rounds before full mocks.</li>
+            </ul>
+          </div>
+          <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+            <h2 className="text-xl font-bold text-rose-900">Who should avoid this format</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
+              <li>Candidates looking only for copied official previous-year question papers.</li>
+              <li>Learners who skip explanation review and depend only on score checking.</li>
+              <li>Students preparing a different teacher recruitment exam pattern only.</li>
+              <li>Users expecting one-click shortcuts without section-wise practice discipline.</li>
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {isCtet && (
+        <section className="rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm sm:p-8">
+          <div className="inline-flex rounded-full border border-sky-200 bg-white px-3 py-1 text-sm font-medium text-sky-700">
+            CTET Paper I Pattern
+          </div>
+          <h2 className="mt-4 text-2xl font-bold text-slate-900">How to use CTET full-length mocks on this page</h2>
+          <p className="mt-3 max-w-4xl text-base leading-7 text-slate-700">
+            Full-length CTET Paper I practice is most useful when attempted with exam-like timing.
+            Follow a clear order: topic strengthening first, mixed full mock second, and targeted revision third.
+          </p>
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">150 Questions</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Matches CTET Paper I total question count so stamina and focus can be trained realistically.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">150 Minutes</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Attempt under one sitting to improve time distribution across CDP, languages, mathematics, and EVS.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-sky-100 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">Bilingual Support</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Practice in English, Hindi, or both so concept understanding improves without language confusion.
+              </p>
+            </div>
           </div>
         </section>
       )}
@@ -706,6 +795,37 @@ export default async function PracticeCategoryPage({ params }: Props) {
                 <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
               </details>
             ))}
+          </div>
+        </section>
+      )}
+
+      {isCtet && (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+          <div className="mt-4 space-y-3">
+            {ctetFaqs.map((faq) => (
+              <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
+                <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {isCtet && (
+        <section className="rounded-3xl border border-blue-200 bg-blue-50 p-6">
+          <h2 className="text-xl font-bold text-blue-950">Content trust and update policy</h2>
+          <div className="mt-3 space-y-2 text-sm leading-7 text-blue-900">
+            <p>
+              CTET questions on this page are original bilingual practice content for educational self-assessment.
+            </p>
+            <p>
+              Pattern references are updated periodically, but candidates should always cross-check latest notices from official CTET sources.
+            </p>
+            <p>
+              Last reviewed: April 2026.
+            </p>
           </div>
         </section>
       )}

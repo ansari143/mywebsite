@@ -1,4 +1,4 @@
-export type PracticeCategory = "ielts" | "engineering-entrance" | "ctet" | "ssc" | "railway";
+﻿export type PracticeCategory = "ielts" | "engineering-entrance" | "ctet" | "ssc" | "railway";
 
 export type PracticeOption = {
   id: "A" | "B" | "C" | "D";
@@ -294,6 +294,1372 @@ function formatValue(value: number) {
   }
 
   return value.toFixed(2).replace(/\.00$/, "").replace(/0$/, "");
+}
+
+type BilingualChoice = {
+  en: string;
+  hi: string;
+};
+
+function createSeededGovQuestion(
+  id: string,
+  chapter: string,
+  chapterHi: string,
+  text: string,
+  hi: string,
+  correctChoice: BilingualChoice,
+  distractors: [BilingualChoice, BilingualChoice, BilingualChoice],
+  explanation: string,
+  explanationHi: string,
+  seed: number
+): GovPracticeQuestion {
+  const allChoices = [correctChoice, ...distractors];
+  const correctIndex = seed % 4;
+  const arranged: BilingualChoice[] = [];
+  let distractorIndex = 1;
+
+  for (let index = 0; index < 4; index += 1) {
+    if (index === correctIndex) {
+      arranged.push(allChoices[0]);
+    } else {
+      arranged.push(allChoices[distractorIndex]);
+      distractorIndex += 1;
+    }
+  }
+
+  const optionIds: Array<"A" | "B" | "C" | "D"> = ["A", "B", "C", "D"];
+
+  return createGovQuestion(
+    id,
+    chapter,
+    chapterHi,
+    text,
+    hi,
+    [
+      arranged[0].en,
+      arranged[1].en,
+      arranged[2].en,
+      arranged[3].en,
+      arranged[0].hi,
+      arranged[1].hi,
+      arranged[2].hi,
+      arranged[3].hi,
+    ],
+    optionIds[correctIndex],
+    explanation,
+    explanationHi
+  );
+}
+
+function createCtetCdpQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 30 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 200 + qNo;
+    const pattern = index % 6;
+
+    if (pattern === 0) {
+      const age = 7 + ((setNumber + qNo) % 4);
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-cdp-${qNo}`,
+        "Child Development and Pedagogy",
+        "बच्चों का विकास और शिक्षाशास्त्र",
+        `A ${age}-year-old child can conserve quantity and classify objects. This mostly matches which Piaget stage?`,
+        `${age} वर्ष का बच्चा मात्रा संरक्षण और वर्गीकरण कर सकता है। यह मुख्य रूप से पियाजे के किस चरण से मेल खाता है?`,
+        { en: "Concrete operational stage", hi: "ठोस संक्रियात्मक चरण" },
+        [
+          { en: "Sensorimotor stage", hi: "संवेदी-प्रेरक चरण" },
+          { en: "Preoperational stage", hi: "पूर्व-संक्रियात्मक चरण" },
+          { en: "Formal operational stage", hi: "औपचारिक संक्रियात्मक चरण" },
+        ],
+        "Children in this age range usually begin concrete logical operations such as conservation and classification.",
+        "इस आयु में बच्चे संरक्षण और वर्गीकरण जैसी ठोस तार्किक संक्रियाएं करने लगते हैं।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-cdp-${qNo}`,
+        "Child Development and Pedagogy",
+        "बच्चों का विकास और शिक्षाशास्त्र",
+        "Which classroom strategy best supports inclusive education?",
+        "समावेशी शिक्षा को सबसे बेहतर कौन सी कक्षा रणनीति समर्थन करती है?",
+        { en: "Differentiated instruction with multiple learning supports", hi: "विभेदित शिक्षण और बहु-स्तरीय सीखने का समर्थन" },
+        [
+          { en: "Same worksheet and same pace for all learners", hi: "सभी बच्चों के लिए एक ही वर्कशीट और एक ही गति" },
+          { en: "Teaching only high scorers separately", hi: "केवल उच्च अंक वाले बच्चों को अलग से पढ़ाना" },
+          { en: "Reducing interaction among mixed-ability students", hi: "विभिन्न क्षमता वाले छात्रों की सहभागिता कम करना" },
+        ],
+        "Inclusive classrooms use flexible teaching methods and supports based on learner needs.",
+        "समावेशी कक्षा में बच्चों की जरूरत के अनुसार लचीली पद्धतियां और सहायता दी जाती हैं।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-cdp-${qNo}`,
+        "Child Development and Pedagogy",
+        "बच्चों का विकास और शिक्षाशास्त्र",
+        "Formative assessment is mainly used to:",
+        "रचनात्मक मूल्यांकन (Formative Assessment) का मुख्य उद्देश्य क्या है?",
+        { en: "Improve ongoing learning through feedback", hi: "फीडबैक के माध्यम से सीखने में निरंतर सुधार करना" },
+        [
+          { en: "Rank students publicly at the end of term", hi: "सत्र अंत में छात्रों की सार्वजनिक रैंकिंग करना" },
+          { en: "Replace all classroom teaching", hi: "पूरे कक्षा शिक्षण को बदल देना" },
+          { en: "Conduct only memory-based testing", hi: "केवल रटने आधारित परीक्षण करना" },
+        ],
+        "Formative assessment provides feedback during learning, not only at the end.",
+        "रचनात्मक मूल्यांकन सीखने की प्रक्रिया के दौरान सुधार हेतु फीडबैक देता है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-cdp-${qNo}`,
+        "Child Development and Pedagogy",
+        "बच्चों का विकास और शिक्षाशास्त्र",
+        "A child learns a behavior by watching the teacher demonstrate it. This is:",
+        "एक बच्चा शिक्षक को देखकर किसी व्यवहार को सीखता है। यह क्या कहलाता है?",
+        { en: "Observational learning", hi: "अवलोकनात्मक अधिगम" },
+        [
+          { en: "Classical conditioning", hi: "शास्त्रीय अनुबंधन" },
+          { en: "Trial and error only", hi: "केवल प्रयास और त्रुटि" },
+          { en: "Rote learning", hi: "रटकर सीखना" },
+        ],
+        "Bandura emphasized learning through observation and imitation.",
+        "बंडूरा ने अवलोकन और अनुकरण द्वारा सीखने पर जोर दिया।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-cdp-${qNo}`,
+        "Child Development and Pedagogy",
+        "बच्चों का विकास और शिक्षाशास्त्र",
+        "The best first response to a slow learner in a mixed classroom is:",
+        "मिश्रित क्षमता वाली कक्षा में धीमी गति से सीखने वाले छात्र के लिए पहली उपयुक्त प्रतिक्रिया क्या होनी चाहिए?",
+        { en: "Diagnostic support and remedial teaching", hi: "नैदानिक सहायता और उपचारात्मक शिक्षण" },
+        [
+          { en: "Seat the child at the back and ignore", hi: "बच्चे को पीछे बैठाकर नजरअंदाज करना" },
+          { en: "Frequent punishment for low scores", hi: "कम अंकों पर बार-बार दंड देना" },
+          { en: "Remove the child from class tasks", hi: "बच्चे को कक्षा कार्यों से अलग कर देना" },
+        ],
+        "Identify learning gaps first, then provide structured remedial support.",
+        "पहले सीखने की कमी पहचानें, फिर योजनाबद्ध उपचारात्मक सहायता दें।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ctet-p1-set${setNumber}-cdp-${qNo}`,
+      "Child Development and Pedagogy",
+      "बच्चों का विकास और शिक्षाशास्त्र",
+      "Which classroom climate most improves student motivation?",
+      "कौन सा कक्षा वातावरण विद्यार्थियों की प्रेरणा को सबसे अधिक बढ़ाता है?",
+      { en: "Supportive and fear-free learning environment", hi: "सहायक और भय-मुक्त सीखने का वातावरण" },
+      [
+        { en: "Strict silence and no questioning", hi: "कठोर चुप्पी और प्रश्न न पूछने देना" },
+        { en: "Only marks-focused interaction", hi: "केवल अंकों पर आधारित संवाद" },
+        { en: "Teacher-centered one-way lecturing", hi: "एकतरफा शिक्षक-केंद्रित व्याख्यान" },
+      ],
+      "Motivation rises when learners feel safe, respected, and encouraged to participate.",
+      "जब शिक्षार्थी सुरक्षित, सम्मानित और सहभागी महसूस करते हैं, तो प्रेरणा बढ़ती है।",
+      seed
+    );
+  });
+}
+
+function createCtetEnglishQuestions(setNumber: number): GovPracticeQuestion[] {
+  const verbSubjects = [
+    { en: "She", hi: "She" },
+    { en: "Rohan", hi: "Rohan" },
+    { en: "The teacher", hi: "The teacher" },
+    { en: "My sister", hi: "My sister" },
+  ];
+
+  const synonyms = [
+    { word: "begin", answer: "start", wrong: ["stop", "close", "finish"], hi: "शुरू करना" },
+    { word: "rapid", answer: "fast", wrong: ["slow", "weak", "quiet"], hi: "तेज" },
+    { word: "correct", answer: "right", wrong: ["wrong", "late", "dim"], hi: "सही" },
+  ] as const;
+
+  return Array.from({ length: 30 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 300 + qNo;
+    const pattern = index % 6;
+
+    if (pattern === 0) {
+      const subject = verbSubjects[index % verbSubjects.length];
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-eng-${qNo}`,
+        "Language I (English)",
+        "भाषा I (अंग्रेजी)",
+        `Choose the correct verb: '${subject.en} _____ to school every day.'`,
+        `सही क्रिया चुनें: '${subject.en} _____ to school every day.'`,
+        { en: "goes", hi: "goes" },
+        [
+          { en: "go", hi: "go" },
+          { en: "going", hi: "going" },
+          { en: "gone", hi: "gone" },
+        ],
+        "For third-person singular subjects, use 'goes' in simple present.",
+        "Third-person singular subject के साथ simple present में 'goes' प्रयोग होता है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-eng-${qNo}`,
+        "Language I (English)",
+        "भाषा I (अंग्रेजी)",
+        "Choose the correct article: 'He is ___ honest student.'",
+        "सही article चुनें: 'He is ___ honest student.'",
+        { en: "an", hi: "an" },
+        [
+          { en: "a", hi: "a" },
+          { en: "the", hi: "the" },
+          { en: "no article", hi: "कोई article नहीं" },
+        ],
+        "'Honest' starts with a vowel sound, so 'an' is correct.",
+        "'honest' स्वर ध्वनि से शुरू होता है, इसलिए 'an' सही है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const item = synonyms[index % synonyms.length];
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-eng-${qNo}`,
+        "Language I (English)",
+        "भाषा I (अंग्रेजी)",
+        `Choose the synonym of '${item.word}'.`,
+        `'${item.word}' का समानार्थी चुनें।`,
+        { en: item.answer, hi: item.hi },
+        [
+          { en: item.wrong[0], hi: item.wrong[0] },
+          { en: item.wrong[1], hi: item.wrong[1] },
+          { en: item.wrong[2], hi: item.wrong[2] },
+        ],
+        `The closest meaning of '${item.word}' is '${item.answer}'.`,
+        `'${item.word}' का सबसे निकट अर्थ '${item.answer}' है।`,
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-eng-${qNo}`,
+        "Language I (English)",
+        "भाषा I (अंग्रेजी)",
+        "Choose the antonym of 'generous'.",
+        "'generous' का विलोम चुनें।",
+        { en: "selfish", hi: "स्वार्थी" },
+        [
+          { en: "kind", hi: "दयालु" },
+          { en: "helpful", hi: "सहायक" },
+          { en: "gentle", hi: "मृदु" },
+        ],
+        "'Selfish' is opposite in meaning to 'generous'.",
+        "'Selfish', 'generous' का विपरीत अर्थ देता है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-eng-${qNo}`,
+        "Language I (English)",
+        "भाषा I (अंग्रेजी)",
+        "Fill in the blank: 'The books are ___ the table.'",
+        "रिक्त स्थान भरें: 'The books are ___ the table.'",
+        { en: "on", hi: "on" },
+        [
+          { en: "in", hi: "in" },
+          { en: "at", hi: "at" },
+          { en: "for", hi: "for" },
+        ],
+        "For surface placement, the correct preposition is 'on'.",
+        "किसी सतह पर होने के लिए सही preposition 'on' है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ctet-p1-set${setNumber}-eng-${qNo}`,
+      "Language I (English)",
+      "भाषा I (अंग्रेजी)",
+      "Read: 'Rina completed her homework before dinner.' What did Rina complete?",
+      "पढ़ें: 'Rina completed her homework before dinner.' रिना ने क्या पूरा किया?",
+      { en: "Her homework", hi: "अपना गृहकार्य" },
+      [
+        { en: "Her lunch", hi: "अपना भोजन" },
+        { en: "Her exam", hi: "अपनी परीक्षा" },
+        { en: "Her holiday", hi: "अपनी छुट्टी" },
+      ],
+      "The sentence directly states that she completed homework.",
+      "वाक्य में स्पष्ट है कि उसने गृहकार्य पूरा किया।",
+      seed
+    );
+  });
+}
+
+function createCtetHindiQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 30 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 400 + qNo;
+    const pattern = index % 6;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-hin-${qNo}`,
+        "Language II (Hindi)",
+        "भाषा II (हिंदी)",
+        "'राम बाजार गया' वाक्य में क्रिया कौन सी है?",
+        "'राम बाजार गया' वाक्य में क्रिया कौन सी है?",
+        { en: "गया", hi: "गया" },
+        [
+          { en: "राम", hi: "राम" },
+          { en: "बाजार", hi: "बाजार" },
+          { en: "में", hi: "में" },
+        ],
+        "'गया' कार्य को बताता है, इसलिए यह क्रिया है।",
+        "'गया' कार्य को बताता है, इसलिए यह क्रिया है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-hin-${qNo}`,
+        "Language II (Hindi)",
+        "भाषा II (हिंदी)",
+        "'सुंदर फूल' में 'सुंदर' किस प्रकार का शब्द है?",
+        "'सुंदर फूल' में 'सुंदर' किस प्रकार का शब्द है?",
+        { en: "विशेषण", hi: "विशेषण" },
+        [
+          { en: "संज्ञा", hi: "संज्ञा" },
+          { en: "क्रिया", hi: "क्रिया" },
+          { en: "सर्वनाम", hi: "सर्वनाम" },
+        ],
+        "जो शब्द संज्ञा का गुण बताए, वह विशेषण कहलाता है।",
+        "जो शब्द संज्ञा का गुण बताए, वह विशेषण कहलाता है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-hin-${qNo}`,
+        "Language II (Hindi)",
+        "भाषा II (हिंदी)",
+        "'पानी' का पर्यायवाची क्या है?",
+        "'पानी' का पर्यायवाची क्या है?",
+        { en: "जल", hi: "जल" },
+        [
+          { en: "अग्नि", hi: "अग्नि" },
+          { en: "धरा", hi: "धरा" },
+          { en: "आकाश", hi: "आकाश" },
+        ],
+        "'जल' और 'पानी' समानार्थी शब्द हैं।",
+        "'जल' और 'पानी' समानार्थी शब्द हैं।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-hin-${qNo}`,
+        "Language II (Hindi)",
+        "भाषा II (हिंदी)",
+        "'अच्छा' का विलोम क्या है?",
+        "'अच्छा' का विलोम क्या है?",
+        { en: "बुरा", hi: "बुरा" },
+        [
+          { en: "सुंदर", hi: "सुंदर" },
+          { en: "तेज", hi: "तेज" },
+          { en: "लंबा", hi: "लंबा" },
+        ],
+        "'अच्छा' का विपरीत अर्थ 'बुरा' है।",
+        "'अच्छा' का विपरीत अर्थ 'बुरा' है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-hin-${qNo}`,
+        "Language II (Hindi)",
+        "भाषा II (हिंदी)",
+        "'मैं, हम, वह' किस प्रकार के शब्द हैं?",
+        "'मैं, हम, वह' किस प्रकार के शब्द हैं?",
+        { en: "सर्वनाम", hi: "सर्वनाम" },
+        [
+          { en: "संज्ञा", hi: "संज्ञा" },
+          { en: "विशेषण", hi: "विशेषण" },
+          { en: "क्रिया", hi: "क्रिया" },
+        ],
+        "ये संज्ञा के स्थान पर आते हैं, इसलिए सर्वनाम हैं।",
+        "ये संज्ञा के स्थान पर आते हैं, इसलिए सर्वनाम हैं।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ctet-p1-set${setNumber}-hin-${qNo}`,
+      "Language II (Hindi)",
+      "भाषा II (हिंदी)",
+      "सही वाक्य चुनें।",
+      "सही वाक्य चुनें।",
+      { en: "बच्चे मैदान में खेलते हैं।", hi: "बच्चे मैदान में खेलते हैं।" },
+      [
+        { en: "बच्चे मैदान में खेलता है।", hi: "बच्चे मैदान में खेलता है।" },
+        { en: "बच्चे मैदान में खेलते है।", hi: "बच्चे मैदान में खेलते है।" },
+        { en: "बच्चे मैदान में खेलती हैं।", hi: "बच्चे मैदान में खेलती हैं।" },
+      ],
+      "कर्ता और क्रिया में वचन-संगति होनी चाहिए।",
+      "कर्ता और क्रिया में वचन-संगति होनी चाहिए।",
+      seed
+    );
+  });
+}
+
+function createCtetMathQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 30 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 500 + qNo;
+    const pattern = index % 6;
+
+    if (pattern === 0) {
+      const a = 12 + setNumber + qNo;
+      const b = 8 + (qNo % 7);
+      const answer = a + b;
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-math-${qNo}`,
+        "Mathematics",
+        "गणित",
+        `What is ${a} + ${b}?`,
+        `${a} + ${b} कितना है?`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer - 1}`, hi: `${answer - 1}` },
+          { en: `${answer + 1}`, hi: `${answer + 1}` },
+          { en: `${answer + 2}`, hi: `${answer + 2}` },
+        ],
+        `Adding ${a} and ${b} gives ${answer}.`,
+        `${a} और ${b} का योग ${answer} है।`,
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      const a = 70 + setNumber * 3 + qNo;
+      const b = 20 + (qNo % 9);
+      const answer = a - b;
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-math-${qNo}`,
+        "Mathematics",
+        "गणित",
+        `What is ${a} - ${b}?`,
+        `${a} - ${b} कितना है?`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer - 2}`, hi: `${answer - 2}` },
+          { en: `${answer + 2}`, hi: `${answer + 2}` },
+          { en: `${answer + 4}`, hi: `${answer + 4}` },
+        ],
+        `Subtract ${b} from ${a} to get ${answer}.`,
+        `${a} में से ${b} घटाने पर ${answer} मिलता है।`,
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const a = 6 + (qNo % 5);
+      const b = 4 + (setNumber % 3);
+      const answer = a * b;
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-math-${qNo}`,
+        "Mathematics",
+        "गणित",
+        `Find the product: ${a} × ${b}`,
+        `गुणनफल ज्ञात करें: ${a} × ${b}`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer - b}`, hi: `${answer - b}` },
+          { en: `${answer + b}`, hi: `${answer + b}` },
+          { en: `${answer + 2}`, hi: `${answer + 2}` },
+        ],
+        `${a} multiplied by ${b} equals ${answer}.`,
+        `${a} को ${b} से गुणा करने पर ${answer} मिलता है।`,
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      const numerator = 2 + (qNo % 4);
+      const denominator = 5;
+      const ofValue = 10 * (setNumber + 2);
+      const answer = (numerator * ofValue) / denominator;
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-math-${qNo}`,
+        "Mathematics",
+        "गणित",
+        `What is ${numerator}/${denominator} of ${ofValue}?`,
+        `${ofValue} का ${numerator}/${denominator} कितना होगा?`,
+        { en: `${answer}`, hi: `${answer}` },
+        [
+          { en: `${answer - 2}`, hi: `${answer - 2}` },
+          { en: `${answer + 2}`, hi: `${answer + 2}` },
+          { en: `${answer + 5}`, hi: `${answer + 5}` },
+        ],
+        `(${numerator}/${denominator}) × ${ofValue} = ${answer}.`,
+        `(${numerator}/${denominator}) × ${ofValue} = ${answer}।`,
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      const side = 5 + (qNo % 6);
+      const answer = side * 4;
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-math-${qNo}`,
+        "Mathematics",
+        "गणित",
+        `Perimeter of a square with side ${side} cm is:`,
+        `${side} सेमी भुजा वाले वर्ग का परिमाप है:`,
+        { en: `${answer} cm`, hi: `${answer} सेमी` },
+        [
+          { en: `${side * 2} cm`, hi: `${side * 2} सेमी` },
+          { en: `${side * 3} cm`, hi: `${side * 3} सेमी` },
+          { en: `${side * side} cm`, hi: `${side * side} सेमी` },
+        ],
+        "Perimeter of a square = 4 × side.",
+        "वर्ग का परिमाप = 4 × भुजा।",
+        seed
+      );
+    }
+
+    const startMinute = 10 + (qNo % 40);
+    const addMinute = 15;
+    const answerMinute = (startMinute + addMinute) % 60;
+    const answerHour = answerMinute < startMinute ? 4 : 3;
+
+    return createSeededGovQuestion(
+      `ctet-p1-set${setNumber}-math-${qNo}`,
+      "Mathematics",
+      "गणित",
+      `If the time is 3:${startMinute.toString().padStart(2, "0")} PM, what will it be after 15 minutes?`,
+      `यदि समय 3:${startMinute.toString().padStart(2, "0")} PM है, तो 15 मिनट बाद समय क्या होगा?`,
+      {
+        en: `${answerHour}:${answerMinute.toString().padStart(2, "0")} PM`,
+        hi: `${answerHour}:${answerMinute.toString().padStart(2, "0")} PM`,
+      },
+      [
+        {
+          en: `3:${((startMinute + 10) % 60).toString().padStart(2, "0")} PM`,
+          hi: `3:${((startMinute + 10) % 60).toString().padStart(2, "0")} PM`,
+        },
+        {
+          en: `3:${((startMinute + 20) % 60).toString().padStart(2, "0")} PM`,
+          hi: `3:${((startMinute + 20) % 60).toString().padStart(2, "0")} PM`,
+        },
+        {
+          en: `4:${((startMinute + 5) % 60).toString().padStart(2, "0")} PM`,
+          hi: `4:${((startMinute + 5) % 60).toString().padStart(2, "0")} PM`,
+        },
+      ],
+      "Add 15 minutes carefully, including hour change if minutes cross 60.",
+      "15 मिनट जोड़ते समय 60 पार होने पर घंटे का परिवर्तन ध्यान रखें।",
+      seed
+    );
+  });
+}
+
+function createCtetEvsQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 30 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 600 + qNo;
+    const pattern = index % 6;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-evs-${qNo}`,
+        "Environmental Studies",
+        "पर्यावरण अध्ययन",
+        "Plants prepare food mainly through:",
+        "पौधे भोजन मुख्य रूप से किस प्रक्रिया से बनाते हैं?",
+        { en: "Photosynthesis", hi: "प्रकाश संश्लेषण" },
+        [
+          { en: "Respiration", hi: "श्वसन" },
+          { en: "Digestion", hi: "पाचन" },
+          { en: "Excretion", hi: "उत्सर्जन" },
+        ],
+        "Food preparation in green plants is called photosynthesis.",
+        "हरे पौधों में भोजन बनाने की प्रक्रिया को प्रकाश संश्लेषण कहते हैं।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-evs-${qNo}`,
+        "Environmental Studies",
+        "पर्यावरण अध्ययन",
+        "Which source gives us potable water after treatment?",
+        "उपचार (treatment) के बाद पीने योग्य पानी किस स्रोत से मिलता है?",
+        { en: "River water", hi: "नदी का पानी" },
+        [
+          { en: "Plastic waste", hi: "प्लास्टिक कचरा" },
+          { en: "Smoke", hi: "धुआं" },
+          { en: "Dry sand", hi: "सूखी रेत" },
+        ],
+        "River water is a major freshwater source and can be treated for drinking.",
+        "नदी का पानी मीठे जल का प्रमुख स्रोत है और उपचार के बाद पीने योग्य बनता है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-evs-${qNo}`,
+        "Environmental Studies",
+        "पर्यावरण अध्ययन",
+        "Which organ is primarily responsible for breathing in humans?",
+        "मनुष्य में श्वसन के लिए मुख्य रूप से कौन सा अंग जिम्मेदार है?",
+        { en: "Lungs", hi: "फेफड़े" },
+        [
+          { en: "Liver", hi: "यकृत" },
+          { en: "Kidney", hi: "गुर्दा" },
+          { en: "Pancreas", hi: "अग्न्याशय" },
+        ],
+        "Lungs exchange oxygen and carbon dioxide in respiration.",
+        "श्वसन में ऑक्सीजन और कार्बन डाइऑक्साइड का आदान-प्रदान फेफड़ों में होता है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-evs-${qNo}`,
+        "Environmental Studies",
+        "पर्यावरण अध्ययन",
+        "The sun rises in the:",
+        "सूर्य किस दिशा में उगता है?",
+        { en: "East", hi: "पूर्व" },
+        [
+          { en: "West", hi: "पश्चिम" },
+          { en: "North", hi: "उत्तर" },
+          { en: "South", hi: "दक्षिण" },
+        ],
+        "The sun appears to rise in the east due to Earth's rotation.",
+        "पृथ्वी के घूर्णन के कारण सूर्य पूर्व दिशा में उगता हुआ दिखाई देता है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ctet-p1-set${setNumber}-evs-${qNo}`,
+        "Environmental Studies",
+        "पर्यावरण अध्ययन",
+        "Which one is a renewable natural resource?",
+        "निम्न में से कौन सा नवीकरणीय प्राकृतिक संसाधन है?",
+        { en: "Sunlight", hi: "सूर्य प्रकाश" },
+        [
+          { en: "Coal", hi: "कोयला" },
+          { en: "Petroleum", hi: "पेट्रोलियम" },
+          { en: "Natural gas", hi: "प्राकृतिक गैस" },
+        ],
+        "Sunlight is replenished naturally and is renewable.",
+        "सूर्य प्रकाश प्राकृतिक रूप से लगातार उपलब्ध होता है, इसलिए यह नवीकरणीय है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ctet-p1-set${setNumber}-evs-${qNo}`,
+      "Environmental Studies",
+      "पर्यावरण अध्ययन",
+      "Best household practice to reduce water wastage is:",
+      "घर में पानी की बर्बादी कम करने का सर्वोत्तम तरीका क्या है?",
+      { en: "Turn off taps when not in use", hi: "उपयोग न होने पर नल बंद रखना" },
+      [
+        { en: "Keep tap open while brushing", hi: "ब्रश करते समय नल खुला रखना" },
+        { en: "Wash vehicles daily with pipe", hi: "वाहन रोज पाइप से धोना" },
+        { en: "Ignore leaking pipes", hi: "लीक पाइपों को नजरअंदाज करना" },
+      ],
+      "Closing taps and preventing leaks are simple water conservation steps.",
+      "नल बंद रखना और रिसाव रोकना जल संरक्षण के सरल उपाय हैं।",
+      seed
+    );
+  });
+}
+
+function generateCtetFullLengthSets(): GovPracticeSet[] {
+  return Array.from({ length: 5 }, (_, index) => {
+    const setNumber = index + 1;
+    const questions = [
+      ...createCtetCdpQuestions(setNumber),
+      ...createCtetEnglishQuestions(setNumber),
+      ...createCtetHindiQuestions(setNumber),
+      ...createCtetMathQuestions(setNumber),
+      ...createCtetEvsQuestions(setNumber),
+    ];
+
+    return {
+      slug: `ctet-paper-1-full-mock-${setNumber}`,
+      title: `CTET Paper I Full Mock Test ${setNumber}`,
+      titleHi: `CTET पेपर I फुल मॉक टेस्ट ${setNumber}`,
+      chapter: "Full Syllabus (CDP, Language I, Language II, Mathematics, EVS)",
+      chapterHi: "पूर्ण पाठ्यक्रम (CDP, भाषा I, भाषा II, गणित, EVS)",
+      difficulty: setNumber <= 2 ? "Easy" : setNumber <= 4 ? "Medium" : "Hard",
+      durationMin: 150,
+      questionCount: 150,
+      bilingual: true,
+      isLive: true,
+      questions,
+    };
+  });
+}
+
+// ===== CTET PAPER II GENERATORS (Classes VI-VIII) =====
+
+function createCtetP2CdpQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 30 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 700 + qNo;
+    const pattern = index % 6;
+
+    if (pattern === 0) {
+      const age = 11 + ((setNumber + qNo) % 3);
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-cdp-${qNo}`,
+        "Child Development and Pedagogy",
+        "बच्चों का विकास और शिक्षाशास्त्र",
+        `An adolescent aged ${age} years is most likely to be in ${age > 12 ? "Erikson's" : "Freud's"} stage of:`,
+        `${age} वर्ष का किशोर ${age > 12 ? "एरिकसन के" : "फ्रायड के"} किस अवस्था में होगा?`,
+        { en: age > 12 ? "Identity vs. Role confusion" : "Competence and skill development", hi: age > 12 ? "पहचान बनाम भूमिका संभ्रम" : "योग्यता और कौशल विकास" },
+        [
+          { en: "Trust vs. Mistrust", hi: "विश्वास बनाम अविश्वास" },
+          { en: "Autonomy vs. Shame", hi: "स्वायत्तता बनाम शर्म" },
+          { en: "Initiative vs. Guilt", hi: "पहल बनाम अपराध बोध" },
+        ],
+        "Adolescence (12-18) involves identity formation as per Erikson.",
+        "किशोरावस्था (12-18) में एरिकसन के अनुसार पहचान का निर्माण होता है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-cdp-${qNo}`,
+        "Child Development and Pedagogy",
+        "बच्चों का विकास और शिक्षाशास्त्र",
+        "Multiple intelligences theory suggests that intelligence is:",
+        "बहु-बुद्धिमत्ता सिद्धांत सुझाता है कि बुद्धिमत्ता है:",
+        { en: "A single, fixed capacity measured by IQ", hi: "एक एकल, निश्चित क्षमता जिसे IQ द्वारा मापा जाता है" },
+        [
+          { en: "Multiple, diverse, and culturally influenced", hi: "बहुविध, विविध और सांस्कृतिक रूप से प्रभावित" },
+          { en: "Only determined by genetics", hi: "केवल आनुवंशिकी द्वारा निर्धारित" },
+          { en: "Unchangeable after age 10", hi: "10 साल की उम्र के बाद अपरिवर्तनीय" },
+        ],
+        "Gardner's multiple intelligences include linguistic, logical, spatial, bodily-kinesthetic, musical, interpersonal, intrapersonal, and naturalistic.",
+        "गार्डनर की बहु-बुद्धिमत्ता में भाषाई, तार्किक, स्थानिक, शारीरिक-गतिविधि, संगीतात्मक, अंतर्व्यक्तिगत, अंतरंग और प्राकृतिक शामिल हैं।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-cdp-${qNo}`,
+        "Child Development and Pedagogy",
+        "बच्चों का विकास और शिक्षाशास्त्र",
+        "Metacognition refers to the ability to:",
+        "मेटाकॉग्निशन किसकी क्षमता को संदर्भित करता है?",
+        { en: "Think about one's own thinking and learning processes", hi: "अपनी सोच और सीखने की प्रक्रियाओं के बारे में सोचना" },
+        [
+          { en: "Memorize facts quickly", hi: "तथ्यों को जल्दी याद रखना" },
+          { en: "Follow instructions exactly", hi: "निर्देशों का सटीकता से पालन करना" },
+          { en: "Compete with peers", hi: "साथियों के साथ प्रतिस्पर्धा करना" },
+        ],
+        "Metacognition is 'thinking about thinking' and helps learners monitor and regulate their learning.",
+        "मेटाकॉग्निशन 'सोच के बारे में सोच' है और शिक्षार्थियों को अपनी सीख की निगरानी और नियमन करने में मदद करती है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-cdp-${qNo}`,
+        "Child Development and Pedagogy",
+        "बच्चों का विकास और शिक्षाशास्त्र",
+        "Which learning style is preferred by kinesthetic learners?",
+        "कौन सी सीखने की शैली kinesthetic सीखने वाले पसंद करते हैं?",
+        { en: "Hands-on activities and movement-based learning", hi: "व्यावहारिक गतिविधियां और आंदोलन-आधारित सीखना" },
+        [
+          { en: "Reading textbooks silently", hi: "पाठ्यपुस्तकें शांति से पढ़ना" },
+          { en: "Listening to lectures", hi: "व्याख्यान सुनना" },
+          { en: "Watching videos passively", hi: "वीडियो निष्क्रिय रूप से देखना" },
+        ],
+        "Kinesthetic learners learn best through physical movement, hands-on practice, and touch.",
+        "Kinesthetic सीखने वाले शारीरिक गति, व्यावहारिक अभ्यास और स्पर्श से सर्वोत्तम रूप से सीखते हैं।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-cdp-${qNo}`,
+        "Child Development and Pedagogy",
+        "बच्चों का विकास और शिक्षाशास्त्र",
+        "Problem-solving skills are best developed through:",
+        "समस्या-समाधान कौशल सर्वोत्तम रूप से कैसे विकसित होता है?",
+        { en: "Open-ended tasks and projects where learners explore and innovate", hi: "खुले-अंत वाले कार्य और परियोजनाएं जहां सीखने वाले अन्वेषण और नवाचार करते हैं" },
+        [
+          { en: "Memorizing step-by-step solutions", hi: "चरण-दर-चरण समाधान याद रखना" },
+          { en: "Following textbook answers exactly", hi: "पाठ्यपुस्तक के उत्तरों का बिल्कुल पालन करना" },
+          { en: "Passive listening to explanations", hi: "व्याख्याओं को निष्क्रिय रूप से सुनना" },
+        ],
+        "Learners develop problem-solving by engaging in authentic, complex tasks that require experimentation and reflection.",
+        "सीखने वाले प्रयोग और चिंतन की आवश्यकता वाले प्रामाणिक, जटिल कार्यों में भाग लेकर समस्या-समाधान विकसित करते हैं।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ctet-p2-set${setNumber}-cdp-${qNo}`,
+      "Child Development and Pedagogy",
+      "बच्चों का विकास और शिक्षाशास्त्र",
+      "How does scaffolding support learners in peer collaboration?",
+      "Scaffolding कैसे सहकर्मी सहयोग में सीखने वालों का समर्थन करता है?",
+      { en: "Provides temporary support that is gradually removed as competence grows", hi: "अस्थायी समर्थन प्रदान करता है जो योग्यता बढ़ने के साथ धीरे-धीरे हटाया जाता है" },
+      [
+        { en: "Allows students to work entirely independently", hi: "छात्रों को पूरी तरह स्वतंत्र रूप से काम करने देता है" },
+        { en: "Eliminates all peer interaction", hi: "सभी सहकर्मी संपर्क को समाप्त करता है" },
+        { en: "Prevents mistakes by giving ready-made answers", hi: "तैयार-निर्मित उत्तर देकर गलतियों को रोकता है" },
+      ],
+      "Scaffolding is a support system that enables learners to reach higher levels of competence with guidance that fades away as they become more capable.",
+      "Scaffolding एक समर्थन प्रणाली है जो सीखने वालों को मार्गदर्शन के साथ उच्च योग्यता के स्तर तक पहुंचने में सक्षम बनाती है जो वे अधिक सक्षम होने के साथ गायब हो जाते हैं।",
+      seed
+    );
+  });
+}
+
+function createCtetP2EnglishQuestions(setNumber: number): GovPracticeQuestion[] {
+  const complexTopics = [
+    { topic: "Modal verbs", en: "can, must, should", hi: "can, must, should" },
+    { topic: "Passive voice", en: "complex sentences", hi: "जटिल वाक्य" },
+    { topic: "Conditional clauses", en: "if-then patterns", hi: "यदि-तो पैटर्न" },
+  ];
+
+  return Array.from({ length: 30 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 800 + qNo;
+    const pattern = index % 6;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-eng-${qNo}`,
+        "Language I (English)",
+        "भाषा I (अंग्रेजी)",
+        "Choose the correct modal verb: 'You _____ help others even when tired.'",
+        "सही modal verb चुनें: 'You _____ help others even when tired.'",
+        { en: "should", hi: "should" },
+        [
+          { en: "might", hi: "might" },
+          { en: "could", hi: "could" },
+          { en: "would", hi: "would" },
+        ],
+        "'Should' expresses moral obligation or strong advice.",
+        "'Should' नैतिक दायित्व या मजबूत सलाह व्यक्त करता है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-eng-${qNo}`,
+        "Language I (English)",
+        "भाषा I (अंग्रेजी)",
+        "Convert to passive voice: 'The teacher will mark the papers.'",
+        "Passive voice में बदलें: 'The teacher will mark the papers.'",
+        { en: "The papers will be marked by the teacher.", hi: "The papers will be marked by the teacher." },
+        [
+          { en: "The papers will mark by the teacher.", hi: "The papers will mark by the teacher." },
+          { en: "The papers are marked by the teacher.", hi: "The papers are marked by the teacher." },
+          { en: "The papers have been marked by the teacher.", hi: "The papers have been marked by the teacher." },
+        ],
+        "Future tense passive uses 'will be + past participle'.",
+        "भविष्य काल passive में 'will be + past participle' का प्रयोग होता है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-eng-${qNo}`,
+        "Language I (English)",
+        "भाषा I (अंग्रेजी)",
+        "Fill in the conditional: 'If she studies hard, she _____ pass the exam.'",
+        "Conditional भरें: 'If she studies hard, she _____ pass the exam.'",
+        { en: "will pass", hi: "will pass" },
+        [
+          { en: "would pass", hi: "would pass" },
+          { en: "passed", hi: "passed" },
+          { en: "passes", hi: "passes" },
+        ],
+        "Real condition (probable future) uses: If + present, + will + infinitive.",
+        "Real condition (probable future) में: If + present, + will + infinitive का प्रयोग होता है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-eng-${qNo}`,
+        "Language I (English)",
+        "भाषा I (अंग्रेजी)",
+        "Identify the literary device in: 'The stage was silent as a tomb.'",
+        "साहित्यिक उपकरण की पहचान करें: 'The stage was silent as a tomb.'",
+        { en: "Simile", hi: "उपमा" },
+        [
+          { en: "Metaphor", hi: "रूपक" },
+          { en: "Personification", hi: "मानवीकरण" },
+          { en: "Alliteration", hi: "अनुप्रास" },
+        ],
+        "Simile compares two things using 'as...as' or 'like'.",
+        "Simile 'as...as' या 'like' का प्रयोग करके दो चीजों की तुलना करता है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-eng-${qNo}`,
+        "Language I (English)",
+        "भाषा I (अंग्रेजी)",
+        "Which is the correct use of 'affect' vs 'effect'?",
+        "'Affect' vs 'effect' का सही प्रयोग कौन सा है?",
+        { en: "The weather affects my mood; the effect is clear.", hi: "The weather affects my mood; the effect is clear." },
+        [
+          { en: "The weather effects my mood; the affect is clear.", hi: "The weather effects my mood; the affect is clear." },
+          { en: "The weather effect my mood; the affect is clear.", hi: "The weather effect my mood; the affect is clear." },
+          { en: "The weathers affect my mood; the effects is clear.", hi: "The weathers affect my mood; the effects is clear." },
+        ],
+        "Affect (verb) = to influence; Effect (noun) = result.",
+        "Affect (क्रिया) = प्रभाव डालना; Effect (संज्ञा) = परिणाम।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ctet-p2-set${setNumber}-eng-${qNo}`,
+      "Language I (English)",
+      "भाषा I (अंग्रेजी)",
+      "Read the passage: 'Books are a treasure of knowledge. They transport us to new worlds.' What does 'transport' mean here?",
+      "परिच्छेद पढ़ें: 'Books are a treasure of knowledge. They transport us to new worlds.' यहां 'transport' का अर्थ क्या है?",
+      { en: "To carry or move mentally", hi: "मानसिक रूप से ले जाना या स्थानांतरित करना" },
+      [
+        { en: "To physically travel", hi: "शारीरिक रूप से यात्रा करना" },
+        { en: "To transform into something else", hi: "किसी और चीज़ में बदलना" },
+        { en: "To express emotional feelings", hi: "भावनात्मक भावनाओं को व्यक्त करना" },
+      ],
+      "In context, 'transport' means to take mentally or imaginatively to another place.",
+      "संदर्भ में, 'transport' का अर्थ मानसिक रूप से या कल्पनात्मक रूप से दूसरी जगह ले जाना है।",
+      seed
+    );
+  });
+}
+
+function createCtetP2HindiQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 30 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 900 + qNo;
+    const pattern = index % 6;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-hin-${qNo}`,
+        "Language II (Hindi)",
+        "भाषा II (हिंदी)",
+        "'पक्षी आकाश में उड़ते हैं' - इस वाक्य में 'पक्षी' क्या है?",
+        "'पक्षी आकाश में उड़ते हैं' - इस वाक्य में 'पक्षी' क्या है?",
+        { en: "कर्ता", hi: "कर्ता" },
+        [
+          { en: "कर्म", hi: "कर्म" },
+          { en: "करण", hi: "करण" },
+          { en: "अधिकरण", hi: "अधिकरण" },
+        ],
+        "जो शब्द वाक्य में क्रिया करता है, वह कर्ता कहलाता है।",
+        "जो शब्द वाक्य में क्रिया करता है, वह कर्ता कहलाता है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-hin-${qNo}`,
+        "Language II (Hindi)",
+        "भाषा II (हिंदी)",
+        "'साहित्य' का पर्यायवाची कौन सा है?",
+        "'साहित्य' का पर्यायवाची कौन सा है?",
+        { en: "वाङ्मय", hi: "वाङ्मय" },
+        [
+          { en: "विज्ञान", hi: "विज्ञान" },
+          { en: "कला", hi: "कला" },
+          { en: "भाषा", hi: "भाषा" },
+        ],
+        "'वाङ्मय' और 'साहित्य' समानार्थी शब्द हैं।",
+        "'वाङ्मय' और 'साहित्य' समानार्थी शब्द हैं।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-hin-${qNo}`,
+        "Language II (Hindi)",
+        "भाषा II (हिंदी)",
+        "'प्रकाश' का विलोम क्या है?",
+        "'प्रकाश' का विलोम क्या है?",
+        { en: "अंधकार", hi: "अंधकार" },
+        [
+          { en: "सूर्य", hi: "सूर्य" },
+          { en: "चाँद", hi: "चाँद" },
+          { en: "तारा", hi: "तारा" },
+        ],
+        "'अंधकार' 'प्रकाश' का विपरीत अर्थ देता है।",
+        "'अंधकार' 'प्रकाश' का विपरीत अर्थ देता है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-hin-${qNo}`,
+        "Language II (Hindi)",
+        "भाषा II (हिंदी)",
+        "'राष्ट्रगान' शब्द किन दो शब्दों से मिलकर बना है?",
+        "'राष्ट्रगान' शब्द किन दो शब्दों से मिलकर बना है?",
+        { en: "राष्ट्र + गान", hi: "राष्ट्र + गान" },
+        [
+          { en: "रा + ष्ट्रगान", hi: "रा + ष्ट्रगान" },
+          { en: "राष्ट् + रगान", hi: "राष्ट् + रगान" },
+          { en: "राष्ट्र + ग + आन", hi: "राष्ट्र + ग + आन" },
+        ],
+        "समास विच्छेद में राष्ट्र + गान = राष्ट्रगान।",
+        "समास विच्छेद में राष्ट्र + गान = राष्ट्रगान।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-hin-${qNo}`,
+        "Language II (Hindi)",
+        "भाषा II (हिंदी)",
+        "निम्नलिखित में मुहावरा कौन सा है?",
+        "निम्नलिखित में मुहावरा कौन सा है?",
+        { en: "दिल तोड़ना", hi: "दिल तोड़ना" },
+        [
+          { en: "हृदय टूटना", hi: "हृदय टूटना" },
+          { en: "चिंतित होना", hi: "चिंतित होना" },
+          { en: "दु:खी होना", hi: "दु:खी होना" },
+        ],
+        "'दिल तोड़ना' एक मुहावरा है जिसका अर्थ किसी को कष्ट पहुंचाना है।",
+        "'दिल तोड़ना' एक मुहावरा है जिसका अर्थ किसी को कष्ट पहुंचाना है।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ctet-p2-set${setNumber}-hin-${qNo}`,
+      "Language II (Hindi)",
+      "भाषा II (हिंदी)",
+      "'माता का प्रेम अतुलनीय है' - यह वाक्य किस काल में है?",
+      "'माता का प्रेम अतुलनीय है' - यह वाक्य किस काल में है?",
+      { en: "वर्तमान काल", hi: "वर्तमान काल" },
+      [
+        { en: "भूत काल", hi: "भूत काल" },
+        { en: "भविष्य काल", hi: "भविष्य काल" },
+        { en: "सामान्य भविष्य काल", hi: "सामान्य भविष्य काल" },
+      ],
+      "'है' क्रिया वर्तमान काल को दर्शाती है।",
+      "'है' क्रिया वर्तमान काल को दर्शाती है।",
+      seed
+    );
+  });
+}
+
+function createCtetP2ScienceQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 30 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 1000 + qNo;
+    const pattern = index % 6;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-sci-${qNo}`,
+        "Science",
+        "विज्ञान",
+        "Light travels in straight lines. This property is called:",
+        "प्रकाश सीधी रेखा में चलता है। इस गुण को कहते हैं:",
+        { en: "Rectilinear propagation", hi: "सरल रेखीय प्रसार" },
+        [
+          { en: "Refraction", hi: "अपवर्तन" },
+          { en: "Diffraction", hi: "विवर्तन" },
+          { en: "Reflection", hi: "परावर्तन" },
+        ],
+        "Light travels in straight paths called rays; this is rectilinear propagation.",
+        "प्रकाश सीधी पथों में यात्रा करता है जिन्हें किरणें कहते हैं; यह सरल रेखीय प्रसार है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-sci-${qNo}`,
+        "Science",
+        "विज्ञान",
+        "Electric current is the flow of:",
+        "विद्युत करंट किसका प्रवाह है?",
+        { en: "Electrons", hi: "इलेक्ट्रॉन" },
+        [
+          { en: "Protons", hi: "प्रोटॉन" },
+          { en: "Neutrons", hi: "न्यूट्रॉन" },
+          { en: "Atoms", hi: "परमाणु" },
+        ],
+        "Electric current is the movement of electrons through a conductor.",
+        "विद्युत करंट एक चालक के माध्यम से इलेक्ट्रॉनों की गति है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-sci-${qNo}`,
+        "Science",
+        "विज्ञान",
+        "Which organelle is called the powerhouse of the cell?",
+        "कौन सी कोशिका अंगिका को कोशिका का शक्तिघर कहा जाता है?",
+        { en: "Mitochondria", hi: "माइटोकॉन्ड्रिया" },
+        [
+          { en: "Ribosome", hi: "राइबोसोम" },
+          { en: "Nucleus", hi: "केंद्रक" },
+          { en: "Vacuole", hi: "रिक्तिका" },
+        ],
+        "Mitochondria produces ATP (energy) and is called the powerhouse of the cell.",
+        "माइटोकॉन्ड्रिया ATP (ऊर्जा) का उत्पादन करता है और कोशिका का शक्तिघर कहा जाता है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-sci-${qNo}`,
+        "Science",
+        "विज्ञान",
+        "The process of water changing from liquid to gas is called:",
+        "पानी के तरल से गैस में बदलने की प्रक्रिया को कहते हैं:",
+        { en: "Evaporation", hi: "वाष्पीकरण" },
+        [
+          { en: "Condensation", hi: "संघनन" },
+          { en: "Sublimation", hi: "उर्ध्वपातन" },
+          { en: "Fusion", hi: "गलन" },
+        ],
+        "Evaporation is the conversion of liquid water to water vapor at the surface.",
+        "वाष्पीकरण सतह पर तरल पानी को जल वाष्प में बदलना है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-sci-${qNo}`,
+        "Science",
+        "विज्ञान",
+        "Which is an example of a non-renewable resource?",
+        "निम्नलिखित में से कौन सा गैर-नवीकरणीय संसाधन का उदाहरण है?",
+        { en: "Fossil fuels (Coal, Oil, Gas)", hi: "जीवाश्म ईंधन (कोयला, तेल, गैस)" },
+        [
+          { en: "Solar energy", hi: "सौर ऊर्जा" },
+          { en: "Wind power", hi: "पवन शक्ति" },
+          { en: "Hydroelectric power", hi: "जलविद्युत शक्ति" },
+        ],
+        "Fossil fuels take millions of years to form and are non-renewable.",
+        "जीवाश्म ईंधन बनने में लाखों साल लगते हैं और गैर-नवीकरणीय हैं।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ctet-p2-set${setNumber}-sci-${qNo}`,
+      "Science",
+      "विज्ञान",
+      "What is the SI unit of pressure?",
+      "दबाव की SI इकाई क्या है?",
+      { en: "Pascal", hi: "पास्कल" },
+      [
+        { en: "Newton", hi: "न्यूटन" },
+        { en: "Joule", hi: "जूल" },
+        { en: "Watt", hi: "वाट" },
+      ],
+      "Pressure = Force/Area, and the SI unit is Pascal (Pa).",
+      "दबाव = बल/क्षेत्र, और SI इकाई पास्कल (Pa) है।",
+      seed
+    );
+  });
+}
+
+function createCtetP2SocialStudiesQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 30 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 1100 + qNo;
+    const pattern = index % 6;
+
+    if (pattern === 0) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-ss-${qNo}`,
+        "Social Studies",
+        "सामाजिक अध्ययन",
+        "The equator divides the Earth into:",
+        "भूमध्य रेखा पृथ्वी को किन भागों में विभाजित करती है?",
+        { en: "Northern and Southern hemispheres", hi: "उत्तरी और दक्षिणी गोलार्ध" },
+        [
+          { en: "Eastern and Western hemispheres", hi: "पूर्वी और पश्चिमी गोलार्ध" },
+          { en: "Tropics", hi: "उष्णकटिबंधीय क्षेत्र" },
+          { en: "Continents", hi: "महाद्वीप" },
+        ],
+        "The equator is an imaginary line that divides Earth into Northern and Southern hemispheres.",
+        "भूमध्य रेखा एक काल्पनिक रेखा है जो पृथ्वी को उत्तरी और दक्षिणी गोलार्ध में विभाजित करती है।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-ss-${qNo}`,
+        "Social Studies",
+        "सामाजिक अध्ययन",
+        "The Constitution of India was adopted on:",
+        "भारत का संविधान कब अपनाया गया?",
+        { en: "26 January 1950", hi: "26 जनवरी 1950" },
+        [
+          { en: "15 August 1947", hi: "15 अगस्त 1947" },
+          { en: "2 October 1869", hi: "2 अक्टूबर 1869" },
+          { en: "1 January 1950", hi: "1 जनवरी 1950" },
+        ],
+        "The Constitution came into effect on 26 January 1950, marking India as a republic.",
+        "संविधान 26 जनवरी 1950 को प्रभावी हुआ, जिससे भारत गणराज्य बना।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-ss-${qNo}`,
+        "Social Studies",
+        "सामाजिक अध्ययन",
+        "The Prime Minister of India heads which branch of government?",
+        "भारत का प्रधानमंत्री सरकार की कौन सी शाखा का नेतृत्व करता है?",
+        { en: "Executive", hi: "कार्यपालिका" },
+        [
+          { en: "Legislative", hi: "विधायिका" },
+          { en: "Judicial", hi: "न्यायपालिका" },
+          { en: "Military", hi: "सैन्य" },
+        ],
+        "The PM heads the executive branch responsible for implementing laws.",
+        "पीएम कार्यपालिका शाखा का नेतृत्व करता है जो कानूनों को लागू करने के लिए जिम्मेदार है।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-ss-${qNo}`,
+        "Social Studies",
+        "सामाजिक अध्ययन",
+        "Which non-metal is found in liquid state at room temperature?",
+        "कौन सी अधातु कमरे के तापमान पर तरल अवस्था में पाई जाती है?",
+        { en: "Bromine", hi: "ब्रोमीन" },
+        [
+          { en: "Sulfur", hi: "गंधक" },
+          { en: "Phosphorus", hi: "फॉस्फोरस" },
+          { en: "Iodine", hi: "आयोडीन" },
+        ],
+        "Bromine is the only non-metal that is liquid at room temperature (25°C).",
+        "ब्रोमीन एकमात्र अधातु है जो कमरे के तापमान (25°C) पर तरल होती है।",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      return createSeededGovQuestion(
+        `ctet-p2-set${setNumber}-ss-${qNo}`,
+        "Social Studies",
+        "सामाजिक अध्ययन",
+        "The Mauryan Empire was founded by:",
+        "मौर्य साम्राज्य की स्थापना किसने की?",
+        { en: "Chandragupta Maurya", hi: "चंद्रगुप्त मौर्य" },
+        [
+          { en: "Ashoka", hi: "अशोक" },
+          { en: "Bindusara", hi: "बिंदुसार" },
+          { en: "Samprati", hi: "संप्रति" },
+        ],
+        "Chandragupta Maurya founded the Mauryan Empire around 322 BCE.",
+        "चंद्रगुप्त मौर्य ने 322 ईसा पूर्व के आसपास मौर्य साम्राज्य की स्थापना की।",
+        seed
+      );
+    }
+
+    return createSeededGovQuestion(
+      `ctet-p2-set${setNumber}-ss-${qNo}`,
+      "Social Studies",
+      "सामाजिक अध्ययन",
+      "Democracy means 'government of, by and for the _____':",
+      "लोकतंत्र का अर्थ है '_____ की, _____ द्वारा और _____ के लिए सरकार':",
+      { en: "people", hi: "लोग" },
+      [
+        { en: "army", hi: "सेना" },
+        { en: "rich", hi: "अमीर" },
+        { en: "king", hi: "राजा" },
+      ],
+      "Democracy is a government where power lies with the people.",
+      "लोकतंत्र एक ऐसी सरकार है जहां शक्ति लोगों के पास है।",
+      seed
+    );
+  });
+}
+
+function generateCtetP2FullLengthSets(): GovPracticeSet[] {
+  return Array.from({ length: 5 }, (_, index) => {
+    const setNumber = index + 1;
+    const questions = [
+      ...createCtetP2CdpQuestions(setNumber),
+      ...createCtetP2EnglishQuestions(setNumber),
+      ...createCtetP2HindiQuestions(setNumber),
+      ...createCtetP2ScienceQuestions(setNumber),
+      ...createCtetP2SocialStudiesQuestions(setNumber),
+    ];
+
+    return {
+      slug: `ctet-paper-2-full-mock-${setNumber}`,
+      title: `CTET Paper II Full Mock Test ${setNumber}`,
+      titleHi: `CTET पेपर II फुल मॉक टेस्ट ${setNumber}`,
+      chapter: "Full Syllabus (CDP, Language I, Language II, Science, Social Studies)",
+      chapterHi: "पूर्ण पाठ्यक्रम (CDP, भाषा I, भाषा II, विज्ञान, सामाजिक अध्ययन)",
+      difficulty: setNumber <= 2 ? "Easy" : setNumber <= 4 ? "Medium" : "Hard",
+      durationMin: 150,
+      questionCount: 150,
+      bilingual: true,
+      isLive: true,
+      questions,
+    };
+  });
 }
 
 function createComedkMathQuestions(setNumber: number): PracticeQuestion[] {
@@ -1568,7 +2934,7 @@ export const practiceCategories: PracticeCategoryMeta[] = [
     title: "CTET Practice Tests",
     shortTitle: "CTET",
     description:
-      "Free CTET practice sets with answers and explanations in English and Hindi for Child Development and Pedagogy, Languages, Mathematics, Science, and Social Studies.",
+      "Free CTET bilingual practice sets with answers and explanations in English and Hindi, including full-length Paper I mocks (150 questions) and topic-wise training for CDP, Languages, Mathematics, and EVS.",
     heroTitle: "CTET Practice Tests with Bilingual Support",
     heroText:
       "Practice CTET questions in English and Hindi with instant scoring and detailed explanations for aspiring teachers.",
@@ -1608,16 +2974,20 @@ export const govPracticeCategories: GovPracticeCategory[] = [
     titleHi: "CTET अभ्यास परीक्षा",
     icon: "📚",
     description:
-      "Free CTET practice sets with answers and explanations in English and Hindi for Child Development and Pedagogy, Languages, Mathematics, Science, and Social Studies.",
+      "Free CTET bilingual practice sets with answers and explanations in English and Hindi, including full-length Paper I & Paper II mocks (150 questions each) and topic-wise training for CDP, Languages, Mathematics, EVS, Science, and Social Studies.",
     descriptionHi:
-      "बच्चों के विकास और शिक्षाशास्त्र, भाषाएं, गणित, विज्ञान और सामाजिक अध्ययन के लिए अंग्रेजी और हिंदी में उत्तरों और स्पष्टीकरण के साथ नि:शुल्क CTET अभ्यास सेट।",
+      "अंग्रेजी और हिंदी में उत्तर व स्पष्टीकरण के साथ CTET द्विभाषी अभ्यास सेट, जिनमें पेपर I और पेपर II के फुल-लेंथ मॉक (प्रत्येक 150 प्रश्न) और CDP, भाषाएं, गणित, EVS, विज्ञान व सामाजिक अध्ययन का विषय-वार अभ्यास शामिल है।",
     audience: ["Aspiring teachers", "CTET candidates", "Education students"],
     chapters: [
+      { name: "Paper I: Primary (Classes I-V)", hi: "पेपर I: प्राथमिक (कक्षा I-V)" },
       { name: "Child Development and Pedagogy", hi: "बच्चों का विकास और शिक्षाशास्त्र" },
       { name: "Language I (English)", hi: "भाषा I (अंग्रेजी)" },
       { name: "Language II (Hindi)", hi: "भाषा II (हिंदी)" },
       { name: "Mathematics", hi: "गणित" },
       { name: "Environmental Studies", hi: "पर्यावरण अध्ययन" },
+      { name: "Paper II: Intermediate (Classes VI-VIII)", hi: "पेपर II: माध्यमिक (कक्षा VI-VIII)" },
+      { name: "Science", hi: "विज्ञान" },
+      { name: "Social Studies", hi: "सामाजिक अध्ययन" },
     ],
     sets: [
       {
@@ -1627,212 +2997,11 @@ export const govPracticeCategories: GovPracticeCategory[] = [
         chapter: "Child Development and Pedagogy",
         chapterHi: "बच्चों का विकास और शिक्षाशास्त्र",
         difficulty: "Easy",
-        durationMin: 15,
-        questionCount: 10,
+        durationMin: 30,
+        questionCount: 30,
         bilingual: true,
         isLive: true,
-        questions: [
-          createGovQuestion(
-            "ctet-cdp-1",
-            "Child Development and Pedagogy",
-            "बच्चों का विकास और शिक्षाशास्त्र",
-            "According to Piaget, children in the concrete operational stage can perform which of the following?",
-            "पियाजेट के अनुसार, ठोस संक्रियात्मक चरण में बच्चे निम्नलिखित में से कौन सा कर सकते हैं?",
-            [
-              "Conservation tasks",
-              "Abstract thinking",
-              "Symbolic play",
-              "Egocentric thinking",
-              "संरक्षण कार्य",
-              "अमूर्त सोच",
-              "प्रतीकात्मक खेल",
-              "अहंकेन्द्रित सोच",
-            ],
-            "A",
-            "Children in the concrete operational stage can understand conservation.",
-            "ठोस संक्रियात्मक चरण में बच्चे संरक्षण की अवधारणा को समझ सकते हैं।"
-          ),
-          createGovQuestion(
-            "ctet-cdp-2",
-            "Child Development and Pedagogy",
-            "बच्चों का विकास और शिक्षाशास्त्र",
-            "Which theory emphasizes the role of social interaction in cognitive development?",
-            "कौन सी सिद्धांत संज्ञानात्मक विकास में सामाजिक संपर्क की भूमिका पर जोर देती है?",
-            [
-              "Behaviorism",
-              "Constructivism",
-              "Socio-cultural theory",
-              "Maturation theory",
-              "व्यवहारवाद",
-              "रचनावाद",
-              "सामाजिक-सांस्कृतिक सिद्धांत",
-              "परिपक्वता सिद्धांत",
-            ],
-            "C",
-            "Vygotsky's socio-cultural theory highlights the role of social interaction.",
-            "वाइगोत्स्की का सामाजिक-सांस्कृतिक सिद्धांत सामाजिक संपर्क की भूमिका पर जोर देता है।"
-          ),
-          createGovQuestion(
-            "ctet-cdp-3",
-            "Child Development and Pedagogy",
-            "बच्चों का विकास और शिक्षाशास्त्र",
-            "What is the term for a child's ability to understand that others have different beliefs and thoughts?",
-            "एक बच्चे की वह क्षमता क्या कहलाती है जिसमें वह समझता है कि दूसरों के विचार और विश्वास अलग हो सकते हैं?",
-            [
-              "Empathy",
-              "Theory of mind",
-              "Moral reasoning",
-              "Conditioning",
-              "सहानुभूति",
-              "मन का सिद्धांत",
-              "नैतिक तर्क",
-              "अनुबंधन",
-            ],
-            "B",
-            "Theory of mind means understanding that others may think differently.",
-            "मन का सिद्धांत का अर्थ है यह समझना कि दूसरे अलग तरह से सोच सकते हैं।"
-          ),
-          createGovQuestion(
-            "ctet-cdp-4",
-            "Child Development and Pedagogy",
-            "बच्चों का विकास और शिक्षाशास्त्र",
-            "Which of the following best represents play-based learning?",
-            "निम्नलिखित में से कौन सा खेल-आधारित अधिगम को सबसे अच्छे ढंग से दर्शाता है?",
-            [
-              "Rote memorization",
-              "Exploration and discovery",
-              "Only written testing",
-              "Silent copying",
-              "रटकर याद करना",
-              "अन्वेषण और खोज",
-              "केवल लिखित परीक्षा",
-              "चुपचाप नकल करना",
-            ],
-            "B",
-            "Play-based learning encourages exploration and discovery.",
-            "खेल-आधारित अधिगम अन्वेषण और खोज को बढ़ावा देता है।"
-          ),
-          createGovQuestion(
-            "ctet-cdp-5",
-            "Child Development and Pedagogy",
-            "बच्चों का विकास और शिक्षाशास्त्र",
-            "What does scaffolding in teaching mean?",
-            "शिक्षण में स्कैफोल्डिंग का क्या अर्थ है?",
-            [
-              "Punishing weak learners",
-              "Temporary support for learning",
-              "Permanent classroom decoration",
-              "Homework checking only",
-              "कमजोर विद्यार्थियों को दंड देना",
-              "सीखने के लिए अस्थायी सहारा देना",
-              "स्थायी कक्षा सजावट",
-              "केवल गृहकार्य जाँचना",
-            ],
-            "B",
-            "Scaffolding means giving temporary guidance until learners can perform independently.",
-            "स्कैफोल्डिंग का अर्थ है विद्यार्थियों को तब तक अस्थायी सहायता देना जब तक वे स्वयं कार्य न कर सकें।"
-          ),
-          createGovQuestion(
-            "ctet-cdp-6",
-            "Child Development and Pedagogy",
-            "बच्चों का विकास और शिक्षाशास्त्र",
-            "In which stage do children begin to use symbols and language rapidly?",
-            "किस चरण में बच्चे प्रतीकों और भाषा का तेजी से उपयोग करना शुरू करते हैं?",
-            [
-              "Sensorimotor stage",
-              "Preoperational stage",
-              "Concrete operational stage",
-              "Formal operational stage",
-              "संवेदी-प्रेरक चरण",
-              "पूर्व-संक्रियात्मक चरण",
-              "ठोस संक्रियात्मक चरण",
-              "औपचारिक संक्रियात्मक चरण",
-            ],
-            "B",
-            "In the preoperational stage, language and symbolic thinking develop quickly.",
-            "पूर्व-संक्रियात्मक चरण में भाषा और प्रतीकात्मक सोच का तेजी से विकास होता है।"
-          ),
-          createGovQuestion(
-            "ctet-cdp-7",
-            "Child Development and Pedagogy",
-            "बच्चों का विकास और शिक्षाशास्त्र",
-            "What is the main aim of inclusive education?",
-            "समावेशी शिक्षा का मुख्य उद्देश्य क्या है?",
-            [
-              "Separate children by ability",
-              "Equal opportunities for all learners",
-              "Teach only gifted students",
-              "Increase competition",
-              "क्षमता के आधार पर बच्चों को अलग करना",
-              "सभी शिक्षार्थियों को समान अवसर देना",
-              "केवल प्रतिभाशाली छात्रों को पढ़ाना",
-              "प्रतिस्पर्धा बढ़ाना",
-            ],
-            "B",
-            "Inclusive education ensures equal educational opportunities for all learners.",
-            "समावेशी शिक्षा सभी शिक्षार्थियों को समान शैक्षिक अवसर प्रदान करती है।"
-          ),
-          createGovQuestion(
-            "ctet-cdp-8",
-            "Child Development and Pedagogy",
-            "बच्चों का विकास और शिक्षाशास्त्र",
-            "Which psychologist is associated with operant conditioning?",
-            "ऑपरेंट कंडीशनिंग किस मनोवैज्ञानिक से जुड़ी है?",
-            [
-              "Piaget",
-              "Skinner",
-              "Vygotsky",
-              "Erikson",
-              "पियाजेट",
-              "स्किनर",
-              "वाइगोत्स्की",
-              "एरिक्सन",
-            ],
-            "B",
-            "B.F. Skinner is known for operant conditioning.",
-            "बी. एफ. स्किनर ऑपरेंट कंडीशनिंग के लिए प्रसिद्ध हैं।"
-          ),
-          createGovQuestion(
-            "ctet-cdp-9",
-            "Child Development and Pedagogy",
-            "बच्चों का विकास और शिक्षाशास्त्र",
-            "Learning by watching and imitating others is called:",
-            "दूसरों को देखकर और उनका अनुकरण करके सीखना क्या कहलाता है?",
-            [
-              "Classical conditioning",
-              "Trial and error",
-              "Observational learning",
-              "Punishment learning",
-              "शास्त्रीय अनुबंधन",
-              "प्रयास और त्रुटि",
-              "अवलोकनात्मक अधिगम",
-              "दंड आधारित अधिगम",
-            ],
-            "C",
-            "Observational learning happens through watching others.",
-            "अवलोकनात्मक अधिगम दूसरों को देखकर होता है।"
-          ),
-          createGovQuestion(
-            "ctet-cdp-10",
-            "Child Development and Pedagogy",
-            "बच्चों का विकास और शिक्षाशास्त्र",
-            "Which of the following is an example of divergent thinking?",
-            "निम्नलिखित में से कौन सा विचलनात्मक सोच का उदाहरण है?",
-            [
-              "Remembering a definition",
-              "Brainstorming many story ideas",
-              "Repeating one correct answer",
-              "Copying from the board",
-              "परिभाषा याद करना",
-              "कहानी के कई विचार सोचना",
-              "एक सही उत्तर को दोहराना",
-              "बोर्ड से नकल करना",
-            ],
-            "B",
-            "Divergent thinking means generating many possible ideas or answers.",
-            "विचलनात्मक सोच का अर्थ है कई संभावित विचार या उत्तर उत्पन्न करना।"
-          ),
-        ],
+        questions: createCtetCdpQuestions(11),
       },
       {
         slug: "english-set-1",
@@ -1841,212 +3010,11 @@ export const govPracticeCategories: GovPracticeCategory[] = [
         chapter: "Language I (English)",
         chapterHi: "भाषा I (अंग्रेजी)",
         difficulty: "Easy",
-        durationMin: 12,
-        questionCount: 10,
+        durationMin: 30,
+        questionCount: 30,
         bilingual: true,
         isLive: true,
-        questions: [
-          createGovQuestion(
-            "ctet-eng-1",
-            "Language I (English)",
-            "भाषा I (अंग्रेजी)",
-            "Choose the correct form of the verb: 'She _____ to school every day.'",
-            "सही क्रिया रूप चुनें: 'वह हर दिन स्कूल _____।'",
-            [
-              "go",
-              "goes",
-              "going",
-              "gone",
-              "go",
-              "goes",
-              "going",
-              "gone",
-            ],
-            "B",
-            "With 'she', the present simple verb is 'goes'.",
-            "'She' के साथ present simple में 'goes' का प्रयोग होता है।"
-          ),
-          createGovQuestion(
-            "ctet-eng-2",
-            "Language I (English)",
-            "भाषा I (अंग्रेजी)",
-            "Identify the noun in the sentence: 'The quick brown fox jumps over the lazy dog.'",
-            "वाक्य में संज्ञा पहचानें: 'The quick brown fox jumps over the lazy dog.'",
-            [
-              "quick",
-              "brown",
-              "fox",
-              "jumps",
-              "तेज",
-              "भूरा",
-              "लोमड़ी",
-              "कूदता है",
-            ],
-            "C",
-            "'Fox' is a noun because it names an animal.",
-            "'Fox' एक संज्ञा है क्योंकि यह एक जीव का नाम है।"
-          ),
-          createGovQuestion(
-            "ctet-eng-3",
-            "Language I (English)",
-            "भाषा I (अंग्रेजी)",
-            "Choose the correct article: '_____ umbrella is on the table.'",
-            "सही article चुनें: '_____ umbrella is on the table.'",
-            [
-              "A",
-              "An",
-              "The",
-              "No article",
-              "A",
-              "An",
-              "The",
-              "कोई article नहीं",
-            ],
-            "B",
-            "'Umbrella' starts with a vowel sound, so 'An' is correct.",
-            "'Umbrella' स्वर ध्वनि से शुरू होता है, इसलिए 'An' सही है।"
-          ),
-          createGovQuestion(
-            "ctet-eng-4",
-            "Language I (English)",
-            "भाषा I (अंग्रेजी)",
-            "Choose the antonym of 'happy'.",
-            "'Happy' का विलोम शब्द चुनें।",
-            [
-              "glad",
-              "cheerful",
-              "sad",
-              "bright",
-              "प्रसन्न",
-              "खुश",
-              "दुखी",
-              "उज्ज्वल",
-            ],
-            "C",
-            "'Sad' is the opposite of 'happy'.",
-            "'Sad', 'happy' का विलोम है।"
-          ),
-          createGovQuestion(
-            "ctet-eng-5",
-            "Language I (English)",
-            "भाषा I (अंग्रेजी)",
-            "Choose the synonym of 'begin'.",
-            "'Begin' का समानार्थी शब्द चुनें।",
-            [
-              "start",
-              "stop",
-              "end",
-              "close",
-              "शुरू करना",
-              "रोकना",
-              "समाप्त करना",
-              "बंद करना",
-            ],
-            "A",
-            "'Start' is a synonym of 'begin'.",
-            "'Start', 'begin' का समानार्थी शब्द है।"
-          ),
-          createGovQuestion(
-            "ctet-eng-6",
-            "Language I (English)",
-            "भाषा I (अंग्रेजी)",
-            "Choose the correct sentence.",
-            "सही वाक्य चुनें।",
-            [
-              "He do his work.",
-              "He does his work.",
-              "He doing his work.",
-              "He done his work.",
-              "He do his work.",
-              "He does his work.",
-              "He doing his work.",
-              "He done his work.",
-            ],
-            "B",
-            "With 'He', the correct form is 'does'.",
-            "'He' के साथ सही रूप 'does' होता है।"
-          ),
-          createGovQuestion(
-            "ctet-eng-7",
-            "Language I (English)",
-            "भाषा I (अंग्रेजी)",
-            "Fill in the blank: 'The cat is _____ the chair.'",
-            "रिक्त स्थान भरें: 'The cat is _____ the chair.'",
-            [
-              "in",
-              "on",
-              "at",
-              "for",
-              "में",
-              "पर",
-              "पर/पास",
-              "के लिए",
-            ],
-            "B",
-            "'On the chair' is the correct phrase here.",
-            "यहाँ 'on the chair' सही phrase है।"
-          ),
-          createGovQuestion(
-            "ctet-eng-8",
-            "Language I (English)",
-            "भाषा I (अंग्रेजी)",
-            "Which word is an adjective?",
-            "कौन सा शब्द विशेषण है?",
-            [
-              "beautiful",
-              "run",
-              "quickly",
-              "book",
-              "सुंदर",
-              "दौड़ना",
-              "तेजी से",
-              "पुस्तक",
-            ],
-            "A",
-            "'Beautiful' describes a noun, so it is an adjective.",
-            "'Beautiful' किसी संज्ञा का वर्णन करता है, इसलिए यह विशेषण है।"
-          ),
-          createGovQuestion(
-            "ctet-eng-9",
-            "Language I (English)",
-            "भाषा I (अंग्रेजी)",
-            "Choose the correct tense: 'They _____ football now.'",
-            "सही tense चुनें: 'They _____ football now.'",
-            [
-              "play",
-              "plays",
-              "are playing",
-              "played",
-              "खेलते हैं",
-              "खेलता है",
-              "खेल रहे हैं",
-              "खेले",
-            ],
-            "C",
-            "'Now' shows present continuous tense, so 'are playing' is correct.",
-            "'Now' वर्तमान निरंतर काल दिखाता है, इसलिए 'are playing' सही है।"
-          ),
-          createGovQuestion(
-            "ctet-eng-10",
-            "Language I (English)",
-            "भाषा I (अंग्रेजी)",
-            "Read the sentence: 'Ravi is taller than Mohan.' Who is shorter?",
-            "वाक्य पढ़ें: 'Ravi is taller than Mohan.' कौन छोटा है?",
-            [
-              "Ravi",
-              "Mohan",
-              "Both",
-              "Cannot say",
-              "रवि",
-              "मोहन",
-              "दोनों",
-              "नहीं कह सकते",
-            ],
-            "B",
-            "If Ravi is taller, then Mohan is shorter.",
-            "यदि Ravi लंबा है, तो Mohan छोटा है।"
-          ),
-        ],
+        questions: createCtetEnglishQuestions(12),
       },
       {
         slug: "maths-set-1",
@@ -2055,361 +3023,107 @@ export const govPracticeCategories: GovPracticeCategory[] = [
         chapter: "Mathematics",
         chapterHi: "गणित",
         difficulty: "Easy",
-        durationMin: 15,
-        questionCount: 10,
+        durationMin: 30,
+        questionCount: 30,
         bilingual: true,
         isLive: true,
-        questions: [
-          createGovQuestion(
-            "ctet-math-1",
-            "Mathematics",
-            "गणित",
-            "What is 15 + 27?",
-            "15 + 27 क्या है?",
-            [
-              "32",
-              "42",
-              "52",
-              "62",
-              "32",
-              "42",
-              "52",
-              "62",
-            ],
-            "B",
-            "15 + 27 = 42.",
-            "15 + 27 = 42।"
-          ),
-          createGovQuestion(
-            "ctet-math-2",
-            "Mathematics",
-            "गणित",
-            "If a triangle has angles 30°, 60°, and 90°, what type of triangle is it?",
-            "यदि एक त्रिभुज में कोण 30°, 60°, और 90° हैं, तो यह किस प्रकार का त्रिभुज है?",
-            [
-              "Equilateral",
-              "Isosceles",
-              "Scalene",
-              "Right-angled",
-              "समबाहु",
-              "समद्विबाहु",
-              "विषमबाहु",
-              "समकोण",
-            ],
-            "D",
-            "A triangle with one 90° angle is a right-angled triangle.",
-            "जिस त्रिभुज का एक कोण 90° हो वह समकोण त्रिभुज होता है।"
-          ),
-          createGovQuestion(
-            "ctet-math-3",
-            "Mathematics",
-            "गणित",
-            "What is 36 ÷ 6?",
-            "36 ÷ 6 क्या है?",
-            [
-              "5",
-              "6",
-              "7",
-              "8",
-              "5",
-              "6",
-              "7",
-              "8",
-            ],
-            "B",
-            "36 divided by 6 equals 6.",
-            "36 को 6 से भाग देने पर 6 मिलता है।"
-          ),
-          createGovQuestion(
-            "ctet-math-4",
-            "Mathematics",
-            "गणित",
-            "Which fraction is equal to one-half?",
-            "कौन सा भिन्न एक-आध के बराबर है?",
-            [
-              "1/3",
-              "2/4",
-              "3/5",
-              "4/5",
-              "1/3",
-              "2/4",
-              "3/5",
-              "4/5",
-            ],
-            "B",
-            "2/4 simplifies to 1/2.",
-            "2/4 को सरल करने पर 1/2 मिलता है।"
-          ),
-          createGovQuestion(
-            "ctet-math-5",
-            "Mathematics",
-            "गणित",
-            "What is 0.5 as a fraction?",
-            "0.5 को भिन्न में क्या लिखेंगे?",
-            [
-              "1/2",
-              "1/3",
-              "2/3",
-              "3/4",
-              "1/2",
-              "1/3",
-              "2/3",
-              "3/4",
-            ],
-            "A",
-            "0.5 equals 1/2.",
-            "0.5, 1/2 के बराबर है।"
-          ),
-          createGovQuestion(
-            "ctet-math-6",
-            "Mathematics",
-            "गणित",
-            "A rectangle has length 8 cm and breadth 3 cm. What is its area?",
-            "एक आयत की लंबाई 8 सेमी और चौड़ाई 3 सेमी है। उसका क्षेत्रफल कितना है?",
-            [
-              "11 sq cm",
-              "16 sq cm",
-              "24 sq cm",
-              "32 sq cm",
-              "11 वर्ग सेमी",
-              "16 वर्ग सेमी",
-              "24 वर्ग सेमी",
-              "32 वर्ग सेमी",
-            ],
-            "C",
-            "Area of rectangle = length × breadth = 8 × 3 = 24.",
-            "आयत का क्षेत्रफल = लंबाई × चौड़ाई = 8 × 3 = 24।"
-          ),
-          createGovQuestion(
-            "ctet-math-7",
-            "Mathematics",
-            "गणित",
-            "The perimeter of a square of side 5 cm is:",
-            "5 सेमी भुजा वाले वर्ग का परिमाप है:",
-            [
-              "10 cm",
-              "15 cm",
-              "20 cm",
-              "25 cm",
-              "10 सेमी",
-              "15 सेमी",
-              "20 सेमी",
-              "25 सेमी",
-            ],
-            "C",
-            "Perimeter of square = 4 × side = 20 cm.",
-            "वर्ग का परिमाप = 4 × भुजा = 20 सेमी।"
-          ),
-          createGovQuestion(
-            "ctet-math-8",
-            "Mathematics",
-            "गणित",
-            "What time is 2 hours after 3:30 PM?",
-            "3:30 PM के 2 घंटे बाद क्या समय होगा?",
-            [
-              "4:30 PM",
-              "5:00 PM",
-              "5:30 PM",
-              "6:30 PM",
-              "4:30 PM",
-              "5:00 PM",
-              "5:30 PM",
-              "6:30 PM",
-            ],
-            "C",
-            "Adding 2 hours to 3:30 PM gives 5:30 PM.",
-            "3:30 PM में 2 घंटे जोड़ने पर 5:30 PM होता है।"
-          ),
-          createGovQuestion(
-            "ctet-math-9",
-            "Mathematics",
-            "गणित",
-            "What is 75 - 29?",
-            "75 - 29 क्या है?",
-            [
-              "44",
-              "45",
-              "46",
-              "47",
-              "44",
-              "45",
-              "46",
-              "47",
-            ],
-            "C",
-            "75 - 29 = 46.",
-            "75 - 29 = 46।"
-          ),
-          createGovQuestion(
-            "ctet-math-10",
-            "Mathematics",
-            "गणित",
-            "What is 9 × 4?",
-            "9 × 4 क्या है?",
-            [
-              "32",
-              "34",
-              "36",
-              "38",
-              "32",
-              "34",
-              "36",
-              "38",
-            ],
-            "C",
-            "9 multiplied by 4 equals 36.",
-            "9 को 4 से गुणा करने पर 36 मिलता है।"
-          ),
-        ],
+        questions: createCtetMathQuestions(13),
       },
       {
-  slug: "hindi-set-1",
-  title: "Hindi Language Set 1",
-  titleHi: "हिंदी भाषा सेट 1",
-  chapter: "Language II (Hindi)",
-  chapterHi: "भाषा II (हिंदी)",
-  difficulty: "Easy",
-  durationMin: 12,
-  questionCount: 10,
-  bilingual: true,
-  isLive: true,
-  questions: [
-    createGovQuestion(
-      "ctet-hindi-1",
-      "Language II (Hindi)",
-      "भाषा II (हिंदी)",
-      "‘राम स्कूल जाता है’ वाक्य में क्रिया कौन सी है?",
-      "‘राम स्कूल जाता है’ वाक्य में क्रिया कौन सी है?",
-      ["राम","स्कूल","जाता है","है","राम","स्कूल","जाता है","है"],
-      "C",
-      "'जाता है' क्रिया है।",
-      "'जाता है' क्रिया है।"
-    ),
-    createGovQuestion(
-      "ctet-hindi-2",
-      "Language II (Hindi)",
-      "भाषा II (हिंदी)",
-      "संज्ञा क्या होती है?",
-      "संज्ञा क्या होती है?",
-      ["क्रिया बताने वाला शब्द","नाम बताने वाला शब्द","विशेषण","सर्वनाम","क्रिया","नाम","विशेषण","सर्वनाम"],
-      "B",
-      "नाम बताने वाले शब्द को संज्ञा कहते हैं।",
-      "नाम बताने वाले शब्द को संज्ञा कहते हैं।"
-    ),
-    createGovQuestion(
-      "ctet-hindi-3",
-      "Language II (Hindi)",
-      "भाषा II (हिंदी)",
-      "'सुंदर' शब्द किस प्रकार का है?",
-      "'सुंदर' शब्द किस प्रकार का है?",
-      ["संज्ञा","विशेषण","क्रिया","सर्वनाम","संज्ञा","विशेषण","क्रिया","सर्वनाम"],
-      "B",
-      "'सुंदर' विशेषण है।",
-      "'सुंदर' विशेषण है।"
-    ),
-    createGovQuestion(
-      "ctet-hindi-4",
-      "Language II (Hindi)",
-      "भाषा II (हिंदी)",
-      "'मैं' किस प्रकार का शब्द है?",
-      "'मैं' किस प्रकार का शब्द है?",
-      ["संज्ञा","सर्वनाम","क्रिया","विशेषण","संज्ञा","सर्वनाम","क्रिया","विशेषण"],
-      "B",
-      "'मैं' सर्वनाम है।",
-      "'मैं' सर्वनाम है।"
-    ),
-    createGovQuestion(
-      "ctet-hindi-5",
-      "Language II (Hindi)",
-      "भाषा II (हिंदी)",
-      "'खेलना' किस प्रकार का शब्द है?",
-      "'खेलना' किस प्रकार का शब्द है?",
-      ["क्रिया","संज्ञा","विशेषण","सर्वनाम","क्रिया","संज्ञा","विशेषण","सर्वनाम"],
-      "A",
-      "'खेलना' क्रिया है।",
-      "'खेलना' क्रिया है।"
-    ),
-    createGovQuestion(
-      "ctet-hindi-6",
-      "Language II (Hindi)",
-      "भाषा II (हिंदी)",
-      "'जल' का पर्यायवाची क्या है?",
-      "'जल' का पर्यायवाची क्या है?",
-      ["पानी","आग","वायु","धरती","पानी","आग","वायु","धरती"],
-      "A",
-      "'जल' का पर्यायवाची 'पानी' है।",
-      "'जल' का पर्यायवाची 'पानी' है।"
-    ),
-    createGovQuestion(
-      "ctet-hindi-7",
-      "Language II (Hindi)",
-      "भाषा II (हिंदी)",
-      "'अच्छा' का विलोम क्या है?",
-      "'अच्छा' का विलोम क्या है?",
-      ["बुरा","सुंदर","तेज","धीमा","बुरा","सुंदर","तेज","धीमा"],
-      "A",
-      "'अच्छा' का विलोम 'बुरा' है।",
-      "'अच्छा' का विलोम 'बुरा' है।"
-    ),
-    createGovQuestion(
-      "ctet-hindi-8",
-      "Language II (Hindi)",
-      "भाषा II (हिंदी)",
-      "वाक्य में कितने शब्द हैं: 'राम घर गया'?",
-      "वाक्य में कितने शब्द हैं: 'राम घर गया'?",
-      ["2","3","4","5","2","3","4","5"],
-      "B",
-      "इस वाक्य में 3 शब्द हैं।",
-      "इस वाक्य में 3 शब्द हैं।"
-    ),
-    createGovQuestion(
-      "ctet-hindi-9",
-      "Language II (Hindi)",
-      "भाषा II (हिंदी)",
-      "'विद्यालय' का अर्थ क्या है?",
-      "'विद्यालय' का अर्थ क्या है?",
-      ["घर","स्कूल","बाजार","मंदिर","घर","स्कूल","बाजार","मंदिर"],
-      "B",
-      "'विद्यालय' का अर्थ स्कूल है।",
-      "'विद्यालय' का अर्थ स्कूल है।"
-    ),
-    createGovQuestion(
-      "ctet-hindi-10",
-      "Language II (Hindi)",
-      "भाषा II (हिंदी)",
-      "सही वाक्य चुनें:",
-      "सही वाक्य चुनें:",
-      ["राम खेलते हैं","राम खेलता है","राम खेलते है","राम खेलते हूं","राम खेलते हैं","राम खेलता है","राम खेलते है","राम खेलते हूं"],
-      "B",
-      "'राम खेलता है' सही वाक्य है।",
-      "'राम खेलता है' सही वाक्य है।"
-    ),
-  ],
-},
-     {
-  slug: "science-set-1",
-  title: "Environmental Studies Set 1",
-  titleHi: "पर्यावरण अध्ययन सेट 1",
-  chapter: "Environmental Studies",
-  chapterHi: "पर्यावरण अध्ययन",
-  difficulty: "Easy",
-  durationMin: 15,
-  questionCount: 10,
-  bilingual: true,
-  isLive: true,
-  questions: [
-    createGovQuestion("ctet-evs-1","EVS","EVS","Plants need sunlight for:","पौधों को सूर्य प्रकाश की आवश्यकता क्यों होती है?",["Photosynthesis","Sleeping","Moving","Breathing","प्रकाश संश्लेषण","सोना","चलना","सांस लेना"],"A","Plants make food.","पौधे भोजन बनाते हैं।"),
-    createGovQuestion("ctet-evs-2","EVS","EVS","Which is a water source?","जल का स्रोत कौन सा है?",["River","Car","Road","Chair","नदी","कार","सड़क","कुर्सी"],"A","River is a source of water.","नदी जल का स्रोत है।"),
-    createGovQuestion("ctet-evs-3","EVS","EVS","Which animal gives milk?","कौन सा जानवर दूध देता है?",["Cow","Lion","Tiger","Dog","गाय","शेर","बाघ","कुत्ता"],"A","Cow gives milk.","गाय दूध देती है।"),
-    createGovQuestion("ctet-evs-4","EVS","EVS","Which organ helps us breathe?","कौन सा अंग हमें सांस लेने में मदद करता है?",["Heart","Lungs","Brain","Liver","हृदय","फेफड़े","मस्तिष्क","यकृत"],"B","Lungs help breathing.","फेफड़े सांस लेने में मदद करते हैं।"),
-    createGovQuestion("ctet-evs-5","EVS","EVS","Sun rises in the:","सूर्य कहाँ से निकलता है?",["East","West","North","South","पूर्व","पश्चिम","उत्तर","दक्षिण"],"A","Sun rises in east.","सूर्य पूर्व से निकलता है।"),
-    createGovQuestion("ctet-evs-6","EVS","EVS","Which is a bird?","कौन सा पक्षी है?",["Crow","Tiger","Dog","Lion","कौवा","बाघ","कुत्ता","शेर"],"A","Crow is a bird.","कौवा पक्षी है।"),
-    createGovQuestion("ctet-evs-7","EVS","EVS","Water is:","पानी क्या है?",["Solid","Liquid","Gas","None","ठोस","द्रव","गैस","कोई नहीं"],"B","Water is liquid.","पानी द्रव है।"),
-    createGovQuestion("ctet-evs-8","EVS","EVS","Which is a plant part?","पौधे का भाग कौन सा है?",["Leaf","Car","Chair","Table","पत्ता","कार","कुर्सी","मेज"],"A","Leaf is plant part.","पत्ता पौधे का भाग है।"),
-    createGovQuestion("ctet-evs-9","EVS","EVS","Which is a natural resource?","प्राकृतिक संसाधन कौन सा है?",["Air","Plastic","Car","Road","वायु","प्लास्टिक","कार","सड़क"],"A","Air is natural resource.","वायु प्राकृतिक संसाधन है।"),
-    createGovQuestion("ctet-evs-10","EVS","EVS","We drink:","हम क्या पीते हैं?",["Water","Stone","Iron","Wood","पानी","पत्थर","लोहा","लकड़ी"],"A","We drink water.","हम पानी पीते हैं।"),
-  ],
-}
+        slug: "hindi-set-1",
+        title: "Hindi Language Set 1",
+        titleHi: "हिंदी भाषा सेट 1",
+        chapter: "Language II (Hindi)",
+        chapterHi: "भाषा II (हिंदी)",
+        difficulty: "Easy",
+        durationMin: 30,
+        questionCount: 30,
+        bilingual: true,
+        isLive: true,
+        questions: createCtetHindiQuestions(14),
+      },
+      {
+        slug: "science-set-1",
+        title: "Environmental Studies Set 1",
+        titleHi: "पर्यावरण अध्ययन सेट 1",
+        chapter: "Environmental Studies",
+        chapterHi: "पर्यावरण अध्ययन",
+        difficulty: "Easy",
+        durationMin: 30,
+        questionCount: 30,
+        bilingual: true,
+        isLive: true,
+        questions: createCtetEvsQuestions(15),
+      },
+      ...generateCtetFullLengthSets(),
+      
+      // ===== PAPER II TOPIC-SPECIFIC SETS =====
+      {
+        slug: "cdp-paper-2-set-1",
+        title: "Paper II Child Development and Pedagogy Set 1",
+        titleHi: "पेपर II बच्चों के विकास और शिक्षाशास्त्र सेट 1",
+        chapter: "Child Development and Pedagogy",
+        chapterHi: "बच्चों का विकास और शिक्षाशास्त्र",
+        difficulty: "Medium",
+        durationMin: 30,
+        questionCount: 30,
+        bilingual: true,
+        isLive: true,
+        questions: createCtetP2CdpQuestions(21),
+      },
+      {
+        slug: "english-paper-2-set-1",
+        title: "Paper II English Language Set 1",
+        titleHi: "पेपर II अंग्रेजी भाषा सेट 1",
+        chapter: "Language I (English)",
+        chapterHi: "भाषा I (अंग्रेजी)",
+        difficulty: "Medium",
+        durationMin: 30,
+        questionCount: 30,
+        bilingual: true,
+        isLive: true,
+        questions: createCtetP2EnglishQuestions(22),
+      },
+      {
+        slug: "hindi-paper-2-set-1",
+        title: "Paper II Hindi Language Set 1",
+        titleHi: "पेपर II हिंदी भाषा सेट 1",
+        chapter: "Language II (Hindi)",
+        chapterHi: "भाषा II (हिंदी)",
+        difficulty: "Medium",
+        durationMin: 30,
+        questionCount: 30,
+        bilingual: true,
+        isLive: true,
+        questions: createCtetP2HindiQuestions(23),
+      },
+      {
+        slug: "science-paper-2-set-1",
+        title: "Paper II Science Set 1",
+        titleHi: "पेपर II विज्ञान सेट 1",
+        chapter: "Science",
+        chapterHi: "विज्ञान",
+        difficulty: "Medium",
+        durationMin: 30,
+        questionCount: 30,
+        bilingual: true,
+        isLive: true,
+        questions: createCtetP2ScienceQuestions(24),
+      },
+      {
+        slug: "social-studies-paper-2-set-1",
+        title: "Paper II Social Studies Set 1",
+        titleHi: "पेपर II सामाजिक अध्ययन सेट 1",
+        chapter: "Social Studies",
+        chapterHi: "सामाजिक अध्ययन",
+        difficulty: "Medium",
+        durationMin: 30,
+        questionCount: 30,
+        bilingual: true,
+        isLive: true,
+        questions: createCtetP2SocialStudiesQuestions(25),
+      },
+      ...generateCtetP2FullLengthSets(),
     ],
   },
 
@@ -5680,3 +6394,4 @@ export function getGovPracticeSet(categorySlug: string, setSlug: string): GovPra
   const category = govPracticeCategories.find(c => c.slug === categorySlug);
   return category?.sets.find(s => s.slug === setSlug);
 }
+
