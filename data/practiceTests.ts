@@ -4089,7 +4089,7 @@ function createWbjeePracticeSet(setNumber: number): PracticeSet {
 
 function createJeeAdvancedMathQuestions(setNumber: number): PracticeQuestion[] {
   return createComedkMathQuestions(setNumber)
-    .slice(0, 18)
+    .slice(0, 12)
     .map((question, index) => ({
       ...question,
       id: `jee-advanced-set${setNumber}-math-${index + 1}`,
@@ -4098,7 +4098,7 @@ function createJeeAdvancedMathQuestions(setNumber: number): PracticeQuestion[] {
 
 function createJeeAdvancedPhysicsQuestions(setNumber: number): PracticeQuestion[] {
   return createComedkPhysicsQuestions(setNumber)
-    .slice(0, 18)
+    .slice(0, 12)
     .map((question, index) => ({
       ...question,
       id: `jee-advanced-set${setNumber}-phys-${index + 1}`,
@@ -4107,7 +4107,7 @@ function createJeeAdvancedPhysicsQuestions(setNumber: number): PracticeQuestion[
 
 function createJeeAdvancedChemistryQuestions(setNumber: number): PracticeQuestion[] {
   return createComedkChemistryQuestions(setNumber)
-    .slice(0, 18)
+    .slice(0, 12)
     .map((question, index) => ({
       ...question,
       id: `jee-advanced-set${setNumber}-chem-${index + 1}`,
@@ -4129,26 +4129,26 @@ function createJeeAdvancedPracticeSet(setNumber: number): PracticeSet {
     category: "engineering-entrance",
     title: `JEE Advanced Practice Set ${setNumber}`,
     description:
-      "Original JEE Advanced-style full-length set with 54 unique questions: 18 Mathematics, 18 Physics, and 18 Chemistry across two papers.",
+      "Original JEE Advanced-style full-length set with 36 unique questions: 12 Mathematics, 12 Physics, and 12 Chemistry following the official two-paper format.",
     examType: "JEE Advanced",
     examSlug: "jee-advanced",
     examName: "JEE Advanced",
     sectionLabel: "Full JEE Advanced Paper 1 + Paper 2 Mock",
     level,
     questionCount: questions.length,
-    estimatedMinutes: 360,
+    estimatedMinutes: 240,
     seoTitle: `JEE Advanced Practice Questions - Set ${setNumber} | Nishaglobal Education`,
     seoDescription:
-      "Practice a full JEE Advanced-style set with 54 original questions covering Mathematics, Physics, and Chemistry with answers and explanations.",
+      "Practice a full JEE Advanced-style set with 36 official-pattern questions covering Mathematics, Physics, and Chemistry with answers and explanations.",
     keywords: [
       `JEE Advanced practice set ${setNumber}`,
-      "JEE Advanced 54 questions",
+      "JEE Advanced 36 questions",
       "JEE Advanced full mock test",
+      "JEE Advanced official pattern",
       "JEE Advanced mathematics physics chemistry",
-      "original JEE Advanced practice",
     ],
     intro:
-      "Use this full-length JEE Advanced set for comprehensive exam preparation, timing mastery across two papers, and high-difficulty problem solving.",
+      "Use this official-pattern JEE Advanced set for comprehensive exam preparation, timing mastery across two papers, and high-difficulty problem solving matching official specifications.",
     isOriginal: true,
     isLive: true,
     questions,

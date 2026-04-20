@@ -138,7 +138,7 @@ export default async function PracticeCategoryPage({ params }: Props) {
   const jeeAdvancedFaqs = [
     {
       q: "How many questions are in each JEE Advanced full-length mock here?",
-      a: "Each JEE Advanced full-length mock contains 54 original questions: 18 Mathematics, 18 Physics, and 18 Chemistry, reflecting the official two-paper format.",
+      a: "Each JEE Advanced full-length mock contains 36 official-pattern questions: 12 Mathematics, 12 Physics, and 12 Chemistry, following the standard two-paper format.",
     },
     {
       q: "How should I attempt JEE Advanced Set 1 through Set 5?",
@@ -146,7 +146,7 @@ export default async function PracticeCategoryPage({ params }: Props) {
     },
     {
       q: "What is the recommended time allocation for JEE Advanced practice?",
-      a: "Allocate a full 6 hours (360 minutes) across two sessions: 3 hours for Paper 1 mathematics-physics, 3 hours for Paper 2 chemistry-mixed. You can also split by paper on different days.",
+      a: "Allocate a full 4 hours (240 minutes) for both papers combined. Paper 1 typically takes 90-120 minutes and Paper 2 takes 90-120 minutes. You can also split them across different days as per your weekly plan.",
     },
     {
       q: "Are these official JEE Advanced previous papers?",
