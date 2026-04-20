@@ -4129,7 +4129,7 @@ function createJeeAdvancedPracticeSet(setNumber: number): PracticeSet {
     category: "engineering-entrance",
     title: `JEE Advanced Practice Set ${setNumber}`,
     description:
-      "Original JEE Advanced-style full-length set with 36 unique questions: 12 Mathematics, 12 Physics, and 12 Chemistry for practical two-paper simulation.",
+      "Original pattern-based JEE Advanced full-length mock with 36 questions: 12 Mathematics, 12 Physics, and 12 Chemistry for practical two-paper strategy practice.",
     examType: "JEE Advanced",
     examSlug: "jee-advanced",
     examName: "JEE Advanced",
@@ -4139,12 +4139,13 @@ function createJeeAdvancedPracticeSet(setNumber: number): PracticeSet {
     estimatedMinutes: 240,
     seoTitle: `JEE Advanced Practice Questions - Set ${setNumber} | Nishaglobal Education`,
     seoDescription:
-      "Practice a full JEE Advanced-style set with 36 pattern-based questions covering Mathematics, Physics, and Chemistry with answers and explanations.",
+      "Practice a full JEE Advanced-style mock with 36 pattern-based questions across Mathematics, Physics, and Chemistry, with answer explanations for strategy-focused revision.",
     keywords: [
       `JEE Advanced practice set ${setNumber}`,
       "JEE Advanced 36 questions",
       "JEE Advanced full mock test",
       "JEE Advanced pattern-based practice",
+      "JEE Advanced two-paper strategy",
       "JEE Advanced mathematics physics chemistry",
     ],
     intro:

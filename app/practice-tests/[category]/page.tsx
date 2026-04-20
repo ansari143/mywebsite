@@ -138,7 +138,7 @@ export default async function PracticeCategoryPage({ params }: Props) {
   const jeeAdvancedFaqs = [
     {
       q: "How many questions are in each JEE Advanced full-length mock here?",
-      a: "Each JEE Advanced full-length mock here uses a pattern-based 36-question structure: 12 Mathematics, 12 Physics, and 12 Chemistry for practical two-paper simulation.",
+      a: "Each JEE Advanced full-length mock here uses a pattern-based 36-question structure: 12 Mathematics, 12 Physics, and 12 Chemistry for practical two-paper strategy practice.",
     },
     {
       q: "How should I attempt JEE Advanced Set 1 through Set 5?",
