@@ -154,6 +154,25 @@ export default async function PracticeCategoryPage({ params }: Props) {
     },
   ];
 
+    const jeeMainFaqs = [
+      {
+        q: "How many questions are in each JEE Main full-length mock here?",
+        a: "Each JEE Main full-length mock contains 90 official-pattern questions: 30 Mathematics, 30 Physics, and 30 Chemistry, reflecting the standard computer-based exam format.",
+      },
+      {
+        q: "How should I use JEE Main Set 1 through Set 5 in my preparation?",
+        a: "Start with Set 1 and Set 2 for speed and confidence building, then move to Set 3 and Set 4 for exam-pressure practice, and complete Set 5 as your final high-difficulty revision mock.",
+      },
+      {
+        q: "What timing should I follow for JEE Main full-length mocks?",
+        a: "Allocate exactly 180 minutes (3 hours) for each full mock to match the official exam duration. Practice time management so you can attempt all 90 questions with proper verification and not rush.",
+      },
+      {
+        q: "Are these official JEE Main previous-year papers?",
+        a: "No. These are original, pattern-based practice tests designed for self-assessment and strategy refinement. Always verify final syllabus, exam patterns, and official notices from the JEE Main official website.",
+      },
+    ];
+
   const ieltsFaqs = [
     {
       q: "Which IELTS practice track should I choose first: Academic or General Training?",
@@ -933,6 +952,20 @@ export default async function PracticeCategoryPage({ params }: Props) {
                     <h3 className="text-xl font-bold text-slate-900">JEE Advanced quick FAQs</h3>
                     <div className="mt-4 space-y-3">
                       {jeeAdvancedFaqs.map((faq) => (
+                        <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                          <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
+                          <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+                        </details>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {group.examSlug === "jee-main" && (
+                  <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+                    <h3 className="text-xl font-bold text-slate-900">JEE Main quick FAQs</h3>
+                    <div className="mt-4 space-y-3">
+                      {jeeMainFaqs.map((faq) => (
                         <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                           <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
                           <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>

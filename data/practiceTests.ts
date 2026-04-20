@@ -4155,6 +4155,74 @@ function createJeeAdvancedPracticeSet(setNumber: number): PracticeSet {
   };
 }
 
+function createJeeMainMathQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkMathQuestions(setNumber)
+    .slice(0, 30)
+    .map((question, index) => ({
+      ...question,
+      id: `jee-main-set${setNumber}-math-${index + 1}`,
+    }));
+}
+
+function createJeeMainPhysicsQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkPhysicsQuestions(setNumber)
+    .slice(0, 30)
+    .map((question, index) => ({
+      ...question,
+      id: `jee-main-set${setNumber}-phys-${index + 1}`,
+    }));
+}
+
+function createJeeMainChemistryQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkChemistryQuestions(setNumber)
+    .slice(0, 30)
+    .map((question, index) => ({
+      ...question,
+      id: `jee-main-set${setNumber}-chem-${index + 1}`,
+    }));
+}
+
+function createJeeMainPracticeSet(setNumber: number): PracticeSet {
+  const questions = [
+    ...createJeeMainMathQuestions(setNumber),
+    ...createJeeMainPhysicsQuestions(setNumber),
+    ...createJeeMainChemistryQuestions(setNumber),
+  ];
+
+  const level = setNumber >= 4 ? "advanced" : "intermediate";
+
+  return {
+    id: `jee-main-mixed-set-${setNumber}`,
+    slug: `jee-main-practice-set-${setNumber}`,
+    category: "engineering-entrance",
+    title: `JEE Main Practice Set ${setNumber}`,
+    description:
+      "Original JEE Main-style full-length set with 90 unique questions: 30 Mathematics, 30 Physics, and 30 Chemistry following the official exam pattern.",
+    examType: "JEE Main",
+    examSlug: "jee-main",
+    examName: "JEE Main",
+    sectionLabel: "Full JEE Main Paper Mock",
+    level,
+    questionCount: questions.length,
+    estimatedMinutes: 180,
+    seoTitle: `JEE Main Practice Questions - Set ${setNumber} | Nishaglobal Education`,
+    seoDescription:
+      "Practice a full JEE Main-style set with 90 official-pattern questions covering Mathematics, Physics, and Chemistry with answers and explanations.",
+    keywords: [
+      `JEE Main practice set ${setNumber}`,
+      "JEE Main 90 questions",
+      "JEE Main full mock test",
+      "JEE Main official pattern",
+      "JEE Main mathematics physics chemistry",
+    ],
+    intro:
+      "Use this official-pattern JEE Main set for realistic exam practice, speed building, and comprehensive coverage of all three subjects in a single timed session.",
+    isOriginal: true,
+    isLive: true,
+    questions,
+  };
+}
+
 function createIeltsListeningQuestions(setNumber: number): PracticeQuestion[] {
   const scenarios = [
     { place: "student services desk", purpose: "ID collection", keyword: "passport photo", topic: "note completion" },
@@ -7679,6 +7747,11 @@ export const practiceSets: PracticeSet[] = [
   createJeeAdvancedPracticeSet(3),
   createJeeAdvancedPracticeSet(4),
   createJeeAdvancedPracticeSet(5),
+    createJeeMainPracticeSet(1),
+    createJeeMainPracticeSet(2),
+    createJeeMainPracticeSet(3),
+    createJeeMainPracticeSet(4),
+    createJeeMainPracticeSet(5),
   {
     id: "wbjee-math-set-1",
     slug: "wbjee-mathematics-practice-set-1",
