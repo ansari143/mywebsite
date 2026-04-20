@@ -3957,6 +3957,68 @@ function createComedkPracticeSet(setNumber: number): PracticeSet {
   };
 }
 
+function createKcetMathQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkMathQuestions(setNumber).map((question, index) => ({
+    ...question,
+    id: `kcet-set${setNumber}-math-${index + 1}`,
+  }));
+}
+
+function createKcetPhysicsQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkPhysicsQuestions(setNumber).map((question, index) => ({
+    ...question,
+    id: `kcet-set${setNumber}-phys-${index + 1}`,
+  }));
+}
+
+function createKcetChemistryQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkChemistryQuestions(setNumber).map((question, index) => ({
+    ...question,
+    id: `kcet-set${setNumber}-chem-${index + 1}`,
+  }));
+}
+
+function createKcetPracticeSet(setNumber: number): PracticeSet {
+  const questions = [
+    ...createKcetMathQuestions(setNumber),
+    ...createKcetPhysicsQuestions(setNumber),
+    ...createKcetChemistryQuestions(setNumber),
+  ];
+
+  const level = setNumber >= 4 ? "advanced" : "intermediate";
+
+  return {
+    id: `kcet-mixed-set-${setNumber}`,
+    slug: `kcet-practice-set-${setNumber}`,
+    category: "engineering-entrance",
+    title: `KCET Practice Set ${setNumber}`,
+    description:
+      "Original KCET-style full-length set with 180 unique questions: 60 mathematics, 60 physics, and 60 chemistry.",
+    examType: "KCET",
+    examSlug: "kcet",
+    examName: "KCET",
+    sectionLabel: "Full PCM Practice Set",
+    level,
+    questionCount: questions.length,
+    estimatedMinutes: 180,
+    seoTitle: `KCET Practice Questions - Set ${setNumber} | Nishaglobal Education`,
+    seoDescription:
+      "Practice a full KCET-style set with 180 original questions across mathematics, physics, and chemistry with answers and explanations.",
+    keywords: [
+      `KCET practice set ${setNumber}`,
+      "KCET 180 questions",
+      "KCET mathematics physics chemistry",
+      "engineering entrance KCET mock",
+      "original KCET practice",
+    ],
+    intro:
+      "Use this full-length KCET set for serious exam practice, balanced subject revision, and explanation-based learning.",
+    isOriginal: true,
+    isLive: true,
+    questions,
+  };
+}
+
 function createIeltsListeningQuestions(setNumber: number): PracticeQuestion[] {
   const scenarios = [
     { place: "student services desk", purpose: "ID collection", keyword: "passport photo", topic: "note completion" },
@@ -7466,6 +7528,11 @@ export const practiceSets: PracticeSet[] = [
   createComedkPracticeSet(3),
   createComedkPracticeSet(4),
   createComedkPracticeSet(5),
+  createKcetPracticeSet(1),
+  createKcetPracticeSet(2),
+  createKcetPracticeSet(3),
+  createKcetPracticeSet(4),
+  createKcetPracticeSet(5),
   {
     id: "wbjee-math-set-1",
     slug: "wbjee-mathematics-practice-set-1",
@@ -7634,264 +7701,6 @@ export const practiceSets: PracticeSet[] = [
         "C",
         "When the body is stationary, forces balance and net force is 0 N.",
         "mechanics",
-        "medium"
-      ),
-    ],
-  },
-  {
-    id: "kcet-math-set-1",
-    slug: "kcet-mathematics-practice-set-1",
-    category: "engineering-entrance",
-    title: "KCET Mathematics Practice Set 1",
-    description:
-      "Original KCET mathematics questions with algebra, arithmetic, and coordinate geometry.",
-    examType: "KCET",
-    examSlug: "kcet",
-    examName: "KCET",
-    sectionLabel: "Mathematics Practice Set",
-    level: "intermediate",
-    questionCount: 6,
-    estimatedMinutes: 18,
-    seoTitle:
-      "KCET Mathematics Practice Questions – Set 1 | Nishaglobal Education",
-    seoDescription:
-      "Practice original KCET mathematics questions with answers and explanations. This set helps you build accuracy for paper-based entrance preparation.",
-    keywords: [
-      "KCET math practice",
-      "KCET mathematics questions",
-      "KCET practice set",
-      "engineering entrance KCET",
-      "original KCET practice",
-    ],
-    intro:
-      "Practice this KCET math set to improve speed and precision in algebra and coordinate geometry.",
-    isOriginal: true,
-    isLive: true,
-    questions: [
-      createQuestion(
-        "kcet-math-1",
-        "What is the value of 7 × 8?",
-        ["48", "54", "56", "64"],
-        "C",
-        "7 × 8 = 56.",
-        "arithmetic",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-math-2",
-        "If x = 3 and y = 4, what is x² + y²?",
-        ["12", "25", "7", "24"],
-        "B",
-        "x² + y² = 9 + 16 = 25.",
-        "algebra",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-math-3",
-        "A line passes through points (0, 0) and (2, 2). What is its slope?",
-        ["1", "2", "0", "−1"],
-        "A",
-        "Slope = (2 − 0)/(2 − 0) = 1.",
-        "coordinate geometry",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-math-4",
-        "What is the perimeter of a square with side 5 cm?",
-        ["20 cm", "25 cm", "10 cm", "15 cm"],
-        "A",
-        "Perimeter = 4 × side = 20 cm.",
-        "geometry",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-math-5",
-        "Which number is a prime number?",
-        ["9", "11", "12", "15"],
-        "B",
-        "11 is prime because it has only two distinct positive divisors.",
-        "number theory",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-math-6",
-        "What is 50% of 80?",
-        ["30", "40", "50", "60"],
-        "B",
-        "50% of 80 is 40.",
-        "percentages",
-        "easy"
-      ),
-    ],
-  },
-  {
-    id: "kcet-physics-set-1",
-    slug: "kcet-physics-practice-set-1",
-    category: "engineering-entrance",
-    title: "KCET Physics Practice Set 1",
-    description:
-      "Original KCET-style physics questions covering motion, force, and basic electricity.",
-    examType: "KCET",
-    examSlug: "kcet",
-    examName: "KCET",
-    sectionLabel: "Physics Practice Set",
-    level: "intermediate",
-    questionCount: 6,
-    estimatedMinutes: 18,
-    seoTitle:
-      "KCET Physics Practice Questions – Set 1 | Nishaglobal Education",
-    seoDescription:
-      "Practice original KCET physics questions with answers and explanations. This set is useful for paper-based exam preparation.",
-    keywords: [
-      "KCET physics practice",
-      "KCET physics questions",
-      "physics practice set",
-      "engineering entrance KCET",
-      "original KCET physics",
-    ],
-    intro:
-      "Practice this KCET physics set to build comfort with motion, forces, and electricity questions.",
-    isOriginal: true,
-    isLive: true,
-    questions: [
-      createQuestion(
-        "kcet-phys-1",
-        "A ball is thrown upward. Which force acts on it while rising?",
-        ["Friction", "Gravity", "Magnetic force", "Tension"],
-        "B",
-        "Gravity acts downward on the ball throughout its motion.",
-        "mechanics",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-phys-2",
-        "If a current of 4 A flows for 5 seconds, how much charge passes through a wire?",
-        ["20 C", "9 C", "1.25 C", "40 C"],
-        "A",
-        "Charge = current × time, so 4 × 5 = 20 C.",
-        "electricity",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-phys-3",
-        "Which property does not change when light enters a new medium?",
-        ["Speed", "Wavelength", "Frequency", "Direction"],
-        "C",
-        "Frequency remains constant as light passes between media.",
-        "optics",
-        "medium"
-      ),
-      createQuestion(
-        "kcet-phys-4",
-        "What is the SI unit of force?",
-        ["Newton", "Joule", "Watt", "Pascal"],
-        "A",
-        "Force is measured in newtons.",
-        "mechanics",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-phys-5",
-        "A 5 kg object is in free fall near Earth's surface. What is its weight approximately? (g = 10 m/s²)",
-        ["5 N", "10 N", "50 N", "500 N"],
-        "C",
-        "Weight = mg = 5 × 10 = 50 N.",
-        "mechanics",
-        "medium"
-      ),
-      createQuestion(
-        "kcet-phys-6",
-        "Which of the following quantities is a scalar?",
-        ["Velocity", "Acceleration", "Momentum", "Speed"],
-        "D",
-        "Speed is scalar because it has magnitude only.",
-        "physics",
-        "easy"
-      ),
-    ],
-  },
-  {
-    id: "kcet-chemistry-set-1",
-    slug: "kcet-chemistry-practice-set-1",
-    category: "engineering-entrance",
-    title: "KCET Chemistry Practice Set 1",
-    description:
-      "Original KCET chemistry questions focused on acids, bases, atomic structure, and reactions.",
-    examType: "KCET",
-    examSlug: "kcet",
-    examName: "KCET",
-    sectionLabel: "Chemistry Practice Set",
-    level: "intermediate",
-    questionCount: 6,
-    estimatedMinutes: 18,
-    seoTitle:
-      "KCET Chemistry Practice Questions – Set 1 | Nishaglobal Education",
-    seoDescription:
-      "Practice original KCET chemistry questions with answers and explanations. This set covers core chemistry concepts for exam preparation.",
-    keywords: [
-      "KCET chemistry practice",
-      "KCET chemistry questions",
-      "chemistry practice set",
-      "engineering entrance KCET",
-      "original KCET chemistry",
-    ],
-    intro:
-      "Use this KCET chemistry set to practice solid question solving and concept review in basic chemistry topics.",
-    isOriginal: true,
-    isLive: true,
-    questions: [
-      createQuestion(
-        "kcet-chem-1",
-        "Which of the following is a noble gas?",
-        ["Oxygen", "Nitrogen", "Helium", "Chlorine"],
-        "C",
-        "Helium is a noble gas with stable electron configuration.",
-        "periodic trends",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-chem-2",
-        "What is the pH of a strong acid solution?",
-        ["2", "7", "12", "14"],
-        "A",
-        "Strong acid solutions have low pH values, typically below 3.",
-        "physical chemistry",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-chem-3",
-        "Which element has atomic number 1?",
-        ["Helium", "Hydrogen", "Oxygen", "Carbon"],
-        "B",
-        "Hydrogen has atomic number 1.",
-        "atomic structure",
-        "easy"
-      ),
-      createQuestion(
-        "kcet-chem-4",
-        "Which substance is a base?",
-        ["HCl", "NaOH", "CO2", "CH4"],
-        "B",
-        "Sodium hydroxide is a base.",
-        "acid-base chemistry",
-        "medium"
-      ),
-      createQuestion(
-        "kcet-chem-5",
-        "What gas is given off when baking soda reacts with vinegar?",
-        ["Oxygen", "Carbon dioxide", "Hydrogen", "Nitrogen"],
-        "B",
-        "Carbon dioxide gas is released in that reaction.",
-        "chemical reactions",
-        "medium"
-      ),
-      createQuestion(
-        "kcet-chem-6",
-        "Which of these is an ionic compound?",
-        ["CO2", "H2O", "NaCl", "C6H12O6"],
-        "C",
-        "Sodium chloride is an ionic compound.",
-        "chemical bonding",
         "medium"
       ),
     ],
