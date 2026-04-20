@@ -4,7 +4,7 @@ import { skillsPages } from "@/data/skillsPages";
 export const metadata = {
   title: "High-Demand Skills | Nisha Global Education",
   description:
-    "Explore beginner-friendly guides for modern AI and technology skills, including Python, prompt engineering, LangChain, AI agents, and practical skill pathways.",
+    "Explore beginner, intermediate, and advanced pathways for modern AI and technology skills, including Python, prompt engineering, LangChain, AI agents, and practical project roadmaps.",
   alternates: {
     canonical: "https://nishaglobaleducation.com/skills",
   },
@@ -21,6 +21,111 @@ const gradients = [
   "from-amber-50 to-orange-50",
   "from-rose-50 to-pink-50",
   "from-violet-50 to-purple-50",
+];
+
+const levelTracks = [
+  {
+    level: "Beginner",
+    duration: "0-6 weeks",
+    badgeClass: "border-emerald-200 bg-emerald-50 text-emerald-800",
+    whoFor:
+      "Students starting from zero in coding or AI concepts, including school and college learners.",
+    avoid:
+      "People looking for fast interview prep without learning foundations.",
+    outcomes: [
+      "Write basic Python and understand core syntax.",
+      "Use prompt engineering for reliable AI outputs.",
+      "Read and modify small code examples safely.",
+    ],
+    links: [
+      { label: "Python Concepts", href: "/skills/python-concepts" },
+      { label: "Prompt Engineering", href: "/skills/prompt-engineering" },
+      { label: "AI Roadmap", href: "/skills/ai-roadmap" },
+    ],
+  },
+  {
+    level: "Intermediate",
+    duration: "6-16 weeks",
+    badgeClass: "border-blue-200 bg-blue-50 text-blue-800",
+    whoFor:
+      "Learners who know basics and want to build complete AI features with frameworks and tools.",
+    avoid:
+      "Those who are still uncomfortable with Python basics and debugging simple scripts.",
+    outcomes: [
+      "Build LangChain pipelines with prompts, tools, and retrieval.",
+      "Create agent-style flows for task automation.",
+      "Deploy one portfolio-ready mini project.",
+    ],
+    links: [
+      { label: "LangChain", href: "/skills/langchain" },
+      { label: "AI Agents", href: "/skills/ai-agents" },
+      { label: "LangGraph", href: "/skills/langgraph" },
+    ],
+  },
+  {
+    level: "Advanced",
+    duration: "16+ weeks",
+    badgeClass: "border-violet-200 bg-violet-50 text-violet-800",
+    whoFor:
+      "Learners building production-ready workflows with observability, quality checks, and performance optimization.",
+    avoid:
+      "Students expecting advanced architecture outcomes without regular project practice.",
+    outcomes: [
+      "Design multi-step graph workflows and fallback strategies.",
+      "Add monitoring, tracing, and evaluation with observability tools.",
+      "Ship 2-3 advanced projects with measurable impact.",
+    ],
+    links: [
+      { label: "LangGraph", href: "/skills/langgraph" },
+      { label: "LangSmith / Langfuse", href: "/skills/langsmith-langfuse" },
+      { label: "Career Tests", href: "/tests" },
+    ],
+  },
+];
+
+const ninetyDayPlan = [
+  {
+    phase: "Days 1-30",
+    focus: "Foundation",
+    actions:
+      "Finish Python and prompt basics, then create one simple Q&A tool with clear prompts and error handling.",
+  },
+  {
+    phase: "Days 31-60",
+    focus: "Application",
+    actions:
+      "Build one LangChain or agent project with tool usage, then document your architecture and failure cases.",
+  },
+  {
+    phase: "Days 61-90",
+    focus: "Production Mindset",
+    actions:
+      "Add LangGraph flow control and observability, then publish a portfolio case study with screenshots and metrics.",
+  },
+];
+
+const projectIdeasByLevel = [
+  {
+    level: "Beginner",
+    idea: "Career FAQ assistant",
+    stack: "Python + prompt templates",
+    value:
+      "Shows you can structure prompts, format responses, and handle basic user intent clearly.",
+  },
+  {
+    level: "Intermediate",
+    idea: "Study planner with tool calls",
+    stack: "LangChain + API/tool integration",
+    value:
+      "Shows chaining, external tools, and practical workflow design beyond one-shot answers.",
+  },
+  {
+    level: "Advanced",
+    idea: "Multi-agent learning workflow",
+    stack: "LangGraph + LangSmith/Langfuse",
+    value:
+      "Shows orchestration, monitoring, and evaluation quality expected in real AI product environments.",
+  },
 ];
 
 export default function SkillsPage() {
@@ -62,8 +167,9 @@ export default function SkillsPage() {
 
           <p className="mt-4 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
             Learn modern tech skills using clear, simple language. Explore
-            beginner-friendly guides on AI agents, LangChain, LangGraph, prompt
-            engineering, Python concepts, and AI monitoring tools.
+            beginner, intermediate, and advanced pathways for AI agents,
+            LangChain, LangGraph, prompt engineering, Python concepts, and AI
+            monitoring tools.
           </p>
         </div>
       </section>
@@ -85,9 +191,64 @@ export default function SkillsPage() {
           <div className="rounded-3xl bg-white p-5">
             <h2 className="text-lg font-semibold text-slate-900">How to use this guide</h2>
             <p className="mt-3 text-sm leading-7 text-slate-600">
-              Start with the AI roadmap, then choose one skill area at a time. Build a small project, move to the next guide, and keep your learning aligned with real career outcomes.
+              First choose your current level, then follow the matching pathway. Build one project per phase and move forward only after you can explain and debug your own work.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">Choose your learning level</h2>
+        <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+          Pick the track that matches your current skill level. Avoid jumping ahead too early, because weak foundations usually slow down intermediate and advanced progress.
+        </p>
+
+        <div className="mt-6 grid gap-5 lg:grid-cols-3">
+          {levelTracks.map((track) => (
+            <article key={track.level} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <div className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${track.badgeClass}`}>
+                {track.level} • {track.duration}
+              </div>
+
+              <h3 className="mt-4 text-lg font-semibold text-slate-900">Who should choose this</h3>
+              <p className="mt-2 text-sm leading-7 text-slate-600">{track.whoFor}</p>
+
+              <h3 className="mt-4 text-lg font-semibold text-slate-900">Who should avoid this</h3>
+              <p className="mt-2 text-sm leading-7 text-slate-600">{track.avoid}</p>
+
+              <h3 className="mt-4 text-lg font-semibold text-slate-900">Expected outcomes</h3>
+              <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-600">
+                {track.outcomes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {track.links.map((link) => (
+                  <Link
+                    key={link.href + link.label}
+                    href={link.href}
+                    className="rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-slate-50 p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">90-day progression roadmap</h2>
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          {ninetyDayPlan.map((phase) => (
+            <div key={phase.phase} className="rounded-2xl border border-slate-200 bg-white p-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{phase.phase}</p>
+              <p className="mt-2 text-sm font-semibold text-slate-900">{phase.focus}</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">{phase.actions}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -192,6 +353,36 @@ export default function SkillsPage() {
       </section>
 
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">Real project ideas by level</h2>
+        <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+          Use these examples to convert theory into outcomes you can show in interviews, internships, and academic portfolios.
+        </p>
+
+        <div className="mt-6 overflow-x-auto">
+          <table className="w-full border-collapse border border-slate-200 text-sm">
+            <thead>
+              <tr className="bg-slate-50">
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Level</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Project Idea</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Suggested Stack</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Why It Matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              {projectIdeasByLevel.map((item) => (
+                <tr key={item.level} className="border-b border-slate-200">
+                  <td className="border-r border-slate-200 px-4 py-3 font-medium text-slate-800">{item.level}</td>
+                  <td className="border-r border-slate-200 px-4 py-3 text-slate-700">{item.idea}</td>
+                  <td className="border-r border-slate-200 px-4 py-3 text-slate-700">{item.stack}</td>
+                  <td className="px-4 py-3 text-slate-700">{item.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
         <div className="mt-6 space-y-4">
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
@@ -212,6 +403,18 @@ export default function SkillsPage() {
               You can build projects for college applications, internships, freelance work, and roles in AI, software, automation, or digital marketing.
             </p>
           </div>
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 className="text-base font-semibold text-slate-900">Do you support intermediate and advanced learners now?</h3>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Yes. This page now includes level-based tracks with clear outcomes, project goals, and progression guidance for beginner, intermediate, and advanced learners.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 className="text-base font-semibold text-slate-900">How do I know when to move from intermediate to advanced?</h3>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Move ahead when you can build and debug a complete workflow with tools, explain your architecture decisions, and track quality with observability metrics.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -219,7 +422,7 @@ export default function SkillsPage() {
         <div className="max-w-4xl">
           <h2 className="text-2xl font-bold text-slate-900">Ready to commit to a practical learning path?</h2>
           <p className="mt-3 text-sm leading-7 text-slate-700">
-            Begin with the AI roadmap or choose a specific skill guide that matches the career path you want to explore. This page is meant to keep your learning focused and useful.
+            Start at your current level and move forward with project evidence. Beginner, intermediate, and advanced tracks are designed to help you learn in sequence and avoid random learning.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link

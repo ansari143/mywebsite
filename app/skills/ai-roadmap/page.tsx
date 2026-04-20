@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "AI Engineer Learning Roadmap | Nishaglobal Education",
   description:
-    "Step-by-step roadmap to learn AI development including Python, prompt engineering, LangChain, AI agents, LangGraph, and observability tools.",
+    "Step-by-step beginner to advanced roadmap to learn AI development including Python, prompt engineering, LangChain, AI agents, LangGraph, and observability tools.",
 };
 
 const roadmap = [
@@ -51,6 +51,27 @@ const roadmap = [
   },
 ];
 
+const roadmapPhases = [
+  {
+    phase: "Beginner Phase",
+    duration: "Weeks 1-6",
+    focus: "Foundations and clarity",
+    includes: "Python fundamentals, structured prompts, and simple mini-projects.",
+  },
+  {
+    phase: "Intermediate Phase",
+    duration: "Weeks 7-16",
+    focus: "Application and integration",
+    includes: "LangChain pipelines, AI agents, tool usage, and API-based workflows.",
+  },
+  {
+    phase: "Advanced Phase",
+    duration: "Weeks 17+",
+    focus: "Architecture and reliability",
+    includes: "LangGraph orchestration, observability, evaluation loops, and production mindset.",
+  },
+];
+
 export default function AIRoadmapPage() {
   return (
     <div className="space-y-10">
@@ -69,6 +90,26 @@ export default function AIRoadmapPage() {
             follow this clear roadmap. Start with Python fundamentals and move
             step-by-step toward AI agents, workflows, and monitoring tools.
           </p>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-800">Beginner track</div>
+            <div className="rounded-xl border border-blue-200 bg-blue-50 px-3 py-2 text-sm font-semibold text-blue-800">Intermediate track</div>
+            <div className="rounded-xl border border-violet-200 bg-violet-50 px-3 py-2 text-sm font-semibold text-violet-800">Advanced track</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-slate-50 p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">Beginner to advanced phase plan</h2>
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          {roadmapPhases.map((item) => (
+            <div key={item.phase} className="rounded-2xl border border-slate-200 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">{item.phase}</p>
+              <p className="mt-1 text-xs uppercase tracking-wide text-slate-500">{item.duration}</p>
+              <p className="mt-3 text-sm font-medium text-slate-800">{item.focus}</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">{item.includes}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -110,6 +151,10 @@ export default function AIRoadmapPage() {
           Start with Python basics, then understand prompts, and gradually move
           into frameworks like LangChain and LangGraph. Build small projects to
           gain practical experience.
+        </p>
+
+        <p className="mt-3 text-sm leading-7 text-slate-700">
+          Use this roadmap for educational guidance only. Final hiring outcomes depend on your project quality, interview performance, and market demand.
         </p>
       </section>
     </div>

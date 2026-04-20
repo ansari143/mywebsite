@@ -19,11 +19,11 @@ export type SkillPage = {
 export const skillsPages: SkillPage[] = [
   {
     slug: "ai-agents",
-    title: "AI Agents for Beginners",
+    title: "AI Agents: Beginner to Advanced",
     description:
-      "Learn AI agents in simple language with examples, diagrams, and beginner-friendly code.",
+      "Learn AI agents from beginner to advanced level with practical architecture patterns, workflows, and project guidance.",
     intro:
-      "AI agents are systems where AI can do more than answer one question. They can think in steps, use tools, collect information, and then give a final answer. This page explains the concept in very simple language.",
+      "AI agents are systems where AI can do more than answer one question. They can think in steps, use tools, collect information, and then give a final answer. This page starts with basics and then moves into intermediate and advanced implementation paths.",
     badge: "Trending Skill",
     sections: [
       {
@@ -68,6 +68,30 @@ response = llm.predict(question)
 
 print(response)`,
       },
+      {
+        title: "Intermediate Path: Tool-Using Agent Design",
+        content: [
+          "At intermediate level, focus on designing agents that can decide when to call tools like search, calculator, or APIs.",
+          "You should learn prompt routing, basic memory usage, retry handling, and fallback responses when tools fail.",
+          "A good intermediate milestone is building one agent that solves a real workflow such as study planning, FAQ support, or research summarization."
+        ],
+      },
+      {
+        title: "Advanced Path: Multi-Agent and Reliability",
+        content: [
+          "Advanced work includes multi-agent orchestration, role-based agents, and evaluation loops to measure quality over time.",
+          "You should add guardrails, hallucination checks, and observability traces to debug failures and improve responses.",
+          "Production-ready agents prioritize reliability, cost control, latency, and user safety instead of only raw output quality."
+        ],
+      },
+      {
+        title: "Project Milestones by Level",
+        content: [
+          "Beginner: Build a single-step assistant that answers one domain of questions clearly.",
+          "Intermediate: Build a tool-using agent that selects APIs based on user intent and handles tool errors.",
+          "Advanced: Build a multi-agent workflow with evaluation metrics, logs, and quality score tracking."
+        ],
+      },
     ],
     faq: [
       {
@@ -79,16 +103,26 @@ print(response)`,
         question: "Do AI agents always use tools?",
         answer:
           "Not always, but many useful AI agents use tools like APIs, search, calculators, or databases."
+      },
+      {
+        question: "How do I move from beginner to intermediate agent building?",
+        answer:
+          "Move after you can build a clean single-agent workflow, explain each prompt step, and handle basic errors. Then add tool routing and memory in small increments."
+      },
+      {
+        question: "What defines advanced AI agent work?",
+        answer:
+          "Advanced work focuses on reliability and scale: multi-agent coordination, guardrails, observability, evaluation metrics, and production debugging."
       }
     ]
   },
   {
     slug: "langchain",
-    title: "LangChain for Beginners",
+    title: "LangChain: Beginner to Advanced",
     description:
-      "Learn LangChain in simple language with diagrams, examples, and easy starter code.",
+      "Learn LangChain from beginner to advanced level with practical chains, tools, retrieval, and architecture guidance.",
     intro:
-      "LangChain is a framework that helps developers build AI applications using prompts, language models, tools, and memory. It makes AI app development easier and more organized.",
+      "LangChain is a framework that helps developers build AI applications using prompts, language models, tools, and memory. This page covers beginner basics and then expands into intermediate and advanced usage.",
     badge: "Framework",
     sections: [
       {
@@ -137,6 +171,30 @@ chain = LLMChain(llm=llm, prompt=prompt)
 result = chain.run("Artificial Intelligence")
 print(result)`,
       },
+      {
+        title: "Intermediate Path: Chains, Tools, and Retrieval",
+        content: [
+          "At intermediate level, combine prompt templates, retrievers, and tools to solve multi-step user requests.",
+          "Practice creating reusable chains, document Q&A flows, and structured output formatting for downstream applications.",
+          "You should also learn how to test chain outputs against known examples before deployment."
+        ],
+      },
+      {
+        title: "Advanced Path: Architecture and Performance",
+        content: [
+          "Advanced LangChain usage includes modular architecture, token/cost optimization, and robust fallback strategies.",
+          "You should implement evaluation pipelines, latency checks, and failure analytics to improve reliability.",
+          "Production systems require strong versioning of prompts and components so updates do not break existing flows."
+        ],
+      },
+      {
+        title: "Project Milestones by Level",
+        content: [
+          "Beginner: One simple prompt chain with clean input and output formatting.",
+          "Intermediate: Retrieval-based Q&A app with tool integration and response grounding.",
+          "Advanced: Multi-module LangChain system with evaluation dashboards and cost controls."
+        ],
+      },
     ],
     faq: [
       {
@@ -148,14 +206,19 @@ print(result)`,
         question: "Do I need Python before learning LangChain?",
         answer:
           "Yes, basic Python is very helpful before starting LangChain."
+      },
+      {
+        question: "When should I move to advanced LangChain topics?",
+        answer:
+          "Move when you can independently build a retrieval or tool-based app, debug errors, and explain how each component affects final output quality."
       }
     ]
   },
   {
     slug: "langgraph",
-    title: "LangGraph for Beginners",
+    title: "LangGraph: Beginner to Advanced",
     description:
-      "Understand LangGraph in simple language with diagrams, workflow ideas, and beginner code.",
+      "Understand LangGraph from beginner to advanced level with workflow design, state handling, and reliability patterns.",
     intro:
       "LangGraph is used to build advanced AI workflows. It is especially useful when your AI system needs multiple steps, branching, retries, or state-based decision making.",
     badge: "Workflow",
@@ -213,6 +276,30 @@ graph.add_edge("step1", "step2")
 
 workflow = graph.compile()`,
       },
+      {
+        title: "Intermediate Path: State and Branching",
+        content: [
+          "At intermediate level, focus on conditional branches, shared state objects, and retry paths for unstable tool outputs.",
+          "You should design graph transitions that remain readable and predictable when adding new steps.",
+          "A strong intermediate milestone is building one workflow with at least two branch conditions and one recovery path."
+        ],
+      },
+      {
+        title: "Advanced Path: Orchestration at Scale",
+        content: [
+          "Advanced LangGraph usage includes multi-agent orchestration, fallback subgraphs, and runtime observability integration.",
+          "You should monitor failure hotspots, state drift, and latency bottlenecks to maintain quality at higher load.",
+          "Production graph architecture requires clear guardrails for invalid states and safe handling of external tool failures."
+        ],
+      },
+      {
+        title: "Project Milestones by Level",
+        content: [
+          "Beginner: Two-step graph that transforms user input into one final response.",
+          "Intermediate: Branching workflow with conditional routing and retry handling.",
+          "Advanced: Multi-agent graph with observability traces and evaluation checkpoints."
+        ],
+      },
     ],
     faq: [
       {
@@ -224,14 +311,19 @@ workflow = graph.compile()`,
         question: "When should I learn LangGraph?",
         answer:
           "After you understand Python, prompts, and basic LangChain concepts."
+      },
+      {
+        question: "Why do advanced teams prefer graph workflows?",
+        answer:
+          "Graph workflows are easier to scale for complex logic because branching, retries, and state transitions are explicit and easier to debug."
       }
     ]
   },
   {
     slug: "prompt-engineering",
-    title: "Prompt Engineering for Beginners",
+    title: "Prompt Engineering: Beginner to Advanced",
     description:
-      "Learn prompt engineering in simple language with examples, prompt structure, and Python snippets.",
+      "Learn prompt engineering from beginner to advanced level with practical patterns, evaluation methods, and failure reduction strategies.",
     intro:
       "Prompt engineering means writing better instructions for AI models. Clear prompts usually give better results. This is one of the most important beginner skills in AI.",
     badge: "Essential",
@@ -277,6 +369,30 @@ response = llm.predict(prompt)
 
 print(response)`,
       },
+      {
+        title: "Intermediate Path: Prompt Patterns and Testing",
+        content: [
+          "At intermediate level, practice role prompts, few-shot examples, output schemas, and constraint-based instructions.",
+          "You should compare prompt versions against the same test inputs and track which version gives more reliable outputs.",
+          "A practical intermediate milestone is creating a prompt library for one use case such as support, learning, or content workflows."
+        ],
+      },
+      {
+        title: "Advanced Path: Evaluation and Robustness",
+        content: [
+          "Advanced prompt engineering focuses on robustness: handling ambiguity, reducing hallucinations, and controlling tone/format consistency.",
+          "You should run prompt evaluations with score criteria such as factuality, completeness, safety, and latency.",
+          "Production teams treat prompts like versioned assets and test them before rollout to avoid regressions."
+        ],
+      },
+      {
+        title: "Project Milestones by Level",
+        content: [
+          "Beginner: Build a small prompt that explains one topic clearly in a fixed format.",
+          "Intermediate: Create prompt templates with examples and schema-based outputs.",
+          "Advanced: Build a prompt evaluation suite with pass/fail criteria and change logs."
+        ],
+      },
     ],
     faq: [
       {
@@ -288,14 +404,19 @@ print(response)`,
         question: "Do beginners need prompt engineering?",
         answer:
           "Yes. It is one of the first important skills in practical AI work."
+      },
+      {
+        question: "How do I know if a prompt is production-ready?",
+        answer:
+          "A production-ready prompt gives consistent output quality across diverse test cases, handles edge cases, and has measurable evaluation criteria."
       }
     ]
   },
   {
     slug: "python-concepts",
-    title: "Python Concepts for AI Beginners",
+    title: "Python for AI: Beginner to Advanced",
     description:
-      "Learn simple Python concepts for AI development with beginner-friendly examples and code.",
+      "Learn Python for AI from beginner to advanced level with practical coding patterns, debugging habits, and project milestones.",
     intro:
       "Python is one of the most important programming languages for AI development. It is simple to read, easy to start, and widely used in automation, APIs, data work, and AI systems.",
     badge: "Foundation",
@@ -335,6 +456,30 @@ print("Hello", name)`,
 
 print(add(5, 3))`,
       },
+      {
+        title: "Intermediate Path: Data Handling and APIs",
+        content: [
+          "At intermediate level, focus on file handling, JSON parsing, APIs, and reusable function design.",
+          "You should write modular scripts and validate inputs/outputs to reduce bugs in AI workflows.",
+          "A strong intermediate milestone is building one script that fetches data, processes it, and stores clean outputs."
+        ],
+      },
+      {
+        title: "Advanced Path: Architecture and Performance",
+        content: [
+          "Advanced Python for AI includes package structure, asynchronous patterns, testing, profiling, and optimization.",
+          "You should write maintainable code with clear logging and error handling for production environments.",
+          "Production-level Python work values readability and reliability more than clever one-line solutions."
+        ],
+      },
+      {
+        title: "Project Milestones by Level",
+        content: [
+          "Beginner: Build simple scripts with conditions, loops, and functions.",
+          "Intermediate: Build API-based data pipeline script with validation and clean output formatting.",
+          "Advanced: Build package-style Python project with tests, logs, and performance improvements."
+        ],
+      },
     ],
     faq: [
       {
@@ -346,12 +491,17 @@ print(add(5, 3))`,
         question: "Should I learn Python before AI frameworks?",
         answer:
           "Yes. Basic Python should come first because most AI tools use it."
+      },
+      {
+        question: "What separates intermediate and advanced Python?",
+        answer:
+          "Intermediate Python focuses on practical scripting and APIs, while advanced Python focuses on architecture, testing, optimization, and production reliability."
       }
     ]
   },
   {
   slug: "langsmith-langfuse",
-  title: "LangSmith and Langfuse for AI Monitoring",
+  title: "LangSmith and Langfuse: Beginner to Advanced Monitoring",
   description:
     "Learn how to debug, monitor, and improve AI agents using LangSmith and Langfuse observability tools.",
   intro:
@@ -414,6 +564,30 @@ question = "Explain AI agents in simple language"
 response = llm.predict(question)
 
 print(response)`
+    },
+    {
+      title: "Intermediate Path: Practical Trace Analysis",
+      content: [
+        "At intermediate level, focus on reading traces, identifying failure points, and improving prompts based on evidence.",
+        "Track token usage, latency spikes, and tool error frequency to understand where quality drops.",
+        "A useful intermediate milestone is creating a weekly review process for trace-based improvements."
+      ]
+    },
+    {
+      title: "Advanced Path: Evaluation and Governance",
+      content: [
+        "Advanced observability includes automated evaluations, alert thresholds, and quality dashboards for production monitoring.",
+        "You should define success metrics such as response accuracy, completion rate, and cost per task.",
+        "Strong teams combine observability with release governance so prompt or workflow changes are validated before rollout."
+      ]
+    },
+    {
+      title: "Project Milestones by Level",
+      content: [
+        "Beginner: Capture basic traces and review prompt-response pairs.",
+        "Intermediate: Build dashboard views for latency, token usage, and common failure types.",
+        "Advanced: Run automated evaluation pipeline with quality alerts and rollback triggers."
+      ]
     }
   ],
 
@@ -427,6 +601,11 @@ print(response)`
       question: "What is observability in AI systems?",
       answer:
         "Observability means monitoring and understanding how an AI system behaves internally, including prompts, outputs, and workflow steps."
+    },
+    {
+      question: "When should a team adopt advanced observability?",
+      answer:
+        "Adopt advanced observability when workflows affect real users, costs increase, or multiple team members ship prompt and logic updates regularly."
     }
   ]
 },

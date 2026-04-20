@@ -178,11 +178,11 @@ export default async function SkillDetailPage({ params }: Props) {
 
           <section className="rounded-3xl border border-blue-100 bg-blue-50 p-5">
             <h2 className="text-lg font-semibold text-slate-900">
-              Recommended Beginner Path
+              Recommended Progression Path
             </h2>
             <p className="mt-2 text-sm leading-7 text-slate-700">
-              Start with Python concepts, then move to prompt engineering,
-              LangChain, AI agents, and LangGraph.
+              Start with fundamentals, move into intermediate framework usage,
+              and then build advanced workflows with monitoring and evaluation.
             </p>
           </section>
         </aside>
