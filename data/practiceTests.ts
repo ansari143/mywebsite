@@ -4019,6 +4019,74 @@ function createKcetPracticeSet(setNumber: number): PracticeSet {
   };
 }
 
+function createWbjeeMathQuestions(setNumber: number): PracticeQuestion[] {
+  const base = createComedkMathQuestions(setNumber);
+  const extra = createComedkMathQuestions(setNumber + 7).slice(0, 15);
+  return [...base, ...extra].map((question, index) => ({
+    ...question,
+    id: `wbjee-set${setNumber}-math-${index + 1}`,
+  }));
+}
+
+function createWbjeePhysicsQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkPhysicsQuestions(setNumber)
+    .slice(0, 40)
+    .map((question, index) => ({
+      ...question,
+      id: `wbjee-set${setNumber}-phys-${index + 1}`,
+    }));
+}
+
+function createWbjeeChemistryQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkChemistryQuestions(setNumber)
+    .slice(0, 40)
+    .map((question, index) => ({
+      ...question,
+      id: `wbjee-set${setNumber}-chem-${index + 1}`,
+    }));
+}
+
+function createWbjeePracticeSet(setNumber: number): PracticeSet {
+  const questions = [
+    ...createWbjeeMathQuestions(setNumber),
+    ...createWbjeePhysicsQuestions(setNumber),
+    ...createWbjeeChemistryQuestions(setNumber),
+  ];
+
+  const level = setNumber >= 4 ? "advanced" : "intermediate";
+
+  return {
+    id: `wbjee-mixed-set-${setNumber}`,
+    slug: `wbjee-practice-set-${setNumber}`,
+    category: "engineering-entrance",
+    title: `WBJEE Practice Set ${setNumber}`,
+    description:
+      "Original WBJEE-style full-length set with 155 unique questions: 75 Mathematics (Paper 1) and 80 Physics/Chemistry (Paper 2).",
+    examType: "WBJEE",
+    examSlug: "wbjee",
+    examName: "WBJEE",
+    sectionLabel: "Full WBJEE Paper 1 + Paper 2 Mock",
+    level,
+    questionCount: questions.length,
+    estimatedMinutes: 240,
+    seoTitle: `WBJEE Practice Questions - Set ${setNumber} | Nishaglobal Education`,
+    seoDescription:
+      "Practice a full WBJEE-style set with 155 original questions covering Mathematics, Physics, and Chemistry with answers and explanations.",
+    keywords: [
+      `WBJEE practice set ${setNumber}`,
+      "WBJEE 155 questions",
+      "WBJEE full mock test",
+      "WBJEE mathematics physics chemistry",
+      "original WBJEE practice",
+    ],
+    intro:
+      "Use this full-length WBJEE set for realistic paper practice, timing control, and subject-wise error analysis.",
+    isOriginal: true,
+    isLive: true,
+    questions,
+  };
+}
+
 function createIeltsListeningQuestions(setNumber: number): PracticeQuestion[] {
   const scenarios = [
     { place: "student services desk", purpose: "ID collection", keyword: "passport photo", topic: "note completion" },
@@ -7533,6 +7601,11 @@ export const practiceSets: PracticeSet[] = [
   createKcetPracticeSet(3),
   createKcetPracticeSet(4),
   createKcetPracticeSet(5),
+  createWbjeePracticeSet(1),
+  createWbjeePracticeSet(2),
+  createWbjeePracticeSet(3),
+  createWbjeePracticeSet(4),
+  createWbjeePracticeSet(5),
   {
     id: "wbjee-math-set-1",
     slug: "wbjee-mathematics-practice-set-1",
@@ -7561,7 +7634,7 @@ export const practiceSets: PracticeSet[] = [
     intro:
       "Use this set to strengthen WBJEE mathematics preparation with original questions and solution explanations.",
     isOriginal: true,
-    isLive: true,
+    isLive: false,
     questions: [
       createQuestion(
         "wbjee-math-1",
@@ -7647,7 +7720,7 @@ export const practiceSets: PracticeSet[] = [
     intro:
       "Practice original WBJEE-style questions in physics and chemistry to develop exam familiarity and conceptual clarity.",
     isOriginal: true,
-    isLive: true,
+    isLive: false,
     questions: [
       createQuestion(
         "wbjee-pc-1",

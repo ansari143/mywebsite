@@ -116,6 +116,25 @@ export default async function PracticeCategoryPage({ params }: Props) {
     },
   ];
 
+  const wbjeeFaqs = [
+    {
+      q: "How many questions are there in the WBJEE full-length mocks on this page?",
+      a: "Each WBJEE full-length mock here contains 155 questions in practical paper-style flow: Mathematics-heavy Paper 1 plus Physics/Chemistry sections for Paper 2.",
+    },
+    {
+      q: "How should I use WBJEE Set 1 to Set 5 effectively?",
+      a: "Follow sequence order: Set 1 and Set 2 for speed and concept base, Set 3 and Set 4 for exam pressure simulation, and Set 5 for final high-difficulty revision.",
+    },
+    {
+      q: "What timing should I follow for WBJEE full mocks?",
+      a: "Use a full 240-minute simulation if you are practicing both papers in one sitting. You can also split practice into Paper 1 and Paper 2 blocks as per your weekly plan.",
+    },
+    {
+      q: "Are these official WBJEE previous-year papers?",
+      a: "No. These are original pattern-based practice sets for self-assessment. Always cross-check final syllabus, question pattern categories, and updates from official WBJEEB notices.",
+    },
+  ];
+
   const ieltsFaqs = [
     {
       q: "Which IELTS practice track should I choose first: Academic or General Training?",
@@ -867,6 +886,20 @@ export default async function PracticeCategoryPage({ params }: Props) {
                     <h3 className="text-xl font-bold text-slate-900">KCET quick FAQs</h3>
                     <div className="mt-4 space-y-3">
                       {kcetFaqs.map((faq) => (
+                        <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                          <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
+                          <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+                        </details>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {group.examSlug === "wbjee" && (
+                  <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+                    <h3 className="text-xl font-bold text-slate-900">WBJEE quick FAQs</h3>
+                    <div className="mt-4 space-y-3">
+                      {wbjeeFaqs.map((faq) => (
                         <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                           <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
                           <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
