@@ -4759,12 +4759,12 @@ export const engineeringExamRules: ExamRule[] = [
     officialUrl: "https://jeemain.nta.nic.in/",
     mode: "Computer Based Test (CBT)",
     duration: "3 hours",
-    totalQuestions: 75,
+    totalQuestions: 90,
     totalMarks: 300,
     subjects: ["Mathematics", "Physics", "Chemistry"],
     marking: "+4 correct, -1 incorrect, 0 unattempted",
     negativeMarking: "Yes, in Section A and Section B",
-    note: "Each subject has 20 MCQs and 5 numerical-value questions.",
+    note: "Paper contains 90 questions (30 per subject), with 75 attempted as per the current exam attempt structure.",
     disclaimer:
       "Practice sets on this page are original simulated questions based on the latest public exam pattern. They are not official NTA papers.",
   },
@@ -7411,7 +7411,7 @@ export const practiceSets: PracticeSet[] = [
     intro:
       "This practice set is designed to help you build JEE Main physics problem solving with original, exam-style questions and clear explanations.",
     isOriginal: true,
-    isLive: true,
+    isLive: false,
     questions: [
       createQuestion(
         "jee-main-phys-1",
@@ -7497,7 +7497,7 @@ export const practiceSets: PracticeSet[] = [
     intro:
       "Practice this chemistry set to build familiarity with JEE Main-style problems in physical, inorganic, and organic chemistry.",
     isOriginal: true,
-    isLive: true,
+    isLive: false,
     questions: [
       createQuestion(
         "jee-main-chem-1",
@@ -7583,7 +7583,7 @@ export const practiceSets: PracticeSet[] = [
     intro:
       "Build your JEE Main math skills with original practice questions that help you understand problem-solving techniques.",
     isOriginal: true,
-    isLive: true,
+    isLive: false,
     questions: [
       createQuestion(
         "jee-main-math-1",
@@ -7669,7 +7669,7 @@ export const practiceSets: PracticeSet[] = [
     intro:
       "Use this set for pattern-based JEE Advanced preparation with a mix of subjects and explanation-driven practice.",
     isOriginal: true,
-    isLive: true,
+    isLive: false,
     questions: [
       createQuestion(
         "jee-adv-1",
