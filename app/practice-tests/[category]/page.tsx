@@ -97,6 +97,25 @@ export default async function PracticeCategoryPage({ params }: Props) {
     },
   ];
 
+  const kcetFaqs = [
+    {
+      q: "How many questions are there in the KCET full-length mocks on this page?",
+      a: "Each KCET full-length mock on this page has 180 questions, aligned with the practical exam-style distribution across Mathematics, Physics, and Chemistry.",
+    },
+    {
+      q: "What is the best order to attempt KCET practice sets?",
+      a: "Start with Set 1 and Set 2 for baseline speed and formula recall, then move to Set 3 and Set 4 for mixed-pressure practice, and finish with Set 5 as the hardest revision checkpoint.",
+    },
+    {
+      q: "Should I practice chapter-wise first or directly solve full KCET mocks?",
+      a: "If your fundamentals are weak, do short chapter revisions first. If your basics are stable, start full-length mocks directly and use post-test analysis to identify weak chapters.",
+    },
+    {
+      q: "Are these official KCET previous-year papers?",
+      a: "No. These are original pattern-based practice tests created for self-assessment. Always verify latest notices, syllabus details, and exam rules from official KEA updates.",
+    },
+  ];
+
   const ieltsFaqs = [
     {
       q: "Which IELTS practice track should I choose first: Academic or General Training?",
@@ -842,6 +861,20 @@ export default async function PracticeCategoryPage({ params }: Props) {
                     </div>
                   )}
                 </div>
+
+                {group.examSlug === "kcet" && (
+                  <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+                    <h3 className="text-xl font-bold text-slate-900">KCET quick FAQs</h3>
+                    <div className="mt-4 space-y-3">
+                      {kcetFaqs.map((faq) => (
+                        <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                          <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
+                          <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+                        </details>
+                      ))}
+                    </div>
+                  </section>
+                )}
 
                 <div className="grid gap-4">
                   {group.sets.length > 0 ? (
