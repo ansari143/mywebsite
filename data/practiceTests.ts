@@ -4129,7 +4129,7 @@ function createJeeAdvancedPracticeSet(setNumber: number): PracticeSet {
     category: "engineering-entrance",
     title: `JEE Advanced Practice Set ${setNumber}`,
     description:
-      "Original JEE Advanced-style full-length set with 36 unique questions: 12 Mathematics, 12 Physics, and 12 Chemistry following the official two-paper format.",
+      "Original JEE Advanced-style full-length set with 36 unique questions: 12 Mathematics, 12 Physics, and 12 Chemistry for practical two-paper simulation.",
     examType: "JEE Advanced",
     examSlug: "jee-advanced",
     examName: "JEE Advanced",
@@ -4139,16 +4139,16 @@ function createJeeAdvancedPracticeSet(setNumber: number): PracticeSet {
     estimatedMinutes: 240,
     seoTitle: `JEE Advanced Practice Questions - Set ${setNumber} | Nishaglobal Education`,
     seoDescription:
-      "Practice a full JEE Advanced-style set with 36 official-pattern questions covering Mathematics, Physics, and Chemistry with answers and explanations.",
+      "Practice a full JEE Advanced-style set with 36 pattern-based questions covering Mathematics, Physics, and Chemistry with answers and explanations.",
     keywords: [
       `JEE Advanced practice set ${setNumber}`,
       "JEE Advanced 36 questions",
       "JEE Advanced full mock test",
-      "JEE Advanced official pattern",
+      "JEE Advanced pattern-based practice",
       "JEE Advanced mathematics physics chemistry",
     ],
     intro:
-      "Use this official-pattern JEE Advanced set for comprehensive exam preparation, timing mastery across two papers, and high-difficulty problem solving matching official specifications.",
+      "Use this pattern-based JEE Advanced set for comprehensive exam preparation, timing mastery across two papers, and high-difficulty problem solving.",
     isOriginal: true,
     isLive: true,
     questions,
@@ -7941,13 +7941,21 @@ export function getEngineeringExamRuleBySlug(
 }
 
 export function getEngineeringPracticeGroups() {
+  const hiddenLegacyEngineeringSlugs = new Set([
+    "jee-main-physics-practice-set-1",
+    "jee-main-chemistry-practice-set-1",
+    "jee-main-mathematics-practice-set-1",
+    "jee-advanced-mixed-practice-set-1",
+  ]);
+
   return engineeringExamRules.map((exam) => ({
     ...exam,
     sets: practiceSets.filter(
       (set) =>
         set.category === "engineering-entrance" &&
         set.examSlug === exam.examSlug &&
-        set.isLive !== false
+        set.isLive !== false &&
+        !hiddenLegacyEngineeringSlugs.has(set.slug)
     ),
   }));
 }
