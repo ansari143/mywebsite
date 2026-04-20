@@ -4087,6 +4087,74 @@ function createWbjeePracticeSet(setNumber: number): PracticeSet {
   };
 }
 
+function createJeeAdvancedMathQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkMathQuestions(setNumber)
+    .slice(0, 18)
+    .map((question, index) => ({
+      ...question,
+      id: `jee-advanced-set${setNumber}-math-${index + 1}`,
+    }));
+}
+
+function createJeeAdvancedPhysicsQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkPhysicsQuestions(setNumber)
+    .slice(0, 18)
+    .map((question, index) => ({
+      ...question,
+      id: `jee-advanced-set${setNumber}-phys-${index + 1}`,
+    }));
+}
+
+function createJeeAdvancedChemistryQuestions(setNumber: number): PracticeQuestion[] {
+  return createComedkChemistryQuestions(setNumber)
+    .slice(0, 18)
+    .map((question, index) => ({
+      ...question,
+      id: `jee-advanced-set${setNumber}-chem-${index + 1}`,
+    }));
+}
+
+function createJeeAdvancedPracticeSet(setNumber: number): PracticeSet {
+  const questions = [
+    ...createJeeAdvancedMathQuestions(setNumber),
+    ...createJeeAdvancedPhysicsQuestions(setNumber),
+    ...createJeeAdvancedChemistryQuestions(setNumber),
+  ];
+
+  const level = setNumber >= 4 ? "advanced" : "intermediate";
+
+  return {
+    id: `jee-advanced-mixed-set-${setNumber}`,
+    slug: `jee-advanced-practice-set-${setNumber}`,
+    category: "engineering-entrance",
+    title: `JEE Advanced Practice Set ${setNumber}`,
+    description:
+      "Original JEE Advanced-style full-length set with 54 unique questions: 18 Mathematics, 18 Physics, and 18 Chemistry across two papers.",
+    examType: "JEE Advanced",
+    examSlug: "jee-advanced",
+    examName: "JEE Advanced",
+    sectionLabel: "Full JEE Advanced Paper 1 + Paper 2 Mock",
+    level,
+    questionCount: questions.length,
+    estimatedMinutes: 360,
+    seoTitle: `JEE Advanced Practice Questions - Set ${setNumber} | Nishaglobal Education`,
+    seoDescription:
+      "Practice a full JEE Advanced-style set with 54 original questions covering Mathematics, Physics, and Chemistry with answers and explanations.",
+    keywords: [
+      `JEE Advanced practice set ${setNumber}`,
+      "JEE Advanced 54 questions",
+      "JEE Advanced full mock test",
+      "JEE Advanced mathematics physics chemistry",
+      "original JEE Advanced practice",
+    ],
+    intro:
+      "Use this full-length JEE Advanced set for comprehensive exam preparation, timing mastery across two papers, and high-difficulty problem solving.",
+    isOriginal: true,
+    isLive: true,
+    questions,
+  };
+}
+
 function createIeltsListeningQuestions(setNumber: number): PracticeQuestion[] {
   const scenarios = [
     { place: "student services desk", purpose: "ID collection", keyword: "passport photo", topic: "note completion" },
@@ -7606,6 +7674,11 @@ export const practiceSets: PracticeSet[] = [
   createWbjeePracticeSet(3),
   createWbjeePracticeSet(4),
   createWbjeePracticeSet(5),
+  createJeeAdvancedPracticeSet(1),
+  createJeeAdvancedPracticeSet(2),
+  createJeeAdvancedPracticeSet(3),
+  createJeeAdvancedPracticeSet(4),
+  createJeeAdvancedPracticeSet(5),
   {
     id: "wbjee-math-set-1",
     slug: "wbjee-mathematics-practice-set-1",

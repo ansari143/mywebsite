@@ -135,6 +135,25 @@ export default async function PracticeCategoryPage({ params }: Props) {
     },
   ];
 
+  const jeeAdvancedFaqs = [
+    {
+      q: "How many questions are in each JEE Advanced full-length mock here?",
+      a: "Each JEE Advanced full-length mock contains 54 original questions: 18 Mathematics, 18 Physics, and 18 Chemistry, reflecting the official two-paper format.",
+    },
+    {
+      q: "How should I attempt JEE Advanced Set 1 through Set 5?",
+      a: "Start with Set 1 and Set 2 for foundational depth and timing awareness, progress to Set 3 and Set 4 for full-difficulty simulation, and complete Set 5 as a high-pressure final revision checkpoint.",
+    },
+    {
+      q: "What is the recommended time allocation for JEE Advanced practice?",
+      a: "Allocate a full 6 hours (360 minutes) across two sessions: 3 hours for Paper 1 mathematics-physics, 3 hours for Paper 2 chemistry-mixed. You can also split by paper on different days.",
+    },
+    {
+      q: "Are these official JEE Advanced previous papers?",
+      a: "No. These are original, pattern-based practice tests for self-assessment and exam strategy. Always verify final exam patterns, syllabus updates, and official notices from JEE Advanced's official portal.",
+    },
+  ];
+
   const ieltsFaqs = [
     {
       q: "Which IELTS practice track should I choose first: Academic or General Training?",
@@ -900,6 +919,20 @@ export default async function PracticeCategoryPage({ params }: Props) {
                     <h3 className="text-xl font-bold text-slate-900">WBJEE quick FAQs</h3>
                     <div className="mt-4 space-y-3">
                       {wbjeeFaqs.map((faq) => (
+                        <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                          <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
+                          <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+                        </details>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {group.examSlug === "jee-advanced" && (
+                  <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+                    <h3 className="text-xl font-bold text-slate-900">JEE Advanced quick FAQs</h3>
+                    <div className="mt-4 space-y-3">
+                      {jeeAdvancedFaqs.map((faq) => (
                         <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                           <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
                           <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
