@@ -136,7 +136,7 @@ export default function FutureProofJobsPage() {
           guidance only. Always verify industry demand, salary data, and job availability from official labor market sources
           before making major career or education decisions.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 Â· Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-rose-100 bg-rose-50 p-6">

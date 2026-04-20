@@ -31,7 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/study-in-australia",
     "/study-in-europe",
     "/practice-tests",
-    "/result",
   ];
 
   const practiceRoutes = practiceCategories.map((cat) => `/practice-tests/${cat.slug}`);
@@ -46,11 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]);
 
   const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
-  const testRoutes = tests.flatMap((test) => [
-    `/tests/${test.slug}`,
-    `/tests/${test.slug}/start`,
-    `/tests/${test.slug}/quiz`,
-  ]);
+  const testRoutes = tests.map((test) => `/tests/${test.slug}`);
   const skillRoutes = skillsPages.map((skill) => `/skills/${skill.slug}`);
 
   return [...staticRoutes, ...resourceRoutes, ...countryRoutes, ...practiceRoutes, ...govSetRoutes, ...blogRoutes, ...testRoutes, ...skillRoutes].map((route) => ({

@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "What is the difference between a Software Engineer and a Data Scientist salary in the USA?",
-    a: "Both are high earners. Entry-level software engineers typically start between $90,000â€“$130,000 annually at major firms. Data scientists typically start between $85,000â€“$120,000. Senior roles and specialists at top tech companies can earn $200,000+ with stock compensation. Exact figures vary by company, location, and experience.",
+    a: "Both are high earners. Entry-level software engineers typically start between $90,000-$130,000 annually at major firms. Data scientists typically start between $85,000-$120,000. Senior roles and specialists at top tech companies can earn $200,000+ with stock compensation. Exact figures vary by company, location, and experience.",
   },
 ];
 
@@ -81,16 +81,16 @@ export default function TopCareersUSAPage() {
             </thead>
             <tbody>
               {[
-                ["Software Engineer", "$90,000â€“$130,000", "CS/engineering degree or strong portfolio", "Very high"],
-                ["Data Scientist", "$85,000â€“$120,000", "Statistics, ML, programming skills", "Very high"],
-                ["AI / ML Engineer", "$100,000â€“$140,000", "CS + ML experience", "Rapidly growing"],
-                ["Cybersecurity Specialist", "$80,000â€“$115,000", "Security certifications, CS background", "Very high"],
-                ["Healthcare Professional", "$60,000â€“$150,000+", "US licensing/certification required", "Consistently high"],
-                ["Financial Analyst", "$70,000â€“$100,000", "Finance, accounting, CFA path", "Stable-high"],
-                ["Product Manager", "$100,000â€“$130,000", "Experience + MBA often preferred", "High"],
-                ["Cloud Engineer", "$90,000â€“$125,000", "Cloud certs (AWS, Azure, GCP)", "High"],
-                ["Pilot / Aviation", "$60,000â€“$200,000+", "FAA license, flight hours required", "Growing"],
-                ["Digital Marketing Strategist", "$55,000â€“$90,000", "Marketing + analytics skills", "Stable"],
+                ["Software Engineer", "$90,000-$130,000", "CS/engineering degree or strong portfolio", "Very high"],
+                ["Data Scientist", "$85,000-$120,000", "Statistics, ML, programming skills", "Very high"],
+                ["AI / ML Engineer", "$100,000-$140,000", "CS + ML experience", "Rapidly growing"],
+                ["Cybersecurity Specialist", "$80,000-$115,000", "Security certifications, CS background", "Very high"],
+                ["Healthcare Professional", "$60,000-$150,000+", "US licensing/certification required", "Consistently high"],
+                ["Financial Analyst", "$70,000-$100,000", "Finance, accounting, CFA path", "Stable-high"],
+                ["Product Manager", "$100,000-$130,000", "Experience + MBA often preferred", "High"],
+                ["Cloud Engineer", "$90,000-$125,000", "Cloud certs (AWS, Azure, GCP)", "High"],
+                ["Pilot / Aviation", "$60,000-$200,000+", "FAA license, flight hours required", "Growing"],
+                ["Digital Marketing Strategist", "$55,000-$90,000", "Marketing + analytics skills", "Stable"],
               ].map(([career, salary, qual, trend]) => (
                 <tr key={career} className="border-b border-slate-200">
                   <td className="border-r border-slate-200 px-4 py-3 font-medium text-slate-800">{career}</td>
@@ -138,7 +138,7 @@ export default function TopCareersUSAPage() {
           of April 2026. Always verify current figures from official US Bureau of Labor Statistics and employer sources before
           making career or study decisions.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 Â· Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-blue-100 bg-blue-50 p-6">

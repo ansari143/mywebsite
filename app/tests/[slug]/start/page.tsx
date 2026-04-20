@@ -2,6 +2,29 @@ import Link from "next/link";
 import { getTestBySlug } from "@/data/tests";
 import { notFound } from "next/navigation";
 
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  const test = getTestBySlug(slug);
+
+  if (!test) {
+    return {
+      title: "Test Not Found | Nishaglobal Education",
+      description: "The requested test could not be found.",
+      robots: "noindex",
+    };
+  }
+
+  return {
+    title: `Start ${test.title} | Nishaglobal Education`,
+    description: `Begin ${test.title} and get instant score-based guidance with practical next steps.`,
+    robots: "noindex,follow",
+  };
+}
+
 export default async function StartPage({
   params,
 }: {

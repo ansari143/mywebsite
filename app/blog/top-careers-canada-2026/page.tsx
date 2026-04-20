@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "Is Canada a good destination for IT and software careers?",
-    a: "Yes. Canada has a strong and growing technology sector, especially in Toronto, Vancouver, and Ottawa. Major tech companies have Canadian offices for tax and talent reasons. Canada also has a Tech Talent Strategy that makes it easier for technology workers to get work permits. Entry-level software developer roles typically pay CAD 65,000â€“95,000.",
+    a: "Yes. Canada has a strong and growing technology sector, especially in Toronto, Vancouver, and Ottawa. Major tech companies have Canadian offices for tax and talent reasons. Canada also has a Tech Talent Strategy that makes it easier for technology workers to get work permits. Entry-level software developer roles typically pay CAD 65,000-95,000.",
   },
   {
     q: "How does the healthcare career pathway work for international students in Canada?",
@@ -80,14 +80,14 @@ export default function TopCareersCanadaPage() {
             </thead>
             <tbody>
               {[
-                ["Software Development / IT", "$70,000â€“$110,000", "ON, BC, QC", "Very high"],
-                ["Data Analytics and AI", "$75,000â€“$115,000", "ON, BC", "Very high"],
-                ["Nursing and Healthcare Support", "$55,000â€“$90,000", "All provinces", "Consistently high"],
-                ["Business Analytics and Finance", "$60,000â€“$95,000", "ON, AB", "High"],
-                ["Supply Chain and Logistics", "$55,000â€“$85,000", "ON, BC, AB", "High"],
-                ["Construction and Skilled Trades", "$60,000â€“$100,000+", "AB, BC, SK", "High"],
-                ["Project Coordination", "$55,000â€“$85,000", "ON, BC", "Stable-high"],
-                ["Hospitality Management", "$45,000â€“$70,000", "BC, ON, QC", "Stable"],
+                ["Software Development / IT", "$70,000-$110,000", "ON, BC, QC", "Very high"],
+                ["Data Analytics and AI", "$75,000-$115,000", "ON, BC", "Very high"],
+                ["Nursing and Healthcare Support", "$55,000-$90,000", "All provinces", "Consistently high"],
+                ["Business Analytics and Finance", "$60,000-$95,000", "ON, AB", "High"],
+                ["Supply Chain and Logistics", "$55,000-$85,000", "ON, BC, AB", "High"],
+                ["Construction and Skilled Trades", "$60,000-$100,000+", "AB, BC, SK", "High"],
+                ["Project Coordination", "$55,000-$85,000", "ON, BC", "Stable-high"],
+                ["Hospitality Management", "$45,000-$70,000", "BC, ON, QC", "Stable"],
               ].map(([career, salary, province, trend]) => (
                 <tr key={career} className="border-b border-slate-200">
                   <td className="border-r border-slate-200 px-4 py-3 font-medium text-slate-800">{career}</td>
@@ -136,7 +136,7 @@ export default function TopCareersCanadaPage() {
           educational guidance only. Always verify immigration and work permit rules from official IRCC (Immigration, Refugees
           and Citizenship Canada) sources before making any application decisions.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 Â· Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-emerald-100 bg-emerald-50 p-6">

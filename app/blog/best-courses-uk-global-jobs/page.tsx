@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: "How long is a master's degree in the UK?",
-    a: "Most UK master's programs are one year full-time, compared to two years in the US or Canada. This makes them more cost-effective for the total investment of fees plus living costs. For MBA programs, 12â€“18 months is typical. Some specialized programs can run up to 2 years.",
+    a: "Most UK master's programs are one year full-time, compared to two years in the US or Canada. This makes them more cost-effective for the total investment of fees plus living costs. For MBA programs, 12-18 months is typical. Some specialized programs can run up to 2 years.",
   },
   {
     q: "What work rights do international students have in the UK after graduation?",
@@ -135,7 +135,7 @@ export default function BestCoursesUKPage() {
           annually. This article is for educational guidance only. Always verify current requirements from official UKVI
           (UK Visas and Immigration), UCAS, and individual university sources before making any application decisions.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 Â· Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-purple-100 bg-purple-50 p-6">

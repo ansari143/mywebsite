@@ -32,6 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: `Start ${set.title}`,
       description: `Begin your ${set.examType} practice test with ${set.questionCount} questions.`,
+      robots: "noindex,follow",
     };
   }
 
