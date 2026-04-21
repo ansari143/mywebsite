@@ -3916,12 +3916,937 @@ function createComedkChemistryQuestions(setNumber: number): PracticeQuestion[] {
   return questions;
 }
 
-function createComedkPracticeSet(setNumber: number): PracticeSet {
-  const questions = [
-    ...createComedkMathQuestions(setNumber),
-    ...createComedkPhysicsQuestions(setNumber),
-    ...createComedkChemistryQuestions(setNumber),
+function createComedkMathQuestions2026Set1(setNumber: number): PracticeQuestion[] {
+  const applyProgression = (questions: PracticeQuestion[]) =>
+    questions.map((question, index) => ({
+      ...question,
+      difficulty:
+        setNumber === 1
+          ? question.difficulty
+          : setNumber === 2
+          ? index % 6 === 0
+            ? "easy"
+            : "medium"
+          : setNumber === 3
+          ? index < 12
+            ? "easy"
+            : index < 42
+            ? "medium"
+            : "hard"
+          : setNumber === 4
+          ? index < 18
+            ? "medium"
+            : "hard"
+          : index < 10
+          ? "medium"
+          : "hard",
+    }));
+
+  const weightedTopics = [
+    ...Array(12).fill("Algebra"),
+    ...Array(9).fill("Differential Calculus"),
+    ...Array(9).fill("Integral Calculus"),
+    ...Array(8).fill("Coordinate Geometry"),
+    ...Array(7).fill("Trigonometry"),
+    ...Array(6).fill("Vectors and 3D Geometry"),
+    ...Array(5).fill("Matrices & Determinants"),
+    ...Array(4).fill("Probability"),
   ];
+
+  const topicCounters: Record<string, number> = {};
+  const isToughSet = setNumber >= 4;
+
+  const questions = weightedTopics.map((topic, index) => {
+    const round = topicCounters[topic] ?? 0;
+    topicCounters[topic] = round + 1;
+    const seed = 9100 + setNumber * 100 + index;
+
+    if (topic === "Algebra") {
+      if (isToughSet) {
+        const a = round + 2;
+        const b = round + 1;
+        const c = setNumber + 5;
+        const x = round + 4;
+        const rhs = a * (x - b) + c;
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-math2026-${index + 1}`,
+          round % 3 === 0
+            ? `In a linear relation transformed by shift-and-scale, solve for x: ${a}(x - ${b}) + ${c} = ${rhs}.`
+            : round % 3 === 1
+            ? `A value is shifted by ${b}, scaled by ${a}, then offset by ${c} to give ${rhs}. Find x from ${a}(x - ${b}) + ${c} = ${rhs}.`
+            : `Reverse the transformation and solve: ${a}(x - ${b}) + ${c} = ${rhs}.`,
+          `${x}`,
+          [`${x + 1}`, `${x - 1}`, `${rhs - c}`],
+          round % 3 === 0
+            ? "Use inverse operations in order: remove constant shift, undo scaling, then reverse variable shift."
+            : round % 3 === 1
+            ? "Undo the operations in reverse order to isolate x."
+            : "Treat the bracketed expression as one variable first, then back-substitute.",
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      const a = round + 2;
+      const x = round + 3;
+      const b = setNumber + 5;
+      const rhs = a * x + b;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-math2026-${index + 1}`,
+        `Solve for x: ${a}x + ${b} = ${rhs}.`,
+        `${x}`,
+        [`${x + 1}`, `${x - 1}`, `${rhs - b}`],
+        `Subtract ${b} and divide by ${a}.`,
+        topic,
+        round >= 4 ? "medium" : "easy",
+        seed
+      );
+    }
+
+    if (topic === "Differential Calculus") {
+      if (isToughSet) {
+        const p = round + 3;
+        const a = round + 2;
+        const b = round + 1;
+        const xValue = 2;
+        const derivative = a * p * xValue ** (p - 1) + b;
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-math2026-${index + 1}`,
+          round % 3 === 0
+            ? `Using linearity of derivatives and power rule, find d/dx of (${a}x^${p} + ${b}x) at x = ${xValue}.`
+            : round % 3 === 1
+            ? `For y = ${a}x^${p} + ${b}x, compute dy/dx at x = ${xValue}.`
+            : `Differentiate and then evaluate at x = ${xValue}: y = ${a}x^${p} + ${b}x.`,
+          `${derivative}`,
+          [`${derivative + 2}`, `${a * xValue ** p + b * xValue}`, `${derivative - 2}`],
+          round % 3 === 0
+            ? "Apply derivative term-wise first, then substitute the point value."
+            : round % 3 === 1
+            ? "Use power rule on each term, then evaluate at the given x."
+            : "Compute symbolic derivative carefully and plug in the numeric point at the end.",
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      const p = round + 2;
+      const xValue = 2;
+      const derivative = p * xValue ** (p - 1);
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-math2026-${index + 1}`,
+        `Find d/dx of x^${p} at x = ${xValue}.`,
+        `${derivative}`,
+        [`${xValue ** p}`, `${p + xValue}`, `${p * xValue}`],
+        `For x^n, derivative is n*x^(n-1).`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Integral Calculus") {
+      if (isToughSet) {
+        const k = round + 2;
+        const m = round + 1;
+        const upper = 3;
+        const value = (k * upper ** 2) / 2 + m * upper;
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-math2026-${index + 1}`,
+          round % 3 === 0
+            ? `Using area accumulation and linearity of integration, evaluate integral from 0 to ${upper} of (${k}x + ${m}) dx.`
+            : round % 3 === 1
+            ? `Evaluate the definite integral from 0 to ${upper}: (${k}x + ${m}) dx.`
+            : `For f(x) = ${k}x + ${m}, find total accumulation over [0, ${upper}].`,
+          `${formatValue(value)}`,
+          [`${formatValue(value + 2)}`, `${formatValue(k * upper + m)}`, `${formatValue(value - 2)}`],
+          round % 3 === 0
+            ? "Integrate each term separately, form antiderivative, then apply upper-lower limits."
+            : round % 3 === 1
+            ? "Use linearity, integrate term-wise, and apply limits carefully."
+            : "Find antiderivative once, then evaluate upper bound minus lower bound.",
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      const k = round + 2;
+      const upper = 2;
+      const value = k * ((upper ** 2) / 2);
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-math2026-${index + 1}`,
+        `Evaluate integral from 0 to ${upper} of ${k}x dx.`,
+        `${formatValue(value)}`,
+        [`${formatValue(value + k)}`, `${formatValue(k * upper)}`, `${formatValue(value - k)}`],
+        `Integral of kx is (k/2)x^2. Apply limits.`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Coordinate Geometry") {
+      const x1 = round + 1;
+      const y1 = setNumber + round + 2;
+      const x2 = x1 + 3;
+      const slope = round + 2;
+      const y2 = y1 + slope * (x2 - x1);
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-math2026-${index + 1}`,
+        `Find the slope of the line through (${x1}, ${y1}) and (${x2}, ${y2}).`,
+        `${slope}`,
+        [`${slope + 1}`, `${slope - 1}`, `${y2 - y1}`],
+        `Slope m = (y2 - y1)/(x2 - x1).`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Trigonometry") {
+      const entries = [
+        { q: "sin 30 deg", a: "1/2", d: ["0", "1", "sqrt(3)/2"] as [string, string, string] },
+        { q: "cos 60 deg", a: "1/2", d: ["0", "1", "sqrt(3)/2"] as [string, string, string] },
+        { q: "tan 45 deg", a: "1", d: ["1/2", "sqrt(3)", "0"] as [string, string, string] },
+        { q: "sin 90 deg", a: "1", d: ["0", "1/2", "sqrt(3)/2"] as [string, string, string] },
+        { q: "cos 0 deg", a: "1", d: ["0", "1/2", "sqrt(3)/2"] as [string, string, string] },
+      ] as const;
+      const entry = entries[round % entries.length];
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-math2026-${index + 1}`,
+        `What is the value of ${entry.q}?`,
+        entry.a,
+        entry.d,
+        `Use standard trigonometric values.`,
+        topic,
+        "easy",
+        seed
+      );
+    }
+
+    if (topic === "Vectors and 3D Geometry") {
+      const a = round + 1;
+      const b = round + 2;
+      const magnitudeSquared = a * a + b * b;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-math2026-${index + 1}`,
+        `Find |v|^2 for vector v = (${a}, ${b}, 0).`,
+        `${magnitudeSquared}`,
+        [`${a + b}`, `${magnitudeSquared + 1}`, `${a * b}`],
+        `|v|^2 = a^2 + b^2 + 0^2.`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Matrices & Determinants") {
+      const a = round + 2;
+      const b = setNumber + 1;
+      const c = round + 1;
+      const d = round + 4;
+      const det = a * d - b * c;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-math2026-${index + 1}`,
+        `Find determinant of [[${a}, ${b}], [${c}, ${d}]].`,
+        `${det}`,
+        [`${a * d + b * c}`, `${det + 2}`, `${det - 2}`],
+        `For 2x2 matrix, determinant = ad - bc.`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (isToughSet) {
+      const red = 4 + (round % 4);
+      const blue = 5 + (round % 3);
+      const total = red + blue;
+      const numerator = red * (red - 1);
+      const denominator = total * (total - 1);
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-math2026-${index + 1}`,
+        round % 3 === 0
+          ? `Without replacement (dependent events), a bag has ${red} red and ${blue} blue balls. Probability that both drawn balls are red?`
+          : round % 3 === 1
+          ? `Two balls are drawn successively without replacement from ${red} red and ${blue} blue balls. Find P(both red).`
+          : `From a bag with ${red} red and ${blue} blue balls, two picks are made without replacement. What is the probability of two reds?`,
+        `${numerator}/${denominator}`,
+        [`${red}/${total}`, `${red * blue}/${denominator}`, `${numerator}/${total}`],
+        round % 3 === 0
+          ? "Concept link: dependence changes denominator after first draw. Compute product of successive conditional probabilities."
+          : round % 3 === 1
+          ? "Use P(R1 and R2) = P(R1) * P(R2|R1)."
+          : "Adjust counts after the first favorable draw, then multiply stage probabilities.",
+        topic,
+        "hard",
+        seed
+      );
+    }
+
+    const total = 10 + round;
+    const favorable = 3 + (round % 4);
+    return createGeneratedQuestion(
+      `comedk-set${setNumber}-math2026-${index + 1}`,
+      `A bag has ${favorable} red and ${total - favorable} blue balls. Probability of red is?`,
+      `${favorable}/${total}`,
+      [`${total - favorable}/${total}`, `${favorable}/${total - 1}`, `${favorable + 1}/${total}`],
+      `Probability = favorable outcomes / total outcomes.`,
+      topic,
+      "easy",
+      seed
+    );
+  });
+
+  return applyProgression(questions);
+}
+
+function createComedkPhysicsQuestions2026Set1(setNumber: number): PracticeQuestion[] {
+  const applyProgression = (questions: PracticeQuestion[]) =>
+    questions.map((question, index) => ({
+      ...question,
+      difficulty:
+        setNumber === 1
+          ? question.difficulty
+          : setNumber === 2
+          ? index % 6 === 0
+            ? "easy"
+            : "medium"
+          : setNumber === 3
+          ? index < 12
+            ? "easy"
+            : index < 42
+            ? "medium"
+            : "hard"
+          : setNumber === 4
+          ? index < 18
+            ? "medium"
+            : "hard"
+          : index < 10
+          ? "medium"
+          : "hard",
+    }));
+
+  const weightedTopics = [
+    ...Array(6).fill("Kinematics"),
+    ...Array(6).fill("Laws of Motion"),
+    ...Array(6).fill("Work, Energy & Power"),
+    ...Array(5).fill("Rotational Motion"),
+    ...Array(4).fill("Gravitation"),
+    ...Array(5).fill("Thermodynamics"),
+    ...Array(4).fill("Oscillations & Waves"),
+    ...Array(5).fill("Electrostatics"),
+    ...Array(5).fill("Current Electricity"),
+    ...Array(4).fill("Magnetic Effects"),
+    ...Array(4).fill("Electromagnetic Induction"),
+    ...Array(3).fill("Optics"),
+    ...Array(3).fill("Modern Physics"),
+  ];
+
+  const topicCounters: Record<string, number> = {};
+  const isToughSet = setNumber >= 4;
+
+  const questions = weightedTopics.map((topic, index) => {
+    const round = topicCounters[topic] ?? 0;
+    topicCounters[topic] = round + 1;
+    const seed = 10100 + setNumber * 100 + index;
+
+    if (topic === "Kinematics") {
+      if (isToughSet) {
+        const u = round + 2;
+        const a = round + 3;
+        const t = 5;
+        const s = u * t + 0.5 * a * t * t;
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-phys2026-${index + 1}`,
+          round % 3 === 0
+            ? `For uniformly accelerated motion, a body starts with ${u} m/s and acceleration ${a} m/s^2 for ${t} s. Find displacement.`
+            : round % 3 === 1
+            ? `A particle moves with initial speed ${u} m/s and constant acceleration ${a} m/s^2 for ${t} s. Determine displacement.`
+            : `Using constant-acceleration kinematics, calculate distance traveled in ${t} s for u = ${u} m/s and a = ${a} m/s^2.`,
+          `${formatValue(s)} m`,
+          [`${u * t} m`, `${formatValue(s + 5)} m`, `${formatValue(s - 5)} m`],
+          round % 3 === 0
+            ? "Concept link: displacement under constant acceleration combines initial-motion term and acceleration term."
+            : round % 3 === 1
+            ? "Use s = ut + (1/2)at^2 for constant acceleration."
+            : "Break motion into uniform and accelerated components, then add.",
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      const u = round + 2;
+      const a = round + 3;
+      const t = 4;
+      const v = u + a * t;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        `A body has initial velocity ${u} m/s and acceleration ${a} m/s^2 for ${t} s. Find final velocity.`,
+        `${v} m/s`,
+        [`${v - a} m/s`, `${v + a} m/s`, `${a * t} m/s`],
+        `Use v = u + at.`,
+        topic,
+        "easy",
+        seed
+      );
+    }
+
+    if (topic === "Laws of Motion") {
+      const m = round + 2;
+      const a = round + 4;
+      const f = m * a;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        `Find force required to accelerate ${m} kg mass at ${a} m/s^2.`,
+        `${f} N`,
+        [`${f - m} N`, `${f + m} N`, `${a} N`],
+        `Use F = ma.`,
+        topic,
+        "easy",
+        seed
+      );
+    }
+
+    if (topic === "Work, Energy & Power") {
+      if (isToughSet) {
+        const m = round + 2;
+        const v = round + 4;
+        const t = 2 + (round % 2);
+        const ke = 0.5 * m * v * v;
+        const p = ke / t;
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-phys2026-${index + 1}`,
+          round % 3 === 0
+            ? `Using work-energy theorem, a ${m} kg body reaches speed ${v} m/s in ${t} s from rest. Find average power delivered.`
+            : round % 3 === 1
+            ? `A ${m} kg object accelerates from rest to ${v} m/s in ${t} s. Compute average power from energy gain.`
+            : `Mass ${m} kg reaches ${v} m/s in ${t} s from rest. Using energy change per time, find average power.`,
+          `${formatValue(p)} W`,
+          [`${formatValue(ke)} W`, `${formatValue(p + 5)} W`, `${formatValue(p - 5)} W`],
+          round % 3 === 0
+            ? "Concept link: net work equals change in kinetic energy; divide by time for average power."
+            : round % 3 === 1
+            ? "Find kinetic-energy change first, then divide by time."
+            : "Average power is rate of energy transfer: Pavg = deltaE/t.",
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      const w = 120 + round * 20;
+      const t = 4 + (round % 3);
+      const p = w / t;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        `${w} J work is done in ${t} s. Find power.`,
+        `${formatValue(p)} W`,
+        [`${formatValue(p + 5)} W`, `${formatValue(w - t)} W`, `${formatValue(t)} W`],
+        `Power P = W/t.`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Rotational Motion") {
+      if (isToughSet) {
+        const i = round + 2;
+        const tau = 12 + round * 2;
+        const t = 4;
+        const alpha = tau / i;
+        const omega = alpha * t;
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-phys2026-${index + 1}`,
+          `From rotational dynamics, a wheel with moment of inertia ${i} kg m^2 has torque ${tau} N m for ${t} s from rest. Find angular speed reached.`,
+          `${formatValue(omega)} rad/s`,
+          [`${formatValue(alpha)} rad/s`, `${formatValue(omega + 2)} rad/s`, `${formatValue(omega - 2)} rad/s`],
+          `Concept link: torque sets angular acceleration, then time integration gives angular speed.`,
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      const i = round + 2;
+      const alpha = round + 3;
+      const tau = i * alpha;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        `A body has moment of inertia ${i} kg m^2 and angular acceleration ${alpha} rad/s^2. Find torque.`,
+        `${tau} N m`,
+        [`${tau + 2} N m`, `${tau - 2} N m`, `${alpha} N m`],
+        `Torque tau = I*alpha.`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Gravitation") {
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        "If distance between two masses is doubled, gravitational force becomes?",
+        "one-fourth",
+        ["double", "half", "unchanged"],
+        "From inverse square law, F is proportional to 1/r^2.",
+        topic,
+        "easy",
+        seed
+      );
+    }
+
+    if (topic === "Thermodynamics") {
+      const qh = 400 + round * 50;
+      const qc = 100 + round * 20;
+      const eta = ((qh - qc) / qh) * 100;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        `A heat engine absorbs ${qh} J and rejects ${qc} J. Find efficiency percentage.`,
+        `${formatValue(eta)}%`,
+        [`${formatValue(eta + 10)}%`, `${formatValue((qc / qh) * 100)}%`, `${formatValue(eta - 10)}%`],
+        `Efficiency = (Qh - Qc)/Qh * 100.`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Oscillations & Waves") {
+      const f = 40 + round * 10;
+      const lambda = 2 + round;
+      const v = f * lambda;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        `A wave has frequency ${f} Hz and wavelength ${lambda} m. Find wave speed.`,
+        `${v} m/s`,
+        [`${v - f} m/s`, `${v + f} m/s`, `${f + lambda} m/s`],
+        `Wave speed v = f*lambda.`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Electrostatics") {
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        "If separation between two charges becomes 3 times, electrostatic force becomes?",
+        "one-ninth",
+        ["one-third", "three times", "unchanged"],
+        "By Coulomb law, F is proportional to 1/r^2.",
+        topic,
+        "easy",
+        seed
+      );
+    }
+
+    if (topic === "Current Electricity") {
+      if (isToughSet) {
+        const r1 = round + 2;
+        const r2 = round + 4;
+        const v = 12 + round;
+        const i = v / (r1 + r2);
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-phys2026-${index + 1}`,
+          round % 3 === 0
+            ? `Applying equivalent resistance in series, two resistors ${r1} ohm and ${r2} ohm are across ${v} V. Find circuit current.`
+            : round % 3 === 1
+            ? `In a series circuit with resistors ${r1} ohm and ${r2} ohm connected to ${v} V, determine the current.`
+            : `First reduce the series pair (${r1} ohm, ${r2} ohm), then compute current for source ${v} V.`,
+          `${formatValue(i)} A`,
+          [`${formatValue(v / r1)} A`, `${formatValue(i + 1)} A`, `${formatValue(i - 1)} A`],
+          round % 3 === 0
+            ? "Concept link: reduce circuit first to one equivalent resistor, then apply Ohm law."
+            : round % 3 === 1
+            ? "Add series resistances, then use I = V/R."
+            : "Series path means same current throughout; obtain current from total resistance.",
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      const i = round + 2;
+      const r = round + 3;
+      const v = i * r;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        `Find potential difference across ${r} ohm resistor carrying ${i} A current.`,
+        `${v} V`,
+        [`${v + r} V`, `${v - r} V`, `${i + r} V`],
+        `Use Ohm law: V = IR.`,
+        topic,
+        "easy",
+        seed
+      );
+    }
+
+    if (topic === "Magnetic Effects") {
+      const q = round + 1;
+      const v = round + 2;
+      const b = round + 3;
+      const f = q * v * b;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        `For charge ${q} C moving perpendicular to field ${b} T at ${v} m/s, find magnetic force.`,
+        `${f} N`,
+        [`${f + b} N`, `${f - b} N`, `${q + v + b} N`],
+        `F = qvB for perpendicular motion.`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Electromagnetic Induction") {
+      if (isToughSet) {
+        const n = 10 + round;
+        const dPhi = 3 + round;
+        const dt = 0.5;
+        const r = round + 2;
+        const emf = n * dPhi / dt;
+        const current = emf / r;
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-phys2026-${index + 1}`,
+          round % 3 === 0
+            ? `Using Faraday-Lenz concept and circuit response, flux changes by ${dPhi} Wb in ${dt} s through ${n} turns connected to ${r} ohm. Find induced current.`
+            : round % 3 === 1
+            ? `A ${n}-turn coil sees flux change ${dPhi} Wb in ${dt} s and is connected to ${r} ohm. Determine induced current.`
+            : `For a ${n}-turn loop, magnetic flux changes by ${dPhi} Wb in ${dt} s and loop resistance is ${r} ohm. Find induced current magnitude.`,
+          `${formatValue(current)} A`,
+          [`${formatValue(emf)} A`, `${formatValue(current + 1)} A`, `${formatValue(current - 1)} A`],
+          round % 3 === 0
+            ? "Concept link: changing flux induces emf, and emf drives current through external resistance."
+            : round % 3 === 1
+            ? "Compute emf from Faraday law, then current from Ohm law."
+            : "Induction creates emf; resistance controls the resulting current.",
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      const n = 10 + round;
+      const dPhi = 2 + round;
+      const dt = 1;
+      const emf = n * dPhi / dt;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        `Flux changes by ${dPhi} Wb in ${dt} s through a ${n}-turn coil. Magnitude of induced emf?`,
+        `${emf} V`,
+        [`${emf + 2} V`, `${emf - 2} V`, `${dPhi} V`],
+        `By Faraday law, emf = N*(dPhi/dt).`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Optics") {
+      const f = round + 1;
+      const p = 1 / f;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-phys2026-${index + 1}`,
+        `A lens has focal length ${f} m. Find its power.`,
+        `${formatValue(p)} D`,
+        [`${f} D`, `${formatValue(p + 1)} D`, `${formatValue(1 / (f + 1))} D`],
+        `Power P = 1/f (with f in meters).`,
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    const f1 = 4 + round;
+    const f2 = 2 * f1;
+    return createGeneratedQuestion(
+      `comedk-set${setNumber}-phys2026-${index + 1}`,
+      `Frequency of light doubles from ${f1} Hz to ${f2} Hz. Photon energy becomes?`,
+      "double",
+      ["half", "one-fourth", "unchanged"],
+      "Photon energy E = hf, so E is directly proportional to frequency.",
+      topic,
+      "easy",
+      seed
+    );
+  });
+
+  return applyProgression(questions);
+}
+
+function createComedkChemistryQuestions2026Set1(setNumber: number): PracticeQuestion[] {
+  const applyProgression = (questions: PracticeQuestion[]) =>
+    questions.map((question, index) => ({
+      ...question,
+      difficulty:
+        setNumber === 1
+          ? question.difficulty
+          : setNumber === 2
+          ? index % 6 === 0
+            ? "easy"
+            : "medium"
+          : setNumber === 3
+          ? index < 12
+            ? "easy"
+            : index < 42
+            ? "medium"
+            : "hard"
+          : setNumber === 4
+          ? index < 18
+            ? "medium"
+            : "hard"
+          : index < 10
+          ? "medium"
+          : "hard",
+    }));
+
+  const weightedTopics = [
+    ...Array(18).fill("Organic Chemistry"),
+    ...Array(6).fill("Solid State and Solutions"),
+    ...Array(6).fill("Chemical Kinetics"),
+    ...Array(6).fill("Chemical Bonding"),
+    ...Array(4).fill("Nuclear Chemistry"),
+    ...Array(5).fill("Coordination Chemistry"),
+    ...Array(5).fill("Polymers"),
+    ...Array(5).fill("Environmental Chemistry"),
+    ...Array(5).fill("Periodic Table"),
+  ];
+
+  const topicCounters: Record<string, number> = {};
+  const isToughSet = setNumber >= 4;
+
+  const questions = weightedTopics.map((topic, index) => {
+    const round = topicCounters[topic] ?? 0;
+    topicCounters[topic] = round + 1;
+    const seed = 11100 + setNumber * 100 + index;
+
+    if (topic === "Organic Chemistry") {
+      const reagents = [
+        {
+          q: "Ethanol on oxidation gives which compound first?",
+          a: "Ethanal",
+          d: ["Methanal", "Acetone", "Ethane"] as [string, string, string],
+        },
+        {
+          q: "Which functional group is present in acetic acid?",
+          a: "Carboxyl",
+          d: ["Hydroxyl", "Aldehyde", "Amide"] as [string, string, string],
+        },
+      ] as const;
+      const entry = reagents[round % reagents.length];
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-chem2026-${index + 1}`,
+        entry.q,
+        entry.a,
+        entry.d,
+        `This follows basic organic reaction/functional group concepts.`,
+        topic,
+        round >= 4 ? "medium" : "easy",
+        seed
+      );
+    }
+
+    if (topic === "Solid State and Solutions") {
+      if (isToughSet) {
+        const m1 = round + 2;
+        const v1 = 100;
+        const m2 = round + 1;
+        const v2 = (m1 * v1) / m2;
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-chem2026-${index + 1}`,
+          round % 3 === 0
+            ? `Using conservation of solute during dilution, ${v1} mL of ${m1} M solution is diluted to ${m2} M. Find final volume.`
+            : round % 3 === 1
+            ? `A ${m1} M solution of volume ${v1} mL is diluted until concentration becomes ${m2} M. Calculate final volume.`
+            : `Apply dilution principle to ${v1} mL of ${m1} M solution converted to ${m2} M. What is final volume?`,
+          `${formatValue(v2)} mL`,
+          [`${formatValue(v2 + 20)} mL`, `${formatValue(v2 - 20)} mL`, `${formatValue(m1 + m2)} mL`],
+          round % 3 === 0
+            ? "Concept link: moles of solute remain unchanged before and after dilution."
+            : round % 3 === 1
+            ? "Use M1V1 = M2V2 since solute moles are conserved."
+            : "Dilution changes concentration by changing volume, not solute amount.",
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      const moles = round + 1;
+      const volumeL = 1;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-chem2026-${index + 1}`,
+        `A solution has ${moles} mole solute in ${volumeL} L. What is molarity?`,
+        `${moles} M`,
+        [`${moles + 1} M`, `${moles - 1} M`, `${moles}/${volumeL + 1} M`],
+        `Molarity = moles of solute / volume in liters.`,
+        topic,
+        "easy",
+        seed
+      );
+    }
+
+    if (topic === "Chemical Kinetics") {
+      if (isToughSet) {
+        const halfLife = round + 2;
+        const intervals = 2;
+        const fraction = `1/${2 ** intervals}`;
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-chem2026-${index + 1}`,
+          round % 3 === 0
+            ? `For first-order kinetics (constant half-life), half-life is ${halfLife} min. What fraction remains after ${halfLife * intervals} min?`
+            : round % 3 === 1
+            ? `A first-order reaction has half-life ${halfLife} min. After ${halfLife * intervals} min, what fraction remains?`
+            : `With first-order decay and half-life ${halfLife} min, determine fraction left after ${intervals} half-life intervals.`,
+          fraction,
+          ["1/2", "1/3", "1/8"],
+          round % 3 === 0
+            ? "Concept link: first-order decay proceeds geometrically by half-life intervals."
+            : round % 3 === 1
+            ? "After n half-lives, remaining fraction is (1/2)^n."
+            : "Count half-life intervals first, then apply repeated halving.",
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-chem2026-${index + 1}`,
+        "For a first-order reaction, if concentration doubles, rate becomes?",
+        "double",
+        ["half", "four times", "unchanged"],
+        "For first-order, rate is directly proportional to concentration.",
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Chemical Bonding") {
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-chem2026-${index + 1}`,
+        "What is the molecular shape of NH3?",
+        "Trigonal pyramidal",
+        ["Linear", "Trigonal planar", "Tetrahedral"],
+        "By VSEPR theory, NH3 has one lone pair and trigonal pyramidal geometry.",
+        topic,
+        "easy",
+        seed
+      );
+    }
+
+    if (topic === "Nuclear Chemistry") {
+      if (isToughSet) {
+        const initial = 160 + round * 20;
+        const remaining = initial / 4;
+        return createGeneratedQuestion(
+          `comedk-set${setNumber}-chem2026-${index + 1}`,
+          round % 3 === 0
+            ? `By exponential radioactive decay concept, a sample starts at ${initial} g. After two half-lives, mass becomes?`
+            : round % 3 === 1
+            ? `An isotope sample initially has mass ${initial} g. Find remaining mass after two half-lives.`
+            : `Radioactive material starts at ${initial} g and decays through two half-life intervals. What mass remains?`,
+          `${remaining} g`,
+          [`${initial / 2} g`, `${initial} g`, `${initial / 8} g`],
+          round % 3 === 0
+            ? "Concept link: each half-life halves the amount; two intervals give one-fourth."
+            : round % 3 === 1
+            ? "Apply repeated halving: remaining = initial*(1/2)^2."
+            : "Use exponential form for half-life decay with n = 2 intervals.",
+          topic,
+          "hard",
+          seed
+        );
+      }
+
+      const initial = 80 + round * 10;
+      const remaining = initial / 2;
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-chem2026-${index + 1}`,
+        `A radioactive sample starts at ${initial} g. After one half-life, mass becomes?`,
+        `${remaining} g`,
+        [`${initial} g`, `${remaining / 2} g`, `${initial - 10} g`],
+        `After one half-life, amount reduces to half.`,
+        topic,
+        "easy",
+        seed
+      );
+    }
+
+    if (topic === "Coordination Chemistry") {
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-chem2026-${index + 1}`,
+        "What is coordination number of Co in [Co(NH3)6]3+?",
+        "6",
+        ["3", "4", "8"],
+        "Coordination number equals number of donor atoms attached to central metal.",
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Polymers") {
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-chem2026-${index + 1}`,
+        "Nylon-6,6 is formed by condensation polymerization of which pair?",
+        "Hexamethylenediamine and adipic acid",
+        ["Ethene and styrene", "Urea and formaldehyde", "Phenol and acetone"],
+        "Nylon-6,6 is produced from diamine and dicarboxylic acid monomers.",
+        topic,
+        "medium",
+        seed
+      );
+    }
+
+    if (topic === "Environmental Chemistry") {
+      return createGeneratedQuestion(
+        `comedk-set${setNumber}-chem2026-${index + 1}`,
+        "Acid rain is mainly caused by oxides of which elements?",
+        "Sulfur and nitrogen",
+        ["Carbon and hydrogen", "Sodium and chlorine", "Calcium and magnesium"],
+        "SOx and NOx react in atmosphere to form acids.",
+        topic,
+        "easy",
+        seed
+      );
+    }
+
+    return createGeneratedQuestion(
+      `comedk-set${setNumber}-chem2026-${index + 1}`,
+      "Which element has the highest first ionization energy in Period 3?",
+      "Argon",
+      ["Sodium", "Aluminium", "Sulfur"],
+      "Across a period, ionization energy generally increases and noble gases are highest.",
+      topic,
+      "medium",
+      seed
+    );
+  });
+
+  return applyProgression(questions);
+}
+
+function createComedkPracticeSet(setNumber: number): PracticeSet {
+  const isEnhanced2026Model = setNumber >= 1 && setNumber <= 5;
+
+  const questions = isEnhanced2026Model
+    ? [
+        ...createComedkMathQuestions2026Set1(setNumber),
+        ...createComedkPhysicsQuestions2026Set1(setNumber),
+        ...createComedkChemistryQuestions2026Set1(setNumber),
+      ]
+    : [
+        ...createComedkMathQuestions(setNumber),
+        ...createComedkPhysicsQuestions(setNumber),
+        ...createComedkChemistryQuestions(setNumber),
+      ];
 
   const level = setNumber >= 4 ? "advanced" : "intermediate";
 
@@ -3930,8 +4855,9 @@ function createComedkPracticeSet(setNumber: number): PracticeSet {
     slug: `comedk-practice-set-${setNumber}`,
     category: "engineering-entrance",
     title: `COMEDK Practice Set ${setNumber}`,
-    description:
-      `Original COMEDK-style full-length set with 180 unique questions: 60 mathematics, 60 physics, and 60 chemistry.`,
+    description: isEnhanced2026Model
+      ? "Original COMEDK-style full-length set aligned to key 2026 PCM syllabus topics with 180 unique questions: 60 mathematics, 60 physics, and 60 chemistry."
+      : `Original COMEDK-style full-length set with 180 unique questions: 60 mathematics, 60 physics, and 60 chemistry.`,
     examType: "COMEDK",
     examSlug: "comedk",
     examName: "COMEDK",
@@ -3949,8 +4875,9 @@ function createComedkPracticeSet(setNumber: number): PracticeSet {
       "engineering entrance COMEDK mock",
       "original COMEDK practice",
     ],
-    intro:
-      "Use this full-length COMEDK set for serious exam practice, balanced subject revision, and explanation-based learning.",
+    intro: isEnhanced2026Model
+      ? `Use this enhanced Set ${setNumber} to practice key 2026 COMEDK syllabus chapters across Mathematics, Physics, and Chemistry with explanation-based learning.`
+      : "Use this full-length COMEDK set for serious exam practice, balanced subject revision, and explanation-based learning.",
     isOriginal: true,
     isLive: true,
     questions,
