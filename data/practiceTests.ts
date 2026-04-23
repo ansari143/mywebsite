@@ -4275,8 +4275,8 @@ function createComedkSet6MathQuestionsLegacy(): PracticeQuestion[] {
     const seed = 9600 + qNo;
 
     if (pattern === 0) {
-      const r1 = 2 + occ;  // occ: 0-3 (no repeat)
-      const r2 = 5 + (qNo % 4);
+      const r1 = 2 + occ;       // occ: 0-3 → r1 = 2, 3, 4, 5
+      const r2 = 3 + occ * 2;   // occ: 0-3 → r2 = 3, 5, 7, 9 (all sums different)
       const sum = r1 + r2;
       const product = r1 * r2;
       return createComedkQuestion(
@@ -5008,8 +5008,8 @@ function createComedkSet6ChemistryQuestionsLegacy(): PracticeQuestion[] {
     if (pattern === 12) {
       // Alcohols / IUPAC pool — 4 unique questions via occ
       const alcoholPool = [
-        { q: "IUPAC name of CH\u2083CH\u2082OH is:", a: "ethanol", d: ["methanol", "propanol", "ethanal"] as [string,string,string], exp: "CH\u2083CH\u2082OH = ethanol." },
-        { q: "IUPAC name of CH\u2083OH is:", a: "methanol", d: ["ethanol", "propanol", "methanal"] as [string,string,string], exp: "CH\u2083OH = methanol." },
+        { q: "IUPAC name of CH\u2083CH\u2082CH\u2082CH\u2082OH is:", a: "butan-1-ol", d: ["butan-2-ol", "propan-1-ol", "pentan-1-ol"] as [string,string,string], exp: "CH\u2083(CH\u2082)\u2083OH: 4-carbon chain, OH on C1 \u2192 butan-1-ol." },
+        { q: "IUPAC name of (CH\u2083)\u2083COH is:", a: "2-methylpropan-2-ol", d: ["propan-2-ol", "butan-2-ol", "propan-1-ol"] as [string,string,string], exp: "(CH\u2083)\u2083COH: 4 carbons, OH on C2, methyl on C2 \u2192 2-methylpropan-2-ol." },
         { q: "IUPAC name of (CH\u2083)\u2082CHOH is:", a: "propan-2-ol", d: ["propan-1-ol", "2-propanol (common only)", "ethanol"] as [string,string,string], exp: "(CH\u2083)\u2082CHOH: 3-carbon chain, OH on C2 \u2192 propan-2-ol." },
         { q: "IUPAC name of CH\u2083CH\u2082CH\u2082OH is:", a: "propan-1-ol", d: ["propan-2-ol", "ethanol", "propanoic acid"] as [string,string,string], exp: "CH\u2083CH\u2082CH\u2082OH: 3-carbon chain, OH on C1 \u2192 propan-1-ol." },
       ] as const;
@@ -5021,7 +5021,7 @@ function createComedkSet6ChemistryQuestionsLegacy(): PracticeQuestion[] {
       // Aldehydes / ketones / tests pool — 4 unique questions via occ
       const aldPool = [
         { q: "Tollens\u2019 reagent gives silver mirror test with:", a: "aldehydes", d: ["ketones", "alkanes", "ethers"] as [string,string,string], exp: "Aldehydes reduce [Ag(NH\u2083)\u2082]\u207a \u2192 silver mirror." },
-        { q: "Fehling\u2019s solution gives brick-red precipitate with:", a: "aldehydes (reducing sugars)", d: ["ketones", "esters", "alkenes"] as [string,string,string], exp: "Aldehydes reduce Cu\u00b2\u207a to Cu\u2082O (brick-red)." },
+        { q: "Iodoform test is positive for:", a: "methyl ketones and acetaldehyde", d: ["all ketones", "carboxylic acids", "esters"] as [string,string,string], exp: "Iodoform (CHI\u2083) forms with compounds containing CH\u2083CO\u2013 group (methyl ketones and acetaldehyde)." },
         { q: "Benedict\u2019s test is positive for:", a: "reducing sugars (glucose, maltose)", d: ["non-reducing sugars (sucrose)", "all carbohydrates", "lipids"] as [string,string,string], exp: "Benedict\u2019s test detects reducing sugars." },
         { q: "Schiff\u2019s reagent is used to distinguish:", a: "aldehydes from ketones", d: ["alcohols from esters", "alkanes from alkenes", "acids from bases"] as [string,string,string], exp: "Schiff\u2019s reagent turns pink/violet with aldehydes, not ketones." },
       ] as const;
