@@ -371,6 +371,90 @@ export default function PracticeTestClient({ set }: Props) {
         })}
       </div>
 
+      {isLongTest && (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-xl font-bold text-slate-900">Your progress</h2>
+              <p className="mt-1 text-sm text-slate-600">
+                Answer all questions, then submit to see your score and explanations.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700">
+              Answered: {answeredCount}/{total}
+            </div>
+          </div>
+
+          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p className="text-sm font-semibold text-slate-900">Long-test navigation</p>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  Use subject jump links or page buttons to move through the 180-question paper without losing answers.
+                </p>
+              </div>
+              <div className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-slate-700">
+                Page {currentPage} of {totalPages} • {pageAnsweredCount}/{pageQuestions.length} answered on this page
+              </div>
+            </div>
+
+            {subjectJumpLinks.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {subjectJumpLinks.map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => goToPage(item.page)}
+                    className={[
+                      "rounded-full border px-4 py-2 text-sm font-semibold transition",
+                      currentPage === item.page
+                        ? "border-blue-600 bg-blue-600 text-white"
+                        : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100",
+                    ].join(" ")}
+                  >
+                    {item.label} • {item.range}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => goToPage(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Previous Page
+              </button>
+              {visiblePages.map((page) => (
+                <button
+                  key={page}
+                  type="button"
+                  onClick={() => goToPage(page)}
+                  className={[
+                    "rounded-xl border px-4 py-2 text-sm font-semibold transition",
+                    currentPage === page
+                      ? "border-blue-600 bg-blue-600 text-white"
+                      : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100",
+                  ].join(" ")}
+                >
+                  Page {page}
+                </button>
+              ))}
+              <button
+                type="button"
+                onClick={() => goToPage(Math.min(totalPages, currentPage + 1))}
+                disabled={currentPage === totalPages}
+                className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Next Page
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <div className="flex flex-col gap-4 sm:flex-row">
           <button

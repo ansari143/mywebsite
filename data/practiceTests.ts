@@ -3277,1587 +3277,1831 @@ function generateSscTier2FullLengthSets(): GovPracticeSet[] {
   });
 }
 
-function createComedkMathQuestions(setNumber: number): PracticeQuestion[] {
-  const questions: PracticeQuestion[] = [];
-  const trigAnswers = [
-    { label: "sin 30°", value: "1/2" },
-    { label: "cos 60°", value: "1/2" },
-    { label: "tan 45°", value: "1" },
-    { label: "sin 90°", value: "1" },
-    { label: "cos 0°", value: "1" },
-  ] as const;
+function createComedkQuestion(
+  id: string,
+  question: string,
+  correctText: string,
+  distractors: [string, string, string],
+  explanation: string,
+  topic: string,
+  difficulty: "easy" | "medium" | "hard",
+  seed: number
+): PracticeQuestion {
+  const options = [correctText, ...distractors];
+  const order: Array<0 | 1 | 2 | 3> = [0, 1, 2, 3];
+  const shift = seed % 4;
+  const rotated = order.map((_, index) => options[(index + shift) % 4]);
+  const answerIds: Array<"A" | "B" | "C" | "D"> = ["A", "B", "C", "D"];
+  const correctIndex = rotated.findIndex((option) => option === correctText);
 
-  for (let round = 0; round < 5; round += 1) {
-    const seed = setNumber * 100 + round * 20;
-
-    const linearAnswer = setNumber + round + 4;
-    const linearCoefficient = round + 2;
-    const linearConstant = setNumber + round + 5;
-    const linearRhs = linearCoefficient * linearAnswer + linearConstant;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 1}`,
-        `If ${linearCoefficient}x + ${linearConstant} = ${linearRhs}, what is x?`,
-        `${linearAnswer}`,
-        [`${linearAnswer - 1}`, `${linearAnswer + 1}`, `${linearAnswer + 2}`],
-        `Subtract ${linearConstant} from both sides and divide by ${linearCoefficient}.`,
-        "algebra",
-        "easy",
-        seed + 1
-      )
-    );
-
-    const rootOne = setNumber + round + 2;
-    const rootTwo = round + 3;
-    const rootSum = rootOne + rootTwo;
-    const rootProduct = rootOne * rootTwo;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 6}`,
-        `One root of x² - ${rootSum}x + ${rootProduct} = 0 is ${rootOne}. What is the other root?`,
-        `${rootTwo}`,
-        [`${rootTwo + 1}`, `${rootTwo - 1}`, `${rootSum}`],
-        `For x² - ${rootSum}x + ${rootProduct} = 0, the product of roots is ${rootProduct}. Since one root is ${rootOne}, the other root is ${rootProduct}/${rootOne} = ${rootTwo}.`,
-        "quadratic equations",
-        "medium",
-        seed + 2
-      )
-    );
-
-    const percentBase = 200 + setNumber * 20 + round * 10;
-    const percentRate = 10 + round * 5;
-    const increasedValue = percentBase + (percentBase * percentRate) / 100;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 11}`,
-        `A quantity of ${percentBase} is increased by ${percentRate}%. What is the new value?`,
-        `${formatValue(increasedValue)}`,
-        [
-          `${formatValue(percentBase + (percentBase * (percentRate - 5)) / 100)}`,
-          `${formatValue(percentBase + percentRate)}`,
-          `${formatValue(percentBase - (percentBase * percentRate) / 100)}`,
-        ],
-        `${percentRate}% of ${percentBase} is ${(percentBase * percentRate) / 100}, so the new value is ${formatValue(increasedValue)}.`,
-        "percentages",
-        "easy",
-        seed + 3
-      )
-    );
-
-    const principal = 1000 + setNumber * 200 + round * 100;
-    const interestRate = 5 + round;
-    const time = 2 + (setNumber % 2);
-    const simpleInterest = (principal * interestRate * time) / 100;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 16}`,
-        `What is the simple interest on Rs. ${principal} at ${interestRate}% per annum for ${time} years?`,
-        `${formatValue(simpleInterest)}`,
-        [
-          `${formatValue(simpleInterest + 20)}`,
-          `${formatValue(simpleInterest - 20)}`,
-          `${formatValue(principal * interestRate / 100)}`,
-        ],
-        `Simple interest = (P × R × T)/100 = (${principal} × ${interestRate} × ${time})/100 = ${formatValue(simpleInterest)}.`,
-        "simple interest",
-        "medium",
-        seed + 4
-      )
-    );
-
-    const apFirst = setNumber + round + 3;
-    const apDifference = round + 2;
-    const apTerm = 8 + setNumber;
-    const apAnswer = apFirst + (apTerm - 1) * apDifference;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 21}`,
-        `Find the ${apTerm}th term of an AP whose first term is ${apFirst} and common difference is ${apDifference}.`,
-        `${apAnswer}`,
-        [`${apAnswer - apDifference}`, `${apAnswer + apDifference}`, `${apFirst + apTerm * apDifference}`],
-        `Use a_n = a + (n - 1)d = ${apFirst} + (${apTerm} - 1) × ${apDifference} = ${apAnswer}.`,
-        "progressions",
-        "medium",
-        seed + 5
-      )
-    );
-
-    const xOne = round + 1;
-    const yOne = setNumber + round + 2;
-    const xTwo = xOne + 2;
-    const slope = setNumber + round + 1;
-    const yTwo = yOne + 2 * slope;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 26}`,
-        `What is the slope of the line passing through (${xOne}, ${yOne}) and (${xTwo}, ${yTwo})?`,
-        `${slope}`,
-        [`${slope - 1}`, `${slope + 1}`, `${yTwo - yOne}`],
-        `Slope = (y₂ - y₁)/(x₂ - x₁) = (${yTwo} - ${yOne})/(${xTwo} - ${xOne}) = ${slope}.`,
-        "coordinate geometry",
-        "medium",
-        seed + 6
-      )
-    );
-
-    const totalBalls = 10 + setNumber + round;
-    const redBalls = 3 + round;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 31}`,
-        `A bag contains ${redBalls} red balls and ${totalBalls - redBalls} blue balls. What is the probability of drawing a red ball?`,
-        `${redBalls}/${totalBalls}`,
-        [
-          `${totalBalls - redBalls}/${totalBalls}`,
-          `${redBalls}/${totalBalls - 1}`,
-          `${redBalls + 1}/${totalBalls}`,
-        ],
-        `Probability = favorable outcomes / total outcomes = ${redBalls}/${totalBalls}.`,
-        "probability",
-        "easy",
-        seed + 7
-      )
-    );
-
-    const triangleBase = 8 + round + setNumber;
-    const triangleHeight = 6 + round * 2;
-    const triangleArea = (triangleBase * triangleHeight) / 2;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 36}`,
-        `What is the area of a triangle with base ${triangleBase} cm and height ${triangleHeight} cm?`,
-        `${triangleArea}`,
-        [`${triangleBase * triangleHeight}`, `${triangleArea - triangleBase}`, `${triangleArea + triangleHeight}`],
-        `Area of triangle = 1/2 × base × height = 1/2 × ${triangleBase} × ${triangleHeight} = ${triangleArea}.`,
-        "geometry",
-        "easy",
-        seed + 8
-      )
-    );
-
-    const logPower = setNumber + round + 2;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 41}`,
-        `What is the value of log₁₀(10^${logPower})?`,
-        `${logPower}`,
-        [`${logPower - 1}`, `${logPower + 1}`, `${10 ** Math.min(logPower, 3)}`],
-        `log₁₀(10^n) = n, so the answer is ${logPower}.`,
-        "logarithms",
-        "easy",
-        seed + 9
-      )
-    );
-
-    const determinantA = setNumber + round + 2;
-    const determinantB = round + 1;
-    const determinantC = setNumber;
-    const determinantD = round + 4;
-    const determinantAnswer = determinantA * determinantD - determinantB * determinantC;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 46}`,
-        `Find the determinant of the matrix [[${determinantA}, ${determinantB}], [${determinantC}, ${determinantD}]].`,
-        `${determinantAnswer}`,
-        [`${determinantA * determinantD + determinantB * determinantC}`, `${determinantAnswer + 2}`, `${determinantAnswer - 2}`],
-        `For a 2 × 2 matrix [[a, b], [c, d]], determinant = ad - bc = ${determinantA} × ${determinantD} - ${determinantB} × ${determinantC} = ${determinantAnswer}.`,
-        "matrices",
-        "medium",
-        seed + 10
-      )
-    );
-
-    const trig = trigAnswers[round];
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 51}`,
-        `What is the value of ${trig.label}?`,
-        trig.value,
-        trig.value === "1/2" ? ["0", "1", "√3/2"] : ["1/2", "√3/2", "0"],
-        `${trig.label} = ${trig.value}.`,
-        "trigonometry",
-        "easy",
-        seed + 11
-      )
-    );
-
-    const inequalityConstant = setNumber + round + 7;
-    const inequalityAnswer = inequalityConstant - 2;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-math-${round + 56}`,
-        `Solve the inequality x + 2 > ${inequalityConstant}.`,
-        `x > ${inequalityAnswer}`,
-        [`x < ${inequalityAnswer}`, `x > ${inequalityAnswer + 1}`, `x < ${inequalityAnswer + 1}`],
-        `Subtract 2 from both sides to get x > ${inequalityAnswer}.`,
-        "inequalities",
-        "easy",
-        seed + 12
-      )
-    );
-  }
-
-  return questions;
+  return createQuestion(
+    id,
+    question,
+    rotated as [string, string, string, string],
+    answerIds[correctIndex],
+    explanation,
+    topic,
+    difficulty
+  );
 }
 
-function createComedkPhysicsQuestions(setNumber: number): PracticeQuestion[] {
-  const questions: PracticeQuestion[] = [];
+function createComedkMathQuestionsLegacy(setNumber: number): PracticeQuestion[] {
+  return Array.from({ length: 60 }, (_, index) => {
+    const qNo = index + 1;
+    const pattern = index % 12;
+    // v is unique for each (setNumber, occurrence-of-pattern) pair: 0-24
+    const v = Math.floor(index / 12) + (setNumber - 1) * 5;
+    const seed = 6100 + setNumber * 100 + qNo;
 
-  for (let round = 0; round < 5; round += 1) {
-    const seed = setNumber * 100 + round * 20;
-
-    const initialVelocity = round + 1;
-    const acceleration = setNumber + round + 2;
-    const time = round + 4;
-    const finalVelocity = initialVelocity + acceleration * time;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 1}`,
-        `A particle has initial velocity ${initialVelocity} m/s and acceleration ${acceleration} m/s² for ${time} s. What is its final velocity?`,
-        `${finalVelocity} m/s`,
-        [`${finalVelocity - acceleration} m/s`, `${finalVelocity + acceleration} m/s`, `${acceleration * time} m/s`],
-        `Use v = u + at = ${initialVelocity} + ${acceleration} × ${time} = ${finalVelocity} m/s.`,
-        "kinematics",
-        "easy",
-        seed + 21
-      )
-    );
-
-    const mass = round + 2;
-    const accelerationTwo = setNumber + round + 3;
-    const force = mass * accelerationTwo;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 6}`,
-        `What force is needed to accelerate a ${mass} kg body at ${accelerationTwo} m/s²?`,
-        `${force} N`,
-        [`${force - mass} N`, `${force + mass} N`, `${accelerationTwo} N`],
-        `From F = ma, force = ${mass} × ${accelerationTwo} = ${force} N.`,
-        "laws of motion",
-        "easy",
-        seed + 22
-      )
-    );
-
-    const workForce = 10 + setNumber + round;
-    const distance = 4 + round;
-    const work = workForce * distance;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 11}`,
-        `A constant force of ${workForce} N moves an object through ${distance} m in the same direction. What is the work done?`,
-        `${work} J`,
-        [`${work + 10} J`, `${work - 10} J`, `${workForce + distance} J`],
-        `Work = force × distance = ${workForce} × ${distance} = ${work} J.`,
-        "work and energy",
-        "easy",
-        seed + 23
-      )
-    );
-
-    const powerWork = 120 + round * 20;
-    const powerTime = 4 + setNumber;
-    const power = powerWork / powerTime;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 16}`,
-        `If ${powerWork} J of work is done in ${powerTime} s, what is the power?`,
-        `${formatValue(power)} W`,
-        [`${formatValue(power + 5)} W`, `${formatValue(powerWork - powerTime)} W`, `${formatValue(powerTime)} W`],
-        `Power = work / time = ${powerWork}/${powerTime} = ${formatValue(power)} W.`,
-        "power",
-        "medium",
-        seed + 24
-      )
-    );
-
-    const momentumMass = round + 3;
-    const momentumVelocity = setNumber + round + 4;
-    const momentum = momentumMass * momentumVelocity;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 21}`,
-        `What is the momentum of a ${momentumMass} kg object moving at ${momentumVelocity} m/s?`,
-        `${momentum} kg m/s`,
-        [`${momentumVelocity} kg m/s`, `${momentum + 5} kg m/s`, `${momentum - 5} kg m/s`],
-        `Momentum = mv = ${momentumMass} × ${momentumVelocity} = ${momentum} kg m/s.`,
-        "momentum",
-        "easy",
-        seed + 25
-      )
-    );
-
-    const keMass = round + 2;
-    const keVelocity = setNumber + round + 3;
-    const kineticEnergy = 0.5 * keMass * keVelocity * keVelocity;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 26}`,
-        `Find the kinetic energy of a ${keMass} kg body moving at ${keVelocity} m/s.`,
-        `${formatValue(kineticEnergy)} J`,
-        [`${formatValue(kineticEnergy + 5)} J`, `${formatValue(keMass * keVelocity)} J`, `${formatValue(kineticEnergy - 5)} J`],
-        `Kinetic energy = 1/2 mv² = 1/2 × ${keMass} × ${keVelocity}² = ${formatValue(kineticEnergy)} J.`,
-        "work and energy",
-        "medium",
-        seed + 26
-      )
-    );
-
-    const peMass = round + 1;
-    const peHeight = setNumber + round + 5;
-    const potentialEnergy = peMass * 10 * peHeight;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 31}`,
-        `A ${peMass} kg body is lifted to a height of ${peHeight} m. Take g = 10 m/s². What is the gain in potential energy?`,
-        `${potentialEnergy} J`,
-        [`${potentialEnergy - 10} J`, `${potentialEnergy + 10} J`, `${peMass * peHeight} J`],
-        `Potential energy = mgh = ${peMass} × 10 × ${peHeight} = ${potentialEnergy} J.`,
-        "gravitation",
-        "easy",
-        seed + 27
-      )
-    );
-
-    const current = round + 2;
-    const chargeTime = setNumber + round + 4;
-    const charge = current * chargeTime;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 36}`,
-        `A current of ${current} A flows for ${chargeTime} s. How much charge passes through the circuit?`,
-        `${charge} C`,
-        [`${charge - current} C`, `${charge + current} C`, `${chargeTime} C`],
-        `Charge Q = It = ${current} × ${chargeTime} = ${charge} C.`,
-        "current electricity",
-        "easy",
-        seed + 28
-      )
-    );
-
-    const resistanceOne = round + 2;
-    const resistanceTwo = setNumber + round + 3;
-    const seriesResistance = resistanceOne + resistanceTwo;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 41}`,
-        `Two resistors of ${resistanceOne} Ω and ${resistanceTwo} Ω are connected in series. What is the equivalent resistance?`,
-        `${seriesResistance} Ω`,
-        [`${resistanceOne * resistanceTwo} Ω`, `${seriesResistance - 1} Ω`, `${resistanceTwo - resistanceOne} Ω`],
-        `Series resistances add directly: ${resistanceOne} + ${resistanceTwo} = ${seriesResistance} Ω.`,
-        "current electricity",
-        "easy",
-        seed + 29
-      )
-    );
-
-    const parallelResistanceOne = 2 * (round + 2);
-    const parallelResistanceTwo = 2 * (setNumber + round + 2);
-    const parallelResistance = (parallelResistanceOne * parallelResistanceTwo) / (parallelResistanceOne + parallelResistanceTwo);
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 46}`,
-        `Two resistors of ${parallelResistanceOne} Ω and ${parallelResistanceTwo} Ω are connected in parallel. What is the equivalent resistance?`,
-        `${formatValue(parallelResistance)} Ω`,
-        [`${parallelResistanceOne + parallelResistanceTwo} Ω`, `${formatValue(parallelResistance + 1)} Ω`, `${formatValue(parallelResistanceOne - 1)} Ω`],
-        `For parallel resistors, R = (R₁R₂)/(R₁ + R₂) = (${parallelResistanceOne} × ${parallelResistanceTwo})/(${parallelResistanceOne} + ${parallelResistanceTwo}) = ${formatValue(parallelResistance)} Ω.`,
-        "current electricity",
-        "medium",
-        seed + 30
-      )
-    );
-
-    const focalLength = round + 1;
-    const lensPower = 1 / focalLength;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 51}`,
-        `A lens has focal length ${focalLength} m. What is its power?`,
-        `${formatValue(lensPower)} D`,
-        [`${focalLength} D`, `${formatValue(lensPower + 1)} D`, `${formatValue(1 / (focalLength + 1))} D`],
-        `Power of a lens P = 1/f, so P = 1/${focalLength} = ${formatValue(lensPower)} D.`,
-        "optics",
-        "medium",
-        seed + 31
-      )
-    );
-
-    const waveFrequency = 40 + round * 10;
-    const wavelength = setNumber + round + 2;
-    const waveSpeed = waveFrequency * wavelength;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-phys-${round + 56}`,
-        `A wave has frequency ${waveFrequency} Hz and wavelength ${wavelength} m. What is its speed?`,
-        `${waveSpeed} m/s`,
-        [`${waveFrequency + wavelength} m/s`, `${waveSpeed - waveFrequency} m/s`, `${waveSpeed + wavelength} m/s`],
-        `Wave speed v = fλ = ${waveFrequency} × ${wavelength} = ${waveSpeed} m/s.`,
-        "waves",
-        "medium",
-        seed + 32
-      )
-    );
-  }
-
-  return questions;
-}
-
-function createComedkChemistryQuestions(setNumber: number): PracticeQuestion[] {
-  const questions: PracticeQuestion[] = [];
-  const molarMassData = [
-    { formula: "H₂O", mass: 18, distractors: ["16", "20", "22"] as [string, string, string] },
-    { formula: "CO₂", mass: 44, distractors: ["28", "40", "48"] as [string, string, string] },
-    { formula: "NH₃", mass: 17, distractors: ["14", "18", "20"] as [string, string, string] },
-    { formula: "CH₄", mass: 16, distractors: ["14", "18", "20"] as [string, string, string] },
-    { formula: "NaOH", mass: 40, distractors: ["23", "39", "56"] as [string, string, string] },
-  ] as const;
-  const functionalGroups = [
-    { compound: "ethanol", answer: "Hydroxyl", distractors: ["Carboxyl", "Aldehyde", "Amine"] as [string, string, string] },
-    { compound: "ethanoic acid", answer: "Carboxyl", distractors: ["Hydroxyl", "Ketone", "Amine"] as [string, string, string] },
-    { compound: "propanone", answer: "Ketone", distractors: ["Aldehyde", "Carboxyl", "Amide"] as [string, string, string] },
-    { compound: "methanal", answer: "Aldehyde", distractors: ["Hydroxyl", "Ketone", "Ester"] as [string, string, string] },
-    { compound: "ethylamine", answer: "Amine", distractors: ["Amide", "Carboxyl", "Hydroxyl"] as [string, string, string] },
-  ] as const;
-  const oxidationStates = [
-    { compound: "H₂SO₄", element: "sulfur", value: "+6", distractors: ["+4", "+2", "-2"] as [string, string, string] },
-    { compound: "HNO₃", element: "nitrogen", value: "+5", distractors: ["+3", "+1", "-3"] as [string, string, string] },
-    { compound: "KMnO₄", element: "manganese", value: "+7", distractors: ["+2", "+4", "+6"] as [string, string, string] },
-    { compound: "SO₂", element: "sulfur", value: "+4", distractors: ["+2", "+6", "-2"] as [string, string, string] },
-    { compound: "K₂Cr₂O₇", element: "chromium", value: "+6", distractors: ["+3", "+4", "+7"] as [string, string, string] },
-  ] as const;
-
-  for (let round = 0; round < 5; round += 1) {
-    const seed = setNumber * 100 + round * 20;
-    const phValue = round + 1;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 1}`,
-        `If the hydrogen ion concentration of a solution is 10^- ${phValue} mol/L, what is its pH?`.replace("^- ", "^-") ,
-        `${phValue}`,
-        [`${phValue + 1}`, `${Math.max(0, phValue - 1)}`, `${14 - phValue}`],
-        `pH = -log[H⁺]. If [H⁺] = 10^-${phValue}, then pH = ${phValue}.`,
-        "physical chemistry",
-        "easy",
-        seed + 41
-      )
-    );
-
-    const molar = molarMassData[round];
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 6}`,
-        `What is the molar mass of ${molar.formula}?`,
-        `${molar.mass} g/mol`,
-        [`${molar.distractors[0]} g/mol`, `${molar.distractors[1]} g/mol`, `${molar.distractors[2]} g/mol`],
-        `The molar mass of ${molar.formula} is ${molar.mass} g/mol.`,
-        "mole concept",
-        "easy",
-        seed + 42
-      )
-    );
-
-    const oxidation = oxidationStates[round];
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 11}`,
-        `What is the oxidation state of ${oxidation.element} in ${oxidation.compound}?`,
-        oxidation.value,
-        oxidation.distractors,
-        `Using the standard oxidation number rules, the oxidation state of ${oxidation.element} in ${oxidation.compound} is ${oxidation.value}.`,
-        "redox chemistry",
-        "medium",
-        seed + 43
-      )
-    );
-
-    const sodiumValency = 1;
-    const oxygenValency = 2;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 16}`,
-        `What is the correct formula of the compound formed by sodium (valency ${sodiumValency}) and oxygen (valency ${oxygenValency})?`,
-        "Na2O",
-        ["NaO", "NaO2", "Na2O2"],
-        `Cross the valencies 1 and 2 to get Na₂O.`,
-        "chemical bonding",
-        "easy",
-        seed + 44
-      )
-    );
-
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 21}`,
-        "Which gas is released when zinc reacts with dilute hydrochloric acid?",
-        "Hydrogen",
-        ["Oxygen", "Nitrogen", "Carbon dioxide"],
-        "Zinc reacts with dilute hydrochloric acid to release hydrogen gas.",
-        "chemical reactions",
-        "easy",
-        seed + 45
-      )
-    );
-
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 26}`,
-        "Which of the following is a strong acid?",
-        "Hydrochloric acid",
-        ["Acetic acid", "Ammonia", "Sodium bicarbonate"],
-        "Hydrochloric acid is a strong acid that ionizes almost completely in water.",
-        "acids and bases",
-        "easy",
-        seed + 46
-      )
-    );
-
-    const group = functionalGroups[round];
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 31}`,
-        `Which functional group is present in ${group.compound}?`,
-        group.answer,
-        group.distractors,
-        `${group.compound} contains the ${group.answer.toLowerCase()} functional group.`,
-        "organic chemistry",
-        "medium",
-        seed + 47
-      )
-    );
-
-    const alkaliMetals = ["Lithium", "Sodium", "Potassium", "Rubidium", "Cesium"] as const;
-    const selectedMetal = alkaliMetals[round];
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 36}`,
-        "Which of the following is an alkali metal?",
-        selectedMetal,
-        ["Calcium", "Aluminium", "Zinc"],
-        `${selectedMetal} belongs to Group 1 of the periodic table and is an alkali metal.`,
-        "periodic table",
-        "easy",
-        seed + 48
-      )
-    );
-
-    const masses = [18, 44, 34, 98, 36.5] as const;
-    const moleMass = masses[round];
-    const moles = round + 2;
-    const sampleMass = moleMass * moles;
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 41}`,
-        `How many moles are present in ${sampleMass} g of a substance with molar mass ${moleMass} g/mol?`,
-        `${moles}`,
-        [`${moles + 1}`, `${moles - 1}`, `${sampleMass / (moleMass / 2)}`],
-        `Moles = mass / molar mass = ${sampleMass}/${moleMass} = ${moles}.`,
-        "mole concept",
-        "medium",
-        seed + 49
-      )
-    );
-
-    const electronicConfigs = [
-      { config: "2, 8, 1", element: "Sodium", distractors: ["Magnesium", "Aluminium", "Neon"] as [string, string, string] },
-      { config: "2, 8, 7", element: "Chlorine", distractors: ["Argon", "Sulfur", "Calcium"] as [string, string, string] },
-      { config: "2, 8, 8, 1", element: "Potassium", distractors: ["Calcium", "Scandium", "Argon"] as [string, string, string] },
-      { config: "2, 8, 3", element: "Aluminium", distractors: ["Silicon", "Magnesium", "Phosphorus"] as [string, string, string] },
-      { config: "2, 6", element: "Oxygen", distractors: ["Nitrogen", "Fluorine", "Carbon"] as [string, string, string] },
-    ] as const;
-    const config = electronicConfigs[round];
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 46}`,
-        `Which element has the electronic configuration ${config.config}?`,
-        config.element,
-        config.distractors,
-        `${config.element} has the electronic configuration ${config.config}.`,
-        "atomic structure",
-        "medium",
-        seed + 50
-      )
-    );
-
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 51}`,
-        "Which of the following is a covalent compound?",
-        "Water",
-        ["Sodium chloride", "Magnesium oxide", "Calcium chloride"],
-        "Water is covalent because atoms share electrons in the molecule.",
-        "chemical bonding",
-        "easy",
-        seed + 51
-      )
-    );
-
-    const commonNames = [
-      { formula: "Ca(OH)2", name: "Slaked lime", distractors: ["Quick lime", "Baking soda", "Bleaching powder"] as [string, string, string] },
-      { formula: "NaHCO3", name: "Baking soda", distractors: ["Washing soda", "Bleaching powder", "Plaster of Paris"] as [string, string, string] },
-      { formula: "CaO", name: "Quick lime", distractors: ["Slaked lime", "Gypsum", "Saltpeter"] as [string, string, string] },
-      { formula: "CaSO4·1/2H2O", name: "Plaster of Paris", distractors: ["Gypsum", "Bleaching powder", "Quick lime"] as [string, string, string] },
-      { formula: "Na2CO3·10H2O", name: "Washing soda", distractors: ["Baking soda", "Caustic soda", "Plaster of Paris"] as [string, string, string] },
-    ] as const;
-    const commonName = commonNames[round];
-    questions.push(
-      createGeneratedQuestion(
-        `comedk-set${setNumber}-chem-${round + 56}`,
-        `What is the common name of ${commonName.formula}?`,
-        commonName.name,
-        commonName.distractors,
-        `${commonName.formula} is commonly known as ${commonName.name}.`,
-        "common compounds",
-        "easy",
-        seed + 52
-      )
-    );
-  }
-
-  return questions;
-}
-
-function createComedkMathQuestions2026Set1(setNumber: number): PracticeQuestion[] {
-  const applyProgression = (questions: PracticeQuestion[]) =>
-    questions.map((question, index) => ({
-      ...question,
-      difficulty:
-        setNumber === 1
-          ? question.difficulty
-          : setNumber === 2
-          ? index % 6 === 0
-            ? "easy"
-            : "medium"
-          : setNumber === 3
-          ? index < 12
-            ? "easy"
-            : index < 42
-            ? "medium"
-            : "hard"
-          : setNumber === 4
-          ? index < 18
-            ? "medium"
-            : "hard"
-          : index < 10
-          ? "medium"
-          : "hard",
-    }));
-
-  const weightedTopics = [
-    ...Array(12).fill("Algebra"),
-    ...Array(9).fill("Differential Calculus"),
-    ...Array(9).fill("Integral Calculus"),
-    ...Array(8).fill("Coordinate Geometry"),
-    ...Array(7).fill("Trigonometry"),
-    ...Array(6).fill("Vectors and 3D Geometry"),
-    ...Array(5).fill("Matrices & Determinants"),
-    ...Array(4).fill("Probability"),
-  ];
-
-  const topicCounters: Record<string, number> = {};
-  const isToughSet = setNumber >= 4;
-
-  const questions = weightedTopics.map((topic, index) => {
-    const round = topicCounters[topic] ?? 0;
-    topicCounters[topic] = round + 1;
-    const seed = 9100 + setNumber * 100 + index;
-
-    if (topic === "Algebra") {
-      if (isToughSet) {
-        const a = round + 2;
-        const b = round + 1;
-        const c = setNumber + 5;
-        const x = round + 4;
-        const rhs = a * (x - b) + c;
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-math2026-${index + 1}`,
-          round % 3 === 0
-            ? `In a linear relation transformed by shift-and-scale, solve for x: ${a}(x - ${b}) + ${c} = ${rhs}.`
-            : round % 3 === 1
-            ? `A value is shifted by ${b}, scaled by ${a}, then offset by ${c} to give ${rhs}. Find x from ${a}(x - ${b}) + ${c} = ${rhs}.`
-            : `Reverse the transformation and solve: ${a}(x - ${b}) + ${c} = ${rhs}.`,
-          `${x}`,
-          [`${x + 1}`, `${x - 1}`, `${rhs - c}`],
-          round % 3 === 0
-            ? "Use inverse operations in order: remove constant shift, undo scaling, then reverse variable shift."
-            : round % 3 === 1
-            ? "Undo the operations in reverse order to isolate x."
-            : "Treat the bracketed expression as one variable first, then back-substitute.",
-          topic,
-          "hard",
-          seed
-        );
-      }
-
-      const a = round + 2;
-      const x = round + 3;
-      const b = setNumber + 5;
+    if (pattern === 0) {
+      // Linear equation — all params vary with v so no two occurrences share same question
+      const a = 2 + (v % 7);   // 2–8
+      const x = 3 + (v % 10);  // 3–12
+      const b = 5 + (v % 9);   // 5–13
       const rhs = a * x + b;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-math2026-${index + 1}`,
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
         `Solve for x: ${a}x + ${b} = ${rhs}.`,
         `${x}`,
-        [`${x + 1}`, `${x - 1}`, `${rhs - b}`],
-        `Subtract ${b} and divide by ${a}.`,
-        topic,
-        round >= 4 ? "medium" : "easy",
-        seed
+        [`${x + 1}`, `${x - 1}`, `${x + 2}`],
+        `Subtract ${b} from both sides: ${a}x = ${rhs - b}. Divide by ${a}: x = ${x}.`,
+        "algebra", "easy", seed
       );
     }
 
-    if (topic === "Differential Calculus") {
-      if (isToughSet) {
-        const p = round + 3;
-        const a = round + 2;
-        const b = round + 1;
-        const xValue = 2;
-        const derivative = a * p * xValue ** (p - 1) + b;
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-math2026-${index + 1}`,
-          round % 3 === 0
-            ? `Using linearity of derivatives and power rule, find d/dx of (${a}x^${p} + ${b}x) at x = ${xValue}.`
-            : round % 3 === 1
-            ? `For y = ${a}x^${p} + ${b}x, compute dy/dx at x = ${xValue}.`
-            : `Differentiate and then evaluate at x = ${xValue}: y = ${a}x^${p} + ${b}x.`,
-          `${derivative}`,
-          [`${derivative + 2}`, `${a * xValue ** p + b * xValue}`, `${derivative - 2}`],
-          round % 3 === 0
-            ? "Apply derivative term-wise first, then substitute the point value."
-            : round % 3 === 1
-            ? "Use power rule on each term, then evaluate at the given x."
-            : "Compute symbolic derivative carefully and plug in the numeric point at the end.",
-          topic,
-          "hard",
-          seed
-        );
-      }
-
-      const p = round + 2;
-      const xValue = 2;
-      const derivative = p * xValue ** (p - 1);
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-math2026-${index + 1}`,
-        `Find d/dx of x^${p} at x = ${xValue}.`,
-        `${derivative}`,
-        [`${xValue ** p}`, `${p + xValue}`, `${p * xValue}`],
-        `For x^n, derivative is n*x^(n-1).`,
-        topic,
-        "medium",
-        seed
+    if (pattern === 1) {
+      const r1 = 3 + (v % 8);           // 3–10
+      const r2 = r1 + 2 + (v % 5);      // always > r1
+      const sum = r1 + r2;
+      const product = r1 * r2;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
+        `One root of x\u00b2 \u2212 ${sum}x + ${product} = 0 is ${r1}. The other root is:`,
+        `${r2}`,
+        [`${r2 + 1}`, `${r2 - 1}`, `${sum}`],
+        `Product of roots = ${product}. Other root = ${product} \u00f7 ${r1} = ${r2}.`,
+        "quadratic equations", "medium", seed
       );
     }
 
-    if (topic === "Integral Calculus") {
-      if (isToughSet) {
-        const k = round + 2;
-        const m = round + 1;
-        const upper = 3;
-        const value = (k * upper ** 2) / 2 + m * upper;
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-math2026-${index + 1}`,
-          round % 3 === 0
-            ? `Using area accumulation and linearity of integration, evaluate integral from 0 to ${upper} of (${k}x + ${m}) dx.`
-            : round % 3 === 1
-            ? `Evaluate the definite integral from 0 to ${upper}: (${k}x + ${m}) dx.`
-            : `For f(x) = ${k}x + ${m}, find total accumulation over [0, ${upper}].`,
-          `${formatValue(value)}`,
-          [`${formatValue(value + 2)}`, `${formatValue(k * upper + m)}`, `${formatValue(value - 2)}`],
-          round % 3 === 0
-            ? "Integrate each term separately, form antiderivative, then apply upper-lower limits."
-            : round % 3 === 1
-            ? "Use linearity, integrate term-wise, and apply limits carefully."
-            : "Find antiderivative once, then evaluate upper bound minus lower bound.",
-          topic,
-          "hard",
-          seed
-        );
-      }
-
-      const k = round + 2;
-      const upper = 2;
-      const value = k * ((upper ** 2) / 2);
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-math2026-${index + 1}`,
-        `Evaluate integral from 0 to ${upper} of ${k}x dx.`,
-        `${formatValue(value)}`,
-        [`${formatValue(value + k)}`, `${formatValue(k * upper)}`, `${formatValue(value - k)}`],
-        `Integral of kx is (k/2)x^2. Apply limits.`,
-        topic,
-        "medium",
-        seed
+    if (pattern === 2) {
+      const a = 2 + (v % 10); // 2–11
+      const d = 2 + (v % 7);  // 2–8
+      const n = 8 + (v % 5);  // 8–12
+      const term = a + (n - 1) * d;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
+        `The ${n}th term of an AP with first term ${a} and common difference ${d} is:`,
+        `${term}`,
+        [`${term - d}`, `${term + d}`, `${term + a + 1}`],
+        `a\u2099 = a + (n\u22121)d = ${a} + ${n - 1}\u00d7${d} = ${term}.`,
+        "progressions", "medium", seed
       );
     }
 
-    if (topic === "Coordinate Geometry") {
-      const x1 = round + 1;
-      const y1 = setNumber + round + 2;
+    if (pattern === 3) {
+      const x1 = 1 + (v % 6);  // 1–6
+      const y1 = 2 + (v % 7);  // 2–8
+      const m  = 2 + (v % 8);  // 2–9
       const x2 = x1 + 3;
-      const slope = round + 2;
-      const y2 = y1 + slope * (x2 - x1);
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-math2026-${index + 1}`,
-        `Find the slope of the line through (${x1}, ${y1}) and (${x2}, ${y2}).`,
-        `${slope}`,
-        [`${slope + 1}`, `${slope - 1}`, `${y2 - y1}`],
-        `Slope m = (y2 - y1)/(x2 - x1).`,
-        topic,
+      const y2 = y1 + m * 3;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
+        `Slope of the line through (${x1}, ${y1}) and (${x2}, ${y2}) is:`,
+        `${m}`,
+        [`${m + 1}`, `${m - 1}`, `${m + 2}`],
+        `Slope = (${y2}\u2212${y1}) \u00f7 (${x2}\u2212${x1}) = ${y2 - y1} \u00f7 3 = ${m}.`,
+        "coordinate geometry", "medium", seed
+      );
+    }
+
+    if (pattern === 4) {
+      // 25-entry pool — v is 0–24 so each call picks a distinct entry
+      const trigPool = [
+        { q: "sin 0\u00b0",     a: "0",        d: ["1", "1/2", "\u221a3/2"] as [string,string,string],      exp: "sin 0\u00b0 = 0." },
+        { q: "cos 0\u00b0",     a: "1",        d: ["0", "\u22121", "1/2"] as [string,string,string],        exp: "cos 0\u00b0 = 1." },
+        { q: "sin 30\u00b0",    a: "1/2",      d: ["0", "1", "\u221a3/2"] as [string,string,string],        exp: "sin 30\u00b0 = 1/2." },
+        { q: "cos 60\u00b0",    a: "1/2",      d: ["0", "\u221a3/2", "1"] as [string,string,string],        exp: "cos 60\u00b0 = 1/2." },
+        { q: "tan 45\u00b0",    a: "1",        d: ["0", "\u221a3", "1/\u221a3"] as [string,string,string],  exp: "tan 45\u00b0 = 1." },
+        { q: "sin 90\u00b0",    a: "1",        d: ["0", "\u22121", "1/2"] as [string,string,string],        exp: "sin 90\u00b0 = 1." },
+        { q: "cos 90\u00b0",    a: "0",        d: ["1", "\u22121", "1/2"] as [string,string,string],        exp: "cos 90\u00b0 = 0." },
+        { q: "sin 45\u00b0",    a: "1/\u221a2",d: ["1/2", "\u221a3/2", "1"] as [string,string,string],     exp: "sin 45\u00b0 = 1/\u221a2." },
+        { q: "cos 30\u00b0",    a: "\u221a3/2",d: ["1/2", "1", "1/\u221a2"] as [string,string,string],     exp: "cos 30\u00b0 = \u221a3/2." },
+        { q: "cos 45\u00b0",    a: "1/\u221a2",d: ["1/2", "\u221a3/2", "1"] as [string,string,string],     exp: "cos 45\u00b0 = 1/\u221a2." },
+        { q: "sin 60\u00b0",    a: "\u221a3/2",d: ["1/2", "1", "1/\u221a2"] as [string,string,string],     exp: "sin 60\u00b0 = \u221a3/2." },
+        { q: "tan 30\u00b0",    a: "1/\u221a3",d: ["\u221a3", "1", "1/2"] as [string,string,string],       exp: "tan 30\u00b0 = 1/\u221a3." },
+        { q: "tan 60\u00b0",    a: "\u221a3",  d: ["1", "1/\u221a3", "2"] as [string,string,string],       exp: "tan 60\u00b0 = \u221a3." },
+        { q: "sin 120\u00b0",   a: "\u221a3/2",d: ["1/2", "\u2212\u221a3/2", "1"] as [string,string,string],exp: "sin 120\u00b0 = sin 60\u00b0 = \u221a3/2." },
+        { q: "cos 120\u00b0",   a: "\u22121/2",d: ["1/2", "\u221a3/2", "\u22121"] as [string,string,string],exp: "cos 120\u00b0 = \u2212cos 60\u00b0 = \u22121/2." },
+        { q: "sin 150\u00b0",   a: "1/2",      d: ["\u22121/2", "\u221a3/2", "0"] as [string,string,string],exp: "sin 150\u00b0 = sin 30\u00b0 = 1/2." },
+        { q: "cos 150\u00b0",   a: "\u2212\u221a3/2",d:["\u221a3/2", "\u22121/2", "0"] as [string,string,string],exp:"cos 150\u00b0 = \u2212\u221a3/2." },
+        { q: "sin 180\u00b0",   a: "0",        d: ["1", "\u22121", "1/2"] as [string,string,string],       exp: "sin 180\u00b0 = 0." },
+        { q: "cos 180\u00b0",   a: "\u22121",  d: ["0", "1", "\u22121/2"] as [string,string,string],       exp: "cos 180\u00b0 = \u22121." },
+        { q: "sin 270\u00b0",   a: "\u22121",  d: ["0", "1", "\u22121/2"] as [string,string,string],       exp: "sin 270\u00b0 = \u22121." },
+        { q: "cos 270\u00b0",   a: "0",        d: ["1", "\u22121", "1/2"] as [string,string,string],       exp: "cos 270\u00b0 = 0." },
+        { q: "tan 0\u00b0",     a: "0",        d: ["1", "undefined", "1/2"] as [string,string,string],     exp: "tan 0\u00b0 = 0." },
+        { q: "sin(\u221230\u00b0)",a:"\u22121/2",d:["1/2", "\u221a3/2", "\u22121"] as [string,string,string],exp:"sin(\u2212\u03b8)=\u2212sin\u03b8, so \u22121/2." },
+        { q: "cos(\u221260\u00b0)",a:"1/2",    d:["\u22121/2", "\u221a3/2", "1"] as [string,string,string], exp:"cos(\u2212\u03b8)=cos\u03b8, so 1/2." },
+        { q: "cot 45\u00b0",    a: "1",        d: ["0", "\u221a3", "1/\u221a3"] as [string,string,string],  exp: "cot 45\u00b0 = cos45\u00b0/sin45\u00b0 = 1." },
+      ] as const;
+      const row = trigPool[v % trigPool.length];
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
+        `Value of ${row.q} is:`,
+        row.a, row.d, row.exp,
+        "trigonometry", "easy", seed
+      );
+    }
+
+    if (pattern === 5) {
+      const red  = 3 + (v % 8);  // 3–10
+      const blue = 5 + (v % 9);  // 5–13
+      const total = red + blue;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
+        `A bag contains ${red} red and ${blue} blue balls. Probability of drawing a red ball is:`,
+        `${red}/${total}`,
+        [`${blue}/${total + 1}`, `${red}/${total - 1}`, `${blue + 1}/${total + 1}`],
+        `P(red) = ${red}/${total}.`,
+        "probability", "easy", seed
+      );
+    }
+
+    if (pattern === 6) {
+      const a = 2 + (v % 7);  // 2–8
+      const b = 1 + (v % 5);  // 1–5
+      const c = 2 + (v % 4);  // 2–5
+      const d = 3 + (v % 8);  // 3–10
+      const det = a * d - b * c;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
+        `Determinant of matrix [[${a}, ${b}], [${c}, ${d}]] is:`,
+        `${det}`,
+        [`${det + 5}`, `${det - 3}`, `${a + c + d + 5}`],
+        `det = ad \u2212 bc = ${a}\u00d7${d} \u2212 ${b}\u00d7${c} = ${det}.`,
+        "matrices", "medium", seed
+      );
+    }
+
+    if (pattern === 7) {
+      const bases = [2, 3, 5, 10] as const;
+      const base  = bases[v % 4];
+      const power = 2 + (v % 7); // 2–8
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
+        `Evaluate: log\u2082\u2090\u2091\u2092\u2093${base}(${base}^${power}) [log base ${base}].`,
+        `${power}`,
+        [`${power + 1}`, `${power - 1}`, `${base * power}`],
+        `log\u2090(a^n) = n, so log_${base}(${base}^${power}) = ${power}.`,
+        "logarithms", "easy", seed
+      );
+    }
+
+    if (pattern === 8) {
+      const n = 6 + (v % 8);   // 6–13
+      const r = 2 + (v % 3);   // 2–4
+      let perm = 1;
+      for (let i = 0; i < r; i++) perm *= (n - i);
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
+        `Find ${n}P${r}.`,
+        `${perm}`,
+        [`${Math.floor(perm / r)}`, `${perm + r * 2}`, `${perm - r * 2}`],
+        `${n}P${r} = ${n}!/(${n}\u2212${r})! = ${Array.from({length:r},(_,i)=>n-i).join('\u00d7')} = ${perm}.`,
+        "permutations", "medium", seed
+      );
+    }
+
+    if (pattern === 9) {
+      const n = 7 + (v % 9);  // 7–15
+      const comb = (n * (n - 1)) / 2;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
+        `Find ${n}C2.`,
+        `${comb}`,
+        [`${n * 2}`, `${comb + 3}`, `${comb - 3}`],
+        `nC2 = n(n\u22121)/2 = ${n}\u00d7${n - 1}/2 = ${comb}.`,
+        "combinations", "medium", seed
+      );
+    }
+
+    if (pattern === 10) {
+      const principal = 500 + v * 200;  // 500–5300
+      const rate  = 4 + (v % 9);        // 4–12
+      const years = 2 + (v % 4);        // 2–5
+      const si = (principal * rate * years) / 100;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-math-${qNo}`,
+        `Simple interest on Rs ${principal} at ${rate}% p.a. for ${years} years is:`,
+        `Rs ${si}`,
+        [`Rs ${si + rate * years * 10}`, `Rs ${si - rate * years * 5}`, `Rs ${si * 2}`],
+        `SI = P\u00d7R\u00d7T/100 = ${principal}\u00d7${rate}\u00d7${years}/100 = Rs ${si}.`,
+        "simple interest", "easy", seed
+      );
+    }
+
+    // pattern 11 (default): area of triangle
+    const base = 6 + (v % 10);  // 6–15
+    const h    = 4 + (v % 9);   // 4–12
+    const area = (base * h) / 2;
+    return createComedkQuestion(
+      `comedk-set${setNumber}-math-${qNo}`,
+      `Area of a triangle with base ${base} cm and height ${h} cm is:`,
+      `${area} cm\u00b2`,
+      [`${base * h} cm\u00b2`, `${area + 6} cm\u00b2`, `${area - 6} cm\u00b2`],
+      `Area = (1/2) \u00d7 base \u00d7 height = (1/2) \u00d7 ${base} \u00d7 ${h} = ${area} cm\u00b2.`,
+      "geometry", "easy", seed
+    );
+  });
+}
+
+function createComedkPhysicsQuestionsLegacy(setNumber: number): PracticeQuestion[] {
+  return Array.from({ length: 60 }, (_, index) => {
+    const qNo = index + 1;
+    const pattern = index % 12;
+    // v is unique for each (setNumber, occurrence-of-pattern) pair: 0–24
+    const v = Math.floor(index / 12) + (setNumber - 1) * 5;
+    const seed = 7100 + setNumber * 100 + qNo;
+
+    if (pattern === 0) {
+      // v = u + at
+      const u  = 2 + (v % 8);  // 2–9
+      const ac = 2 + (v % 7);  // 2–8
+      const t  = 3 + (v % 5);  // 3–7
+      const vf = u + ac * t;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `A body starts with velocity ${u} m/s and has acceleration ${ac} m/s\u00b2. Its velocity after ${t} s is:`,
+        `${vf} m/s`,
+        [`${vf - ac} m/s`, `${vf + ac} m/s`, `${u + t} m/s`],
+        `v = u + at = ${u} + ${ac}\u00d7${t} = ${vf} m/s.`,
+        "kinematics", "easy", seed
+      );
+    }
+
+    if (pattern === 1) {
+      // s = ut + \u00bdAt\u00b2
+      const u  = 1 + (v % 6);  // 1–6
+      const ac = 2 + (v % 5);  // 2–6
+      const t  = 4 + (v % 4);  // 4–7
+      const s  = u * t + 0.5 * ac * t * t;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `For u = ${u} m/s, a = ${ac} m/s\u00b2, t = ${t} s, displacement is:`,
+        `${formatValue(s)} m`,
+        [`${u * t} m`, `${formatValue(s + ac * t)} m`, `${formatValue(s - ac)} m`],
+        `s = ut + \u00bdAt\u00b2 = ${u}\u00d7${t} + 0.5\u00d7${ac}\u00d7${t}\u00b2 = ${formatValue(s)} m.`,
+        "kinematics", "medium", seed
+      );
+    }
+
+    if (pattern === 2) {
+      // F = ma
+      const m  = 2 + (v % 8);  // 2–9
+      const ac = 3 + (v % 7);  // 3–9
+      const f  = m * ac;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `Net force needed to give ${m} kg mass an acceleration of ${ac} m/s\u00b2 is:`,
+        `${f} N`,
+        [`${f + ac} N`, `${f - ac} N`, `${m + ac} N`],
+        `F = ma = ${m}\u00d7${ac} = ${f} N.`,
+        "laws of motion", "easy", seed
+      );
+    }
+
+    if (pattern === 3) {
+      // W = F\u00d7d
+      const force = 10 + (v % 12) * 5;  // 10, 15, 20, …, 65
+      const dist  = 3 + (v % 8);        // 3–10
+      const work  = force * dist;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `Work done when force ${force} N moves a body ${dist} m in its direction is:`,
+        `${work} J`,
+        [`${work + force} J`, `${work - force} J`, `${force + dist} J`],
+        `W = F\u00d7d = ${force}\u00d7${dist} = ${work} J.`,
+        "work and energy", "easy", seed
+      );
+    }
+
+    if (pattern === 4) {
+      // P = W/t
+      const work = 100 + v * 50;  // 100–1300
+      const time = 5 + (v % 6);   // 5–10
+      const power = work / time;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `A body does ${work} J of work in ${time} s. Its power is:`,
+        `${formatValue(power)} W`,
+        [`${formatValue(power * 2)} W`, `${formatValue(power + time)} W`, `${formatValue(power - 5 > 0 ? power - 5 : power + 3)} W`],
+        `P = W/t = ${work}/${time} = ${formatValue(power)} W.`,
+        "work and energy", "easy", seed
+      );
+    }
+
+    if (pattern === 5) {
+      // p = mv
+      const m   = 3 + (v % 8);   // 3–10
+      const vel = 4 + (v % 9);   // 4–12
+      const p   = m * vel;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `A body of mass ${m} kg moves at ${vel} m/s. Its momentum is:`,
+        `${p} kg\u00b7m/s`,
+        [`${p + m} kg\u00b7m/s`, `${p - vel} kg\u00b7m/s`, `${m + vel} kg\u00b7m/s`],
+        `p = mv = ${m}\u00d7${vel} = ${p} kg\u00b7m/s.`,
+        "momentum", "easy", seed
+      );
+    }
+
+    if (pattern === 6) {
+      // KE = \u00bdmv\u00b2
+      const m   = 2 + (v % 7);   // 2–8
+      const vel = 4 + (v % 8);   // 4–11
+      const ke  = 0.5 * m * vel * vel;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `Kinetic energy of ${m} kg body moving at ${vel} m/s is:`,
+        `${formatValue(ke)} J`,
+        [`${m * vel} J`, `${formatValue(ke + m * vel)} J`, `${formatValue(ke - m > 0 ? ke - m : ke + m)} J`],
+        `KE = \u00bdmv\u00b2 = 0.5\u00d7${m}\u00d7${vel}\u00b2 = ${formatValue(ke)} J.`,
+        "work and energy", "medium", seed
+      );
+    }
+
+    if (pattern === 7) {
+      // V = IR
+      const curr = 2 + (v % 8);   // 2–9 A
+      const res  = 3 + (v % 9);   // 3–11 \u03a9
+      const volt = curr * res;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `Voltage across a ${res} \u03a9 resistor carrying ${curr} A current is:`,
+        `${volt} V`,
+        [`${volt + res} V`, `${volt - curr - 1} V`, `${curr + res + 2} V`],
+        `V = IR = ${curr}\u00d7${res} = ${volt} V.`,
+        "current electricity", "easy", seed
+      );
+    }
+
+    if (pattern === 8) {
+      // Series resistance
+      const r1 = 4 + (v % 8);   // 4–11
+      const r2 = 6 + (v % 9);   // 6–14
+      const rs = r1 + r2;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `Two resistors ${r1} \u03a9 and ${r2} \u03a9 connected in series. Total resistance is:`,
+        `${rs} \u03a9`,
+        [`${r1 * r2} \u03a9`, `${Math.abs(r1 - r2)} \u03a9`, `${rs + 2} \u03a9`],
+        `Series: R = R\u2081 + R\u2082 = ${r1} + ${r2} = ${rs} \u03a9.`,
+        "current electricity", "easy", seed
+      );
+    }
+
+    if (pattern === 9) {
+      // Lens power P = 1/f; use focal lengths 20–90 cm (multiples of 10)
+      const fCm = 20 + (v % 8) * 10;   // 20, 30, …, 90 cm — 8 unique values
+      const fM  = fCm / 100;
+      const pw  = formatValue(1 / fM);
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `Power of a lens with focal length ${fCm} cm is:`,
+        `${pw} D`,
+        [`${fCm} D`, `${formatValue(1 / fM + 1)} D`, `${fM} D`],
+        `P = 1/f = 1/${fM} m = ${pw} D.`,
+        "optics", "medium", seed
+      );
+    }
+
+    if (pattern === 10) {
+      // Wave speed v = f\u03bb
+      const freq   = 50 + (v % 10) * 20;  // 50–230 Hz
+      const lambda = 2 + (v % 7);         // 2–8 m
+      const spd    = freq * lambda;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-phys-${qNo}`,
+        `Wave speed for frequency ${freq} Hz and wavelength ${lambda} m is:`,
+        `${spd} m/s`,
+        [`${spd + freq} m/s`, `${spd - lambda * 10} m/s`, `${freq + lambda} m/s`],
+        `v = f\u03bb = ${freq}\u00d7${lambda} = ${spd} m/s.`,
+        "waves", "medium", seed
+      );
+    }
+
+    // pattern 11 (default): Gravitation pool — 10 unique entries, indexed by v%10
+    const gravPool = [
+      { q: "Gravitational force doubles when one mass doubles:", a: "doubles", d: ["halves", "quadruples", "unchanged"] as [string,string,string], exp: "F \u221d m\u2081\u00d7m\u2082; doubling one mass doubles F." },
+      { q: "Gravitational force when separation is tripled becomes:", a: "1/9 of original", d: ["1/3 of original", "3 times", "9 times"] as [string,string,string], exp: "F \u221d 1/r\u00b2; 3\u00d7 distance \u2192 F/9." },
+      { q: "Gravitational force when distance is doubled becomes:", a: "one-fourth", d: ["half", "double", "unchanged"] as [string,string,string], exp: "F \u221d 1/r\u00b2; 2\u00d7 distance \u2192 F/4." },
+      { q: "Escape velocity from Earth's surface is approximately:", a: "11.2 km/s", d: ["7.9 km/s", "3.0 km/s", "16.0 km/s"] as [string,string,string], exp: "v\u1d49 = \u221a(2gR) \u2248 11.2 km/s." },
+      { q: "Orbital velocity of a satellite near Earth's surface is approximately:", a: "7.9 km/s", d: ["11.2 km/s", "5.0 km/s", "3.0 km/s"] as [string,string,string], exp: "First cosmic velocity \u2248 7.9 km/s." },
+      { q: "Standard acceleration due to gravity at Earth's surface is:", a: "9.8 m/s\u00b2", d: ["6.7 m/s\u00b2", "11.2 m/s\u00b2", "3.7 m/s\u00b2"] as [string,string,string], exp: "g \u2248 9.8 m/s\u00b2 at Earth's surface." },
+      { q: "Weight of a body in free fall is:", a: "zero (apparent weight)", d: ["equal to mg", "doubled", "equal to mass"] as [string,string,string], exp: "In free fall, normal reaction = 0 \u2192 apparent weight = 0." },
+      { q: "If both masses and distance are all doubled, gravitational force:", a: "remains the same", d: ["doubles", "quadruples", "halves"] as [string,string,string], exp: "F \u221d m\u2081m\u2082/r\u00b2. 4m\u2081m\u2082/(4r\u00b2) = original F." },
+      { q: "Unit of gravitational constant G is:", a: "N m\u00b2 kg\u207b\u00b2", d: ["N m kg\u207b\u00b9", "N kg\u207b\u00b2", "m\u00b3 kg\u207b\u00b9 s\u207b\u00b2"] as [string,string,string], exp: "From F = Gm\u2081m\u2082/r\u00b2, G = Fr\u00b2/(m\u2081m\u2082)." },
+      { q: "Gravitational force between two bodies is independent of:", a: "medium between them", d: ["masses of bodies", "distance between them", "gravitational constant"] as [string,string,string], exp: "Unlike electrostatic force, gravitational force is medium-independent." },
+    ] as const;
+    const gRow = gravPool[v % gravPool.length];
+    return createComedkQuestion(
+      `comedk-set${setNumber}-phys-${qNo}`,
+      gRow.q, gRow.a, gRow.d, gRow.exp,
+      "gravitation", "easy", seed
+    );
+  });
+}
+
+function buildComedkMathBank(): PracticeQuestion[] {
+  const rawBank = Array.from({ length: 5 }, (_, index) =>
+    createComedkMathQuestionsLegacy(index + 1)
+  ).flat();
+
+  const duplicateQuestionMap = new Map<string, number>();
+  let duplicateOptionCount = 0;
+
+  for (const question of rawBank) {
+    const key = normalizeQuestionKey(question.question);
+    duplicateQuestionMap.set(key, (duplicateQuestionMap.get(key) ?? 0) + 1);
+
+    if (hasDuplicateOptions(question)) {
+      duplicateOptionCount += 1;
+    }
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    const duplicateQuestionCount = Array.from(duplicateQuestionMap.values()).filter(
+      (count) => count > 1
+    ).length;
+
+    if (duplicateQuestionCount > 0 || duplicateOptionCount > 0) {
+      console.warn(
+        `[COMEDK] Math bank quality check: duplicate questions=${duplicateQuestionCount}, duplicate-option-questions=${duplicateOptionCount}`
+      );
+    }
+  }
+
+  return rawBank;
+}
+
+const COMEDK_MATH_BANK = buildComedkMathBank();
+
+function createComedkMathQuestions(setNumber: number): PracticeQuestion[] {
+  const start = (setNumber - 1) * 60;
+  const slice = COMEDK_MATH_BANK.slice(start, start + 60);
+
+  return slice.map((question, index) => ({
+    ...question,
+    id: `comedk-set${setNumber}-math-${index + 1}`,
+  }));
+}
+
+function buildComedkPhysicsBank(): PracticeQuestion[] {
+  const rawBank = Array.from({ length: 5 }, (_, index) =>
+    createComedkPhysicsQuestionsLegacy(index + 1)
+  ).flat();
+
+  const duplicateQuestionMap = new Map<string, number>();
+  let duplicateOptionCount = 0;
+
+  for (const question of rawBank) {
+    const key = normalizeQuestionKey(question.question);
+    duplicateQuestionMap.set(key, (duplicateQuestionMap.get(key) ?? 0) + 1);
+
+    if (hasDuplicateOptions(question)) {
+      duplicateOptionCount += 1;
+    }
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    const duplicateQuestionCount = Array.from(duplicateQuestionMap.values()).filter(
+      (count) => count > 1
+    ).length;
+
+    if (duplicateQuestionCount > 0 || duplicateOptionCount > 0) {
+      console.warn(
+        `[COMEDK] Physics bank quality check: duplicate questions=${duplicateQuestionCount}, duplicate-option-questions=${duplicateOptionCount}`
+      );
+    }
+  }
+
+  return rawBank;
+}
+
+const COMEDK_PHYSICS_BANK = buildComedkPhysicsBank();
+
+function createComedkPhysicsQuestions(setNumber: number): PracticeQuestion[] {
+  const start = (setNumber - 1) * 60;
+  const slice = COMEDK_PHYSICS_BANK.slice(start, start + 60);
+
+  return slice.map((question, index) => ({
+    ...question,
+    id: `comedk-set${setNumber}-phys-${index + 1}`,
+  }));
+}
+
+function createComedkChemistryQuestionsLegacy(setNumber: number): PracticeQuestion[] {
+  return Array.from({ length: 60 }, (_, index) => {
+    const qNo = index + 1;
+    const pattern = index % 12;
+    // v unique per (setNumber, occurrence-of-pattern): 0–24
+    const v = Math.floor(index / 12) + (setNumber - 1) * 5;
+    const seed = 8100 + setNumber * 100 + qNo;
+
+    if (pattern === 0) {
+      // pH — 13 distinct values via v%13
+      const pH = 1 + (v % 13);
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        `If [H\u207a] = 10\u207b${pH} mol/L, the pH of the solution is:`,
+        `${pH}`,
+        [`${pH + 1}`, `${pH === 7 ? 9 : 14 - pH}`, `${pH - 1 > 0 ? pH - 1 : pH + 2}`],
+        `pH = \u2212log[H\u207a] = \u2212log(10\u207b${pH}) = ${pH}.`,
+        "physical chemistry", "easy", seed
+      );
+    }
+
+    if (pattern === 1) {
+      // 25-entry molar mass pool
+      const molarPool = [
+        { f: "H\u2082O",    m: "18",   d: ["16", "20", "22"] as [string,string,string] },
+        { f: "CO\u2082",    m: "44",   d: ["40", "46", "48"] as [string,string,string] },
+        { f: "NH\u2083",    m: "17",   d: ["14", "16", "18"] as [string,string,string] },
+        { f: "NaCl",        m: "58.5", d: ["36.5", "74", "23"] as [string,string,string] },
+        { f: "H\u2082SO\u2084", m: "98", d: ["80", "96", "100"] as [string,string,string] },
+        { f: "HCl",         m: "36.5", d: ["35.5", "37", "18"] as [string,string,string] },
+        { f: "NaOH",        m: "40",   d: ["23", "39", "42"] as [string,string,string] },
+        { f: "CH\u2084",    m: "16",   d: ["14", "12", "18"] as [string,string,string] },
+        { f: "CaCO\u2083",  m: "100",  d: ["80", "98", "102"] as [string,string,string] },
+        { f: "KCl",         m: "74.5", d: ["39", "74", "76"] as [string,string,string] },
+        { f: "MgO",         m: "40",   d: ["24", "32", "44"] as [string,string,string] },
+        { f: "C\u2082H\u2084", m: "28", d: ["26", "24", "30"] as [string,string,string] },
+        { f: "C\u2082H\u2086", m: "30", d: ["28", "26", "32"] as [string,string,string] },
+        { f: "HNO\u2083",   m: "63",   d: ["47", "65", "61"] as [string,string,string] },
+        { f: "AlCl\u2083",  m: "133.5",d: ["98", "127", "135"] as [string,string,string] },
+        { f: "CaCl\u2082",  m: "111",  d: ["75", "95", "113"] as [string,string,string] },
+        { f: "O\u2082",     m: "32",   d: ["16", "48", "30"] as [string,string,string] },
+        { f: "N\u2082",     m: "28",   d: ["14", "21", "30"] as [string,string,string] },
+        { f: "Fe\u2082O\u2083", m: "160", d: ["72", "104", "144"] as [string,string,string] },
+        { f: "ZnO",         m: "81",   d: ["65", "80", "83"] as [string,string,string] },
+        { f: "Cl\u2082",    m: "71",   d: ["35.5", "70", "72"] as [string,string,string] },
+        { f: "SO\u2082",    m: "64",   d: ["48", "80", "66"] as [string,string,string] },
+        { f: "NO\u2082",    m: "46",   d: ["30", "44", "48"] as [string,string,string] },
+        { f: "KOH",         m: "56",   d: ["39", "55", "58"] as [string,string,string] },
+        { f: "Na\u2082CO\u2083", m: "106", d: ["62", "100", "108"] as [string,string,string] },
+      ] as const;
+      const row = molarPool[v % molarPool.length];
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        `Molar mass of ${row.f} is:`,
+        `${row.m} g/mol`,
+        [`${row.d[0]} g/mol`, `${row.d[1]} g/mol`, `${row.d[2]} g/mol`],
+        `Add atomic masses: molar mass of ${row.f} = ${row.m} g/mol.`,
+        "mole concept", "easy", seed
+      );
+    }
+
+    if (pattern === 2) {
+      // Oxidation states — 25-entry pool
+      const oxPool = [
+        { q: "Oxidation state of sulfur in H\u2082SO\u2084 is:", a: "+6", d: ["+4", "+2", "\u22122"] as [string,string,string], exp: "S in H\u2082SO\u2084 = +6." },
+        { q: "Oxidation state of nitrogen in NH\u2083 is:", a: "\u22123", d: ["+3", "0", "+5"] as [string,string,string], exp: "H is +1 (\u00d73), so N = \u22123." },
+        { q: "Oxidation state of carbon in CO\u2082 is:", a: "+4", d: ["+2", "\u22122", "0"] as [string,string,string], exp: "O is \u22122 (\u00d72), so C = +4." },
+        { q: "Oxidation state of iron in Fe\u2082O\u2083 is:", a: "+3", d: ["+2", "0", "+4"] as [string,string,string], exp: "O is \u22122 (\u00d73); 2Fe = +6, Fe = +3." },
+        { q: "Oxidation state of chlorine in HCl is:", a: "\u22121", d: ["+1", "0", "\u22123"] as [string,string,string], exp: "H is +1, so Cl = \u22121." },
+        { q: "Oxidation state of oxygen in H\u2082O is:", a: "\u22122", d: ["+2", "0", "\u22121"] as [string,string,string], exp: "H is +1 (\u00d72), so O = \u22122." },
+        { q: "Oxidation state of nitrogen in HNO\u2083 is:", a: "+5", d: ["+3", "\u22123", "+4"] as [string,string,string], exp: "H=+1, O=\u22122(\u00d73), so N=+5." },
+        { q: "Oxidation state of Mn in KMnO\u2084 is:", a: "+7", d: ["+2", "+4", "+6"] as [string,string,string], exp: "K=+1, O=\u22122(\u00d74), Mn=+7." },
+        { q: "Oxidation state of Cr in K\u2082Cr\u2082O\u2087 is:", a: "+6", d: ["+3", "+4", "+2"] as [string,string,string], exp: "2K(+1)+2Cr+7O(\u22122)=0 \u2192 Cr=+6." },
+        { q: "Oxidation state of phosphorus in H\u2083PO\u2084 is:", a: "+5", d: ["+3", "+1", "\u22123"] as [string,string,string], exp: "3H(+1)+P+4O(\u22122)=0 \u2192 P=+5." },
+        { q: "Oxidation state of sulfur in SO\u2082 is:", a: "+4", d: ["+6", "+2", "\u22122"] as [string,string,string], exp: "2O(\u22122)+S=0 \u2192 S=+4." },
+        { q: "Oxidation state of nitrogen in N\u2082 gas is:", a: "0", d: ["+3", "\u22123", "+5"] as [string,string,string], exp: "Elemental N\u2082 has oxidation state 0." },
+        { q: "Oxidation state of copper in CuO is:", a: "+2", d: ["+1", "0", "+3"] as [string,string,string], exp: "O=\u22122, so Cu=+2." },
+        { q: "Oxidation state of Cl in Cl\u2082 gas is:", a: "0", d: ["\u22121", "+1", "+7"] as [string,string,string], exp: "Elemental Cl\u2082: oxidation state 0." },
+        { q: "Oxidation state of hydrogen in NaH is:", a: "\u22121", d: ["+1", "0", "+2"] as [string,string,string], exp: "In metal hydrides, H is \u22121." },
+        { q: "Oxidation state of sulfur in Na\u2082S is:", a: "\u22122", d: ["+2", "0", "+6"] as [string,string,string], exp: "Na=+1 each, so S=\u22122." },
+        { q: "Oxidation state of iron in FeCl\u2083 is:", a: "+3", d: ["+2", "0", "+4"] as [string,string,string], exp: "Cl=\u22121 (\u00d73), Fe=+3." },
+        { q: "Oxidation state of carbon in CH\u2084 is:", a: "\u22124", d: ["+4", "0", "+2"] as [string,string,string], exp: "H=+1 (\u00d74), C=\u22124." },
+        { q: "Oxidation state of nitrogen in NO is:", a: "+2", d: ["\u22122", "+3", "0"] as [string,string,string], exp: "O=\u22122, so N=+2." },
+        { q: "Oxidation state of Pb in PbO\u2082 is:", a: "+4", d: ["+2", "0", "+3"] as [string,string,string], exp: "O=\u22122(\u00d72), Pb=+4." },
+        { q: "Oxidation state of Zn in ZnSO\u2084 is:", a: "+2", d: ["+1", "0", "+3"] as [string,string,string], exp: "SO\u2084=\u22122, Zn=+2." },
+        { q: "Oxidation state of Na in Na\u2082O\u2082 is:", a: "+1", d: ["+2", "0", "\u22121"] as [string,string,string], exp: "Na=+1; peroxide O=\u22121." },
+        { q: "Oxidation state of carbon in CO is:", a: "+2", d: ["+4", "\u22122", "0"] as [string,string,string], exp: "O=\u22122, C=+2." },
+        { q: "Oxidation state of oxygen in OF\u2082 is:", a: "+2", d: ["\u22122", "0", "+1"] as [string,string,string], exp: "F=\u22121(\u00d72); O is less electronegative \u2192 O=+2." },
+        { q: "Oxidation state of Cl in ClO\u2083\u207b is:", a: "+5", d: ["+3", "+7", "\u22121"] as [string,string,string], exp: "O=\u22122(\u00d73)=\u22126; charge=\u22121; Cl=+5." },
+      ] as const;
+      const row = oxPool[v % oxPool.length];
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        row.q, row.a, row.d, row.exp,
+        "redox chemistry", "medium", seed
+      );
+    }
+
+    if (pattern === 3) {
+      // Ionic compound formulas — 25-entry pool
+      const ionicPool = [
+        { q: "Formula of compound formed by Na\u207a and O\u00b2\u207b is:", a: "Na\u2082O", d: ["NaO", "NaO\u2082", "Na\u2082O\u2082"] as [string,string,string], exp: "Na(+1) and O(\u22122): Na\u2082O." },
+        { q: "Formula of magnesium chloride is:", a: "MgCl\u2082", d: ["MgCl", "Mg\u2082Cl", "MgCl\u2083"] as [string,string,string], exp: "Mg(+2) needs 2 Cl(\u22121)." },
+        { q: "Formula of aluminium oxide is:", a: "Al\u2082O\u2083", d: ["AlO", "Al\u2083O\u2082", "AlO\u2083"] as [string,string,string], exp: "Al(+3) and O(\u22122): Al\u2082O\u2083." },
+        { q: "Formula of calcium chloride is:", a: "CaCl\u2082", d: ["CaCl", "Ca\u2082Cl", "CaCl\u2083"] as [string,string,string], exp: "Ca(+2) needs 2 Cl(\u22121)." },
+        { q: "Formula of potassium sulfate is:", a: "K\u2082SO\u2084", d: ["KSO\u2084", "K\u2082SO\u2083", "K\u2082S"] as [string,string,string], exp: "K(+1) and SO\u2084\u00b2\u207b: K\u2082SO\u2084." },
+        { q: "Formula of iron(III) chloride is:", a: "FeCl\u2083", d: ["FeCl\u2082", "Fe\u2083Cl", "FeCl"] as [string,string,string], exp: "Fe(+3) needs 3 Cl(\u22121)." },
+        { q: "Formula of silver nitrate is:", a: "AgNO\u2083", d: ["Ag\u2082NO\u2083", "AgNO\u2082", "AgNO\u2084"] as [string,string,string], exp: "Ag(+1) and NO\u2083\u207b: AgNO\u2083." },
+        { q: "Formula of barium sulfate is:", a: "BaSO\u2084", d: ["Ba\u2082SO\u2084", "BaSO\u2083", "Ba(SO\u2084)\u2082"] as [string,string,string], exp: "Ba(+2) and SO\u2084\u00b2\u207b: BaSO\u2084." },
+        { q: "Formula of zinc hydroxide is:", a: "Zn(OH)\u2082", d: ["ZnOH", "Zn\u2082OH", "ZnO"] as [string,string,string], exp: "Zn(+2) and OH(\u22121): Zn(OH)\u2082." },
+        { q: "Formula of ammonium sulfate is:", a: "(NH\u2084)\u2082SO\u2084", d: ["NH\u2084SO\u2084", "(NH\u2084)SO\u2084", "NH\u2084SO\u2083"] as [string,string,string], exp: "NH\u2084\u207a(+1) and SO\u2084\u00b2\u207b: 2 NH\u2084\u207a needed." },
+        { q: "Formula of iron(II) sulfate is:", a: "FeSO\u2084", d: ["Fe\u2082SO\u2084", "Fe(SO\u2084)\u2082", "FeSO\u2083"] as [string,string,string], exp: "Fe(+2) and SO\u2084\u00b2\u207b: FeSO\u2084." },
+        { q: "Formula of copper(II) oxide is:", a: "CuO", d: ["Cu\u2082O", "Cu\u2082O\u2083", "CuO\u2082"] as [string,string,string], exp: "Cu(+2) and O(\u22122): CuO." },
+        { q: "Formula of magnesium nitrate is:", a: "Mg(NO\u2083)\u2082", d: ["MgNO\u2083", "Mg\u2082NO\u2083", "Mg(NO\u2082)\u2082"] as [string,string,string], exp: "Mg(+2) and NO\u2083\u207b: need 2 NO\u2083\u207b." },
+        { q: "Formula of sodium carbonate is:", a: "Na\u2082CO\u2083", d: ["NaCO\u2083", "Na\u2082CO\u2082", "NaHCO\u2083"] as [string,string,string], exp: "Na(+1) and CO\u2083\u00b2\u207b: Na\u2082CO\u2083." },
+        { q: "Formula of calcium phosphate is:", a: "Ca\u2083(PO\u2084)\u2082", d: ["CaPO\u2084", "Ca\u2082PO\u2084", "Ca(PO\u2084)\u2082"] as [string,string,string], exp: "Ca(+2) and PO\u2084\u00b3\u207b: Ca\u2083(PO\u2084)\u2082." },
+        { q: "Formula of lithium oxide is:", a: "Li\u2082O", d: ["LiO", "Li\u2083O\u2082", "LiO\u2082"] as [string,string,string], exp: "Li(+1) and O(\u22122): Li\u2082O." },
+        { q: "Formula of copper(I) chloride is:", a: "CuCl", d: ["CuCl\u2082", "Cu\u2082Cl", "CuCl\u2083"] as [string,string,string], exp: "Cu(+1) and Cl(\u22121): CuCl." },
+        { q: "Formula of nickel(II) sulfate is:", a: "NiSO\u2084", d: ["Ni\u2082SO\u2084", "Ni(SO\u2084)\u2082", "NiSO\u2083"] as [string,string,string], exp: "Ni(+2) and SO\u2084\u00b2\u207b: NiSO\u2084." },
+        { q: "Formula of lead(II) iodide is:", a: "PbI\u2082", d: ["PbI", "Pb\u2082I", "PbI\u2084"] as [string,string,string], exp: "Pb(+2) needs 2 I(\u22121)." },
+        { q: "Formula of silver sulfide is:", a: "Ag\u2082S", d: ["AgS", "Ag\u2082S\u2082", "Ag\u2083S"] as [string,string,string], exp: "Ag(+1) and S(\u22122): Ag\u2082S." },
+        { q: "Formula of manganese(II) oxide is:", a: "MnO", d: ["Mn\u2082O\u2083", "MnO\u2082", "Mn\u2083O\u2084"] as [string,string,string], exp: "Mn(+2) and O(\u22122): MnO." },
+        { q: "Formula of cobalt(II) chloride is:", a: "CoCl\u2082", d: ["CoCl", "CoCl\u2083", "Co\u2082Cl\u2083"] as [string,string,string], exp: "Co(+2) and Cl(\u22121): CoCl\u2082." },
+        { q: "Formula of chromium(III) chloride is:", a: "CrCl\u2083", d: ["CrCl\u2082", "Cr\u2082Cl\u2083", "CrCl"] as [string,string,string], exp: "Cr(+3) needs 3 Cl(\u22121)." },
+        { q: "Formula of potassium permanganate is:", a: "KMnO\u2084", d: ["K\u2082MnO\u2084", "KMnO\u2083", "K\u2082Mn\u2082O\u2087"] as [string,string,string], exp: "K(+1) and MnO\u2084\u207b: KMnO\u2084." },
+        { q: "Formula of ammonium chloride is:", a: "NH\u2084Cl", d: ["N\u2082H\u2084Cl", "NH\u2083Cl", "(NH\u2084)\u2082Cl"] as [string,string,string], exp: "NH\u2084\u207a(+1) and Cl(\u22121): NH\u2084Cl." },
+      ] as const;
+      const row = ionicPool[v % ionicPool.length];
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        row.q, row.a, row.d, row.exp,
+        "chemical bonding", "easy", seed
+      );
+    }
+
+    if (pattern === 4) {
+      // Chemical reactions — 25-entry pool
+      const rxnPool = [
+        { q: "Gas evolved when zinc reacts with dilute HCl is:", a: "hydrogen", d: ["oxygen", "nitrogen", "carbon dioxide"] as [string,string,string], exp: "Zn + 2HCl \u2192 ZnCl\u2082 + H\u2082\u2191." },
+        { q: "Gas evolved when Na\u2082CO\u2083 reacts with HCl is:", a: "carbon dioxide", d: ["hydrogen", "oxygen", "chlorine"] as [string,string,string], exp: "Na\u2082CO\u2083 + 2HCl \u2192 2NaCl + H\u2082O + CO\u2082\u2191." },
+        { q: "Gas evolved when NH\u2084Cl reacts with Ca(OH)\u2082 is:", a: "ammonia", d: ["hydrogen", "nitrogen", "HCl"] as [string,string,string], exp: "2NH\u2084Cl + Ca(OH)\u2082 \u2192 CaCl\u2082 + 2H\u2082O + 2NH\u2083\u2191." },
+        { q: "Gas evolved when MnO\u2082 reacts with conc. HCl is:", a: "chlorine", d: ["hydrogen", "oxygen", "HCl"] as [string,string,string], exp: "MnO\u2082 + 4HCl \u2192 MnCl\u2082 + 2H\u2082O + Cl\u2082\u2191." },
+        { q: "Product when NaOH reacts with HCl is:", a: "NaCl and water", d: ["Na\u2082O and water", "NaCl and H\u2082", "NaHCO\u2083"] as [string,string,string], exp: "NaOH + HCl \u2192 NaCl + H\u2082O." },
+        { q: "Gas produced when Na reacts with water is:", a: "hydrogen", d: ["oxygen", "sodium oxide", "hydroxide gas"] as [string,string,string], exp: "2Na + 2H\u2082O \u2192 2NaOH + H\u2082\u2191." },
+        { q: "Gas evolved when limestone reacts with dilute HCl is:", a: "carbon dioxide", d: ["hydrogen", "sulfur dioxide", "chlorine"] as [string,string,string], exp: "CaCO\u2083 + 2HCl \u2192 CaCl\u2082 + H\u2082O + CO\u2082\u2191." },
+        { q: "Product when CaO (quicklime) reacts with water is:", a: "Ca(OH)\u2082", d: ["CaCO\u2083", "CaCl\u2082", "Ca(HCO\u2083)\u2082"] as [string,string,string], exp: "CaO + H\u2082O \u2192 Ca(OH)\u2082 (slaked lime)." },
+        { q: "Substance formed when SO\u2083 dissolves in water is:", a: "H\u2082SO\u2084", d: ["H\u2082SO\u2083", "SO\u2082", "HSO\u2084\u207b"] as [string,string,string], exp: "SO\u2083 + H\u2082O \u2192 H\u2082SO\u2084." },
+        { q: "Gas produced when aluminium reacts with NaOH solution is:", a: "hydrogen", d: ["oxygen", "chlorine", "ammonia"] as [string,string,string], exp: "2Al + 2NaOH + 2H\u2082O \u2192 2NaAlO\u2082 + 3H\u2082\u2191." },
+        { q: "Gas produced when CaC\u2082 reacts with water is:", a: "acetylene (ethyne)", d: ["methane", "ethane", "propane"] as [string,string,string], exp: "CaC\u2082 + 2H\u2082O \u2192 Ca(OH)\u2082 + C\u2082H\u2082\u2191." },
+        { q: "When excess CO\u2082 is passed through Ca(OH)\u2082, precipitate:", a: "dissolves (Ca(HCO\u2083)\u2082 forms)", d: ["remains unchanged", "turns yellow", "turns red"] as [string,string,string], exp: "CaCO\u2083 + CO\u2082 + H\u2082O \u2192 Ca(HCO\u2083)\u2082 (soluble)." },
+        { q: "Reaction of K with water produces:", a: "KOH and H\u2082", d: ["K\u2082O and H\u2082O", "K\u2082O\u2082 and H\u2082", "KH and O\u2082"] as [string,string,string], exp: "2K + 2H\u2082O \u2192 2KOH + H\u2082\u2191." },
+        { q: "Gas produced when Cu reacts with conc. H\u2082SO\u2084 is:", a: "SO\u2082", d: ["H\u2082", "CO\u2082", "SO\u2083"] as [string,string,string], exp: "Cu + 2H\u2082SO\u2084(conc.) \u2192 CuSO\u2084 + SO\u2082 + 2H\u2082O." },
+        { q: "Lime water turns milky when CO\u2082 is passed because:", a: "CaCO\u2083 precipitates", d: ["Ca(OH)\u2082 dissolves", "CaO forms", "CO\u2082 reduces Ca(OH)\u2082"] as [string,string,string], exp: "CO\u2082 + Ca(OH)\u2082 \u2192 CaCO\u2083\u2193 + H\u2082O." },
+        { q: "Product when P\u2082O\u2085 reacts with water is:", a: "H\u2083PO\u2084", d: ["H\u2083PO\u2083", "HPO\u2083", "H\u2084P\u2082O\u2087"] as [string,string,string], exp: "P\u2082O\u2085 + 3H\u2082O \u2192 2H\u2083PO\u2084." },
+        { q: "White precipitate formed when AgNO\u2083 reacts with HCl is:", a: "AgCl", d: ["AgBr", "Ag\u2082O", "Ag\u2082S"] as [string,string,string], exp: "AgNO\u2083 + HCl \u2192 AgCl\u2193(white) + HNO\u2083." },
+        { q: "Brown gas formed when Cu reacts with dil. HNO\u2083 is:", a: "NO", d: ["NO\u2082", "N\u2082O", "N\u2082"] as [string,string,string], exp: "3Cu + 8HNO\u2083(dil.) \u2192 3Cu(NO\u2083)\u2082 + 2NO\u2191 + 4H\u2082O." },
+        { q: "Gas produced when iron reacts with steam is:", a: "hydrogen", d: ["oxygen", "CO\u2082", "N\u2082"] as [string,string,string], exp: "3Fe + 4H\u2082O \u2192 Fe\u2083O\u2084 + 4H\u2082." },
+        { q: "Product when Na\u2082O\u2082 reacts with water is:", a: "NaOH and O\u2082", d: ["NaOH and H\u2082", "Na\u2082O and H\u2082O\u2082", "NaH and O\u2082"] as [string,string,string], exp: "2Na\u2082O\u2082 + 2H\u2082O \u2192 4NaOH + O\u2082." },
+        { q: "Colour of copper sulfate solution is:", a: "blue", d: ["green", "colourless", "pink"] as [string,string,string], exp: "CuSO\u2084 solution is blue due to [Cu(H\u2082O)\u2084]\u00b2\u207a." },
+        { q: "PbS precipitate colour with H\u2082S in lead acetate solution is:", a: "black", d: ["white", "yellow", "red"] as [string,string,string], exp: "Pb(CH\u2083COO)\u2082 + H\u2082S \u2192 PbS\u2193(black)." },
+        { q: "Gas used to test for presence of unsaturation in organic compound:", a: "Br\u2082 water (bromine water)", d: ["H\u2082S", "NH\u2083", "Cl\u2082"] as [string,string,string], exp: "Bromine water decolourises with alkenes/alkynes." },
+        { q: "Product of combustion of methane (complete) is:", a: "CO\u2082 and H\u2082O", d: ["CO and H\u2082O", "CO\u2082 and H\u2082", "C and H\u2082O"] as [string,string,string], exp: "CH\u2084 + 2O\u2082 \u2192 CO\u2082 + 2H\u2082O." },
+        { q: "Aqua regia dissolves gold because:", a: "it is a powerful oxidising and complexing mixture", d: ["gold is a weak metal", "gold is soluble in HCl alone", "gold reacts with water"] as [string,string,string], exp: "Conc. HNO\u2083 + 3 conc. HCl oxidise and complex gold." },
+      ] as const;
+      const row = rxnPool[v % rxnPool.length];
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        row.q, row.a, row.d, row.exp,
+        "chemical reactions", "easy", seed
+      );
+    }
+
+    if (pattern === 5) {
+      // Acids/bases — 25-entry pool
+      const acidPool = [
+        { q: "Which is a strong acid?", a: "HCl", d: ["CH\u2083COOH", "H\u2082CO\u2083", "HF"] as [string,string,string], exp: "HCl ionises completely in water." },
+        { q: "Which is a weak acid?", a: "CH\u2083COOH", d: ["HNO\u2083", "H\u2082SO\u2084", "HCl"] as [string,string,string], exp: "Acetic acid ionises partially." },
+        { q: "pH of pure water at 25\u00b0C is:", a: "7", d: ["0", "14", "1"] as [string,string,string], exp: "Pure water [H\u207a]=[OH\u207b]=10\u207b\u2077; pH=7." },
+        { q: "A solution with pH < 7 is:", a: "acidic", d: ["basic", "neutral", "amphoteric"] as [string,string,string], exp: "Acidic solutions have pH below 7." },
+        { q: "Which is a strong base?", a: "NaOH", d: ["NH\u2084OH", "Cu(OH)\u2082", "Mg(OH)\u2082"] as [string,string,string], exp: "NaOH fully dissociates in water." },
+        { q: "Blue litmus paper turns red in:", a: "acid", d: ["base", "neutral salt solution", "distilled water"] as [string,string,string], exp: "Acids turn blue litmus red." },
+        { q: "Common name of NaHCO\u2083 is:", a: "baking soda", d: ["washing soda", "common salt", "lime water"] as [string,string,string], exp: "NaHCO\u2083 = baking soda." },
+        { q: "Chemical formula of washing soda is:", a: "Na\u2082CO\u2083\u00b710H\u2082O", d: ["NaHCO\u2083", "NaOH", "Na\u2082SO\u2084"] as [string,string,string], exp: "Washing soda = Na\u2082CO\u2083\u00b710H\u2082O." },
+        { q: "Which is an amphoteric oxide?", a: "Al\u2082O\u2083", d: ["CaO", "SO\u2082", "Na\u2082O"] as [string,string,string], exp: "Al\u2082O\u2083 reacts with both acids and bases." },
+        { q: "Acid present in vinegar is:", a: "acetic acid", d: ["citric acid", "lactic acid", "tartaric acid"] as [string,string,string], exp: "Vinegar is 5\u20138% acetic acid (CH\u2083COOH)." },
+        { q: "pH of 0.1 M HCl solution is:", a: "1", d: ["3", "7", "0"] as [string,string,string], exp: "[H\u207a]=0.1=10\u207b\u00b9; pH=1." },
+        { q: "Acid that cannot be stored in glass bottles is:", a: "HF", d: ["HCl", "H\u2082SO\u2084", "HNO\u2083"] as [string,string,string], exp: "HF etches glass (SiO\u2082 + 4HF \u2192 SiF\u2084 + 2H\u2082O)." },
+        { q: "Common name of Ca(OH)\u2082 is:", a: "slaked lime", d: ["quicklime", "limestone", "marble"] as [string,string,string], exp: "Ca(OH)\u2082 = slaked lime." },
+        { q: "Acid rain is caused mainly by:", a: "SO\u2082 and NO\u2082", d: ["CO\u2082 and H\u2082O", "O\u2083 and Cl\u2082", "NH\u2083 and HF"] as [string,string,string], exp: "SO\u2082 and NO\u2082 dissolve in rain \u2192 H\u2082SO\u2084 and HNO\u2083." },
+        { q: "Indicator that turns pink in base is:", a: "phenolphthalein", d: ["methyl orange", "litmus", "starch"] as [string,string,string], exp: "Phenolphthalein: colourless in acid, pink in base." },
+        { q: "Which salt hydrolyses to give acidic solution?", a: "NH\u2084Cl", d: ["NaCl", "Na\u2082CO\u2083", "CH\u2083COONa"] as [string,string,string], exp: "NH\u2084\u207a hydrolyses: NH\u2084\u207a+H\u2082O \u21cc NH\u2083+H\u2083O\u207a." },
+        { q: "Concentrated H\u2082SO\u2084 acts as:", a: "dehydrating agent", d: ["reducing agent", "bleaching agent alone", "weak acid"] as [string,string,string], exp: "Conc. H\u2082SO\u2084 is a powerful dehydrating agent." },
+        { q: "Which acid is used in car batteries?", a: "H\u2082SO\u2084", d: ["HCl", "HNO\u2083", "H\u2083PO\u2084"] as [string,string,string], exp: "Lead-acid batteries use dilute H\u2082SO\u2084." },
+        { q: "Formula of caustic soda is:", a: "NaOH", d: ["Na\u2082O", "NaHCO\u2083", "Na\u2082CO\u2083"] as [string,string,string], exp: "Caustic soda = NaOH." },
+        { q: "Which is a neutral salt?", a: "NaCl", d: ["Na\u2082CO\u2083", "NH\u2084Cl", "CH\u2083COONa"] as [string,string,string], exp: "NaCl (strong acid + strong base) gives neutral solution." },
+        { q: "Formula of bleaching powder is:", a: "Ca(OCl)Cl", d: ["CaO", "CaCl\u2082", "Ca(ClO\u2083)\u2082"] as [string,string,string], exp: "Bleaching powder = Ca(OCl)Cl." },
+        { q: "Neutralisation of acid with base always produces:", a: "salt and water", d: ["only salt", "only water", "H\u2082 gas"] as [string,string,string], exp: "Acid + Base \u2192 Salt + Water." },
+        { q: "A buffer solution resists change in:", a: "pH", d: ["temperature", "colour", "volume"] as [string,string,string], exp: "Buffers maintain nearly constant pH." },
+        { q: "Which property increases across a period?", a: "electronegativity", d: ["atomic radius", "metallic character", "ionisation energy decreases"] as [string,string,string], exp: "Electronegativity increases across a period." },
+        { q: "Antacid tablets contain:", a: "Mg(OH)\u2082 or Al(OH)\u2083", d: ["HCl", "NaHSO\u2084", "Na\u2082CO\u2083 solution"] as [string,string,string], exp: "Antacids are mild bases that neutralise excess stomach acid." },
+      ] as const;
+      const row = acidPool[v % acidPool.length];
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        row.q, row.a, row.d, row.exp,
+        "acids and bases", "easy", seed
+      );
+    }
+
+    if (pattern === 6) {
+      // Organic chemistry — 25-entry pool
+      const orgPool = [
+        { q: "Functional group in ethanol is:", a: "\u2212OH (hydroxyl)", d: ["\u2212COOH (carboxyl)", "\u2212CHO (aldehyde)", "\u2212CO\u2212 (ketone)"] as [string,string,string], exp: "C\u2082H\u2085OH has a hydroxyl group." },
+        { q: "Functional group in ethanoic acid is:", a: "\u2212COOH (carboxyl)", d: ["\u2212OH (hydroxyl)", "\u2212CO\u2212 (ketone)", "\u2212NH\u2082 (amine)"] as [string,string,string], exp: "CH\u2083COOH has a carboxyl group." },
+        { q: "Functional group in propanone is:", a: "\u2212CO\u2212 (ketone)", d: ["\u2212CHO (aldehyde)", "\u2212COOH", "\u2212OH"] as [string,string,string], exp: "Propanone (CH\u2083COCH\u2083) is a ketone." },
+        { q: "Functional group in methanal is:", a: "\u2212CHO (aldehyde)", d: ["\u2212CO\u2212 (ketone)", "\u2212COOH", "\u2212OH"] as [string,string,string], exp: "HCHO is an aldehyde." },
+        { q: "Functional group in methylamine is:", a: "\u2212NH\u2082 (amine)", d: ["\u2212OH", "\u2212NO\u2082 (nitro)", "\u2212COOH"] as [string,string,string], exp: "CH\u2083NH\u2082 has an amine group." },
+        { q: "IUPAC name of CH\u2083OH is:", a: "methanol", d: ["ethanol", "propanol", "methanal"] as [string,string,string], exp: "CH\u2083OH is methanol." },
+        { q: "IUPAC name of CH\u2083CHO is:", a: "ethanal", d: ["ethanol", "propanone", "methanol"] as [string,string,string], exp: "CH\u2083CHO is ethanal (acetaldehyde)." },
+        { q: "IUPAC name of CH\u2083COCH\u2083 is:", a: "propan-2-one", d: ["propan-1-one", "propanal", "propanol"] as [string,string,string], exp: "CH\u2083COCH\u2083 (acetone) = propan-2-one." },
+        { q: "Homologous series with formula C\u2099H\u2082\u2099\u208a\u2082 is:", a: "alkanes", d: ["alkenes", "alkynes", "arenes"] as [string,string,string], exp: "Alkanes: C\u2099H\u2082\u2099\u208a\u2082 (fully saturated)." },
+        { q: "General formula of alkenes is:", a: "C\u2099H\u2082\u2099", d: ["C\u2099H\u2082\u2099\u208a\u2082", "C\u2099H\u2082\u2099\u208b\u2082", "C\u2099H\u2099"] as [string,string,string], exp: "Alkenes: C\u2099H\u2082\u2099 (one double bond)." },
+        { q: "General formula of alkynes is:", a: "C\u2099H\u2082\u2099\u208b\u2082", d: ["C\u2099H\u2082\u2099\u208a\u2082", "C\u2099H\u2082\u2099", "C\u2099H\u2099"] as [string,string,string], exp: "Alkynes: C\u2099H\u2082\u2099\u208b\u2082 (one triple bond)." },
+        { q: "Product of fermentation of glucose is:", a: "ethanol and CO\u2082", d: ["acetic acid and H\u2082", "lactic acid", "methanol and CO"] as [string,string,string], exp: "C\u2086H\u2081\u2082O\u2086 \u2192 2C\u2082H\u2085OH + 2CO\u2082 (yeast)." },
+        { q: "Reaction of carboxylic acid + alcohol (acid catalyst) gives:", a: "ester", d: ["ether", "aldehyde", "alkene"] as [string,string,string], exp: "RCOOH + R\u2019OH \u21cc RCOOR\u2019 + H\u2082O (esterification)." },
+        { q: "Product of dehydration of ethanol at 170\u00b0C is:", a: "ethene", d: ["ethane", "diethyl ether", "acetaldehyde"] as [string,string,string], exp: "C\u2082H\u2085OH \u2192(H\u2082SO\u2084, 170\u00b0C)\u2192 CH\u2082=CH\u2082 + H\u2082O." },
+        { q: "Fehling\u2019s solution gives brick-red precipitate with:", a: "aldehydes", d: ["ketones", "carboxylic acids", "esters"] as [string,string,string], exp: "Aldehydes reduce Cu\u00b2\u207a to Cu\u2082O (brick-red)." },
+        { q: "Tollens\u2019 reagent (silver mirror test) is given by:", a: "aldehydes", d: ["ketones", "alcohols", "esters"] as [string,string,string], exp: "Aldehydes reduce [Ag(NH\u2083)\u2082]\u207a to silver mirror." },
+        { q: "Reagent that converts alkene to alkane is:", a: "H\u2082/Ni (hydrogenation)", d: ["Cl\u2082/h\u03bd", "KMnO\u2084/H\u207a", "HBr alone"] as [string,string,string], exp: "Catalytic hydrogenation: alkene + H\u2082 \u2192 alkane." },
+        { q: "Functional group that makes a compound an ester is:", a: "\u2212COO\u2212 (ester linkage)", d: ["\u2212COOH", "\u2212OH", "\u2212CO\u2212"] as [string,string,string], exp: "Esters have \u2212COO\u2212 linkage." },
+        { q: "IUPAC name of CH\u2083CH\u2082OH is:", a: "ethanol", d: ["methanol", "propanol", "ethanoic acid"] as [string,string,string], exp: "CH\u2083CH\u2082OH is ethanol." },
+        { q: "Aldol condensation requires compounds with:", a: "\u03b1-hydrogen atoms", d: ["no hydrogen atoms", "aromatic rings only", "ester groups only"] as [string,string,string], exp: "Aldol condensation requires \u03b1-H adjacent to carbonyl." },
+        { q: "Functional group in nitrobenzene is:", a: "\u2212NO\u2082 (nitro)", d: ["\u2212NH\u2082 (amine)", "\u2212OH", "\u2212COOH"] as [string,string,string], exp: "C\u2086H\u2085NO\u2082 has a nitro group." },
+        { q: "Saponification reaction: ester + alkali gives:", a: "alcohol + soap (salt of fatty acid)", d: ["ester + acid \u2192 alcohol", "alcohol + acid \u2192 ester", "alkene + H\u2082O"] as [string,string,string], exp: "RCOOR\u2019 + NaOH \u2192 RCOONa + R\u2019OH." },
+        { q: "Product of oxidation of primary alcohol using K\u2082Cr\u2082O\u2087/H\u207a is:", a: "aldehyde (then carboxylic acid)", d: ["ketone", "ester", "ether"] as [string,string,string], exp: "Primary alcohol \u2192 aldehyde \u2192 carboxylic acid on oxidation." },
+        { q: "Functional group in chloroethane is:", a: "\u2212Cl (halo)", d: ["\u2212OH", "\u2212NH\u2082", "\u2212COOH"] as [string,string,string], exp: "C\u2082H\u2085Cl is a haloalkane." },
+        { q: "Compound formed by treating carboxylic acid with SOCl\u2082 is:", a: "acid chloride", d: ["ester", "anhydride", "amide"] as [string,string,string], exp: "RCOOH + SOCl\u2082 \u2192 RCOCl (acid chloride) + SO\u2082 + HCl." },
+      ] as const;
+      const row = orgPool[v % orgPool.length];
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        row.q, row.a, row.d, row.exp,
+        "organic chemistry", "medium", seed
+      );
+    }
+
+    if (pattern === 7) {
+      // Periodic table — 25-entry pool
+      const perPool = [
+        { q: "Which element belongs to Group 1 (alkali metals)?", a: "Potassium", d: ["Calcium", "Magnesium", "Aluminium"] as [string,string,string], exp: "K is in Group 1." },
+        { q: "Atomic number of carbon is:", a: "6", d: ["12", "14", "8"] as [string,string,string], exp: "Carbon has 6 protons." },
+        { q: "Which is a noble gas?", a: "Argon", d: ["Nitrogen", "Hydrogen", "Fluorine"] as [string,string,string], exp: "Argon (Group 18) is a noble gas." },
+        { q: "Element with symbol Fe is:", a: "iron", d: ["fluorine", "francium", "fermium"] as [string,string,string], exp: "Fe from Latin \u2018ferrum\u2019 (iron)." },
+        { q: "Atomic number of sodium is:", a: "11", d: ["23", "12", "10"] as [string,string,string], exp: "Na has 11 protons." },
+        { q: "Which element has electronic configuration 2,8,7?", a: "Chlorine", d: ["Fluorine", "Bromine", "Neon"] as [string,string,string], exp: "2+8+7=17 protons \u2192 Cl." },
+        { q: "First element of the periodic table is:", a: "Hydrogen", d: ["Helium", "Lithium", "Carbon"] as [string,string,string], exp: "Hydrogen has atomic number 1." },
+        { q: "Transition metals belong to which block?", a: "d-block", d: ["s-block", "p-block", "f-block"] as [string,string,string], exp: "Transition elements have partly-filled d orbitals." },
+        { q: "Atomic mass of oxygen is approximately:", a: "16", d: ["8", "32", "14"] as [string,string,string], exp: "Oxygen atomic mass \u2248 16 u." },
+        { q: "How many periods are in the modern periodic table?", a: "7", d: ["5", "6", "8"] as [string,string,string], exp: "Modern periodic table has 7 periods." },
+        { q: "Which is a metalloid?", a: "Silicon", d: ["Sulphur", "Phosphorus", "Selenium"] as [string,string,string], exp: "Silicon is a common metalloid." },
+        { q: "Halogens belong to which group?", a: "Group 17", d: ["Group 1", "Group 16", "Group 18"] as [string,string,string], exp: "Halogens are Group 17 elements." },
+        { q: "Lanthanides and actinides belong to:", a: "f-block", d: ["d-block", "p-block", "s-block"] as [string,string,string], exp: "f-block elements have partly-filled f orbitals." },
+        { q: "Element with symbol Au is:", a: "gold", d: ["aluminium", "argentum (Ag)", "arsenic"] as [string,string,string], exp: "Au from Latin \u2018aurum\u2019 (gold)." },
+        { q: "Atomic number of nitrogen is:", a: "7", d: ["14", "8", "6"] as [string,string,string], exp: "N has 7 protons." },
+        { q: "Which metal is liquid at room temperature?", a: "Mercury", d: ["Tin", "Lead", "Bismuth"] as [string,string,string], exp: "Mercury (Hg) is liquid at room temperature." },
+        { q: "The most abundant element in Earth\u2019s crust is:", a: "Oxygen", d: ["Silicon", "Aluminium", "Iron"] as [string,string,string], exp: "Oxygen (\u223c46%) is most abundant in Earth\u2019s crust." },
+        { q: "Element with highest melting point among all elements is:", a: "Tungsten (W)", d: ["Iron", "Carbon", "Osmium"] as [string,string,string], exp: "W has highest melting point (\u223c3422\u00b0C)." },
+        { q: "Atomic number of aluminium is:", a: "13", d: ["27", "12", "14"] as [string,string,string], exp: "Al has 13 protons." },
+        { q: "Electropositive character increases down a group because:", a: "ionisation energy decreases", d: ["atomic size decreases", "electronegativity increases", "proton number increases"] as [string,string,string], exp: "Lower IE \u2192 easier electron loss \u2192 more electropositive." },
+        { q: "Which element in Period 2 has 2 valence electrons?", a: "Beryllium", d: ["Magnesium", "Lithium", "Boron"] as [string,string,string], exp: "Be (Z=4): config 2,2 \u2192 Period 2, Group 2." },
+        { q: "Which pair is in the same group of the periodic table?", a: "Na and K", d: ["Na and Mg", "K and Ca", "Li and Be"] as [string,string,string], exp: "Na and K are both in Group 1." },
+        { q: "Atomic number of calcium is:", a: "20", d: ["40", "19", "21"] as [string,string,string], exp: "Ca has 20 protons." },
+        { q: "Which element has the highest electronegativity?", a: "Fluorine", d: ["Oxygen", "Chlorine", "Nitrogen"] as [string,string,string], exp: "Fluorine has highest electronegativity (Pauling scale: 3.98)." },
+        { q: "Symbol of silver is:", a: "Ag", d: ["Si", "Au", "Sr"] as [string,string,string], exp: "Ag from Latin \u2018argentum\u2019 (silver)." },
+      ] as const;
+      const row = perPool[v % perPool.length];
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        row.q, row.a, row.d, row.exp,
+        "periodic table", "easy", seed
+      );
+    }
+
+    if (pattern === 8) {
+      // Mole concept — vary both compound and moles using v
+      const compounds = ["H\u2082O","CO\u2082","NH\u2083","HCl","H\u2082SO\u2084","NaOH","NaCl","CO","O\u2082","Cl\u2082","CaO","CH\u2084","SO\u2082","NO\u2082","CaCO\u2083"] as const;
+      const molarMasses = [18, 44, 17, 36.5, 98, 40, 58.5, 28, 32, 71, 56, 16, 64, 46, 100] as const;
+      const molesArr = [1, 2, 3, 4, 5] as const;
+      const ci = v % compounds.length;
+      const mi = v % molesArr.length;
+      const moles = molesArr[mi];
+      const mm = molarMasses[ci];
+      const mass = mm * moles;
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        `Number of moles in ${mass} g of ${compounds[ci]} (M = ${mm} g/mol) is:`,
+        `${moles}`,
+        [`${moles + 1}`, `${moles - 1 > 0 ? moles - 1 : moles + 2}`, `${moles + 1.5}`],
+        `n = mass/M = ${mass}/${mm} = ${moles} mol.`,
+        "mole concept", "medium", seed
+      );
+    }
+
+    if (pattern === 9) {
+      // Atomic structure — 25-entry pool
+      const atomPool = [
+        { q: "Electronic configuration 2,8,1 corresponds to:", a: "Sodium (Na)", d: ["Potassium (K)", "Magnesium (Mg)", "Lithium (Li)"] as [string,string,string], exp: "2+8+1=11 \u2192 Na." },
+        { q: "Electronic configuration 2,8,8 corresponds to:", a: "Argon (Ar)", d: ["Chlorine (Cl)", "Sulphur (S)", "Potassium (K)"] as [string,string,string], exp: "2+8+8=18 \u2192 Ar." },
+        { q: "Maximum electrons in d-subshell is:", a: "10", d: ["2", "6", "14"] as [string,string,string], exp: "d has 5 orbitals \u00d7 2 = 10 electrons." },
+        { q: "Quantum number describing orbital shape is:", a: "azimuthal (l)", d: ["principal (n)", "magnetic (m)", "spin (s)"] as [string,string,string], exp: "l determines orbital shape." },
+        { q: "Number of orbitals in p-subshell is:", a: "3", d: ["1", "5", "7"] as [string,string,string], exp: "p has 3 orbitals: p\u2093, p\u1d67, p\u1d69." },
+        { q: "Electron configuration of Na\u207a is:", a: "1s\u00b22s\u00b22p\u2076", d: ["1s\u00b22s\u00b22p\u2076 3s\u00b9", "1s\u00b22s\u00b22p\u2076 3s\u00b2", "1s\u00b22s\u00b22p\u2075"] as [string,string,string], exp: "Na loses 1e\u207b \u2192 10 electrons (Ne config)." },
+        { q: "Maximum electrons in shell n=3 is:", a: "18", d: ["8", "6", "32"] as [string,string,string], exp: "Max = 2n\u00b2 = 18." },
+        { q: "Electron configuration of Cl\u207b is:", a: "1s\u00b22s\u00b22p\u2076 3s\u00b23p\u2076", d: ["1s\u00b22s\u00b22p\u2076 3s\u00b23p\u2075", "1s\u00b22s\u00b22p\u2076 3s\u00b23p\u2076 3d\u00b9", "1s\u00b22s\u00b22p\u2076 3s\u00b2"] as [string,string,string], exp: "Cl gains 1e\u207b \u2192 18 electrons (Ar config)." },
+        { q: "Atomic number of hydrogen is:", a: "1", d: ["2", "0", "3"] as [string,string,string], exp: "H has 1 proton." },
+        { q: "Mass number of atom = protons +", a: "neutrons", d: ["electrons", "protons only", "electrons and neutrons"] as [string,string,string], exp: "A = Z + N (neutrons)." },
+        { q: "Isotopes are atoms with same:", a: "atomic number but different mass number", d: ["mass number but different Z", "same neutrons", "same A and Z"] as [string,string,string], exp: "Isotopes: same Z, different A." },
+        { q: "Shape of s-orbital is:", a: "spherical", d: ["dumbbell", "clover-leaf", "linear"] as [string,string,string], exp: "s-orbital is spherically symmetric." },
+        { q: "Aufbau principle: electrons fill orbitals in order of:", a: "increasing energy", d: ["decreasing energy", "random order", "n only"] as [string,string,string], exp: "Electrons fill lowest-energy orbitals first." },
+        { q: "Hund\u2019s rule: electrons occupy degenerate orbitals:", a: "one each before pairing", d: ["in pairs first", "randomly", "starting from highest energy"] as [string,string,string], exp: "Maximum spin multiplicity (Hund\u2019s rule)." },
+        { q: "Pauli exclusion principle states:", a: "no two electrons in an atom have same four quantum numbers", d: ["electrons repel each other", "orbitals fill in order of energy", "each orbital holds one electron only"] as [string,string,string], exp: "Each electron has unique set of n, l, m, s." },
+        { q: "De Broglie wavelength is:", a: "h/mv", d: ["mv/h", "h\u00b7mv", "m/hv"] as [string,string,string], exp: "\u03bb = h/p = h/(mv)." },
+        { q: "Photoelectric effect proves light has:", a: "particle nature (photons)", d: ["wave nature only", "both wave and particle simultaneously", "no mass"] as [string,string,string], exp: "Photoelectric effect demonstrated photon (particle) nature." },
+        { q: "Electron configuration of O\u00b2\u207b is:", a: "1s\u00b22s\u00b22p\u2076", d: ["1s\u00b22s\u00b22p\u2074", "1s\u00b22s\u00b22p\u2075", "1s\u00b22s\u00b22p\u2076 3s\u00b9"] as [string,string,string], exp: "O gains 2e\u207b \u2192 10 electrons (Ne config)." },
+        { q: "Electronic configuration 2,8,2 corresponds to:", a: "Magnesium", d: ["Calcium", "Beryllium", "Zinc"] as [string,string,string], exp: "2+8+2=12 \u2192 Mg." },
+        { q: "Radial nodes in 2s orbital:", a: "1", d: ["0", "2", "3"] as [string,string,string], exp: "Radial nodes = n \u2212 l \u2212 1 = 2\u22120\u22121 = 1." },
+        { q: "Heisenberg uncertainty principle:", a: "position and momentum cannot both be measured precisely simultaneously", d: ["electrons move in fixed orbits", "energy is conserved", "photons have mass"] as [string,string,string], exp: "\u0394x\u00b7\u0394p \u2265 h/(4\u03c0)." },
+        { q: "3d subshell electrons of Fe\u00b2\u207a (Z=26) is:", a: "6", d: ["4", "8", "5"] as [string,string,string], exp: "Fe: [Ar]3d\u2076 4s\u00b2; Fe\u00b2\u207a: [Ar]3d\u2076." },
+        { q: "Bohr model accurately explains atomic spectra of:", a: "hydrogen-like atoms", d: ["all atoms", "all metals", "noble gases only"] as [string,string,string], exp: "Bohr model works for H-like (one-electron) atoms." },
+        { q: "Electronic configuration 2,8,18,1 corresponds to:", a: "Copper (Cu, Z=29)", d: ["Zinc (Zn)", "Nickel (Ni)", "Iron (Fe)"] as [string,string,string], exp: "2+8+18+1=29 \u2192 Cu." },
+        { q: "Electronic configuration 2,2 corresponds to:", a: "Beryllium (Be)", d: ["Lithium (Li)", "Boron (B)", "Helium (He)"] as [string,string,string], exp: "2+2=4 \u2192 Be (Z=4)." },
+      ] as const;
+      const row = atomPool[v % atomPool.length];
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        row.q, row.a, row.d, row.exp,
+        "atomic structure", "medium", seed
+      );
+    }
+
+    if (pattern === 10) {
+      // Chemical bonding — 25-entry pool
+      const bondPool = [
+        { q: "Which is a covalent compound?", a: "Water (H\u2082O)", d: ["NaCl", "MgO", "CaCl\u2082"] as [string,string,string], exp: "Water has covalent O\u2212H bonds." },
+        { q: "Bond angle in water molecule is approximately:", a: "104.5\u00b0", d: ["180\u00b0", "120\u00b0", "109.5\u00b0"] as [string,string,string], exp: "Water is V-shaped; bond angle \u2248 104.5\u00b0." },
+        { q: "Shape of CO\u2082 molecule is:", a: "linear", d: ["bent", "trigonal planar", "tetrahedral"] as [string,string,string], exp: "CO\u2082 is linear (O=C=O)." },
+        { q: "Type of bond in NaCl is:", a: "ionic", d: ["covalent", "metallic", "hydrogen"] as [string,string,string], exp: "NaCl forms by electrostatic attraction (ionic bond)." },
+        { q: "Which molecule has a triple bond?", a: "N\u2082", d: ["H\u2082O", "NH\u2083", "O\u2082"] as [string,string,string], exp: "N\u2082 has a triple bond (N\u2261N)." },
+        { q: "Hybridisation of carbon in methane (CH\u2084) is:", a: "sp\u00b3", d: ["sp\u00b2", "sp", "dsp\u00b2"] as [string,string,string], exp: "CH\u2084 is tetrahedral; C is sp\u00b3 hybridised." },
+        { q: "Shape of BF\u2083 is:", a: "trigonal planar", d: ["tetrahedral", "linear", "pyramidal"] as [string,string,string], exp: "3 bond pairs, no lone pairs \u2192 trigonal planar." },
+        { q: "Hybridisation of carbon in ethene (C\u2082H\u2084) is:", a: "sp\u00b2", d: ["sp\u00b3", "sp", "dsp\u00b2"] as [string,string,string], exp: "C=C double bond; each C is sp\u00b2 hybridised." },
+        { q: "Shape of NH\u2083 is:", a: "trigonal pyramidal", d: ["tetrahedral", "trigonal planar", "bent"] as [string,string,string], exp: "3 bond pairs + 1 lone pair \u2192 trigonal pyramidal." },
+        { q: "Which compound shows hydrogen bonding?", a: "HF", d: ["HCl", "HBr", "HI"] as [string,string,string], exp: "HF has strong H-bonding (high electronegativity of F)." },
+        { q: "Electronegativity order: F, O, N, C is:", a: "F > O > N > C", d: ["C > N > O > F", "O > F > N > C", "N > O > C > F"] as [string,string,string], exp: "Electronegativity: F > O > N > C." },
+        { q: "Bond order in O\u2082 is:", a: "2", d: ["1", "3", "1.5"] as [string,string,string], exp: "O=O double bond; bond order = 2." },
+        { q: "Which molecule is polar?", a: "HCl", d: ["Cl\u2082", "N\u2082", "CO\u2082"] as [string,string,string], exp: "HCl has a net dipole moment \u2192 polar." },
+        { q: "Hybridisation of carbon in ethyne (C\u2082H\u2082) is:", a: "sp", d: ["sp\u00b2", "sp\u00b3", "dsp"] as [string,string,string], exp: "C\u2261C triple bond; each C is sp hybridised." },
+        { q: "Number of sigma bonds in ethane (C\u2082H\u2086) is:", a: "7", d: ["6", "8", "5"] as [string,string,string], exp: "C\u2013C (1) + 6 C\u2013H = 7 \u03c3 bonds." },
+        { q: "Bond angle in methane (CH\u2084) is:", a: "109.5\u00b0", d: ["90\u00b0", "120\u00b0", "180\u00b0"] as [string,string,string], exp: "Tetrahedral CH\u2084: 109.5\u00b0." },
+        { q: "Ionic bond typically forms between:", a: "metal and non-metal", d: ["two non-metals", "two metals", "metal and metalloid"] as [string,string,string], exp: "Ionic bonds form between metals (+) and non-metals (\u2212)." },
+        { q: "Which molecule is non-polar despite having polar bonds?", a: "CCl\u2084", d: ["HCl", "H\u2082O", "NH\u2083"] as [string,string,string], exp: "CCl\u2084 is symmetric (tetrahedral); dipoles cancel." },
+        { q: "Coordinate (dative) bond: both electrons donated by:", a: "one atom", d: ["each atom donates one", "ionic charges", "shared equally"] as [string,string,string], exp: "Dative bond: one atom donates both bonding electrons." },
+        { q: "Bond order in N\u2082 is:", a: "3", d: ["2", "1", "2.5"] as [string,string,string], exp: "N\u2261N triple bond; bond order = 3." },
+        { q: "London dispersion forces are present in:", a: "all molecules", d: ["polar molecules only", "ionic compounds only", "metals only"] as [string,string,string], exp: "London forces arise from temporary dipoles in all molecules." },
+        { q: "Which has the shortest bond length?", a: "triple bond", d: ["single bond", "double bond", "ionic bond"] as [string,string,string], exp: "Bond order \u2191 \u2192 bond length \u2193." },
+        { q: "Bond formed by sharing of electrons is:", a: "covalent bond", d: ["ionic bond", "metallic bond", "hydrogen bond"] as [string,string,string], exp: "Covalent bonds involve electron sharing." },
+        { q: "Force binding atoms in a metallic lattice is:", a: "metallic bond (electron sea)", d: ["ionic attraction", "covalent bond", "van der Waals"] as [string,string,string], exp: "Delocalised electrons form metallic bonds." },
+        { q: "Number of lone pairs on oxygen in H\u2082O is:", a: "2", d: ["0", "1", "3"] as [string,string,string], exp: "O has 6 valence electrons; 2 used in bonds, 4 in 2 lone pairs." },
+      ] as const;
+      const row = bondPool[v % bondPool.length];
+      return createComedkQuestion(
+        `comedk-set${setNumber}-chem-${qNo}`,
+        row.q, row.a, row.d, row.exp,
+        "chemical bonding", "easy", seed
+      );
+    }
+
+    // pattern 11 (default): common compounds — 25-entry pool
+    const compPool = [
+      { q: "Common name of NaHCO\u2083 is:", a: "baking soda", d: ["washing soda", "bleaching powder", "quicklime"] as [string,string,string], exp: "NaHCO\u2083 = baking soda." },
+      { q: "Chemical name of common salt (NaCl) is:", a: "sodium chloride", d: ["sodium carbonate", "sodium hydroxide", "sodium sulfate"] as [string,string,string], exp: "NaCl = sodium chloride." },
+      { q: "Chemical formula of plaster of Paris is:", a: "CaSO\u2084\u00b7\u00bdH\u2082O", d: ["CaSO\u2084\u00b72H\u2082O", "CaSO\u2084", "CaO"] as [string,string,string], exp: "Plaster of Paris = calcium sulfate hemihydrate." },
+      { q: "Gas used in fire extinguishers is:", a: "CO\u2082", d: ["N\u2082", "O\u2082", "Cl\u2082"] as [string,string,string], exp: "CO\u2082 smothers fire by displacing oxygen." },
+      { q: "Colour of hydrated copper sulfate (CuSO\u2084\u00b75H\u2082O) crystals is:", a: "blue", d: ["green", "white", "yellow"] as [string,string,string], exp: "Hydrated copper sulfate is blue." },
+      { q: "Rust is chemically:", a: "Fe\u2082O\u2083\u00b7xH\u2082O", d: ["FeO", "Fe\u2083O\u2084", "FeSO\u2084"] as [string,string,string], exp: "Rust = hydrated iron(III) oxide." },
+      { q: "Dry ice is:", a: "solid CO\u2082", d: ["solid N\u2082", "solid H\u2082O (below 0\u00b0C)", "solid SO\u2082"] as [string,string,string], exp: "Dry ice = solid carbon dioxide." },
+      { q: "Lime water turns milky when CO\u2082 is passed due to formation of:", a: "CaCO\u2083", d: ["Ca(OH)\u2082 dissolves", "CaO", "Ca(HCO\u2083)\u2082"] as [string,string,string], exp: "CO\u2082 + Ca(OH)\u2082 \u2192 CaCO\u2083\u2193 + H\u2082O." },
+      { q: "Galvanisation is coating iron with:", a: "zinc", d: ["tin", "copper", "chromium"] as [string,string,string], exp: "Galvanised iron is coated with Zn to prevent rusting." },
+      { q: "Chemical name of marble is:", a: "calcium carbonate", d: ["calcium oxide", "calcium sulfate", "calcium silicate"] as [string,string,string], exp: "Marble = CaCO\u2083." },
+      { q: "Colour of anhydrous copper sulfate (CuSO\u2084) is:", a: "white", d: ["blue", "green", "yellow"] as [string,string,string], exp: "Anhydrous CuSO\u2084 is white; turns blue on absorbing water." },
+      { q: "Laughing gas is:", a: "N\u2082O", d: ["NO", "NO\u2082", "N\u2082"] as [string,string,string], exp: "Laughing gas = nitrous oxide (N\u2082O)." },
+      { q: "Aqua regia is a mixture of:", a: "conc. HCl and conc. HNO\u2083 (3:1)", d: ["conc. H\u2082SO\u2084 and HNO\u2083", "conc. HCl and H\u2082SO\u2084", "dilute HNO\u2083 and HCl"] as [string,string,string], exp: "Aqua regia = 3 parts HCl : 1 part HNO\u2083." },
+      { q: "Chemical formula of gypsum is:", a: "CaSO\u2084\u00b72H\u2082O", d: ["CaSO\u2084\u00b7\u00bdH\u2082O", "CaSO\u2084", "CaCO\u2083"] as [string,string,string], exp: "Gypsum = calcium sulfate dihydrate." },
+      { q: "Drying agent used in lab is:", a: "anhydrous CaCl\u2082", d: ["NaCl", "KCl", "NH\u2084Cl"] as [string,string,string], exp: "Anhydrous CaCl\u2082 absorbs moisture (desiccant)." },
+      { q: "Hypo (sodium thiosulfate) is used in photography to:", a: "fix the image (remove unexposed AgBr)", d: ["develop the image", "wash the film", "sensitise the film"] as [string,string,string], exp: "Na\u2082S\u2082O\u2083 dissolves unreacted AgBr (fixing)." },
+      { q: "Philosopher\u2019s wool is:", a: "ZnO (white powder)", d: ["MgO", "Al\u2082O\u2083", "CaO"] as [string,string,string], exp: "Zinc oxide forms white fluffy powder = philosopher\u2019s wool." },
+      { q: "Gas used in electric bulbs to prevent filament burning is:", a: "Argon (or N\u2082)", d: ["CO\u2082", "O\u2082", "H\u2082"] as [string,string,string], exp: "Ar or N\u2082 is inert and prevents tungsten oxidation." },
+      { q: "Chemical name of quicklime is:", a: "calcium oxide", d: ["calcium carbonate", "calcium hydroxide", "calcium chloride"] as [string,string,string], exp: "Quicklime = CaO." },
+      { q: "Compound used as antiseptic:", a: "H\u2082O\u2082 (dilute 3%)", d: ["H\u2082SO\u2084", "HNO\u2083", "conc. HCl"] as [string,string,string], exp: "Dilute H\u2082O\u2082 (3%) is used as an antiseptic." },
+      { q: "Greenhouse gas produced mainly from fossil fuel combustion is:", a: "CO\u2082", d: ["O\u2082", "N\u2082", "H\u2082"] as [string,string,string], exp: "CO\u2082 is the primary greenhouse gas from human activity." },
+      { q: "Formula of washing soda is:", a: "Na\u2082CO\u2083\u00b710H\u2082O", d: ["NaHCO\u2083", "Na\u2082CO\u2083 (anhydrous)", "NaOH\u00b710H\u2082O"] as [string,string,string], exp: "Washing soda = Na\u2082CO\u2083\u00b710H\u2082O." },
+      { q: "Magnesia is:", a: "MgO", d: ["Mg(OH)\u2082", "MgSO\u2084", "MgCO\u2083"] as [string,string,string], exp: "Magnesia = magnesium oxide (MgO)." },
+      { q: "Substance used to test for starch is:", a: "iodine solution", d: ["Fehling\u2019s solution", "Tollens\u2019 reagent", "bromine water"] as [string,string,string], exp: "Iodine turns blue-black with starch." },
+      { q: "Chemical name of slaked lime is:", a: "calcium hydroxide", d: ["calcium oxide", "calcium carbonate", "calcium sulfate"] as [string,string,string], exp: "Slaked lime = Ca(OH)\u2082." },
+    ] as const;
+    const row = compPool[v % compPool.length];
+    return createComedkQuestion(
+      `comedk-set${setNumber}-chem-${qNo}`,
+      row.q, row.a, row.d, row.exp,
+      "common compounds", "easy", seed
+    );
+  });
+}
+
+function normalizeQuestionKey(question: string): string {
+  return question.replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+function hasDuplicateOptions(question: PracticeQuestion): boolean {
+  const normalized = question.options.map((option) => option.text.trim().toLowerCase());
+  return new Set(normalized).size !== normalized.length;
+}
+
+function buildComedkChemistryBank(): PracticeQuestion[] {
+  const rawBank = Array.from({ length: 5 }, (_, index) =>
+    createComedkChemistryQuestionsLegacy(index + 1)
+  ).flat();
+
+  const duplicateQuestionMap = new Map<string, number>();
+  let duplicateOptionCount = 0;
+
+  for (const question of rawBank) {
+    const key = normalizeQuestionKey(question.question);
+    duplicateQuestionMap.set(key, (duplicateQuestionMap.get(key) ?? 0) + 1);
+
+    if (hasDuplicateOptions(question)) {
+      duplicateOptionCount += 1;
+    }
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    const duplicateQuestionCount = Array.from(duplicateQuestionMap.values()).filter(
+      (count) => count > 1
+    ).length;
+
+    if (duplicateQuestionCount > 0 || duplicateOptionCount > 0) {
+      console.warn(
+        `[COMEDK] Chemistry bank quality check: duplicate questions=${duplicateQuestionCount}, duplicate-option-questions=${duplicateOptionCount}`
+      );
+    }
+  }
+
+  return rawBank;
+}
+
+const COMEDK_CHEMISTRY_BANK = buildComedkChemistryBank();
+
+function createComedkChemistryQuestions(setNumber: number): PracticeQuestion[] {
+  const start = (setNumber - 1) * 60;
+  const slice = COMEDK_CHEMISTRY_BANK.slice(start, start + 60);
+
+  return slice.map((question, index) => ({
+    ...question,
+    id: `comedk-set${setNumber}-chem-${index + 1}`,
+  }));
+}
+
+function createComedkSet6MathQuestionsLegacy(): PracticeQuestion[] {
+  return Array.from({ length: 60 }, (_, index) => {
+    const qNo = index + 1;
+    const pattern = index % 15;
+    const occ = Math.floor(index / 15); // 0–3: occurrence within set
+    const seed = 9600 + qNo;
+
+    if (pattern === 0) {
+      const r1 = 2 + occ;  // occ: 0-3 (no repeat)
+      const r2 = 5 + (qNo % 4);
+      const sum = r1 + r2;
+      const product = r1 * r2;
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `If roots of x\u00b2 \u2212 ${sum}x + ${product} = 0 are \u03b1 and \u03b2, value of \u03b1\u00b7\u03b2 is:`,
+        `${product}`,
+        [`${sum}`, `${product + 2}`, `${product - 2}`],
+        `For x\u00b2 \u2212 Sx + P = 0, product of roots is P.`,
+        "algebra",
         "medium",
         seed
       );
     }
 
-    if (topic === "Trigonometry") {
-      const entries = [
-        { q: "sin 30 deg", a: "1/2", d: ["0", "1", "sqrt(3)/2"] as [string, string, string] },
-        { q: "cos 60 deg", a: "1/2", d: ["0", "1", "sqrt(3)/2"] as [string, string, string] },
-        { q: "tan 45 deg", a: "1", d: ["1/2", "sqrt(3)", "0"] as [string, string, string] },
-        { q: "sin 90 deg", a: "1", d: ["0", "1/2", "sqrt(3)/2"] as [string, string, string] },
-        { q: "cos 0 deg", a: "1", d: ["0", "1/2", "sqrt(3)/2"] as [string, string, string] },
-      ] as const;
-      const entry = entries[round % entries.length];
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-math2026-${index + 1}`,
-        `What is the value of ${entry.q}?`,
-        entry.a,
-        entry.d,
-        `Use standard trigonometric values.`,
-        topic,
+    if (pattern === 1) {
+      const a = 3 + (qNo % 4);
+      const d = 2 + occ;  // occ: 0-3 (no repeat)
+      const n = 12;
+      const sum = (n * (2 * a + (n - 1) * d)) / 2;
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `Sum of first ${n} terms of AP with a=${a}, d=${d} is:`,
+        `${sum}`,
+        [`${sum + n}`, `${sum - n}`, `${n * (a + d)}`],
+        `Use Sn = n/2 * [2a + (n-1)d].`,
+        "progressions",
+        "medium",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const n = 6 + occ;  // occ: 0-3 (no repeat)
+      const r = 2 + (qNo % 2);
+      const comb = r === 2 ? (n * (n - 1)) / 2 : (n * (n - 1) * (n - 2)) / 6;
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `Value of ${n}C${r} is:`,
+        `${comb}`,
+        [`${comb + 1}`, `${comb - 1}`, `${n * r}`],
+        `Use nCr = n!/(r!(n-r)!).`,
+        "combinatorics",
+        "medium",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      const p = 3 + occ;  // occ: 0-3 (no repeat)
+      const x = 2;
+      const val = p * x ** (p - 1);
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `If y = x^${p}, then dy/dx at x=${x} equals:`,
+        `${val}`,
+        [`${x ** p}`, `${p * x}`, `${val + 2}`],
+        `Derivative of x^n is n*x^(n-1).`,
+        "differential calculus",
+        "medium",
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      const k = 2 + (qNo % 4);
+      const upper = 3;
+      const val = (k * upper * upper) / 2;
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `Integral from 0 to ${upper} of ${k}x dx is:`,
+        `${val}`,
+        [`${val + k}`, `${k * upper}`, `${val - k}`],
+        `Integral of kx is (k/2)x^2 and then apply limits.`,
+        "integral calculus",
+        "medium",
+        seed
+      );
+    }
+
+    if (pattern === 5) {
+      const r = 5 + occ;  // occ: 0-3 (no repeat)
+      const area = Math.PI * r * r;
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `Area of circle of radius ${r} is:`,
+        `${r * r}pi`,
+        [`${2 * r}pi`, `${r}pi`, `${r * (r + 1)}pi`],
+        `Area = pi*r^2.`,
+        "coordinate geometry",
         "easy",
         seed
       );
     }
 
-    if (topic === "Vectors and 3D Geometry") {
-      const a = round + 1;
-      const b = round + 2;
-      const magnitudeSquared = a * a + b * b;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-math2026-${index + 1}`,
-        `Find |v|^2 for vector v = (${a}, ${b}, 0).`,
-        `${magnitudeSquared}`,
-        [`${a + b}`, `${magnitudeSquared + 1}`, `${a * b}`],
-        `|v|^2 = a^2 + b^2 + 0^2.`,
-        topic,
-        "medium",
+    if (pattern === 6) {
+      const m1 = 1 + (qNo % 4);
+      const m2 = -1 - occ;  // occ: 0-3 (no repeat)
+      const prod = m1 * m2;
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `If slopes are m1=${m1} and m2=${m2}, then m1*m2 is:`,
+        `${prod}`,
+        [`${m1 + m2}`, `${m1 - m2}`, `${prod - 2}`],
+        `Multiply the two slopes directly.`,
+        "straight lines",
+        "easy",
         seed
       );
     }
 
-    if (topic === "Matrices & Determinants") {
-      const a = round + 2;
-      const b = setNumber + 1;
-      const c = round + 1;
-      const d = round + 4;
+    if (pattern === 7) {
+      const a = 2 + (qNo % 4);
+      const b = 1 + occ;  // occ: 0-3 (no repeat)
+      const c = 1 + (qNo % 2);
+      const d = 4 + ((occ + 2) % 4);  // Different from b
       const det = a * d - b * c;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-math2026-${index + 1}`,
-        `Find determinant of [[${a}, ${b}], [${c}, ${d}]].`,
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `Determinant of matrix [[${a}, ${b}], [${c}, ${d}]] is:`,
         `${det}`,
-        [`${a * d + b * c}`, `${det + 2}`, `${det - 2}`],
+        [`${a * d + b * c}`, `${a + b + c + d}`, `${det + 3}`],
         `For 2x2 matrix, determinant = ad - bc.`,
-        topic,
+        "matrices",
         "medium",
         seed
       );
     }
 
-    if (isToughSet) {
-      const red = 4 + (round % 4);
-      const blue = 5 + (round % 3);
+    if (pattern === 8) {
+      const n = 7 + (qNo % 4);
+      const r = 3;
+      const perm = n * (n - 1) * (n - 2);
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `Value of ${n}P${r} is:`,
+        `${perm}`,
+        [`${perm / 6}`, `${perm + 6}`, `${perm - 6}`],
+        `nPr = n!/(n-r)!.`,
+        "permutations",
+        "medium",
+        seed
+      );
+    }
+
+    if (pattern === 9) {
+      const red = 4 + occ;  // occ: 0-3 (no repeat)
+      const blue = 5 + (qNo % 4);
       const total = red + blue;
-      const numerator = red * (red - 1);
-      const denominator = total * (total - 1);
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-math2026-${index + 1}`,
-        round % 3 === 0
-          ? `Without replacement (dependent events), a bag has ${red} red and ${blue} blue balls. Probability that both drawn balls are red?`
-          : round % 3 === 1
-          ? `Two balls are drawn successively without replacement from ${red} red and ${blue} blue balls. Find P(both red).`
-          : `From a bag with ${red} red and ${blue} blue balls, two picks are made without replacement. What is the probability of two reds?`,
-        `${numerator}/${denominator}`,
-        [`${red}/${total}`, `${red * blue}/${denominator}`, `${numerator}/${total}`],
-        round % 3 === 0
-          ? "Concept link: dependence changes denominator after first draw. Compute product of successive conditional probabilities."
-          : round % 3 === 1
-          ? "Use P(R1 and R2) = P(R1) * P(R2|R1)."
-          : "Adjust counts after the first favorable draw, then multiply stage probabilities.",
-        topic,
+      const num = red * (red - 1);
+      const den = total * (total - 1);
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `Two balls are drawn without replacement from a bag having ${red} red and ${blue} blue balls. Probability that both are red is:`,
+        `${num}/${den}`,
+        [`${red}/${total}`, `${num}/${total}`, `${blue * (blue - 1)}/${den}`],
+        `Use P(R1 and R2) = (red/total)*((red-1)/(total-1)).`,
+        "probability",
         "hard",
         seed
       );
     }
 
-    const total = 10 + round;
-    const favorable = 3 + (round % 4);
-    return createGeneratedQuestion(
-      `comedk-set${setNumber}-math2026-${index + 1}`,
-      `A bag has ${favorable} red and ${total - favorable} blue balls. Probability of red is?`,
-      `${favorable}/${total}`,
-      [`${total - favorable}/${total}`, `${favorable}/${total - 1}`, `${favorable + 1}/${total}`],
-      `Probability = favorable outcomes / total outcomes.`,
-      topic,
-      "easy",
+    if (pattern === 10) {
+      const a = 3 + (qNo % 4);
+      const b = 4 + occ;  // occ: 0-3 (no repeat)
+      const mod = Math.sqrt(a * a + b * b);
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `Modulus of complex number ${a} + ${b}i is:`,
+        `${formatValue(mod)}`,
+        [`${a + b}`, `${Math.abs(a - b)}`, `${a * b}`],
+        `|a+bi| = sqrt(a^2 + b^2).`,
+        "complex numbers",
+        "medium",
+        seed
+      );
+    }
+
+    if (pattern === 11) {
+      const a1 = 1 + occ;  // occ: 0-3 (no repeat)
+      const a2 = 2 + (qNo % 4);
+      const b1 = 3 + (qNo % 2);
+      const b2 = 1 + ((occ + 2) % 4);  // Different from a1
+      const dot = a1 * b1 + a2 * b2;
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `Dot product of vectors (${a1}, ${a2}) and (${b1}, ${b2}) is:`,
+        `${dot}`,
+        [`${a1 * b1 - a2 * b2}`, `${dot + 2}`, `${dot - 2}`],
+        `For 2D vectors, dot product is x1x2 + y1y2.`,
+        "vectors",
+        "medium",
+        seed
+      );
+    }
+
+    if (pattern === 12) {
+      // 4 distinct trig identity questions — occ 0–3 picks a unique one
+      const trigIdentPool = [
+        { q: "Value of sin\u00b2\u03b8 + cos\u00b2\u03b8 is:", a: "1", d: ["0", "2", "sin 2\u03b8"] as [string,string,string], exp: "Fundamental Pythagorean identity." },
+        { q: "Value of 1 + tan\u00b2\u03b8 is:", a: "sec\u00b2\u03b8", d: ["csc\u00b2\u03b8", "1", "cos\u00b2\u03b8"] as [string,string,string], exp: "1 + tan\u00b2\u03b8 = sec\u00b2\u03b8." },
+        { q: "Value of 1 + cot\u00b2\u03b8 is:", a: "csc\u00b2\u03b8", d: ["sec\u00b2\u03b8", "1", "sin\u00b2\u03b8"] as [string,string,string], exp: "1 + cot\u00b2\u03b8 = csc\u00b2\u03b8." },
+        { q: "Value of sin(90\u00b0 \u2212 \u03b8) is:", a: "cos\u03b8", d: ["sin\u03b8", "\u2212cos\u03b8", "tan\u03b8"] as [string,string,string], exp: "Co-function identity: sin(90\u00b0\u2212\u03b8) = cos\u03b8." },
+      ] as const;
+      const row = trigIdentPool[occ % trigIdentPool.length];
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        row.q, row.a, row.d, row.exp,
+        "trigonometry", "easy", seed
+      );
+    }
+
+    if (pattern === 13) {
+      const p = 2 + (qNo % 4);
+      return createComedkQuestion(
+        `comedk-set6-math-${qNo}`,
+        `If log10(x) = ${p}, then x equals:`,
+        `${10 ** p}`,
+        [`${p}`, `${p * 10}`, `${10 ** (p - 1)}`],
+        `From log10(x)=p, x=10^p.`,
+        "logarithms",
+        "easy",
+        seed
+      );
+    }
+
+    const n = 1 + (qNo % 4);
+    const lim = 2 * n;
+    return createComedkQuestion(
+      `comedk-set6-math-${qNo}`,
+      `Limit of (x^2 - ${n * n})/(x - ${n}) as x tends to ${n} is:`,
+      `${lim}`,
+      [`${n}`, `${3 * n + 1}`, `${lim + 1}`],
+      `Factor numerator: (x-n)(x+n), cancel and substitute x=n.`,
+      "limits",
+      "hard",
       seed
     );
   });
-
-  return applyProgression(questions);
 }
 
-function createComedkPhysicsQuestions2026Set1(setNumber: number): PracticeQuestion[] {
-  const applyProgression = (questions: PracticeQuestion[]) =>
-    questions.map((question, index) => ({
-      ...question,
-      difficulty:
-        setNumber === 1
-          ? question.difficulty
-          : setNumber === 2
-          ? index % 6 === 0
-            ? "easy"
-            : "medium"
-          : setNumber === 3
-          ? index < 12
-            ? "easy"
-            : index < 42
-            ? "medium"
-            : "hard"
-          : setNumber === 4
-          ? index < 18
-            ? "medium"
-            : "hard"
-          : index < 10
-          ? "medium"
-          : "hard",
-    }));
+function buildComedkSet6MathBank(): PracticeQuestion[] {
+  const rawBank = createComedkSet6MathQuestionsLegacy();
 
-  const weightedTopics = [
-    ...Array(6).fill("Kinematics"),
-    ...Array(6).fill("Laws of Motion"),
-    ...Array(6).fill("Work, Energy & Power"),
-    ...Array(5).fill("Rotational Motion"),
-    ...Array(4).fill("Gravitation"),
-    ...Array(5).fill("Thermodynamics"),
-    ...Array(4).fill("Oscillations & Waves"),
-    ...Array(5).fill("Electrostatics"),
-    ...Array(5).fill("Current Electricity"),
-    ...Array(4).fill("Magnetic Effects"),
-    ...Array(4).fill("Electromagnetic Induction"),
-    ...Array(3).fill("Optics"),
-    ...Array(3).fill("Modern Physics"),
-  ];
+  const duplicateQuestionMap = new Map<string, number>();
+  let duplicateOptionCount = 0;
 
-  const topicCounters: Record<string, number> = {};
-  const isToughSet = setNumber >= 4;
+  for (const question of rawBank) {
+    const key = normalizeQuestionKey(question.question);
+    duplicateQuestionMap.set(key, (duplicateQuestionMap.get(key) ?? 0) + 1);
 
-  const questions = weightedTopics.map((topic, index) => {
-    const round = topicCounters[topic] ?? 0;
-    topicCounters[topic] = round + 1;
-    const seed = 10100 + setNumber * 100 + index;
+    if (hasDuplicateOptions(question)) {
+      duplicateOptionCount += 1;
+    }
+  }
 
-    if (topic === "Kinematics") {
-      if (isToughSet) {
-        const u = round + 2;
-        const a = round + 3;
-        const t = 5;
-        const s = u * t + 0.5 * a * t * t;
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-phys2026-${index + 1}`,
-          round % 3 === 0
-            ? `For uniformly accelerated motion, a body starts with ${u} m/s and acceleration ${a} m/s^2 for ${t} s. Find displacement.`
-            : round % 3 === 1
-            ? `A particle moves with initial speed ${u} m/s and constant acceleration ${a} m/s^2 for ${t} s. Determine displacement.`
-            : `Using constant-acceleration kinematics, calculate distance traveled in ${t} s for u = ${u} m/s and a = ${a} m/s^2.`,
-          `${formatValue(s)} m`,
-          [`${u * t} m`, `${formatValue(s + 5)} m`, `${formatValue(s - 5)} m`],
-          round % 3 === 0
-            ? "Concept link: displacement under constant acceleration combines initial-motion term and acceleration term."
-            : round % 3 === 1
-            ? "Use s = ut + (1/2)at^2 for constant acceleration."
-            : "Break motion into uniform and accelerated components, then add.",
-          topic,
-          "hard",
-          seed
-        );
-      }
+  if (process.env.NODE_ENV !== "production") {
+    const duplicateQuestionCount = Array.from(duplicateQuestionMap.values()).filter(
+      (count) => count > 1
+    ).length;
 
-      const u = round + 2;
-      const a = round + 3;
+    if (duplicateQuestionCount > 0 || duplicateOptionCount > 0) {
+      console.warn(
+        `[COMEDK] Set6 Math bank quality check: duplicate questions=${duplicateQuestionCount}, duplicate-option-questions=${duplicateOptionCount}`
+      );
+    }
+  }
+
+  return rawBank;
+}
+
+const COMEDK_SET6_MATH_BANK = buildComedkSet6MathBank();
+
+function createComedkSet6MathQuestions(): PracticeQuestion[] {
+  return COMEDK_SET6_MATH_BANK;
+}
+
+function createComedkSet6PhysicsQuestionsLegacy(): PracticeQuestion[] {
+  return Array.from({ length: 60 }, (_, index) => {
+    const qNo = index + 1;
+    const pattern = index % 15;
+    const occ = Math.floor(index / 15); // 0–3
+    const seed = 10600 + qNo;
+
+    if (pattern === 0) {
+      const u = 2 + occ;  // occ: 0-3 (no repeat)
+      const a = 3 + (qNo % 4);
       const t = 4;
       const v = u + a * t;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        `A body has initial velocity ${u} m/s and acceleration ${a} m/s^2 for ${t} s. Find final velocity.`,
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `For uniformly accelerated motion (u=${u} m/s, a=${a} m/s\u00b2, t=${t} s), final velocity is:`,
         `${v} m/s`,
-        [`${v - a} m/s`, `${v + a} m/s`, `${a * t} m/s`],
+        [`${v - a} m/s`, `${v + a} m/s`, `${u + t} m/s`],
         `Use v = u + at.`,
-        topic,
+        "kinematics",
         "easy",
         seed
       );
     }
 
-    if (topic === "Laws of Motion") {
-      const m = round + 2;
-      const a = round + 4;
+    if (pattern === 1) {
+      const u = 22 + occ * 3;
+      const g = 10;
+      const h = (u * u) / (2 * g);
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `Maximum height reached by a body projected vertically upward with speed ${u} m/s (g=10 m/s^2) is:`,
+        `${formatValue(h)} m`,
+        [`${u} m`, `${formatValue(h + 2)} m`, `${formatValue(h - 2)} m`],
+        `Use H = u^2/(2g).`,
+        "projectile motion",
+        "medium",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const m = 2 + (qNo % 5);
+      const a = 3 + occ;  // occ: 0-3 (no repeat)
       const f = m * a;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        `Find force required to accelerate ${m} kg mass at ${a} m/s^2.`,
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `A ${m} kg body has acceleration ${a} m/s^2. Net force is:`,
         `${f} N`,
-        [`${f - m} N`, `${f + m} N`, `${a} N`],
+        [`${f + 2} N`, `${f - 2} N`, `${a} N`],
         `Use F = ma.`,
-        topic,
+        "laws of motion",
         "easy",
         seed
       );
     }
 
-    if (topic === "Work, Energy & Power") {
-      if (isToughSet) {
-        const m = round + 2;
-        const v = round + 4;
-        const t = 2 + (round % 2);
-        const ke = 0.5 * m * v * v;
-        const p = ke / t;
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-phys2026-${index + 1}`,
-          round % 3 === 0
-            ? `Using work-energy theorem, a ${m} kg body reaches speed ${v} m/s in ${t} s from rest. Find average power delivered.`
-            : round % 3 === 1
-            ? `A ${m} kg object accelerates from rest to ${v} m/s in ${t} s. Compute average power from energy gain.`
-            : `Mass ${m} kg reaches ${v} m/s in ${t} s from rest. Using energy change per time, find average power.`,
-          `${formatValue(p)} W`,
-          [`${formatValue(ke)} W`, `${formatValue(p + 5)} W`, `${formatValue(p - 5)} W`],
-          round % 3 === 0
-            ? "Concept link: net work equals change in kinetic energy; divide by time for average power."
-            : round % 3 === 1
-            ? "Find kinetic-energy change first, then divide by time."
-            : "Average power is rate of energy transfer: Pavg = deltaE/t.",
-          topic,
-          "hard",
-          seed
-        );
-      }
+    if (pattern === 3) {
+      const m = 3 + (qNo % 4);
+      const v = 4 + occ;  // occ: 0-3 (no repeat)
+      const ke = 0.5 * m * v * v;
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `Kinetic energy of mass ${m} kg moving at ${v} m/s is:`,
+        `${formatValue(ke)} J`,
+        [`${formatValue(ke + 5)} J`, `${formatValue(ke - 5)} J`, `${m * v} J`],
+        `Use KE = 1/2 mv^2.`,
+        "work and energy",
+        "medium",
+        seed
+      );
+    }
 
-      const w = 120 + round * 20;
-      const t = 4 + (round % 3);
+    if (pattern === 4) {
+      const w = 240 + qNo * 2;
+      const t = 8;
       const p = w / t;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        `${w} J work is done in ${t} s. Find power.`,
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `If ${w} J work is done in ${t} s, power is:`,
         `${formatValue(p)} W`,
-        [`${formatValue(p + 5)} W`, `${formatValue(w - t)} W`, `${formatValue(t)} W`],
-        `Power P = W/t.`,
-        topic,
-        "medium",
-        seed
-      );
-    }
-
-    if (topic === "Rotational Motion") {
-      if (isToughSet) {
-        const i = round + 2;
-        const tau = 12 + round * 2;
-        const t = 4;
-        const alpha = tau / i;
-        const omega = alpha * t;
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-phys2026-${index + 1}`,
-          `From rotational dynamics, a wheel with moment of inertia ${i} kg m^2 has torque ${tau} N m for ${t} s from rest. Find angular speed reached.`,
-          `${formatValue(omega)} rad/s`,
-          [`${formatValue(alpha)} rad/s`, `${formatValue(omega + 2)} rad/s`, `${formatValue(omega - 2)} rad/s`],
-          `Concept link: torque sets angular acceleration, then time integration gives angular speed.`,
-          topic,
-          "hard",
-          seed
-        );
-      }
-
-      const i = round + 2;
-      const alpha = round + 3;
-      const tau = i * alpha;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        `A body has moment of inertia ${i} kg m^2 and angular acceleration ${alpha} rad/s^2. Find torque.`,
-        `${tau} N m`,
-        [`${tau + 2} N m`, `${tau - 2} N m`, `${alpha} N m`],
-        `Torque tau = I*alpha.`,
-        topic,
-        "medium",
-        seed
-      );
-    }
-
-    if (topic === "Gravitation") {
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        "If distance between two masses is doubled, gravitational force becomes?",
-        "one-fourth",
-        ["double", "half", "unchanged"],
-        "From inverse square law, F is proportional to 1/r^2.",
-        topic,
+        [`${formatValue(p + 4)} W`, `${formatValue(p - 4)} W`, `${t} W`],
+        `Power = Work/time.`,
+        "work and energy",
         "easy",
         seed
       );
     }
 
-    if (topic === "Thermodynamics") {
-      const qh = 400 + round * 50;
-      const qc = 100 + round * 20;
-      const eta = ((qh - qc) / qh) * 100;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        `A heat engine absorbs ${qh} J and rejects ${qc} J. Find efficiency percentage.`,
-        `${formatValue(eta)}%`,
-        [`${formatValue(eta + 10)}%`, `${formatValue((qc / qh) * 100)}%`, `${formatValue(eta - 10)}%`],
-        `Efficiency = (Qh - Qc)/Qh * 100.`,
-        topic,
-        "medium",
+    if (pattern === 5) {
+      // 4 distinct gravitational force questions — occ 0–3
+      const nArr = [2, 3, 4, 5] as const;
+      const fracArr = ["1/4", "1/9", "1/16", "1/25"] as const;
+      const n   = nArr[occ % nArr.length];
+      const frac = fracArr[occ % fracArr.length];
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `If distance between two masses becomes ${n} times its original value, gravitational force becomes:`,
+        frac,
+        [
+          occ === 0 ? "1/2" : "1/4",
+          occ === 0 ? "2 times" : "1/2",
+          "unchanged"
+        ] as [string,string,string],
+        `F \u221d 1/r\u00b2. New F = F\u2080/${n}\u00b2 = ${frac} of original.`,
+        "gravitation", "easy", seed
+      );
+    }
+
+    if (pattern === 6) {
+      const m = 1 + occ;  // occ: 0-3 (no repeat)
+      const k = 100 + 25 * ((occ + 2) % 4);  // Different from m
+      const period = 2 * Math.PI * Math.sqrt(m / k);
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `For mass-spring system (m=${m} kg, k=${k} N/m), time period is:`,
+        `${formatValue(period)} s`,
+        [`${formatValue(period + 0.2)} s`, `${formatValue(period - 0.2)} s`, `${formatValue(Math.sqrt(m / k))} s`],
+        `Use T = 2*pi*sqrt(m/k).`,
+        "oscillations",
+        "hard",
         seed
       );
     }
 
-    if (topic === "Oscillations & Waves") {
-      const f = 40 + round * 10;
-      const lambda = 2 + round;
+    if (pattern === 7) {
+      const f = 40 + (qNo % 4) * 10;
+      const lambda = 2 + occ;  // occ: 0-3 (no repeat)
       const v = f * lambda;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        `A wave has frequency ${f} Hz and wavelength ${lambda} m. Find wave speed.`,
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `A wave has frequency ${f} Hz and wavelength ${lambda} m. Speed is:`,
         `${v} m/s`,
-        [`${v - f} m/s`, `${v + f} m/s`, `${f + lambda} m/s`],
-        `Wave speed v = f*lambda.`,
-        topic,
+        [`${v + 10} m/s`, `${v - 10} m/s`, `${f + lambda} m/s`],
+        `Use v = f*lambda.`,
+        "waves",
         "medium",
         seed
       );
     }
 
-    if (topic === "Electrostatics") {
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        "If separation between two charges becomes 3 times, electrostatic force becomes?",
-        "one-ninth",
-        ["one-third", "three times", "unchanged"],
-        "By Coulomb law, F is proportional to 1/r^2.",
-        topic,
-        "easy",
+    if (pattern === 8) {
+      const qh = 500 + (qNo % 4) * 50;
+      const qc = 200 + occ * 20;  // occ: 0-3 (no repeat)
+      const eta = ((qh - qc) / qh) * 100;
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `A heat engine absorbs ${qh} J and rejects ${qc} J. Efficiency is:`,
+        `${formatValue(eta)}%`,
+        [`${formatValue(eta + 5)}%`, `${formatValue(eta - 5)}%`, `${formatValue((qc / qh) * 100)}%`],
+        `Efficiency = (Qh-Qc)/Qh.`,
+        "thermodynamics",
+        "medium",
         seed
       );
     }
 
-    if (topic === "Current Electricity") {
-      if (isToughSet) {
-        const r1 = round + 2;
-        const r2 = round + 4;
-        const v = 12 + round;
-        const i = v / (r1 + r2);
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-phys2026-${index + 1}`,
-          round % 3 === 0
-            ? `Applying equivalent resistance in series, two resistors ${r1} ohm and ${r2} ohm are across ${v} V. Find circuit current.`
-            : round % 3 === 1
-            ? `In a series circuit with resistors ${r1} ohm and ${r2} ohm connected to ${v} V, determine the current.`
-            : `First reduce the series pair (${r1} ohm, ${r2} ohm), then compute current for source ${v} V.`,
-          `${formatValue(i)} A`,
-          [`${formatValue(v / r1)} A`, `${formatValue(i + 1)} A`, `${formatValue(i - 1)} A`],
-          round % 3 === 0
-            ? "Concept link: reduce circuit first to one equivalent resistor, then apply Ohm law."
-            : round % 3 === 1
-            ? "Add series resistances, then use I = V/R."
-            : "Series path means same current throughout; obtain current from total resistance.",
-          topic,
-          "hard",
-          seed
-        );
-      }
+    if (pattern === 9) {
+      // 4 distinct Coulomb / electrostatics questions — occ 0–3
+      const nArr = [2, 3, 4, 5] as const;
+      const fracArr = ["1/4", "1/9", "1/16", "1/25"] as const;
+      const n    = nArr[occ % nArr.length];
+      const frac = fracArr[occ % fracArr.length];
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `If separation between two point charges is made ${n} times its original value, electrostatic force becomes:`,
+        frac,
+        [
+          occ === 0 ? "1/2" : "1/4",
+          occ === 0 ? "2 times" : "1/2",
+          "unchanged"
+        ] as [string,string,string],
+        `Coulomb\u2019s law: F \u221d 1/r\u00b2. New F = F\u2080/${n}\u00b2 = ${frac} of original.`,
+        "electrostatics", "easy", seed
+      );
+    }
 
-      const i = round + 2;
-      const r = round + 3;
+    if (pattern === 10) {
+      const r1 = 2 + (qNo % 4);
+      const r2 = 3 + (qNo % 5);
+      const req = (r1 * r2) / (r1 + r2);
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `Equivalent resistance of ${r1} ohm and ${r2} ohm in parallel is:`,
+        `${formatValue(req)} ohm`,
+        [`${r1 + r2} ohm`, `${Math.abs(r1 - r2)} ohm`, `${formatValue(req + 1)} ohm`],
+        `For parallel combination, R = R1*R2/(R1+R2).`,
+        "current electricity",
+        "medium",
+        seed
+      );
+    }
+
+    if (pattern === 11) {
+      const i = 2 + (qNo % 4);
+      const r = 5 + (qNo % 3);
       const v = i * r;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        `Find potential difference across ${r} ohm resistor carrying ${i} A current.`,
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `Potential difference across ${r} ohm carrying ${i} A current is:`,
         `${v} V`,
-        [`${v + r} V`, `${v - r} V`, `${i + r} V`],
-        `Use Ohm law: V = IR.`,
-        topic,
+        [`${v + 2} V`, `${v - 2} V`, `${i + r} V`],
+        `Ohm law: V = IR.`,
+        "current electricity",
         "easy",
         seed
       );
     }
 
-    if (topic === "Magnetic Effects") {
-      const q = round + 1;
-      const v = round + 2;
-      const b = round + 3;
+    if (pattern === 12) {
+      const q = 2 + (qNo % 3);
+      const v = 3 + (qNo % 4);
+      const b = 4 + (qNo % 2);
       const f = q * v * b;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        `For charge ${q} C moving perpendicular to field ${b} T at ${v} m/s, find magnetic force.`,
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `A charge ${q} C moves perpendicular to magnetic field ${b} T with speed ${v} m/s. Magnetic force is:`,
         `${f} N`,
-        [`${f + b} N`, `${f - b} N`, `${q + v + b} N`],
-        `F = qvB for perpendicular motion.`,
-        topic,
+        [`${f + 2} N`, `${f - 2} N`, `${q + v + b} N`],
+        `Use F = qvB for perpendicular motion.`,
+        "magnetism",
         "medium",
         seed
       );
     }
 
-    if (topic === "Electromagnetic Induction") {
-      if (isToughSet) {
-        const n = 10 + round;
-        const dPhi = 3 + round;
-        const dt = 0.5;
-        const r = round + 2;
-        const emf = n * dPhi / dt;
-        const current = emf / r;
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-phys2026-${index + 1}`,
-          round % 3 === 0
-            ? `Using Faraday-Lenz concept and circuit response, flux changes by ${dPhi} Wb in ${dt} s through ${n} turns connected to ${r} ohm. Find induced current.`
-            : round % 3 === 1
-            ? `A ${n}-turn coil sees flux change ${dPhi} Wb in ${dt} s and is connected to ${r} ohm. Determine induced current.`
-            : `For a ${n}-turn loop, magnetic flux changes by ${dPhi} Wb in ${dt} s and loop resistance is ${r} ohm. Find induced current magnitude.`,
-          `${formatValue(current)} A`,
-          [`${formatValue(emf)} A`, `${formatValue(current + 1)} A`, `${formatValue(current - 1)} A`],
-          round % 3 === 0
-            ? "Concept link: changing flux induces emf, and emf drives current through external resistance."
-            : round % 3 === 1
-            ? "Compute emf from Faraday law, then current from Ohm law."
-            : "Induction creates emf; resistance controls the resulting current.",
-          topic,
-          "hard",
-          seed
-        );
-      }
-
-      const n = 10 + round;
-      const dPhi = 2 + round;
-      const dt = 1;
-      const emf = n * dPhi / dt;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        `Flux changes by ${dPhi} Wb in ${dt} s through a ${n}-turn coil. Magnitude of induced emf?`,
-        `${emf} V`,
-        [`${emf + 2} V`, `${emf - 2} V`, `${dPhi} V`],
-        `By Faraday law, emf = N*(dPhi/dt).`,
-        topic,
-        "medium",
+    if (pattern === 13) {
+      const n = 20 + (qNo % 5);
+      const dPhi = 3 + (qNo % 4);
+      const dt = 0.5;
+      const emf = (n * dPhi) / dt;
+      return createComedkQuestion(
+        `comedk-set6-phys-${qNo}`,
+        `A ${n}-turn coil has flux change ${dPhi} Wb in ${dt} s. Induced emf magnitude is:`,
+        `${formatValue(emf)} V`,
+        [`${formatValue(emf + 2)} V`, `${formatValue(emf - 2)} V`, `${dPhi} V`],
+        `Faraday law: emf = N*(dPhi/dt).`,
+        "electromagnetic induction",
+        "hard",
         seed
       );
     }
 
-    if (topic === "Optics") {
-      const f = round + 1;
-      const p = 1 / f;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-phys2026-${index + 1}`,
-        `A lens has focal length ${f} m. Find its power.`,
-        `${formatValue(p)} D`,
-        [`${f} D`, `${formatValue(p + 1)} D`, `${formatValue(1 / (f + 1))} D`],
-        `Power P = 1/f (with f in meters).`,
-        topic,
-        "medium",
-        seed
-      );
-    }
-
-    const f1 = 4 + round;
-    const f2 = 2 * f1;
-    return createGeneratedQuestion(
-      `comedk-set${setNumber}-phys2026-${index + 1}`,
-      `Frequency of light doubles from ${f1} Hz to ${f2} Hz. Photon energy becomes?`,
-      "double",
-      ["half", "one-fourth", "unchanged"],
-      "Photon energy E = hf, so E is directly proportional to frequency.",
-      topic,
-      "easy",
-      seed
+    // pattern 14 (default): modern physics — 4 unique questions via occ
+    const photoPool = [
+      { q: "In photoelectric effect, if frequency increases beyond threshold, KE\u2098\u2090\u2093 of emitted electrons:", a: "increases linearly", d: ["decreases", "remains zero", "remains constant"] as [string,string,string], exp: "KE\u2098\u2090\u2093 = h\u03bd \u2212 \u03c6; KE increases linearly with frequency." },
+      { q: "In photoelectric effect, threshold frequency is:", a: "minimum frequency to eject an electron", d: ["maximum frequency of light", "frequency of emitted electron", "frequency of X-rays"] as [string,string,string], exp: "Below \u03bd\u2080, no photoelectric effect occurs." },
+      { q: "Work function in photoelectric effect is:", a: "minimum energy needed to eject an electron from metal surface", d: ["kinetic energy of emitted electron", "energy of incident photon", "energy of X-rays"] as [string,string,string], exp: "Work function \u03c6 = h\u03bd\u2080." },
+      { q: "Stopping potential in photoelectric experiment is voltage needed to:", a: "stop the fastest emitted electrons", d: ["accelerate electrons", "increase photon frequency", "reflect photons"] as [string,string,string], exp: "eV\u209b = KE\u2098\u2090\u2093; stopping potential arrests maximum-energy electrons." },
+    ] as const;
+    const pRow = photoPool[occ % photoPool.length];
+    return createComedkQuestion(
+      `comedk-set6-phys-${qNo}`,
+      pRow.q, pRow.a, pRow.d, pRow.exp,
+      "modern physics", "medium", seed
     );
   });
-
-  return applyProgression(questions);
 }
 
-function createComedkChemistryQuestions2026Set1(setNumber: number): PracticeQuestion[] {
-  const applyProgression = (questions: PracticeQuestion[]) =>
-    questions.map((question, index) => ({
-      ...question,
-      difficulty:
-        setNumber === 1
-          ? question.difficulty
-          : setNumber === 2
-          ? index % 6 === 0
-            ? "easy"
-            : "medium"
-          : setNumber === 3
-          ? index < 12
-            ? "easy"
-            : index < 42
-            ? "medium"
-            : "hard"
-          : setNumber === 4
-          ? index < 18
-            ? "medium"
-            : "hard"
-          : index < 10
-          ? "medium"
-          : "hard",
-    }));
+function buildComedkSet6PhysicsBank(): PracticeQuestion[] {
+  const rawBank = createComedkSet6PhysicsQuestionsLegacy();
 
-  const weightedTopics = [
-    ...Array(18).fill("Organic Chemistry"),
-    ...Array(6).fill("Solid State and Solutions"),
-    ...Array(6).fill("Chemical Kinetics"),
-    ...Array(6).fill("Chemical Bonding"),
-    ...Array(4).fill("Nuclear Chemistry"),
-    ...Array(5).fill("Coordination Chemistry"),
-    ...Array(5).fill("Polymers"),
-    ...Array(5).fill("Environmental Chemistry"),
-    ...Array(5).fill("Periodic Table"),
-  ];
+  const duplicateQuestionMap = new Map<string, number>();
+  let duplicateOptionCount = 0;
 
-  const topicCounters: Record<string, number> = {};
-  const isToughSet = setNumber >= 4;
+  for (const question of rawBank) {
+    const key = normalizeQuestionKey(question.question);
+    duplicateQuestionMap.set(key, (duplicateQuestionMap.get(key) ?? 0) + 1);
 
-  const questions = weightedTopics.map((topic, index) => {
-    const round = topicCounters[topic] ?? 0;
-    topicCounters[topic] = round + 1;
-    const seed = 11100 + setNumber * 100 + index;
+    if (hasDuplicateOptions(question)) {
+      duplicateOptionCount += 1;
+    }
+  }
 
-    if (topic === "Organic Chemistry") {
-      const reagents = [
-        {
-          q: "Ethanol on oxidation gives which compound first?",
-          a: "Ethanal",
-          d: ["Methanal", "Acetone", "Ethane"] as [string, string, string],
-        },
-        {
-          q: "Which functional group is present in acetic acid?",
-          a: "Carboxyl",
-          d: ["Hydroxyl", "Aldehyde", "Amide"] as [string, string, string],
-        },
+  if (process.env.NODE_ENV !== "production") {
+    const duplicateQuestionCount = Array.from(duplicateQuestionMap.values()).filter(
+      (count) => count > 1
+    ).length;
+
+    if (duplicateQuestionCount > 0 || duplicateOptionCount > 0) {
+      console.warn(
+        `[COMEDK] Set6 Physics bank quality check: duplicate questions=${duplicateQuestionCount}, duplicate-option-questions=${duplicateOptionCount}`
+      );
+    }
+  }
+
+  return rawBank;
+}
+
+const COMEDK_SET6_PHYSICS_BANK = buildComedkSet6PhysicsBank();
+
+function createComedkSet6PhysicsQuestions(): PracticeQuestion[] {
+  return COMEDK_SET6_PHYSICS_BANK;
+}
+
+function createComedkSet6ChemistryQuestionsLegacy(): PracticeQuestion[] {
+  return Array.from({ length: 60 }, (_, index) => {
+    const qNo = index + 1;
+    const pattern = index % 15;
+    const occ = Math.floor(index / 15); // 0–3
+    const seed = 11600 + qNo;
+
+    if (pattern === 0) {
+      const mass = 22 + (qNo % 4) * 11;
+      const molarMass = 44;
+      const moles = mass / molarMass;
+      return createComedkQuestion(
+        `comedk-set6-chem-${qNo}`,
+        `Number of moles in ${mass} g of CO2 is:`,
+        `${formatValue(moles)}`,
+        [`${formatValue(moles + 0.5)}`, `${formatValue(moles - 0.25)}`, `${formatValue(moles + 1)}`],
+        `Moles = mass/molar mass.`,
+        "mole concept",
+        "easy",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      // Gas laws pool — 4 unique questions via occ
+      const gasPool = [
+        { q: "At constant temperature, pressure of a gas is inversely proportional to volume. This is:", a: "Boyle\u2019s law", d: ["Charles\u2019 law", "Gay-Lussac\u2019s law", "Avogadro\u2019s law"] as [string,string,string], exp: "Boyle\u2019s law: P \u221d 1/V at constant T." },
+        { q: "At constant pressure, volume of a gas is directly proportional to temperature. This is:", a: "Charles\u2019 law", d: ["Boyle\u2019s law", "Gay-Lussac\u2019s law", "Dalton\u2019s law"] as [string,string,string], exp: "Charles\u2019 law: V \u221d T at constant P." },
+        { q: "At constant volume, pressure of a gas is directly proportional to temperature. This is:", a: "Gay-Lussac\u2019s law", d: ["Boyle\u2019s law", "Charles\u2019 law", "Avogadro\u2019s law"] as [string,string,string], exp: "Gay-Lussac\u2019s law: P \u221d T at constant V." },
+        { q: "Equal volumes of all gases at same T and P contain equal number of molecules. This is:", a: "Avogadro\u2019s law", d: ["Boyle\u2019s law", "Charles\u2019 law", "Dalton\u2019s law"] as [string,string,string], exp: "Avogadro\u2019s law: V \u221d n at same T and P." },
       ] as const;
-      const entry = reagents[round % reagents.length];
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-chem2026-${index + 1}`,
-        entry.q,
-        entry.a,
-        entry.d,
-        `This follows basic organic reaction/functional group concepts.`,
-        topic,
-        round >= 4 ? "medium" : "easy",
-        seed
+      const row = gasPool[occ % gasPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "gas laws", "easy", seed);
+    }
+
+    if (pattern === 2) {
+      // Thermochemistry pool — 4 unique questions via occ
+      const thermoPool = [
+        { q: "A reaction that absorbs heat from surroundings is:", a: "endothermic", d: ["exothermic", "isothermal", "adiabatic"] as [string,string,string], exp: "Endothermic reaction absorbs heat (\u0394H > 0)." },
+        { q: "A reaction that releases heat to surroundings is:", a: "exothermic", d: ["endothermic", "isothermal", "reversible"] as [string,string,string], exp: "Exothermic reaction releases heat (\u0394H < 0)." },
+        { q: "Hess\u2019s law states that enthalpy change is:", a: "independent of path (state function)", d: ["path-dependent", "always positive", "always zero"] as [string,string,string], exp: "Hess\u2019s law: \u0394H is a state function." },
+        { q: "Standard enthalpy of formation is defined for:", a: "formation of 1 mol from elements in standard states", d: ["decomposition of 1 mol compound", "combustion of 1 mol fuel", "neutralisation of 1 mol acid"] as [string,string,string], exp: "\u0394\u0192H\u00b0 = enthalpy for forming 1 mol from elements." },
+      ] as const;
+      const row = thermoPool[occ % thermoPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "thermochemistry", "easy", seed);
+    }
+
+    if (pattern === 3) {
+      const kp = 4 + occ;  // occ: 0-3 (no repeat)
+      const rt = 2;
+      const kc = kp / rt;
+      return createComedkQuestion(
+        `comedk-set6-chem-${qNo}`,
+        `For a reaction with \u0394n = 1, if Kp = ${kp} and RT = ${rt}, then Kc is:`,
+        `${formatValue(kc)}`,
+        [`${formatValue(kp * rt)}`, `${formatValue(kp + rt)}`, `${formatValue(kc + 1.5)}`],
+        `Kp = Kc\u00d7(RT)\u1d35\u207f; here Kc = Kp/RT = ${kp}/${rt} = ${formatValue(kc)}.`,
+        "chemical equilibrium", "hard", seed
       );
     }
 
-    if (topic === "Solid State and Solutions") {
-      if (isToughSet) {
-        const m1 = round + 2;
-        const v1 = 100;
-        const m2 = round + 1;
-        const v2 = (m1 * v1) / m2;
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-chem2026-${index + 1}`,
-          round % 3 === 0
-            ? `Using conservation of solute during dilution, ${v1} mL of ${m1} M solution is diluted to ${m2} M. Find final volume.`
-            : round % 3 === 1
-            ? `A ${m1} M solution of volume ${v1} mL is diluted until concentration becomes ${m2} M. Calculate final volume.`
-            : `Apply dilution principle to ${v1} mL of ${m1} M solution converted to ${m2} M. What is final volume?`,
-          `${formatValue(v2)} mL`,
-          [`${formatValue(v2 + 20)} mL`, `${formatValue(v2 - 20)} mL`, `${formatValue(m1 + m2)} mL`],
-          round % 3 === 0
-            ? "Concept link: moles of solute remain unchanged before and after dilution."
-            : round % 3 === 1
-            ? "Use M1V1 = M2V2 since solute moles are conserved."
-            : "Dilution changes concentration by changing volume, not solute amount.",
-          topic,
-          "hard",
-          seed
-        );
-      }
-
-      const moles = round + 1;
-      const volumeL = 1;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-chem2026-${index + 1}`,
-        `A solution has ${moles} mole solute in ${volumeL} L. What is molarity?`,
-        `${moles} M`,
-        [`${moles + 1} M`, `${moles - 1} M`, `${moles}/${volumeL + 1} M`],
-        `Molarity = moles of solute / volume in liters.`,
-        topic,
-        "easy",
-        seed
-      );
+    if (pattern === 4) {
+      // Electrochemistry pool — 4 unique questions via occ
+      const elecPool = [
+        { q: "Anode in a galvanic cell is the electrode where:", a: "oxidation occurs", d: ["reduction occurs", "ions are reduced only", "electrons are consumed"] as [string,string,string], exp: "Oxidation always occurs at anode." },
+        { q: "Cathode in an electrolytic cell is where:", a: "reduction occurs", d: ["oxidation occurs", "cations are repelled", "electrons are removed"] as [string,string,string], exp: "Reduction occurs at cathode in both galvanic and electrolytic cells." },
+        { q: "EMF of a galvanic cell is given by:", a: "E\u00b0cell = E\u00b0cathode \u2212 E\u00b0anode", d: ["E\u00b0cell = E\u00b0anode \u2212 E\u00b0cathode", "E\u00b0cell = E\u00b0cathode + E\u00b0anode", "E\u00b0cell = E\u00b0anode / E\u00b0cathode"] as [string,string,string], exp: "E\u00b0cell = E\u00b0(reduction at cathode) \u2212 E\u00b0(reduction at anode)." },
+        { q: "In electrolysis of CuSO\u2084, metal deposited at cathode is:", a: "copper", d: ["sulfur", "oxygen", "hydrogen"] as [string,string,string], exp: "Cu\u00b2\u207a is reduced at cathode: Cu\u00b2\u207a + 2e\u207b \u2192 Cu." },
+      ] as const;
+      const row = elecPool[occ % elecPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "electrochemistry", "medium", seed);
     }
 
-    if (topic === "Chemical Kinetics") {
-      if (isToughSet) {
-        const halfLife = round + 2;
-        const intervals = 2;
-        const fraction = `1/${2 ** intervals}`;
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-chem2026-${index + 1}`,
-          round % 3 === 0
-            ? `For first-order kinetics (constant half-life), half-life is ${halfLife} min. What fraction remains after ${halfLife * intervals} min?`
-            : round % 3 === 1
-            ? `A first-order reaction has half-life ${halfLife} min. After ${halfLife * intervals} min, what fraction remains?`
-            : `With first-order decay and half-life ${halfLife} min, determine fraction left after ${intervals} half-life intervals.`,
-          fraction,
-          ["1/2", "1/3", "1/8"],
-          round % 3 === 0
-            ? "Concept link: first-order decay proceeds geometrically by half-life intervals."
-            : round % 3 === 1
-            ? "After n half-lives, remaining fraction is (1/2)^n."
-            : "Count half-life intervals first, then apply repeated halving.",
-          topic,
-          "hard",
-          seed
-        );
-      }
-
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-chem2026-${index + 1}`,
-        "For a first-order reaction, if concentration doubles, rate becomes?",
-        "double",
-        ["half", "four times", "unchanged"],
-        "For first-order, rate is directly proportional to concentration.",
-        topic,
-        "medium",
-        seed
-      );
+    if (pattern === 5) {
+      // Chemical kinetics pool — 4 unique questions via occ
+      const kineticsPool = [
+        { q: "For first-order reaction, unit of rate constant is:", a: "s\u207b\u00b9", d: ["mol L\u207b\u00b9 s\u207b\u00b9", "L mol\u207b\u00b9 s\u207b\u00b9", "mol\u207b\u00b9 s\u207b\u00b9"] as [string,string,string], exp: "For first-order, unit of k is time\u207b\u00b9 (s\u207b\u00b9)." },
+        { q: "For second-order reaction, unit of rate constant is:", a: "L mol\u207b\u00b9 s\u207b\u00b9", d: ["s\u207b\u00b9", "mol L\u207b\u00b9 s\u207b\u00b9", "mol\u207b\u00b2 L\u00b2 s\u207b\u00b9"] as [string,string,string], exp: "For second-order, k unit is L mol\u207b\u00b9 s\u207b\u00b9." },
+        { q: "Rate of reaction generally increases with temperature because:", a: "more molecules have energy \u2265 activation energy", d: ["activation energy decreases to zero", "all molecules speed up equally", "collision frequency only increases"] as [string,string,string], exp: "Arrhenius: k = Ae\u207b(Ea/RT); higher T \u2192 more molecules exceed Ea." },
+        { q: "Half-life of first-order reaction is:", a: "independent of initial concentration", d: ["directly proportional to concentration", "inversely proportional to concentration", "equal to rate constant"] as [string,string,string], exp: "t\u00bd = ln2/k for first-order; does not depend on [A]\u2080." },
+      ] as const;
+      const row = kineticsPool[occ % kineticsPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "chemical kinetics", "medium", seed);
     }
 
-    if (topic === "Chemical Bonding") {
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-chem2026-${index + 1}`,
-        "What is the molecular shape of NH3?",
-        "Trigonal pyramidal",
-        ["Linear", "Trigonal planar", "Tetrahedral"],
-        "By VSEPR theory, NH3 has one lone pair and trigonal pyramidal geometry.",
-        topic,
-        "easy",
-        seed
-      );
+    if (pattern === 6) {
+      // Atomic structure pool — 4 unique questions via occ
+      const atomPool = [
+        { q: "Maximum number of electrons in p-subshell is:", a: "6", d: ["2", "10", "14"] as [string,string,string], exp: "p has 3 orbitals \u00d7 2 electrons = 6." },
+        { q: "Maximum number of electrons in d-subshell is:", a: "10", d: ["2", "6", "14"] as [string,string,string], exp: "d has 5 orbitals \u00d7 2 electrons = 10." },
+        { q: "Maximum number of electrons in f-subshell is:", a: "14", d: ["2", "6", "10"] as [string,string,string], exp: "f has 7 orbitals \u00d7 2 electrons = 14." },
+        { q: "Maximum number of electrons in s-subshell is:", a: "2", d: ["6", "10", "14"] as [string,string,string], exp: "s has 1 orbital \u00d7 2 electrons = 2." },
+      ] as const;
+      const row = atomPool[occ % atomPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "atomic structure", "easy", seed);
     }
 
-    if (topic === "Nuclear Chemistry") {
-      if (isToughSet) {
-        const initial = 160 + round * 20;
-        const remaining = initial / 4;
-        return createGeneratedQuestion(
-          `comedk-set${setNumber}-chem2026-${index + 1}`,
-          round % 3 === 0
-            ? `By exponential radioactive decay concept, a sample starts at ${initial} g. After two half-lives, mass becomes?`
-            : round % 3 === 1
-            ? `An isotope sample initially has mass ${initial} g. Find remaining mass after two half-lives.`
-            : `Radioactive material starts at ${initial} g and decays through two half-life intervals. What mass remains?`,
-          `${remaining} g`,
-          [`${initial / 2} g`, `${initial} g`, `${initial / 8} g`],
-          round % 3 === 0
-            ? "Concept link: each half-life halves the amount; two intervals give one-fourth."
-            : round % 3 === 1
-            ? "Apply repeated halving: remaining = initial*(1/2)^2."
-            : "Use exponential form for half-life decay with n = 2 intervals.",
-          topic,
-          "hard",
-          seed
-        );
-      }
-
-      const initial = 80 + round * 10;
-      const remaining = initial / 2;
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-chem2026-${index + 1}`,
-        `A radioactive sample starts at ${initial} g. After one half-life, mass becomes?`,
-        `${remaining} g`,
-        [`${initial} g`, `${remaining / 2} g`, `${initial - 10} g`],
-        `After one half-life, amount reduces to half.`,
-        topic,
-        "easy",
-        seed
-      );
+    if (pattern === 7) {
+      // Periodic trends pool — 4 unique questions via occ
+      const ptPool = [
+        { q: "Element with highest electronegativity is:", a: "Fluorine", d: ["Oxygen", "Chlorine", "Nitrogen"] as [string,string,string], exp: "Fluorine has highest electronegativity (Pauling: 3.98)." },
+        { q: "Atomic radius generally increases going:", a: "down a group", d: ["across a period", "from metals to non-metals", "left to right across period"] as [string,string,string], exp: "Atomic radius increases down a group due to additional shells." },
+        { q: "Ionisation energy generally decreases going:", a: "down a group", d: ["across a period", "from non-metals to metals", "from right to left in a period"] as [string,string,string], exp: "Ionisation energy decreases down a group; outer electrons are farther." },
+        { q: "Electron affinity is generally most negative for:", a: "halogens (especially Cl)", d: ["noble gases", "alkali metals", "alkaline earth metals"] as [string,string,string], exp: "Cl has highest electron affinity among all elements." },
+      ] as const;
+      const row = ptPool[occ % ptPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "periodic table", "easy", seed);
     }
 
-    if (topic === "Coordination Chemistry") {
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-chem2026-${index + 1}`,
-        "What is coordination number of Co in [Co(NH3)6]3+?",
-        "6",
-        ["3", "4", "8"],
-        "Coordination number equals number of donor atoms attached to central metal.",
-        topic,
-        "medium",
-        seed
-      );
+    if (pattern === 8) {
+      // Chemical bonding / VSEPR pool — 4 unique questions via occ
+      const vsepPool = [
+        { q: "Molecular shape of NH\u2083 is:", a: "trigonal pyramidal", d: ["tetrahedral", "trigonal planar", "linear"] as [string,string,string], exp: "NH\u2083: 3 bond pairs + 1 lone pair \u2192 trigonal pyramidal." },
+        { q: "Molecular shape of H\u2082O is:", a: "bent (V-shaped)", d: ["linear", "trigonal planar", "tetrahedral"] as [string,string,string], exp: "H\u2082O: 2 bond pairs + 2 lone pairs \u2192 bent." },
+        { q: "Molecular shape of CO\u2082 is:", a: "linear", d: ["bent", "trigonal planar", "tetrahedral"] as [string,string,string], exp: "CO\u2082: 2 double bonds, no lone pairs \u2192 linear." },
+        { q: "Molecular shape of BF\u2083 is:", a: "trigonal planar", d: ["pyramidal", "tetrahedral", "linear"] as [string,string,string], exp: "BF\u2083: 3 bond pairs, no lone pairs \u2192 trigonal planar." },
+      ] as const;
+      const row = vsepPool[occ % vsepPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "chemical bonding", "medium", seed);
     }
 
-    if (topic === "Polymers") {
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-chem2026-${index + 1}`,
-        "Nylon-6,6 is formed by condensation polymerization of which pair?",
-        "Hexamethylenediamine and adipic acid",
-        ["Ethene and styrene", "Urea and formaldehyde", "Phenol and acetone"],
-        "Nylon-6,6 is produced from diamine and dicarboxylic acid monomers.",
-        topic,
-        "medium",
-        seed
-      );
+    if (pattern === 9) {
+      // Coordination compounds pool — 4 unique questions via occ
+      const coordPool = [
+        { q: "Coordination number of Fe in [Fe(CN)\u2086]\u2074\u207b is:", a: "6", d: ["4", "2", "8"] as [string,string,string], exp: "6 cyanide ligands around Fe \u2192 CN = 6." },
+        { q: "Coordination number of Cu in [Cu(NH\u2083)\u2084]\u00b2\u207a is:", a: "4", d: ["2", "6", "8"] as [string,string,string], exp: "4 ammonia ligands around Cu \u2192 CN = 4." },
+        { q: "IUPAC name for [Co(NH\u2083)\u2086]\u00b3\u207a is:", a: "hexaamminecobalt(III)", d: ["cobalt hexamine", "cobaltamine", "hexacobaltamine"] as [string,string,string], exp: "6 NH\u2083 ligands = hexaammine; Co is +3 \u2192 cobalt(III)." },
+        { q: "A ligand that donates two pairs of electrons is called:", a: "bidentate", d: ["monodentate", "tridentate", "ambidentate"] as [string,string,string], exp: "Bidentate ligands donate 2 electron pairs (e.g. en, oxalate)." },
+      ] as const;
+      const row = coordPool[occ % coordPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "coordination compounds", "medium", seed);
     }
 
-    if (topic === "Environmental Chemistry") {
-      return createGeneratedQuestion(
-        `comedk-set${setNumber}-chem2026-${index + 1}`,
-        "Acid rain is mainly caused by oxides of which elements?",
-        "Sulfur and nitrogen",
-        ["Carbon and hydrogen", "Sodium and chlorine", "Calcium and magnesium"],
-        "SOx and NOx react in atmosphere to form acids.",
-        topic,
-        "easy",
-        seed
-      );
+    if (pattern === 10) {
+      // Hydrocarbons pool — 4 unique questions via occ
+      const hydroPool = [
+        { q: "Main product of addition of H\u2082 to ethene is:", a: "ethane", d: ["ethyne", "ethanol", "methane"] as [string,string,string], exp: "Hydrogenation: CH\u2082=CH\u2082 + H\u2082 \u2192 CH\u2083CH\u2083 (ethane)." },
+        { q: "Main product of addition of HBr to propene (Markovnikov) is:", a: "2-bromopropane", d: ["1-bromopropane", "1-bromopropene", "propanol"] as [string,string,string], exp: "Markovnikov: H adds to C with more H\u2019s \u2192 2-bromopropane." },
+        { q: "Product of combustion of ethane (complete) is:", a: "CO\u2082 and H\u2082O", d: ["CO and H\u2082O", "C and H\u2082", "CO\u2082 and H\u2082"] as [string,string,string], exp: "2C\u2082H\u2086 + 7O\u2082 \u2192 4CO\u2082 + 6H\u2082O." },
+        { q: "Benzene undergoes electrophilic substitution rather than addition because:", a: "it is stabilised by aromaticity", d: ["it has no double bonds", "it is a saturated compound", "it reacts only with metals"] as [string,string,string], exp: "Aromatic stability is maintained by substitution, not addition." },
+      ] as const;
+      const row = hydroPool[occ % hydroPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "hydrocarbons", "easy", seed);
     }
 
-    return createGeneratedQuestion(
-      `comedk-set${setNumber}-chem2026-${index + 1}`,
-      "Which element has the highest first ionization energy in Period 3?",
-      "Argon",
-      ["Sodium", "Aluminium", "Sulfur"],
-      "Across a period, ionization energy generally increases and noble gases are highest.",
-      topic,
-      "medium",
-      seed
-    );
+    if (pattern === 11) {
+      // Haloalkanes pool — 4 unique questions via occ
+      const haloPool = [
+        { q: "Hydrolysis of CH\u2083Cl in aqueous KOH gives:", a: "methanol", d: ["methane", "chloromethane", "formaldehyde"] as [string,string,string], exp: "CH\u2083Cl + KOH(aq) \u2192 CH\u2083OH + KCl." },
+        { q: "SN2 reaction is favoured by:", a: "primary haloalkanes in polar aprotic solvent", d: ["tertiary haloalkanes", "polar protic solvents", "bulky substrates"] as [string,string,string], exp: "SN2 needs easy backside attack \u2192 primary haloalkanes are best." },
+        { q: "Product of reaction of 2-bromopropane with KOH (alcoholic) is:", a: "propene (elimination)", d: ["propanol (substitution)", "propane", "propanoic acid"] as [string,string,string], exp: "Alcoholic KOH causes elimination: 2-BrC\u2083H\u2087 \u2192 CH\u2083CH=CH\u2082." },
+        { q: "In SN1 reaction, intermediate formed is:", a: "carbocation", d: ["carbanion", "free radical", "transition state only"] as [string,string,string], exp: "SN1: ionisation \u2192 carbocation intermediate, then nucleophile attacks." },
+      ] as const;
+      const row = haloPool[occ % haloPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "haloalkanes", "medium", seed);
+    }
+
+    if (pattern === 12) {
+      // Alcohols / IUPAC pool — 4 unique questions via occ
+      const alcoholPool = [
+        { q: "IUPAC name of CH\u2083CH\u2082OH is:", a: "ethanol", d: ["methanol", "propanol", "ethanal"] as [string,string,string], exp: "CH\u2083CH\u2082OH = ethanol." },
+        { q: "IUPAC name of CH\u2083OH is:", a: "methanol", d: ["ethanol", "propanol", "methanal"] as [string,string,string], exp: "CH\u2083OH = methanol." },
+        { q: "IUPAC name of (CH\u2083)\u2082CHOH is:", a: "propan-2-ol", d: ["propan-1-ol", "2-propanol (common only)", "ethanol"] as [string,string,string], exp: "(CH\u2083)\u2082CHOH: 3-carbon chain, OH on C2 \u2192 propan-2-ol." },
+        { q: "IUPAC name of CH\u2083CH\u2082CH\u2082OH is:", a: "propan-1-ol", d: ["propan-2-ol", "ethanol", "propanoic acid"] as [string,string,string], exp: "CH\u2083CH\u2082CH\u2082OH: 3-carbon chain, OH on C1 \u2192 propan-1-ol." },
+      ] as const;
+      const row = alcoholPool[occ % alcoholPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "alcohols phenols ethers", "easy", seed);
+    }
+
+    if (pattern === 13) {
+      // Aldehydes / ketones / tests pool — 4 unique questions via occ
+      const aldPool = [
+        { q: "Tollens\u2019 reagent gives silver mirror test with:", a: "aldehydes", d: ["ketones", "alkanes", "ethers"] as [string,string,string], exp: "Aldehydes reduce [Ag(NH\u2083)\u2082]\u207a \u2192 silver mirror." },
+        { q: "Fehling\u2019s solution gives brick-red precipitate with:", a: "aldehydes (reducing sugars)", d: ["ketones", "esters", "alkenes"] as [string,string,string], exp: "Aldehydes reduce Cu\u00b2\u207a to Cu\u2082O (brick-red)." },
+        { q: "Benedict\u2019s test is positive for:", a: "reducing sugars (glucose, maltose)", d: ["non-reducing sugars (sucrose)", "all carbohydrates", "lipids"] as [string,string,string], exp: "Benedict\u2019s test detects reducing sugars." },
+        { q: "Schiff\u2019s reagent is used to distinguish:", a: "aldehydes from ketones", d: ["alcohols from esters", "alkanes from alkenes", "acids from bases"] as [string,string,string], exp: "Schiff\u2019s reagent turns pink/violet with aldehydes, not ketones." },
+      ] as const;
+      const row = aldPool[occ % aldPool.length];
+      return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "aldehydes ketones", "medium", seed);
+    }
+
+    // pattern 14 (default): Polymers/biomolecules pool — 4 unique questions via occ
+    const polyPool = [
+      { q: "Monomer unit of polyethene is:", a: "ethene", d: ["ethane", "ethyne", "benzene"] as [string,string,string], exp: "Polyethene forms by polymerisation of ethene (CH\u2082=CH\u2082)." },
+      { q: "Monomer unit of polypropylene is:", a: "propene", d: ["propane", "propyne", "ethene"] as [string,string,string], exp: "Polypropylene forms from propene (CH\u2082=CHCH\u2083)." },
+      { q: "Type of polymerisation used to make nylon-6,6 is:", a: "condensation polymerisation", d: ["addition polymerisation", "chain-growth polymerisation", "ring-opening only"] as [string,string,string], exp: "Nylon-6,6 forms by condensation of hexamethylenediamine and adipic acid." },
+      { q: "Natural polymer that makes up plant cell walls is:", a: "cellulose", d: ["starch", "glycogen", "chitin"] as [string,string,string], exp: "Cellulose: \u03b2-glucose polymer that forms plant cell walls." },
+    ] as const;
+    const row = polyPool[occ % polyPool.length];
+    return createComedkQuestion(`comedk-set6-chem-${qNo}`, row.q, row.a, row.d, row.exp, "polymers", "easy", seed);
   });
+}
 
-  return applyProgression(questions);
+function buildComedkSet6ChemistryBank(): PracticeQuestion[] {
+  const rawBank = createComedkSet6ChemistryQuestionsLegacy();
+
+  const duplicateQuestionMap = new Map<string, number>();
+  let duplicateOptionCount = 0;
+
+  for (const question of rawBank) {
+    const key = normalizeQuestionKey(question.question);
+    duplicateQuestionMap.set(key, (duplicateQuestionMap.get(key) ?? 0) + 1);
+
+    if (hasDuplicateOptions(question)) {
+      duplicateOptionCount += 1;
+    }
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    const duplicateQuestionCount = Array.from(duplicateQuestionMap.values()).filter(
+      (count) => count > 1
+    ).length;
+
+    if (duplicateQuestionCount > 0 || duplicateOptionCount > 0) {
+      console.warn(
+        `[COMEDK] Set6 Chemistry bank quality check: duplicate questions=${duplicateQuestionCount}, duplicate-option-questions=${duplicateOptionCount}`
+      );
+    }
+  }
+
+  return rawBank;
+}
+
+const COMEDK_SET6_CHEMISTRY_BANK = buildComedkSet6ChemistryBank();
+
+function createComedkSet6ChemistryQuestions(): PracticeQuestion[] {
+  return COMEDK_SET6_CHEMISTRY_BANK;
 }
 
 function createComedkPracticeSet(setNumber: number): PracticeSet {
-  const isEnhanced2026Model = setNumber >= 1 && setNumber <= 5;
+  const questions =
+    setNumber === 6
+      ? [
+          ...createComedkSet6MathQuestions(),
+          ...createComedkSet6PhysicsQuestions(),
+          ...createComedkSet6ChemistryQuestions(),
+        ]
+      : [
+          ...createComedkMathQuestions(setNumber),
+          ...createComedkPhysicsQuestions(setNumber),
+          ...createComedkChemistryQuestions(setNumber),
+        ];
 
-  const questions = isEnhanced2026Model
-    ? [
-        ...createComedkMathQuestions2026Set1(setNumber),
-        ...createComedkPhysicsQuestions2026Set1(setNumber),
-        ...createComedkChemistryQuestions2026Set1(setNumber),
-      ]
-    : [
-        ...createComedkMathQuestions(setNumber),
-        ...createComedkPhysicsQuestions(setNumber),
-        ...createComedkChemistryQuestions(setNumber),
-      ];
-
-  const level = setNumber >= 4 ? "advanced" : "intermediate";
+  const level = setNumber === 6 ? "intermediate" : setNumber <= 2 ? "intermediate" : "advanced";
 
   return {
     id: `comedk-mixed-set-${setNumber}`,
     slug: `comedk-practice-set-${setNumber}`,
     category: "engineering-entrance",
     title: `COMEDK Practice Set ${setNumber}`,
-    description: isEnhanced2026Model
-      ? "Original COMEDK-style full-length set aligned to key 2026 PCM syllabus topics with 180 unique questions: 60 mathematics, 60 physics, and 60 chemistry."
-      : `Original COMEDK-style full-length set with 180 unique questions: 60 mathematics, 60 physics, and 60 chemistry.`,
+    description:
+      setNumber === 6
+        ? "Original COMEDK-style Set 6 (paper-pattern aligned) with 180 questions: 60 Mathematics, 60 Physics, and 60 Chemistry at balanced moderate level."
+        : "Original COMEDK-style full-length set with 180 questions: 60 Mathematics, 60 Physics, and 60 Chemistry.",
     examType: "COMEDK",
     examSlug: "comedk",
     examName: "COMEDK",
@@ -4865,19 +5109,23 @@ function createComedkPracticeSet(setNumber: number): PracticeSet {
     level,
     questionCount: questions.length,
     estimatedMinutes: 180,
-    seoTitle: `COMEDK Practice Questions – Set ${setNumber} | Nishaglobal Education`,
+    seoTitle: `COMEDK Practice Questions - Set ${setNumber} | Nishaglobal Education`,
     seoDescription:
-      `Practice a full COMEDK-style set with 180 original questions across mathematics, physics, and chemistry with answers and explanations.`,
+      setNumber === 6
+        ? "Practice COMEDK Set 6 with original, pattern-aligned 180 PCM questions designed for realistic moderate-level exam practice."
+        : "Practice a COMEDK-style 180-question paper with original PCM questions and explanation-based answers.",
     keywords: [
       `COMEDK practice set ${setNumber}`,
+      "COMEDK full-length mock",
+      "COMEDK PCM practice",
       "COMEDK 180 questions",
-      "COMEDK mathematics physics chemistry",
-      "engineering entrance COMEDK mock",
-      "original COMEDK practice",
+      "original COMEDK-style questions",
+      ...(setNumber === 6 ? ["COMEDK set 6", "COMEDK moderate level mock"] : []),
     ],
-    intro: isEnhanced2026Model
-      ? `Use this enhanced Set ${setNumber} to practice key 2026 COMEDK syllabus chapters across Mathematics, Physics, and Chemistry with explanation-based learning.`
-      : "Use this full-length COMEDK set for serious exam practice, balanced subject revision, and explanation-based learning.",
+    intro:
+      setNumber === 6
+        ? "Set 6 follows COMEDK full-paper flow with original questions, same 60-60-60 structure, and moderate difficulty progression for realistic attempt strategy."
+        : "Use this full-length COMEDK-style set for realistic timing, balanced subject practice, and targeted error analysis.",
     isOriginal: true,
     isLive: true,
     questions,
@@ -8660,6 +8908,7 @@ export const practiceSets: PracticeSet[] = [
   createComedkPracticeSet(3),
   createComedkPracticeSet(4),
   createComedkPracticeSet(5),
+  createComedkPracticeSet(6),
   createKcetPracticeSet(1),
   createKcetPracticeSet(2),
   createKcetPracticeSet(3),
