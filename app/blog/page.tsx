@@ -4,7 +4,7 @@ import { blogPosts } from "@/data/blogs";
 export const metadata = {
   title: "Blog | Nishaglobal Education",
   description:
-    "Explore career, study abroad, IELTS, engineering practice, and future-ready skills articles from Nishaglobal Education.",
+    "Explore career, study abroad, IELTS, TOEFL, engineering practice, and future-ready skills articles from Nishaglobal Education.",
   alternates: {
     canonical: "https://nishaglobaleducation.com/blog",
   },
@@ -22,6 +22,7 @@ const blogTopics = [
   "High paying global careers",
   "Future-ready skills and AI-era jobs",
   "IELTS practice and grammar",
+  "TOEFL practice and integrated skills",
   "Engineering entrance preparation",
 ];
 
@@ -39,6 +40,20 @@ const seoPracticeBlogs = [
     description:
       "A beginner-friendly IELTS grammar article with answers and simple explanations.",
     category: "IELTS Grammar",
+  },
+  {
+    title: "Free TOEFL Practice Questions with Answers",
+    href: "/blog/toefl-practice-questions-with-answers",
+    description:
+      "Practice TOEFL-style reading, listening, and integrated skills with explanation-based questions.",
+    category: "TOEFL Practice",
+  },
+  {
+    title: "TOEFL Speaking and Writing Practice for Beginners",
+    href: "/blog/toefl-speaking-writing-practice-for-beginners",
+    description:
+      "Build TOEFL speaking and writing strategy with beginner-friendly examples, structure, and review tips.",
+    category: "TOEFL Strategy",
   },
   {
     title: "Engineering Entrance Questions with Answers",
@@ -68,7 +83,7 @@ export default function BlogIndexPage() {
   const blogFaqs = [
     {
       q: "Who should use this blog regularly?",
-      a: "Students in Classes 10 to 12, college applicants, IELTS candidates, and parents who want practical guidance for career and study decisions should use this blog weekly. The content is designed for action, not just reading.",
+      a: "Students in Classes 10 to 12, college applicants, IELTS or TOEFL candidates, and parents who want practical guidance for career and study decisions should use this blog weekly. The content is designed for action, not just reading.",
     },
     {
       q: "How is this blog different from generic career content sites?",
@@ -93,7 +108,7 @@ export default function BlogIndexPage() {
     "@type": "CollectionPage",
     name: "Nishaglobal Education Blog",
     description:
-      "Career, study abroad, IELTS, engineering preparation, and future-ready skills articles from Nishaglobal Education.",
+      "Career, study abroad, IELTS, TOEFL, engineering preparation, and future-ready skills articles from Nishaglobal Education.",
     url: "https://nishaglobaleducation.com/blog",
     hasPart: allBlogPosts.map((post) => ({
       "@type": "BlogPosting",
@@ -121,7 +136,7 @@ export default function BlogIndexPage() {
 
         <p className="mt-4 max-w-3xl leading-7 text-slate-600">
           Explore practical articles that support Indian students and global
-          students with career guidance, study abroad planning, IELTS practice,
+          students with career guidance, study abroad planning, IELTS and TOEFL practice,
           engineering entrance basics, country comparisons, and modern skills.
         </p>
 
@@ -142,7 +157,7 @@ export default function BlogIndexPage() {
           <h2 className="text-xl font-bold text-emerald-900">Who should choose this blog</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
             <li>Students confused between multiple career and study-abroad options.</li>
-            <li>IELTS and engineering aspirants who need beginner-friendly preparation guidance.</li>
+            <li>IELTS, TOEFL, and engineering aspirants who need beginner-friendly preparation guidance.</li>
             <li>Parents comparing countries, course value, and long-term job outcomes.</li>
             <li>Learners who prefer step-by-step advice over motivational generic content.</li>
           </ul>
@@ -194,7 +209,7 @@ export default function BlogIndexPage() {
         </div>
 
         <h2 className="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl">
-          New IELTS and Engineering preparation articles
+          New IELTS, TOEFL, and Engineering preparation articles
         </h2>
 
         <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
@@ -265,7 +280,7 @@ export default function BlogIndexPage() {
           <div className="rounded-2xl border border-blue-100 bg-white p-5">
             <p className="text-sm font-semibold text-slate-900">Goal: Exam preparation</p>
             <p className="mt-2 text-sm leading-7 text-slate-600">
-              Read the IELTS and engineering preparation blogs first, then switch to topic-wise and exam-wise practice tests.
+              Read the IELTS, TOEFL, and engineering preparation blogs first, then switch to topic-wise and exam-wise practice tests.
             </p>
             <Link href="/practice-tests" className="mt-4 inline-block text-sm font-semibold text-blue-700">
               Go to practice tests →

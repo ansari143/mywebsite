@@ -25,6 +25,22 @@ export const blogPosts: BlogPost[] = [
     href: "/blog/ielts-grammar-practice-for-beginners",
   },
   {
+    slug: "toefl-practice-questions-with-answers",
+    title: "Free TOEFL Practice Questions with Answers",
+    description:
+      "Practice TOEFL reading, listening, and integrated task questions with explanation-based answers.",
+    category: "TOEFL Practice",
+    href: "/blog/toefl-practice-questions-with-answers",
+  },
+  {
+    slug: "toefl-speaking-writing-practice-for-beginners",
+    title: "TOEFL Speaking and Writing Practice for Beginners",
+    description:
+      "Improve TOEFL speaking and writing with beginner-friendly structure, sample prompts, and correction strategy.",
+    category: "TOEFL Strategy",
+    href: "/blog/toefl-speaking-writing-practice-for-beginners",
+  },
+  {
     slug: "engineering-entrance-questions-with-answers",
     title: "Engineering Entrance Questions with Answers",
     description:

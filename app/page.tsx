@@ -277,7 +277,7 @@ export default function HomePage() {
               </h2>
 
               <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
-                Students can now practice IELTS and engineering entrance questions with instant scoring,
+                Students can now practice IELTS, TOEFL, and engineering entrance questions with instant scoring,
                 detailed explanations, and topic-wise improvement tracking.
               </p>
             </div>
@@ -290,7 +290,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <Link
               href="/practice-tests/ielts"
               className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
@@ -303,6 +303,21 @@ export default function HomePage() {
               </p>
               <span className="mt-3 inline-block text-sm font-medium text-blue-700">
                 Start IELTS practice →
+              </span>
+            </Link>
+
+            <Link
+              href="/practice-tests/toefl"
+              className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <p className="text-lg font-semibold text-slate-900">
+                TOEFL Practice Tests
+              </p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Train Reading, Listening, Speaking, Writing, and integrated tasks with TOEFL-style section practice.
+              </p>
+              <span className="mt-3 inline-block text-sm font-medium text-blue-700">
+                Start TOEFL practice →
               </span>
             </Link>
 

@@ -8,9 +8,9 @@ import {
 
 export const metadata: Metadata = {
   title:
-    "Free Practice Tests for Engineering Entrance, IELTS, CTET, SSC and Railway",
+    "Free Practice Tests for Engineering Entrance, IELTS, TOEFL, CTET, SSC, Railway, Medical NEET and Aviation Careers",
   description:
-    "Take free original practice tests with instant scoring and explanations for JEE Main, JEE Advanced, COMEDK, WBJEE, KCET, IELTS, CTET, SSC, and Railway exams.",
+    "Take free original practice tests with instant scoring and explanations for JEE Main, JEE Advanced, COMEDK, WBJEE, KCET, IELTS, TOEFL, CTET, SSC, Railway, Medical NEET, and Aviation career roles.",
 };
 
 export default function PracticeTestsHubPage() {
@@ -97,15 +97,22 @@ export default function PracticeTestsHubPage() {
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          {practiceCategories.map((category) => {
+        {(() => {
+          const govSlugs = ["ctet", "ssc", "railway"];
+          const generalCategories = practiceCategories.filter(
+            (c) => !govSlugs.includes(c.slug)
+          );
+          const govCategories = practiceCategories.filter((c) =>
+            govSlugs.includes(c.slug)
+          );
+
+          const renderCard = (category: (typeof practiceCategories)[number]) => {
             const govCategory = govPracticeCategories.find(
               (item) => item.slug === category.slug
             );
             const count = govCategory
               ? govCategory.sets.filter((set) => set.isLive).length
-              : practiceSets.filter((item) => item.category === category.slug)
-                  .length;
+              : practiceSets.filter((item) => item.category === category.slug).length;
 
             return (
               <div
@@ -118,7 +125,6 @@ export default function PracticeTestsHubPage() {
                 <p className="mt-3 text-sm leading-7 text-slate-600">
                   {category.description}
                 </p>
-
                 <div className="mt-5 flex flex-wrap gap-2 text-sm">
                   <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
                     {count} practice set{count > 1 ? "s" : ""}
@@ -127,7 +133,6 @@ export default function PracticeTestsHubPage() {
                     Instant feedback
                   </span>
                 </div>
-
                 <div className="mt-6">
                   <Link
                     href={`/practice-tests/${category.slug}`}
@@ -138,8 +143,31 @@ export default function PracticeTestsHubPage() {
                 </div>
               </div>
             );
-          })}
-        </div>
+          };
+
+          return (
+            <>
+              <div className="grid gap-4 md:grid-cols-2">
+                {generalCategories.map(renderCard)}
+              </div>
+
+              <div className="rounded-3xl border border-amber-200 bg-amber-50 p-6 sm:p-8">
+                <div className="inline-flex rounded-full border border-amber-300 bg-white px-3 py-1 text-sm font-medium text-amber-800">
+                  Government Jobs
+                </div>
+                <h2 className="mt-4 text-2xl font-bold text-slate-900">
+                  Government Jobs Practice Tests
+                </h2>
+                <p className="mt-2 text-sm leading-7 text-slate-600">
+                  Bilingual practice sets for CTET, SSC, and Railway recruitment exams with full-length mocks, instant scoring, and Hindi–English support.
+                </p>
+                <div className="mt-6 grid gap-4 md:grid-cols-3">
+                  {govCategories.map(renderCard)}
+                </div>
+              </div>
+            </>
+          );
+        })()}
       </section>
 
       <section className="rounded-3xl border border-gray-200 bg-blue-50 p-6 sm:p-8">
@@ -162,6 +190,12 @@ export default function PracticeTestsHubPage() {
                 <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Study abroad applicants</td>
               </tr>
               <tr className="border-b border-slate-200">
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">TOEFL iBT</td>
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Reading, Listening, Speaking, Writing, Integrated Tasks</td>
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">About 2 hours</td>
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">University-focused English proficiency candidates</td>
+              </tr>
+              <tr className="border-b border-slate-200">
                 <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Engineering Entrance</td>
                 <td className="border-r border-slate-200 px-4 py-3 text-slate-700">MCQs in Physics, Chemistry, Math</td>
                 <td className="border-r border-slate-200 px-4 py-3 text-slate-700">3 hours</td>
@@ -178,6 +212,18 @@ export default function PracticeTestsHubPage() {
                 <td className="border-r border-slate-200 px-4 py-3 text-slate-700">MCQs in General Knowledge, Reasoning</td>
                 <td className="border-r border-slate-200 px-4 py-3 text-slate-700">1-2 hours</td>
                 <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Government job aspirants</td>
+              </tr>
+              <tr className="border-b border-slate-200">
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Medical NEET</td>
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">MCQs in Physics, Chemistry, Biology</td>
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">3 hours</td>
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Medical aspirants</td>
+              </tr>
+              <tr className="border-b border-slate-200">
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Aviation Careers</td>
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Role-wise MCQs and interview scenarios</td>
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">15-20 min per set</td>
+                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Cabin crew, ground, and support staff aspirants</td>
               </tr>
             </tbody>
           </table>
@@ -217,6 +263,12 @@ export default function PracticeTestsHubPage() {
             className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
           >
             Practice IELTS Tests
+          </Link>
+          <Link
+            href="/practice-tests/toefl"
+            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            Practice TOEFL Tests
           </Link>
           <Link
             href="/practice-tests/engineering-entrance"

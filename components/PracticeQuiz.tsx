@@ -214,32 +214,34 @@ export default function PracticeQuiz({ categorySlug, categoryTitle, set, categor
           <h1 className="text-2xl font-bold text-slate-900">
             {set.title} - {categoryTitle}
           </h1>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setLanguage("en")}
-              className={`rounded-lg px-3 py-1 text-sm ${
-                language === "en" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
-              }`}
-            >
-              English
-            </button>
-            <button
-              onClick={() => setLanguage("hi")}
-              className={`rounded-lg px-3 py-1 text-sm ${
-                language === "hi" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
-              }`}
-            >
-              Hindi
-            </button>
-            <button
-              onClick={() => setLanguage("both")}
-              className={`rounded-lg px-3 py-1 text-sm ${
-                language === "both" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
-              }`}
-            >
-              Both
-            </button>
-          </div>
+          {set.bilingual && (
+            <div className="flex gap-2">
+              <button
+                onClick={() => setLanguage("en")}
+                className={`rounded-lg px-3 py-1 text-sm ${
+                  language === "en" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
+                }`}
+              >
+                English
+              </button>
+              <button
+                onClick={() => setLanguage("hi")}
+                className={`rounded-lg px-3 py-1 text-sm ${
+                  language === "hi" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
+                }`}
+              >
+                Hindi
+              </button>
+              <button
+                onClick={() => setLanguage("both")}
+                className={`rounded-lg px-3 py-1 text-sm ${
+                  language === "both" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
+                }`}
+              >
+                Both
+              </button>
+            </div>
+          )}
         </div>
         <div className="mt-4 flex items-center gap-4 text-sm text-slate-600">
           <span>Question {currentQuestionIndex + 1} of {total}</span>

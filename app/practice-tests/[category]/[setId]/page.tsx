@@ -10,6 +10,7 @@ import {
   getEngineeringExamRules,
   getEngineeringPracticeGroups,
   getIeltsPracticeGroups,
+  getToeflPracticeGroups,
 } from "@/data/practiceTests";
 
 type Props = {
@@ -151,8 +152,10 @@ export default async function PracticeSetPage({ params }: Props) {
     );
   }
 
-  if (category === "ielts" && set) {
-    const group = getIeltsPracticeGroups().find(
+  if ((category === "ielts" || category === "toefl") && set) {
+    const isIelts = category === "ielts";
+    const examLabel = isIelts ? "IELTS" : "TOEFL iBT";
+    const group = (isIelts ? getIeltsPracticeGroups() : getToeflPracticeGroups()).find(
       (item) => item.key === set.practiceGroup
     );
 
@@ -160,7 +163,7 @@ export default async function PracticeSetPage({ params }: Props) {
       <div className="space-y-8">
         <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
           <div className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-medium text-slate-700">
-            {set.sectionLabel || "IELTS Practice"}
+            {set.sectionLabel || `${examLabel} Practice`}
           </div>
           <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">
             {set.title}
@@ -170,7 +173,7 @@ export default async function PracticeSetPage({ params }: Props) {
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <span className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700">
-              IELTS
+              {examLabel}
             </span>
             <span className="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-700 capitalize">
               {set.level}
@@ -180,7 +183,7 @@ export default async function PracticeSetPage({ params }: Props) {
 
         {group && (
           <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-slate-900">How this practice matches real IELTS use</h2>
+            <h2 className="text-xl font-bold text-slate-900">How this practice matches real {examLabel} use</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
                 <div className="font-semibold text-slate-900">Real-test format</div>
@@ -214,7 +217,7 @@ export default async function PracticeSetPage({ params }: Props) {
             </div>
             <div className="rounded-2xl bg-slate-50 p-4 text-sm leading-7 text-slate-600">
               <p className="font-semibold text-slate-900">3. Repeat with purpose</p>
-              <p className="mt-2">After review, move to the next related IELTS section or repeat weak-question types until your accuracy becomes stable.</p>
+              <p className="mt-2">After review, move to the next related {examLabel} section or repeat weak-question types until your accuracy becomes stable.</p>
             </div>
           </div>
         </section>
@@ -242,7 +245,10 @@ export default async function PracticeSetPage({ params }: Props) {
         </section>
 
         <div className="rounded-3xl border border-amber-100 bg-amber-50 p-4 text-sm leading-7 text-amber-900">
-          <span className="font-semibold">Important note:</span> These are original IELTS-style practice questions for self-assessment. They are not official IELTS materials. Writing and speaking improvement still benefits from teacher review, examiner-style feedback, or recorded practice.
+          <span className="font-semibold">Important note:</span>{" "}
+          {isIelts
+            ? "These are original IELTS-style practice questions for self-assessment. They are not official IELTS materials. Writing and speaking improvement still benefits from teacher review, examiner-style feedback, or recorded practice."
+            : "These are original TOEFL-style practice questions for self-assessment. They are not official ETS materials. Speaking and writing improvement still benefits from mentor feedback, rubric-based review, or recorded response analysis."}
         </div>
       </div>
     );
@@ -268,6 +274,104 @@ export default async function PracticeSetPage({ params }: Props) {
         </div>
       );
     }
+
+    if (category === "medical") {
+      const isFullMock = govSet.slug.includes("neet-ug-full-mock-");
+      const medicalRuleSummary = isFullMock
+        ? {
+            totalQuestions: 180,
+            totalMarks: 720,
+            duration: "180 minutes",
+            marking: "+4 for correct, -1 for incorrect, 0 for unattempted",
+            note: "Full mock follows NEET-style distribution: Physics 45, Chemistry 45, Biology 90.",
+          }
+        : {
+            totalQuestions: govSet.questionCount,
+            totalMarks: govSet.questionCount * 4,
+            duration: `${govSet.durationMin} minutes`,
+            marking: "+4 for correct, -1 for incorrect, 0 for unattempted",
+            note: `Subject-wise practice set focused on ${govSet.chapter}.`,
+          };
+
+      return (
+        <div className="space-y-8">
+          <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-medium text-slate-700">
+              Medical NEET
+            </div>
+            <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">
+              {govSet.title}
+            </h1>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
+              Practice {govSet.questionCount} NEET questions in English with explanation-based learning and exam-style pacing.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700">
+                English Only
+              </span>
+              <span className="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-700">
+                {govSet.chapter}
+              </span>
+            </div>
+          </section>
+
+          <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-slate-900">Exam Pattern & Rules</h2>
+            <div className="mt-4 space-y-4">
+              <div className="grid gap-2 sm:grid-cols-2">
+                <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
+                  <div className="font-semibold text-slate-900">Total Questions</div>
+                  <div className="mt-1">{medicalRuleSummary.totalQuestions}</div>
+                </div>
+                <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
+                  <div className="font-semibold text-slate-900">Total Marks</div>
+                  <div className="mt-1">{medicalRuleSummary.totalMarks}</div>
+                </div>
+                <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
+                  <div className="font-semibold text-slate-900">Duration</div>
+                  <div className="mt-1">{medicalRuleSummary.duration}</div>
+                </div>
+                <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
+                  <div className="font-semibold text-slate-900">Marking</div>
+                  <div className="mt-1">{medicalRuleSummary.marking}</div>
+                </div>
+              </div>
+              <div className="text-sm text-slate-600">
+                <p><strong>Negative Marking:</strong> Included in the above pattern.</p>
+                <p className="mt-2"><strong>Note:</strong> {medicalRuleSummary.note}</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-slate-900">Practice Set Details</h2>
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
+                <div className="font-semibold text-slate-900">Questions</div>
+                <div className="mt-1">{govSet.questionCount}</div>
+              </div>
+              <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
+                <div className="font-semibold text-slate-900">Estimated Time</div>
+                <div className="mt-1">{govSet.durationMin} minutes</div>
+              </div>
+            </div>
+            <div className="mt-6 flex justify-center">
+              <Link
+                href={`/practice-tests/${category}/${setId}/start`}
+                className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
+              >
+                Start Practice Test
+              </Link>
+            </div>
+          </section>
+
+          <div className="rounded-3xl border border-amber-100 bg-amber-50 p-4 text-sm text-amber-900">
+            <span className="font-semibold">Disclaimer:</span> These are original NEET-style practice questions for self-assessment and preparation support. They are not official previous-year papers.
+          </div>
+        </div>
+      );
+    }
+
     return <PracticeQuiz categorySlug={category} categoryTitle={category} set={govSet} categoryData={categoryData} />;
   }
 

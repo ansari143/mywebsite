@@ -1,4 +1,4 @@
-﻿export type PracticeCategory = "ielts" | "engineering-entrance" | "ctet" | "ssc" | "railway";
+﻿export type PracticeCategory = "ielts" | "toefl" | "engineering-entrance" | "ctet" | "ssc" | "railway" | "medical" | "aviation";
 
 export type PracticeOption = {
   id: "A" | "B" | "C" | "D";
@@ -55,6 +55,13 @@ type IeltsPracticeGroupKey =
   | "ielts-general-reading"
   | "ielts-writing"
   | "ielts-speaking";
+
+type ToeflPracticeGroupKey =
+  | "toefl-reading"
+  | "toefl-listening"
+  | "toefl-speaking"
+  | "toefl-writing"
+  | "toefl-integrated";
 
 export type ExamRule = {
   examSlug: "jee-main" | "jee-advanced" | "comedk" | "wbjee" | "kcet";
@@ -150,6 +157,74 @@ const ieltsPracticeGroupMeta = [
       "Candidates who freeze during interviews, give short answers, or need better structure for common speaking topics.",
     note:
       "Use these sets with voice practice. Objective questions help you understand what a strong spoken response should include.",
+  },
+];
+
+const toeflPracticeGroupMeta = [
+  {
+    key: "toefl-reading" as const,
+    title: "TOEFL Reading Practice",
+    shortName: "Reading",
+    description:
+      "TOEFL iBT reading practice focused on passage logic, inference, vocabulary in context, and evidence-based answer choice.",
+    duration: "About 35 minutes in the TOEFL iBT Reading section.",
+    format: "20 questions from 2 academic passages (practice-style)",
+    bestFor:
+      "Students preparing for university-focused English tests and needing stronger academic reading speed and accuracy.",
+    note:
+      "These are original practice sets designed to improve skill readiness. Always verify current ETS format before exam booking.",
+  },
+  {
+    key: "toefl-listening" as const,
+    title: "TOEFL Listening Practice",
+    shortName: "Listening",
+    description:
+      "TOEFL-style listening practice for lectures and campus conversations, with detail tracking and speaker-intent questions.",
+    duration: "About 36 minutes in the TOEFL iBT Listening section.",
+    format: "28 questions from lectures and conversations (practice-style)",
+    bestFor:
+      "Learners who miss detail while listening, confuse speaker purpose, or struggle with note-based answering under time pressure.",
+    note:
+      "This set uses transcript-style prompts for focused comprehension training and answer strategy improvement.",
+  },
+  {
+    key: "toefl-speaking" as const,
+    title: "TOEFL Speaking Practice",
+    shortName: "Speaking",
+    description:
+      "TOEFL speaking strategy practice for independent and integrated tasks with structure, clarity, and timed response flow.",
+    duration: "About 16 minutes in the TOEFL iBT Speaking section.",
+    format: "4 speaking tasks in the real test; objective strategy practice here",
+    bestFor:
+      "Students who need stronger speaking structure, concise delivery, and better integration of reading/listening points in responses.",
+    note:
+      "Use these sets with voice recording to improve content quality, fluency control, and response organization.",
+  },
+  {
+    key: "toefl-writing" as const,
+    title: "TOEFL Writing Practice",
+    shortName: "Writing",
+    description:
+      "TOEFL writing strategy practice for integrated and academic discussion tasks, coherence, support quality, and grammar accuracy.",
+    duration: "About 29 minutes in the TOEFL iBT Writing section.",
+    format: "2 writing tasks in the real test; objective strategy practice here",
+    bestFor:
+      "Candidates who write generic answers, miss evidence usage, or need clearer organization and argument support.",
+    note:
+      "These questions train writing decisions and structure awareness before full written response evaluation.",
+  },
+  {
+    key: "toefl-integrated" as const,
+    title: "TOEFL Integrated Skills Practice",
+    shortName: "Integrated Skills",
+    description:
+      "Cross-skill TOEFL practice combining reading, listening, speaking, and writing decision logic in exam-like scenarios.",
+    duration: "Varies by task; built for mixed timed strategy practice.",
+    format: "Integrated scenario questions across multiple TOEFL task types",
+    bestFor:
+      "Students targeting balanced score improvement across all sections, especially integrated task performance.",
+    note:
+      "Integrated skill quality strongly affects score consistency, so regular mixed-task practice is essential.",
   },
 ];
 
@@ -5873,6 +5948,454 @@ function createIeltsPracticeSet(
   };
 }
 
+function createToeflReadingQuestions(setNumber: number): PracticeQuestion[] {
+  const topics = [
+    {
+      skill: "main idea",
+      best: "Identify the passage's central claim before checking details",
+      weak: "Choose the first familiar sentence",
+      keyword: "overall argument",
+    },
+    {
+      skill: "inference",
+      best: "Choose the option best supported by the passage evidence",
+      weak: "Use outside personal knowledge",
+      keyword: "evidence-based inference",
+    },
+    {
+      skill: "vocabulary in context",
+      best: "Use surrounding sentence meaning to infer the target word",
+      weak: "Pick the shortest option quickly",
+      keyword: "context clues",
+    },
+    {
+      skill: "reference questions",
+      best: "Find the exact noun phrase that pronouns refer to",
+      weak: "Guess from general topic only",
+      keyword: "pronoun tracking",
+    },
+    {
+      skill: "paragraph purpose",
+      best: "Ask why this paragraph exists in the argument structure",
+      weak: "Memorize one line without purpose",
+      keyword: "text function",
+    },
+  ] as const;
+
+  return topics.flatMap((topic, round) => {
+    const seed = setNumber * 710 + round * 10;
+    return [
+      createGeneratedQuestion(
+        `toefl-reading-${setNumber}-${round + 1}`,
+        `In TOEFL Reading, what is the best approach for ${topic.skill} questions?`,
+        topic.best,
+        [topic.weak, "Skip the passage and read options only", "Answer before checking evidence"],
+        `For ${topic.skill}, the strongest method is to focus on ${topic.keyword}.`,
+        "reading strategy",
+        "easy",
+        seed + 1
+      ),
+      createGeneratedQuestion(
+        `toefl-reading-${setNumber}-${round + 11}`,
+        `Which mistake most often lowers accuracy in ${topic.skill} questions?`,
+        topic.weak,
+        [topic.best, "Marking key evidence lines", "Re-checking final choice against text"],
+        `${topic.weak} commonly reduces score consistency in TOEFL reading.`,
+        "reading error control",
+        "medium",
+        seed + 2
+      ),
+    ];
+  });
+}
+
+function createToeflListeningQuestions(setNumber: number): PracticeQuestion[] {
+  const topics = [
+    {
+      skill: "lecture detail",
+      best: "Note speaker transitions and supporting examples",
+      weak: "Write every word without structure",
+      keyword: "organized note-taking",
+    },
+    {
+      skill: "speaker purpose",
+      best: "Track why the speaker says each key point",
+      weak: "Focus only on isolated vocabulary",
+      keyword: "intent recognition",
+    },
+    {
+      skill: "conversation problem-solution",
+      best: "Identify the student's problem and recommended next step",
+      weak: "Ignore solution details",
+      keyword: "problem-solution mapping",
+    },
+    {
+      skill: "attitude and tone",
+      best: "Use word choice and emphasis to infer attitude",
+      weak: "Assume neutral tone always",
+      keyword: "tone inference",
+    },
+    {
+      skill: "listening recall",
+      best: "Review notes mentally before selecting answers",
+      weak: "Guess immediately without checking notes",
+      keyword: "recall verification",
+    },
+  ] as const;
+
+  return topics.flatMap((topic, round) => {
+    const seed = setNumber * 720 + round * 10;
+    return [
+      createGeneratedQuestion(
+        `toefl-listening-${setNumber}-${round + 1}`,
+        `What is the strongest listening habit for TOEFL ${topic.skill} tasks?`,
+        topic.best,
+        [topic.weak, "Pause frequently and lose context", "Ignore signpost words"],
+        `Better TOEFL listening comes from ${topic.keyword} and active structure tracking.`,
+        "listening strategy",
+        "easy",
+        seed + 1
+      ),
+      createGeneratedQuestion(
+        `toefl-listening-${setNumber}-${round + 11}`,
+        `Which error most often weakens ${topic.skill} performance?`,
+        topic.weak,
+        [topic.best, "Checking notes before final answer", "Separating main points from examples"],
+        `${topic.weak} increases careless mistakes in listening sections.`,
+        "listening error control",
+        "medium",
+        seed + 2
+      ),
+    ];
+  });
+}
+
+function createToeflSpeakingQuestions(setNumber: number): PracticeQuestion[] {
+  const topics = [
+    {
+      task: "independent speaking",
+      best: "State your position quickly, then support it with one clear example",
+      weak: "Spend all time on background without answering directly",
+      keyword: "direct response",
+    },
+    {
+      task: "integrated speaking",
+      best: "Summarize both sources accurately before giving conclusion",
+      weak: "Ignore one source and give personal opinion only",
+      keyword: "source integration",
+    },
+    {
+      task: "timed speaking",
+      best: "Use a short template: point, reason, example, close",
+      weak: "Start speaking without any structure",
+      keyword: "response structure",
+    },
+    {
+      task: "delivery",
+      best: "Keep pace steady and pronunciation clear",
+      weak: "Rush every line with unclear stress",
+      keyword: "speech clarity",
+    },
+    {
+      task: "content quality",
+      best: "Use relevant detail instead of generic statements",
+      weak: "Repeat the same line in different words",
+      keyword: "content development",
+    },
+  ] as const;
+
+  return topics.flatMap((topic, round) => {
+    const seed = setNumber * 730 + round * 10;
+    return [
+      createGeneratedQuestion(
+        `toefl-speaking-${setNumber}-${round + 1}`,
+        `For TOEFL ${topic.task}, what is the strongest answer strategy?`,
+        topic.best,
+        [topic.weak, "Memorize one answer for all prompts", "Use complex words without control"],
+        `Higher speaking scores rely on ${topic.keyword} and relevant support.`,
+        "speaking strategy",
+        "easy",
+        seed + 1
+      ),
+      createGeneratedQuestion(
+        `toefl-speaking-${setNumber}-${round + 11}`,
+        `Which issue most often lowers score in ${topic.task}?`,
+        topic.weak,
+        [topic.best, "Planning keywords before speaking", "Reviewing recording after mock"],
+        `${topic.weak} usually reduces clarity and score reliability.`,
+        "speaking mistakes",
+        "medium",
+        seed + 2
+      ),
+    ];
+  });
+}
+
+function createToeflWritingQuestions(setNumber: number): PracticeQuestion[] {
+  const topics = [
+    {
+      task: "integrated writing",
+      best: "Present how listening points challenge or support reading points",
+      weak: "Copy full reading lines without synthesis",
+      keyword: "comparison mapping",
+    },
+    {
+      task: "academic discussion task",
+      best: "Take one clear stance and support it with specific reasoning",
+      weak: "Give vague agreement without support",
+      keyword: "clear argument",
+    },
+    {
+      task: "coherence",
+      best: "Use logical sequencing and paragraph separation",
+      weak: "Jump between unrelated ideas",
+      keyword: "logical organization",
+    },
+    {
+      task: "evidence use",
+      best: "Use concrete support instead of generic claims",
+      weak: "State opinion repeatedly without proof",
+      keyword: "supported claims",
+    },
+    {
+      task: "language accuracy",
+      best: "Prioritize correct grammar and precise vocabulary",
+      weak: "Force advanced words incorrectly",
+      keyword: "accuracy first",
+    },
+  ] as const;
+
+  return topics.flatMap((topic, round) => {
+    const seed = setNumber * 740 + round * 10;
+    return [
+      createGeneratedQuestion(
+        `toefl-writing-${setNumber}-${round + 1}`,
+        `In TOEFL ${topic.task}, what should be prioritized first?`,
+        topic.best,
+        [topic.weak, "Write as long as possible without planning", "Avoid paragraph breaks"],
+        `Better writing scores come from ${topic.keyword} and direct task response.`,
+        "writing strategy",
+        "easy",
+        seed + 1
+      ),
+      createGeneratedQuestion(
+        `toefl-writing-${setNumber}-${round + 11}`,
+        `Which mistake most often harms ${topic.task} quality?`,
+        topic.weak,
+        [topic.best, "Checking task requirement before finishing", "Using clear transitions"],
+        `${topic.weak} commonly lowers writing clarity and coherence.`,
+        "writing error control",
+        "medium",
+        seed + 2
+      ),
+    ];
+  });
+}
+
+function createToeflIntegratedSkillQuestions(setNumber: number): PracticeQuestion[] {
+  const topics = [
+    {
+      area: "read-listen synthesis",
+      best: "Track agreements and contradictions between sources",
+      weak: "Treat each source separately without linkage",
+      keyword: "cross-source linking",
+    },
+    {
+      area: "note-to-answer conversion",
+      best: "Convert notes into structured points before answering",
+      weak: "Read notes randomly while speaking",
+      keyword: "structured recall",
+    },
+    {
+      area: "time management",
+      best: "Allocate prep, response, and review time deliberately",
+      weak: "Use most time on one early question",
+      keyword: "time balance",
+    },
+    {
+      area: "accuracy under pressure",
+      best: "Confirm claim-source match before final answer",
+      weak: "Guess when evidence is available",
+      keyword: "evidence check",
+    },
+    {
+      area: "score consistency",
+      best: "Practice mixed tasks in one session weekly",
+      weak: "Practice only one easy task type repeatedly",
+      keyword: "mixed-task routine",
+    },
+  ] as const;
+
+  return topics.flatMap((topic, round) => {
+    const seed = setNumber * 750 + round * 10;
+    return [
+      createGeneratedQuestion(
+        `toefl-integrated-${setNumber}-${round + 1}`,
+        `For TOEFL ${topic.area}, which strategy gives the strongest outcome?`,
+        topic.best,
+        [topic.weak, "Ignore timing and focus only on one skill", "Use one fixed template for all tasks"],
+        `${topic.keyword} is essential for stable integrated-task performance.`,
+        "integrated strategy",
+        "easy",
+        seed + 1
+      ),
+      createGeneratedQuestion(
+        `toefl-integrated-${setNumber}-${round + 11}`,
+        `What is the most common score-limiting mistake in ${topic.area}?`,
+        topic.weak,
+        [topic.best, "Linking evidence to claim clearly", "Reviewing weak integrated tasks after mock"],
+        `${topic.weak} weakens response quality in integrated TOEFL tasks.`,
+        "integrated mistakes",
+        "medium",
+        seed + 2
+      ),
+    ];
+  });
+}
+
+function createToeflPracticeSet(
+  key: ToeflPracticeGroupKey,
+  setNumber: number
+): PracticeSet {
+  const baseMeta: Record<
+    ToeflPracticeGroupKey,
+    {
+      title: string;
+      slug: string;
+      description: string;
+      minutes: number;
+      level: "beginner" | "intermediate" | "advanced";
+      intro: string;
+      sectionLabel: string;
+      keywords: string[];
+    }
+  > = {
+    "toefl-reading": {
+      title: `TOEFL Reading Practice Test - Set ${setNumber}`,
+      slug: `toefl-reading-practice-test-${setNumber}`,
+      description:
+        "TOEFL reading practice with passage logic, inference, vocabulary in context, and evidence-based answer selection.",
+      minutes: 30,
+      level: "beginner",
+      intro:
+        "Use this set to strengthen academic reading speed and answer-justification quality for TOEFL preparation.",
+      sectionLabel: "Reading Practice",
+      keywords: [
+        "TOEFL reading practice",
+        "TOEFL iBT reading questions",
+        "TOEFL passage strategy",
+        "TOEFL reading answers",
+        `TOEFL reading set ${setNumber}`,
+      ],
+    },
+    "toefl-listening": {
+      title: `TOEFL Listening Practice Test - Set ${setNumber}`,
+      slug: `toefl-listening-practice-test-${setNumber}`,
+      description:
+        "TOEFL listening practice for lecture and conversation questions with note-based decision training.",
+      minutes: 30,
+      level: "beginner",
+      intro:
+        "Use this set to improve listening focus, note quality, and answer confidence under timed conditions.",
+      sectionLabel: "Listening Practice",
+      keywords: [
+        "TOEFL listening practice",
+        "TOEFL iBT listening questions",
+        "TOEFL listening mock",
+        "TOEFL note taking",
+        `TOEFL listening set ${setNumber}`,
+      ],
+    },
+    "toefl-speaking": {
+      title: `TOEFL Speaking Practice Test - Set ${setNumber}`,
+      slug: `toefl-speaking-practice-test-${setNumber}`,
+      description:
+        "TOEFL speaking strategy practice for independent and integrated response quality, structure, and delivery.",
+      minutes: 20,
+      level: "intermediate",
+      intro:
+        "Use this set to improve response structure, clarity, and timing before live speaking recording rounds.",
+      sectionLabel: "Speaking Practice",
+      keywords: [
+        "TOEFL speaking practice",
+        "TOEFL speaking strategy",
+        "TOEFL integrated speaking",
+        "TOEFL speaking answers",
+        `TOEFL speaking set ${setNumber}`,
+      ],
+    },
+    "toefl-writing": {
+      title: `TOEFL Writing Practice Test - Set ${setNumber}`,
+      slug: `toefl-writing-practice-test-${setNumber}`,
+      description:
+        "TOEFL writing strategy practice for integrated writing and academic discussion response quality.",
+      minutes: 25,
+      level: "intermediate",
+      intro:
+        "Use this set to improve task response, coherence, evidence usage, and grammar control in TOEFL writing tasks.",
+      sectionLabel: "Writing Practice",
+      keywords: [
+        "TOEFL writing practice",
+        "TOEFL integrated writing",
+        "TOEFL writing strategy",
+        "TOEFL writing answers",
+        `TOEFL writing set ${setNumber}`,
+      ],
+    },
+    "toefl-integrated": {
+      title: `TOEFL Integrated Skills Practice Test - Set ${setNumber}`,
+      slug: `toefl-integrated-skills-practice-test-${setNumber}`,
+      description:
+        "TOEFL integrated-skills practice combining reading, listening, speaking, and writing strategy decisions.",
+      minutes: 28,
+      level: "intermediate",
+      intro:
+        "Use this set to build score consistency across mixed TOEFL task types, especially integrated prompts.",
+      sectionLabel: "Integrated Skills Practice",
+      keywords: [
+        "TOEFL integrated skills",
+        "TOEFL mixed practice",
+        "TOEFL iBT integrated tasks",
+        "TOEFL preparation online",
+        `TOEFL integrated set ${setNumber}`,
+      ],
+    },
+  };
+
+  const config = baseMeta[key];
+  const questions =
+    key === "toefl-reading"
+      ? createToeflReadingQuestions(setNumber)
+      : key === "toefl-listening"
+        ? createToeflListeningQuestions(setNumber)
+        : key === "toefl-speaking"
+          ? createToeflSpeakingQuestions(setNumber)
+          : key === "toefl-writing"
+            ? createToeflWritingQuestions(setNumber)
+            : createToeflIntegratedSkillQuestions(setNumber);
+
+  return {
+    id: `${key}-set-${setNumber}`,
+    slug: config.slug,
+    category: "toefl",
+    practiceGroup: key,
+    title: config.title,
+    description: config.description,
+    examType: "TOEFL iBT",
+    sectionLabel: config.sectionLabel,
+    level: config.level,
+    questionCount: questions.length,
+    estimatedMinutes: config.minutes,
+    seoTitle: `${config.title} | Nishaglobal Education`,
+    seoDescription: `${config.description} Practice with explanation-based guidance for stronger TOEFL readiness.`,
+    keywords: config.keywords,
+    intro: config.intro,
+    isOriginal: true,
+    isLive: true,
+    questions,
+  };
+}
+
 export const engineeringExamRules: ExamRule[] = [
   {
     examSlug: "comedk",
@@ -6566,6 +7089,931 @@ const railwayTicketClerkTtConfig: RailwayPatternConfig = {
   gaCount: 30,
 };
 
+function createNeetPhysicsQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 45 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 2600 + qNo;
+    const pattern = index % 5;
+    const cycleIndex = Math.floor(index / 5);
+
+    if (pattern === 0) {
+      const u = 6 + (qNo % 8);
+      const a = 2 + (setNumber % 4);
+      const t = 3 + (qNo % 5);
+      const v = u + a * t;
+      return createSeededGovQuestion(
+        `neet-phys-set${setNumber}-${qNo}`,
+        "Physics",
+        "भौतिकी",
+        `For u = ${u} m/s, a = ${a} m/s^2 and t = ${t} s, final velocity v is:`,
+        `u = ${u} m/s, a = ${a} m/s^2 और t = ${t} s के लिए अंतिम वेग v होगा:`,
+        { en: `${v} m/s`, hi: `${v} m/s` },
+        [
+          { en: `${v - a} m/s`, hi: `${v - a} m/s` },
+          { en: `${v + a} m/s`, hi: `${v + a} m/s` },
+          { en: `${u + t} m/s`, hi: `${u + t} m/s` },
+        ],
+        "Use v = u + at.",
+        "सूत्र v = u + at का उपयोग करें।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      const force = 10 + (qNo % 7) * 5;
+      const distance = 3 + (setNumber % 5);
+      const work = force * distance;
+      return createSeededGovQuestion(
+        `neet-phys-set${setNumber}-${qNo}`,
+        "Physics",
+        "भौतिकी",
+        `A force of ${force} N moves a body by ${distance} m in the same direction. Work done is:`,
+        `${force} N का बल किसी वस्तु को ${distance} m उसी दिशा में विस्थापित करता है। किया गया कार्य होगा:`,
+        { en: `${work} J`, hi: `${work} J` },
+        [
+          { en: `${work + force} J`, hi: `${work + force} J` },
+          { en: `${work - distance} J`, hi: `${work - distance} J` },
+          { en: `${force + distance} J`, hi: `${force + distance} J` },
+        ],
+        "Work done is W = F x s when force and displacement are in the same direction.",
+        "जब बल और विस्थापन एक ही दिशा में हों, तब W = F x s होता है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const current = 2 + (qNo % 6);
+      const resistance = 4 + (setNumber % 6);
+      const voltage = current * resistance;
+      return createSeededGovQuestion(
+        `neet-phys-set${setNumber}-${qNo}`,
+        "Physics",
+        "भौतिकी",
+        `If current is ${current} A and resistance is ${resistance} ohm, potential difference is:`,
+        `यदि धारा ${current} A और प्रतिरोध ${resistance} ohm है, तो विभवांतर होगा:`,
+        { en: `${voltage} V`, hi: `${voltage} V` },
+        [
+          { en: `${voltage + 2} V`, hi: `${voltage + 2} V` },
+          { en: `${voltage - 2} V`, hi: `${voltage - 2} V` },
+          { en: `${current + resistance} V`, hi: `${current + resistance} V` },
+        ],
+        "Use Ohm's law V = IR.",
+        "ओम के नियम V = IR का प्रयोग करें।",
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      const siUnitBank = [
+        {
+          q: "electric charge",
+          qHi: "विद्युत आवेश",
+          a: "Coulomb",
+          aHi: "कूलॉम",
+          wrong: ["Ohm", "Tesla", "Watt"],
+          wrongHi: ["ओम", "टेस्ला", "वाट"],
+        },
+        {
+          q: "force",
+          qHi: "बल",
+          a: "Newton",
+          aHi: "न्यूटन",
+          wrong: ["Joule", "Pascal", "Watt"],
+          wrongHi: ["जूल", "पास्कल", "वाट"],
+        },
+        {
+          q: "power",
+          qHi: "शक्ति",
+          a: "Watt",
+          aHi: "वाट",
+          wrong: ["Joule", "Volt", "Newton"],
+          wrongHi: ["जूल", "वोल्ट", "न्यूटन"],
+        },
+        {
+          q: "pressure",
+          qHi: "दाब",
+          a: "Pascal",
+          aHi: "पास्कल",
+          wrong: ["Bar", "Newton", "Joule"],
+          wrongHi: ["बार", "न्यूटन", "जूल"],
+        },
+        {
+          q: "frequency",
+          qHi: "आवृत्ति",
+          a: "Hertz",
+          aHi: "हर्ट्ज",
+          wrong: ["Weber", "Farad", "Tesla"],
+          wrongHi: ["वेबर", "फैराड", "टेस्ला"],
+        },
+        {
+          q: "electric potential difference",
+          qHi: "विभवांतर",
+          a: "Volt",
+          aHi: "वोल्ट",
+          wrong: ["Ampere", "Coulomb", "Ohm"],
+          wrongHi: ["ऐम्पियर", "कूलॉम", "ओम"],
+        },
+        {
+          q: "resistance",
+          qHi: "प्रतिरोध",
+          a: "Ohm",
+          aHi: "ओम",
+          wrong: ["Volt", "Ampere", "Tesla"],
+          wrongHi: ["वोल्ट", "ऐम्पियर", "टेस्ला"],
+        },
+        {
+          q: "magnetic flux",
+          qHi: "चुंबकीय फ्लक्स",
+          a: "Weber",
+          aHi: "वेबर",
+          wrong: ["Tesla", "Henry", "Farad"],
+          wrongHi: ["टेस्ला", "हेनरी", "फैराड"],
+        },
+        {
+          q: "capacitance",
+          qHi: "धारिता",
+          a: "Farad",
+          aHi: "फैराड",
+          wrong: ["Henry", "Ohm", "Joule"],
+          wrongHi: ["हेनरी", "ओम", "जूल"],
+        },
+      ];
+      const item = siUnitBank[cycleIndex % siUnitBank.length];
+      return createSeededGovQuestion(
+        `neet-phys-set${setNumber}-${qNo}`,
+        "Physics",
+        "भौतिकी",
+        `The SI unit of ${item.q} is:`,
+        `${item.qHi} की SI इकाई है:`,
+        { en: item.a, hi: item.aHi },
+        [
+          { en: item.wrong[0], hi: item.wrongHi[0] },
+          { en: item.wrong[1], hi: item.wrongHi[1] },
+          { en: item.wrong[2], hi: item.wrongHi[2] },
+        ],
+        `${item.q} is measured in ${item.a}.`,
+        `${item.qHi} को ${item.aHi} में मापा जाता है।`,
+        seed
+      );
+    }
+
+    const constantBank = [
+      {
+        q: "Speed of light in vacuum is approximately:",
+        qHi: "निर्वात में प्रकाश का वेग लगभग होता है:",
+        a: "3 x 10^8 m/s",
+        wrong: ["3 x 10^6 m/s", "3 x 10^3 m/s", "3 x 10^10 m/s"],
+        exp: "The accepted value is approximately 3 x 10^8 m/s.",
+        expHi: "स्वीकृत मान लगभग 3 x 10^8 m/s है।",
+      },
+      {
+        q: "Acceleration due to gravity near Earth's surface is approximately:",
+        qHi: "पृथ्वी की सतह के पास गुरुत्वजनित त्वरण लगभग होता है:",
+        a: "9.8 m/s^2",
+        wrong: ["98 m/s^2", "0.98 m/s^2", "4.9 m/s^2"],
+        exp: "Near Earth, g is approximately 9.8 m/s^2.",
+        expHi: "पृथ्वी के पास g का मान लगभग 9.8 m/s^2 होता है।",
+      },
+      {
+        q: "Absolute zero temperature on Kelvin scale is:",
+        qHi: "केल्विन स्केल पर परम शून्य तापमान है:",
+        a: "0 K",
+        wrong: ["-273 K", "273 K", "-100 K"],
+        exp: "Absolute zero is defined as 0 K.",
+        expHi: "परम शून्य 0 K पर परिभाषित है।",
+      },
+      {
+        q: "The SI unit of energy is:",
+        qHi: "ऊर्जा की SI इकाई है:",
+        a: "Joule",
+        wrong: ["Watt", "Newton", "Pascal"],
+        exp: "Energy is measured in joule (J).",
+        expHi: "ऊर्जा को जूल (J) में मापा जाता है।",
+      },
+      {
+        q: "The speed of sound in air at room temperature is closest to:",
+        qHi: "कमरे के तापमान पर वायु में ध्वनि का वेग सबसे निकट है:",
+        a: "340 m/s",
+        wrong: ["34 m/s", "170 m/s", "680 m/s"],
+        exp: "At room temperature, sound speed in air is about 340 m/s.",
+        expHi: "कमरे के तापमान पर वायु में ध्वनि का वेग लगभग 340 m/s होता है।",
+      },
+      {
+        q: "The SI unit of magnetic field is:",
+        qHi: "चुंबकीय क्षेत्र की SI इकाई है:",
+        a: "Tesla",
+        wrong: ["Weber", "Henry", "Farad"],
+        exp: "Magnetic field is measured in tesla (T).",
+        expHi: "चुंबकीय क्षेत्र को टेस्ला (T) में मापा जाता है।",
+      },
+      {
+        q: "1 kilowatt is equal to:",
+        qHi: "1 किलोवाट बराबर है:",
+        a: "1000 watt",
+        wrong: ["100 watt", "10 watt", "10000 watt"],
+        exp: "Kilo means 10^3, so 1 kW = 1000 W.",
+        expHi: "किलो का अर्थ 10^3 है, इसलिए 1 kW = 1000 W।",
+      },
+      {
+        q: "The SI unit of momentum is:",
+        qHi: "संवेग की SI इकाई है:",
+        a: "kg m/s",
+        wrong: ["N/s", "kg/m", "J/s"],
+        exp: "Momentum p = mv, so unit is kg m/s.",
+        expHi: "संवेग p = mv, इसलिए इकाई kg m/s होती है।",
+      },
+      {
+        q: "Planck constant is denoted by:",
+        qHi: "प्लांक स्थिरांक को किससे दर्शाते हैं:",
+        a: "h",
+        wrong: ["k", "c", "G"],
+        exp: "Planck constant is represented by h.",
+        expHi: "प्लांक स्थिरांक को h से दर्शाया जाता है।",
+      },
+    ];
+    const constant = constantBank[cycleIndex % constantBank.length];
+    return createSeededGovQuestion(
+      `neet-phys-set${setNumber}-${qNo}`,
+      "Physics",
+      "भौतिकी",
+      constant.q,
+      constant.qHi,
+      { en: constant.a, hi: constant.a },
+      [
+        { en: constant.wrong[0], hi: constant.wrong[0] },
+        { en: constant.wrong[1], hi: constant.wrong[1] },
+        { en: constant.wrong[2], hi: constant.wrong[2] },
+      ],
+      constant.exp,
+      constant.expHi,
+      seed
+    );
+  });
+}
+
+function createNeetChemistryQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 45 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 2700 + qNo;
+    const pattern = index % 5;
+    const cycleIndex = Math.floor(index / 5);
+
+    if (pattern === 0) {
+      const moles = 2 + (qNo % 4);
+      const molarMass = 18;
+      const mass = moles * molarMass;
+      return createSeededGovQuestion(
+        `neet-chem-set${setNumber}-${qNo}`,
+        "Chemistry",
+        "रसायन विज्ञान",
+        `Number of moles in ${mass} g of water (molar mass 18 g/mol) is:`,
+        `पानी के ${mass} g (मोलर द्रव्यमान 18 g/mol) में मोलों की संख्या होगी:`,
+        { en: `${moles}`, hi: `${moles}` },
+        [
+          { en: `${moles + 1}`, hi: `${moles + 1}` },
+          { en: `${moles - 1}`, hi: `${moles - 1}` },
+          { en: `${moles + 2}`, hi: `${moles + 2}` },
+        ],
+        "Moles = mass / molar mass.",
+        "मोल = द्रव्यमान / मोलर द्रव्यमान।",
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      const ph = 1 + (qNo % 12);
+      return createSeededGovQuestion(
+        `neet-chem-set${setNumber}-${qNo}`,
+        "Chemistry",
+        "रसायन विज्ञान",
+        `If [H+] = 10^-${ph} mol/L, pH of the solution is:`,
+        `यदि [H+] = 10^-${ph} mol/L है, तो विलयन का pH होगा:`,
+        { en: `${ph}`, hi: `${ph}` },
+        [
+          { en: `${ph + 1}`, hi: `${ph + 1}` },
+          { en: `${ph - 1 > 0 ? ph - 1 : ph + 2}`, hi: `${ph - 1 > 0 ? ph - 1 : ph + 2}` },
+          { en: `${14 - ph}`, hi: `${14 - ph}` },
+        ],
+        "pH = -log[H+].",
+        "pH = -log[H+] होता है।",
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const atomicNumberBank = [
+        { z: 8, element: "Oxygen", elementHi: "ऑक्सीजन" },
+        { z: 7, element: "Nitrogen", elementHi: "नाइट्रोजन" },
+        { z: 6, element: "Carbon", elementHi: "कार्बन" },
+        { z: 11, element: "Sodium", elementHi: "सोडियम" },
+        { z: 12, element: "Magnesium", elementHi: "मैग्नीशियम" },
+        { z: 13, element: "Aluminium", elementHi: "ऐल्युमिनियम" },
+        { z: 14, element: "Silicon", elementHi: "सिलिकॉन" },
+        { z: 15, element: "Phosphorus", elementHi: "फॉस्फोरस" },
+        { z: 16, element: "Sulfur", elementHi: "सल्फर" },
+      ];
+      const item = atomicNumberBank[cycleIndex % atomicNumberBank.length];
+      const wrong = atomicNumberBank
+        .filter((entry) => entry.element !== item.element)
+        .slice(0, 3);
+      return createSeededGovQuestion(
+        `neet-chem-set${setNumber}-${qNo}`,
+        "Chemistry",
+        "रसायन विज्ञान",
+        `Which element has atomic number ${item.z}?`,
+        `किस तत्व का परमाणु क्रमांक ${item.z} है?`,
+        { en: item.element, hi: item.elementHi },
+        [
+          { en: wrong[0].element, hi: wrong[0].elementHi },
+          { en: wrong[1].element, hi: wrong[1].elementHi },
+          { en: wrong[2].element, hi: wrong[2].elementHi },
+        ],
+        `Atomic number ${item.z} corresponds to ${item.element}.`,
+        `परमाणु क्रमांक ${item.z} ${item.elementHi} का होता है।`,
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      const functionalGroupBank = [
+        {
+          family: "carboxylic acids",
+          familyHi: "कार्बोक्सिलिक अम्ल",
+          group: "-COOH",
+          wrong: ["-CHO", "-OH", "-NH2"],
+          exp: "Carboxylic acids contain the -COOH group.",
+          expHi: "कार्बोक्सिलिक अम्ल में -COOH समूह होता है।",
+        },
+        {
+          family: "aldehydes",
+          familyHi: "ऐल्डिहाइड",
+          group: "-CHO",
+          wrong: ["-COOH", "-OH", "-CN"],
+          exp: "Aldehydes are identified by the -CHO group.",
+          expHi: "ऐल्डिहाइड में -CHO समूह होता है।",
+        },
+        {
+          family: "alcohols",
+          familyHi: "अल्कोहल",
+          group: "-OH",
+          wrong: ["-COOH", "-NH2", "-COO-"],
+          exp: "Alcohols contain the hydroxyl (-OH) group.",
+          expHi: "अल्कोहल में हाइड्रॉक्सिल (-OH) समूह होता है।",
+        },
+        {
+          family: "amines",
+          familyHi: "ऐमीन",
+          group: "-NH2",
+          wrong: ["-COOH", "-OH", "-CHO"],
+          exp: "Primary amines contain the -NH2 group.",
+          expHi: "प्राथमिक ऐमीन में -NH2 समूह होता है।",
+        },
+        {
+          family: "ketones",
+          familyHi: "कीटोन",
+          group: ">C=O",
+          wrong: ["-CHO", "-COOH", "-OH"],
+          exp: "Ketones have a carbonyl group between two carbon atoms.",
+          expHi: "कीटोन में दो कार्बन के बीच कार्बोनिल समूह होता है।",
+        },
+        {
+          family: "esters",
+          familyHi: "एस्टर",
+          group: "-COO-",
+          wrong: ["-COOH", "-CHO", "-OH"],
+          exp: "Esters are characterized by the -COO- linkage.",
+          expHi: "एस्टर में -COO- लिंकज होता है।",
+        },
+        {
+          family: "ethers",
+          familyHi: "ईथर",
+          group: "-O-",
+          wrong: ["-OH", "-COO-", "-NH2"],
+          exp: "Ethers contain an oxygen atom between two carbon groups.",
+          expHi: "ईथर में दो कार्बन समूहों के बीच ऑक्सीजन होता है।",
+        },
+        {
+          family: "alkenes",
+          familyHi: "अल्कीन",
+          group: "C=C",
+          wrong: ["C-C", "C#C", "C=O"],
+          exp: "Alkenes are unsaturated hydrocarbons with C=C bond.",
+          expHi: "अल्कीन में C=C डबल बॉन्ड होता है।",
+        },
+        {
+          family: "alkynes",
+          familyHi: "अल्काइन",
+          group: "C#C",
+          wrong: ["C=C", "C-C", "C=O"],
+          exp: "Alkynes are characterized by a triple bond C#C.",
+          expHi: "अल्काइन में C#C ट्रिपल बॉन्ड होता है।",
+        },
+      ];
+      const item = functionalGroupBank[cycleIndex % functionalGroupBank.length];
+      return createSeededGovQuestion(
+        `neet-chem-set${setNumber}-${qNo}`,
+        "Chemistry",
+        "रसायन विज्ञान",
+        `Functional group present in ${item.family} is:`,
+        `${item.familyHi} में उपस्थित फंक्शनल समूह है:`,
+        { en: item.group, hi: item.group },
+        [
+          { en: item.wrong[0], hi: item.wrong[0] },
+          { en: item.wrong[1], hi: item.wrong[1] },
+          { en: item.wrong[2], hi: item.wrong[2] },
+        ],
+        item.exp,
+        item.expHi,
+        seed
+      );
+    }
+
+    const reactionBank = [
+      {
+        reaction: "zinc reacts with dilute HCl",
+        reactionHi: "जिंक की dilute HCl से अभिक्रिया",
+        gas: "Hydrogen",
+        gasHi: "हाइड्रोजन",
+        eqn: "Zn + 2HCl gives ZnCl2 + H2 gas.",
+        eqnHi: "Zn + 2HCl से ZnCl2 और H2 गैस बनती है।",
+      },
+      {
+        reaction: "calcium carbonate reacts with dilute HCl",
+        reactionHi: "कैल्शियम कार्बोनेट की dilute HCl से अभिक्रिया",
+        gas: "Carbon dioxide",
+        gasHi: "कार्बन डाइऑक्साइड",
+        eqn: "CaCO3 + 2HCl gives CaCl2 + CO2 + H2O.",
+        eqnHi: "CaCO3 + 2HCl से CaCl2 + CO2 + H2O बनता है।",
+      },
+      {
+        reaction: "ammonium chloride reacts with NaOH on heating",
+        reactionHi: "अमोनियम क्लोराइड की NaOH के साथ गरम करने पर अभिक्रिया",
+        gas: "Ammonia",
+        gasHi: "अमोनिया",
+        eqn: "NH4Cl + NaOH gives NH3 + NaCl + H2O.",
+        eqnHi: "NH4Cl + NaOH से NH3 + NaCl + H2O बनता है।",
+      },
+      {
+        reaction: "hydrogen peroxide decomposes",
+        reactionHi: "हाइड्रोजन पेरॉक्साइड का अपघटन",
+        gas: "Oxygen",
+        gasHi: "ऑक्सीजन",
+        eqn: "2H2O2 decomposes to 2H2O + O2.",
+        eqnHi: "2H2O2 के अपघटन से 2H2O + O2 बनता है।",
+      },
+      {
+        reaction: "sodium metal reacts with water",
+        reactionHi: "सोडियम धातु की पानी से अभिक्रिया",
+        gas: "Hydrogen",
+        gasHi: "हाइड्रोजन",
+        eqn: "2Na + 2H2O gives 2NaOH + H2.",
+        eqnHi: "2Na + 2H2O से 2NaOH + H2 बनता है।",
+      },
+      {
+        reaction: "marble chips react with dilute acid",
+        reactionHi: "मार्बल चिप्स की dilute अम्ल से अभिक्रिया",
+        gas: "Carbon dioxide",
+        gasHi: "कार्बन डाइऑक्साइड",
+        eqn: "Carbonates react with acids to release CO2.",
+        eqnHi: "कार्बोनेट अम्ल से अभिक्रिया कर CO2 छोड़ते हैं।",
+      },
+      {
+        reaction: "metal sulfide reacts with dilute acid",
+        reactionHi: "धातु सल्फाइड की dilute अम्ल से अभिक्रिया",
+        gas: "Hydrogen sulfide",
+        gasHi: "हाइड्रोजन सल्फाइड",
+        eqn: "Metal sulfides with acids release H2S gas.",
+        eqnHi: "धातु सल्फाइड अम्ल से H2S गैस छोड़ते हैं।",
+      },
+      {
+        reaction: "baking soda is heated strongly",
+        reactionHi: "बेकिंग सोडा को तीव्र गरम करने पर",
+        gas: "Carbon dioxide",
+        gasHi: "कार्बन डाइऑक्साइड",
+        eqn: "2NaHCO3 on heating gives Na2CO3 + CO2 + H2O.",
+        eqnHi: "2NaHCO3 गरम करने पर Na2CO3 + CO2 + H2O देता है।",
+      },
+      {
+        reaction: "potassium chlorate decomposes on heating",
+        reactionHi: "पोटैशियम क्लोरेट गरम करने पर अपघटित होता है",
+        gas: "Oxygen",
+        gasHi: "ऑक्सीजन",
+        eqn: "2KClO3 gives 2KCl + 3O2 on heating.",
+        eqnHi: "2KClO3 गरम करने पर 2KCl + 3O2 देता है।",
+      },
+    ];
+    const reaction = reactionBank[cycleIndex % reactionBank.length];
+    return createSeededGovQuestion(
+      `neet-chem-set${setNumber}-${qNo}`,
+      "Chemistry",
+      "रसायन विज्ञान",
+      `The gas evolved when ${reaction.reaction} is:`,
+      `${reaction.reactionHi} में निकलने वाली गैस है:`,
+      { en: reaction.gas, hi: reaction.gasHi },
+      [
+        { en: "Oxygen", hi: "ऑक्सीजन" },
+        { en: "Nitrogen", hi: "नाइट्रोजन" },
+        { en: "Chlorine", hi: "क्लोरीन" },
+      ],
+      reaction.eqn,
+      reaction.eqnHi,
+      seed
+    );
+  });
+}
+
+function createNeetBiologyQuestions(setNumber: number): GovPracticeQuestion[] {
+  return Array.from({ length: 90 }, (_, index) => {
+    const qNo = index + 1;
+    const seed = setNumber * 2800 + qNo;
+    const pattern = index % 6;
+    const cycleIndex = Math.floor(index / 6);
+
+    if (pattern === 0) {
+      const organelleBank = [
+        { f: "powerhouse of the cell", fHi: "कोशिका का पावरहाउस", a: "Mitochondria", aHi: "माइटोकॉन्ड्रिया" },
+        { f: "site of protein synthesis", fHi: "प्रोटीन संश्लेषण का स्थल", a: "Ribosome", aHi: "राइबोसोम" },
+        { f: "control center of the cell", fHi: "कोशिका का नियंत्रण केंद्र", a: "Nucleus", aHi: "नाभिक" },
+        { f: "modification and packaging of proteins", fHi: "प्रोटीन संशोधन व पैकेजिंग", a: "Golgi body", aHi: "गोल्जी बॉडी" },
+        { f: "intracellular digestion", fHi: "कोशिकीय पाचन", a: "Lysosome", aHi: "लाइसोसोम" },
+        { f: "photosynthesis in plants", fHi: "पौधों में प्रकाश संश्लेषण", a: "Chloroplast", aHi: "क्लोरोप्लास्ट" },
+        { f: "storage of cell sap in plant cells", fHi: "पौध कोशिका रस का भंडारण", a: "Vacuole", aHi: "वैक्यूल" },
+        { f: "formation of spindle fibers", fHi: "स्पिंडल तंतु निर्माण", a: "Centrosome", aHi: "सेंट्रोसोम" },
+        { f: "lipid synthesis and detoxification", fHi: "लिपिड संश्लेषण व डिटॉक्सिफिकेशन", a: "Smooth endoplasmic reticulum", aHi: "स्मूद एंडोप्लाज्मिक रेटिकुलम" },
+        { f: "transport of proteins", fHi: "प्रोटीन का परिवहन", a: "Rough endoplasmic reticulum", aHi: "रफ एंडोप्लाज्मिक रेटिकुलम" },
+        { f: "cellular respiration", fHi: "कोशिकीय श्वसन", a: "Mitochondria", aHi: "माइटोकॉन्ड्रिया" },
+        { f: "contains hydrolytic enzymes", fHi: "हाइड्रोलिटिक एंजाइम वाले", a: "Lysosome", aHi: "लाइसोसोम" },
+        { f: "manufacture of ATP", fHi: "ATP निर्माण", a: "Mitochondria", aHi: "माइटोकॉन्ड्रिया" },
+        { f: "processing and secretion", fHi: "प्रोसेसिंग और स्राव", a: "Golgi body", aHi: "गोल्जी बॉडी" },
+        { f: "storage in mature plant cells", fHi: "परिपक्व पौध कोशिका में भंडारण", a: "Large central vacuole", aHi: "बड़ा केंद्रीय वैक्यूल" },
+      ];
+      const item = organelleBank[cycleIndex % organelleBank.length];
+      return createSeededGovQuestion(
+        `neet-bio-set${setNumber}-${qNo}`,
+        "Biology",
+        "जीवविज्ञान",
+        `Which cell organelle is known for ${item.f}?`,
+        `${item.fHi} के लिए कौन-सा कोशिकांग जाना जाता है?`,
+        { en: item.a, hi: item.aHi },
+        [
+          { en: "Ribosome", hi: "राइबोसोम" },
+          { en: "Golgi body", hi: "गोल्जी बॉडी" },
+          { en: "Lysosome", hi: "लाइसोसोम" },
+        ],
+        `${item.a} is associated with ${item.f}.`,
+        `${item.aHi} ${item.fHi} से संबंधित है।`,
+        seed
+      );
+    }
+
+    if (pattern === 1) {
+      const basicUnitBank = [
+        { q: "life", qHi: "जीवन", a: "Cell", aHi: "कोशिका" },
+        { q: "inheritance", qHi: "वंशागति", a: "Gene", aHi: "जीन" },
+        { q: "kidney", qHi: "वृक्क", a: "Nephron", aHi: "नेफ्रॉन" },
+        { q: "nervous system", qHi: "तंत्रिका तंत्र", a: "Neuron", aHi: "न्यूरॉन" },
+        { q: "muscle contraction", qHi: "मांसपेशी संकुचन", a: "Sarcomere", aHi: "सार्कोमियर" },
+        { q: "respiration in lungs", qHi: "फेफड़ों में श्वसन", a: "Alveolus", aHi: "एल्विओलस" },
+        { q: "leaf structure", qHi: "पत्ती की संरचना", a: "Leaf", aHi: "पत्ती" },
+        { q: "structural unit of bone", qHi: "हड्डी की संरचनात्मक इकाई", a: "Osteon", aHi: "ओस्टिऑन" },
+        { q: "liver functional work", qHi: "यकृत का कार्य", a: "Hepatocyte", aHi: "हेपेटोसाइट" },
+        { q: "testis", qHi: "वृषण", a: "Seminiferous tubule", aHi: "सीमिनिफेरस ट्यूब्यूल" },
+        { q: "ovary", qHi: "अंडाशय", a: "Follicle", aHi: "फॉलिकल" },
+        { q: "plant water transport", qHi: "पौधों में जल परिवहन", a: "Xylem", aHi: "जाइलम" },
+        { q: "food transport in plants", qHi: "पौधों में भोजन परिवहन", a: "Phloem", aHi: "फ्लोएम" },
+        { q: "photosynthesis", qHi: "प्रकाश संश्लेषण", a: "Chloroplast", aHi: "क्लोरोप्लास्ट" },
+        { q: "hereditary information in chromosome", qHi: "क्रोमोसोम में आनुवंशिक सूचना", a: "DNA", aHi: "डीएनए" },
+      ];
+      const item = basicUnitBank[cycleIndex % basicUnitBank.length];
+      return createSeededGovQuestion(
+        `neet-bio-set${setNumber}-${qNo}`,
+        "Biology",
+        "जीवविज्ञान",
+        `The basic structural and functional unit related to ${item.q} is:`,
+        `${item.qHi} से संबंधित मूल संरचनात्मक और क्रियात्मक इकाई है:`,
+        { en: item.a, hi: item.aHi },
+        [
+          { en: "Tissue", hi: "ऊतक" },
+          { en: "Organ", hi: "अंग" },
+          { en: "Organ system", hi: "अंग तंत्र" },
+        ],
+        `${item.a} is the most appropriate unit for this context.`,
+        `इस संदर्भ में ${item.aHi} सबसे उपयुक्त इकाई है।`,
+        seed
+      );
+    }
+
+    if (pattern === 2) {
+      const gasExchangeBank = [
+        { org: "humans", orgHi: "मनुष्य", place: "Alveoli", placeHi: "एल्विओलाई" },
+        { org: "fish", orgHi: "मछली", place: "Gills", placeHi: "गिल्स" },
+        { org: "insects", orgHi: "कीट", place: "Tracheal tubes", placeHi: "ट्रेकियल ट्यूब" },
+        { org: "earthworm", orgHi: "केंचुआ", place: "Moist skin", placeHi: "नम त्वचा" },
+        { org: "frog (on land)", orgHi: "मेंढक (स्थल पर)", place: "Lungs", placeHi: "फेफड़े" },
+        { org: "frog (in water)", orgHi: "मेंढक (जल में)", place: "Skin", placeHi: "त्वचा" },
+        { org: "plants", orgHi: "पौधे", place: "Stomata", placeHi: "रंध्र" },
+        { org: "bird lungs", orgHi: "पक्षी के फेफड़े", place: "Parabronchi", placeHi: "पैराब्रोंकाई" },
+        { org: "mammals", orgHi: "स्तनधारी", place: "Alveoli", placeHi: "एल्विओलाई" },
+        { org: "reptiles", orgHi: "सरीसृप", place: "Lungs", placeHi: "फेफड़े" },
+        { org: "amphibian larvae", orgHi: "उभयचर लार्वा", place: "Gills", placeHi: "गिल्स" },
+        { org: "cockroach", orgHi: "तिलचट्टा", place: "Trachea", placeHi: "ट्रेकिया" },
+        { org: "rabbit", orgHi: "खरगोश", place: "Alveoli", placeHi: "एल्विओलाई" },
+        { org: "snail", orgHi: "घोंघा", place: "Pulmonary sac", placeHi: "पल्मोनरी थैली" },
+        { org: "whale", orgHi: "व्हेल", place: "Lungs", placeHi: "फेफड़े" },
+      ];
+      const item = gasExchangeBank[cycleIndex % gasExchangeBank.length];
+      return createSeededGovQuestion(
+        `neet-bio-set${setNumber}-${qNo}`,
+        "Biology",
+        "जीवविज्ञान",
+        `In ${item.org}, gas exchange occurs mainly in:`,
+        `${item.orgHi} में गैस विनिमय मुख्य रूप से कहाँ होता है?`,
+        { en: item.place, hi: item.placeHi },
+        [
+          { en: "Trachea", hi: "श्वासनली" },
+          { en: "Bronchi", hi: "ब्रॉन्काई" },
+          { en: "Diaphragm", hi: "डायफ्राम" },
+        ],
+        `${item.place} is the primary site of gas exchange in this organism/context.`,
+        `${item.orgHi} में ${item.placeHi} गैस विनिमय का मुख्य स्थल है।`,
+        seed
+      );
+    }
+
+    if (pattern === 3) {
+      const pigmentBank = [
+        { process: "photosynthesis in green plants", processHi: "हरे पौधों में प्रकाश संश्लेषण", pigment: "Chlorophyll", pigmentHi: "क्लोरोफिल" },
+        { process: "yellow color in ripened leaves", processHi: "पकी पत्तियों का पीला रंग", pigment: "Xanthophyll", pigmentHi: "जैंथोफिल" },
+        { process: "orange color in carrots", processHi: "गाजर का नारंगी रंग", pigment: "Carotene", pigmentHi: "कैरोटीन" },
+        { process: "red-purple color in flowers", processHi: "फूलों का लाल-बैंगनी रंग", pigment: "Anthocyanin", pigmentHi: "एन्थोसाइनिन" },
+        { process: "oxygen transport in blood", processHi: "रक्त में ऑक्सीजन परिवहन", pigment: "Hemoglobin", pigmentHi: "हीमोग्लोबिन" },
+        { process: "oxygen storage in muscle", processHi: "मांसपेशियों में ऑक्सीजन भंडारण", pigment: "Myoglobin", pigmentHi: "मायोग्लोबिन" },
+        { process: "blue-green algae photosynthesis", processHi: "नील-हरित शैवाल में प्रकाश संश्लेषण", pigment: "Phycocyanin", pigmentHi: "फाइकोसाइनिन" },
+        { process: "brown algae color", processHi: "भूरे शैवाल का रंग", pigment: "Fucoxanthin", pigmentHi: "फ्यूकोजैंथिन" },
+        { process: "green sulfur bacteria photosystem", processHi: "ग्रीन सल्फर बैक्टीरिया में प्रकाश तंत्र", pigment: "Bacteriochlorophyll", pigmentHi: "बैक्टीरियोक्लोरोफिल" },
+        { process: "human skin pigmentation", processHi: "मानव त्वचा का रंगद्रव्य", pigment: "Melanin", pigmentHi: "मेलानिन" },
+        { process: "retina low-light vision pigment", processHi: "रेटिना में कम रोशनी का रंगद्रव्य", pigment: "Rhodopsin", pigmentHi: "रhodopsin" },
+        { process: "red color in tomatoes", processHi: "टमाटर का लाल रंग", pigment: "Lycopene", pigmentHi: "लाइकोपीन" },
+        { process: "green color in leaves", processHi: "पत्तियों का हरा रंग", pigment: "Chlorophyll", pigmentHi: "क्लोरोफिल" },
+        { process: "autumn yellow leaf tone", processHi: "पतझड़ में पत्तियों का पीला रंग", pigment: "Xanthophyll", pigmentHi: "जैंथोफिल" },
+        { process: "muscle oxygen-binding pigment", processHi: "मांसपेशी में ऑक्सीजन-बाइंडिंग रंगद्रव्य", pigment: "Myoglobin", pigmentHi: "मायोग्लोबिन" },
+      ];
+      const item = pigmentBank[cycleIndex % pigmentBank.length];
+      return createSeededGovQuestion(
+        `neet-bio-set${setNumber}-${qNo}`,
+        "Biology",
+        "जीवविज्ञान",
+        `Which pigment is primarily responsible for ${item.process}?`,
+        `${item.processHi} के लिए मुख्य पिग्मेंट कौन-सा है?`,
+        { en: item.pigment, hi: item.pigmentHi },
+        [
+          { en: "Carotene", hi: "कैरोटीन" },
+          { en: "Xanthophyll", hi: "जैंथोफिल" },
+          { en: "Anthocyanin", hi: "एन्थोसाइनिन" },
+        ],
+        `${item.pigment} is the correct pigment for this context.`,
+        `इस संदर्भ में सही पिग्मेंट ${item.pigmentHi} है।`,
+        seed
+      );
+    }
+
+    if (pattern === 4) {
+      const geneticsBank = [
+        {
+          q: "Mendel's law of segregation is related to:",
+          qHi: "मेंडल का पृथक्करण का नियम किससे संबंधित है?",
+          a: "Separation of allele pairs during gamete formation",
+          aHi: "गैमेट बनने के समय एलील युग्म का अलग होना",
+        },
+        {
+          q: "Mendel's law of independent assortment states that:",
+          qHi: "मेंडल का स्वतंत्र वर्गीकरण नियम कहता है कि:",
+          a: "Alleles of different genes assort independently",
+          aHi: "विभिन्न जीनों के एलील स्वतंत्र रूप से वर्गीकृत होते हैं",
+        },
+        {
+          q: "A test cross is used to determine:",
+          qHi: "टेस्ट क्रॉस का उपयोग किसे जानने के लिए होता है?",
+          a: "Genotype of an individual with dominant phenotype",
+          aHi: "प्रभावी गुणधर्म वाले जीव का जीनोटाइप",
+        },
+        {
+          q: "Monohybrid cross phenotypic ratio in F2 generation is:",
+          qHi: "मोनोहाइब्रिड क्रॉस में F2 पीढ़ी का फीनोटाइपिक अनुपात है:",
+          a: "3:1",
+          aHi: "3:1",
+        },
+        {
+          q: "Dihybrid cross phenotypic ratio in F2 generation is:",
+          qHi: "डाइहाइब्रिड क्रॉस में F2 पीढ़ी का फीनोटाइपिक अनुपात है:",
+          a: "9:3:3:1",
+          aHi: "9:3:3:1",
+        },
+        {
+          q: "Law of dominance explains that:",
+          qHi: "प्रभाविता का नियम बताता है कि:",
+          a: "Dominant allele expresses in heterozygous condition",
+          aHi: "हेटेरोजाइगस अवस्था में प्रभावी एलील अभिव्यक्त होता है",
+        },
+        {
+          q: "Incomplete dominance results in F1 phenotype that is:",
+          qHi: "अपूर्ण प्रभाविता में F1 गुणधर्म कैसा होता है?",
+          a: "Intermediate between both parents",
+          aHi: "दोनों अभिभावकों के बीच का",
+        },
+        {
+          q: "Codominance is seen when:",
+          qHi: "सह-प्रभाविता कब दिखती है?",
+          a: "Both alleles express equally",
+          aHi: "दोनों एलील समान रूप से अभिव्यक्त होते हैं",
+        },
+        {
+          q: "ABO blood group inheritance is an example of:",
+          qHi: "ABO रक्त समूह वंशागति किसका उदाहरण है?",
+          a: "Multiple alleles and codominance",
+          aHi: "बहु-एलील और सह-प्रभाविता",
+        },
+        {
+          q: "Chromosomal theory of inheritance was proposed by:",
+          qHi: "वंशागति का गुणसूत्र सिद्धांत किसने दिया?",
+          a: "Sutton and Boveri",
+          aHi: "सटन और बोवेरी",
+        },
+        {
+          q: "Crossing over occurs during which phase of meiosis I?",
+          qHi: "मीयोसिस I की किस अवस्था में क्रॉसिंग ओवर होता है?",
+          a: "Pachytene",
+          aHi: "पैकीटीन",
+        },
+        {
+          q: "Sex-linked inheritance in humans is commonly associated with:",
+          qHi: "मनुष्यों में लिंग-संबद्ध वंशागति आमतौर पर किससे जुड़ी है?",
+          a: "X chromosome",
+          aHi: "X गुणसूत्र",
+        },
+        {
+          q: "A pure line is generally:",
+          qHi: "शुद्ध रेखा सामान्यतः कैसी होती है?",
+          a: "Homozygous and true-breeding",
+          aHi: "होमोजाइगस और ट्रू-ब्रीडिंग",
+        },
+        {
+          q: "Mutation is defined as:",
+          qHi: "म्यूटेशन की परिभाषा है:",
+          a: "Sudden heritable change in genetic material",
+          aHi: "आनुवंशिक पदार्थ में अचानक वंशानुगत परिवर्तन",
+        },
+        {
+          q: "The physical expression of genotype is called:",
+          qHi: "जीनोटाइप की भौतिक अभिव्यक्ति को क्या कहते हैं?",
+          a: "Phenotype",
+          aHi: "फीनोटाइप",
+        },
+      ];
+      const item = geneticsBank[cycleIndex % geneticsBank.length];
+      return createSeededGovQuestion(
+        `neet-bio-set${setNumber}-${qNo}`,
+        "Biology",
+        "जीवविज्ञान",
+        item.q,
+        item.qHi,
+        { en: item.a, hi: item.aHi },
+        [
+          { en: "Linkage of genes on chromosomes", hi: "क्रोमोसोम पर जीन का लिंकिज" },
+          { en: "Independent mutation of all genes", hi: "सभी जीन का स्वतंत्र म्यूटेशन" },
+          { en: "Crossing over in all cells", hi: "सभी कोशिकाओं में क्रॉसिंग ओवर" },
+        ],
+        "This is the conceptually correct genetics statement.",
+        "यह आनुवंशिकी का सही कथन है।",
+        seed
+      );
+    }
+
+    const bloodBank = [
+      { q: "Which component of blood helps in clotting?", qHi: "रक्त का कौन-सा घटक थक्का बनने में मदद करता है?", a: "Platelets", aHi: "प्लेटलेट्स" },
+      { q: "Which blood component mainly transports oxygen?", qHi: "रक्त का कौन-सा घटक मुख्यतः ऑक्सीजन ले जाता है?", a: "RBCs", aHi: "RBCs" },
+      { q: "Which blood component is mainly responsible for immunity?", qHi: "रक्त का कौन-सा घटक मुख्यतः प्रतिरक्षा के लिए जिम्मेदार है?", a: "WBCs", aHi: "WBCs" },
+      { q: "Which plasma protein is key for clot formation?", qHi: "थक्का बनने में मुख्य प्लाज्मा प्रोटीन कौन-सा है?", a: "Fibrinogen", aHi: "फाइब्रिनोजन" },
+      { q: "Which blood component carries nutrients and hormones?", qHi: "पोषक तत्व और हार्मोन कौन-सा रक्त घटक ले जाता है?", a: "Plasma", aHi: "प्लाज्मा" },
+      { q: "Which cells are called erythrocytes?", qHi: "एरिथ्रोसाइट्स किसे कहते हैं?", a: "RBCs", aHi: "RBCs" },
+      { q: "Which cells are called leukocytes?", qHi: "ल्यूकोसाइट्स किसे कहते हैं?", a: "WBCs", aHi: "WBCs" },
+      { q: "Deficiency of platelets can directly affect:", qHi: "प्लेटलेट्स की कमी सीधे किसे प्रभावित करती है?", a: "Blood clotting", aHi: "रक्त का थक्का बनना" },
+      { q: "Hemoglobin is present in which blood cells?", qHi: "हीमोग्लोबिन किस रक्त कोशिका में होता है?", a: "RBCs", aHi: "RBCs" },
+      { q: "Phagocytosis in blood is mainly done by:", qHi: "रक्त में फागोसाइटोसिस मुख्यतः कौन करता है?", a: "WBCs", aHi: "WBCs" },
+      { q: "Liquid matrix of blood is called:", qHi: "रक्त का द्रव मैट्रिक्स कहलाता है:", a: "Plasma", aHi: "प्लाज्मा" },
+      { q: "Formed elements of blood include:", qHi: "रक्त के निर्मित अवयवों में शामिल हैं:", a: "RBCs, WBCs and platelets", aHi: "RBCs, WBCs और प्लेटलेट्स" },
+      { q: "The protein helping oxygen transport in blood is:", qHi: "रक्त में ऑक्सीजन परिवहन में सहायक प्रोटीन है:", a: "Hemoglobin", aHi: "हीमोग्लोबिन" },
+      { q: "Main role of neutrophils is:", qHi: "न्यूट्रोफिल्स का मुख्य कार्य है:", a: "Defense against infection", aHi: "संक्रमण से रक्षा" },
+      { q: "Major role of platelets is:", qHi: "प्लेटलेट्स की प्रमुख भूमिका है:", a: "Initiating clot formation", aHi: "थक्का निर्माण शुरू करना" },
+    ];
+    const item = bloodBank[cycleIndex % bloodBank.length];
+    return createSeededGovQuestion(
+      `neet-bio-set${setNumber}-${qNo}`,
+      "Biology",
+      "जीवविज्ञान",
+      item.q,
+      item.qHi,
+      { en: item.a, hi: item.aHi },
+      [
+        { en: "RBCs", hi: "RBCs" },
+        { en: "WBCs", hi: "WBCs" },
+        { en: "Plasma proteins only", hi: "केवल प्लाज्मा प्रोटीन" },
+      ],
+      "This blood component/function pair is correct.",
+      "यह रक्त घटक/कार्य जोड़ी सही है।",
+      seed
+    );
+  });
+}
+
+function generateNeetUgFullLengthSets(): GovPracticeSet[] {
+  return Array.from({ length: 5 }, (_, index) => {
+    const setNumber = index + 1;
+    const questions = [
+      ...createNeetPhysicsQuestions(setNumber),
+      ...createNeetChemistryQuestions(setNumber),
+      ...createNeetBiologyQuestions(setNumber),
+    ];
+
+    return {
+      slug: `neet-ug-full-mock-${setNumber}`,
+      title: `Medical NEET Full Mock Test ${setNumber}`,
+      titleHi: `मेडिकल NEET फुल मॉक टेस्ट ${setNumber}`,
+      chapter: "Official-style NEET pattern (Physics 45, Chemistry 45, Biology 90)",
+      chapterHi: "ऑफिशियल-स्टाइल NEET पैटर्न (भौतिकी 45, रसायन 45, जीवविज्ञान 90)",
+      difficulty: setNumber <= 2 ? "Easy" : setNumber <= 4 ? "Medium" : "Hard",
+      durationMin: 180,
+      questionCount: 180,
+      bilingual: false,
+      isLive: true,
+      questions,
+    };
+  });
+}
+
+function generateNeetSubjectWiseSets(): GovPracticeSet[] {
+  const subjectConfigs: Array<{
+    slugPrefix: string;
+    titlePrefix: string;
+    titleHiPrefix: string;
+    chapter: string;
+    chapterHi: string;
+    durationMin: number;
+    questionCount: number;
+    createQuestions: (setNumber: number) => GovPracticeQuestion[];
+  }> = [
+    {
+      slugPrefix: "neet-physics-practice-set",
+      titlePrefix: "NEET Physics Practice Set",
+      titleHiPrefix: "NEET भौतिकी प्रैक्टिस सेट",
+      chapter: "NEET Physics Chapter-wise Practice",
+      chapterHi: "NEET भौतिकी अध्याय-आधारित अभ्यास",
+      durationMin: 45,
+      questionCount: 45,
+      createQuestions: createNeetPhysicsQuestions,
+    },
+    {
+      slugPrefix: "neet-chemistry-practice-set",
+      titlePrefix: "NEET Chemistry Practice Set",
+      titleHiPrefix: "NEET रसायन विज्ञान प्रैक्टिस सेट",
+      chapter: "NEET Chemistry Chapter-wise Practice",
+      chapterHi: "NEET रसायन विज्ञान अध्याय-आधारित अभ्यास",
+      durationMin: 45,
+      questionCount: 45,
+      createQuestions: createNeetChemistryQuestions,
+    },
+    {
+      slugPrefix: "neet-biology-practice-set",
+      titlePrefix: "NEET Biology Practice Set",
+      titleHiPrefix: "NEET जीवविज्ञान प्रैक्टिस सेट",
+      chapter: "NEET Biology Chapter-wise Practice",
+      chapterHi: "NEET जीवविज्ञान अध्याय-आधारित अभ्यास",
+      durationMin: 90,
+      questionCount: 90,
+      createQuestions: createNeetBiologyQuestions,
+    },
+  ];
+
+  return subjectConfigs.flatMap((subject) =>
+    Array.from({ length: 5 }, (_, index) => {
+      const setNumber = index + 1;
+      return {
+        slug: `${subject.slugPrefix}-${setNumber}`,
+        title: `${subject.titlePrefix} ${setNumber}`,
+        titleHi: `${subject.titleHiPrefix} ${setNumber}`,
+        chapter: subject.chapter,
+        chapterHi: subject.chapterHi,
+        difficulty: setNumber <= 2 ? "Easy" : setNumber <= 4 ? "Medium" : "Hard",
+        durationMin: subject.durationMin,
+        questionCount: subject.questionCount,
+        bilingual: false,
+        isLive: true,
+        questions: subject.createQuestions(setNumber),
+      };
+    })
+  );
+}
+
 export const practiceCategories: PracticeCategoryMeta[] = [
   {
     slug: "ielts",
@@ -6576,6 +8024,18 @@ export const practiceCategories: PracticeCategoryMeta[] = [
     heroTitle: "IELTS Practice Tests with Answers and Explanations",
     heroText:
       "Use these English-only IELTS practice tests to prepare for study abroad, work, and migration goals with section-based practice that is closer to the real exam structure.",
+    ctaHref: "/study-abroad",
+    ctaLabel: "Explore Study Abroad Guidance",
+  },
+  {
+    slug: "toefl",
+    title: "TOEFL Practice Tests",
+    shortTitle: "TOEFL",
+    description:
+      "Free TOEFL iBT practice tests for Reading, Listening, Speaking, Writing, and Integrated Skills with explanation-based guidance and section-focused preparation.",
+    heroTitle: "TOEFL Practice Tests with Answers and Explanations",
+    heroText:
+      "Use these English-only TOEFL practice tests to prepare for study abroad admission goals with section-based practice and integrated task strategy.",
     ctaHref: "/study-abroad",
     ctaLabel: "Explore Study Abroad Guidance",
   },
@@ -6626,6 +8086,30 @@ export const practiceCategories: PracticeCategoryMeta[] = [
       "Practice Railway recruitment questions in English and Hindi with instant scoring, pattern-based full-length mocks, and practical section-wise exam preparation.",
     ctaHref: "/practice-tests/railway",
     ctaLabel: "Start Railway Practice",
+  },
+  {
+    slug: "medical",
+    title: "Medical NEET Practice Tests",
+    shortTitle: "Medical NEET",
+    description:
+      "Free Medical NEET practice tests in English with 5 chapter-wise sets each for Physics, Chemistry, Biology, plus 5 full-length mocks with instant scoring and explanations.",
+    heroTitle: "Medical NEET Practice Tests with Answers",
+    heroText:
+      "Practice chapter-wise NEET sets and full mocks to improve speed, accuracy, and subject balance before exam day.",
+    ctaHref: "/practice-tests/medical",
+    ctaLabel: "Start NEET Practice",
+  },
+  {
+    slug: "aviation",
+    title: "Aviation Career Practice Tests",
+    shortTitle: "Aviation",
+    description:
+      "Free aviation career practice tests and role-based preparation for cabin crew, ground staff, and airport support staff with interview-style and job-readiness guidance.",
+    heroTitle: "Aviation Job Preparation Practice",
+    heroText:
+      "Prepare role-wise for aviation hiring with focused practice sets, interview readiness guidance, and practical application tips.",
+    ctaHref: "/practice-tests/aviation",
+    ctaLabel: "Start Aviation Practice",
   },
 ];
 
@@ -7504,9 +8988,3552 @@ export const govPracticeCategories: GovPracticeCategory[] = [
       ...generateRailwayPatternSets(railwayTicketClerkTtConfig, 5),
     ],
   },
+
+  {
+    slug: "medical",
+    title: "Medical NEET Practice Tests",
+    titleHi: "मेडिकल NEET अभ्यास परीक्षा",
+    icon: "🩺",
+    description:
+      "Free Medical NEET English-only practice tests with 5 chapter-wise sets each for Physics, Chemistry, Biology and 5 official-style full mocks (Physics 45, Chemistry 45, Biology 90).",
+    descriptionHi:
+      "NEET फिजिक्स, केमिस्ट्री, बायोलॉजी के 5-5 अध्याय-आधारित सेट और 5 फुल मॉक के साथ मेडिकल NEET अभ्यास टेस्ट (Physics 45, Chemistry 45, Biology 90)।",
+    audience: ["NEET aspirants", "Medical entrance students", "PCB candidates"],
+    chapters: [
+      { name: "NEET Physics", hi: "NEET भौतिकी" },
+      { name: "NEET Chemistry", hi: "NEET रसायन" },
+      { name: "NEET Biology", hi: "NEET जीवविज्ञान" },
+      { name: "Full-length NEET Mock", hi: "फुल-लेंथ NEET मॉक" },
+    ],
+    sets: [...generateNeetSubjectWiseSets(), ...generateNeetUgFullLengthSets()],
+  },
 ];
 
 export const practiceSets: PracticeSet[] = [
+  {
+    id: "aviation-cabin-crew-set-1",
+    slug: "aviation-cabin-crew-practice-set-1",
+    category: "aviation",
+    title: "Cabin Crew Practice Set 1",
+    description:
+      "Entry-level cabin crew practice for passenger service, safety awareness, communication etiquette, grooming standards, and basic in-flight scenario handling.",
+    examType: "Aviation Cabin Crew",
+    level: "beginner",
+    questionCount: 16,
+    estimatedMinutes: 20,
+    seoTitle:
+      "Cabin Crew Practice Questions with Answers - Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice cabin crew interview-style and aptitude questions with explanations. Learn passenger handling, communication, safety basics, and service etiquette.",
+    keywords: [
+      "cabin crew practice questions",
+      "air hostess preparation",
+      "cabin crew interview practice",
+      "aviation jobs preparation",
+      "flight attendant mock test",
+    ],
+    intro:
+      "This set is for beginners preparing for cabin crew recruitment rounds and communication-heavy interviews.",
+    questions: [
+      createQuestion(
+        "aviation-cc-1",
+        "A passenger is anxious during turbulence. Your best first response is:",
+        [
+          "Ignore and continue service",
+          "Calmly reassure and ask them to keep seat belt fastened",
+          "Ask them to stand and stretch",
+          "Tell them turbulence is not serious and walk away",
+        ],
+        "B",
+        "Cabin crew should reassure passengers calmly and reinforce safety instructions.",
+        "passenger handling",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc-2",
+        "Which quality is most critical for cabin crew during boarding?",
+        ["Speed only", "Observation and communication", "Silence", "Technical maintenance skills"],
+        "B",
+        "Boarding requires clear communication, attention to passenger needs, and safety awareness.",
+        "service skills",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc-3",
+        "If two passengers argue loudly, what is the best approach?",
+        [
+          "Publicly scold both passengers",
+          "Move one passenger immediately without speaking",
+          "Intervene politely, de-escalate, and seek senior support if needed",
+          "Wait for the pilot to handle it",
+        ],
+        "C",
+        "Cabin crew should de-escalate conflict professionally and escalate when required.",
+        "conflict handling",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc-4",
+        "Professional cabin crew communication should be:",
+        ["Informal and casual", "Short and rude", "Clear, polite, and confident", "Only scripted"],
+        "C",
+        "Recruiters assess clarity, courtesy, and confidence in communication.",
+        "communication",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc-5",
+        "Before takeoff, passengers are reminded mainly to:",
+        ["Order food", "Turn off reading lights", "Follow safety instructions", "Fill feedback form"],
+        "C",
+        "Takeoff preparation is safety-focused, including seat belts and compliance instructions.",
+        "safety basics",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc-6",
+        "What does strong customer service in cabin crew roles mean?",
+        [
+          "Serving fast regardless of accuracy",
+          "Balancing safety, courtesy, and passenger comfort",
+          "Talking continuously with passengers",
+          "Avoiding difficult passengers",
+        ],
+        "B",
+        "Cabin crew service is not only hospitality; it must align with safety and professionalism.",
+        "customer service",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc-7",
+        "In interview rounds, airlines usually assess grooming because it reflects:",
+        ["Fashion trend awareness", "Professional discipline and brand representation", "Only personal style", "Social media influence"],
+        "B",
+        "Grooming in aviation is linked with professionalism, hygiene, and customer confidence.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc-8",
+        "When a passenger asks for help in an unfamiliar language, you should:",
+        [
+          "Ignore the request",
+          "Respond respectfully, use simple words/gestures, and seek team help",
+          "Argue with the passenger",
+          "Tell them to wait until landing",
+        ],
+        "B",
+        "Inclusive communication and teamwork are essential in multicultural cabin environments.",
+        "communication",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc-9",
+        "A core cabin crew competency for emergency situations is:",
+        ["Panic response", "Calm decision-making", "Loud speaking only", "Avoiding responsibility"],
+        "B",
+        "Recruiters value composure and procedure-based responses under pressure.",
+        "safety basics",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc-10",
+        "If you do not know an answer to a passenger query, best practice is:",
+        [
+          "Give a random answer",
+          "Admit politely and verify with the right source/team member",
+          "Ignore and move on",
+          "Blame another department",
+        ],
+        "B",
+        "Honest and accurate communication builds trust and avoids service errors.",
+        "customer service",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc-11",
+        "Cabin crew interviews often include scenario questions to test:",
+        ["Memorization only", "Judgment and communication under pressure", "Typing speed", "Mathematical formulas"],
+        "B",
+        "Scenario rounds measure behavior, judgment, and teamwork in real service contexts.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc-12",
+        "Best mindset for cabin crew preparation is:",
+        ["Only appearance matters", "Safety and service go together", "No need for communication practice", "Interview preparation is optional"],
+        "B",
+        "Successful candidates combine service attitude with safety awareness and communication skills.",
+        "career strategy",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc-13",
+        "During boarding, a passenger looks confused about seat direction. Best response:",
+        [
+          "Ignore because boarding is busy",
+          "Guide politely with clear directions and calm body language",
+          "Tell another passenger to help",
+          "Ask them to wait until everyone boards",
+        ],
+        "B",
+        "Small moments of calm guidance improve passenger confidence and boarding flow.",
+        "service skills",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc-14",
+        "What makes a self-introduction stronger in cabin crew interviews?",
+        [
+          "Long personal background only",
+          "Short role-fit summary with communication and service strengths",
+          "Salary expectations first",
+          "Random hobbies only",
+        ],
+        "B",
+        "Interview introductions should be concise, relevant, and professional.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc-15",
+        "A passenger asks the same question repeatedly because they are nervous. You should:",
+        [
+          "Show frustration",
+          "Repeat the answer calmly and confirm they understood",
+          "Walk away after first answer",
+          "Ask them not to speak again",
+        ],
+        "B",
+        "Patient repetition with confirmation is part of strong service behavior.",
+        "passenger handling",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc-16",
+        "Which habit improves cabin crew interview performance most?",
+        [
+          "Memorizing one answer only",
+          "Practicing common scenarios aloud and improving weak responses",
+          "Skipping mock interviews",
+          "Only focusing on appearance",
+        ],
+        "B",
+        "Scenario practice improves confidence, clarity, and behavioral consistency.",
+        "career strategy",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "aviation-ground-staff-set-1",
+    slug: "aviation-ground-staff-practice-set-1",
+    category: "aviation",
+    title: "Ground Staff Practice Set 1",
+    description:
+      "Ground staff practice for check-in flow, passenger documentation awareness, queue management, baggage basics, and service desk communication.",
+    examType: "Aviation Ground Staff",
+    level: "beginner",
+    questionCount: 16,
+    estimatedMinutes: 20,
+    seoTitle:
+      "Ground Staff Practice Questions with Answers - Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Prepare for airport ground staff jobs with practical check-in, documentation, baggage, and passenger support questions.",
+    keywords: [
+      "ground staff practice test",
+      "airport ground staff interview",
+      "check-in agent questions",
+      "aviation ground operations",
+      "airport jobs preparation",
+    ],
+    intro:
+      "This set helps beginners prepare for airport front-desk and check-in related ground staff roles.",
+    questions: [
+      createQuestion(
+        "aviation-gs-1",
+        "At check-in counters, your first priority is:",
+        ["Selling upgrades only", "Passenger verification and smooth processing", "Ignoring queue discipline", "Chatting with team"],
+        "B",
+        "Ground staff must verify passenger details and process check-in accurately.",
+        "check-in operations",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs-2",
+        "If queue length increases sharply, the best immediate action is:",
+        [
+          "Close the counter",
+          "Coordinate support and guide passengers clearly",
+          "Stop announcements",
+          "Ask passengers to manage themselves",
+        ],
+        "B",
+        "Queue management depends on communication, coordination, and proactive support.",
+        "queue management",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs-3",
+        "Ground staff communication should be:",
+        ["Fast but unclear", "Clear and respectful", "Strict and harsh", "Very technical for all passengers"],
+        "B",
+        "Passengers need clear, respectful, and easy-to-follow guidance.",
+        "communication",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs-4",
+        "A delayed passenger reaches the counter stressed. You should:",
+        [
+          "Argue with them",
+          "Stay calm, check options quickly, and explain next steps",
+          "Ignore urgency",
+          "Send them away without checking",
+        ],
+        "B",
+        "Professional calmness and quick problem-solving improve passenger experience.",
+        "passenger handling",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs-5",
+        "Why is document verification important in ground roles?",
+        ["Only for record keeping", "For operational and regulatory compliance", "Only for VIP passengers", "Not important"],
+        "B",
+        "Accurate document checks support secure and compliant airport operations.",
+        "documentation",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs-6",
+        "In airport service roles, teamwork matters because:",
+        ["One person handles everything", "Multiple desks and units must coordinate", "Passengers prefer one person only", "It reduces safety"],
+        "B",
+        "Ground operations require coordination across counters, security, and gates.",
+        "teamwork",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs-7",
+        "A passenger cannot understand your instruction. Best response:",
+        ["Repeat louder only", "Use simple wording and confirm understanding", "Ignore and proceed", "Call someone without trying"],
+        "B",
+        "Effective service communication includes simplification and confirmation.",
+        "communication",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs-8",
+        "Baggage handling queries should be addressed with:",
+        ["Assumptions", "Policy-based, accurate guidance", "Personal opinions", "No response"],
+        "B",
+        "Ground staff should use process-based responses and verified information.",
+        "baggage awareness",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs-9",
+        "What is a strong interview answer style for ground staff candidates?",
+        ["Short and vague", "Specific examples from real situations", "Only theoretical statements", "Memorized one-line replies"],
+        "B",
+        "Recruiters prefer practical examples showing service and problem-solving.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs-10",
+        "When systems are slow, a professional ground staff response is:",
+        ["Show frustration", "Inform passengers politely and manage flow", "Stop work", "Blame passengers"],
+        "B",
+        "System delays need calm updates and active queue coordination.",
+        "service control",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs-11",
+        "Ground staff roles mainly combine:",
+        ["Technical flying skills", "Process discipline and passenger service", "Cabin announcements only", "Pilot-level operations"],
+        "B",
+        "These roles focus on ground process accuracy and customer-facing support.",
+        "career basics",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs-12",
+        "Best preparation before ground staff interviews includes:",
+        ["No company research", "Role research, communication drills, and scenario practice", "Only resume printing", "Ignoring airport process basics"],
+        "B",
+        "Interview success improves with role-wise research and scenario-based practice.",
+        "career strategy",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs-13",
+        "If a passenger asks where to go next after check-in, best response is:",
+        [
+          "Figure it out yourself",
+          "Give clear, simple directions to the next process point",
+          "Ignore because counter is busy",
+          "Ask another passenger to explain",
+        ],
+        "B",
+        "Ground staff service includes guiding passengers clearly through the process.",
+        "check-in operations",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs-14",
+        "Why is calm tone important at the check-in counter?",
+        [
+          "It sounds formal only",
+          "It reduces confusion and helps passengers follow instructions",
+          "It is needed only for VIPs",
+          "It has no impact",
+        ],
+        "B",
+        "A calm tone supports smoother passenger response and lower conflict.",
+        "communication",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs-15",
+        "A passenger asks about baggage rules and you are unsure. Best action:",
+        [
+          "Give an estimate",
+          "Verify the correct rule before advising",
+          "Ignore the question",
+          "Blame airline policy",
+        ],
+        "B",
+        "Verified answers are important for compliance and passenger trust.",
+        "baggage awareness",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs-16",
+        "Which quality helps most in front-desk airport roles?",
+        [
+          "Fast talking",
+          "Process clarity with respectful service behavior",
+          "Avoiding teamwork",
+          "Working without updates",
+        ],
+        "B",
+        "Ground roles require both process discipline and professional customer handling.",
+        "career basics",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "aviation-support-staff-set-1",
+    slug: "aviation-support-staff-practice-set-1",
+    category: "aviation",
+    title: "Airport Support Staff Practice Set 1",
+    description:
+      "Support staff practice for airport coordination, shift discipline, safety-first behavior, escalation awareness, and operational teamwork.",
+    examType: "Airport Support Staff",
+    level: "beginner",
+    questionCount: 12,
+    estimatedMinutes: 15,
+    seoTitle:
+      "Airport Support Staff Practice Questions with Answers - Set 1 | Nishaglobal Education",
+    seoDescription:
+      "Practice airport support staff questions for safety, teamwork, shift discipline, operational reporting, and interview readiness.",
+    keywords: [
+      "airport support staff practice",
+      "aviation support job preparation",
+      "airport operations interview questions",
+      "aviation safety basics",
+      "ground operations staff mock test",
+    ],
+    intro:
+      "This set is for candidates preparing for airport support and operations-assistant style recruitment rounds.",
+    questions: [
+      createQuestion(
+        "aviation-ss-1",
+        "In support staff roles, safety-related observations should be:",
+        ["Ignored if minor", "Reported through proper channel promptly", "Shared only after shift", "Discussed casually"],
+        "B",
+        "Operational safety depends on timely reporting through formal channels.",
+        "safety culture",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss-2",
+        "Shift discipline in airport roles is important because:",
+        ["Flights are occasional", "Operations run on strict timelines", "It is optional", "Only managers need punctuality"],
+        "B",
+        "Airport processes are time-sensitive and require punctual handovers.",
+        "work discipline",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss-3",
+        "If you are unsure about a task instruction, best response is:",
+        ["Proceed without clarity", "Seek clarification before execution", "Ask passengers", "Skip the task"],
+        "B",
+        "Clarification reduces operational errors and safety risks.",
+        "task handling",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss-4",
+        "Support staff teamwork mainly helps in:",
+        ["Avoiding communication", "Smooth turnaround and coordinated operations", "Reducing accountability", "Replacing all procedures"],
+        "B",
+        "Coordination across units is essential for airport efficiency.",
+        "teamwork",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss-5",
+        "Professional reporting in operations should be:",
+        ["Emotional and vague", "Accurate, concise, and timely", "Delayed", "Verbal only without records"],
+        "B",
+        "Operations depend on clear and timely information flow.",
+        "reporting",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss-6",
+        "When workload increases unexpectedly, good practice is:",
+        ["Work in isolation", "Prioritize tasks and coordinate with supervisor/team", "Stop reporting", "Leave tasks pending"],
+        "B",
+        "Prioritization and escalation keep operations stable under pressure.",
+        "operations control",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss-7",
+        "Why do recruiters ask situational questions for support staff?",
+        ["To test memorization only", "To evaluate judgment and reliability", "To test handwriting", "To avoid technical discussion"],
+        "B",
+        "Scenario responses reveal practical decision-making and accountability.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss-8",
+        "In airport operations, escalation means:",
+        ["Passing blame", "Informing the right authority for timely resolution", "Ignoring issues", "Public complaints only"],
+        "B",
+        "Escalation is a formal process to address issues at the right level.",
+        "process awareness",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss-9",
+        "A strong support staff candidate demonstrates:",
+        ["Carelessness", "Responsibility and process discipline", "Overconfidence without listening", "Role confusion"],
+        "B",
+        "Employers value reliability, discipline, and process compliance.",
+        "career basics",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss-10",
+        "If a co-worker misses a critical step, the safest action is:",
+        ["Ignore to avoid conflict", "Address politely and inform supervisor if needed", "Discuss later", "Complain publicly"],
+        "B",
+        "Safety-first culture requires timely correction and proper escalation.",
+        "safety culture",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss-11",
+        "Which interview preparation is most useful for support staff roles?",
+        ["Only generic motivation answers", "Role-specific scenarios and process understanding", "No preparation", "Only salary negotiation"],
+        "B",
+        "Role-specific scenario prep improves interview confidence and accuracy.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss-12",
+        "Best long-term strategy for airport support staff growth is:",
+        ["Avoid learning new tasks", "Build consistency, safety habits, and communication skills", "Depend only on senior staff", "Focus only on one shift"],
+        "B",
+        "Growth in operations comes from discipline, skill-building, and dependable performance.",
+        "career strategy",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "aviation-cabin-crew-set-2",
+    slug: "aviation-cabin-crew-practice-set-2",
+    category: "aviation",
+    title: "Cabin Crew Practice Set 2",
+    description:
+      "Intermediate cabin crew practice with interview scenarios, safety communication, conflict handling, and service language accuracy.",
+    examType: "Aviation Cabin Crew",
+    level: "intermediate",
+    questionCount: 16,
+    estimatedMinutes: 22,
+    seoTitle:
+      "Cabin Crew Interview Practice Questions - Set 2 | Nishaglobal Education",
+    seoDescription:
+      "Practice intermediate cabin crew interview and scenario questions with sample explanations for service, safety, and communication.",
+    keywords: [
+      "cabin crew set 2",
+      "air hostess interview questions",
+      "cabin crew scenario questions",
+      "flight attendant communication practice",
+      "aviation service interview prep",
+    ],
+    intro:
+      "Use this set after Cabin Crew Set 1 to improve interview-quality responses and service judgment in pressure situations.",
+    questions: [
+      createQuestion(
+        "aviation-cc2-1",
+        "A passenger says your tone was rude. What is the best first response?",
+        [
+          "Defend yourself immediately",
+          "Acknowledge politely and clarify with calm service tone",
+          "Ignore and continue",
+          "Ask another passenger to respond",
+        ],
+        "B",
+        "Professional recovery starts with calm acknowledgement and respectful clarification.",
+        "service recovery",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc2-2",
+        "Which answer sounds most professional in an interview?",
+        [
+          "I can do any role, no need to train me",
+          "I stay calm, follow SOP, and support passengers with clear communication",
+          "I only like easy routes",
+          "I prefer working alone and avoid team tasks",
+        ],
+        "B",
+        "Recruiters value SOP awareness, composure, and teamwork language.",
+        "interview language",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc2-3",
+        "During a delay, passengers repeatedly ask for updates. You should:",
+        [
+          "Stop responding to avoid crowding",
+          "Share verified updates at intervals and remain approachable",
+          "Give unconfirmed times to calm everyone",
+          "Ask passengers to check internet only",
+        ],
+        "B",
+        "Verified, consistent communication reduces anxiety and conflict.",
+        "delay handling",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc2-4",
+        "A strong answer to 'Why cabin crew?' should focus on:",
+        [
+          "Travel photos",
+          "Service mindset, safety responsibility, and teamwork",
+          "Uniform only",
+          "Celebrity lifestyle",
+        ],
+        "B",
+        "Role-fit answers should combine service values and safety commitment.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc2-5",
+        "If a medical concern is reported onboard, your first principle is:",
+        [
+          "Panic and make random announcements",
+          "Stay calm, follow crew protocol, and escalate correctly",
+          "Hide the issue",
+          "Wait until landing without informing team",
+        ],
+        "B",
+        "Protocol-driven escalation and calm communication are critical.",
+        "safety basics",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc2-6",
+        "Which phrase is best for de-escalation?",
+        [
+          "Calm down, you are wrong",
+          "I understand your concern, let me assist you step by step",
+          "This is not my problem",
+          "Please complain later",
+        ],
+        "B",
+        "Empathy plus clear action language helps de-escalate conflict.",
+        "communication",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc2-7",
+        "Cabin crew grooming standards are mainly linked with:",
+        [
+          "Fashion experimentation",
+          "Professional hygiene and brand confidence",
+          "Personal social media image",
+          "No operational relevance",
+        ],
+        "B",
+        "Grooming standards reflect discipline, hygiene, and trust.",
+        "professional standards",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc2-8",
+        "If you make a service error, the best correction approach is:",
+        [
+          "Hide the mistake",
+          "Acknowledge, correct quickly, and inform relevant crew if needed",
+          "Blame passenger behavior",
+          "Ignore if small",
+        ],
+        "B",
+        "Ownership and timely correction preserve passenger trust and team coordination.",
+        "service recovery",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc2-9",
+        "Interviewers ask scenario questions to evaluate:",
+        [
+          "Only memory",
+          "Judgment, communication, and attitude",
+          "Typing speed",
+          "Geography knowledge only",
+        ],
+        "B",
+        "Scenario answers reveal real behavior under operational pressure.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc2-10",
+        "What is a good closing line in a cabin crew interview?",
+        [
+          "I need quick promotion",
+          "I am ready to learn, serve safely, and grow with discipline",
+          "I will work only preferred shifts",
+          "I do not need feedback",
+        ],
+        "B",
+        "A growth mindset and safety-service commitment are positive signals.",
+        "interview language",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc2-11",
+        "When a child passenger is separated from family briefly, you should:",
+        [
+          "Announce loudly without process",
+          "Follow crew protocol and support reunification calmly",
+          "Ignore if boarding is busy",
+          "Leave it to others without reporting",
+        ],
+        "B",
+        "Passenger care requires process-based and calm action.",
+        "passenger handling",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc2-12",
+        "The strongest long-term cabin crew habit is:",
+        [
+          "Memorizing one script",
+          "Continuous SOP learning, reflection, and communication practice",
+          "Avoiding feedback",
+          "Only focusing on appearance",
+        ],
+        "B",
+        "Consistent improvement habits build reliable on-duty performance.",
+        "career strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc2-13",
+        "If a passenger complains loudly about delay information, your best language is:",
+        [
+          "Please stop complaining",
+          "I understand the frustration. Let me share the latest verified update",
+          "We already told you",
+          "Ask someone else",
+        ],
+        "B",
+        "Empathy plus verified communication is the strongest service response.",
+        "delay handling",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc2-14",
+        "A strong answer to 'How do you work in teams?' should include:",
+        [
+          "I prefer leading only",
+          "How you coordinate, support, and communicate during pressure",
+          "I avoid team disagreements",
+          "I work best alone",
+        ],
+        "B",
+        "Teamwork answers should show communication and role awareness under pressure.",
+        "interview language",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc2-15",
+        "What should you do if passenger instructions are not followed after polite reminder?",
+        [
+          "Ignore it",
+          "Repeat clearly and escalate according to crew protocol if required",
+          "Argue with passenger",
+          "Delay until landing",
+        ],
+        "B",
+        "Safety compliance requires clear repetition and proper escalation when needed.",
+        "safety basics",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc2-16",
+        "Which answer best reflects maturity in service roles?",
+        [
+          "I try to avoid difficult passengers",
+          "I stay respectful, solution-focused, and calm during difficult interactions",
+          "I prefer silent service only",
+          "I respond based on mood",
+        ],
+        "B",
+        "Recruiters value emotional control and solution-focused service behavior.",
+        "customer service",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "aviation-ground-staff-set-2",
+    slug: "aviation-ground-staff-practice-set-2",
+    category: "aviation",
+    title: "Ground Staff Practice Set 2",
+    description:
+      "Intermediate ground staff mock with documentation judgment, service recovery, queue control, and interview communication practice.",
+    examType: "Aviation Ground Staff",
+    level: "intermediate",
+    questionCount: 16,
+    estimatedMinutes: 22,
+    seoTitle:
+      "Ground Staff Interview Questions and Mock Set 2 | Nishaglobal Education",
+    seoDescription:
+      "Practice intermediate airport ground staff interview and operational scenario questions with detailed explanations.",
+    keywords: [
+      "ground staff set 2",
+      "airport check in interview",
+      "ground operations scenario questions",
+      "airport customer service practice",
+      "ground staff communication test",
+    ],
+    intro:
+      "This set builds stronger interview and process confidence after Ground Staff Set 1.",
+    questions: [
+      createQuestion(
+        "aviation-gs2-1",
+        "A passenger reaches wrong counter and becomes upset. Best response:",
+        [
+          "Tell them to find it themselves",
+          "Acknowledge concern, guide clearly, and support quick redirection",
+          "Ignore and continue paperwork",
+          "Ask them to return later",
+        ],
+        "B",
+        "Professional ground support combines empathy and clear direction.",
+        "passenger handling",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs2-2",
+        "When documentation looks inconsistent, you should:",
+        [
+          "Approve anyway to avoid delay",
+          "Follow verification protocol and escalate if needed",
+          "Argue publicly with passenger",
+          "Discard the booking",
+        ],
+        "B",
+        "Compliance depends on protocol-based checks and proper escalation.",
+        "documentation",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs2-3",
+        "A strong interview answer for peak-hour pressure should include:",
+        [
+          "I panic but finish somehow",
+          "I prioritize, communicate updates, and coordinate support desks",
+          "I stop taking passengers",
+          "I avoid eye contact",
+        ],
+        "B",
+        "Structured pressure handling is key for ground roles.",
+        "interview readiness",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs2-4",
+        "Which phrase is best for a delayed boarding update?",
+        [
+          "No idea, wait",
+          "Thank you for your patience. We will share the next verified update shortly",
+          "You should have arrived earlier",
+          "Please do not ask again",
+        ],
+        "B",
+        "Polite, verified, and time-bound communication is best practice.",
+        "communication",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs2-5",
+        "Ground staff service quality is strongest when you:",
+        [
+          "Speed through without checks",
+          "Balance accuracy, compliance, and passenger support",
+          "Avoid difficult cases",
+          "Rely only on memory",
+        ],
+        "B",
+        "Role success requires both operational accuracy and service behavior.",
+        "service quality",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs2-6",
+        "If a family has a special assistance request, the best action is:",
+        [
+          "Ignore because queue is long",
+          "Coordinate with designated support process and inform clearly",
+          "Give unverified promises",
+          "Send them to random desk",
+        ],
+        "B",
+        "Assistance handling must follow process and communication discipline.",
+        "special assistance",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs2-7",
+        "Why do recruiters ask about your previous customer conflict?",
+        [
+          "To judge gossip",
+          "To evaluate your de-escalation and accountability",
+          "To test personal opinions",
+          "To avoid technical rounds",
+        ],
+        "B",
+        "Conflict examples show practical maturity and service recovery skills.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs2-8",
+        "What makes a ground staff update trustworthy?",
+        [
+          "Speed only",
+          "Confirmed information plus clear next step",
+          "Personal guess",
+          "Aggressive tone",
+        ],
+        "B",
+        "Passengers trust updates that are verified and actionable.",
+        "communication",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs2-9",
+        "A good answer to 'Why should we hire you?' is:",
+        [
+          "I need any job quickly",
+          "I bring process discipline, service focus, and calm problem-solving",
+          "I dislike team work",
+          "I do not follow SOP strictly",
+        ],
+        "B",
+        "Role-fit answers should show operational and service strengths.",
+        "interview language",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs2-10",
+        "If system issues cause delay, priority should be:",
+        [
+          "Silence to avoid complaints",
+          "Flow control, escalation, and periodic updates",
+          "Blaming IT publicly",
+          "Closing all counters",
+        ],
+        "B",
+        "Ground teams must stabilize flow while communicating clearly.",
+        "operations control",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs2-11",
+        "Role growth in ground operations usually comes from:",
+        [
+          "Ignoring feedback",
+          "Consistency, cross-desk learning, and communication quality",
+          "Avoiding difficult shifts",
+          "Only speed without accuracy",
+        ],
+        "B",
+        "Sustained performance and learning improve promotion readiness.",
+        "career strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs2-12",
+        "Best interview preparation one day before round is:",
+        [
+          "Cram random answers",
+          "Review role basics, 5 scenario stories, and professional self-introduction",
+          "Skip company research",
+          "Practice only salary discussion",
+        ],
+        "B",
+        "Structured last-day prep builds clarity and confidence.",
+        "interview strategy",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs2-13",
+        "If a passenger asks for an exception you cannot approve, best response is:",
+        [
+          "Say no and move on",
+          "Explain the policy politely and offer the next valid option",
+          "Promise approval later",
+          "Ignore the request",
+        ],
+        "B",
+        "Respectful policy explanation is essential in passenger-facing operations.",
+        "service quality",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs2-14",
+        "A strong ground staff candidate usually speaks in interviews with:",
+        [
+          "Long unclear answers",
+          "Clear structure, short examples, and calm tone",
+          "Very technical jargon only",
+          "One-word replies",
+        ],
+        "B",
+        "Clarity and example-based answers improve interview credibility.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs2-15",
+        "If a passenger misses part of your explanation, you should:",
+        [
+          "Repeat angrily",
+          "Rephrase simply and confirm understanding",
+          "Ignore and continue",
+          "Call another desk immediately",
+        ],
+        "B",
+        "Simple rephrasing improves comprehension and service quality.",
+        "communication",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs2-16",
+        "Which behavior improves ground staff growth most?",
+        [
+          "Avoiding peak-hour duties",
+          "Learning process details and reviewing mistakes regularly",
+          "Working without coordination",
+          "Giving quick unverified answers",
+        ],
+        "B",
+        "Repeated learning and review improve operational confidence and promotion readiness.",
+        "career strategy",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "aviation-support-staff-set-2",
+    slug: "aviation-support-staff-practice-set-2",
+    category: "aviation",
+    title: "Airport Support Staff Practice Set 2",
+    description:
+      "Intermediate support staff preparation with escalation judgment, shift handover discipline, safety reporting, and interview scenario quality.",
+    examType: "Airport Support Staff",
+    level: "intermediate",
+    questionCount: 12,
+    estimatedMinutes: 18,
+    seoTitle:
+      "Airport Support Staff Interview Practice - Set 2 | Nishaglobal Education",
+    seoDescription:
+      "Practice support staff scenario and interview questions for safety-first operations, reporting discipline, and teamwork.",
+    keywords: [
+      "support staff set 2",
+      "airport support interview questions",
+      "aviation safety reporting practice",
+      "airport operations support mock",
+      "support staff scenario questions",
+    ],
+    intro:
+      "Use this set to deepen operational judgment and interview confidence after Support Staff Set 1.",
+    questions: [
+      createQuestion(
+        "aviation-ss2-1",
+        "A recurring safety issue is noticed by multiple shifts. Best action:",
+        [
+          "Ignore since it is recurring",
+          "Document clearly and escalate through formal reporting chain",
+          "Discuss only informally",
+          "Wait for passenger complaint",
+        ],
+        "B",
+        "Repeated issues require documented escalation and traceable action.",
+        "safety reporting",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss2-2",
+        "Good shift handover should include:",
+        [
+          "Only completed tasks",
+          "Pending tasks, risks, and clear ownership",
+          "Verbal summary without records",
+          "No mention of issues",
+        ],
+        "B",
+        "Effective handover reduces operational gaps and delays.",
+        "shift discipline",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss2-3",
+        "If instructions conflict between two team members, you should:",
+        [
+          "Follow random option",
+          "Seek supervisor clarification before execution",
+          "Delay all work silently",
+          "Argue in public area",
+        ],
+        "B",
+        "Clarification through hierarchy prevents execution errors.",
+        "task handling",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss2-4",
+        "Recruiters ask 'Tell me about a pressure situation' to assess:",
+        [
+          "Memory of definitions",
+          "Reliability, judgment, and accountability",
+          "Accent only",
+          "Personal travel history",
+        ],
+        "B",
+        "Behavioral questions reveal operational maturity and ownership.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss2-5",
+        "In support roles, a professional incident note should be:",
+        [
+          "Emotional and lengthy",
+          "Factual, time-stamped, and action-oriented",
+          "Based on assumptions",
+          "Written days later",
+        ],
+        "B",
+        "Operational records must be factual, timely, and useful for action.",
+        "reporting",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss2-6",
+        "If workload spikes, the best team behavior is:",
+        [
+          "Hide pending tasks",
+          "Prioritize critical steps and coordinate role allocation",
+          "Stop communication",
+          "Wait for shift end",
+        ],
+        "B",
+        "Coordination and prioritization keep safety and flow stable.",
+        "operations control",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss2-7",
+        "Strong answer to 'How do you handle mistakes?' is:",
+        [
+          "I never make mistakes",
+          "I report early, correct fast, and learn to prevent repeat",
+          "I hide small mistakes",
+          "I wait for others to notice",
+        ],
+        "B",
+        "Ownership and prevention mindset are valued in operations.",
+        "interview language",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss2-8",
+        "Escalation is successful when:",
+        [
+          "Message is vague",
+          "Right authority receives clear, timely details",
+          "Issue is broadcast everywhere",
+          "No follow-up is done",
+        ],
+        "B",
+        "Clarity and correct routing make escalation effective.",
+        "process awareness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss2-9",
+        "A reliable support staff profile usually demonstrates:",
+        [
+          "High confidence, low discipline",
+          "Consistency, punctuality, and team accountability",
+          "Only technical jargon",
+          "No communication",
+        ],
+        "B",
+        "Reliability is measured by everyday disciplined execution.",
+        "career basics",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss2-10",
+        "Before an operations interview, best preparation is:",
+        [
+          "Memorize one generic answer",
+          "Prepare 4-5 real examples using situation-action-result format",
+          "Avoid role research",
+          "Skip reporting concepts",
+        ],
+        "B",
+        "Structured examples make answers practical and credible.",
+        "interview strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss2-11",
+        "If a teammate is overloaded, your best support is:",
+        [
+          "Ignore until asked",
+          "Coordinate priorities and communicate handover clearly",
+          "Take over without informing anyone",
+          "Complain to others",
+        ],
+        "B",
+        "Proactive coordination improves operational reliability.",
+        "teamwork",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss2-12",
+        "Long-term growth in support operations depends most on:",
+        [
+          "Luck only",
+          "Safety discipline, communication, and continuous upskilling",
+          "Avoiding feedback",
+          "Changing teams frequently",
+        ],
+        "B",
+        "Career growth comes from dependable performance and learning.",
+        "career strategy",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "aviation-english-set-1",
+    slug: "aviation-english-communication-practice-set-1",
+    category: "aviation",
+    title: "Aviation English Communication Practice Set 1",
+    description:
+      "English practice for aviation applicants covering spoken clarity, polite service phrases, interview grammar, and role-based communication.",
+    examType: "Aviation English",
+    level: "beginner",
+    questionCount: 16,
+    estimatedMinutes: 20,
+    seoTitle:
+      "Aviation English Practice Questions with Answers | Nishaglobal Education",
+    seoDescription:
+      "Practice aviation English communication questions for cabin crew, ground staff, and support staff interviews with explanations.",
+    keywords: [
+      "aviation english practice",
+      "cabin crew english questions",
+      "ground staff english communication",
+      "airport interview english",
+      "aviation spoken english mock test",
+    ],
+    intro:
+      "Start here if you want stronger interview English and service communication before role-specific aviation rounds.",
+    questions: [
+      createQuestion(
+        "aviation-eng-1",
+        "Choose the most professional opening line for a passenger interaction:",
+        [
+          "What do you want?",
+          "Good morning, how may I assist you today?",
+          "Wait there",
+          "Say quickly",
+        ],
+        "B",
+        "Polite and clear openings create trust in service roles.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng-2",
+        "Choose the correct sentence for interview English:",
+        [
+          "I am working in customer service since two years",
+          "I have been working in customer service for two years",
+          "I has worked in customer service",
+          "I working customer service two years",
+        ],
+        "B",
+        "Present perfect continuous with 'for' is correct for duration.",
+        "grammar",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng-3",
+        "Best phrase for handling an upset passenger is:",
+        [
+          "You are overreacting",
+          "I understand your concern. Let me help you with the next step",
+          "Not my duty",
+          "Ask someone else",
+        ],
+        "B",
+        "Empathy plus action language improves de-escalation.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng-4",
+        "Choose the strongest self-introduction sentence:",
+        [
+          "Myself Riya and I want job",
+          "My name is Riya. I have customer service experience and I handle pressure calmly",
+          "I can do everything no training",
+          "I need this job urgently",
+        ],
+        "B",
+        "A strong introduction is clear, role-relevant, and professional.",
+        "interview english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng-5",
+        "Complete the sentence: 'Please keep your seat belt ___ during turbulence.'",
+        ["fasten", "fastened", "fastening", "to fasten"],
+        "B",
+        "'Keep ... fastened' is the correct and standard instruction pattern.",
+        "aviation phrases",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng-6",
+        "Which answer is best for 'Why should we hire you?'",
+        [
+          "Because I need work quickly",
+          "I bring disciplined service behavior, clear communication, and team reliability",
+          "I only prefer easy duties",
+          "I do not like feedback",
+        ],
+        "B",
+        "Interview answers should show value, behavior, and role fit.",
+        "interview english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng-7",
+        "Pick the correct polite request:",
+        [
+          "Give me your ID now",
+          "Could you please share your ID for verification?",
+          "Show ID fast",
+          "ID, now",
+        ],
+        "B",
+        "Polite requests maintain professionalism and cooperation.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng-8",
+        "Choose the best closing line in a support role interaction:",
+        [
+          "Done. Next.",
+          "Thank you for your patience. Please contact us if you need further help",
+          "That is all, go",
+          "No more questions",
+        ],
+        "B",
+        "Professional closings improve service quality and confidence.",
+        "communication",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng-9",
+        "Correct sentence for teamwork communication:",
+        [
+          "I informed my supervisor and coordinated with the desk team",
+          "I inform supervisor yesterday",
+          "I was coordinate all team",
+          "I did not informed",
+        ],
+        "A",
+        "Sentence A is grammatically correct and context-appropriate.",
+        "grammar",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng-10",
+        "What is the best replacement for a vague answer in interview?",
+        [
+          "I can do everything",
+          "In my last role, I handled peak queues by prioritizing and giving timely updates",
+          "No comments",
+          "Depends on mood",
+        ],
+        "B",
+        "Specific examples are stronger than generic statements.",
+        "interview english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng-11",
+        "Best phrase for seeking clarification from supervisor:",
+        [
+          "I will guess and do",
+          "Could you please confirm the correct procedure before I proceed?",
+          "Not sure, but I will try",
+          "I do not need guidance",
+        ],
+        "B",
+        "Clarity-first language reduces operational errors.",
+        "professional english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng-12",
+        "Choose the best personal improvement line:",
+        [
+          "I am perfect already",
+          "I practice role-based English daily and review feedback to improve interview quality",
+          "English is not important",
+          "I avoid mock interviews",
+        ],
+        "B",
+        "Growth-oriented language reflects coachability and commitment.",
+        "career communication",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng-13",
+        "Which sentence is best for greeting a passenger politely?",
+        [
+          "Tell me fast",
+          "Good evening, how may I help you today?",
+          "Say your issue",
+          "What happened now?",
+        ],
+        "B",
+        "Polite greeting language is the foundation of passenger-facing English.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng-14",
+        "Choose the correct sentence:",
+        [
+          "I handled many passengers yesterday and remained calm",
+          "I handle many passengers yesterday",
+          "I had handle many passenger",
+          "I am handled many passengers",
+        ],
+        "A",
+        "Sentence A uses the correct past tense and agreement.",
+        "grammar",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng-15",
+        "Best phrase for offering assistance is:",
+        [
+          "Wait there",
+          "Let me assist you with that",
+          "No idea",
+          "Ask later",
+        ],
+        "B",
+        "Simple, polite assistance language sounds professional and confident.",
+        "spoken scenario",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng-16",
+        "What improves spoken-English interview answers most?",
+        [
+          "Reading silently only",
+          "Practicing aloud with role-based examples",
+          "Memorizing without speaking",
+          "Avoiding correction",
+        ],
+        "B",
+        "Spoken performance improves through repeated aloud practice and refinement.",
+        "career communication",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "aviation-english-set-2",
+    slug: "aviation-english-communication-practice-set-2",
+    category: "aviation",
+    title: "Aviation English Communication Practice Set 2",
+    description:
+      "Intermediate aviation English practice for interview grammar, spoken clarity, service-recovery phrases, and role-based scenario responses.",
+    examType: "Aviation English",
+    level: "intermediate",
+    questionCount: 16,
+    estimatedMinutes: 22,
+    seoTitle:
+      "Aviation English Intermediate Practice Set 2 | Nishaglobal Education",
+    seoDescription:
+      "Practice intermediate aviation English questions for cabin crew, ground staff, and support staff communication rounds.",
+    keywords: [
+      "aviation english set 2",
+      "intermediate cabin crew english",
+      "ground staff spoken english",
+      "airport interview english practice",
+      "aviation service communication set",
+    ],
+    intro:
+      "Use Set 2 after Set 1 to improve grammar control and confident spoken responses for interview scenarios.",
+    questions: [
+      createQuestion(
+        "aviation-eng2-1",
+        "Choose the most professional line during a delay update:",
+        [
+          "No update, please wait",
+          "Thank you for your patience. We are awaiting confirmation and will update you shortly",
+          "We do not know anything",
+          "Please stop asking",
+        ],
+        "B",
+        "It is polite, transparent, and gives a clear communication commitment.",
+        "spoken scenario",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng2-2",
+        "Correct sentence: 'If a passenger is upset, I ___ calm and listen carefully.'",
+        ["stay", "stays", "stayed", "staying"],
+        "A",
+        "With subject 'I', the base form 'stay' is correct in present tense.",
+        "grammar",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng2-3",
+        "Which answer sounds strongest for 'Tell me about yourself'?",
+        [
+          "I can do any job",
+          "I am a customer-focused candidate with strong communication habits and calm decision-making",
+          "I need work urgently",
+          "I do not have any weakness",
+        ],
+        "B",
+        "Role-relevant strengths and behavior language improve interview quality.",
+        "interview english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng2-4",
+        "Best phrase when you need to verify a process before answering:",
+        [
+          "I will guess",
+          "Let me confirm the details and provide you an accurate update",
+          "Not sure",
+          "Ask someone else",
+        ],
+        "B",
+        "Verification language signals professionalism and accountability.",
+        "professional english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng2-5",
+        "Choose the correct sentence for experience duration:",
+        [
+          "I have worked in service since three years",
+          "I have been working in service for three years",
+          "I am working in service for three years ago",
+          "I working in service since three year",
+        ],
+        "B",
+        "Use 'for' with duration and present perfect continuous for ongoing experience.",
+        "grammar",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng2-6",
+        "Which statement best shows empathy plus action?",
+        [
+          "Please wait",
+          "I understand your concern, and I will help you with the next available option",
+          "This is not my issue",
+          "You should have planned better",
+        ],
+        "B",
+        "Good service communication combines empathy with a clear next step.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng2-7",
+        "Best line to close a check-in interaction:",
+        [
+          "Done",
+          "Your process is complete. Please proceed to security, and have a pleasant journey",
+          "Next",
+          "Move quickly",
+        ],
+        "B",
+        "Professional closure should be courteous and directional.",
+        "spoken scenario",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng2-8",
+        "Select the strongest response for a team-coordination interview question:",
+        [
+          "I work alone",
+          "I share clear status updates and coordinate priorities with my team",
+          "I avoid reporting",
+          "I prefer no feedback",
+        ],
+        "B",
+        "Team communication and priority alignment are core aviation skills.",
+        "interview english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng2-9",
+        "Correct form: 'The supervisor asked me ___ the updated passenger list.'",
+        ["to verify", "verify", "verifying", "verified"],
+        "A",
+        "After 'asked me', infinitive form 'to verify' is grammatically correct.",
+        "grammar",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng2-10",
+        "Which phrase is most appropriate for handling a complaint?",
+        [
+          "Calm down",
+          "Thank you for sharing this. Let me review it and support you",
+          "Not possible",
+          "You are wrong",
+        ],
+        "B",
+        "Respectful acknowledgment reduces tension and builds trust.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng2-11",
+        "Best upgrade from a weak answer 'I am hardworking' is:",
+        [
+          "I am hardworking",
+          "In my previous role, I handled peak-hour queues while maintaining accurate updates",
+          "I always do my best",
+          "I can do everything",
+        ],
+        "B",
+        "Specific evidence is stronger than generic traits.",
+        "interview strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng2-12",
+        "Best daily spoken-English improvement method is:",
+        [
+          "Only reading notes",
+          "Daily role-based speaking, recording, and self-correction",
+          "Memorizing without speaking",
+          "Avoiding mock interviews",
+        ],
+        "B",
+        "Fluency improves through consistent speaking practice with feedback.",
+        "career communication",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng2-13",
+        "Which answer is strongest for 'How do you handle pressure?'",
+        [
+          "I just manage somehow",
+          "I stay organized, speak clearly, and focus on the next priority",
+          "I panic first",
+          "I avoid difficult situations",
+        ],
+        "B",
+        "Good interview answers explain a clear method, not just a vague claim.",
+        "interview english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng2-14",
+        "Correct sentence: 'The passenger requested that I ___ the boarding gate again.'",
+        ["explain", "explained", "explaining", "to explain"],
+        "A",
+        "After 'requested that I', the base form 'explain' is correct here.",
+        "grammar",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng2-15",
+        "Best phrase for a respectful apology is:",
+        [
+          "Sorry, wait",
+          "I am sorry for the inconvenience. Let me assist you with the next step",
+          "This is not my mistake",
+          "Please do not complain",
+        ],
+        "B",
+        "A good apology acknowledges inconvenience and offers support action.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng2-16",
+        "Which response sounds most professional in spoken interviews?",
+        [
+          "I can do everything",
+          "I have practiced customer-facing communication and I stay calm under pressure",
+          "Any role is okay",
+          "I do not like teamwork",
+        ],
+        "B",
+        "Specific, role-relevant confidence sounds stronger than generic claims.",
+        "spoken scenario",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "aviation-english-set-4",
+    slug: "aviation-english-communication-practice-set-4",
+    category: "aviation",
+    title: "Aviation English Communication Practice Set 4",
+    description:
+      "Advanced aviation English practice for final interview rounds with multi-step spoken scenarios, policy language, and escalation clarity.",
+    examType: "Aviation English",
+    level: "advanced",
+    questionCount: 12,
+    estimatedMinutes: 22,
+    seoTitle:
+      "Aviation English Advanced Practice Set 4 | Nishaglobal Education",
+    seoDescription:
+      "Practice advanced aviation English interview and spoken scenario questions for cabin crew, ground staff, and support roles.",
+    keywords: [
+      "aviation english set 4",
+      "advanced airport interview english",
+      "spoken scenario english aviation",
+      "aviation communication mock set 4",
+      "final round english preparation",
+    ],
+    intro:
+      "Set 4 strengthens final-round spoken precision, policy-safe language, and escalation communication quality.",
+    questions: [
+      createQuestion(
+        "aviation-eng4-1",
+        "Best opening for a passenger escalation conversation is:",
+        [
+          "Please calm down first",
+          "I understand your concern, and I will help you with the next clear step",
+          "This is not my area",
+          "Wait until someone comes",
+        ],
+        "B",
+        "Strong openings combine empathy with immediate action language.",
+        "spoken scenario",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng4-2",
+        "Choose the most professional escalation update:",
+        [
+          "Need urgent help",
+          "Queue overflow at Counter 4; reroute support requested for immediate flow control",
+          "Big problem here",
+          "Please come fast",
+        ],
+        "B",
+        "Good escalation messages are factual, specific, and action-oriented.",
+        "professional english",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng4-3",
+        "Correct sentence: 'Had we received the update earlier, we ___ passengers sooner.'",
+        ["inform", "informed", "would have informed", "had informed"],
+        "C",
+        "Third conditional needs 'would have + past participle'.",
+        "grammar",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng4-4",
+        "Best answer to 'How do you communicate under pressure?'",
+        [
+          "I speak quickly",
+          "I keep messages short, verified, and time-focused so passengers can act clearly",
+          "I avoid talking much",
+          "I let others communicate",
+        ],
+        "B",
+        "Effective pressure communication is concise, accurate, and actionable.",
+        "interview english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng4-5",
+        "Best policy-clarity phrase is:",
+        [
+          "This cannot be done",
+          "As per policy, this option is unavailable, but I can guide you to these alternatives",
+          "No, next",
+          "Not allowed, please move",
+        ],
+        "B",
+        "Professional policy communication should include alternatives when possible.",
+        "service english",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng4-6",
+        "Which answer is strongest for teamwork communication?",
+        [
+          "I do my part only",
+          "I share status updates, align priorities, and confirm handovers clearly",
+          "I work faster alone",
+          "I avoid escalations",
+        ],
+        "B",
+        "Operational teamwork requires updates, alignment, and clear handovers.",
+        "spoken scenario",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng4-7",
+        "Best phrase for clarifying misunderstanding is:",
+        [
+          "You are wrong",
+          "Let me rephrase this clearly so we are on the same page",
+          "Listen carefully",
+          "I already explained",
+        ],
+        "B",
+        "Rephrasing politely keeps communication constructive and clear.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng4-8",
+        "In interview speaking, what is a high-quality close?",
+        [
+          "That is all",
+          "I am ready to contribute with clear communication, discipline, and reliable service behavior",
+          "I can do anything",
+          "Please select me",
+        ],
+        "B",
+        "A clear value-based close leaves a professional impression.",
+        "interview strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng4-9",
+        "Correct sentence: 'The issue was resolved after we ___ the supervisor.'",
+        ["inform", "informed", "had inform", "informing"],
+        "B",
+        "Past narrative here correctly uses 'informed'.",
+        "grammar",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng4-10",
+        "Best phrase for service recovery is:",
+        [
+          "Please wait",
+          "I am sorry for the inconvenience. Let me fix this step by step",
+          "This happens",
+          "Not my responsibility",
+        ],
+        "B",
+        "Recovery language should show ownership and clear action.",
+        "spoken scenario",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng4-11",
+        "A mature response to feedback is:",
+        [
+          "I defend my style",
+          "I review feedback, adjust communication, and test improvement in mock rounds",
+          "I ignore comments",
+          "I only change if required",
+        ],
+        "B",
+        "Growth-focused communication behavior is key in aviation roles.",
+        "career communication",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng4-12",
+        "Most effective daily routine for advanced spoken English is:",
+        [
+          "Read without speaking",
+          "Practice 3 role scenarios aloud, record, and correct weak lines",
+          "Memorize scripts",
+          "Only learn vocabulary lists",
+        ],
+        "B",
+        "Recorded scenario practice gives measurable improvement in fluency.",
+        "spoken delivery",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "aviation-english-set-5",
+    slug: "aviation-english-communication-practice-set-5",
+    category: "aviation",
+    title: "Aviation English Communication Practice Set 5",
+    description:
+      "Final advanced aviation English mock for interview mastery with high-pressure scenarios, structured responses, and professional closing quality.",
+    examType: "Aviation English",
+    level: "advanced",
+    questionCount: 12,
+    estimatedMinutes: 24,
+    seoTitle:
+      "Aviation English Final Mock Set 5 | Nishaglobal Education",
+    seoDescription:
+      "Final advanced aviation English communication set for interview readiness and spoken scenario consistency.",
+    keywords: [
+      "aviation english set 5",
+      "final aviation english mock",
+      "advanced spoken interview english",
+      "airport communication mastery",
+      "aviation english final round",
+    ],
+    intro:
+      "Set 5 is your final language-readiness checkpoint before cabin crew, ground staff, or support-role interviews.",
+    questions: [
+      createQuestion(
+        "aviation-eng5-1",
+        "Best opening when multiple passengers demand updates at once:",
+        [
+          "Please wait silently",
+          "Thank you for your patience. I will share the latest verified update and next steps now",
+          "We already announced",
+          "Check online",
+        ],
+        "B",
+        "A clear group-facing update reduces confusion and tension.",
+        "spoken scenario",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng5-2",
+        "Which response best shows accountability language?",
+        [
+          "Not sure",
+          "I will verify this immediately and return with an accurate update",
+          "Someone else handles this",
+          "Please ask later",
+        ],
+        "B",
+        "Ownership statements build trust in professional settings.",
+        "professional english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng5-3",
+        "Correct sentence: 'By the time I reached the desk, the team ___ the issue.'",
+        ["resolved", "had resolved", "resolve", "resolving"],
+        "B",
+        "Past perfect is correct for an action completed before another past action.",
+        "grammar",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng5-4",
+        "Best final-round answer to 'Why should we hire you?'",
+        [
+          "I work hard",
+          "I bring calm communication, process discipline, and reliable service execution under pressure",
+          "I need this job",
+          "I can do all roles equally",
+        ],
+        "B",
+        "A value-based, role-aligned answer is strongest in final rounds.",
+        "interview english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng5-5",
+        "Best phrase when policy blocks a request is:",
+        [
+          "Cannot do",
+          "I understand your request. Based on policy, this is not available, but here are valid alternatives",
+          "No chance",
+          "Do not insist",
+        ],
+        "B",
+        "Policy communication should remain respectful and solution-oriented.",
+        "service english",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng5-6",
+        "Best speaking structure for scenario answers is:",
+        [
+          "Long story first",
+          "Situation, action taken, result achieved, learning",
+          "Result only",
+          "Opinion only",
+        ],
+        "B",
+        "Structured answers improve clarity and evaluation quality.",
+        "interview strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng5-7",
+        "Which phrase sounds most passenger-friendly?",
+        [
+          "Next",
+          "Please allow me to help you with this step",
+          "Wait",
+          "Not my task",
+        ],
+        "B",
+        "Passenger-friendly language should be polite, clear, and actionable.",
+        "spoken scenario",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng5-8",
+        "In final interviews, what matters most in spoken delivery?",
+        [
+          "Fast speech",
+          "Clarity, control, and relevance of answers",
+          "Accent style",
+          "Complex vocabulary",
+        ],
+        "B",
+        "Interviewers prioritize understandable, relevant communication.",
+        "spoken delivery",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng5-9",
+        "Correct sentence for professional reporting:",
+        [
+          "I already send update",
+          "I have shared the update and logged the action taken",
+          "I shared update yesterday now",
+          "I am send details",
+        ],
+        "B",
+        "This sentence is grammatically correct and operationally clear.",
+        "grammar",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng5-10",
+        "Best phrase for closing an interview answer:",
+        [
+          "That is it",
+          "This experience strengthened my communication and decision-making under pressure",
+          "Anyways",
+          "No further comments",
+        ],
+        "B",
+        "Strong closes summarize skill growth and role relevance.",
+        "interview english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng5-11",
+        "Most useful pre-interview language routine is:",
+        [
+          "Read silently",
+          "Run timed mock Q&A and refine weak answers with feedback",
+          "Only revise grammar rules",
+          "Avoid speaking to conserve energy",
+        ],
+        "B",
+        "Timed speaking drills build confidence and consistency.",
+        "career communication",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng5-12",
+        "Final readiness in aviation English is best shown by:",
+        [
+          "Memorized scripts only",
+          "Clear, calm, and consistent responses across varied scenarios",
+          "Very long answers",
+          "Using difficult words unnecessarily",
+        ],
+        "B",
+        "Consistency across scenarios indicates true interview readiness.",
+        "spoken scenario",
+        "hard"
+      ),
+    ],
+  },
+  {
+    id: "aviation-english-set-3",
+    slug: "aviation-english-communication-practice-set-3",
+    category: "aviation",
+    title: "Aviation English Communication Practice Set 3",
+    description:
+      "Advanced spoken-scenario English practice for final interview rounds, escalation clarity, and high-pressure communication decisions.",
+    examType: "Aviation English",
+    level: "advanced",
+    questionCount: 10,
+    estimatedMinutes: 18,
+    seoTitle:
+      "Aviation English Advanced Practice Set 3 | Nishaglobal Education",
+    seoDescription:
+      "Advanced aviation English mock questions for spoken scenarios, interview quality, and professional escalation language.",
+    keywords: [
+      "aviation english set 3",
+      "advanced spoken aviation english",
+      "cabin crew final interview english",
+      "ground staff advanced communication",
+      "airport escalation language practice",
+    ],
+    intro:
+      "Set 3 is for final-round readiness where your spoken clarity, judgment language, and composure are tested together.",
+    questions: [
+      createQuestion(
+        "aviation-eng3-1",
+        "Best opening in a high-pressure complaint situation is:",
+        [
+          "You are misunderstanding",
+          "I understand this is frustrating. Let me assist you with the next immediate step",
+          "Please wait quietly",
+          "This is not my fault",
+        ],
+        "B",
+        "It acknowledges emotion and quickly moves to support action.",
+        "spoken scenario",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng3-2",
+        "Choose the strongest escalation sentence:",
+        [
+          "Need help quickly",
+          "Issue observed at gate B2, passenger flow blocked, support required for queue diversion",
+          "Problem here",
+          "Call me now",
+        ],
+        "B",
+        "Advanced escalation language should be specific, factual, and actionable.",
+        "professional english",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng3-3",
+        "Correct advanced grammar sentence:",
+        [
+          "Had I knew earlier, I would inform the team",
+          "Had I known earlier, I would have informed the team",
+          "If I had knew, I informed team",
+          "Had known I earlier, informed team",
+        ],
+        "B",
+        "This is the correct third conditional structure.",
+        "grammar",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng3-4",
+        "Best final-round answer to 'How do you stay calm?'",
+        [
+          "I just stay calm",
+          "I prioritize critical tasks, control my pace, and communicate updates clearly",
+          "I ignore pressure",
+          "I wait for others",
+        ],
+        "B",
+        "Shows method, not just a claim.",
+        "interview english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng3-5",
+        "Choose the best policy-communication line:",
+        [
+          "Rule is rule",
+          "Based on policy, this option is unavailable, but I can offer these alternatives",
+          "Cannot help",
+          "Ask someone else",
+        ],
+        "B",
+        "Clear policy language with alternatives reduces friction.",
+        "service english",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-eng3-6",
+        "Best replacement for filler-heavy answer is:",
+        [
+          "Umm... maybe I can do it",
+          "In my previous role, I handled documentation checks with 100% process compliance",
+          "I think... maybe",
+          "Depends",
+        ],
+        "B",
+        "Precise evidence-based language improves professional confidence.",
+        "interview strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng3-7",
+        "In spoken interviews, the best pace is:",
+        [
+          "Very fast",
+          "Controlled pace with clear pauses and concise points",
+          "Very slow with long silence",
+          "Monotone speed",
+        ],
+        "B",
+        "Controlled delivery improves clarity and interviewer understanding.",
+        "spoken delivery",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng3-8",
+        "Strong teamwork communication example should include:",
+        [
+          "Only personal effort",
+          "How you coordinated, what action was taken, and the final outcome",
+          "General motivation only",
+          "No result",
+        ],
+        "B",
+        "Outcome-based team examples are strongest in advanced rounds.",
+        "interview english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-eng3-9",
+        "Best phrase when you need time to verify data:",
+        [
+          "I do not know",
+          "Allow me one moment to verify this accurately for you",
+          "Wait",
+          "Check yourself",
+        ],
+        "B",
+        "Professional phrasing preserves confidence while ensuring accuracy.",
+        "spoken scenario",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-eng3-10",
+        "Most effective final-week English prep is:",
+        [
+          "Only grammar worksheets",
+          "Daily mock interview speaking with role-specific scenario correction",
+          "Only vocabulary list",
+          "No recording practice",
+        ],
+        "B",
+        "Interview performance improves most through repeated spoken simulation.",
+        "career communication",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "aviation-cabin-crew-set-3",
+    slug: "aviation-cabin-crew-practice-set-3",
+    category: "aviation",
+    title: "Cabin Crew Practice Set 3",
+    description:
+      "Advanced cabin crew scenario practice for service recovery, escalation judgment, and interview pressure rounds.",
+    examType: "Aviation Cabin Crew",
+    level: "advanced",
+    questionCount: 8,
+    estimatedMinutes: 16,
+    seoTitle:
+      "Cabin Crew Advanced Practice Questions - Set 3 | Nishaglobal Education",
+    seoDescription:
+      "Advanced cabin crew mock questions with real interview-style situations and detailed explanations.",
+    keywords: [
+      "cabin crew set 3",
+      "advanced cabin crew interview",
+      "cabin crew scenario mock",
+      "air hostess advanced preparation",
+      "aviation customer handling test",
+    ],
+    intro:
+      "Set 3 focuses on complex passenger situations and decision-making quality under pressure.",
+    questions: [
+      createQuestion(
+        "aviation-cc3-1",
+        "A passenger records a conflict on phone and refuses instruction. Best action:",
+        [
+          "Argue and take phone away",
+          "Keep calm, repeat safety instruction clearly, and escalate via protocol",
+          "Ignore and move on",
+          "Threaten passenger",
+        ],
+        "B",
+        "Safety-first communication and protocol escalation are required in high-tension situations.",
+        "conflict handling",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-cc3-2",
+        "Best interview response to 'How do you handle criticism?'",
+        [
+          "I do not accept criticism",
+          "I clarify feedback, implement changes, and review results",
+          "I ignore it",
+          "I blame team",
+        ],
+        "B",
+        "Recruiters prefer coachability, accountability, and improvement mindset.",
+        "interview language",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc3-3",
+        "A passenger demands immediate exception to policy. You should:",
+        [
+          "Promise exception without confirmation",
+          "Explain policy politely and offer valid alternatives",
+          "Argue about rules",
+          "Walk away",
+        ],
+        "B",
+        "Professional response balances empathy with policy compliance.",
+        "policy communication",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-cc3-4",
+        "In cabin service, the strongest de-escalation technique is:",
+        [
+          "Raise your voice to control",
+          "Use calm tone, active listening, and clear next steps",
+          "Avoid eye contact",
+          "Ask passenger to wait without updates",
+        ],
+        "B",
+        "Calm acknowledgment with actionable steps reduces conflict intensity.",
+        "communication",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc3-5",
+        "What makes a cabin crew answer 'advanced' in interviews?",
+        [
+          "Generic motivation",
+          "Specific scenario example with action and outcome",
+          "One-line reply",
+          "Only confidence words",
+        ],
+        "B",
+        "Structured examples demonstrate practical readiness.",
+        "interview readiness",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc3-6",
+        "If two requests are urgent at once, best approach is:",
+        [
+          "Handle randomly",
+          "Prioritize safety-critical task first and coordinate team support",
+          "Delay both",
+          "Take help from passenger",
+        ],
+        "B",
+        "Operational prioritization is essential during peak cabin pressure.",
+        "decision making",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-cc3-7",
+        "Strong professional phrase for uncertainty is:",
+        [
+          "I do not know",
+          "Let me verify this for you and return with accurate information",
+          "Ask someone else",
+          "Not my job",
+        ],
+        "B",
+        "Verification language shows responsibility and service quality.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc3-8",
+        "A mature cabin crew mindset is best shown by:",
+        [
+          "Avoiding feedback",
+          "Learning from incidents and improving SOP execution",
+          "Focusing only on appearance",
+          "Choosing easy flights",
+        ],
+        "B",
+        "Continuous improvement is core to advanced role readiness.",
+        "career strategy",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "aviation-cabin-crew-set-4",
+    slug: "aviation-cabin-crew-practice-set-4",
+    category: "aviation",
+    title: "Cabin Crew Practice Set 4",
+    description:
+      "Advanced interview-round set with judgment, communication depth, and multi-passenger scenario analysis.",
+    examType: "Aviation Cabin Crew",
+    level: "advanced",
+    questionCount: 8,
+    estimatedMinutes: 17,
+    seoTitle:
+      "Cabin Crew Advanced Mock Interview Set 4 | Nishaglobal Education",
+    seoDescription:
+      "Train with advanced cabin crew mock interview questions and high-pressure service scenarios.",
+    keywords: [
+      "cabin crew set 4",
+      "advanced air hostess mock",
+      "cabin crew pressure interview",
+      "flight attendant scenario set",
+      "cabin crew final rounds",
+    ],
+    intro:
+      "Set 4 is designed for candidates entering final interview rounds with tougher communication checks.",
+    questions: [
+      createQuestion(
+        "aviation-cc4-1",
+        "If a passenger challenges your instruction publicly, first priority is:",
+        [
+          "Win argument",
+          "Maintain calm authority and reinforce safety requirement",
+          "Ignore challenge",
+          "Call security immediately for every case",
+        ],
+        "B",
+        "Authority should be calm, clear, and safety-focused.",
+        "safety communication",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-cc4-2",
+        "Best example structure for interview story is:",
+        [
+          "Long background only",
+          "Situation, action, result, and learning",
+          "Opinion without example",
+          "Outcome without action",
+        ],
+        "B",
+        "Structured storytelling improves clarity and credibility.",
+        "interview strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc4-3",
+        "If passenger language barrier persists, you should:",
+        [
+          "Stop interaction",
+          "Use simple phrases, gestures, and request crew support",
+          "Raise voice",
+          "Skip instruction",
+        ],
+        "B",
+        "Inclusive communication requires simplification and teamwork.",
+        "passenger handling",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc4-4",
+        "Interviewers assess your 'safety mindset' mainly through:",
+        [
+          "Uniform comments",
+          "Protocol-based choices in scenario responses",
+          "Travel preferences",
+          "Social media profile",
+        ],
+        "B",
+        "Scenario choices reveal actual safety thinking.",
+        "interview readiness",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-cc4-5",
+        "A realistic answer to 'biggest weakness' is:",
+        [
+          "I have no weakness",
+          "I used to rush responses; now I pause, verify, and communicate clearly",
+          "I cannot work in teams",
+          "I dislike SOP",
+        ],
+        "B",
+        "Improvement-oriented weakness answers are more credible.",
+        "interview language",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc4-6",
+        "What improves final-round cabin crew confidence most?",
+        [
+          "Memorizing 100 lines",
+          "Mock scenarios with feedback and response refinement",
+          "Skipping practice",
+          "Only appearance preparation",
+        ],
+        "B",
+        "Performance feedback cycles build stable interview confidence.",
+        "mock preparation",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc4-7",
+        "Best close for service conversation is:",
+        [
+          "Done",
+          "Thank you. Please let me know if you need further assistance",
+          "Next passenger",
+          "No further help",
+        ],
+        "B",
+        "Professional closures maintain passenger trust and tone.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc4-8",
+        "A top candidate usually demonstrates:",
+        [
+          "Confidence without process",
+          "Balanced service empathy, SOP discipline, and teamwork",
+          "Solo work preference",
+          "Resistance to feedback",
+        ],
+        "B",
+        "Advanced selection favors consistency across behavior and process.",
+        "career strategy",
+        "hard"
+      ),
+    ],
+  },
+  {
+    id: "aviation-cabin-crew-set-5",
+    slug: "aviation-cabin-crew-practice-set-5",
+    category: "aviation",
+    title: "Cabin Crew Practice Set 5",
+    description:
+      "Final advanced cabin crew mock set for interview mastery, communication precision, and difficult scenario readiness.",
+    examType: "Aviation Cabin Crew",
+    level: "advanced",
+    questionCount: 8,
+    estimatedMinutes: 18,
+    seoTitle:
+      "Cabin Crew Final Mock Set 5 | Nishaglobal Education",
+    seoDescription:
+      "Final advanced cabin crew mock questions for interview preparation and high-pressure service scenarios.",
+    keywords: [
+      "cabin crew set 5",
+      "final cabin crew mock",
+      "advanced cabin interview questions",
+      "air hostess final round prep",
+      "cabin crew high pressure scenarios",
+    ],
+    intro:
+      "Use Set 5 as your final readiness check before interview day.",
+    questions: [
+      createQuestion(
+        "aviation-cc5-1",
+        "What is best when two passengers complain at once?",
+        [
+          "Handle whichever is louder",
+          "Prioritize urgency, assign support, and communicate timelines",
+          "Delay both until later",
+          "Argue with both",
+        ],
+        "B",
+        "Prioritization plus communication is essential in simultaneous issues.",
+        "decision making",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-cc5-2",
+        "Strong answer to 'Why this airline?' should include:",
+        [
+          "Any airline is fine",
+          "Company values alignment, role fit, and long-term contribution",
+          "Only salary expectations",
+          "I like travel only",
+        ],
+        "B",
+        "Role-specific company alignment makes interview answers stronger.",
+        "interview strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc5-3",
+        "If you receive conflicting passenger requests, best method is:",
+        [
+          "Decline both",
+          "Acknowledge both, clarify constraints, and provide fair resolution",
+          "Favor one without reason",
+          "Ignore until asked again",
+        ],
+        "B",
+        "Fair communication and boundary clarity support service quality.",
+        "service recovery",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-cc5-4",
+        "Best language to show accountability is:",
+        [
+          "Not my responsibility",
+          "I will take ownership, verify details, and update you promptly",
+          "Someone else will handle",
+          "Please wait silently",
+        ],
+        "B",
+        "Ownership language reflects professionalism and trust.",
+        "service english",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-cc5-5",
+        "In final rounds, what differentiates candidates most?",
+        [
+          "Accent only",
+          "Consistent judgment across multiple scenarios",
+          "Height only",
+          "Speed of talking",
+        ],
+        "B",
+        "Final selections emphasize reliable decision quality.",
+        "interview readiness",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-cc5-6",
+        "Best response if you need senior support is:",
+        [
+          "Hide issue",
+          "Escalate early with concise factual summary",
+          "Delay escalation",
+          "Complain to passenger",
+        ],
+        "B",
+        "Timely factual escalation prevents service and safety breakdowns.",
+        "escalation",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc5-7",
+        "Which habit keeps interview English strong?",
+        [
+          "No speaking practice",
+          "Daily role-based speaking with self-review",
+          "Only reading notes",
+          "Memorizing without feedback",
+        ],
+        "B",
+        "Daily speaking and review improve fluency and response quality.",
+        "communication",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-cc5-8",
+        "Best final preparation plan before cabin interview is:",
+        [
+          "Practice one question only",
+          "Review SOP basics, mock 10 scenarios, refine weak answers",
+          "Avoid feedback",
+          "Only research salary",
+        ],
+        "B",
+        "Focused final revision increases consistency under pressure.",
+        "interview strategy",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "aviation-ground-staff-set-3",
+    slug: "aviation-ground-staff-practice-set-3",
+    category: "aviation",
+    title: "Ground Staff Practice Set 3",
+    description:
+      "Advanced ground staff practice for queue pressure, escalation quality, and interview situation handling.",
+    examType: "Aviation Ground Staff",
+    level: "advanced",
+    questionCount: 8,
+    estimatedMinutes: 16,
+    seoTitle:
+      "Ground Staff Advanced Practice Set 3 | Nishaglobal Education",
+    seoDescription:
+      "Advanced airport ground staff scenario and interview practice set with detailed explanations.",
+    keywords: [
+      "ground staff set 3",
+      "advanced airport ground staff",
+      "check in scenario questions",
+      "ground staff final round mock",
+      "airport desk communication test",
+    ],
+    intro:
+      "Set 3 increases complexity in passenger flow, documentation decisions, and escalation communication.",
+    questions: [
+      createQuestion(
+        "aviation-gs3-1",
+        "When multiple counters slow down, first operational move is:",
+        [
+          "Stop announcements",
+          "Reallocate support, guide queue lanes, and provide updates",
+          "Close one counter",
+          "Ask passengers to wait silently",
+        ],
+        "B",
+        "Active flow control and clear communication reduce disruption.",
+        "queue management",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-gs3-2",
+        "Best answer to 'How do you handle angry passengers?' is:",
+        [
+          "I avoid them",
+          "I acknowledge concern, verify facts, and explain actionable options",
+          "I debate with them",
+          "I call security first in every case",
+        ],
+        "B",
+        "Balanced empathy and process response is expected in interviews.",
+        "interview language",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs3-3",
+        "If a passenger gives incomplete documents, you should:",
+        [
+          "Proceed anyway",
+          "Explain requirement clearly and follow verification workflow",
+          "Reject rudely",
+          "Ask passenger to decide",
+        ],
+        "B",
+        "Compliance-friendly communication protects operations and service.",
+        "documentation",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs3-4",
+        "Advanced customer update style should be:",
+        [
+          "Frequent but unverified",
+          "Verified, concise, and time-bound",
+          "Long technical explanation",
+          "No updates",
+        ],
+        "B",
+        "Trustworthy updates require accuracy and timeline clarity.",
+        "communication",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-gs3-5",
+        "Which answer shows strongest role ownership?",
+        [
+          "I do my part only",
+          "I manage desk duties while coordinating with adjacent teams",
+          "I prefer no coordination",
+          "I avoid difficult shifts",
+        ],
+        "B",
+        "Ground operations performance depends on cross-team coordination.",
+        "teamwork",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs3-6",
+        "What should you do when system latency grows?",
+        [
+          "Hide issue",
+          "Escalate, re-sequence queue, and communicate expected delay",
+          "Stop accepting passengers",
+          "Blame passengers",
+        ],
+        "B",
+        "Combined technical escalation and flow communication is best.",
+        "operations control",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-gs3-7",
+        "A strong ground staff close in interview is:",
+        [
+          "I can do everything",
+          "I am ready to deliver accurate process support and calm passenger service",
+          "I need easy shifts",
+          "I dislike strict SOP",
+        ],
+        "B",
+        "Role-specific closing statements show readiness and realism.",
+        "interview readiness",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs3-8",
+        "Long-term promotion readiness in ground roles is built by:",
+        [
+          "Speed without quality",
+          "Consistency, compliance, communication, and review habits",
+          "Ignoring feedback",
+          "Working alone",
+        ],
+        "B",
+        "Sustained quality and learning drive role growth.",
+        "career strategy",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "aviation-ground-staff-set-4",
+    slug: "aviation-ground-staff-practice-set-4",
+    category: "aviation",
+    title: "Ground Staff Practice Set 4",
+    description:
+      "Advanced mock set for interview finals with complex queue, service, and policy communication decisions.",
+    examType: "Aviation Ground Staff",
+    level: "advanced",
+    questionCount: 8,
+    estimatedMinutes: 17,
+    seoTitle:
+      "Ground Staff Advanced Mock Interview Set 4 | Nishaglobal Education",
+    seoDescription:
+      "Final-round style ground staff questions covering passenger handling, policy communication, and escalation.",
+    keywords: [
+      "ground staff set 4",
+      "airport ground staff final interview",
+      "check in policy communication",
+      "advanced ground operations mock",
+      "airport queue handling questions",
+    ],
+    intro:
+      "Set 4 prepares candidates for tougher interview rounds where communication precision is closely tested.",
+    questions: [
+      createQuestion(
+        "aviation-gs4-1",
+        "If two passengers dispute queue position loudly, what is best?",
+        [
+          "Ignore argument",
+          "Intervene calmly, re-establish queue order, and continue flow",
+          "Stop all counters",
+          "Scold both publicly",
+        ],
+        "B",
+        "Conflict control must maintain fairness and queue momentum.",
+        "queue management",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-gs4-2",
+        "Interview answer quality improves most when you:",
+        [
+          "Use generic claims",
+          "Use measurable examples from real customer situations",
+          "Speak very fast",
+          "Avoid details",
+        ],
+        "B",
+        "Specific outcomes strengthen credibility in interviews.",
+        "interview strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs4-3",
+        "Best phrase for policy denial is:",
+        [
+          "Cannot do. Next.",
+          "I understand your request. Based on policy, this option is unavailable, but here is what we can do",
+          "Rules are rules",
+          "No explanation needed",
+        ],
+        "B",
+        "Respectful policy communication reduces friction.",
+        "service english",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-gs4-4",
+        "Strong escalation note should include:",
+        [
+          "Opinion only",
+          "Issue, actions taken, pending risk, and required support",
+          "No timeline",
+          "Only passenger name",
+        ],
+        "B",
+        "Structured escalation data improves response speed.",
+        "reporting",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs4-5",
+        "What is best during prolonged delay at desk?",
+        [
+          "One announcement only",
+          "Periodic verified updates and clear passenger guidance",
+          "No updates",
+          "Guess timings",
+        ],
+        "B",
+        "Continuous verified updates reduce stress and repeat conflicts.",
+        "delay handling",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs4-6",
+        "Ground staff professionalism is strongest when:",
+        [
+          "Speed is prioritized over accuracy",
+          "Accuracy, courtesy, and compliance stay balanced",
+          "Only courtesy matters",
+          "Only compliance matters",
+        ],
+        "B",
+        "Balanced service and process execution is the role standard.",
+        "service quality",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs4-7",
+        "Final-round candidates usually show:",
+        [
+          "Inconsistent answers",
+          "Stable communication and clear decision logic",
+          "Overconfidence without examples",
+          "Short one-word responses",
+        ],
+        "B",
+        "Consistency across scenarios is a key selection signal.",
+        "interview readiness",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-gs4-8",
+        "Best pre-interview last-day plan is:",
+        [
+          "No revision",
+          "Review SOP basics, refine 8 scenario answers, and practice tone",
+          "Only wardrobe prep",
+          "Only resume printing",
+        ],
+        "B",
+        "Focused final practice improves delivery quality.",
+        "interview strategy",
+        "easy"
+      ),
+    ],
+  },
+  {
+    id: "aviation-ground-staff-set-5",
+    slug: "aviation-ground-staff-practice-set-5",
+    category: "aviation",
+    title: "Ground Staff Practice Set 5",
+    description:
+      "Final advanced ground staff readiness set for high-pressure customer scenarios and final interview decision rounds.",
+    examType: "Aviation Ground Staff",
+    level: "advanced",
+    questionCount: 8,
+    estimatedMinutes: 18,
+    seoTitle:
+      "Ground Staff Final Mock Set 5 | Nishaglobal Education",
+    seoDescription:
+      "Final advanced ground staff mock with complex communication and operations scenarios.",
+    keywords: [
+      "ground staff set 5",
+      "ground staff final mock",
+      "airport operations final prep",
+      "advanced check in scenarios",
+      "ground staff interview mastery",
+    ],
+    intro:
+      "Set 5 is a final readiness test before your interview and role screening.",
+    questions: [
+      createQuestion(
+        "aviation-gs5-1",
+        "What is best when policy and passenger expectation conflict?",
+        [
+          "Prioritize expectation only",
+          "Explain policy respectfully and provide valid alternatives",
+          "Reject without explanation",
+          "Promise exception",
+        ],
+        "B",
+        "Policy clarity with alternatives supports professional service.",
+        "policy communication",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-gs5-2",
+        "A strong answer to 'Describe teamwork' includes:",
+        [
+          "General statement",
+          "Specific cross-desk coordination example and result",
+          "No example",
+          "Only personal achievement",
+        ],
+        "B",
+        "Interview quality rises with concrete teamwork evidence.",
+        "interview language",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs5-3",
+        "When passenger is stressed and confused, first sentence should:",
+        [
+          "Blame passenger",
+          "Acknowledge concern and give one clear next step",
+          "Give technical jargon",
+          "Ask to wait quietly",
+        ],
+        "B",
+        "Simple, calm action language improves clarity under stress.",
+        "service english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs5-4",
+        "Best response if you are unsure about a process update:",
+        [
+          "Guess and proceed",
+          "Verify with supervisor/system and update passenger accurately",
+          "Ignore update",
+          "Delay communication",
+        ],
+        "B",
+        "Accuracy and verification are essential in airport operations.",
+        "operations control",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-gs5-5",
+        "What do interviewers test in repeated scenario questions?",
+        [
+          "Memory",
+          "Consistency of judgment under varied context",
+          "Typing speed",
+          "Math formulas",
+        ],
+        "B",
+        "Repeated scenarios check decision stability, not memorization.",
+        "interview readiness",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-gs5-6",
+        "Ground staff professional growth depends on:",
+        [
+          "Shortcuts",
+          "Process mastery, communication, and accountable behavior",
+          "Avoiding difficult tasks",
+          "Working without coordination",
+        ],
+        "B",
+        "Growth comes from dependable execution and learning agility.",
+        "career strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-gs5-7",
+        "Best final-interview close is:",
+        [
+          "I am perfect",
+          "I am prepared to deliver accurate, calm, and passenger-focused ground support",
+          "I need quick joining only",
+          "I prefer no pressure roles",
+        ],
+        "B",
+        "A realistic value statement leaves strong final impression.",
+        "interview strategy",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-gs5-8",
+        "What is best final week practice routine?",
+        [
+          "Only theory",
+          "Daily scenario mock, communication drill, and feedback correction",
+          "No speaking practice",
+          "Only company reading",
+        ],
+        "B",
+        "Interview performance improves with repeated scenario speaking practice.",
+        "mock preparation",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "aviation-support-staff-set-3",
+    slug: "aviation-support-staff-practice-set-3",
+    category: "aviation",
+    title: "Airport Support Staff Practice Set 3",
+    description:
+      "Advanced support-staff scenarios for risk reporting, shift continuity, and accountability-focused interviews.",
+    examType: "Airport Support Staff",
+    level: "advanced",
+    questionCount: 8,
+    estimatedMinutes: 16,
+    seoTitle:
+      "Airport Support Staff Advanced Set 3 | Nishaglobal Education",
+    seoDescription:
+      "Advanced support staff practice questions for operational judgment and interview readiness.",
+    keywords: [
+      "support staff set 3",
+      "airport support advanced mock",
+      "safety reporting interview",
+      "support operations scenario questions",
+      "airport support role preparation",
+    ],
+    intro:
+      "Set 3 introduces advanced support-role scenarios requiring disciplined escalation and reporting.",
+    questions: [
+      createQuestion(
+        "aviation-ss3-1",
+        "If a hazard repeats across shifts, what is best response?",
+        [
+          "Treat as normal",
+          "Log details with timeline and escalate for corrective action",
+          "Discuss casually only",
+          "Wait for audit",
+        ],
+        "B",
+        "Pattern-based risks require documented escalation and follow-up.",
+        "safety reporting",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-ss3-2",
+        "Best interview answer to 'How do you manage pressure?'",
+        [
+          "I work randomly",
+          "I prioritize critical tasks, communicate status, and escalate early",
+          "I stop work",
+          "I wait for instructions only",
+        ],
+        "B",
+        "Prioritization and communication are key operational behaviors.",
+        "interview language",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss3-3",
+        "Strong shift handover must include:",
+        [
+          "Only completed work",
+          "Pending actions, risks, and owner confirmation",
+          "No documentation",
+          "General comments",
+        ],
+        "B",
+        "Clear handover prevents task gaps and risk carryover.",
+        "shift discipline",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss3-4",
+        "If task instruction is unclear, correct behavior is:",
+        [
+          "Proceed anyway",
+          "Confirm procedure before execution",
+          "Skip task",
+          "Ask unrelated team",
+        ],
+        "B",
+        "Procedure confirmation prevents avoidable errors.",
+        "task handling",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss3-5",
+        "A professional incident update should be:",
+        [
+          "Emotional",
+          "Factual, concise, and action-linked",
+          "Delayed",
+          "Opinion-based",
+        ],
+        "B",
+        "Operational teams need actionable, factual communication.",
+        "reporting",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss3-6",
+        "Interviewers evaluate reliability by checking:",
+        [
+          "Volume of speech",
+          "Consistency of responsible decisions in scenarios",
+          "Appearance only",
+          "Luck stories",
+        ],
+        "B",
+        "Scenario consistency reflects dependable behavior.",
+        "interview readiness",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-ss3-7",
+        "Best phrase for escalation request is:",
+        [
+          "Please help",
+          "Issue observed at time X, immediate support needed for step Y",
+          "Problem here",
+          "Urgent call me",
+        ],
+        "B",
+        "Precise escalation wording improves response speed.",
+        "professional english",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-ss3-8",
+        "Long-term support-role growth comes from:",
+        [
+          "Avoiding accountability",
+          "Safety discipline, communication quality, and learning mindset",
+          "Working in isolation",
+          "Skipping SOP reviews",
+        ],
+        "B",
+        "Career growth aligns with consistency and process maturity.",
+        "career strategy",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "aviation-support-staff-set-4",
+    slug: "aviation-support-staff-practice-set-4",
+    category: "aviation",
+    title: "Airport Support Staff Practice Set 4",
+    description:
+      "Advanced support-staff interview mock with high-accountability scenarios and operational communication checks.",
+    examType: "Airport Support Staff",
+    level: "advanced",
+    questionCount: 8,
+    estimatedMinutes: 17,
+    seoTitle:
+      "Airport Support Staff Advanced Interview Set 4 | Nishaglobal Education",
+    seoDescription:
+      "Advanced airport support staff final-round style practice with scenario and escalation questions.",
+    keywords: [
+      "support staff set 4",
+      "support role final round",
+      "airport operations accountability questions",
+      "aviation support escalation practice",
+      "advanced support staff interview",
+    ],
+    intro:
+      "Set 4 strengthens final-round interview language and operational responsibility judgment.",
+    questions: [
+      createQuestion(
+        "aviation-ss4-1",
+        "If two teams report different status for same task, you should:",
+        [
+          "Choose one randomly",
+          "Verify source, reconcile status, and update supervisor",
+          "Ignore mismatch",
+          "Delay shift handover",
+        ],
+        "B",
+        "Status reconciliation and timely update prevent downstream errors.",
+        "operations control",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-ss4-2",
+        "Best response to 'Tell us a failure you handled' is:",
+        [
+          "I never failed",
+          "I explain incident, corrective action, and prevention step",
+          "I blame team",
+          "I avoid details",
+        ],
+        "B",
+        "Ownership and corrective learning are key interview signals.",
+        "interview strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss4-3",
+        "Which escalation style is strongest?",
+        [
+          "Emotion-driven",
+          "Fact-driven with timeline and required support",
+          "Very long narrative",
+          "No follow-up",
+        ],
+        "B",
+        "Action-focused escalation helps fast and accurate resolution.",
+        "escalation",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-ss4-4",
+        "Professional support communication should prioritize:",
+        [
+          "Speed only",
+          "Clarity, relevance, and accountability",
+          "Complex vocabulary",
+          "Silence",
+        ],
+        "B",
+        "Operational clarity is more valuable than complexity.",
+        "communication",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss4-5",
+        "If a risk is unresolved near shift end, best action is:",
+        [
+          "Leave for next shift without note",
+          "Document status, escalate, and confirm handover ownership",
+          "Delete report",
+          "Handle alone without update",
+        ],
+        "B",
+        "Safe shift continuity requires traceable ownership.",
+        "shift discipline",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-ss4-6",
+        "What makes an advanced interview answer stronger?",
+        [
+          "General claim",
+          "Practical example with measurable result",
+          "Very short yes/no",
+          "No context",
+        ],
+        "B",
+        "Specific impact improves answer credibility.",
+        "interview language",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss4-7",
+        "Most reliable support staff habit is:",
+        [
+          "Working from memory",
+          "Checklist discipline and timely status communication",
+          "Avoiding updates",
+          "Ignoring minor risks",
+        ],
+        "B",
+        "Checklist and update discipline improve reliability.",
+        "career basics",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss4-8",
+        "Best final-week support-role prep is:",
+        [
+          "Only reading theory",
+          "Daily scenario drill, escalation writing, and feedback correction",
+          "No speaking practice",
+          "Skip SOP review",
+        ],
+        "B",
+        "Combined writing and speaking practice strengthens final readiness.",
+        "mock preparation",
+        "medium"
+      ),
+    ],
+  },
+  {
+    id: "aviation-support-staff-set-5",
+    slug: "aviation-support-staff-practice-set-5",
+    category: "aviation",
+    title: "Airport Support Staff Practice Set 5",
+    description:
+      "Final advanced support-staff mock set for interview readiness and safety-critical reporting judgment.",
+    examType: "Airport Support Staff",
+    level: "advanced",
+    questionCount: 8,
+    estimatedMinutes: 18,
+    seoTitle:
+      "Airport Support Staff Final Mock Set 5 | Nishaglobal Education",
+    seoDescription:
+      "Final advanced support staff practice questions for airport operations interviews and scenario rounds.",
+    keywords: [
+      "support staff set 5",
+      "support staff final mock",
+      "airport support final interview",
+      "advanced operations scenario test",
+      "aviation support career prep",
+    ],
+    intro:
+      "Set 5 is your final checkpoint before interview rounds for support operations roles.",
+    questions: [
+      createQuestion(
+        "aviation-ss5-1",
+        "When escalation is delayed, main risk is:",
+        [
+          "No impact",
+          "Issue expansion and operational disruption",
+          "Better team trust",
+          "Less reporting need",
+        ],
+        "B",
+        "Delayed escalation can magnify small issues into major disruptions.",
+        "escalation",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-ss5-2",
+        "Best interview reply to 'Why support operations?'",
+        [
+          "Any role is fine",
+          "I value disciplined execution, safety culture, and team reliability",
+          "I prefer no responsibility",
+          "I only want easy shifts",
+        ],
+        "B",
+        "Role-fit motivation should reflect operations mindset.",
+        "interview strategy",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss5-3",
+        "What makes a risk report useful to supervisor?",
+        [
+          "General wording",
+          "Clear issue, timeline, impact, and requested decision",
+          "Only complaints",
+          "No next step",
+        ],
+        "B",
+        "Decision-makers need structured and actionable reporting.",
+        "reporting",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-ss5-4",
+        "If teammate misses a safety step, best response is:",
+        [
+          "Ignore",
+          "Correct immediately and escalate appropriately if required",
+          "Discuss next week",
+          "Publicly shame teammate",
+        ],
+        "B",
+        "Immediate correction with proper process protects safety and team trust.",
+        "safety culture",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss5-5",
+        "Final-round interviewers prioritize:",
+        [
+          "Accent",
+          "Consistency, accountability, and decision clarity",
+          "Length of answers",
+          "Memorized scripts",
+        ],
+        "B",
+        "Final rounds evaluate dependable behavior under varied scenarios.",
+        "interview readiness",
+        "hard"
+      ),
+      createQuestion(
+        "aviation-ss5-6",
+        "Best way to improve support-role English quickly is:",
+        [
+          "Read only",
+          "Daily spoken summaries of incidents and handover notes",
+          "Avoid speaking",
+          "Use slang",
+        ],
+        "B",
+        "Role-specific spoken practice improves operational communication.",
+        "professional english",
+        "medium"
+      ),
+      createQuestion(
+        "aviation-ss5-7",
+        "A mature support-role close in interview is:",
+        [
+          "I know everything",
+          "I am committed to safe, reliable, and accountable operations support",
+          "I dislike SOP",
+          "I avoid escalation",
+        ],
+        "B",
+        "A focused value statement supports final-round selection.",
+        "interview language",
+        "easy"
+      ),
+      createQuestion(
+        "aviation-ss5-8",
+        "Best final 3-day preparation pattern is:",
+        [
+          "Random reading",
+          "Scenario simulation, report-writing drills, and feedback correction",
+          "No revision",
+          "Only CV edits",
+        ],
+        "B",
+        "Structured final practice improves response quality and confidence.",
+        "mock preparation",
+        "medium"
+      ),
+    ],
+  },
   {
     id: "ielts-set-1",
     slug: "ielts-reading-grammar-set-1",
@@ -8320,6 +13347,31 @@ export const practiceSets: PracticeSet[] = [
   createIeltsPracticeSet("ielts-writing", 2),
   createIeltsPracticeSet("ielts-speaking", 1),
   createIeltsPracticeSet("ielts-speaking", 2),
+  createToeflPracticeSet("toefl-reading", 1),
+  createToeflPracticeSet("toefl-reading", 2),
+  createToeflPracticeSet("toefl-reading", 3),
+  createToeflPracticeSet("toefl-reading", 4),
+  createToeflPracticeSet("toefl-reading", 5),
+  createToeflPracticeSet("toefl-listening", 1),
+  createToeflPracticeSet("toefl-listening", 2),
+  createToeflPracticeSet("toefl-listening", 3),
+  createToeflPracticeSet("toefl-listening", 4),
+  createToeflPracticeSet("toefl-listening", 5),
+  createToeflPracticeSet("toefl-speaking", 1),
+  createToeflPracticeSet("toefl-speaking", 2),
+  createToeflPracticeSet("toefl-speaking", 3),
+  createToeflPracticeSet("toefl-speaking", 4),
+  createToeflPracticeSet("toefl-speaking", 5),
+  createToeflPracticeSet("toefl-writing", 1),
+  createToeflPracticeSet("toefl-writing", 2),
+  createToeflPracticeSet("toefl-writing", 3),
+  createToeflPracticeSet("toefl-writing", 4),
+  createToeflPracticeSet("toefl-writing", 5),
+  createToeflPracticeSet("toefl-integrated", 1),
+  createToeflPracticeSet("toefl-integrated", 2),
+  createToeflPracticeSet("toefl-integrated", 3),
+  createToeflPracticeSet("toefl-integrated", 4),
+  createToeflPracticeSet("toefl-integrated", 5),
   {
     id: "engineering-set-3",
     slug: "engineering-entrance-physics-math-set-3",
@@ -9143,6 +14195,18 @@ export function getIeltsPracticeGroups() {
     sets: practiceSets.filter(
       (set) =>
         set.category === "ielts" &&
+        set.practiceGroup === group.key &&
+        set.isLive !== false
+    ),
+  }));
+}
+
+export function getToeflPracticeGroups() {
+  return toeflPracticeGroupMeta.map((group) => ({
+    ...group,
+    sets: practiceSets.filter(
+      (set) =>
+        set.category === "toefl" &&
         set.practiceGroup === group.key &&
         set.isLive !== false
     ),

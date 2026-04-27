@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import PracticeTestClient from "@/components/PracticeTestClient";
 import PracticeQuiz from "@/components/PracticeQuiz";
 import { getPracticeSetBySlug, getGovPracticeSet, getGovPracticeCategoryBySlug } from "@/data/practiceTests";
+import type { PracticeSet } from "@/data/practiceTests";
 
 type Props = {
   params: Promise<{ category: string; setId: string }>;
@@ -46,6 +47,7 @@ export default async function PracticeSetStartPage({ params }: Props) {
   const set = getPracticeSetBySlug(setId);
   const govSet = getGovPracticeSet(category, setId);
   const categoryData = getGovPracticeCategoryBySlug(category);
+  const isMedical = category === "medical";
 
   if (!set && !govSet) return notFound();
 
@@ -69,6 +71,46 @@ export default async function PracticeSetStartPage({ params }: Props) {
         </div>
       );
     }
+
+    if (isMedical) {
+      const mappedMedicalSet: PracticeSet = {
+        id: `medical-${govSet.slug}`,
+        slug: govSet.slug,
+        category,
+        title: govSet.title,
+        description: `Practice ${govSet.questionCount} NEET questions in ${govSet.chapter}.`,
+        examType: "Medical NEET",
+        level:
+          govSet.difficulty === "Easy"
+            ? "beginner"
+            : govSet.difficulty === "Medium"
+            ? "intermediate"
+            : "advanced",
+        questionCount: govSet.questionCount,
+        estimatedMinutes: govSet.durationMin,
+        seoTitle: govSet.title,
+        seoDescription: `Practice ${govSet.title} with ${govSet.questionCount} NEET questions and explanations.`,
+        keywords: ["neet practice", "medical neet mock", "neet questions"],
+        intro: "English-only NEET practice set.",
+        questions: (govSet.questions || []).map((q) => ({
+          id: q.id,
+          question: q.text,
+          options: q.options.map((opt) => ({ id: opt.id, text: opt.text })),
+          correctAnswer: q.correct,
+          explanation: q.explanation,
+          topic: q.chapter,
+          difficulty:
+            govSet.difficulty === "Easy"
+              ? "easy"
+              : govSet.difficulty === "Medium"
+              ? "medium"
+              : "hard",
+        })),
+            };
+
+      return <PracticeTestClient set={mappedMedicalSet} />;
+    }
+
     return <PracticeQuiz categorySlug={category} categoryTitle={category} set={govSet} categoryData={categoryData} />;
   }
 
