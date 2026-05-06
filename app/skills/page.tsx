@@ -2,7 +2,7 @@ import Link from "next/link";
 import { skillsPages } from "@/data/skillsPages";
 
 export const metadata = {
-  title: "High-Demand Skills | Nisha Global Education",
+  title: "High-Demand Skills | Nishaglobal Education",
   description:
     "Explore beginner, intermediate, and advanced pathways for modern AI and technology skills, including Python, prompt engineering, LangChain, AI agents, and practical project roadmaps.",
   alternates: {

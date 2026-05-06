@@ -30,6 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: data.title,
     description: data.description,
+    alternates: {
+      canonical: `https://nishaglobaleducation.com/practice-tests/${category}`,
+    },
   };
 }
 
@@ -1638,11 +1641,11 @@ export default async function PracticeCategoryPage({ params }: Props) {
                           </h3>
                           {set.bilingual && <p className="mt-1 text-sm text-slate-600">{set.titleHi}</p>}
                           <p className="mt-3 text-sm leading-7 text-slate-600">
-                            Coming soon - {set.questionCount} questions in {set.chapter}.
+                            Planned set - {set.questionCount} questions in {set.chapter}.
                           </p>
                         </div>
                         <div className="rounded-xl bg-gray-300 px-5 py-3 text-center font-semibold text-gray-600">
-                          Coming Soon
+                          Planned
                         </div>
                       </div>
                     </div>

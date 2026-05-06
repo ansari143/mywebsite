@@ -7,13 +7,10 @@ export const metadata = {
   metadataBase: new URL("https://nishaglobaleducation.com"),
   title: {
     default: "Nishaglobal Education",
-    template: "%s | Nishaglobal Education",
+    template: "%s",
   },
   description:
     "Career guidance for students worldwide, including free career tests, study abroad guides, educational resources, and future-ready skills learning.",
-  alternates: {
-    canonical: "https://nishaglobaleducation.com",
-  },
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",

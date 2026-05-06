@@ -4,6 +4,9 @@ export const metadata = {
   title: "AI Engineer Learning Roadmap | Nishaglobal Education",
   description:
     "Step-by-step beginner to advanced roadmap to learn AI development including Python, prompt engineering, LangChain, AI agents, LangGraph, and observability tools.",
+  alternates: {
+    canonical: "https://nishaglobaleducation.com/skills/ai-roadmap",
+  },
 };
 
 const roadmap = [

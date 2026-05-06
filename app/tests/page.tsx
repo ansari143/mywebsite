@@ -182,16 +182,16 @@ export default function TestsHub() {
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
-            href="/tests/stream-selector/start"
+            href="/tests/engineering/start"
             className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
           >
-            Start Stream Selector Test
+            Start Engineering Test
           </Link>
           <Link
-            href="/tests/career-assessment/start"
+            href="/tests/medical/start"
             className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
           >
-            Take Career Assessment
+            Take Medical Career Test
           </Link>
         </div>
       </section>

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Career Guidance for Global Students",
   description:
     "Free career tests, study abroad guides, blogs, and future-ready skill resources for students in India and worldwide.",
+  alternates: {
+    canonical: "https://nishaglobaleducation.com",
+  },
 };
 
 export const generateViewport = () => ({

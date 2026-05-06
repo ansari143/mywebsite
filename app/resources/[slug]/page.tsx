@@ -19,13 +19,13 @@ export async function generateMetadata({ params }: Props) {
 
   if (!page) {
     return {
-      title: "Resource Not Found | Nisha Global Education",
+      title: "Resource Not Found | Nishaglobal Education",
       description: "The requested resource page could not be found.",
     };
   }
 
   return {
-    title: `${page.title} | Nisha Global Education`,
+    title: `${page.title} | Nishaglobal Education`,
     description: page.description,
     alternates: {
       canonical: `https://nishaglobaleducation.com/resources/${page.slug}`,

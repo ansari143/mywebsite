@@ -34,13 +34,13 @@ export async function generateMetadata({ params }: Props) {
 
   if (!page) {
     return {
-      title: "Skill Not Found | Nisha Global Education",
+      title: "Skill Not Found | Nishaglobal Education",
       description: "The requested skill page could not be found.",
     };
   }
 
   return {
-    title: `${page.title} | Nisha Global Education`,
+    title: `${page.title} | Nishaglobal Education`,
     description: page.description,
     alternates: {
       canonical: `https://nishaglobaleducation.com/skills/${page.slug}`,
