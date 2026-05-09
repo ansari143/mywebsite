@@ -2452,4 +2452,1277 @@ get_daily_cost_report(days_back=7)`,
     }
   ]
 },
+  // ─────────────────────────────────────────────────────────────────
+  // iOS MOBILE APP DEVELOPMENT
+  // ─────────────────────────────────────────────────────────────────
+  {
+    slug: "ios-mobile-app-development",
+    title: "iOS App Development from Scratch: Beginner to Advanced",
+    description:
+      "Learn iOS app development from beginner to advanced. Master Swift, SwiftUI, networking, Core Data, and App Store deployment in a structured, step-by-step roadmap.",
+    intro:
+      "iOS app development means building applications for iPhones, iPads, and Apple Watch. This skill page guides you from zero knowledge through publishing your first app to the App Store. You'll learn Swift (Apple's programming language), build user interfaces with SwiftUI, work with APIs, store data locally, and navigate the entire app submission process.",
+    badge: "Mobile Platform",
+    sections: [
+      {
+        title: "Why Learn iOS Development?",
+        content: [
+          "iOS apps run on over 2 billion Apple devices worldwide. Developers with iOS skills are in high demand and command competitive salaries ($100k–$180k+ depending on experience and location).",
+          "Apple's ecosystem is cohesive and well-documented. Learning iOS gives you immediate access to tools, frameworks, and communities that support quality app development.",
+          "iOS users typically spend more time and money on apps compared to other platforms, making iOS a valuable market for indie developers and startups."
+        ],
+      },
+      {
+        title: "Beginner: Foundations (Weeks 1–4)",
+        content: [
+          "Duration: 4 weeks | Time commitment: 15–20 hours/week",
+          "Goal: Build your first app that displays text, buttons, and handles user input.",
+          "",
+          "Step 1: Set up your development environment.",
+          "• Download Xcode (Apple's free IDE) from the App Store.",
+          "• Create an Apple Developer Account (free for now, $99/year to publish).",
+          "• Familiarize yourself with Xcode's interface: projects, files, build settings, simulator.",
+          "",
+          "Step 2: Learn Swift basics.",
+          "• Variables and constants (var, let).",
+          "• Data types (String, Int, Double, Bool, Array, Dictionary).",
+          "• Control flow (if/else, loops, switch statements).",
+          "• Functions and closures.",
+          "• Optionals and nil-coalescing (?? operator).",
+          "",
+          "Step 3: Understand SwiftUI fundamentals.",
+          "• SwiftUI is Apple's modern UI framework (replace older UIKit for most new projects).",
+          "• Learn basic View components: Text, Button, VStack, HStack, Image.",
+          "• Understand @State for storing view state.",
+          "• Create your first simple screen: a button that increments a counter when tapped.",
+          "",
+          "Step 4: Build your first mini-app.",
+          "• Project: Simple Calculator App.",
+          "• Features: Two text inputs for numbers, buttons for basic operations (+, −, ×, ÷), display result.",
+          "• Use @State to manage operands and result. Use functions to handle calculations.",
+          "• Test on the iOS Simulator. Run the app and try different number combinations.",
+          ""
+        ],
+        code: `import SwiftUI
+
+struct ContentView: View {
+    @State var firstNumber: String = ""
+    @State var secondNumber: String = ""
+    @State var result: String = ""
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Simple Calculator")
+                .font(.title)
+                .fontWeight(.bold)
+
+            TextField("Enter first number", text: $firstNumber)
+                .textFieldStyle(.roundedBorder)
+                .keyboardType(.decimalPad)
+
+            TextField("Enter second number", text: $secondNumber)
+                .textFieldStyle(.roundedBorder)
+                .keyboardType(.decimalPad)
+
+            HStack(spacing: 8) {
+                Button("+") { performAdd() }
+                    .buttonStyle(.borderedProminent)
+                Button("−") { performSubtract() }
+                    .buttonStyle(.borderedProminent)
+                Button("×") { performMultiply() }
+                    .buttonStyle(.borderedProminent)
+                Button("÷") { performDivide() }
+                    .buttonStyle(.borderedProminent)
+            }
+
+            if !result.isEmpty {
+                Text("Result: \(result)")
+                    .font(.headline)
+                    .foregroundColor(.green)
+            }
+
+            Spacer()
+        }
+        .padding()
+    }
+
+    func performAdd() {
+        guard let n1 = Double(firstNumber),
+              let n2 = Double(secondNumber) else { return }
+        result = String(n1 + n2)
+    }
+
+    func performSubtract() {
+        guard let n1 = Double(firstNumber),
+              let n2 = Double(secondNumber) else { return }
+        result = String(n1 - n2)
+    }
+
+    func performMultiply() {
+        guard let n1 = Double(firstNumber),
+              let n2 = Double(secondNumber) else { return }
+        result = String(n1 * n2)
+    }
+
+    func performDivide() {
+        guard let n1 = Double(firstNumber),
+              let n2 = Double(secondNumber), n2 != 0 else {
+            result = "Error: Cannot divide by zero"
+            return
+        }
+        result = String(n1 / n2)
+    }
+}`,
+      },
+      {
+        title: "Intermediate: Building Real Apps (Weeks 5–12)",
+        content: [
+          "Duration: 8 weeks | Time commitment: 20–25 hours/week",
+          "Goal: Build a multi-screen app with data persistence, networking, and polished UI.",
+          "",
+          "Step 5: Master navigation and data flow.",
+          "• Learn NavigationStack (iOS 16+) to navigate between screens.",
+          "• Understand @ObservedObject and @EnvironmentObject for passing data between views.",
+          "• Build a simple multi-screen app: Home screen → Detail screen → Settings screen.",
+          "",
+          "Step 6: Connect to APIs.",
+          "• Learn URLSession for making HTTP requests.",
+          "• Fetch live data from a public API (e.g., OpenWeatherMap for weather, REST countries for global data).",
+          "• Decode JSON responses into Swift structs using Codable.",
+          "• Handle errors gracefully (network failures, invalid data).",
+          "• Display fetched data in your app UI.",
+          "",
+          "Step 7: Store data locally with Core Data.",
+          "• Core Data is Apple's framework for persisting app data to the device.",
+          "• Learn to create data models, save records, fetch records, update and delete records.",
+          "• Example: A to-do app that saves tasks even after the app closes.",
+          "",
+          "Step 8: Polish the UI and user experience.",
+          "• Learn layout techniques: padding, spacing, alignment, Geometry Reader for responsive design.",
+          "• Use system colors and fonts that follow Apple's Human Interface Guidelines (HIG).",
+          "• Add animations: fade-in, slide, scale transitions.",
+          "• Test on multiple screen sizes (iPhone 14 mini, iPhone 14, iPhone 14 Pro Max).",
+          "",
+          "Step 9: Intermediate mini-project.",
+          "• Project: Weather Forecast App.",
+          "• Features:",
+          "  - Search for a city and fetch weather data from OpenWeatherMap API.",
+          "  - Display current temperature, conditions, humidity, wind speed.",
+          "  - Save favorite cities using Core Data.",
+          "  - Show a list of saved favorites with one-tap access.",
+          "  - Use appropriate icons and colors based on weather conditions.",
+          "  - Handle errors (city not found, network timeout) gracefully.",
+          ""
+        ],
+        code: `import SwiftUI
+
+struct ContentView: View {
+    @StateObject var viewModel = WeatherViewModel()
+    @State var city: String = ""
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 16) {
+                HStack {
+                    TextField("Enter city name", text: $city)
+                        .textFieldStyle(.roundedBorder)
+                    Button("Search") {
+                        viewModel.fetchWeather(for: city)
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+                .padding()
+
+                if let weather = viewModel.weather {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(weather.city)
+                            .font(.title)
+                            .fontWeight(.bold)
+                        Text("Temperature: \(String(format: "%.1f", weather.temperature))°C")
+                        Text("Condition: \(weather.condition)")
+                        Text("Humidity: \(weather.humidity)%")
+                        Text("Wind Speed: \(weather.windSpeed) m/s")
+                    }
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                }
+
+                if let error = viewModel.errorMessage {
+                    Text("Error: \(error)")
+                        .foregroundColor(.red)
+                }
+
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Weather Forecast")
+        }
+    }
+}
+
+// ViewModel for managing state and API calls
+class WeatherViewModel: ObservableObject {
+    @Published var weather: Weather?
+    @Published var errorMessage: String?
+
+    func fetchWeather(for city: String) {
+        let apiURL = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&appid=YOUR_API_KEY"
+        
+        guard let url = URL(string: apiURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else {
+            errorMessage = "Invalid URL"
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.errorMessage = error.localizedDescription
+                }
+                return
+            }
+
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    self.errorMessage = "No data received"
+                }
+                return
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                let weatherResponse = try decoder.decode(WeatherResponse.self, from: data)
+                DispatchQueue.main.async {
+                    self.weather = Weather(
+                        city: weatherResponse.name,
+                        temperature: weatherResponse.main.temp,
+                        condition: weatherResponse.weather.first?.main ?? "Unknown",
+                        humidity: weatherResponse.main.humidity,
+                        windSpeed: weatherResponse.wind.speed
+                    )
+                    self.errorMessage = nil
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.errorMessage = "Failed to decode response"
+                }
+            }
+        }.resume()
+    }
+}
+
+struct Weather {
+    let city: String
+    let temperature: Double
+    let condition: String
+    let humidity: Int
+    let windSpeed: Double
+}
+
+// JSON Models
+struct WeatherResponse: Codable {
+    let name: String
+    let main: MainWeather
+    let weather: [WeatherCondition]
+    let wind: Wind
+}
+
+struct MainWeather: Codable {
+    let temp: Double
+    let humidity: Int
+}
+
+struct WeatherCondition: Codable {
+    let main: String
+}
+
+struct Wind: Codable {
+    let speed: Double
+}`,
+      },
+      {
+        title: "Advanced: Production Apps & App Store (Weeks 13–16)",
+        content: [
+          "Duration: 4 weeks | Time commitment: 25–30 hours/week",
+          "Goal: Build a portfolio-quality app and publish it to the App Store.",
+          "",
+          "Step 10: Advanced architecture patterns.",
+          "• Learn MVVM (Model-View-ViewModel) architecture for scalable, testable code.",
+          "• Understand dependency injection for flexible, modular code.",
+          "• Learn async/await patterns for cleaner asynchronous code (async-let for parallel tasks).",
+          "• Write unit tests using XCTest framework.",
+          "",
+          "Step 11: Advanced networking and data persistence.",
+          "• Implement authentication (OAuth, JWT tokens).",
+          "• Handle complex API workflows (pagination, retries, caching).",
+          "• Learn CloudKit for syncing user data across devices.",
+          "• Optimize database queries and understand N+1 query problems.",
+          "",
+          "Step 12: Advanced UI and animations.",
+          "• Learn Canvas API for custom drawing.",
+          "• Create advanced animations with motion, spring effects.",
+          "• Implement gesture recognition (tap, swipe, pinch, drag).",
+          "• Learn accessibility best practices (VoiceOver, dynamic type sizes).",
+          "",
+          "Step 13: Prepare for App Store submission.",
+          "• Follow App Store Review Guidelines (content, functionality, design).",
+          "• Create app icons, screenshots, and app preview videos.",
+          "• Write compelling app descriptions and privacy policies.",
+          "• Set up app categories, keywords, and pricing.",
+          "• Understand TestFlight beta testing and review process.",
+          "",
+          "Step 14: Advanced mini-project.",
+          "• Project: Social Photo Sharing App.",
+          "• Features:",
+          "  - User authentication (sign up, login, logout).",
+          "  - Upload photos to a backend server (Firebase or your own server).",
+          "  - Display a feed of all user photos with pagination.",
+          "  - Like/unlike and comment on photos.",
+          "  - User profiles showing all photos uploaded by a user.",
+          "  - Core Data caching for offline viewing.",
+          "  - Push notifications for new comments.",
+          "  - Clean MVVM architecture with unit tests.",
+          "• Polish: Smooth animations, error handling, loading states, empty states.",
+          ""
+        ],
+        code: `import SwiftUI
+
+// MVVM Architecture Example: Photo Feed
+@MainActor
+class PhotoFeedViewModel: ObservableObject {
+    @Published var photos: [Photo] = []
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+
+    private let apiService: APIService
+    private var currentPage = 1
+
+    init(apiService: APIService = .shared) {
+        self.apiService = apiService
+    }
+
+    func loadPhotos() {
+        isLoading = true
+        Task {
+            do {
+                let newPhotos = try await apiService.fetchPhotos(page: currentPage)
+                photos.append(contentsOf: newPhotos)
+                currentPage += 1
+                isLoading = false
+            } catch {
+                errorMessage = error.localizedDescription
+                isLoading = false
+            }
+        }
+    }
+
+    func likePhoto(_ photo: Photo) {
+        Task {
+            do {
+                try await apiService.likePhoto(id: photo.id)
+                if let index = photos.firstIndex(where: { $0.id == photo.id }) {
+                    photos[index].isLiked = true
+                    photos[index].likes += 1
+                }
+            } catch {
+                errorMessage = "Failed to like photo"
+            }
+        }
+    }
+}
+
+struct Photo: Codable, Identifiable {
+    let id: String
+    let username: String
+    let imageURL: URL
+    let caption: String
+    let createdAt: Date
+    var isLiked: Bool = false
+    var likes: Int = 0
+
+    enum CodingKeys: String, CodingKey {
+        case id, username, imageURL = "image_url", caption
+        case createdAt = "created_at"
+        case isLiked = "is_liked"
+        case likes
+    }
+}
+
+struct PhotoFeedView: View {
+    @StateObject var viewModel = PhotoFeedViewModel()
+
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                if viewModel.photos.isEmpty && !viewModel.isLoading {
+                    VStack {
+                        Image(systemName: "photo.badge.exclamationmark")
+                            .font(.system(size: 40))
+                            .foregroundColor(.gray)
+                        Text("No photos yet")
+                    }
+                } else {
+                    ScrollView {
+                        LazyVStack(spacing: 16) {
+                            ForEach(viewModel.photos) { photo in
+                                PhotoCard(photo: photo, onLike: {
+                                    viewModel.likePhoto(photo)
+                                })
+                            }
+                            
+                            if viewModel.isLoading {
+                                ProgressView()
+                                    .padding()
+                            }
+                        }
+                        .padding()
+                    }
+                    .onAppear { viewModel.loadPhotos() }
+                }
+
+                if let error = viewModel.errorMessage {
+                    VStack {
+                        Text("Error: \(error)")
+                            .foregroundColor(.red)
+                        Button("Retry") {
+                            viewModel.errorMessage = nil
+                            viewModel.loadPhotos()
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    .padding()
+                    .background(Color(.systemRed).opacity(0.1))
+                    .cornerRadius(8)
+                }
+            }
+            .navigationTitle("Photo Feed")
+        }
+    }
+}
+
+struct PhotoCard: View {
+    let photo: Photo
+    let onLike: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Circle()
+                    .fill(Color.blue.opacity(0.5))
+                    .frame(width: 40, height: 40)
+                    .overlay(Text(photo.username.prefix(1)).font(.bold))
+                
+                VStack(alignment: .leading) {
+                    Text(photo.username).fontWeight(.bold)
+                    Text(photo.createdAt.formatted(date: .abbreviated, time: .shortened))
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                Spacer()
+            }
+
+            AsyncImage(url: photo.imageURL) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(height: 200)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 200)
+                        .clipped()
+                case .failure:
+                    Color.gray.frame(height: 200)
+                @unknown default:
+                    EmptyView()
+                }
+            }
+            .cornerRadius(8)
+
+            Text(photo.caption)
+            
+            HStack(spacing: 16) {
+                Button(action: onLike) {
+                    Image(systemName: photo.isLiked ? "heart.fill" : "heart")
+                        .foregroundColor(photo.isLiked ? .red : .gray)
+                }
+                
+                Text("\(photo.likes) likes")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                
+                Spacer()
+            }
+        }
+        .padding()
+        .background(Color(.systemGray6))
+        .cornerRadius(8)
+    }
+}
+
+// API Service Example
+class APIService {
+    static let shared = APIService()
+    private let baseURL = "https://api.photoshare.example.com"
+
+    func fetchPhotos(page: Int) async throws -> [Photo] {
+        let url = URL(string: "\(baseURL)/photos?page=\(page)")!
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return try JSONDecoder().decode([Photo].self, from: data)
+    }
+
+    func likePhoto(id: String) async throws {
+        var request = URLRequest(url: URL(string: "\(baseURL)/photos/\(id)/like")!)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(getAuthToken())", forHTTPHeaderField: "Authorization")
+        let _ = try await URLSession.shared.data(for: request)
+    }
+
+    private func getAuthToken() -> String {
+        // Retrieve from Keychain or UserDefaults
+        return UserDefaults.standard.string(forKey: "auth_token") ?? ""
+    }
+}`,
+      },
+      {
+        title: "Key Technologies & Tools",
+        content: [
+          "Xcode: Apple's integrated development environment (IDE) for all app development.",
+          "Swift: Apple's modern programming language (simpler and safer than older Objective-C).",
+          "SwiftUI: Modern declarative UI framework for building interfaces with code.",
+          "Core Data: Apple's framework for persisting data locally on the device.",
+          "URLSession: Built-in networking framework for making HTTP requests to APIs.",
+          "CloudKit: iCloud-based backend for syncing data across user devices.",
+          "TestFlight: Apple's beta testing platform before App Store release.",
+          "Xcode UI Preview: Real-time preview of your UI changes without running simulator.",
+          "Git/GitHub: Version control to manage code and collaborate with other developers.",
+        ],
+      },
+      {
+        title: "Common Beginner Mistakes to Avoid",
+        content: [
+          "1. Ignoring SwiftUI documentation and learning old UIKit instead. Focus on SwiftUI for new projects.",
+          "2. Building the entire app in one giant file. Split into separate files and use reusable components early.",
+          "3. Not handling errors in networking code. Always handle connection failures, timeouts, and invalid data.",
+          "4. Forgetting to ask for user permissions. Apps need explicit user permission for camera, location, contacts, calendar, etc.",
+          "5. Submitting to App Store without testing on real devices. Simulator behavior differs from real iPhones.",
+          "6. Hardcoding API keys and secrets. Always store sensitive data in Keychain or use backend services.",
+          "7. Not following Apple's Human Interface Guidelines (HIG). Apps that don't follow HIG get rejected during review.",
+          "8. Building on simulator only. Test on actual devices (iPhone, iPad) before submission.",
+        ],
+      },
+      {
+        title: "Project Roadmap by Level",
+        content: [
+          "Beginner Projects:",
+          "• Simple Calculator (arithmetic operations).",
+          "• To-Do List (add, delete, mark complete with Core Data storage).",
+          "• Color Mixer (interactive RGB color picker).",
+          "",
+          "Intermediate Projects:",
+          "• Weather Forecast App (API integration, location services).",
+          "• Recipe Browser (search recipes, display details, save favorites).",
+          "• Quote of the Day (fetch and display daily quotes with social sharing).",
+          "",
+          "Advanced Projects:",
+          "• Social Photo Sharing App (authentication, backend API, real-time updates).",
+          "• Fitness Tracker (HealthKit integration, location tracking, cloud sync).",
+          "• Real-time Chat App (WebSocket or Firebase for messaging, push notifications).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: "Do I need a Mac to develop iOS apps?",
+        answer:
+          "Yes, you need a Mac with Xcode installed. You cannot develop iOS apps on Windows or Linux. However, you can use services like MacStadium or rent a Mac in the cloud."
+      },
+      {
+        question: "Can I develop iOS apps without paying the $99 Developer fee?",
+        answer:
+          "Yes. You can develop and test apps on the Simulator for free. The $99/year fee is only required to deploy apps to real devices and publish on the App Store. It renews annually."
+      },
+      {
+        question: "Is Swift hard to learn?",
+        answer:
+          "Swift is considered beginner-friendly compared to older languages. If you know basic programming concepts, you can start building apps within weeks. SwiftUI makes UI development even more approachable."
+      },
+      {
+        question: "How long does it take to publish on the App Store?",
+        answer:
+          "After submitting, Apple typically reviews your app within 24–48 hours. If approved, it appears in the App Store within minutes. Rejections usually have clear reasons and can be resubmitted quickly."
+      },
+      {
+        question: "What is TestFlight and why do I need it?",
+        answer:
+          "TestFlight is Apple's beta testing platform. You can invite up to 10,000 users to test your app before it goes live on the App Store. It catches bugs and gathers feedback early."
+      },
+      {
+        question: "Can I publish my iOS app for free, or do I need to charge?",
+        answer:
+          "iOS apps can be completely free. You can also charge upfront, offer in-app purchases, or use ad-based monetization. Apple takes a 30% cut of paid app sales and in-app purchases."
+      },
+      {
+        question: "What should my first iOS app be?",
+        answer:
+          "Start small: a calculator, to-do list, or habit tracker. These teach you SwiftUI basics without overwhelming complexity. Publish it to the App Store to build your portfolio."
+      }
+    ]
+  },
+  // ─────────────────────────────────────────────────────────────────
+  // ANDROID MOBILE APP DEVELOPMENT
+  // ─────────────────────────────────────────────────────────────────
+  {
+    slug: "android-mobile-app-development",
+    title: "Android App Development from Scratch: Beginner to Advanced",
+    description:
+      "Learn Android app development from beginner to advanced. Master Kotlin, Jetpack Compose, APIs, Room database, and Google Play Store publishing in a complete roadmap.",
+    intro:
+      "Android is the world's most popular mobile operating system, powering over 3 billion devices. This page guides you from zero knowledge through publishing your first app on Google Play Store. You'll learn Kotlin (Google's recommended programming language for Android), build modern UIs with Jetpack Compose, work with APIs, persist data with Room database, and navigate the entire app submission process.",
+    badge: "Mobile Platform",
+    sections: [
+      {
+        title: "Why Learn Android Development?",
+        content: [
+          "Android dominates global mobile market share (70%+) across smartphones, tablets, and wearables. Developers skilled in Android face strong job demand and competitive compensation ($90k–$170k+ depending on experience).",
+          "Google provides excellent documentation, tools, and libraries. Android Studio (the IDE) is free, powerful, and constantly updated with modern development patterns.",
+          "Android's open ecosystem attracts independent developers and startups. Google Play Store is more permissive than Apple App Store, making it easier to publish and experiment.",
+          "Learning Android teaches you patterns (dependency injection, reactive programming, architecture) that transfer to backend and web development."
+        ],
+      },
+      {
+        title: "Beginner: Foundations (Weeks 1–4)",
+        content: [
+          "Duration: 4 weeks | Time commitment: 15–20 hours/week",
+          "Goal: Build your first app that displays text, buttons, and responds to user interaction.",
+          "",
+          "Step 1: Set up your development environment.",
+          "• Download Android Studio (free, includes emulator and SDK).",
+          "• Create a Google Play Developer Account ($25 one-time fee, required for publishing).",
+          "• Understand project structure: app/src/main/ (code and resources), build.gradle (dependencies), AndroidManifest.xml (app metadata).",
+          "• Familiarize yourself with Android Emulator: create virtual devices for different screen sizes and Android versions.",
+          "",
+          "Step 2: Learn Kotlin basics.",
+          "• Variables and data types (val, var; String, Int, Double, Boolean, List, Map).",
+          "• Control flow (if/else, when statements, for/while loops).",
+          "• Functions and lambda expressions.",
+          "• Null safety (? and !! operators, optional types).",
+          "• Classes, inheritance, and interfaces.",
+          "",
+          "Step 3: Understand Jetpack Compose fundamentals.",
+          "• Jetpack Compose is Google's modern UI toolkit for Android (similar to SwiftUI on iOS).",
+          "• Learn composables: @Composable functions, Text, Button, Image, Column, Row, LazyColumn.",
+          "• Understand state management with @State, @remember, and rememberSaveable.",
+          "• Master modifier system: padding, spacing, alignment, size, color.",
+          "• Build your first simple screen: a welcome message and a button.",
+          "",
+          "Step 4: Build your first mini-app.",
+          "• Project: Counter App.",
+          "• Features: Display a counter number, increment button, decrement button, reset button.",
+          "• Use @State to store counter value. Use modifiers for styling.",
+          "• Test on Emulator. Run app and interact with all buttons.",
+          ""
+        ],
+        code: `import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+
+@Composable
+fun CounterApp() {
+    var count by remember { mutableStateOf(0) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Counter App",
+            style = MaterialTheme.typography.headlineLarge,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+
+        Text(
+            text = count.toString(),
+            style = MaterialTheme.typography.displayMedium,
+            modifier = Modifier.padding(bottom = 32.dp)
+        )
+
+        Row(
+            modifier = Modifier.padding(bottom = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Button(
+                onClick = { count-- },
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("−")
+            }
+
+            Button(
+                onClick = { count++ },
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("+")
+            }
+        }
+
+        Button(
+            onClick = { count = 0 },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp)
+        ) {
+            Text("Reset")
+        }
+    }
+}`,
+      },
+      {
+        title: "Intermediate: Building Real Apps (Weeks 5–12)",
+        content: [
+          "Duration: 8 weeks | Time commitment: 20–25 hours/week",
+          "Goal: Build a multi-screen app with data persistence, networking, and polished UI.",
+          "",
+          "Step 5: Master navigation between screens.",
+          "• Learn Jetpack Navigation component for managing screen transitions.",
+          "• Understand navigation graph: define routes, pass arguments between screens.",
+          "• Build a multi-screen app: Home → Detail → Settings.",
+          "",
+          "Step 6: Connect to APIs and handle networking.",
+          "• Learn Retrofit library for clean, type-safe HTTP requests.",
+          "• Understand JSON serialization with Gson or Kotlinx Serialization.",
+          "• Fetch data from public APIs (e.g., OpenWeatherMap, REST Countries).",
+          "• Handle errors: network timeouts, invalid responses, server errors.",
+          "• Use coroutines for asynchronous tasks without blocking UI.",
+          "",
+          "Step 7: Persist data locally with Room database.",
+          "• Room is Google's abstraction layer over SQLite for type-safe database access.",
+          "• Create Entity classes (data models), DAOs (database operations), and Database class.",
+          "• Save, query, update, and delete records.",
+          "• Example: A to-do app that saves tasks even after closing.",
+          "",
+          "Step 8: Polish UI and user experience.",
+          "• Learn Material 3 design system for modern, accessible UI.",
+          "• Use padding, spacing, shapes, colors following Material 3 guidelines.",
+          "• Add animations: fade, slide, scale transitions using transitions API.",
+          "• Test on multiple screen sizes: small phones, tablets, foldables.",
+          "",
+          "Step 9: Intermediate mini-project.",
+          "• Project: Weather Forecast App.",
+          "• Features:",
+          "  - Search for city name and fetch weather from OpenWeatherMap API.",
+          "  - Display current temp, condition, humidity, wind speed.",
+          "  - Save favorite cities to Room database.",
+          "  - Show list of saved favorites with quick access.",
+          "  - Use appropriate icons and colors for weather conditions.",
+          "  - Handle errors and loading states.",
+          ""
+        ],
+        code: `import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlin.math.roundToInt
+
+@Composable
+fun WeatherScreen(viewModel: WeatherViewModel = viewModel()) {
+    val weather by viewModel.weather.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val errorMessage by viewModel.errorMessage.collectAsState()
+    var cityInput by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Search Bar
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            TextField(
+                value = cityInput,
+                onValueChange = { cityInput = it },
+                label = { Text("Enter city") },
+                modifier = Modifier.weight(1f)
+            )
+            Button(onClick = { viewModel.fetchWeather(cityInput) }) {
+                Text("Search")
+            }
+        }
+
+        // Loading Indicator
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.padding(24.dp))
+        }
+
+        // Error Message
+        errorMessage?.let {
+            Text(
+                text = "Error: \$it",
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+        }
+
+        // Weather Info
+        weather?.let { w ->
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = w.city,
+                        style = MaterialTheme.typography.headlineMedium,
+                        modifier = Modifier.padding(bottom = 12.dp)
+                    )
+                    Text("\${w.temperature.roundToInt()}°C")
+                    Text(w.condition)
+                    Text("Humidity: \${w.humidity}%")
+                    Text("Wind: \${w.windSpeed} m/s")
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.weight(1f))
+    }
+}
+
+// ViewModel handling business logic
+class WeatherViewModel : ViewModel() {
+    private val _weather = MutableStateFlow<Weather?>(null)
+    val weather = _weather.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading = _isLoading.asStateFlow()
+
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage = _errorMessage.asStateFlow()
+
+    fun fetchWeather(city: String) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                val response = RetrofitClient.apiService.getWeather(city)
+                _weather.value = Weather(
+                    city = response.name,
+                    temperature = response.main.temp,
+                    condition = response.weather.firstOrNull()?.main ?: "Unknown",
+                    humidity = response.main.humidity,
+                    windSpeed = response.wind.speed
+                )
+                _errorMessage.value = null
+            } catch (e: Exception) {
+                _errorMessage.value = e.message
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+}
+
+data class Weather(
+    val city: String,
+    val temperature: Double,
+    val condition: String,
+    val humidity: Int,
+    val windSpeed: Double
+)
+
+// Retrofit setup
+interface WeatherApi {
+    @GET("weather")
+    suspend fun getWeather(
+        @Query("q") city: String,
+        @Query("units") units: String = "metric",
+        @Query("appid") apiKey: String = "YOUR_API_KEY"
+    ): WeatherResponse
+}
+
+data class WeatherResponse(
+    val name: String,
+    val main: MainWeather,
+    val weather: List<WeatherCondition>,
+    val wind: Wind
+)
+
+data class MainWeather(val temp: Double, val humidity: Int)
+data class WeatherCondition(val main: String)
+data class Wind(val speed: Double)
+
+object RetrofitClient {
+    val apiService: WeatherApi by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(WeatherApi::class.java)
+    }
+}`,
+      },
+      {
+        title: "Advanced: Production Apps & Google Play (Weeks 13–16)",
+        content: [
+          "Duration: 4 weeks | Time commitment: 25–30 hours/week",
+          "Goal: Build a portfolio-quality app and publish it on Google Play Store.",
+          "",
+          "Step 10: Advanced architecture patterns.",
+          "• Learn MVVM (Model-View-ViewModel) using Jetpack libraries.",
+          "• Understand dependency injection with Hilt framework.",
+          "• Learn coroutines and Flow for reactive, non-blocking code.",
+          "• Write unit tests using JUnit and Mockk.",
+          "• Write UI tests using Compose Testing.",
+          "",
+          "Step 11: Advanced networking and data persistence.",
+          "• Implement user authentication (OAuth, JWT tokens).",
+          "• Handle complex API workflows (pagination, retry logic, caching).",
+          "• Learn data sync between local database and remote server.",
+          "• Optimize queries and understand best practices for Room.",
+          "• Use DataStore for app preferences (replaces SharedPreferences).",
+          "",
+          "Step 12: Advanced UI and animations.",
+          "• Master Jetpack Compose modifiers and layout system.",
+          "• Create complex animations with AnimatedVisibility, animateAsState.",
+          "• Handle gestures: click, swipe, pinch, long-press.",
+          "• Learn accessibility: content descriptions, semantic properties.",
+          "• Follow Material 3 design guidelines for modern look.",
+          "",
+          "Step 13: Prepare for Google Play submission.",
+          "• Follow Google Play app policies (content, functionality, behavior).",
+          "• Create app icon, screenshots, and promotional graphics.",
+          "• Write app description, privacy policy, and release notes.",
+          "• Set up app categories, target audience, content rating.",
+          "• Understand Google Play's app review process (usually 1–4 hours).",
+          "",
+          "Step 14: Advanced mini-project.",
+          "• Project: Social Photo Sharing App.",
+          "• Features:",
+          "  - Firebase Authentication (email, Google sign-in).",
+          "  - Upload photos to Firebase Storage and Firestore.",
+          "  - Display feed with infinite scroll pagination.",
+          "  - Like, comment, follow users.",
+          "  - Room database for offline caching.",
+          "  - Cloud Firestore for real-time updates.",
+          "  - Push notifications using Firebase Cloud Messaging.",
+          "  - Complete MVVM architecture with Hilt and Unit tests.",
+          "• Polish: Smooth animations, proper error handling, loading states.",
+          ""
+        ],
+        code: `import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+// MVVM Architecture with Hilt: Photo Feed
+@HiltViewModel
+class PhotoFeedViewModel @Inject constructor(
+    private val photoRepository: PhotoRepository
+) : ViewModel() {
+    private val _photos = MutableStateFlow<List<Photo>>(emptyList())
+    val photos = _photos.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading = _isLoading.asStateFlow()
+
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage = _errorMessage.asStateFlow()
+
+    fun loadPhotos() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                val result = photoRepository.fetchPhotos()
+                _photos.value = result
+            } catch (e: Exception) {
+                _errorMessage.value = e.message
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun likePhoto(photoId: String) {
+        viewModelScope.launch {
+            try {
+                photoRepository.likePhoto(photoId)
+                val updated = _photos.value.map { photo ->
+                    if (photo.id == photoId) {
+                        photo.copy(isLiked = true, likes = photo.likes + 1)
+                    } else photo
+                }
+                _photos.value = updated
+            } catch (e: Exception) {
+                _errorMessage.value = "Failed to like photo"
+            }
+        }
+    }
+}
+
+@Composable
+fun PhotoFeedScreen(viewModel: PhotoFeedViewModel = hiltViewModel()) {
+    val photos by viewModel.photos.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val errorMessage by viewModel.errorMessage.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.loadPhotos()
+    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        if (photos.isEmpty() && !isLoading) {
+            Text("No photos", modifier = Modifier.align(Alignment.Center))
+        } else {
+            LazyColumn {
+                items(photos) { photo ->
+                    PhotoCard(
+                        photo = photo,
+                        onLike = { viewModel.likePhoto(photo.id) }
+                    )
+                }
+            }
+        }
+
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+        }
+
+        errorMessage?.let {
+            Text(
+                text = "Error: $it",
+                color = Color.Red,
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(16.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun PhotoCard(photo: Photo, onLike: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        Column(modifier = Modifier.padding(12.dp)) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Surface(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(CircleShape),
+                    color = MaterialTheme.colorScheme.primary
+                ) {}
+                
+                Column(modifier = Modifier.padding(start = 8.dp)) {
+                    Text(photo.username, fontWeight = FontWeight.Bold)
+                    Text(
+                        photo.createdAt,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Color.Gray
+                    )
+                }
+            }
+
+            AsyncImage(
+                model = photo.imageUrl,
+                contentDescription = photo.caption,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(300.dp)
+                    .clip(RoundedCornerShape(8.dp)),
+            )
+
+            Text(
+                photo.caption,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+
+            Row(
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(onClick = onLike) {
+                    Icon(
+                        imageVector = if (photo.isLiked)
+                            Icons.Filled.Favorite else Icons.Outlined.Favorite,
+                        contentDescription = "Like",
+                        tint = if (photo.isLiked) Color.Red else Color.Gray
+                    )
+                }
+                Text("\${photo.likes} likes")
+            }
+        }
+    }
+}
+
+@Entity(tableName = "photos")
+data class Photo(
+    @PrimaryKey val id: String,
+    val username: String,
+    val imageUrl: String,
+    val caption: String,
+    val createdAt: String,
+    val isLiked: Boolean = false,
+    val likes: Int = 0
+)
+
+// Repository pattern
+class PhotoRepository(
+    private val photoDao: PhotoDao,
+    private val apiService: PhotoApiService
+) {
+    suspend fun fetchPhotos(): List<Photo> {
+        return try {
+            val photos = apiService.getPhotos()
+            photoDao.insertPhotos(photos)
+            photos
+        } catch (e: Exception) {
+            photoDao.getAllPhotos()
+        }
+    }
+
+    suspend fun likePhoto(photoId: String) {
+        apiService.likePhoto(photoId)
+    }
+}
+
+@Dao
+interface PhotoDao {
+    @Query("SELECT * FROM photos ORDER BY createdAt DESC")
+    suspend fun getAllPhotos(): List<Photo>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPhotos(photos: List<Photo>)
+}
+
+interface PhotoApiService {
+    @GET("photos")
+    suspend fun getPhotos(): List<Photo>
+
+    @POST("photos/{id}/like")
+    suspend fun likePhoto(@Path("id") photoId: String)
+}
+
+// Hilt Module
+@Module
+@InstallIn(SingletonComponent::class)
+object RepositoryModule {
+    @Provides
+    @Singleton
+    fun providePhotoRepository(
+        photoDao: PhotoDao,
+        apiService: PhotoApiService
+    ): PhotoRepository = PhotoRepository(photoDao, apiService)
+}`,
+      },
+      {
+        title: "Key Technologies & Tools",
+        content: [
+          "Android Studio: Google's official IDE (free, includes emulator and tools).",
+          "Kotlin: Google's recommended language for Android (modern, concise, null-safe).",
+          "Jetpack Compose: Modern declarative UI toolkit (replaces older XML-based layouts).",
+          "Room: Type-safe database abstraction for SQLite persistence.",
+          "Retrofit: Type-safe HTTP client for API calls.",
+          "Hilt: Dependency injection framework for cleaner architecture.",
+          "Jetpack Navigation: Component for managing screen transitions.",
+          "Flow & Coroutines: Reactive programming for async tasks without blocking UI.",
+          "Firebase: Backend services (Authentication, Firestore, Cloud Storage, Messaging).",
+          "Google Play Store: Distribution platform for publishing apps.",
+        ],
+      },
+      {
+        title: "Common Beginner Mistakes to Avoid",
+        content: [
+          "1. Building UI with old XML layouts instead of Jetpack Compose. Compose is the modern standard.",
+          "2. Performing network calls on the main thread. Always use coroutines or async/await.",
+          "3. Not handling permissions. Apps need user permission for camera, location, contacts, etc.",
+          "4. Ignoring lifecycle: Activities and Fragments have lifecycles. Don't leak resources.",
+          "5. Hardcoding API keys. Store sensitive data securely or use backend.",
+          "6. Not testing on real devices. Emulator behavior differs from actual Android phones.",
+          "7. Submitting without privacy policy and clear app description. Google Play requires these.",
+          "8. Ignoring Material 3 design guidelines. Apps not following Material Design get rejected.",
+          "9. Not handling the back button. Implement proper back navigation.",
+          "10. Building everything in one massive Activity/Screen file. Split into reusable components.",
+        ],
+      },
+      {
+        title: "Project Roadmap by Level",
+        content: [
+          "Beginner Projects:",
+          "• Counter App (increment/decrement buttons, state management).",
+          "• To-Do List (add tasks, mark done, delete with Room database).",
+          "• Color Mixer (RGB sliders for interactive color selection).",
+          "",
+          "Intermediate Projects:",
+          "• Weather Forecast App (Retrofit API calls, Compose UI, error handling).",
+          "• Movie Browser (search movies, display details, save favorites).",
+          "• Quote of the Day (daily quotes display, share feature, local caching).",
+          "",
+          "Advanced Projects:",
+          "• Social Photo Sharing (Firebase auth, photo upload, real-time feed, MVVM + Hilt).",
+          "• Fitness Tracker (Google Fit integration, workout logging, cloud sync).",
+          "• Chat Application (Firebase Firestore real-time messaging, push notifications).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: "Can I develop Android apps on Windows or Mac?",
+        answer:
+          "Yes! Android Studio works on Windows, Mac, and Linux. You can develop Android apps on any operating system."
+      },
+      {
+        question: "Do I need to pay to publish on Google Play Store?",
+        answer:
+          "Yes, a one-time $25 fee is required to set up a Google Play Developer Account. After that, you can publish unlimited apps for free. There are no recurring fees."
+      },
+      {
+        question: "Is Kotlin hard to learn?",
+        answer:
+          "Kotlin is beginner-friendly and often easier than Java. It has cleaner syntax, built-in null safety, and excellent documentation. If you know basic programming, you can start building apps within weeks."
+      },
+      {
+        question: "How long does it take Google to review my app?",
+        answer:
+          "Google Play review is usually fast, taking 1–4 hours. If approved, your app appears in the store within minutes. If rejected, the reason is clearly stated and you can resubmit quickly."
+      },
+      {
+        question: "What is the difference between Jetpack Compose and XML layouts?",
+        answer:
+          "Compose is modern, declarative, and code-based. XML is older, imperative, and separated from code. Compose is Google's recommended approach for new projects and is easier to learn."
+      },
+      {
+        question: "Can I build cross-platform apps with Android?",
+        answer:
+          "Android specifically targets Android devices. For cross-platform (Android + iOS) development, consider React Native, Flutter, or Kotlin Multiplatform Mobile (KMM)."
+      },
+      {
+        question: "What should my first Android app be?",
+        answer:
+          "Start small: a counter, to-do list, or simple note app. These teach Compose and state management basics. Publish it to Google Play to build your portfolio."
+      }
+    ]
+  },
 ];
