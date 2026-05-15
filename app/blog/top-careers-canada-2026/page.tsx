@@ -117,6 +117,57 @@ export default function TopCareersCanadaPage() {
         </p>
       </section>
 
+      <section className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+          <h2 className="text-xl font-bold text-emerald-950">Who should prefer Canada pathway</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
+            <li>Students targeting co-op driven employability and practical work rights.</li>
+            <li>Students open to province-based strategy, not only big-city branding.</li>
+            <li>Students planning long-term work and PR options through valid routes.</li>
+            <li>Families seeking predictable post-study transition planning.</li>
+          </ul>
+        </div>
+        <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+          <h2 className="text-xl font-bold text-rose-950">Who should be cautious</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
+            <li>Students selecting programs without PGWP or employer demand checks.</li>
+            <li>Students assuming all provinces have identical job outcomes.</li>
+            <li>Students ignoring licensing barriers in regulated professions.</li>
+            <li>Families not accounting for cost-of-living variation by city.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">Step-by-step planning roadmap for Canada careers</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Step 1: Pick role and province together</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Match target role demand with province-specific employer clusters and salary-cost balance.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Step 2: Choose a program with employability evidence</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Prefer courses with co-op, internship links, and local employer engagement.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Step 3: Build work profile during study</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Gain project and part-time experience early, then move to stronger internship applications.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Step 4: Plan PGWP to PR timeline realistically</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Track work experience, language score readiness, and pathway eligibility before deadlines.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
         <div className="mt-4 space-y-3">
@@ -136,7 +187,7 @@ export default function TopCareersCanadaPage() {
           educational guidance only. Always verify immigration and work permit rules from official IRCC (Immigration, Refugees
           and Citizenship Canada) sources before making any application decisions.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 | Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-500">Last reviewed: May 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-emerald-100 bg-emerald-50 p-6">

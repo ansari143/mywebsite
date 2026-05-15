@@ -119,6 +119,57 @@ export default function TopCareersUSAPage() {
         </p>
       </section>
 
+      <section className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+          <h2 className="text-xl font-bold text-emerald-950">Who should pursue USA high-paying paths</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
+            <li>Students with strong domain fit in tech, analytics, healthcare, or finance.</li>
+            <li>Students prepared for competitive internships and structured interview prep.</li>
+            <li>Students willing to build long-term employability, not only chase salary headlines.</li>
+            <li>Families who can plan with visa and timeline uncertainty in mind.</li>
+          </ul>
+        </div>
+        <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+          <h2 className="text-xl font-bold text-rose-950">Who should avoid rushed USA planning</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
+            <li>Students choosing only by starting salary without role readiness.</li>
+            <li>Students ignoring licensing and credential requirements in regulated professions.</li>
+            <li>Students assuming one internship guarantees long-term sponsorship.</li>
+            <li>Families without a fallback plan for market or visa volatility.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">12-month role-readiness roadmap for USA opportunities</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Quarter 1: Role clarity and fundamentals</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Choose one role lane, map required skills, and close core knowledge gaps first.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Quarter 2: Portfolio and internships</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Build project proof and pursue internships or research work aligned with target roles.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Quarter 3: Interview and networking</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Strengthen interview performance and activate alumni and professional referral channels.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Quarter 4: Application strategy</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Apply in focused batches, review outcomes weekly, and adapt profile gaps quickly.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
         <div className="mt-4 space-y-3">
@@ -138,7 +189,7 @@ export default function TopCareersUSAPage() {
           of April 2026. Always verify current figures from official US Bureau of Labor Statistics and employer sources before
           making career or study decisions.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 | Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-500">Last reviewed: May 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-blue-100 bg-blue-50 p-6">

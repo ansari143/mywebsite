@@ -20,10 +20,20 @@ export default function IELTSGrammarPracticePage() {
     <SeoBlogArticle
       badge="Beginner IELTS grammar"
       title="IELTS Grammar Practice for Beginners"
-      intro="Grammar is one of the most important foundations for IELTS success. Even when vocabulary is good, weak grammar can reduce accuracy and confidence."
+      intro="Grammar is one of the most important foundations for IELTS success. Even when vocabulary is good, weak grammar can reduce accuracy and confidence. This beginner guide is designed for students who want practical grammar improvement for IELTS without getting buried under too many rules at once."
       sections={[
         {
+          heading: "Who should start with this guide",
+          paragraphs: [
+            "This page is useful for students who understand basic English but still make frequent grammar mistakes in writing or speaking. It is also useful for learners returning to IELTS after a long gap and for parents who want to understand why grammar matters beyond memorizing word lists.",
+            "Students already scoring high bands may need more advanced grammar range practice, but beginners usually improve fastest by mastering common sentence patterns first.",
+          ],
+        },
+        {
           heading: "Grammar topics beginners should master first",
+          paragraphs: [
+            "IELTS does not reward students for memorizing rare grammar terms. It rewards clarity, control, and fewer repeated mistakes. The fastest early improvements usually come from fixing the grammar patterns that appear in everyday writing and speaking.",
+          ],
           bullets: [
             "Present simple and past simple tense",
             "Articles: a, an, the",
@@ -64,10 +74,42 @@ export default function IELTSGrammarPracticePage() {
           ],
         },
         {
+          heading: "How grammar affects IELTS band performance",
+          paragraphs: [
+            "In IELTS Writing and Speaking, grammar is not judged by one perfect sentence. Examiners look for control across the full response. If a student repeats the same tense errors, article mistakes, or sentence structure problems, the band score gets limited even when ideas are decent.",
+            "This is why beginners should treat grammar as a scoring tool, not a school subject. The goal is to express ideas clearly under time pressure.",
+          ],
+        },
+        {
+          heading: "How beginners should practice grammar each week",
+          bullets: [
+            "Choose one grammar topic at a time instead of mixing too many rules together.",
+            "Write 5 to 10 short example sentences using that topic.",
+            "Speak those sentences aloud to notice awkward structure and verb errors.",
+            "Review one old mistake set every week so errors do not repeat.",
+          ],
+        },
+        {
           heading: "Why grammar practice improves IELTS performance",
           paragraphs: [
             "Grammar affects writing, reading understanding, and speaking clarity. When students feel comfortable with sentence patterns, they answer faster and make fewer mistakes.",
             "The goal is not to memorize every rule at once. The goal is to build confidence with common patterns that appear again and again.",
+          ],
+        },
+        {
+          heading: "Common beginner mistakes that reduce band score",
+          bullets: [
+            "Using the wrong article before singular nouns.",
+            "Mixing past and present tense without reason.",
+            "Forgetting subject-verb agreement in long sentences.",
+            "Trying complex grammar too early and producing unclear sentences.",
+          ],
+        },
+        {
+          heading: "A 30-day IELTS grammar improvement plan",
+          paragraphs: [
+            "In week one, focus on articles and subject-verb agreement. In week two, revise present and past tense usage. In week three, practice prepositions and sentence connectors. In week four, write short IELTS-style responses and check whether the earlier grammar errors are repeating.",
+            "Students improve faster when they keep an error notebook. If the same mistake appears three times, that topic should return to the next week's practice plan.",
           ],
         },
       ]}
@@ -78,10 +120,12 @@ export default function IELTSGrammarPracticePage() {
       ctaSecondaryHref="/blog/ielts-practice-questions-with-answers"
       ctaSecondaryLabel="Read More IELTS Questions"
       faqs={[
+        { question: "How long does it take to improve beginner IELTS grammar?", answer: "Many students notice improvement within 4 to 8 weeks if they practice consistently and review their own mistakes. Grammar usually improves faster when students write and speak regularly instead of only reading rule books." },
         { question: "What grammar topics appear most in IELTS?", answer: "Articles (a, an, the), subject-verb agreement, verb tenses, prepositions, and comparatives appear frequently. Connectives and complex sentence structures are especially important for the Writing section band 7 and above." },
         { question: "How do I stop making grammar mistakes in IELTS Writing?", answer: "The most effective method is to write short paragraphs, then review them for one grammar rule at a time. Start with subject-verb agreement, then articles, then tenses. Reviewing your own mistakes is more effective than just reading grammar rules." },
         { question: "Does IELTS grammar matter only for Writing?", answer: "No. Grammar affects all four sections. In Speaking, grammar errors reduce your Grammatical Range and Accuracy score. In Reading and Listening, understanding grammatical structures helps you follow meaning. Writing and Speaking are scored directly on grammar range and accuracy." },
         { question: "Can I use contractions in IELTS Writing?", answer: "Avoid contractions in IELTS Academic Writing. Use full forms: 'it is' instead of 'it's', 'they are' instead of 'they're'. Contractions are acceptable in Speaking but may slightly reduce formal register in Academic Writing tasks." },
+        { question: "Should beginners learn all grammar rules before taking IELTS practice tests?", answer: "No. Students should learn core grammar rules and practice them while doing IELTS-style exercises. Waiting to master every rule first usually delays progress and lowers confidence." },
       ]}
       trustInfo={{
         author: "Nishaglobal Education editorial team",

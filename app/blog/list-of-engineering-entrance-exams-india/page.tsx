@@ -294,6 +294,41 @@ export default function EngineeringEntranceExamsIndiaPage() {
         </div>
       </section>
 
+        <section className="rounded-3xl border border-green-200 bg-green-50 p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-green-950">Placement Guidance for Engineering Students</h2>
+          <p className="mt-3 text-sm leading-7 text-green-900 sm:text-base">
+            Entrance exam preparation is only one part of the engineering journey. Students also need a serious plan for campus placement, off-campus recovery, and global job search. Instead of keeping all of that in one long section here, we split it into three dedicated guides so students and parents can follow the right roadmap in more detail.
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <article className="rounded-2xl border border-green-200 bg-white p-5">
+              <h3 className="text-lg font-bold text-slate-900">Campus placement during engineering</h3>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Semester-wise preparation, aptitude, coding, resume strategy, project depth, and interview preparation for college placements.
+              </p>
+              <Link href="/blog/how-to-prepare-for-campus-placement-during-engineering" className="mt-4 inline-block font-semibold text-green-700 hover:underline">
+                Read the campus placement guide
+              </Link>
+            </article>
+            <article className="rounded-2xl border border-green-200 bg-white p-5">
+              <h3 className="text-lg font-bold text-slate-900">Off-campus placement after rejection</h3>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                What to do if you are not placed in college, how to rebuild your profile, where to apply, and how to recover intelligently.
+              </p>
+              <Link href="/blog/off-campus-placement-guide-for-engineering-students" className="mt-4 inline-block font-semibold text-green-700 hover:underline">
+                Read the off-campus guide
+              </Link>
+            </article>
+            <article className="rounded-2xl border border-green-200 bg-white p-5">
+              <h3 className="text-lg font-bold text-slate-900">Global job search after engineering</h3>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Realistic guidance for jobs abroad, remote global roles, country selection, English readiness, and visa-aware planning.
+              </p>
+              <Link href="/blog/global-job-search-guide-for-engineering-students" className="mt-4 inline-block font-semibold text-green-700 hover:underline">
+                Read the global job guide
+              </Link>
+            </article>
+          </div>
+        </section>
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <h2 className="text-2xl font-bold text-slate-900">Why students should know all engineering exams</h2>
         <div className="mt-4 space-y-4 text-sm leading-7 text-slate-600 sm:text-base">

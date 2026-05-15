@@ -117,6 +117,57 @@ export default function FutureProofJobsPage() {
         </div>
       </section>
 
+      <section className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+          <h2 className="text-xl font-bold text-emerald-950">Who should choose AI-resilient planning now</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
+            <li>Students in Classes 10 to 12 exploring durable long-term careers.</li>
+            <li>College students confused by rapid AI tool changes.</li>
+            <li>Parents who want practical direction instead of trend-driven panic.</li>
+            <li>Working professionals planning a skills reset in the next 12 to 24 months.</li>
+          </ul>
+        </div>
+        <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+          <h2 className="text-xl font-bold text-rose-950">Who should avoid hype-based decisions</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
+            <li>Students choosing a field only because it is currently viral.</li>
+            <li>Students collecting certificates without practical portfolio work.</li>
+            <li>Families assuming one AI tool course guarantees employment.</li>
+            <li>Students ignoring core domain fundamentals in pursuit of shortcuts.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">A practical 12-month AI-era career plan</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Months 1 to 3</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Choose one domain lane and one supporting tool lane. Build concept clarity in both before chasing advanced topics.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Months 4 to 6</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Build two practical projects showing how you use tools to solve domain problems, not just run demos.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Months 7 to 9</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Improve communication and decision explanation. Employers value people who can justify output quality and risk.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Months 10 to 12</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Apply for internships or role transitions, then refine your profile based on rejection patterns and feedback.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
         <div className="mt-4 space-y-3">
@@ -136,7 +187,7 @@ export default function FutureProofJobsPage() {
           guidance only. Always verify industry demand, salary data, and job availability from official labor market sources
           before making major career or education decisions.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 | Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-500">Last reviewed: May 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-rose-100 bg-rose-50 p-6">

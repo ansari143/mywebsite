@@ -116,6 +116,57 @@ export default function BestCoursesUKPage() {
         </p>
       </section>
 
+      <section className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+          <h2 className="text-xl font-bold text-emerald-950">Who should choose this UK route</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
+            <li>Students who want a one-year master's with faster return-to-work timeline.</li>
+            <li>Students targeting global business, tech, analytics, or policy roles.</li>
+            <li>Students with clear budget planning and realistic post-study goals.</li>
+            <li>Families comparing UK ROI against Canada, Australia, and Europe pathways.</li>
+          </ul>
+        </div>
+        <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+          <h2 className="text-xl font-bold text-rose-950">Who should avoid rushed applications</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
+            <li>Students selecting a course only by university rank without role fit.</li>
+            <li>Students ignoring living-cost pressure in major cities.</li>
+            <li>Students assuming Graduate Route automatically guarantees sponsorship.</li>
+            <li>Families not prepared for total cost and contingency planning.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-slate-900">How to shortlist the right UK course</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Step 1: Define the target role first</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Start from the job outcome you want, then map courses that directly support that role.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Step 2: Compare course structure</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Check modules, projects, placement support, and dissertation format for employability value.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Step 3: Verify city-level job reality</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              A good course in a city with stronger employer clusters can outperform a better rank in weak location fit.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-semibold text-slate-900">Step 4: Plan post-study pathway</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Evaluate graduate route, sponsorship viability, and fallback country options before final commitment.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
         <div className="mt-4 space-y-3">
@@ -135,7 +186,7 @@ export default function BestCoursesUKPage() {
           annually. This article is for educational guidance only. Always verify current requirements from official UKVI
           (UK Visas and Immigration), UCAS, and individual university sources before making any application decisions.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 | Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-500">Last reviewed: May 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-purple-100 bg-purple-50 p-6">
