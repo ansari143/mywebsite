@@ -120,7 +120,7 @@ export default function BestCoursesUKPage() {
         <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
           <h2 className="text-xl font-bold text-emerald-950">Who should choose this UK route</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
-            <li>Students who want a one-year master's with faster return-to-work timeline.</li>
+            <li>Students who want a one-year master&apos;s with faster return-to-work timeline.</li>
             <li>Students targeting global business, tech, analytics, or policy roles.</li>
             <li>Students with clear budget planning and realistic post-study goals.</li>
             <li>Families comparing UK ROI against Canada, Australia, and Europe pathways.</li>
