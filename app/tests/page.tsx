@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Take free career tests for engineering, medical, government jobs, aviation, and more. Get instant scores, topic-wise insights, and personalized guidance to choose the right stream.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/tests",
+    canonical: "https://www.nishaglobaleducation.com/tests",
   },
 };
 

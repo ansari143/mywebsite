@@ -3,7 +3,7 @@ export const metadata = {
   description:
     "Privacy Policy for Nishaglobal Education covering data collection, usage, cookies, and user rights for our global career guidance platform.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/privacy-policy",
+    canonical: "https://www.nishaglobaleducation.com/privacy-policy",
   },
 };
 
@@ -19,11 +19,11 @@ export default function PrivacyPolicyPage() {
     name: "Privacy Policy",
     description:
       "Privacy Policy for Nishaglobal Education covering data collection, usage, cookies, and user rights for our global career guidance platform.",
-    url: "https://nishaglobaleducation.com/privacy-policy",
+    url: "https://www.nishaglobaleducation.com/privacy-policy",
     isPartOf: {
       "@type": "WebSite",
       name: "Nishaglobal Education",
-      url: "https://nishaglobaleducation.com",
+      url: "https://www.nishaglobaleducation.com",
     },
   };
 

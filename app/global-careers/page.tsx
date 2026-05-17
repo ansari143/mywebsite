@@ -1,4 +1,4 @@
-﻿import CareerGuideTemplate from '@/components/CareerGuideTemplate';
+import CareerGuideTemplate from '@/components/CareerGuideTemplate';
 import { careerGuides } from '@/data/careerGuides';
 
 export const metadata = {
@@ -6,7 +6,7 @@ export const metadata = {
   description:
     'Explore global career pathways in technology, healthcare, business, creative industries, and public service, with future-focused guidance for students.',
   alternates: {
-    canonical: 'https://nishaglobaleducation.com/global-careers',
+    canonical: 'https://www.nishaglobaleducation.com/global-careers',
   },
 };
 

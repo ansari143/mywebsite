@@ -1,4 +1,4 @@
-﻿import CareerGuideTemplate from '@/components/CareerGuideTemplate';
+import CareerGuideTemplate from '@/components/CareerGuideTemplate';
 import { careerGuides } from '@/data/careerGuides';
 
 export const metadata = {
@@ -6,7 +6,7 @@ export const metadata = {
   description:
     'A practical guide for international students covering study abroad planning, scholarships, visa preparation, work while studying, and common mistakes to avoid.',
   alternates: {
-    canonical: 'https://nishaglobaleducation.com/international-students',
+    canonical: 'https://www.nishaglobaleducation.com/international-students',
   },
 };
 

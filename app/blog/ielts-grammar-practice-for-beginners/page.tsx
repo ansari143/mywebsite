@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "IELTS grammar practice for beginners with answers and explanations. Improve sentence accuracy, articles, tenses, subject-verb agreement, and prepositions step by step.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/blog/ielts-grammar-practice-for-beginners",
+    canonical: "https://www.nishaglobaleducation.com/blog/ielts-grammar-practice-for-beginners",
   },
 };
 

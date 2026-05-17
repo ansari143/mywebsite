@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Free career tests, study abroad guides, blogs, and future-ready skill resources for students in India and worldwide.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com",
+    canonical: "https://www.nishaglobaleducation.com",
   },
 };
 

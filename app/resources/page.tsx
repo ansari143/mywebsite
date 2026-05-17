@@ -7,7 +7,7 @@ export const metadata = {
   description:
     "Explore country-based and topic-based career guidance resources for students, including India, USA, Canada, UK, Australia, and Europe.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/resources",
+    canonical: "https://www.nishaglobaleducation.com/resources",
   },
 };
 
@@ -38,13 +38,13 @@ export default function ResourcesPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://nishaglobaleducation.com",
+        item: "https://www.nishaglobaleducation.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Resources",
-        item: "https://nishaglobaleducation.com/resources",
+        item: "https://www.nishaglobaleducation.com/resources",
       },
     ],
   };
@@ -53,7 +53,7 @@ export default function ResourcesPage() {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     name: "Nishaglobal Education",
-    url: "https://nishaglobaleducation.com",
+    url: "https://www.nishaglobaleducation.com",
     description:
       "Career guidance platform for students worldwide with country-based resources, study abroad planning, global careers, and practical skill guidance.",
   };

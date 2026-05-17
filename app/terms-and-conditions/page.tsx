@@ -3,7 +3,7 @@ export const metadata = {
   description:
     "Terms and Conditions for using Nishaglobal Education, covering website usage, career guidance, educational content, and user responsibilities.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/terms-and-conditions",
+    canonical: "https://www.nishaglobaleducation.com/terms-and-conditions",
   },
 };
 
@@ -19,11 +19,11 @@ export default function TermsAndConditionsPage() {
     name: "Terms & Conditions",
     description:
       "Terms and Conditions for using Nishaglobal Education, covering website usage, career guidance, educational content, and user responsibilities.",
-    url: "https://nishaglobaleducation.com/terms-and-conditions",
+    url: "https://www.nishaglobaleducation.com/terms-and-conditions",
     isPartOf: {
       "@type": "WebSite",
       name: "Nishaglobal Education",
-      url: "https://nishaglobaleducation.com",
+      url: "https://www.nishaglobaleducation.com",
     },
   };
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://nishaglobaleducation.com/blog/engineering-entrance-questions-with-answers",
+    canonical: "https://www.nishaglobaleducation.com/blog/engineering-entrance-questions-with-answers",
   },
 };
 

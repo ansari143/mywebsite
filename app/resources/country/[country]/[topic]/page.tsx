@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { countryResourcesWithTopics, getCountryTopic } from "@/data/countryResources";
+import { countryResourcesWithTopics, getCountryTopic, isCountryUsingDefaultTopics } from "@/data/countryResources";
 
 type Props = {
   params: Promise<{ country: string; topic: string }>;
@@ -18,6 +18,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { country, topic } = await params;
   const data = getCountryTopic(country, topic);
+  const usesDefaultTopics = isCountryUsingDefaultTopics(country);
 
   if (!data) {
     return {
@@ -29,8 +30,9 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${data.topic.title} | Nishaglobal Education`,
     description: data.topic.description,
+    robots: usesDefaultTopics ? "noindex,follow" : undefined,
     alternates: {
-      canonical: `https://nishaglobaleducation.com/resources/country/${data.country.slug}/${data.topic.slug}`,
+      canonical: `https://www.nishaglobaleducation.com/resources/country/${data.country.slug}/${data.topic.slug}`,
     },
   };
 }
@@ -62,25 +64,25 @@ export default async function CountryTopicPage({ params }: Props) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://nishaglobaleducation.com",
+        item: "https://www.nishaglobaleducation.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Resources",
-        item: "https://nishaglobaleducation.com/resources",
+        item: "https://www.nishaglobaleducation.com/resources",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: `${data.country.name} Resources`,
-        item: `https://nishaglobaleducation.com/resources/country/${data.country.slug}`,
+        item: `https://www.nishaglobaleducation.com/resources/country/${data.country.slug}`,
       },
       {
         "@type": "ListItem",
         position: 4,
         name: data.topic.title,
-        item: `https://nishaglobaleducation.com/resources/country/${data.country.slug}/${data.topic.slug}`,
+        item: `https://www.nishaglobaleducation.com/resources/country/${data.country.slug}/${data.topic.slug}`,
       },
     ],
   };

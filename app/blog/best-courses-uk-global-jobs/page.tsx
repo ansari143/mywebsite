@@ -1,11 +1,11 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 export const metadata = {
   title: "Best Courses in UK for Global Job Opportunities | Nishaglobal Education",
   description:
     "Discover the best courses in the UK for international students who want global job opportunities. Compare fields, graduate demand, and how to choose the right program.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/blog/best-courses-uk-global-jobs",
+    canonical: "https://www.nishaglobaleducation.com/blog/best-courses-uk-global-jobs",
   },
 };
 

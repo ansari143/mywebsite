@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Learn about Nishaglobal Education, a global career guidance platform helping students with career tests, study abroad planning, educational resources, and future-ready skills.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/about",
+    canonical: "https://www.nishaglobaleducation.com/about",
   },
 };
 
@@ -19,14 +19,14 @@ export default function AboutPage() {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     name: "About Nishaglobal Education",
-    url: "https://nishaglobaleducation.com/about",
+    url: "https://www.nishaglobaleducation.com/about",
     description:
       "Nishaglobal Education is an educational guidance platform for students worldwide, offering career tests, global career guidance, study abroad content, resources, and future-ready skills learning.",
     mainEntity: {
       "@type": "EducationalOrganization",
       name: "Nishaglobal Education",
-      url: "https://nishaglobaleducation.com",
-      logo: "https://nishaglobaleducation.com/logo.png",
+      url: "https://www.nishaglobaleducation.com",
+      logo: "https://www.nishaglobaleducation.com/logo.png",
       email: "nishaglobaleducation@gmail.com",
       sameAs: [
         "https://www.facebook.com/global.nisha",

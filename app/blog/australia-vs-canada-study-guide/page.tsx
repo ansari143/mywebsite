@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Compare Australia and Canada for international students on cost, lifestyle, post-study work rights, PR pathways, and career planning.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/blog/australia-vs-canada-study-guide",
+    canonical: "https://www.nishaglobaleducation.com/blog/australia-vs-canada-study-guide",
   },
 };
 

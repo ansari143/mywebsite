@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: data.title,
     description: data.description,
     alternates: {
-      canonical: `https://nishaglobaleducation.com/practice-tests/${category}`,
+      canonical: `https://www.nishaglobaleducation.com/practice-tests/${category}`,
     },
   };
 }

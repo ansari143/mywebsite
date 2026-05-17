@@ -7,13 +7,13 @@ export const metadata: Metadata = {
     "Complete SEO guide to engineering entrance exams in India 2026 with national, state, private university, lateral entry, comparison tables, FAQs, official links, and preparation strategy.",
   alternates: {
     canonical:
-      "https://nishaglobaleducation.com/blog/list-of-engineering-entrance-exams-india",
+      "https://www.nishaglobaleducation.com/blog/list-of-engineering-entrance-exams-india",
   },
   openGraph: {
     title: "List of Engineering Entrance Exams in India 2026",
     description:
       "Complete list of engineering entrance exams in India with official links, comparison tables, FAQs, and preparation strategy.",
-    url: "https://nishaglobaleducation.com/blog/list-of-engineering-entrance-exams-india",
+    url: "https://www.nishaglobaleducation.com/blog/list-of-engineering-entrance-exams-india",
     type: "article",
   },
 };
@@ -223,7 +223,7 @@ export default function EngineeringEntranceExamsIndiaPage() {
         headline: "List of Engineering Entrance Exams in India 2026 With Official Links",
         description:
           "Complete list of engineering entrance exams in India with official links, comparison tables, FAQs, and preparation strategy.",
-        url: "https://nishaglobaleducation.com/blog/list-of-engineering-entrance-exams-india",
+        url: "https://www.nishaglobaleducation.com/blog/list-of-engineering-entrance-exams-india",
         author: {
           "@type": "Organization",
           name: "Nishaglobal Education",
@@ -233,7 +233,7 @@ export default function EngineeringEntranceExamsIndiaPage() {
           name: "Nishaglobal Education",
         },
         mainEntityOfPage:
-          "https://nishaglobaleducation.com/blog/list-of-engineering-entrance-exams-india",
+          "https://www.nishaglobaleducation.com/blog/list-of-engineering-entrance-exams-india",
         keywords:
           "engineering entrance exams in India, JEE Main, JEE Advanced, COMEDK, KCET, MHT CET, WBJEE, BITSAT, VITEEE, SRMJEEE",
       },

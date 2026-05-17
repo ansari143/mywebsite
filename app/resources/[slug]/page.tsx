@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props) {
     title: `${page.title} | Nishaglobal Education`,
     description: page.description,
     alternates: {
-      canonical: `https://nishaglobaleducation.com/resources/${page.slug}`,
+      canonical: `https://www.nishaglobaleducation.com/resources/${page.slug}`,
     },
   };
 }
@@ -79,19 +79,19 @@ export default async function ResourceDetailPage({ params }: Props) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://nishaglobaleducation.com",
+        item: "https://www.nishaglobaleducation.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Resources",
-        item: "https://nishaglobaleducation.com/resources",
+        item: "https://www.nishaglobaleducation.com/resources",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: page.title,
-        item: `https://nishaglobaleducation.com/resources/${page.slug}`,
+        item: `https://www.nishaglobaleducation.com/resources/${page.slug}`,
       },
     ],
   };

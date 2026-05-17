@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Contact Nishaglobal Education for global career guidance, study abroad support, educational resources, skill learning, partnerships, and collaboration enquiries.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/contact",
+    canonical: "https://www.nishaglobaleducation.com/contact",
   },
 };
 
@@ -19,7 +19,7 @@ export default function ContactPage() {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     name: "Nishaglobal Education",
-    url: "https://nishaglobaleducation.com",
+    url: "https://www.nishaglobaleducation.com",
     email: "nishaglobaleducation@gmail.com",
     contactPoint: [
       {

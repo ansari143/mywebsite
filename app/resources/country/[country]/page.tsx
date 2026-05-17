@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props) {
     title: `${item.name} Resources | Nishaglobal Education`,
     description: item.description,
     alternates: {
-      canonical: `https://nishaglobaleducation.com/resources/country/${item.slug}`,
+      canonical: `https://www.nishaglobaleducation.com/resources/country/${item.slug}`,
     },
   };
 }
@@ -44,19 +44,19 @@ export default async function CountryResourcePage({ params }: Props) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://nishaglobaleducation.com",
+        item: "https://www.nishaglobaleducation.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Resources",
-        item: "https://nishaglobaleducation.com/resources",
+        item: "https://www.nishaglobaleducation.com/resources",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: `${item.name} Resources`,
-        item: `https://nishaglobaleducation.com/resources/country/${item.slug}`,
+        item: `https://www.nishaglobaleducation.com/resources/country/${item.slug}`,
       },
     ],
   };

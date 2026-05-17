@@ -3,7 +3,7 @@ export const metadata = {
   description:
     "Disclaimer for Nishaglobal Education covering career tests, study abroad guidance, educational content, advertisements, and informational use for global users.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/disclaimer",
+    canonical: "https://www.nishaglobaleducation.com/disclaimer",
   },
 };
 
@@ -19,11 +19,11 @@ export default function DisclaimerPage() {
     name: "Disclaimer",
     description:
       "Disclaimer for Nishaglobal Education covering career tests, study abroad guidance, educational content, advertisements, and informational use for global users.",
-    url: "https://nishaglobaleducation.com/disclaimer",
+    url: "https://www.nishaglobaleducation.com/disclaimer",
     isPartOf: {
       "@type": "WebSite",
       name: "Nishaglobal Education",
-      url: "https://nishaglobaleducation.com",
+      url: "https://www.nishaglobaleducation.com",
     },
   };
 

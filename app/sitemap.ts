@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
 import { resourcePages } from "@/data/resourcePages";
-import { countryResourcesWithTopics } from "@/data/countryResources";
+import { countryResourcesWithTopics, isCountryUsingDefaultTopics } from "@/data/countryResources";
 import { practiceCategories, govPracticeCategories } from "@/data/practiceTests";
 import { blogPosts } from "@/data/blogs";
 import { tests } from "@/data/tests";
 import { skillsPages } from "@/data/skillsPages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://nishaglobaleducation.com";
+  const baseUrl = "https://www.nishaglobaleducation.com";
 
   const staticRoutes = [
     "",
@@ -39,10 +39,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const resourceRoutes = resourcePages.map((page) => `/resources/${page.slug}`);
-  const countryRoutes = countryResourcesWithTopics.flatMap((country) => [
-    `/resources/country/${country.slug}`,
-    ...country.topics.map((topic) => `/resources/country/${country.slug}/${topic.slug}`),
-  ]);
+  const countryRoutes = countryResourcesWithTopics.flatMap((country) => {
+    const routes = [`/resources/country/${country.slug}`];
+    if (!isCountryUsingDefaultTopics(country.slug)) {
+      routes.push(...country.topics.map((topic) => `/resources/country/${country.slug}/${topic.slug}`));
+    }
+    return routes;
+  });
 
   const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
   const testRoutes = tests.map((test) => `/tests/${test.slug}`);

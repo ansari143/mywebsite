@@ -8,13 +8,13 @@ export const metadata: Metadata = {
     "Detailed off-campus placement guidance for engineering students in India: what to do if not placed in college, how to apply smartly, build proof of skills, and recover from rejection.",
   alternates: {
     canonical:
-      "https://nishaglobaleducation.com/blog/off-campus-placement-guide-for-engineering-students",
+      "https://www.nishaglobaleducation.com/blog/off-campus-placement-guide-for-engineering-students",
   },
   openGraph: {
     title: "Off-Campus Placement Guide for Engineering Students",
     description:
       "What engineering students should do if not placed on campus: resume strategy, job search channels, referrals, internships, and realistic next steps.",
-    url: "https://nishaglobaleducation.com/blog/off-campus-placement-guide-for-engineering-students",
+    url: "https://www.nishaglobaleducation.com/blog/off-campus-placement-guide-for-engineering-students",
     type: "article",
   },
 };
@@ -52,7 +52,7 @@ export default function OffCampusPlacementGuidePage() {
         headline: "Off-Campus Placement Guide for Engineering Students",
         description:
           "Detailed off-campus placement guidance for engineering students in India: what to do if not placed in college, how to apply smartly, build proof of skills, and recover from rejection.",
-        url: "https://nishaglobaleducation.com/blog/off-campus-placement-guide-for-engineering-students",
+        url: "https://www.nishaglobaleducation.com/blog/off-campus-placement-guide-for-engineering-students",
         author: {
           "@type": "Organization",
           name: "Nishaglobal Education",

@@ -1,11 +1,11 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 export const metadata = {
   title: "Jobs That Will Stay Strong Even in the AI Era | Nishaglobal Education",
   description:
     "Explore future-proof jobs that are expected to remain valuable as AI changes industries. Learn which skills and career paths protect your long-term employability.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/blog/future-proof-jobs-ai-era",
+    canonical: "https://www.nishaglobaleducation.com/blog/future-proof-jobs-ai-era",
   },
 };
 

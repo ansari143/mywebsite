@@ -7,7 +7,7 @@ export const metadata = {
   title: "Study in Europe | Nishaglobal Education",
   description: guide.description,
   alternates: {
-    canonical: "https://nishaglobaleducation.com/study-in-europe",
+    canonical: "https://www.nishaglobaleducation.com/study-in-europe",
   },
 };
 

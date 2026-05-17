@@ -672,3 +672,9 @@ export function getCountryTopic(countrySlug: string, topicSlug: string) {
 
   return { country, topic };
 }
+
+export function isCountryUsingDefaultTopics(countrySlug: string) {
+  const originalCountry = countryResources.find((country) => country.slug === countrySlug);
+  if (!originalCountry) return false;
+  return originalCountry.topics.length === 0;
+}

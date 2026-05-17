@@ -1,11 +1,11 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 export const metadata = {
   title: "Top Careers in Canada for International Students | Nishaglobal Education",
   description:
     "Explore top careers in Canada for international students across technology, healthcare, business, and skilled sectors. Understand salary potential, province fit, and how to plan.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/blog/top-careers-canada-2026",
+    canonical: "https://www.nishaglobaleducation.com/blog/top-careers-canada-2026",
   },
 };
 

@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://nishaglobaleducation.com/sitemap.xml",
-    host: "https://nishaglobaleducation.com",
+    sitemap: "https://www.nishaglobaleducation.com/sitemap.xml",
+    host: "https://www.nishaglobaleducation.com",
   };
 }

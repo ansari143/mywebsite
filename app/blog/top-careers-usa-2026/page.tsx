@@ -1,11 +1,11 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 export const metadata = {
   title: "Top 10 High Paying Careers in USA 2026 | Nishaglobal Education",
   description:
     "Explore top high paying careers in the USA in 2026 including technology, healthcare, finance, and AI. Understand salary potential, job demand, and how to plan your path.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/blog/top-careers-usa-2026",
+    canonical: "https://www.nishaglobaleducation.com/blog/top-careers-usa-2026",
   },
 };
 

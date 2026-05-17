@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Explore study abroad options with country guides for the USA, Canada, UK, Australia, and Europe, plus scholarships, exams, and planning tips.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/study-abroad",
+    canonical: "https://www.nishaglobaleducation.com/study-abroad",
   },
 };
 

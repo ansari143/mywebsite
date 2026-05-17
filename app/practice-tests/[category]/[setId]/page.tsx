@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: govSet.title,
       description: `Practice ${govSet.title} with ${govSet.questionCount} questions.`,
       alternates: {
-        canonical: `https://nishaglobaleducation.com/practice-tests/${category}/${setId}`,
+        canonical: `https://www.nishaglobaleducation.com/practice-tests/${category}/${setId}`,
       },
     };
   }
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: `${set.title} - Engineering Entrance Practice`,
         description: `Practice ${set.questionCount} questions for ${set.examType}. Prepare with original questions and detailed solutions.`,
         alternates: {
-          canonical: `https://nishaglobaleducation.com/practice-tests/${category}/${setId}`,
+          canonical: `https://www.nishaglobaleducation.com/practice-tests/${category}/${setId}`,
         },
       };
     }
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: set.seoDescription,
       keywords: set.keywords,
       alternates: {
-        canonical: `https://nishaglobaleducation.com/practice-tests/${category}/${setId}`,
+        canonical: `https://www.nishaglobaleducation.com/practice-tests/${category}/${setId}`,
       },
     };
   }

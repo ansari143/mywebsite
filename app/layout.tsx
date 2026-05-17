@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
-  metadataBase: new URL("https://nishaglobaleducation.com"),
+  metadataBase: new URL("https://www.nishaglobaleducation.com"),
   title: {
     default: "Nishaglobal Education",
     template: "%s",
@@ -20,7 +20,7 @@ export const metadata = {
     title: "Nishaglobal Education",
     description:
       "Helping students choose careers in India and abroad through free career tests, global education guides, resources, and future-ready skills.",
-    url: "https://nishaglobaleducation.com",
+    url: "https://www.nishaglobaleducation.com",
     siteName: "Nishaglobal Education",
     locale: "en_US",
     type: "website",
@@ -54,9 +54,9 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
   name: "Nishaglobal Education",
-  url: "https://nishaglobaleducation.com",
-  logo: "https://nishaglobaleducation.com/logo.png",
-  image: "https://nishaglobaleducation.com/logo.png",
+  url: "https://www.nishaglobaleducation.com",
+  logo: "https://www.nishaglobaleducation.com/logo.png",
+  image: "https://www.nishaglobaleducation.com/logo.png",
   email: "nishaglobaleducation@gmail.com",
   description:
     "Nishaglobal Education provides career guidance, educational resources, study abroad guidance, free career tests, and future-ready skills learning for students worldwide.",
@@ -83,22 +83,22 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Nishaglobal Education",
-  url: "https://nishaglobaleducation.com",
+  url: "https://www.nishaglobaleducation.com",
   description:
     "Career guidance for students worldwide, including study abroad guides, free career tests, educational resources, and future-ready skills.",
   publisher: {
     "@type": "EducationalOrganization",
     name: "Nishaglobal Education",
-    url: "https://nishaglobaleducation.com",
+    url: "https://www.nishaglobaleducation.com",
     logo: {
       "@type": "ImageObject",
-      url: "https://nishaglobaleducation.com/logo.png",
+      url: "https://www.nishaglobaleducation.com/logo.png",
     },
   },
   potentialAction: {
     "@type": "SearchAction",
     target:
-      "https://nishaglobaleducation.com/resources?query={search_term_string}",
+      "https://www.nishaglobaleducation.com/resources?query={search_term_string}",
     "query-input": "required name=search_term_string",
   },
 };

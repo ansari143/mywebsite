@@ -6,7 +6,7 @@ export const metadata = {
   description:
     "Explore beginner, intermediate, and advanced pathways for modern AI and technology skills, including Python, prompt engineering, LangChain, AI agents, and practical project roadmaps.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/skills",
+    canonical: "https://www.nishaglobaleducation.com/skills",
   },
 };
 
@@ -137,13 +137,13 @@ export default function SkillsPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://nishaglobaleducation.com",
+        item: "https://www.nishaglobaleducation.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "High-Demand Skills",
-        item: "https://nishaglobaleducation.com/skills",
+        item: "https://www.nishaglobaleducation.com/skills",
       },
     ],
   };

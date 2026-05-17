@@ -8,13 +8,13 @@ export const metadata: Metadata = {
     "A practical campus placement guide for engineering students in India with semester-wise preparation, resume strategy, coding plan, interview roadmap, and realistic placement advice.",
   alternates: {
     canonical:
-      "https://nishaglobaleducation.com/blog/how-to-prepare-for-campus-placement-during-engineering",
+      "https://www.nishaglobaleducation.com/blog/how-to-prepare-for-campus-placement-during-engineering",
   },
   openGraph: {
     title: "How to Prepare for Campus Placement During Engineering",
     description:
       "Step-by-step campus placement preparation for engineering students with coding, aptitude, projects, resume, and interview strategy.",
-    url: "https://nishaglobaleducation.com/blog/how-to-prepare-for-campus-placement-during-engineering",
+    url: "https://www.nishaglobaleducation.com/blog/how-to-prepare-for-campus-placement-during-engineering",
     type: "article",
   },
 };
@@ -52,7 +52,7 @@ export default function CampusPlacementGuidePage() {
         headline: "How to Prepare for Campus Placement During Engineering",
         description:
           "A practical campus placement guide for engineering students in India with semester-wise preparation, resume strategy, coding plan, interview roadmap, and realistic placement advice.",
-        url: "https://nishaglobaleducation.com/blog/how-to-prepare-for-campus-placement-during-engineering",
+        url: "https://www.nishaglobaleducation.com/blog/how-to-prepare-for-campus-placement-during-engineering",
         author: {
           "@type": "Organization",
           name: "Nishaglobal Education",
@@ -62,7 +62,7 @@ export default function CampusPlacementGuidePage() {
           name: "Nishaglobal Education",
         },
         mainEntityOfPage:
-          "https://nishaglobaleducation.com/blog/how-to-prepare-for-campus-placement-during-engineering",
+          "https://www.nishaglobaleducation.com/blog/how-to-prepare-for-campus-placement-during-engineering",
       },
       {
         "@type": "FAQPage",

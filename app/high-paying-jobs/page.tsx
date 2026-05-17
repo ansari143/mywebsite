@@ -1,4 +1,4 @@
-﻿import CareerGuideTemplate from '@/components/CareerGuideTemplate';
+import CareerGuideTemplate from '@/components/CareerGuideTemplate';
 import { careerGuides } from '@/data/careerGuides';
 
 export const metadata = {
@@ -6,7 +6,7 @@ export const metadata = {
   description:
     'Explore high paying job categories, future-proof career directions, and global salary-oriented pathways for students and learners.',
   alternates: {
-    canonical: 'https://nishaglobaleducation.com/high-paying-jobs',
+    canonical: 'https://www.nishaglobaleducation.com/high-paying-jobs',
   },
 };
 

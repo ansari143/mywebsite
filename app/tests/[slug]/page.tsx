@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props) {
     title: `${test.title} | Nishaglobal Education`,
     description: `${test.summary} Take this free test with ${test.questions.length} questions and get instant score-based guidance with next-step actions.`,
     alternates: {
-      canonical: `https://nishaglobaleducation.com/tests/${test.slug}`,
+      canonical: `https://www.nishaglobaleducation.com/tests/${test.slug}`,
     },
   };
 }

@@ -8,13 +8,13 @@ export const metadata: Metadata = {
     "Detailed guidance for engineering students who want jobs abroad or remote global roles: countries, hiring routes, English tests, visa realities, portfolio strategy, and practical planning.",
   alternates: {
     canonical:
-      "https://nishaglobaleducation.com/blog/global-job-search-guide-for-engineering-students",
+      "https://www.nishaglobaleducation.com/blog/global-job-search-guide-for-engineering-students",
   },
   openGraph: {
     title: "Global Job Search Guide for Engineering Students",
     description:
       "How engineering students can prepare for global jobs: target countries, role matching, English readiness, visa planning, remote work, and practical application strategy.",
-    url: "https://nishaglobaleducation.com/blog/global-job-search-guide-for-engineering-students",
+    url: "https://www.nishaglobaleducation.com/blog/global-job-search-guide-for-engineering-students",
     type: "article",
   },
 };
@@ -80,7 +80,7 @@ export default function GlobalJobSearchGuidePage() {
         headline: "Global Job Search Guide for Engineering Students",
         description:
           "Detailed guidance for engineering students who want jobs abroad or remote global roles: countries, hiring routes, English tests, visa realities, portfolio strategy, and practical planning.",
-        url: "https://nishaglobaleducation.com/blog/global-job-search-guide-for-engineering-students",
+        url: "https://www.nishaglobaleducation.com/blog/global-job-search-guide-for-engineering-students",
         author: {
           "@type": "Organization",
           name: "Nishaglobal Education",

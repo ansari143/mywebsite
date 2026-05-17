@@ -6,7 +6,7 @@ export const metadata = {
   description:
     "Explore career, study abroad, IELTS, TOEFL, engineering practice, and future-ready skills articles from Nishaglobal Education.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/blog",
+    canonical: "https://www.nishaglobaleducation.com/blog",
   },
 };
 
@@ -109,11 +109,11 @@ export default function BlogIndexPage() {
     name: "Nishaglobal Education Blog",
     description:
       "Career, study abroad, IELTS, TOEFL, engineering preparation, and future-ready skills articles from Nishaglobal Education.",
-    url: "https://nishaglobaleducation.com/blog",
+    url: "https://www.nishaglobaleducation.com/blog",
     hasPart: allBlogPosts.map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
-      url: `https://nishaglobaleducation.com${post.href}`,
+      url: `https://www.nishaglobaleducation.com${post.href}`,
       about: post.category,
     })),
   };

@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props) {
     title: `${page.title} | Nishaglobal Education`,
     description: page.description,
     alternates: {
-      canonical: `https://nishaglobaleducation.com/skills/${page.slug}`,
+      canonical: `https://www.nishaglobaleducation.com/skills/${page.slug}`,
     },
   };
 }

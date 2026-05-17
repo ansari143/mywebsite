@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://nishaglobaleducation.com/blog/beginner-engineering-practice-math-physics-chemistry",
+    canonical: "https://www.nishaglobaleducation.com/blog/beginner-engineering-practice-math-physics-chemistry",
   },
 };
 

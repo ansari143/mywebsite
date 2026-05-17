@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Beginner-friendly TOEFL speaking and writing practice with structure tips, sample prompts, and explanation-based strategy guidance.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/blog/toefl-speaking-writing-practice-for-beginners",
+    canonical: "https://www.nishaglobaleducation.com/blog/toefl-speaking-writing-practice-for-beginners",
   },
 };
 

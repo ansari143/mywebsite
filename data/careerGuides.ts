@@ -10,7 +10,7 @@ export const careerGuides: CareerGuide[] = [
     metadata: {
       title: "Global Careers | Nishaglobal Education",
       description: "Navigate global career opportunities with practical strategies for international work in technology, healthcare, business, and creative fields.",
-      canonical: "https://nishaglobaleducation.com/global-careers",
+      canonical: "https://www.nishaglobaleducation.com/global-careers",
     },
     sections: [
       {
@@ -203,7 +203,7 @@ export const careerGuides: CareerGuide[] = [
     metadata: {
       title: "High Paying Jobs | Nishaglobal Education",
       description: "Discover high-earning career paths with practical strategies for breaking into lucrative fields like technology, finance, and consulting.",
-      canonical: "https://nishaglobaleducation.com/high-paying-jobs",
+      canonical: "https://www.nishaglobaleducation.com/high-paying-jobs",
     },
     sections: [
       {
@@ -396,7 +396,7 @@ export const careerGuides: CareerGuide[] = [
     metadata: {
       title: "International Students Guide | Nishaglobal Education",
       description: "Master the study abroad process with detailed strategies for university selection, visa success, and thriving in a new country.",
-      canonical: "https://nishaglobaleducation.com/international-students",
+      canonical: "https://www.nishaglobaleducation.com/international-students",
     },
     sections: [
       {

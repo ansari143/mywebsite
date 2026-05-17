@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     "Take free original practice tests with instant scoring and explanations for JEE Main, JEE Advanced, COMEDK, WBJEE, KCET, IELTS, TOEFL, CTET, SSC, Railway, Medical NEET, and Aviation career roles.",
   alternates: {
-    canonical: "https://nishaglobaleducation.com/practice-tests",
+    canonical: "https://www.nishaglobaleducation.com/practice-tests",
   },
 };
 
