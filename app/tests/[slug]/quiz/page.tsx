@@ -3,36 +3,8 @@
 import { useMemo, useState } from "react";
 import { getTestBySlug } from "@/data/tests";
 import { useRouter, useParams } from "next/navigation";
-import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function QuizPage() {
-  const socialLinks = [
-    {
-      name: "Facebook",
-      url: "https://www.facebook.com/global.nisha",
-      icon: FaFacebook,
-      color: "text-blue-600",
-    },
-    {
-      name: "Instagram",
-      url: "https://instagram.com/nisha.global",
-      icon: FaInstagram,
-      color: "text-pink-600",
-    },
-    {
-      name: "Facebook Page",
-      url: "https://www.facebook.com/profile.php?id=61588627138300",
-      icon: FaFacebook,
-      color: "text-blue-700",
-    },
-    {
-      name: "YouTube",
-      url: "https://www.youtube.com/@NishaglobalEducation",
-      icon: FaYoutube,
-      color: "text-red-600",
-    },
-  ] as const;
-
   const [showMissing, setShowMissing] = useState(false);
   const [missingNums, setMissingNums] = useState<number[]>([]);
   const [lang, setLang] = useState<"EN" | "HI" | "BOTH">("EN");
@@ -133,26 +105,6 @@ export default function QuizPage() {
             <div>
               <p className="font-semibold">🎓 Nishaglobal Education</p>
               <p className="text-xs text-gray-600">Career guidance, mock tests, global student planning</p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
-              {socialLinks.map((s) => {
-                const Icon = s.icon;
-                return (
-                  <a
-                    key={s.name}
-                    href={s.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-center gap-2 rounded-xl border bg-white px-4 py-2 transition hover:bg-gray-100"
-                  >
-                    <Icon className={`text-lg ${s.color}`} />
-                    <div className="leading-tight">
-                      <div className="text-xs font-semibold whitespace-nowrap">{s.name}</div>
-                    </div>
-                  </a>
-                );
-              })}
             </div>
           </div>
         </div>

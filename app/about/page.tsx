@@ -28,13 +28,6 @@ export default function AboutPage() {
       url: "https://www.nishaglobaleducation.com",
       logo: "https://www.nishaglobaleducation.com/logo.png",
       email: "nishaglobaleducation@gmail.com",
-      sameAs: [
-        "https://www.facebook.com/global.nisha",
-        "https://instagram.com/nisha.global",
-        "https://www.youtube.com/@NishaglobalEducation",
-        "https://www.facebook.com/profile.php?id=61588627138300",
-        "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
-      ],
     },
   };
 

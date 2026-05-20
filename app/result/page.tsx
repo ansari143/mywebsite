@@ -192,7 +192,7 @@ export default function ResultPage() {
   }
 
   const issuedOn = data.attemptedOn ? new Date(data.attemptedOn).toLocaleString() : new Date().toLocaleString();
-  const qrValue = "https://www.youtube.com/@NishaglobalEducation";
+  const qrValue = "https://www.nishaglobaleducation.com";
 
   return (
     <div className="space-y-6">

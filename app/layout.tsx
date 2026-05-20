@@ -62,13 +62,6 @@ const organizationSchema = {
     "Nishaglobal Education provides career guidance, educational resources, study abroad guidance, free career tests, and future-ready skills learning for students worldwide.",
   areaServed: "Worldwide",
   availableLanguage: ["English", "Hindi"],
-  sameAs: [
-    "https://www.facebook.com/global.nisha",
-    "https://instagram.com/nisha.global",
-    "https://www.youtube.com/@NishaglobalEducation",
-    "https://www.facebook.com/profile.php?id=61588627138300",
-    "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
-  ],
   contactPoint: [
     {
       "@type": "ContactPoint",

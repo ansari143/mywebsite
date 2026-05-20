@@ -3,17 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { FaYoutube, FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-
-  const socialLinks = {
-    youtube: "https://www.youtube.com/@NishaglobalEducation",
-    instagram: "https://www.instagram.com/nisha.global",
-    facebook: "https://www.facebook.com/global.nisha",
-    linkedin: "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
-  };
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -67,45 +59,6 @@ export default function Navbar() {
           >
             Free Test
           </Link>
-
-          <div className="flex items-center gap-3 border-l pl-4 text-gray-500">
-            <a
-              href={socialLinks.youtube}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-              className="transition hover:text-red-600"
-            >
-              <FaYoutube size={16} />
-            </a>
-            <a
-              href={socialLinks.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="transition hover:text-pink-600"
-            >
-              <FaInstagram size={16} />
-            </a>
-            <a
-              href={socialLinks.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="transition hover:text-blue-600"
-            >
-              <FaFacebookF size={15} />
-            </a>
-            <a
-              href={socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="transition hover:text-sky-700"
-            >
-              <FaLinkedinIn size={15} />
-            </a>
-          </div>
         </div>
 
         <button
@@ -138,45 +91,6 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
-
-            <div className="mt-2 flex items-center gap-4 border-t pt-3 text-gray-500">
-              <a
-                href={socialLinks.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="transition hover:text-red-600"
-              >
-                <FaYoutube size={18} />
-              </a>
-              <a
-                href={socialLinks.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="transition hover:text-pink-600"
-              >
-                <FaInstagram size={18} />
-              </a>
-              <a
-                href={socialLinks.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="transition hover:text-blue-600"
-              >
-                <FaFacebookF size={17} />
-              </a>
-              <a
-                href={socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="transition hover:text-sky-700"
-              >
-                <FaLinkedinIn size={17} />
-              </a>
-            </div>
           </div>
         </div>
       )}

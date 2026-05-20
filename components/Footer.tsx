@@ -1,15 +1,7 @@
 import Link from "next/link";
-import { FaYoutube, FaInstagram, FaFacebookF, FaLinkedinIn, FaEnvelope } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
 
 export default function Footer() {
-  const socialLinks = {
-    youtube: "https://www.youtube.com/@NishaglobalEducation",
-    instagram: "https://www.instagram.com/nisha.global",
-    facebookProfile: "https://www.facebook.com/global.nisha",
-    facebookPage: "https://www.facebook.com/profile.php?id=61588627138300",
-    linkedin: "https://www.linkedin.com/in/nishaglobal-education-9818713b7/",
-  };
-
   return (
     <footer className="mt-12 border-t border-gray-200 bg-white">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
@@ -57,28 +49,16 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-900">Follow Us</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-900">Get Support</h4>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              Follow Nishaglobal Education for career tips, global study guidance,
-              and future-ready skills.
+              Reach out for guidance related to tests, resources, and study planning.
             </p>
 
             <div className="mt-4 flex flex-col gap-3 text-sm text-slate-600">
-              <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-red-600">
-                <FaYoutube /> YouTube Channel
+              <a href="mailto:nishaglobaleducation@gmail.com" className="flex items-center gap-2 hover:text-blue-700">
+                <FaEnvelope /> nishaglobaleducation@gmail.com
               </a>
-              <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-pink-600">
-                <FaInstagram /> Instagram
-              </a>
-              <a href={socialLinks.facebookPage} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-blue-600">
-                <FaFacebookF /> Facebook Page
-              </a>
-              <a href={socialLinks.facebookProfile} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-blue-600">
-                <FaFacebookF /> Facebook Profile
-              </a>
-              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-sky-700">
-                <FaLinkedinIn /> LinkedIn
-              </a>
+              <Link href="/contact" className="hover:text-blue-600">Go to Contact Page</Link>
             </div>
           </div>
         </div>
