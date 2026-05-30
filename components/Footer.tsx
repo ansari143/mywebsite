@@ -38,13 +38,17 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-900">Guides & Policies</h4>
             <div className="mt-3 flex flex-col gap-2 text-sm text-slate-600">
-              <Link href="/resources/country/usa" className="hover:text-blue-600">USA Resources</Link>
-              <Link href="/resources/country/canada" className="hover:text-blue-600">Canada Resources</Link>
-              <Link href="/resources/country/india" className="hover:text-blue-600">India Resources</Link>
-              <Link href="/high-paying-jobs" className="hover:text-blue-600">High Paying Jobs</Link>
-              <Link href="/disclaimer" className="hover:text-blue-600">Disclaimer</Link>
+              <Link href="/blog" className="hover:text-blue-600">Blog</Link>
+              <Link href="/study-in-usa" className="hover:text-blue-600">Study in USA</Link>
+              <Link href="/blog?category=USA%20Careers" className="hover:text-blue-600">USA Careers</Link>
+              <Link href="/blog?category=AI%20%26%20Tech%20Careers" className="hover:text-blue-600">AI Careers</Link>
+              <Link href="/blog?category=Scholarships" className="hover:text-blue-600">Scholarships</Link>
+              <Link href="/tests" className="hover:text-blue-600">Career Tests</Link>
+              <Link href="/practice-tests" className="hover:text-blue-600">Practice Tests</Link>
               <Link href="/privacy-policy" className="hover:text-blue-600">Privacy Policy</Link>
-              <Link href="/terms-and-conditions" className="hover:text-blue-600">Terms & Conditions</Link>
+              <Link href="/terms-and-conditions" className="hover:text-blue-600">Terms</Link>
+              <Link href="/disclaimer" className="hover:text-blue-600">Disclaimer</Link>
+              <Link href="/contact" className="hover:text-blue-600">Contact</Link>
             </div>
           </div>
 

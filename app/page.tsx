@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import SkillsPreview from "@/components/SkillsPreview";
 import SkillsRoadmapPreview from "@/components/SkillsRoadmapPreview";
 import TrendingBlogs from "@/components/TrendingBlogs";
+import BlogCard from "@/components/BlogCard";
+import { getPopularUSABlogs, getBlogsByCategory } from "@/data/blogs";
 
 export const metadata: Metadata = {
   title: "Career Guidance for Global Students",
@@ -138,6 +140,14 @@ const faqs = [
 ];
 
 export default function HomePage() {
+  const popularUSACareerGuides = getPopularUSABlogs()
+    .filter((post) => post.category === "USA Careers")
+    .slice(0, 3);
+  const studyAbroadGuides = [
+    ...getBlogsByCategory("Study in USA").slice(0, 2),
+    ...getBlogsByCategory("Scholarships").slice(0, 1),
+  ].slice(0, 3);
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -195,7 +205,7 @@ export default function HomePage() {
             href="/blog"
             className="w-full rounded-xl border border-gray-300 bg-white px-6 py-3 text-center font-medium text-slate-700 hover:bg-gray-50 sm:w-auto"
           >
-            Read Latest Blogs
+            Read Career Blogs
           </Link>
         </div>
       </section>
@@ -436,6 +446,64 @@ export default function HomePage() {
       <SkillsPreview />
       <SkillsRoadmapPreview />
       <TrendingBlogs title="Latest Career and Study Abroad Articles" limit={3} />
+
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-slate-900">Popular USA Career Guides</h2>
+            <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">
+              Most-read USA career blogs for students planning high-paying and future-ready pathways.
+            </p>
+          </div>
+          <Link href="/blog" className="text-sm font-semibold text-blue-700 hover:underline">
+            View all blogs
+          </Link>
+        </div>
+        <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {popularUSACareerGuides.map((post) => (
+            <BlogCard key={post.slug} post={post} />
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-6 shadow-sm sm:p-8">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-slate-900">Study Abroad Guides</h2>
+            <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">
+              Start with practical guides for study in USA planning, scholarships, and decision-ready roadmaps.
+            </p>
+          </div>
+          <Link href="/study-abroad" className="text-sm font-semibold text-blue-700 hover:underline">
+            Explore Study Abroad
+          </Link>
+        </div>
+        <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {studyAbroadGuides.map((post) => (
+            <BlogCard key={post.slug} post={post} />
+          ))}
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href="/tests"
+            className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            Start Free Career Test
+          </Link>
+          <Link
+            href="/blog"
+            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            Read Career Blogs
+          </Link>
+          <Link
+            href="/study-abroad"
+            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            Explore Study Abroad
+          </Link>
+        </div>
+      </section>
 
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>

@@ -26,9 +26,10 @@ export default function Navbar() {
           <Image
             src="/logo.png"
             alt="Nishaglobal Education Logo"
-            width={50}
-            height={50}
+            width={44}
+            height={44}
             priority
+            className="h-11 w-11 object-contain"
           />
           <div className="hidden sm:block">
             <span className="block text-lg font-semibold text-slate-900">
