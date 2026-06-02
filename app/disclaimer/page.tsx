@@ -2,6 +2,10 @@ export const metadata = {
   title: "Disclaimer",
   description:
     "Disclaimer for Nishaglobal Education covering career tests, study abroad guidance, educational content, advertisements, and informational use for global users.",
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: "https://www.nishaglobaleducation.com/disclaimer",
   },

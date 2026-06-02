@@ -229,7 +229,156 @@ export const countryResources: CountryResource[] = [
       { slug: "scholarships", label: "Scholarships", short: "Funding support and scholarship planning tips" },
       { slug: "jobs-and-work-opportunities", label: "Jobs & Work Opportunities", short: "Work planning during and after study" }
     ],
-    topics: []
+    topics: [
+      {
+        slug: "study-options",
+        title: "Study Options in Canada",
+        description: "Understand university, college, PG diploma, and transfer pathways in Canada with practical planning points.",
+        intro:
+          "Canada offers multiple study routes, and the best choice depends on your budget, target career, and preferred province. Students should choose a pathway that is both affordable and employability-focused.",
+        sections: [
+          {
+            title: "Main Study Pathways",
+            points: [
+              "Students after 12th usually compare bachelor's programs at universities with diploma or advanced diploma routes at colleges.",
+              "Graduates often choose between master's programs and applied PG diplomas based on budget, profile strength, and job goals.",
+              "Transfer routes can work well when students start in a cost-effective college and move to a university with clear articulation rules."
+            ]
+          },
+          {
+            title: "How to Choose Province and Institution",
+            points: [
+              "Province selection matters because tuition, rent, weather, and local job markets vary significantly across Canada.",
+              "Students should compare not just rank, but also co-op availability, internship ecosystem, and graduate employment outcomes.",
+              "A balanced shortlist usually includes one aspirational option, two realistic options, and one budget-safe option."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Should students choose university or college in Canada?",
+            answer:
+              "It depends on career goals and budget. Universities are often stronger for academic and research pathways, while colleges can provide practical and affordable job-focused training."
+          },
+          {
+            question: "Is province choice important in Canada?",
+            answer:
+              "Yes. Province choice affects tuition, living cost, part-time opportunities, weather adaptation, and long-term career planning."
+          }
+        ]
+      },
+      {
+        slug: "student-visa-guide",
+        title: "Canada Study Permit Guide",
+        description: "A practical student-first overview of study permit preparation for Canada.",
+        intro:
+          "A strong Canada study permit file is built through early document planning, transparent finances, and clear academic intent. Students should avoid last-minute preparation and unclear explanation of goals.",
+        sections: [
+          {
+            title: "What to Prepare Before Applying",
+            points: [
+              "Keep admission records, financial documents, identity proof, and academic records ready in a structured checklist.",
+              "Students should clearly explain why the chosen course in Canada makes sense for their previous education and future career path.",
+              "Any gap period should be explained honestly with timeline clarity and supporting records."
+            ]
+          },
+          {
+            title: "Frequent Permit Mistakes",
+            points: [
+              "Generic statements with no clear career objective can weaken the file quality.",
+              "Insufficient financial explanation or inconsistent documents often create avoidable risk.",
+              "Students should never rely on unofficial shortcuts and must verify latest rules from official Canadian sources."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "How early should students start Canada study permit planning?",
+            answer:
+              "Start as soon as admission planning begins. Early preparation improves document consistency and reduces last-minute errors."
+          },
+          {
+            question: "Is financial clarity important in permit applications?",
+            answer:
+              "Yes. Clear, credible, and well-documented finances are one of the most important parts of a strong study permit file."
+          }
+        ]
+      },
+      {
+        slug: "scholarships",
+        title: "Scholarships in Canada",
+        description: "Explore scholarship directions in Canada and practical strategies for international students.",
+        intro:
+          "Canada scholarships can reduce costs, but students should plan realistically and start early. Funding depends on profile strength, institution type, and program level.",
+        sections: [
+          {
+            title: "Common Scholarship Paths",
+            points: [
+              "Students may find entrance scholarships, merit awards, department-based scholarships, and limited external funding options.",
+              "Graduate students may have stronger opportunities through assistantships or research-related support in selected programs.",
+              "Scholarship availability differs by institution, so always check official university pages for updated details."
+            ]
+          },
+          {
+            title: "How to Improve Scholarship Chances",
+            points: [
+              "Build a focused profile that shows academic consistency, practical achievements, and a clear career direction.",
+              "Prepare a strong statement that explains fit between your background, chosen program, and future goals.",
+              "Do not depend on one scholarship outcome; apply across a realistic mix of institutions."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Can international students get scholarships in Canada?",
+            answer:
+              "Yes. Many institutions offer scholarships, but amounts and eligibility vary by course, level, and profile quality."
+          },
+          {
+            question: "Should scholarship planning start before applications?",
+            answer:
+              "Yes. Early planning helps with profile building, essay quality, and deadline management."
+          }
+        ]
+      },
+      {
+        slug: "jobs-and-work-opportunities",
+        title: "Jobs and Work Opportunities in Canada",
+        description: "Understand student work planning and post-study career preparation in Canada.",
+        intro:
+          "Students should treat work planning as part of their full education strategy. Good outcomes depend on program fit, skill-building, communication ability, and local job readiness.",
+        sections: [
+          {
+            title: "During Study",
+            points: [
+              "Students should understand official work limits and ensure studies remain the primary priority.",
+              "Part-time work helps with confidence and local exposure, but it should not be treated as the main funding plan.",
+              "Campus roles and structured internships often provide stronger resume value than random low-skill work."
+            ]
+          },
+          {
+            title: "After Graduation",
+            points: [
+              "Post-study opportunities improve when students build local experience through co-op, internships, and networking before graduation.",
+              "Students should prepare role-specific resumes and communication skills early rather than waiting for final semester.",
+              "Job outcomes are usually stronger when course selection is aligned with demand in the chosen province."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Can students work while studying in Canada?",
+            answer:
+              "Students may have work options depending on official conditions and permit status. Always verify current rules from official government sources."
+          },
+          {
+            question: "What improves job outcomes after study in Canada?",
+            answer:
+              "Practical skills, local internship exposure, communication strength, and targeted job applications improve outcomes significantly."
+          }
+        ]
+      }
+    ]
   },
   {
     slug: "uk",
@@ -255,7 +404,156 @@ export const countryResources: CountryResource[] = [
       { slug: "scholarships", label: "Scholarships", short: "Funding and scholarship awareness" },
       { slug: "jobs-and-work-opportunities", label: "Jobs & Work Opportunities", short: "Part-time work and post-study planning" }
     ],
-    topics: []
+    topics: [
+      {
+        slug: "study-options",
+        title: "Study Options in the UK",
+        description: "Compare undergraduate, taught master's, foundation, and specialized pathways in the UK.",
+        intro:
+          "The UK offers multiple formats including shorter master's programs, but students should evaluate total value beyond duration. Course quality, city cost, and career support remain critical.",
+        sections: [
+          {
+            title: "Popular UK Pathways",
+            points: [
+              "Students after 12th commonly choose bachelor's degrees or foundation-to-degree routes depending on profile readiness.",
+              "Graduates often choose one-year taught master's programs, especially in business, data, management, and engineering tracks.",
+              "Program accreditation and industry relevance should be checked before finalizing shortlists."
+            ]
+          },
+          {
+            title: "Choosing the Right UK Option",
+            points: [
+              "One-year course length can save time, but students must ensure job readiness and internship planning are not ignored.",
+              "City choice matters because London and non-London living costs can differ heavily.",
+              "Students should compare module structure, career office support, and alumni outcomes by specific program."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Are one-year master's programs in the UK worth it?",
+            answer:
+              "They can be high value when students choose a strong program with practical outcomes and prepare job strategy from the start."
+          },
+          {
+            question: "Should students prioritize ranking only in the UK?",
+            answer:
+              "No. Students should balance ranking with affordability, course fit, and employability support."
+          }
+        ]
+      },
+      {
+        slug: "student-visa-guide",
+        title: "UK Student Visa Guide",
+        description: "A practical overview of UK student visa planning for international students.",
+        intro:
+          "A strong UK student visa process depends on clear academic purpose, clean documentation, and realistic financial planning. Students should avoid rushed and unverified preparation.",
+        sections: [
+          {
+            title: "Core Preparation Points",
+            points: [
+              "Organize admission, finance, identity, and academic records in advance to avoid mistakes near deadlines.",
+              "Students should be ready to explain program choice and post-study direction clearly and confidently.",
+              "Any inconsistent timeline or unclear educational intent should be corrected before submission."
+            ]
+          },
+          {
+            title: "Avoidable Errors",
+            points: [
+              "Do not depend on unofficial advice over official UK visa guidance.",
+              "Late document preparation can create avoidable rejection risk.",
+              "Students should verify current policy updates from official UK government channels."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Should students verify UK visa rules from official sources?",
+            answer:
+              "Yes. Visa policies can change, so official UK government websites should always be your final reference."
+          },
+          {
+            question: "Is financial planning essential for UK visa applications?",
+            answer:
+              "Yes. Clear, documented funding is a key part of visa preparation and reduces avoidable uncertainty."
+          }
+        ]
+      },
+      {
+        slug: "scholarships",
+        title: "Scholarships in the UK",
+        description: "Understand scholarship opportunities and practical planning strategies for UK study pathways.",
+        intro:
+          "Scholarships in the UK vary by university, course, and student profile. Students should plan with realistic expectations and apply across multiple funding options.",
+        sections: [
+          {
+            title: "Where Scholarship Support Comes From",
+            points: [
+              "Students may find institution-specific scholarships, regional awards, and selected external funding programs.",
+              "Some scholarships are automatically considered, while others require separate applications and statements.",
+              "Scholarship conditions often differ between undergraduate and postgraduate levels."
+            ]
+          },
+          {
+            title: "Practical Scholarship Strategy",
+            points: [
+              "Start early and maintain a deadline tracker for each target institution.",
+              "Use clear evidence in statements instead of generic motivational content.",
+              "Keep a balanced university list so scholarship uncertainty does not break your complete plan."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Can international students get scholarships in the UK?",
+            answer:
+              "Yes. Many UK institutions provide scholarships, but amount and eligibility vary significantly by program and profile."
+          },
+          {
+            question: "Are scholarships enough to fund everything?",
+            answer:
+              "Sometimes, but often not fully. Students should combine scholarships with realistic financial planning."
+          }
+        ]
+      },
+      {
+        slug: "jobs-and-work-opportunities",
+        title: "Jobs and Work Opportunities in the UK",
+        description: "Plan part-time work and post-study employability strategy in the UK with practical student guidance.",
+        intro:
+          "Students should connect UK education planning with employability from the first semester. Work outcomes improve when students build practical skills and communication strength early.",
+        sections: [
+          {
+            title: "During Study",
+            points: [
+              "Part-time work can help with exposure and confidence, but academics and skill growth should remain the main priority.",
+              "Students should verify official work conditions and avoid non-compliant arrangements.",
+              "Roles that improve communication and professional habits can add resume value beyond income support."
+            ]
+          },
+          {
+            title: "After Graduation",
+            points: [
+              "Graduation outcomes improve when students build networking, internship, and portfolio evidence before the final term.",
+              "Program choice should be linked to sectors with real hiring activity and skill demand.",
+              "Students should prepare UK-style CVs and interview readiness early, not after course completion."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Can students work while studying in the UK?",
+            answer:
+              "Students may have work options depending on visa conditions and official rules. Always verify current guidance from official UK sources."
+          },
+          {
+            question: "What helps post-study job outcomes in the UK?",
+            answer:
+              "Strong communication, internship exposure, employer-facing projects, and program-market alignment improve job outcomes."
+          }
+        ]
+      }
+    ]
   },
   {
     slug: "australia",
@@ -281,7 +579,156 @@ export const countryResources: CountryResource[] = [
       { slug: "scholarships", label: "Scholarships", short: "Funding support and scholarship planning" },
       { slug: "jobs-and-work-opportunities", label: "Jobs & Work Opportunities", short: "Student work and post-study direction" }
     ],
-    topics: []
+    topics: [
+      {
+        slug: "study-options",
+        title: "Study Options in Australia",
+        description: "Compare university degrees, pathway programs, and vocational options in Australia.",
+        intro:
+          "Australia offers both university and vocational pathways, so students should choose by long-term job direction, budget, and learning style rather than popularity alone.",
+        sections: [
+          {
+            title: "Main Academic Routes",
+            points: [
+              "After 12th, students often choose bachelor's programs or pathway/foundation routes depending on profile and institution requirements.",
+              "Graduates commonly compare master's programs with practical specializations in business, IT, engineering, and healthcare-related areas.",
+              "Vocational and practical tracks can also be valuable for students targeting skill-focused outcomes."
+            ]
+          },
+          {
+            title: "Planning the Right Australian Path",
+            points: [
+              "City-level cost differences are important, especially for accommodation and transport.",
+              "Students should compare industry links, internship scope, and practical learning format before committing.",
+              "A good shortlist includes both academic-fit and budget-fit options to reduce decision risk."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Is Australia suitable for practical career-focused study?",
+            answer:
+              "Yes. Many programs are designed with practical orientation, but students should still verify quality and outcomes at institution level."
+          },
+          {
+            question: "Should students choose city based on cost and opportunities together?",
+            answer:
+              "Yes. Cost alone or prestige alone is not enough. Students should evaluate affordability with career exposure."
+          }
+        ]
+      },
+      {
+        slug: "student-visa-guide",
+        title: "Australia Student Visa Guide",
+        description: "A clear student-focused guide for planning Australian visa preparation responsibly.",
+        intro:
+          "Visa preparation should start with clean documentation, clear academic goals, and realistic financial planning. Students should avoid incomplete or rushed submissions.",
+        sections: [
+          {
+            title: "Preparation Essentials",
+            points: [
+              "Keep admission records, financial statements, identity proof, and academic documents organized and consistent.",
+              "Students should clearly explain why the selected Australian course aligns with background and future career plans.",
+              "Any education gap or profile transition should be addressed with clarity and supporting context."
+            ]
+          },
+          {
+            title: "Common Visa Planning Issues",
+            points: [
+              "Relying on outdated information can cause major mistakes in submission.",
+              "Weak financial clarity or contradictory statements can reduce application quality.",
+              "Always verify policy updates from official Australian government sources."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Is early visa preparation useful for Australia applications?",
+            answer:
+              "Yes. Early planning improves consistency and reduces last-minute documentation errors."
+          },
+          {
+            question: "Should students depend on unofficial visa shortcuts?",
+            answer:
+              "No. Students should always follow official processes and verified guidance only."
+          }
+        ]
+      },
+      {
+        slug: "scholarships",
+        title: "Scholarships in Australia",
+        description: "Explore practical scholarship planning in Australia for international students.",
+        intro:
+          "Australia scholarships can reduce cost pressure, but students should evaluate realistic funding chances and prepare application quality early.",
+        sections: [
+          {
+            title: "Scholarship Directions",
+            points: [
+              "Students can find institution-level merit support and selected externally funded programs depending on profile and course.",
+              "Scholarship competitiveness usually increases for high-demand programs and top institutions.",
+              "Eligibility and award size vary, so official course pages should always be checked."
+            ]
+          },
+          {
+            title: "How to Improve Funding Outcomes",
+            points: [
+              "Build a clear profile story with academic consistency and practical achievements.",
+              "Submit complete and specific statements instead of generic essay content.",
+              "Apply to a balanced set of institutions instead of relying on one scholarship outcome."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Do Australian universities offer scholarships for international students?",
+            answer:
+              "Yes. Many institutions offer scholarship support, but eligibility and award amounts vary by course and profile."
+          },
+          {
+            question: "Can scholarships fully cover costs in Australia?",
+            answer:
+              "Sometimes, but many awards are partial. Students should combine scholarships with realistic financial planning."
+          }
+        ]
+      },
+      {
+        slug: "jobs-and-work-opportunities",
+        title: "Jobs and Work Opportunities in Australia",
+        description: "Plan student work strategy and post-study employability in Australia with practical guidance.",
+        intro:
+          "Work outcomes in Australia depend on skill-building and planning, not just destination choice. Students should build employability while studying, not after graduation.",
+        sections: [
+          {
+            title: "During Study",
+            points: [
+              "Students should follow official work rules and keep academic performance as primary focus.",
+              "Part-time roles can improve communication and workplace confidence if chosen thoughtfully.",
+              "Resume quality improves when students combine study with relevant projects and practical exposure."
+            ]
+          },
+          {
+            title: "After Graduation",
+            points: [
+              "Post-study outcomes improve when students align course choice with sector demand and regional opportunities.",
+              "Students should develop interview readiness and local networking before final semester.",
+              "Career planning should include backup pathways and skill-upgrade milestones."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Can students work while studying in Australia?",
+            answer:
+              "Students may have work options under official conditions. Always verify current rules from official sources before starting work."
+          },
+          {
+            question: "What improves employability in Australia after study?",
+            answer:
+              "Practical skills, communication confidence, internship-like exposure, and targeted applications improve post-study outcomes."
+          }
+        ]
+      }
+    ]
   },
   {
     slug: "europe",
@@ -307,7 +754,156 @@ export const countryResources: CountryResource[] = [
       { slug: "scholarships", label: "Scholarships", short: "Funding support across selected destinations" },
       { slug: "jobs-and-work-opportunities", label: "Jobs & Work Opportunities", short: "Student work and career planning" }
     ],
-    topics: []
+    topics: [
+      {
+        slug: "study-options",
+        title: "Study Options in Europe",
+        description: "Compare European study pathways by country, cost, language, and employability context.",
+        intro:
+          "Europe should not be treated as one destination. Students need country-by-country comparison because tuition, language environment, and post-study pathways vary significantly.",
+        sections: [
+          {
+            title: "How Europe Differs by Country",
+            points: [
+              "Some countries are known for affordability, while others are known for prestige or specialization in selected sectors.",
+              "English-taught options are available in many destinations, but students should verify language requirements carefully.",
+              "Institution quality, city cost, and program format should be evaluated at destination level, not region level."
+            ]
+          },
+          {
+            title: "Building a Smart Europe Shortlist",
+            points: [
+              "Shortlist by country clusters: cost-focused, quality-focused, and balanced options.",
+              "Compare visa timelines, housing availability, and internship opportunities before finalizing choices.",
+              "Students should keep backup destinations in case policy or admission timelines shift."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Is Europe affordable for international students?",
+            answer:
+              "It can be, depending on country and city. Some destinations are more affordable than common study-abroad options, but costs still vary by lifestyle and institution."
+          },
+          {
+            question: "Should students compare Europe country by country?",
+            answer:
+              "Yes. This is essential because tuition, language rules, and career opportunities are not uniform across Europe."
+          }
+        ]
+      },
+      {
+        slug: "student-visa-guide",
+        title: "Europe Student Visa Guide",
+        description: "A practical overview of student visa preparation across popular European destinations.",
+        intro:
+          "Visa planning for Europe requires country-specific preparation because document processes and timelines differ. Students should avoid treating all European destinations as one visa process.",
+        sections: [
+          {
+            title: "Country-Specific Preparation",
+            points: [
+              "Students should build destination-specific document checklists based on official embassy and government guidance.",
+              "Financial proof, admission documents, and housing readiness often play a key role in visa planning.",
+              "Timelines can vary, so students should begin preparation early to avoid intake delays."
+            ]
+          },
+          {
+            title: "Common Mistakes in Europe Visa Planning",
+            points: [
+              "Using one generic checklist for all countries can create missing-document issues.",
+              "Students should not rely on outdated social media visa advice.",
+              "Always verify final requirements from official destination-country sources."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Are visa requirements same across all Europe countries?",
+            answer:
+              "No. Requirements differ by country, so students must follow official destination-specific guidance."
+          },
+          {
+            question: "How early should students start visa planning for Europe?",
+            answer:
+              "Start early after shortlisting countries to manage documentation, timelines, and intake schedules smoothly."
+          }
+        ]
+      },
+      {
+        slug: "scholarships",
+        title: "Scholarships in Europe",
+        description: "Understand scholarship pathways across European study destinations with realistic planning tips.",
+        intro:
+          "Scholarship opportunities in Europe vary by country, institution, and program level. Students should combine scholarship exploration with affordable-country strategy.",
+        sections: [
+          {
+            title: "Where Funding Opportunities Appear",
+            points: [
+              "Students may find country-level scholarships, institution scholarships, and selected external funding opportunities.",
+              "Program level and academic profile can influence scholarship competitiveness significantly.",
+              "Some lower-cost countries may provide better total value even with smaller scholarship amounts."
+            ]
+          },
+          {
+            title: "Practical Scholarship Planning",
+            points: [
+              "Track deadlines country-wise and avoid combining everything into one generic list.",
+              "Prepare clear statements that explain course-country fit and long-term goals.",
+              "Use scholarship strategy with budget-safe destination choices for a stable overall plan."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Can students find scholarships across Europe?",
+            answer:
+              "Yes, but opportunities vary widely by destination and institution. Students should research country and university pages carefully."
+          },
+          {
+            question: "Should students rely only on scholarships to fund Europe study?",
+            answer:
+              "No. A stable plan combines scholarship opportunities with realistic cost-focused destination selection."
+          }
+        ]
+      },
+      {
+        slug: "jobs-and-work-opportunities",
+        title: "Jobs and Work Opportunities in Europe",
+        description: "A practical guide to student work planning and post-study employability across Europe.",
+        intro:
+          "Europe career outcomes vary by country, language environment, and sector demand. Students should build employability strategy with destination-specific context from the beginning.",
+        sections: [
+          {
+            title: "During Study",
+            points: [
+              "Students should verify country-specific work permissions and remain compliant with official student conditions.",
+              "Part-time roles can support communication growth and local exposure when chosen carefully.",
+              "Language learning can become a major employability advantage in many European destinations."
+            ]
+          },
+          {
+            title: "After Graduation",
+            points: [
+              "Post-study planning should include visa pathway understanding, sector demand mapping, and location flexibility.",
+              "Students should prepare local-style CVs and interview approaches based on destination expectations.",
+              "Career strength improves when academic learning is combined with practical projects and language adaptation."
+            ]
+          }
+        ],
+        faq: [
+          {
+            question: "Is language important for jobs in Europe?",
+            answer:
+              "In many destinations, yes. English may be enough in some sectors, but local language ability can improve employability significantly."
+          },
+          {
+            question: "Can students work while studying in Europe?",
+            answer:
+              "Many countries offer student work options under official rules, but conditions differ by destination and should be verified carefully."
+          }
+        ]
+      }
+    ]
   },
   {
     slug: "india",

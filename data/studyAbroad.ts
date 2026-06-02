@@ -6,6 +6,10 @@ export type CountryGuide = {
   description: string;
   intro: string;
   steps?: string[];
+  whoShouldChoose?: string[];
+  whoShouldAvoid?: string[];
+  commonMistakes?: string[];
+  realExamples?: { scenario: string; takeaway: string }[];
   eligibility: string[];
   exams: string[];
   visa?: {
@@ -38,6 +42,16 @@ export const countryGuides: CountryGuide[] = [
       "Explore studying in the USA with a clear guide to eligibility, exams, tuition, living costs, scholarships, work opportunities, student visa basics, and post-study pathways.",
     intro:
       "The United States remains one of the most popular destinations for international students because of its wide program selection, flexible academic system, strong research ecosystem, and global job opportunities across technology, healthcare, business, media, and engineering.",
+    whoShouldChoose: [
+      "Students targeting research-heavy universities, advanced labs, and specialization depth in STEM, business analytics, and healthcare.",
+      "Applicants who can handle a higher-cost ecosystem and want strong internship and innovation exposure.",
+      "Students planning to build a global resume through assistantships, projects, and industry networking.",
+    ],
+    whoShouldAvoid: [
+      "Students who need very low tuition with minimal financial risk in the first year.",
+      "Applicants choosing a university only by ranking without checking total cost and career outcomes.",
+      "Students not ready for self-managed planning across academics, finance, housing, and immigration paperwork.",
+    ],
     steps: [
       "Choose your course, degree level, and preferred universities based on your career goals, academic profile, and budget.",
       "Review entry requirements such as academic transcripts, English proficiency, test scores, and supporting documents.",
@@ -47,6 +61,12 @@ export const countryGuides: CountryGuide[] = [
       "Receive the required admission documents from the university, including the I-20 form where applicable.",
       "Arrange financial proof, accommodation planning, health insurance, and travel budgeting.",
       "Apply for the student visa, attend the interview if required, and complete your final pre-departure preparations.",
+    ],
+    commonMistakes: [
+      "Shortlisting only expensive, highly competitive universities without budget-safe options.",
+      "Treating scholarship chances as guaranteed instead of building a full financing plan.",
+      "Ignoring internship ecosystem and job-market fit while selecting programs.",
+      "Preparing visa interview answers without a clear academic and career narrative.",
     ],
     eligibility: [
       "After 12th for undergraduate programs at colleges and universities.",
@@ -109,6 +129,20 @@ export const countryGuides: CountryGuide[] = [
       "Need-based support where available",
       "External scholarships from governments and private organizations",
     ],
+    realExamples: [
+      {
+        scenario:
+          "A computer science applicant chose a lower-ranked university with strong internship links in Texas over a costlier brand-name option, reducing debt and landing an internship in year one.",
+        takeaway:
+          "Outcome quality is often driven by program-industry fit and financial sustainability, not ranking alone.",
+      },
+      {
+        scenario:
+          "A public health student improved admit quality after rewriting SOP around one clear specialization goal and measurable post-study plan.",
+        takeaway:
+          "Focused intent and coherent storytelling can materially improve admission outcomes.",
+      },
+    ],
     faqs: [
       {
         question: "Can students study in the USA after 12th?",
@@ -168,6 +202,16 @@ export const countryGuides: CountryGuide[] = [
       "Understand studying in Canada with details on eligibility, English tests, tuition, living costs, scholarships, work options, study permit basics, and post-study pathways.",
     intro:
       "Canada is a strong destination for students seeking quality education, multicultural campuses, practical learning, and relatively clear post-study work and immigration pathways in many cases.",
+    whoShouldChoose: [
+      "Students prioritizing practical education with co-op or applied learning outcomes.",
+      "Applicants who want a balance between quality education, manageable tuition, and long-term work pathways.",
+      "Students comfortable adapting to province-specific job markets and climate realities.",
+    ],
+    whoShouldAvoid: [
+      "Students selecting Canada only for immigration headlines without checking program ROI.",
+      "Applicants assuming every college and every course provides equal post-study outcomes.",
+      "Students with no buffer for rising living costs in major cities.",
+    ],
     steps: [
       "Choose your preferred course, province, and institution based on budget, career goals, and long-term plans.",
       "Review academic eligibility, English test requirements, and institution-specific admission criteria.",
@@ -177,6 +221,12 @@ export const countryGuides: CountryGuide[] = [
       "Accept admission and collect documents needed for your study permit application.",
       "Prepare financial proof, tuition payment records, passport, and accommodation planning.",
       "Apply for your Canadian study permit and complete biometrics or other required steps.",
+    ],
+    commonMistakes: [
+      "Choosing province and institution without reviewing local demand for your target occupation.",
+      "Submitting generic SOPs that do not connect prior education to Canadian program outcomes.",
+      "Underestimating housing and transport costs in high-demand cities.",
+      "Expecting part-time work income to fully cover tuition and living expenses.",
     ],
     eligibility: [
       "After 12th for diploma and bachelor's options.",
@@ -235,6 +285,20 @@ export const countryGuides: CountryGuide[] = [
       "Provincial and federal opportunities where eligible",
       "Private and nonprofit scholarships",
     ],
+    realExamples: [
+      {
+        scenario:
+          "An engineering diploma student selected a mid-sized Ontario college with co-op placement support and secured paid work experience before graduation.",
+        takeaway:
+          "Employer connectivity and co-op execution can outperform pure brand value for early employability.",
+      },
+      {
+        scenario:
+          "A business applicant reduced refusal risk by showing clear funds trail and an SOP tied to prior internships and return-on-study plan.",
+        takeaway:
+          "Transparent financial documentation and logical academic progression are critical in permit decisions.",
+      },
+    ],
     faqs: [
       {
         question: "Is Canada good after 12th for international students?",
@@ -288,6 +352,16 @@ export const countryGuides: CountryGuide[] = [
       "A clear study in UK guide covering admissions, English tests, tuition, living expenses, scholarships, student visa basics, top courses, work options, and career pathways after graduation.",
     intro:
       "The United Kingdom is known for globally recognized universities, shorter program durations for many degrees, strong business and research reputation, and a well-established international student environment.",
+    whoShouldChoose: [
+      "Students seeking faster degree completion, especially one-year master's pathways.",
+      "Applicants targeting business, finance, law, media, and data-focused programs with global reputation.",
+      "Students who prefer structured academic calendars and compact city-based study models.",
+    ],
+    whoShouldAvoid: [
+      "Students choosing solely based on brand prestige without evaluating total living cost.",
+      "Applicants expecting low tuition in London-equivalent city centers without financial planning.",
+      "Students not ready for accelerated coursework pace and tighter assignment timelines.",
+    ],
     steps: [
       "Choose your course, university, and degree level based on career plans, location, and budget.",
       "Review academic criteria, English requirements, and any course-specific conditions.",
@@ -297,6 +371,12 @@ export const countryGuides: CountryGuide[] = [
       "Accept your offer and obtain the documents needed for your student visa application.",
       "Arrange finances, accommodation, travel planning, and health surcharge requirements where applicable.",
       "Submit your student visa application and complete biometrics or any requested formalities.",
+    ],
+    commonMistakes: [
+      "Ignoring city-level living differences and budgeting only for tuition.",
+      "Applying late and losing access to better accommodation and scholarship windows.",
+      "Choosing courses without checking graduate employability outcomes and visa implications.",
+      "Treating one-year master's programs as easy instead of planning for high-intensity timelines.",
     ],
     eligibility: [
       "After 12th for foundation, pathway, and undergraduate entry depending on the institution.",
@@ -355,6 +435,20 @@ export const countryGuides: CountryGuide[] = [
       "Chevening and related merit-based opportunities",
       "Departmental scholarships for selected programs",
       "Private funding bodies and educational trusts",
+    ],
+    realExamples: [
+      {
+        scenario:
+          "A finance student selected a Russell Group program outside London to cut annual living cost and used savings for professional certification prep.",
+        takeaway:
+          "City strategy can meaningfully improve affordability without sacrificing degree quality.",
+      },
+      {
+        scenario:
+          "A media applicant built a portfolio before arrival and secured part-time agency work in semester one.",
+        takeaway:
+          "Pre-arrival skill assets can accelerate job readiness in practical UK sectors.",
+      },
     ],
     faqs: [
       {

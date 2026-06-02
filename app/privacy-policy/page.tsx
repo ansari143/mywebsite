@@ -2,6 +2,10 @@ export const metadata = {
   title: "Privacy Policy | Nishaglobal Education",
   description:
     "Privacy Policy for Nishaglobal Education covering data collection, usage, cookies, and user rights for our global career guidance platform.",
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: "https://www.nishaglobaleducation.com/privacy-policy",
   },

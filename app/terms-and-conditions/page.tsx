@@ -2,6 +2,10 @@ export const metadata = {
   title: "Terms & Conditions | Nishaglobal Education",
   description:
     "Terms and Conditions for using Nishaglobal Education, covering website usage, career guidance, educational content, and user responsibilities.",
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: "https://www.nishaglobaleducation.com/terms-and-conditions",
   },

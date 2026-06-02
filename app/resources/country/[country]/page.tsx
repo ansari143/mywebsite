@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { countryResourcesWithTopics, getCountryResource } from "@/data/countryResources";
+import { countryResourcesWithTopics, getCountryResource, isCountryUsingDefaultTopics } from "@/data/countryResources";
 
 type Props = {
   params: Promise<{ country: string }>;
@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${item.name} Resources | Nishaglobal Education`,
     description: item.description,
+    robots: isCountryUsingDefaultTopics(item.slug) ? "noindex,follow" : undefined,
     alternates: {
       canonical: `https://www.nishaglobaleducation.com/resources/country/${item.slug}`,
     },

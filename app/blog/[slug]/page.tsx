@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import CTABox from "@/components/CTABox";
 import FAQSection from "@/components/FAQSection";
 import RelatedBlogs from "@/components/RelatedBlogs";
-import { blogPosts, getBlogBySlug } from "@/data/blogs";
+import { blogPosts, getBlogBySlug, isIndexableBlog } from "@/data/blogs";
 
 type BlogPageParams = {
   params: Promise<{ slug: string }>;
@@ -54,11 +54,13 @@ export async function generateMetadata({ params }: BlogPageParams): Promise<Meta
   }
 
   const canonicalUrl = `https://www.nishaglobaleducation.com/blog/${post.slug}`;
+  const shouldIndex = isIndexableBlog(post.slug);
 
   return {
     title: `${post.title} | Nishaglobal Education`,
     description: post.description,
     keywords: post.keywords,
+    robots: shouldIndex ? undefined : "noindex,follow",
     alternates: {
       canonical: canonicalUrl,
     },

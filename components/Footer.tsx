@@ -45,6 +45,7 @@ export default function Footer() {
               <Link href="/blog?category=Scholarships" className="hover:text-blue-600">Scholarships</Link>
               <Link href="/tests" className="hover:text-blue-600">Career Tests</Link>
               <Link href="/practice-tests" className="hover:text-blue-600">Practice Tests</Link>
+              <Link href="/editorial-policy" className="hover:text-blue-600">Editorial Policy</Link>
               <Link href="/privacy-policy" className="hover:text-blue-600">Privacy Policy</Link>
               <Link href="/terms-and-conditions" className="hover:text-blue-600">Terms</Link>
               <Link href="/disclaimer" className="hover:text-blue-600">Disclaimer</Link>

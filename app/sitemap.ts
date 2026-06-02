@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { resourcePages } from "@/data/resourcePages";
 import { countryResourcesWithTopics, isCountryUsingDefaultTopics } from "@/data/countryResources";
 import { practiceCategories, govPracticeCategories } from "@/data/practiceTests";
-import { blogPosts } from "@/data/blogs";
+import { getIndexableBlogPosts } from "@/data/blogs";
 import { tests } from "@/data/tests";
 import { skillsPages } from "@/data/skillsPages";
 
@@ -13,13 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/about",
     "/blog",
-    "/contact",
-    "/disclaimer",
-    "/privacy-policy",
+    "/editorial-policy",
     "/resources",
     "/skills",
     "/skills/ai-roadmap",
-    "/terms-and-conditions",
     "/tests",
     "/global-careers",
     "/study-abroad",
@@ -40,21 +37,54 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const resourceRoutes = resourcePages.map((page) => `/resources/${page.slug}`);
   const countryRoutes = countryResourcesWithTopics.flatMap((country) => {
-    const routes = [`/resources/country/${country.slug}`];
+    const routes = isCountryUsingDefaultTopics(country.slug)
+      ? []
+      : [`/resources/country/${country.slug}`];
     if (!isCountryUsingDefaultTopics(country.slug)) {
       routes.push(...country.topics.map((topic) => `/resources/country/${country.slug}/${topic.slug}`));
     }
     return routes;
   });
 
-  const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
+  const blogRoutes = getIndexableBlogPosts().map((post) => `/blog/${post.slug}`);
   const testRoutes = tests.map((test) => `/tests/${test.slug}`);
   const skillRoutes = skillsPages.map((skill) => `/skills/${skill.slug}`);
+
+  const routePriority = (route: string) => {
+    if (route === "") return 1;
+
+    if (["/blog", "/resources", "/study-abroad", "/tests", "/skills"].includes(route)) {
+      return 0.9;
+    }
+
+    if (route.startsWith("/blog/") || route.startsWith("/study-in-") || route.startsWith("/resources/country/")) {
+      return 0.85;
+    }
+
+    if (route.startsWith("/practice-tests/")) {
+      const depth = route.split("/").filter(Boolean).length;
+      return depth >= 3 ? 0.6 : 0.7;
+    }
+
+    if (route.startsWith("/tests/")) {
+      return 0.8;
+    }
+
+    return 0.75;
+  };
+
+  const routeFrequency = (route: string): MetadataRoute.Sitemap[number]["changeFrequency"] => {
+    if (route === "") return "weekly";
+    if (route.startsWith("/blog") || route.startsWith("/resources")) return "weekly";
+    if (route.startsWith("/study-") || route.startsWith("/skills")) return "monthly";
+    if (route.startsWith("/practice-tests") || route.startsWith("/tests")) return "monthly";
+    return "monthly";
+  };
 
   return [...staticRoutes, ...resourceRoutes, ...countryRoutes, ...practiceRoutes, ...govSetRoutes, ...blogRoutes, ...testRoutes, ...skillRoutes].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : 0.8,
+    changeFrequency: routeFrequency(route),
+    priority: routePriority(route),
   }));
 }

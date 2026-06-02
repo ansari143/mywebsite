@@ -4,6 +4,10 @@ export const metadata = {
   title: "Contact | Nishaglobal Education",
   description:
     "Contact Nishaglobal Education for global career guidance, study abroad support, educational resources, skill learning, partnerships, and collaboration enquiries.",
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: "https://www.nishaglobaleducation.com/contact",
   },

@@ -59,6 +59,27 @@ export type BlogPost = {
   relatedSlugs?: string[];
 };
 
+const curatedIndexableBlogSlugs = new Set([
+  "how-indian-students-can-study-in-usa-after-12th",
+  "f1-visa-interview-questions-with-answers",
+  "top-10-highest-paying-careers-in-usa-2026",
+  "how-to-become-software-engineer-in-usa",
+  "best-ai-skills-to-learn-in-2026",
+  "best-affordable-universities-in-usa-for-international-students",
+  "top-scholarships-in-usa-for-indian-students-2026",
+  "community-college-vs-university-in-usa",
+  "living-cost-in-usa-for-students",
+  "best-careers-that-will-survive-ai",
+  "ai-careers-without-coding",
+  "best-ai-tools-for-students",
+  "study-timetable-for-competitive-exams",
+  "best-careers-for-introverts",
+  "how-to-avoid-distractions-while-studying",
+  "cloud-computing-vs-data-science",
+  "cybersecurity-career-roadmap",
+  "how-to-become-an-ai-engineer-in-usa",
+]);
+
 const defaultAuthor = "Nishaglobal Education Editorial Team";
 
 function buildTemplate(params: {
@@ -596,6 +617,397 @@ const f1VisaInterviewContent: BlogContentTemplate = {
   ],
 };
 
+const affordableUniversitiesUSAContent: BlogContentTemplate = {
+  introduction: [
+    "Students often search for affordable universities in USA and get trapped in ranking lists that ignore total cost, scholarship reality, and city expenses. That leads to poor shortlists and expensive mistakes.",
+    "A good affordable-university decision is not just about low tuition. It should combine manageable yearly cost, program strength, internship access, and a realistic fit for international students.",
+    "This guide helps Indian students and other international students compare affordable USA options with a decision process they can actually use. Instead of pushing a generic top-10 list, it explains how to evaluate value properly.",
+  ],
+  whoThisGuideIsFor: [
+    "Students targeting study in USA with a strict family budget.",
+    "Parents comparing tuition plus living cost rather than tuition alone.",
+    "Applicants deciding between public universities, regional campuses, and transfer-friendly routes.",
+    "International students who want value and employability instead of brand-name pressure.",
+  ],
+  whoShouldAvoid: [
+    "Students choosing universities only because a social media creator mentioned them.",
+    "Families who compare published tuition but ignore rent, insurance, and transport.",
+    "Applicants expecting a low-cost university to automatically offer strong internship access in every major.",
+  ],
+  mainExplanation: [
+    {
+      heading: "What affordable really means in USA education",
+      paragraphs: [
+        "Affordable does not always mean cheapest tuition. In the USA, two universities with similar tuition can create very different total yearly cost because housing, food, health insurance, and local transport vary sharply by city and state.",
+        "Students should evaluate total cost of attendance, not only headline tuition. A mid-cost university in a lower-cost location can be better value than a low-tuition university in a very expensive city.",
+        "You should also measure affordability against employability. A university that gives stronger internship access, career office support, and employer visibility may create better long-term return even if first-year cost is slightly higher.",
+      ],
+    },
+    {
+      heading: "Which institutions usually offer better value for international students",
+      paragraphs: [
+        "Public universities in lower-cost states, regional universities with strong STEM or business outcomes, and universities offering merit aid often provide better value than heavily branded private options for budget-conscious students.",
+        "Community college plus transfer is also a serious affordability strategy, but it requires transfer planning, GPA discipline, and clarity about the final university target.",
+        "Students should compare four things together: tuition, living cost, scholarship likelihood, and internship ecosystem. If one of these is missing, the shortlist is incomplete.",
+      ],
+    },
+    {
+      heading: "How to avoid low-value affordable university lists",
+      paragraphs: [
+        "Many websites publish generic affordable university lists with no explanation of program fit, scholarship probability, or city cost. Those lists are not enough for a real decision.",
+        "Instead, build a shortlist in three bands: very affordable, balanced value, and stretch-with-aid. That gives families a more stable application strategy.",
+      ],
+    },
+  ],
+  stepByStepGuidance: [
+    { title: "Step 1: Set a total annual budget", detail: "Decide the full amount your family can manage per year, including tuition, living cost, insurance, books, and emergency buffer." },
+    { title: "Step 2: Build a value-first shortlist", detail: "Create 12 to 15 options across public universities, regional campuses, and transfer routes based on total cost, not prestige." },
+    { title: "Step 3: Check scholarship probability", detail: "Look for automatic merit aid, separate scholarship applications, and major-specific awards. Do not assume every admitted student gets meaningful aid." },
+    { title: "Step 4: Compare outcomes by major", detail: "A low-cost university can still be a bad fit if your intended major has weak placement support or poor internship access." },
+    { title: "Step 5: Finalize reach, match, and safe options", detail: "Choose a balanced final list so one rejection or one expensive offer does not break the whole plan." },
+  ],
+  comparisonTable: {
+    title: "Affordable path comparison for international students",
+    headers: ["Path", "Cost Pattern", "Main Advantage", "Main Risk"],
+    rows: [
+      ["Regional Public University", "Low to medium", "Better total cost and realistic admissions", "May have weaker brand recognition"],
+      ["Public Flagship with Aid", "Medium", "Good outcomes with scholarship support", "More competitive for funding"],
+      ["Community College + Transfer", "Lower first two years", "Strong cost reduction", "Requires careful transfer planning"],
+      ["Private University with Merit Aid", "Can vary widely", "Sometimes lower net cost than expected", "Published tuition can look misleadingly high"],
+    ],
+  },
+  commonMistakes: [
+    "Shortlisting only by tuition without checking city living cost.",
+    "Applying to expensive universities assuming aid will appear later.",
+    "Ignoring career office strength and local employer access.",
+    "Choosing an affordable institution with weak fit for the intended major.",
+    "Not keeping budget-safe backup options.",
+  ],
+  finalTips: [
+    "Build decisions around net yearly cost, not brand pressure.",
+    "Keep one transfer strategy in reserve if direct four-year options are too expensive.",
+    "Use scholarships as cost reducers, not as the entire funding plan.",
+    "Discuss budget honestly before applications start so the shortlist stays realistic.",
+  ],
+  faqs: [
+    { question: "Are affordable universities in USA low quality?", answer: "No. Many affordable universities offer solid academic support and good career outcomes when chosen by major fit and location value, not just national prestige." },
+    { question: "Can scholarships make mid-cost universities more affordable than cheap universities?", answer: "Yes. A university with strong merit aid can become cheaper in net cost than a low-tuition university with little or no aid." },
+    { question: "Should international students consider community college first?", answer: "Yes, if budget is tight and the student is ready to manage transfer planning carefully. It can be a strong value route, not a weak route." },
+    { question: "What is the biggest mistake families make?", answer: "They compare tuition only and underestimate living cost, insurance, and the risk of weak employability outcomes." },
+  ],
+};
+
+const scholarshipsUSAContent: BlogContentTemplate = {
+  introduction: [
+    "Many students search for scholarships in USA and end up reading vague pages that simply repeat names of awards without explaining who actually has a strong chance, when to prepare, or what makes an application competitive.",
+    "Scholarship planning works best when families treat it as a profile-building process, not a lucky bonus. Students who start early, show clear academic direction, and present credible impact stories usually do better.",
+    "This guide is written for Indian students and parents who want a realistic scholarship strategy for 2026, including how to think about merit aid, institutional scholarships, and what strong applications usually look like.",
+  ],
+  whoThisGuideIsFor: [
+    "Indian students applying to undergraduate or postgraduate study in USA.",
+    "Parents trying to reduce total education cost without depending on risky assumptions.",
+    "Applicants willing to prepare essays, activity evidence, and documents early.",
+    "Students who want scholarship strategy linked to university selection, not handled separately at the last minute.",
+  ],
+  whoShouldAvoid: [
+    "Applicants who plan to start scholarship preparation only after admissions arrive.",
+    "Students using generic essays that could be sent to any scholarship committee.",
+    "Families assuming one full scholarship is the most likely outcome.",
+  ],
+  mainExplanation: [
+    {
+      heading: "How scholarship opportunities usually work in USA",
+      paragraphs: [
+        "Scholarship support for international students often comes in three broad forms: automatic merit aid, separate institutional scholarships, and external funding. Each has different timing and competition levels.",
+        "Undergraduate applicants often benefit from merit-based institutional aid when grades, profile quality, and essays are strong. Graduate applicants may also explore assistantships, department-based awards, and project-related support.",
+        "Students should think in terms of total funding package rather than one single scholarship name. Several partial reductions together can make a major difference.",
+      ],
+    },
+    {
+      heading: "What makes a scholarship application strong",
+      paragraphs: [
+        "Strong applicants usually show more than marks. They demonstrate consistency, initiative, community contribution, project outcomes, leadership, or depth in one area that matters to the institution.",
+        "Committees respond better to specific evidence than broad claims. Instead of saying you are passionate, show what you built, led, improved, or sustained over time.",
+      ],
+    },
+    {
+      heading: "How to create a scholarship-friendly application strategy",
+      paragraphs: [
+        "Choose universities where your profile is above or near the academic median, because that often improves merit-aid chances. Highly aspirational schools may be valuable, but they should not dominate the list.",
+        "Keep a separate scholarship calendar. Missing one deadline can reduce funding options more than a weak essay.",
+      ],
+    },
+  ],
+  stepByStepGuidance: [
+    { title: "Step 1: Audit your profile honestly", detail: "List academics, activities, projects, competitions, leadership, volunteering, and any measurable achievements. Scholarship strength depends on evidence, not self-description." },
+    { title: "Step 2: Categorize scholarships", detail: "Separate automatic merit aid, institution-specific applications, government-linked funding, and external scholarships so you know what requires extra work." },
+    { title: "Step 3: Build your story themes", detail: "Most strong applications revolve around two or three consistent themes such as leadership, research interest, social impact, or technical excellence." },
+    { title: "Step 4: Write and refine early", detail: "Start essays well before deadlines so teachers, mentors, or family members can review clarity and evidence quality." },
+    { title: "Step 5: Use scholarship strategy in shortlist decisions", detail: "Do not create a university list first and then think about funding later. Funding probability should be one of the list-building filters." },
+  ],
+  comparisonTable: {
+    title: "Scholarship type comparison",
+    headers: ["Scholarship Type", "Typical Basis", "Best For", "Planning Note"],
+    rows: [
+      ["Automatic Merit Aid", "Grades and profile strength", "Students with strong academic consistency", "Check whether separate application is needed"],
+      ["Institutional Scholarship", "Essays, leadership, impact", "Students with compelling story and activity depth", "Deadline discipline matters a lot"],
+      ["Departmental Funding", "Program fit or research alignment", "Graduate applicants", "Needs course-specific research"],
+      ["External Scholarship", "Independent criteria", "Students willing to manage extra paperwork", "Competition can be broader and more varied"],
+    ],
+  },
+  commonMistakes: [
+    "Treating scholarships as luck instead of a planning process.",
+    "Submitting the same essay everywhere.",
+    "Overstating achievements without proof.",
+    "Choosing universities with low scholarship probability for your profile band.",
+    "Missing deadlines because documents were not organized early.",
+  ],
+  finalTips: [
+    "Build a shortlist where aid probability is part of the decision, not an afterthought.",
+    "Show sustained effort and measurable contribution, not motivational slogans.",
+    "Use partial scholarships strategically because combined savings can still transform total cost.",
+    "Track every requirement in one spreadsheet from day one.",
+  ],
+  faqs: [
+    { question: "Can Indian students get scholarships in USA even without perfect marks?", answer: "Yes. Strong essays, leadership, project depth, and a well-matched university list can still create meaningful scholarship opportunities even without perfect marks." },
+    { question: "Are full scholarships common for international students?", answer: "They exist, but they are highly competitive. A realistic plan should also include partial scholarships, aid combinations, and budget-safe universities." },
+    { question: "When should students start scholarship planning?", answer: "Ideally 9 to 12 months before the first application deadlines, especially if essays, tests, and recommendation letters are involved." },
+    { question: "Do scholarships only matter for undergraduate students?", answer: "No. Graduate students often have additional options such as departmental funding, assistantships, and research-related support." },
+  ],
+};
+
+const communityCollegeVsUniversityContent: BlogContentTemplate = {
+  introduction: [
+    "For many international students, the community college versus university decision is not about prestige. It is about cost, transfer flexibility, campus experience, and long-term career outcomes.",
+    "The wrong choice can create financial strain or academic mismatch. The right choice can reduce cost and still lead to a strong degree outcome if the student understands the trade-offs clearly.",
+    "This guide compares community colleges and universities in USA in a practical way so students and parents can decide based on goals, budget, and learning style.",
+  ],
+  whoThisGuideIsFor: [
+    "Students comparing lower-cost study in USA pathways.",
+    "Parents evaluating whether a transfer route is financially smarter.",
+    "Students deciding between a direct four-year campus experience and a phased pathway.",
+  ],
+  whoShouldAvoid: [
+    "Students who want a transfer path but are not ready for academic planning discipline.",
+    "Applicants assuming all credits always transfer automatically.",
+    "Families who want a simple one-step decision with no follow-up planning.",
+  ],
+  mainExplanation: [
+    {
+      heading: "What community college offers that universities may not",
+      paragraphs: [
+        "Community colleges can significantly reduce first- and second-year costs. For budget-sensitive students, that can make USA education possible without taking on unrealistic financial stress.",
+        "They also often provide smaller classes and a gentler transition into the American academic system. That can benefit students who need time to adapt to teaching style, communication expectations, and independent learning.",
+      ],
+    },
+    {
+      heading: "What universities offer that community colleges may not",
+      paragraphs: [
+        "A four-year university usually gives direct access to the full campus ecosystem from day one: clubs, research, internship pipelines, career fairs, residential life, and broader alumni exposure.",
+        "For students targeting brand visibility, major-specific resources, and a full residential experience immediately, direct university entry can be the better fit if budget allows.",
+      ],
+    },
+    {
+      heading: "The real deciding factor is transfer quality and fit",
+      paragraphs: [
+        "Community college works best when transfer planning is intentional. Students must understand target universities, GPA expectations, required courses, and credit transfer rules from the beginning.",
+        "Without that planning, students can lose time, repeat courses, or struggle to move into the right major at the right moment.",
+      ],
+    },
+  ],
+  stepByStepGuidance: [
+    { title: "Step 1: Decide your main priority", detail: "Choose whether your top goal is lower cost, direct campus experience, faster networking, or transfer flexibility." },
+    { title: "Step 2: Compare total cost over four years", detail: "Do not compare only first-year tuition. Estimate the full route cost from start to graduation." },
+    { title: "Step 3: Check transfer pathways", detail: "If considering community college, verify articulation agreements, transfer acceptance patterns, and course equivalency early." },
+    { title: "Step 4: Match the path to your learning style", detail: "Some students thrive with smaller stepping-stone environments, while others benefit more from direct immersion in a large university ecosystem." },
+    { title: "Step 5: Review career access", detail: "Look at internships, local employer connections, and major-specific support rather than choosing by label alone." },
+  ],
+  comparisonTable: {
+    title: "Community college vs university in USA",
+    headers: ["Factor", "Community College", "University"],
+    rows: [
+      ["Cost", "Usually lower in first two years", "Usually higher from day one"],
+      ["Campus Experience", "More limited", "Full residential and campus ecosystem"],
+      ["Transfer Need", "Yes, for four-year degree path", "No transfer required"],
+      ["Internship Access", "Can be more limited initially", "Often broader from first year"],
+      ["Best For", "Budget-sensitive and transfer-ready students", "Students wanting direct four-year immersion"],
+    ],
+  },
+  commonMistakes: [
+    "Assuming all community college credits transfer smoothly.",
+    "Comparing only first-year cost instead of total graduation cost.",
+    "Choosing university for status without checking affordability.",
+    "Ignoring academic advising quality in transfer planning.",
+  ],
+  finalTips: [
+    "Community college is a strategy, not a compromise, when planned properly.",
+    "University is not always better if it creates unsustainable cost pressure.",
+    "Use transfer rules and major fit as primary decision tools.",
+    "Families should choose the path they can sustain through graduation, not just admission.",
+  ],
+  faqs: [
+    { question: "Is community college respected in USA?", answer: "Yes. It is a serious entry route for many domestic and international students, especially when used with a strong transfer plan." },
+    { question: "Can students still reach a top university after community college?", answer: "Yes, some students do, but success depends on GPA, course planning, transfer agreements, and the competitiveness of the target major." },
+    { question: "Who should choose direct university entry?", answer: "Students who want immediate access to the full campus ecosystem, can manage the budget, and prefer a single continuous four-year path." },
+    { question: "What is the biggest risk in the community college route?", answer: "Weak transfer planning. If courses, GPA targets, and destination goals are unclear, students can lose time and money." },
+  ],
+};
+
+const livingCostUSAContent: BlogContentTemplate = {
+  introduction: [
+    "Many students underestimate living cost in USA because they focus on tuition first. In reality, rent, insurance, food, transport, books, and day-to-day spending can decide whether the overall study plan remains sustainable.",
+    "This guide gives a practical view of student living cost in USA, not a one-number promise. Costs vary sharply by city, housing model, and spending habits, so students need planning ranges rather than random guesses.",
+    "Use this page to build a realistic monthly budget before finalizing your university list or visa financial plan.",
+  ],
+  whoThisGuideIsFor: [
+    "Students preparing financial plans for study in USA.",
+    "Parents checking whether tuition plus living cost is manageable.",
+    "Applicants choosing between cities, states, and housing models.",
+  ],
+  whoShouldAvoid: [
+    "Students looking for one universal cost number for the whole country.",
+    "Families who want to decide budget without city-level research.",
+    "Students unwilling to track monthly spending after arrival.",
+  ],
+  mainExplanation: [
+    {
+      heading: "Why student living cost in USA varies so much",
+      paragraphs: [
+        "A student in a high-cost city can spend dramatically more than a student in a smaller college town, even if both attend similar tuition-level institutions. Housing is usually the biggest reason for the gap.",
+        "Insurance, transport, eating habits, and whether you live on campus or off campus also change the monthly total. That is why students should plan in cost bands, not one fixed figure.",
+      ],
+    },
+    {
+      heading: "The major cost buckets students should model",
+      paragraphs: [
+        "The most important monthly cost heads are housing, groceries, utilities, transport, phone/internet, personal spending, and emergency buffer. On top of that, students often face semester-based costs such as books, deposits, and health insurance payments.",
+        "A useful family budget should separate predictable monthly expenses from irregular academic or relocation expenses.",
+      ],
+    },
+    {
+      heading: "How to control living costs without hurting the student experience",
+      paragraphs: [
+        "Low-cost living is not about cutting everything. It is about choosing the right city, housing setup, and weekly spending habits before bad patterns begin.",
+        "Students who share housing wisely, plan meals, and use campus resources usually reduce financial pressure more effectively than students who depend on emergency savings later.",
+      ],
+    },
+  ],
+  stepByStepGuidance: [
+    { title: "Step 1: Budget by city category", detail: "Classify options into high-cost city, medium-cost city, and lower-cost college town before finalizing your shortlist." },
+    { title: "Step 2: Estimate housing first", detail: "Housing usually drives the biggest difference, so compare dorms, shared apartments, and off-campus options early." },
+    { title: "Step 3: Build a monthly and semester budget", detail: "Keep routine spending separate from one-time academic and relocation expenses." },
+    { title: "Step 4: Add buffer, not optimism", detail: "Keep room for medical, travel, or academic surprise costs instead of assuming the cheapest scenario every month." },
+    { title: "Step 5: Review spending in the first 60 days", detail: "Most overspending happens early. Track your first two months closely and adjust habits fast." },
+  ],
+  comparisonTable: {
+    title: "Student cost bands in USA",
+    headers: ["Cost Band", "Typical Monthly Pattern", "Best Description", "Risk"],
+    rows: [
+      ["High-cost city", "$1,800-$2,700+", "Major metro with expensive rent", "Budget pressure can escalate quickly"],
+      ["Mid-cost city", "$1,200-$1,900", "Balanced city with moderate living cost", "Still needs careful housing choice"],
+      ["Lower-cost college town", "$900-$1,400", "Smaller city or college-focused town", "Fewer transport or lifestyle options in some cases"],
+    ],
+  },
+  commonMistakes: [
+    "Using tuition as the only budgeting metric.",
+    "Ignoring health insurance and deposits.",
+    "Choosing expensive housing for convenience without long-term affordability.",
+    "Depending on part-time work to rescue a weak financial plan.",
+    "Not tracking the first months after arrival.",
+  ],
+  finalTips: [
+    "Choose affordable location first, then lifestyle upgrades later.",
+    "Shared housing can be a smart strategy if commute and safety are reasonable.",
+    "Budget for emergencies before you need them.",
+    "A slightly less famous university in a lower-cost city can create better long-term financial stability.",
+  ],
+  faqs: [
+    { question: "How much should students budget monthly in USA?", answer: "A realistic range can be roughly $900 to $2,700 or more depending on location and housing model. The right way to plan is by city category, not one national average." },
+    { question: "Can part-time work cover living costs?", answer: "Part-time work may reduce some pressure, but it should not be the foundation of the budget. Students should build a financially stable plan before arrival." },
+    { question: "What is the biggest living-cost mistake?", answer: "Underestimating housing, insurance, and first-semester setup costs while focusing only on tuition." },
+    { question: "Is on-campus housing always cheaper?", answer: "Not always. It can be simpler and safer for many students, but off-campus shared housing may be cheaper in some locations." },
+  ],
+};
+
+const careersSurviveAIContent: BlogContentTemplate = {
+  introduction: [
+    "Students are hearing two extreme messages about AI: either every job will disappear, or AI will only create opportunity. Both views are incomplete. The more useful question is which careers stay durable when AI automates routine tasks.",
+    "This guide explains how to think about career resilience in the AI era. Instead of treating jobs as safe or unsafe forever, it shows which types of work retain value because they require judgment, trust, responsibility, domain depth, or human interaction.",
+    "If you are choosing a degree, skill plan, or career roadmap for the next five to ten years, this page is meant to help you think more clearly and less fearfully.",
+  ],
+  whoThisGuideIsFor: [
+    "Students worried about future job security in the AI era.",
+    "Parents trying to guide career decisions beyond short-term hype.",
+    "Learners choosing courses or skills that should remain useful over time.",
+    "Anyone who wants to understand what kind of work becomes more valuable when AI spreads.",
+  ],
+  whoShouldAvoid: [
+    "Readers looking for a fantasy list of jobs that will never change.",
+    "Students who want to ignore AI completely and hope the market stays the same.",
+    "People who want a career answer without considering skills, adaptability, and domain fit.",
+  ],
+  mainExplanation: [
+    {
+      heading: "What makes a career more resilient against AI",
+      paragraphs: [
+        "The most resilient careers are not necessarily the ones with no technology. They are roles where technology assists the work, but human judgment, responsibility, trust, or complex communication still matter greatly.",
+        "Work becomes more durable when it includes decision-making under uncertainty, human care, system ownership, ethical judgment, or domain-specific accountability. AI can support these roles, but it does not fully replace them easily.",
+      ],
+    },
+    {
+      heading: "Career types that usually hold value better",
+      paragraphs: [
+        "Healthcare, cybersecurity, skilled engineering, education leadership, operations, product roles, and AI-assisted technical careers often stay more resilient because they combine tools with human reasoning and responsibility.",
+        "Even in software and data, resilience comes from owning systems, understanding business context, and solving problems end to end, not just producing isolated tasks.",
+      ],
+    },
+    {
+      heading: "How students should plan for an AI-shaped future",
+      paragraphs: [
+        "The best response is not fear. It is building a hybrid profile: domain depth plus AI literacy, communication, and adaptability.",
+        "Students who learn to work with AI while strengthening human strengths usually stay more employable than those who either fear AI or depend on it completely.",
+      ],
+    },
+  ],
+  stepByStepGuidance: [
+    { title: "Step 1: Identify automatable parts of your target field", detail: "Break roles into tasks and see what is routine versus what requires judgment, ownership, and communication." },
+    { title: "Step 2: Build human-plus-AI strengths", detail: "Add AI literacy, data thinking, writing clarity, and decision quality on top of your core domain skills." },
+    { title: "Step 3: Choose one durable specialization", detail: "Go deeper in an area where human accountability matters, such as healthcare systems, product strategy, cybersecurity, or engineering reliability." },
+    { title: "Step 4: Show proof of adaptability", detail: "Projects, case studies, and internship work should demonstrate that you can solve problems using modern tools without becoming dependent on shortcuts." },
+    { title: "Step 5: Reassess every 6 months", detail: "Career resilience is dynamic. Keep reviewing demand, tools, and skill gaps instead of assuming one course choice solves everything forever." },
+  ],
+  comparisonTable: {
+    title: "How different career types respond to AI",
+    headers: ["Career Type", "AI Impact", "Why It Stays Valuable", "Student Focus"],
+    rows: [
+      ["Healthcare and Care Roles", "Assisted, not fully replaced", "Human trust, safety, and responsibility matter", "Domain depth and communication"],
+      ["Cybersecurity", "Growing with AI pressure", "Threats evolve and require judgment", "Hands-on skill and systems thinking"],
+      ["Software and Cloud", "Workflow changes, role survives", "System ownership and problem-solving still matter", "Build architecture and delivery skills"],
+      ["Product and Operations", "AI supports decisions", "Business context and coordination remain human-heavy", "Strategy, metrics, communication"],
+      ["Routine clerical work", "Higher automation pressure", "Tasks are more repetitive", "Upgrade into analysis, tools, or domain specialization"],
+    ],
+  },
+  commonMistakes: [
+    "Assuming an entire profession is safe or dead forever.",
+    "Ignoring AI tools completely.",
+    "Building shallow skills in too many trendy areas.",
+    "Choosing a path only because it sounds future-proof online.",
+    "Forgetting that communication and domain judgment matter more over time.",
+  ],
+  finalTips: [
+    "Pick careers where you can combine human judgment with technical leverage.",
+    "Do not compete only on tasks AI can do faster.",
+    "Learn to use AI, but also learn to verify, improve, and own results.",
+    "Career resilience comes from adaptability and depth, not fear-driven decisions.",
+  ],
+  faqs: [
+    { question: "Will AI remove all entry-level jobs?", answer: "No, but it will change many entry-level tasks. Students need stronger proof of skill, judgment, and adaptability than before." },
+    { question: "Which careers are more resilient in the AI era?", answer: "Roles involving human care, security, systems ownership, strategy, education, and complex problem-solving generally remain more resilient than purely routine task-based roles." },
+    { question: "Should students avoid tech because of AI?", answer: "No. Tech is still valuable, but students should aim for deeper problem-solving, systems understanding, and domain context rather than only narrow tool usage." },
+    { question: "What is the best career strategy right now?", answer: "Build a hybrid profile: strong domain skill, AI literacy, communication, and the ability to take responsibility for outcomes." },
+  ],
+};
+
 export const blogPosts: BlogPost[] = [
   {
     title: "How Indian Students Can Study in USA After 12th",
@@ -626,25 +1038,9 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     popularUSA: true,
     author: defaultAuthor,
-    updatedAt: "2026-05-20",
+    updatedAt: "2026-06-01",
     coverImage: "/logo.png",
-    content: buildTemplate({
-      topic: "how to choose affordable universities in USA",
-      audience: ["Budget-aware international students", "Parents comparing fee structures", "Students targeting scholarship combinations"],
-      avoid: ["Students selecting by ranking only", "Applicants who skip cost-of-living analysis"],
-      overview: ["Affordable does not mean low quality. Evaluate outcomes, internships, and support services.", "Calculate total yearly cost including housing and health insurance."],
-      steps: [
-        { title: "Set a budget band", detail: "Define your total yearly spend before shortlisting institutions." },
-        { title: "Shortlist by value", detail: "Compare tuition, scholarship rates, and internship opportunities." },
-        { title: "Validate outcomes", detail: "Check placement reports and alumni outcomes by major." },
-      ],
-      mistakes: ["Ignoring location cost", "Applying without scholarship essays", "No backup options"],
-      tips: ["Use public universities for value", "Apply early for aid", "Track assistantship and campus work options"],
-      faqs: [
-        { question: "Are affordable universities less valuable?", answer: "Not always. Many provide excellent outcomes when chosen by program strength and internship support." },
-        { question: "Can scholarships reduce total cost significantly?", answer: "Yes, merit aid plus assistantships can lower total cost substantially for many students." },
-      ],
-    }),
+    content: affordableUniversitiesUSAContent,
   },
   {
     title: "Top Scholarships in USA for Indian Students 2026",
@@ -658,25 +1054,9 @@ export const blogPosts: BlogPost[] = [
     featured: true,
     popularUSA: true,
     author: defaultAuthor,
-    updatedAt: "2026-05-20",
+    updatedAt: "2026-06-01",
     coverImage: "/logo.png",
-    content: buildTemplate({
-      topic: "winning scholarships in USA universities",
-      audience: ["Students with strong academics and leadership", "Families needing budget reduction", "Applicants preparing in advance"],
-      avoid: ["Last-minute applicants", "Students with generic scholarship essays"],
-      overview: ["Scholarships reward profile quality and fit, not only grades.", "Use a deadline tracker and submit evidence-backed essays."],
-      steps: [
-        { title: "Research scholarships", detail: "Map university-specific and external scholarships by deadline." },
-        { title: "Strengthen profile", detail: "Show leadership, impact, and consistency in activities." },
-        { title: "Submit strategic applications", detail: "Customize essays for each scholarship objective." },
-      ],
-      mistakes: ["Missing deadlines", "Copy-paste essays", "No measurable impact examples"],
-      tips: ["Start 9 to 12 months early", "Use mentors for essay review", "Maintain a portfolio of achievements"],
-      faqs: [
-        { question: "Can average students get scholarships in USA?", answer: "Yes, many scholarships value holistic profile and leadership, not just top marks." },
-        { question: "Do scholarships cover full cost?", answer: "Some do, but most are partial. Combine multiple funding options for best results." },
-      ],
-    }),
+    content: scholarshipsUSAContent,
   },
   {
     title: "F1 Visa Interview Questions With Answers",
@@ -707,25 +1087,9 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     popularUSA: true,
     author: defaultAuthor,
-    updatedAt: "2026-05-19",
+    updatedAt: "2026-06-01",
     coverImage: "/logo.png",
-    content: buildTemplate({
-      topic: "choosing between community college and university in USA",
-      audience: ["Budget-focused students", "Transfer pathway planners", "Parents comparing total cost"],
-      avoid: ["Students needing full residential campus experience from year one"],
-      overview: ["Community colleges can reduce first-year and second-year costs.", "Transfer planning quality determines long-term outcomes."],
-      steps: [
-        { title: "Map budget and goal", detail: "Define if cost-saving or campus immersion is your priority." },
-        { title: "Check transfer agreements", detail: "Verify transfer pathways for your intended major." },
-        { title: "Plan academic consistency", detail: "Maintain GPA and course mapping to avoid transfer delays." },
-      ],
-      mistakes: ["No transfer planning", "Ignoring course equivalency", "Weak advising support"],
-      tips: ["Use academic advisors early", "Track credit transfer every semester", "Plan long-term major outcomes"],
-      faqs: [
-        { question: "Is community college respected in USA?", answer: "Yes, many students use it strategically before transferring to strong universities." },
-        { question: "Can international students transfer easily?", answer: "Yes with planning, GPA discipline, and proper course mapping." },
-      ],
-    }),
+    content: communityCollegeVsUniversityContent,
   },
   {
     title: "Living Cost in USA for Students",
@@ -739,25 +1103,9 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     popularUSA: true,
     author: defaultAuthor,
-    updatedAt: "2026-05-19",
+    updatedAt: "2026-06-01",
     coverImage: "/logo.png",
-    content: buildTemplate({
-      topic: "managing living cost in USA as a student",
-      audience: ["Students preparing financial plans", "Parents evaluating total cost"],
-      avoid: ["Students with no monthly tracking discipline"],
-      overview: ["City choice changes cost more than many students expect.", "Budget tracking and shared housing can reduce financial pressure."],
-      steps: [
-        { title: "Estimate monthly baseline", detail: "Include rent, groceries, utilities, transport, insurance, and misc expenses." },
-        { title: "Choose location wisely", detail: "Compare suburban and city cost bands with transit accessibility." },
-        { title: "Optimize spending habits", detail: "Use meal planning, student discounts, and part-time options responsibly." },
-      ],
-      mistakes: ["Ignoring insurance", "No emergency fund", "Overspending in first semester"],
-      tips: ["Track weekly spending", "Share housing responsibly", "Use student support services"],
-      faqs: [
-        { question: "How much should students budget monthly in USA?", answer: "Costs vary, but many students budget roughly $900 to $2200 depending on city and housing model." },
-        { question: "Can part-time work cover full living cost?", answer: "Usually no. It can help reduce pressure, but full planning should not depend only on part-time income." },
-      ],
-    }),
+    content: livingCostUSAContent,
   },
   {
     title: "Top 10 Highest Paying Careers in USA 2026",
@@ -805,25 +1153,9 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     popularUSA: true,
     author: defaultAuthor,
-    updatedAt: "2026-05-19",
+    updatedAt: "2026-06-01",
     coverImage: "/logo.png",
-    content: buildTemplate({
-      topic: "building careers that stay relevant in the AI era",
-      audience: ["Students worried about AI job disruption", "Parents planning long-term stability"],
-      avoid: ["Readers expecting zero change in job market"],
-      overview: ["AI automates tasks, not complete professions in most cases.", "Roles that combine domain depth, judgment, and communication remain durable."],
-      steps: [
-        { title: "Audit your current skills", detail: "Identify what can be automated and what creates unique value." },
-        { title: "Build hybrid profile", detail: "Combine domain expertise with AI tools and data literacy." },
-        { title: "Practice continuous learning", detail: "Update skills every quarter based on market signals." },
-      ],
-      mistakes: ["Ignoring AI tools", "No domain specialization", "Career plan based only on fear"],
-      tips: ["Develop critical thinking", "Strengthen communication", "Focus on problem ownership"],
-      faqs: [
-        { question: "Will AI remove all entry-level jobs?", answer: "No, but entry roles are changing. Students need stronger practical skills and AI-assisted workflows." },
-        { question: "Which fields are most AI-resilient?", answer: "Healthcare, cybersecurity, engineering, operations, and roles needing human judgment stay relatively resilient." },
-      ],
-    }),
+    content: careersSurviveAIContent,
   },
   {
     title: "Top Remote Jobs in USA",
@@ -1422,6 +1754,14 @@ export const blogPosts: BlogPost[] = [
 
 export function getBlogBySlug(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
+}
+
+export function isIndexableBlog(slug: string) {
+  return curatedIndexableBlogSlugs.has(slug);
+}
+
+export function getIndexableBlogPosts() {
+  return blogPosts.filter((post) => isIndexableBlog(post.slug));
 }
 
 export function getFeaturedBlogs() {

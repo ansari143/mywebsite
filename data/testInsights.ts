@@ -41,8 +41,8 @@ export const testInsights: Record<string, TestInsight> = {
       { label: "Study abroad hub", href: "/study-abroad" },
     ],
     blogs: [
-      { label: "Top careers in the USA", href: "/blog/top-careers-usa-2026" },
-      { label: "Future-proof jobs in the AI era", href: "/blog/future-proof-jobs-ai-era" },
+      { label: "Top careers in the USA", href: "/blog/top-10-highest-paying-careers-in-usa-2026" },
+      { label: "Future-proof jobs in the AI era", href: "/blog/best-careers-that-will-survive-ai" },
     ],
     backupSlugs: ["bcom", "aviation", "government"],
   },
@@ -111,7 +111,7 @@ export const testInsights: Record<string, TestInsight> = {
       { label: "Career resources hub", href: "/resources" },
     ],
     blogs: [
-      { label: "Future-proof jobs in the AI era", href: "/blog/future-proof-jobs-ai-era" },
+      { label: "Future-proof jobs in the AI era", href: "/blog/best-careers-that-will-survive-ai" },
       { label: "Top careers in Canada", href: "/blog/top-careers-canada-2026" },
     ],
     backupSlugs: ["teacher", "bcom", "aviation"],
@@ -147,7 +147,7 @@ export const testInsights: Record<string, TestInsight> = {
     ],
     blogs: [
       { label: "Best courses in the UK for global jobs", href: "/blog/best-courses-uk-global-jobs" },
-      { label: "Top careers in the USA", href: "/blog/top-careers-usa-2026" },
+      { label: "Top careers in the USA", href: "/blog/top-10-highest-paying-careers-in-usa-2026" },
     ],
     backupSlugs: ["government", "medical", "bcom"],
   },
@@ -181,7 +181,7 @@ export const testInsights: Record<string, TestInsight> = {
       { label: "Study abroad hub", href: "/study-abroad" },
     ],
     blogs: [
-      { label: "Top careers in the USA", href: "/blog/top-careers-usa-2026" },
+      { label: "Top careers in the USA", href: "/blog/top-10-highest-paying-careers-in-usa-2026" },
       { label: "Australia vs Canada study guide", href: "/blog/australia-vs-canada-study-guide" },
     ],
     backupSlugs: ["teacher", "bcom", "government"],
@@ -252,8 +252,9 @@ export const testInsights: Record<string, TestInsight> = {
     ],
     blogs: [
       { label: "Australia vs Canada study guide", href: "/blog/australia-vs-canada-study-guide" },
-      { label: "Top careers in the USA", href: "/blog/top-careers-usa-2026" },
+      { label: "Top careers in the USA", href: "/blog/top-10-highest-paying-careers-in-usa-2026" },
     ],
     backupSlugs: ["government", "aviation", "teacher"],
   },
 };
+

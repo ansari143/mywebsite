@@ -48,6 +48,38 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
         </div>
       </section>
 
+      {(guide.whoShouldChoose?.length || guide.whoShouldAvoid?.length) && (
+        <section className="grid gap-6 lg:grid-cols-2">
+          {guide.whoShouldChoose?.length ? (
+            <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm">
+              <h2 className="text-2xl font-bold text-slate-900">Who Should Choose {guide.country}</h2>
+              <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-700 sm:text-base">
+                {guide.whoShouldChoose.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-emerald-600" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {guide.whoShouldAvoid?.length ? (
+            <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6 shadow-sm">
+              <h2 className="text-2xl font-bold text-slate-900">Who Should Avoid This Path</h2>
+              <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-700 sm:text-base">
+                {guide.whoShouldAvoid.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-rose-600" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </section>
+      )}
+
       <section className="grid gap-6 lg:grid-cols-2">
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
           <h2 className="text-2xl font-bold text-slate-900">Eligibility</h2>
@@ -102,6 +134,36 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
           </ul>
         </div>
       </section>
+
+      {guide.commonMistakes?.length ? (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-slate-900">Common Mistakes Students Make</h2>
+          <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-600 sm:text-base">
+            {guide.commonMistakes.map((item) => (
+              <li key={item} className="flex gap-3">
+                <span className="mt-2 h-2.5 w-2.5 rounded-full bg-amber-500" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {guide.realExamples?.length ? (
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-slate-900">Real Student Planning Examples</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {guide.realExamples.map((item) => (
+              <article key={item.scenario} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <h3 className="text-base font-semibold text-slate-900">Scenario</h3>
+                <p className="mt-2 text-sm leading-7 text-slate-600">{item.scenario}</p>
+                <h4 className="mt-4 text-sm font-semibold text-slate-900">Takeaway</h4>
+                <p className="mt-1 text-sm leading-7 text-slate-600">{item.takeaway}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="grid gap-6 lg:grid-cols-3">
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm lg:col-span-2">
