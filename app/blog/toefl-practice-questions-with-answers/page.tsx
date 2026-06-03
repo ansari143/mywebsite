@@ -5,10 +5,6 @@ export const metadata: Metadata = {
   title: "Free TOEFL Practice Questions with Answers | Nishaglobal Education",
   description:
     "Practice free TOEFL-style questions with answers and explanations. Improve reading, listening, and integrated task strategy with step-by-step guidance.",
-  robots: {
-    index: false,
-    follow: true,
-  },
   alternates: {
     canonical: "https://www.nishaglobaleducation.com/blog/toefl-practice-questions-with-answers",
   },
@@ -43,6 +39,20 @@ export default function ToeflPracticeQuestionsPage() {
             "It trains integrated-task thinking where you connect information from multiple sources.",
             "It improves answer quality under real time pressure.",
             "It helps students identify section weaknesses early and fix them with a plan.",
+          ],
+        },
+        {
+          heading: "How to make this a complete TOEFL plan",
+          paragraphs: [
+            "Use this page as your section-wise foundation: learn why answers are right, then move into timed section sets. A complete TOEFL routine should combine question practice, error categorization, and weekly integrated-task training.",
+            "Do not prepare only one skill. Many students improve reading but stay stuck because speaking and integrated writing remain weak. TOEFL score growth is strongest when all sections are trained together with a weekly schedule.",
+          ],
+          bullets: [
+            "Reading: 3 focused sessions per week (inference, vocabulary in context, passage logic).",
+            "Listening: 3 note-quality sessions per week (lecture structure, speaker purpose, detail filtering).",
+            "Speaking: 4 short timed drills per week using intro-reason-example-close flow.",
+            "Writing: 3 integrated-writing and 2 academic-discussion sessions per week.",
+            "Integrated skills: at least 2 mixed-task rounds each week.",
           ],
         },
         {
@@ -88,6 +98,18 @@ export default function ToeflPracticeQuestionsPage() {
           paragraphs: [
             "Before checking answers, identify what skill the question is testing. Is it vocabulary-in-context, main idea recognition, listening inference, or source integration? This helps students understand why mistakes happen.",
             "After each set, classify mistakes into four buckets: language gap, concept misunderstanding, speed pressure, and attention error. Reviewing this pattern weekly gives much better progress than solving new questions every day without reflection.",
+          ],
+        },
+        {
+          heading: "TOEFL score target roadmap by timeline",
+          paragraphs: [
+            "If your exam date is close, prioritize high-yield fixes: response structure, note quality, and task relevance. If you have 8 to 10 weeks, build section depth first and then increase simulation frequency.",
+          ],
+          bullets: [
+            "2-4 weeks left: short daily sets + fast correction loop + one full mock weekly.",
+            "5-8 weeks left: section depth blocks + integrated tasks + one timed mixed set every 4 days.",
+            "9-12 weeks left: vocabulary-context building, listening stamina, and speaking fluency layering before heavy mocks.",
+            "Always keep one review day each week to analyze recurring mistakes.",
           ],
         },
         {
@@ -152,6 +174,11 @@ export default function ToeflPracticeQuestionsPage() {
           question: "Should I take full mock tests every day?",
           answer:
             "Not usually. Beginners improve faster with section-wise drills first, then timed mixed practice. Full mocks are useful when you already have baseline control in each section.",
+        },
+        {
+          question: "What is a practical TOEFL score improvement expectation in 6 to 8 weeks?",
+          answer:
+            "Improvement depends on baseline level and consistency, but many students see meaningful progress when they run section-wise drills, integrated-task practice, and weekly error analysis instead of random unscheduled practice.",
         },
       ]}
       trustInfo={{

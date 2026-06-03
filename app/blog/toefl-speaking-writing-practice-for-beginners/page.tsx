@@ -42,6 +42,18 @@ export default function ToeflSpeakingWritingPracticePage() {
           ],
         },
         {
+          heading: "Speaking task templates that actually work",
+          paragraphs: [
+            "TOEFL speaking improves when you use a compact template per task type, not one generic memorized answer. Keep transitions simple and spend most time on relevant support.",
+          ],
+          bullets: [
+            "Independent task: clear opinion -> two reasons -> one concrete example -> short close.",
+            "Integrated campus-style task: summarize issue -> explain speaker position -> give two support points.",
+            "Integrated lecture summary: main concept -> two key details -> final synthesis sentence.",
+            "Target speaking length: complete and relevant response with stable pacing, not unnecessary long answers.",
+          ],
+        },
+        {
           heading: "Beginner speaking and writing practice prompts",
           qaItems: [
             {
@@ -85,6 +97,19 @@ export default function ToeflSpeakingWritingPracticePage() {
           ],
         },
         {
+          heading: "Writing scoring checklist for self-review",
+          paragraphs: [
+            "Use one checklist after every writing response. This avoids emotional scoring and helps you detect repeated quality gaps objectively.",
+          ],
+          bullets: [
+            "Task response: did you answer the exact prompt without drifting?",
+            "Organization: does each paragraph have one clear purpose?",
+            "Source connection: for integrated tasks, are reading and listening linked correctly?",
+            "Support quality: do examples and explanations actually prove your point?",
+            "Language control: grammar and sentence clarity are stable enough to avoid misunderstanding.",
+          ],
+        },
+        {
           heading: "How to evaluate your own responses",
           bullets: [
             "Task relevance: did you answer exactly what was asked?",
@@ -98,6 +123,16 @@ export default function ToeflSpeakingWritingPracticePage() {
           paragraphs: [
             "Run four sessions each week: one speaking structure session, one writing structure session, one integrated mini-task session, and one review day for correction notes.",
             "Record speaking responses and compare them with your own checklist: relevance, clarity, example quality, and ending sentence strength.",
+          ],
+        },
+        {
+          heading: "7-day focused sprint before test week",
+          bullets: [
+            "Day 1-2: speaking structure speed rounds and timing correction.",
+            "Day 3-4: integrated writing with source-mapping before drafting.",
+            "Day 5: mixed speaking + writing set under timed conditions.",
+            "Day 6: full correction day and weak-area patch session.",
+            "Day 7: light rehearsal with calm pacing and no new heavy material.",
           ],
         },
         {
@@ -120,11 +155,11 @@ export default function ToeflSpeakingWritingPracticePage() {
         },
       ]}
       ctaTitle="Continue with full TOEFL practice"
-      ctaText="After beginner speaking and writing strategy practice, move to full TOEFL section sets and integrated tasks for consistent score improvement."
+      ctaText="After this speaking-writing focused training, continue with full TOEFL reading, listening, and integrated section sets for complete score consistency."
       ctaPrimaryHref="/practice-tests/toefl"
       ctaPrimaryLabel="Open TOEFL Practice Tests"
       ctaSecondaryHref="/blog/toefl-practice-questions-with-answers"
-      ctaSecondaryLabel="Read More TOEFL Questions"
+      ctaSecondaryLabel="Open Complete TOEFL Guide"
       faqs={[
         {
           question: "How long should I practice speaking daily for TOEFL?",
@@ -155,6 +190,11 @@ export default function ToeflSpeakingWritingPracticePage() {
           question: "Should I memorize sample answers for TOEFL speaking and writing?",
           answer:
             "Memorizing full answers is risky and often reduces score quality when prompts change. It is better to memorize structure patterns and practice adapting content naturally.",
+        },
+        {
+          question: "What should I prioritize if I have only 2 weeks left?",
+          answer:
+            "Prioritize speaking timing discipline, integrated writing source connection, and daily short correction loops. In short timelines, structure and relevance improvements give the fastest score impact.",
         },
       ]}
       trustInfo={{

@@ -1623,38 +1623,6 @@ export const blogPosts: BlogPost[] = [
     }),
   },
   {
-    title: "TOEFL Preparation Guide",
-    slug: "toefl-preparation-guide",
-    category: "Entrance Exams",
-    description:
-      "A practical TOEFL guide covering section strategy, integrated tasks, and preparation planning for international students.",
-    keywords: ["TOEFL", "Entrance Exams", "study in USA", "student guidance"],
-    readingTime: "8 min read",
-    date: "2026-04-20",
-    featured: false,
-    popularUSA: false,
-    author: defaultAuthor,
-    updatedAt: "2026-05-17",
-    coverImage: "/logo.png",
-    content: buildTemplate({
-      topic: "preparing for TOEFL effectively",
-      audience: ["Students applying to USA universities", "Applicants preparing integrated skills tests"],
-      avoid: ["Students avoiding listening and speaking drills"],
-      overview: ["TOEFL requires integrated comprehension and response quality.", "Time management and template discipline improve scores."],
-      steps: [
-        { title: "Map section targets", detail: "Set score goals for each section based on university requirements." },
-        { title: "Train integrated tasks", detail: "Practice reading-listening-speaking and reading-listening-writing combinations." },
-        { title: "Run full tests", detail: "Take full-length timed mocks and fix recurring issues." },
-      ],
-      mistakes: ["No full-length simulations", "Weak note-taking", "Ignoring speaking clarity"],
-      tips: ["Use timed practice", "Improve note frameworks", "Review speaking pacing"],
-      faqs: [
-        { question: "Is TOEFL harder than IELTS?", answer: "Difficulty depends on your strengths. TOEFL often suits students comfortable with computer-based academic English." },
-        { question: "How can I improve TOEFL speaking quickly?", answer: "Use timed templates, record responses, and review clarity and structure daily." },
-      ],
-    }),
-  },
-  {
     title: "GRE vs GMAT Explained",
     slug: "gre-vs-gmat-explained",
     category: "Entrance Exams",
