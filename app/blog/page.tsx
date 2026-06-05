@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import BlogIndexClient from "./BlogIndexClient";
 import { BLOG_CATEGORIES, type BlogCategory } from "@/data/blogs";
 
@@ -92,12 +93,12 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
             <p className="mt-1 text-sm font-medium text-slate-500">Updated: June 2026</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href="/skills" className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+            <Link href="/skills" className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
               Explore AI Skills
-            </a>
-            <a href="/tests" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+            </Link>
+            <Link href="/tests" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
               Start Free Career Test
-            </a>
+            </Link>
           </div>
         </div>
       </section>
