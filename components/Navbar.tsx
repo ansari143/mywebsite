@@ -36,7 +36,7 @@ export default function Navbar() {
               Nishaglobal Education
             </span>
             <span className="block text-xs text-slate-500">
-              Career guidance for students in India and worldwide
+              Learn AI skills for every career role with career guidance for students worldwide
             </span>
           </div>
         </Link>

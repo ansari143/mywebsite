@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Study Abroad | Nishaglobal Education",
+  title: "Study Abroad Guidance by Country | Nishaglobal Education",
   description:
-    "Explore study abroad options with country guides for the USA, Canada, UK, Australia, and Europe, plus scholarships, exams, and planning tips.",
+    "Compare study abroad destinations with country guides, scholarship tips, exam requirements, and step-by-step planning for students worldwide.",
   alternates: {
     canonical: "https://www.nishaglobaleducation.com/study-abroad",
   },
@@ -62,6 +62,7 @@ export default function StudyAbroadPage() {
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
           Study Abroad Guidance for Students Worldwide
         </h1>
+        <p className="mt-2 text-sm font-medium text-slate-500">Updated: June 2026</p>
         <p className="mt-4 max-w-4xl text-base leading-8 text-slate-700 sm:text-lg">
           Use this section to compare study destinations based on your academic goals, budget, and career plans. Each country has specific strengths and requirements that may or may not align with your situation.
         </p>
@@ -83,6 +84,9 @@ export default function StudyAbroadPage() {
           </Link>
           <Link href="/global-careers" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">
             Explore Global Careers
+          </Link>
+          <Link href="/skills" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">
+            Explore AI Skills
           </Link>
         </div>
       </section>

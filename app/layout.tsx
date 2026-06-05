@@ -10,7 +10,7 @@ export const metadata = {
     template: "%s",
   },
   description:
-    "Career guidance for students worldwide, including free career tests, study abroad guides, educational resources, and future-ready skills learning.",
+    "Learn AI skills for every career role with career guidance for students worldwide, including free career tests, study abroad guides, educational resources, and future-ready skills learning.",
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
@@ -19,7 +19,7 @@ export const metadata = {
   openGraph: {
     title: "Nishaglobal Education",
     description:
-      "Helping students choose careers in India and abroad through free career tests, global education guides, resources, and future-ready skills.",
+      "Learn AI skills for every career role with career guidance for students worldwide through free career tests, global education guides, resources, and future-ready skills.",
     url: "https://www.nishaglobaleducation.com",
     siteName: "Nishaglobal Education",
     locale: "en_US",
@@ -37,7 +37,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Nishaglobal Education",
     description:
-      "Career guidance for students worldwide, including free career tests, study abroad guides, educational resources, and future-ready skills learning.",
+      "Learn AI skills for every career role with career guidance for students worldwide, including free career tests, study abroad guides, educational resources, and future-ready skills learning.",
     images: ["/logo.png"],
   },
   verification: {
@@ -59,7 +59,7 @@ const organizationSchema = {
   image: "https://www.nishaglobaleducation.com/logo.png",
   email: "nishaglobaleducation@gmail.com",
   description:
-    "Nishaglobal Education provides career guidance, educational resources, study abroad guidance, free career tests, and future-ready skills learning for students worldwide.",
+    "Nishaglobal Education helps learners build AI skills for every career role with career guidance for students worldwide, educational resources, study abroad guidance, free career tests, and future-ready skills learning.",
   areaServed: "Worldwide",
   availableLanguage: ["English", "Hindi"],
   contactPoint: [
@@ -78,7 +78,7 @@ const websiteSchema = {
   name: "Nishaglobal Education",
   url: "https://www.nishaglobaleducation.com",
   description:
-    "Career guidance for students worldwide, including study abroad guides, free career tests, educational resources, and future-ready skills.",
+    "Learn AI skills for every career role with career guidance for students worldwide, including study abroad guides, free career tests, educational resources, and future-ready skills.",
   publisher: {
     "@type": "EducationalOrganization",
     name: "Nishaglobal Education",

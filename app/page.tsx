@@ -7,9 +7,9 @@ import BlogCard from "@/components/BlogCard";
 import { getPopularUSABlogs, getBlogsByCategory } from "@/data/blogs";
 
 export const metadata: Metadata = {
-  title: "Career Guidance for Global Students",
+  title: "AI Skills and Career Guidance for Students Worldwide | Free Career Tests",
   description:
-    "Free career tests, study abroad guides, blogs, and future-ready skill resources for students in India and worldwide.",
+    "Learn AI skills for every career role with career guidance, free tests, study abroad guides, and practical roadmaps for students worldwide.",
   alternates: {
     canonical: "https://www.nishaglobaleducation.com",
   },
@@ -22,16 +22,16 @@ export const generateViewport = () => ({
 
 const keyJourneys = [
   {
-    title: "Students in India",
+    title: "Students exploring local pathways",
     description:
-      "Get stream selection help after 10th and 12th, compare options, and explore exam-focused guidance. Best for: Those prioritizing local education, JEE/NEET prep, or affordable pathways. Avoid if: You're certain about studying abroad without considering Indian options first.",
-    href: "/resources/country/india",
-    cta: "Explore India Guides",
+      "Get practical guidance for comparing local education options, career routes, and exam-focused pathways. Best for: Students who want a structured decision process with room to compare local and international choices. Avoid if: You only want a quick overview with no depth.",
+    href: "/resources",
+    cta: "Browse Resources",
   },
   {
     title: "International Students",
     description:
-      "Understand study abroad routes, student planning, scholarships, and country comparisons in one place. Best for: Students exploring global opportunities, visa processes, or work-study balances. Avoid if: You prefer staying in India and don't need international insights.",
+      "Understand study abroad routes, student planning, scholarships, and country comparisons in one place. Best for: Students exploring global opportunities, visa processes, or work-study balances. Avoid if: You do not need international insights.",
     href: "/international-students",
     cta: "View International Guide",
   },
@@ -98,29 +98,23 @@ const destinations = [
     href: "/resources/country/europe",
     text: "Diverse options from Germany (free tuition) to Netherlands; average $10-20k/year; English-taught programs in tech, design, and sciences.",
   },
-  {
-    name: "India",
-    flag: "🇮🇳",
-    href: "/resources/country/india",
-    text: "Local expertise for IITs, NITs, and medical colleges; affordable at $5-10k/year; strong foundation for competitive exams and career starts.",
-  },
 ];
 
 const faqs = [
   {
     question: "Who is Nishaglobal Education for?",
     answer:
-      "Nishaglobal Education is designed for students in India and worldwide who need simple career guidance, study abroad direction, educational resources, and future-ready skills content. It's especially helpful for those after 10th, 12th, or graduation exploring options.",
+      "Nishaglobal Education is designed for students worldwide who need simple career guidance, study abroad direction, educational resources, and future-ready skills content. It's especially helpful for those after 10th, 12th, or graduation exploring options.",
   },
   {
     question: "What can students do on this website?",
     answer:
-      "Students can take free career tests, read stream and country guides, explore blogs, compare educational pathways, and learn practical skills that support modern careers. Everything is tailored for Indian students with global perspectives.",
+      "Students can take free career tests, read stream and country guides, explore blogs, compare educational pathways, and learn practical skills that support modern careers. Everything is tailored for students with global perspectives.",
   },
   {
-    question: "Are the tests and guides only for Indian students?",
+    question: "Are the tests and guides only for one country?",
     answer:
-      "No. The platform supports Indian students while also building global guidance for international students who want to compare destinations, careers, and next steps. We bridge local and international education.",
+      "No. The platform supports students worldwide who want to compare destinations, careers, and next steps. We bridge local and international education.",
   },
   {
     question: "How accurate are the career tests?",
@@ -168,47 +162,47 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <section className="rounded-3xl border border-gray-200 bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-6 text-center shadow-sm sm:p-8 lg:p-10">
-        <div className="inline-flex rounded-full border border-blue-100 bg-white px-3 py-1 text-sm font-medium text-blue-700">
-          India + Global student guidance 🌍
-        </div>
+      <section className="rounded-3xl border border-violet-200 bg-gradient-to-br from-violet-50 via-white to-cyan-50 p-6 shadow-sm sm:p-8 lg:p-10">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-4xl">
+            <div className="inline-flex rounded-full border border-violet-200 bg-white px-3 py-1 text-sm font-medium text-violet-700">
+              Learn AI skills for every career role with career guidance for students worldwide
+            </div>
 
-        <h1 className="mx-auto mt-4 max-w-5xl text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-          Choose the right career path after 10th, 12th, or graduation — with guidance that fits India and the world
-        </h1>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+              Learn AI skills for every career role
+            </h2>
 
-        <p className="mx-auto mt-4 max-w-4xl text-base leading-7 text-gray-600 sm:text-lg">
-          Unlike generic sites, Nishaglobal combines India&apos;s education system with global options, offering free tests, practical guides, and real student examples. Whether you&apos;re choosing a stream after 10th, preparing for JEE, or planning study abroad, get trustworthy guidance that saves time and reduces confusion.
-        </p>
+            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+              Whether you are a developer, QA engineer, DevOps professional, business analyst, project manager, or product manager, explore practical AI roadmaps that help you transition from traditional work to AI-driven execution.
+            </p>
 
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-slate-700">
-          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Free career tests</span>
-          <span className="rounded-full bg-white px-3 py-1 shadow-sm">India-focused guidance</span>
-          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Global study options</span>
-          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Practice + tests + skills</span>
-        </div>
+            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700">
+              <span className="rounded-full bg-white px-3 py-1 shadow-sm">AI Engineer roadmap</span>
+              <span className="rounded-full bg-white px-3 py-1 shadow-sm">AI Agents learning path</span>
+              <span className="rounded-full bg-white px-3 py-1 shadow-sm">Role-based transition plans</span>
+            </div>
+          </div>
 
-        <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
-          <Link
-            href="/tests"
-            className="w-full rounded-xl bg-blue-600 px-6 py-3 text-center font-semibold text-white hover:bg-blue-700 sm:w-auto"
-          >
-            Start Free Career Test
-          </Link>
-          <Link
-            href="/study-abroad"
-            className="w-full rounded-xl border border-gray-300 bg-white px-6 py-3 text-center font-medium text-slate-700 hover:bg-gray-50 sm:w-auto"
-          >
-            Explore Study Abroad
-          </Link>
-          <Link
-            href="/blog"
-            className="w-full rounded-xl border border-gray-300 bg-white px-6 py-3 text-center font-medium text-slate-700 hover:bg-gray-50 sm:w-auto"
-          >
-            Read Career Blogs
-          </Link>
+          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+            <Link
+              href="/skills"
+              className="rounded-xl bg-violet-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-violet-700"
+            >
+              Explore AI Skills
+            </Link>
+            <Link
+              href="/skills/ai-agents"
+              className="rounded-xl border border-violet-300 bg-white px-5 py-3 text-center text-sm font-semibold text-violet-700 hover:bg-violet-50"
+            >
+              Start AI Agents
+            </Link>
+          </div>
         </div>
       </section>
+      <TrendingBlogs title="Latest Career and Study Abroad Articles" limit={3} />
+      <SkillsRoadmapPreview />
+      <SkillsPreview />
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
@@ -218,11 +212,11 @@ export default function HomePage() {
           },
           {
             title: "Country Guides",
-            desc: "Compare study costs, visa processes, top universities, and student life in the USA, Canada, UK, Australia, Europe, and India with real examples and checklists.",
+            desc: "Compare study costs, visa processes, top universities, and student life in the USA, Canada, UK, Australia, Europe, Mexico, and more with real examples and checklists.",
           },
           {
             title: "Career Blogs",
-            desc: "Read practical articles like 'JEE vs NEET: Which is Right for You?' or 'How Indian Students Succeed in Canadian Universities' with actionable tips.",
+            desc: "Read practical articles on choosing the right pathway, preparing for admissions, and building skills with actionable tips.",
           },
           {
             title: "Future Skills",
@@ -383,7 +377,7 @@ export default function HomePage() {
           <div>
             <h2 className="text-2xl font-bold text-slate-900">Explore by destination</h2>
             <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
-              Choose your study destination based on budget, career goals, and lifestyle. Each guide includes visa timelines, scholarship tips, and success stories from Indian students who&apos;ve studied there.
+                Choose your study destination based on budget, career goals, and lifestyle. Each guide includes visa timelines, scholarship tips, and success stories from students who&apos;ve studied there.
             </p>
           </div>
           <Link
@@ -443,10 +437,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <SkillsPreview />
-      <SkillsRoadmapPreview />
-      <TrendingBlogs title="Latest Career and Study Abroad Articles" limit={3} />
-
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -501,6 +491,48 @@ export default function HomePage() {
             className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
           >
             Explore Study Abroad
+          </Link>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-gray-200 bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-6 text-center shadow-sm sm:p-8 lg:p-10">
+        <div className="inline-flex rounded-full border border-blue-100 bg-white px-3 py-1 text-sm font-medium text-blue-700">
+          Global student guidance 🌍
+        </div>
+
+        <h1 className="mx-auto mt-4 max-w-5xl text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+          Choose the right career path after 10th, 12th, or graduation — with guidance that fits students worldwide
+        </h1>
+
+        <p className="mx-auto mt-4 max-w-4xl text-base leading-7 text-gray-600 sm:text-lg">
+          Unlike generic sites, Nishaglobal combines practical education guidance with global options, offering free tests, practical guides, and real student examples. Whether you&apos;re comparing pathways, preparing for admissions, or planning study abroad, get trustworthy guidance that saves time and reduces confusion.
+        </p>
+
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-slate-700">
+          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Free career tests</span>
+          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Country-specific guidance</span>
+          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Global study options</span>
+          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Practice + tests + skills</span>
+        </div>
+
+        <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+          <Link
+            href="/tests"
+            className="w-full rounded-xl bg-blue-600 px-6 py-3 text-center font-semibold text-white hover:bg-blue-700 sm:w-auto"
+          >
+            Start Free Career Test
+          </Link>
+          <Link
+            href="/study-abroad"
+            className="w-full rounded-xl border border-gray-300 bg-white px-6 py-3 text-center font-medium text-slate-700 hover:bg-gray-50 sm:w-auto"
+          >
+            Explore Study Abroad
+          </Link>
+          <Link
+            href="/blog"
+            className="w-full rounded-xl border border-gray-300 bg-white px-6 py-3 text-center font-medium text-slate-700 hover:bg-gray-50 sm:w-auto"
+          >
+            Read Career Blogs
           </Link>
         </div>
       </section>

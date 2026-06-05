@@ -9,7 +9,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-slate-900">Nishaglobal Education</h3>
             <p className="mt-3 text-sm leading-7 text-slate-600">
-              Career guidance for students worldwide, including free career tests,
+              Learn AI skills for every career role with career guidance for students worldwide, including free career tests,
               global education guidance, practical resources, and future-ready skills.
             </p>
             <a

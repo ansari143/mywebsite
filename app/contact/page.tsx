@@ -62,17 +62,17 @@ export default function ContactPage() {
 
           <p className="mt-4 text-sm leading-7 text-slate-700 sm:text-base">
             Nishaglobal Education supports students, parents, and learners who
-            are exploring career options in India and abroad. You can contact us
-            for stream selection after 10th or 12th, study abroad guidance,
-            global career pathways, skill learning, scholarships, admissions,
-            aviation careers, resource support, collaborations, and advertising
+            are exploring career options worldwide. You can contact us for
+            stream selection after 10th or 12th, study abroad guidance, global
+            career pathways, skill learning, scholarships, admissions, aviation
+            careers, resource support, collaborations, and advertising
             enquiries.
           </p>
 
           <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
             We aim to make career guidance simple, practical, and globally
             relevant for students planning their future in countries such as the
-            USA, Canada, the UK, Australia, Europe, and India.
+            USA, Canada, the UK, Australia, Europe, and Mexico.
           </p>
         </div>
       </section>
@@ -316,7 +316,7 @@ export default function ContactPage() {
               <li>• UK</li>
               <li>• Australia</li>
               <li>• Europe</li>
-              <li>• India</li>
+              <li>• Mexico</li>
             </ul>
           </section>
 

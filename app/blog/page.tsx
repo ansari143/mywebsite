@@ -3,9 +3,9 @@ import BlogIndexClient from "./BlogIndexClient";
 import { BLOG_CATEGORIES, type BlogCategory } from "@/data/blogs";
 
 export const metadata: Metadata = {
-  title: "Blog for Study in USA, USA Careers, Scholarships, and Student Guidance",
+  title: "Career and Study Abroad Blog | AI Skills, Scholarships, and Student Guidance",
   description:
-    "Explore USA-focused blogs on study in USA planning, international students, AI careers, scholarships, high paying jobs, entrance exams, and practical career roadmaps.",
+    "Read practical articles on AI skills, global careers, scholarships, study abroad planning, and student success roadmaps.",
   keywords: [
     "USA careers",
     "study in USA",
@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     canonical: "https://www.nishaglobaleducation.com/blog",
   },
   openGraph: {
-    title: "Nishaglobal Education Blog",
+    title: "Career and Study Abroad Blog",
     description:
-      "Professional blog hub for USA careers, study in USA, AI and tech careers, scholarships, and entrance exam guidance.",
+      "Practical blog hub for AI skills, global careers, scholarships, and study abroad guidance.",
     url: "https://www.nishaglobaleducation.com/blog",
     siteName: "Nishaglobal Education",
     locale: "en_US",
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nishaglobal Education Blog",
+    title: "Career and Study Abroad Blog",
     description:
-      "Read practical USA-focused blogs on careers, scholarships, study abroad, and student success.",
+      "Read practical blogs on AI careers, scholarships, study abroad planning, and student success.",
     images: ["https://www.nishaglobaleducation.com/logo.png"],
   },
 };
@@ -79,6 +79,29 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
+
+      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
+              Latest Career and Study Abroad Articles
+            </h1>
+            <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">
+              Updated weekly with practical guidance on AI skills, scholarships, global careers, and study abroad strategy.
+            </p>
+            <p className="mt-1 text-sm font-medium text-slate-500">Updated: June 2026</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a href="/skills" className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+              Explore AI Skills
+            </a>
+            <a href="/tests" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+              Start Free Career Test
+            </a>
+          </div>
+        </div>
+      </section>
+
       <BlogIndexClient initialQuery={initialQuery} initialCategory={initialCategory} />
     </main>
   );

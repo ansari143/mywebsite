@@ -403,9 +403,9 @@ export default function ResultPage() {
           {insight && (
             <section className="grid gap-6 xl:grid-cols-2">
               <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-                <h2 className="text-xl font-bold text-slate-900">India pathway guidance</h2>
+                <h2 className="text-xl font-bold text-slate-900">Local pathway guidance</h2>
                 <div className="mt-4 space-y-3 text-sm leading-7 text-slate-600">
-                  {insight.indiaPathway.map((item) => (
+                  {insight.localPathway.map((item) => (
                     <div key={item} className="flex gap-3">
                       <span className="mt-2 h-2 w-2 rounded-full bg-orange-500" />
                       <p>{item}</p>

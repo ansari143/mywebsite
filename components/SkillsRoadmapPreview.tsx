@@ -62,6 +62,29 @@ export default function SkillsRoadmapPreview() {
           Start with Python first, then learn prompts, frameworks, and agent
           workflows step by step.
         </p>
+
+        <div className="mt-5 rounded-2xl border border-violet-100 bg-violet-50 p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-violet-700">
+            AI Engineer quick start
+          </p>
+          <p className="mt-2 text-sm leading-7 text-slate-700">
+            If you want to become an AI Engineer, start with the AI Agents guide to build practical workflow thinking early.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-3">
+            <Link
+              href="/skills/ai-agents"
+              className="rounded-xl bg-violet-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-violet-700"
+            >
+              Start with AI Agents
+            </Link>
+            <Link
+              href="/skills"
+              className="rounded-xl border border-violet-300 bg-white px-4 py-2 text-sm font-semibold text-violet-700 transition hover:bg-violet-100"
+            >
+              View Full Skills Portal
+            </Link>
+          </div>
+        </div>
       </div>
 
       <div className="mt-8 grid gap-4 lg:grid-cols-5">

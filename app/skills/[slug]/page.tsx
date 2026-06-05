@@ -1,6 +1,9 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { skillsPages } from "@/data/skillsPages";
+
+const siteUrl = "https://www.nishaglobaleducation.com";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -40,10 +43,33 @@ export async function generateMetadata({ params }: Props) {
   }
 
   return {
-    title: `${page.title} | Nishaglobal Education`,
+    title: `${page.title} | Skill Guide | Nishaglobal Education`,
     description: page.description,
+    keywords: [
+      page.title,
+      page.slug.replaceAll("-", " "),
+      "skills",
+      "AI skills",
+      "learning roadmap",
+    ],
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      title: `${page.title} | Skill Guide`,
+      description: page.description,
+      url: `${siteUrl}/skills/${page.slug}`,
+      siteName: "Nishaglobal Education",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${page.title} | Skill Guide`,
+      description: page.description,
+    },
     alternates: {
-      canonical: `https://www.nishaglobaleducation.com/skills/${page.slug}`,
+      canonical: `${siteUrl}/skills/${page.slug}`,
     },
   };
 }
@@ -69,8 +95,55 @@ export default async function SkillDetailPage({ params }: Props) {
       }
     : null;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Skills",
+        item: `${siteUrl}/skills`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: page.title,
+        item: `${siteUrl}/skills/${page.slug}`,
+      },
+    ],
+  };
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: page.title,
+    url: `${siteUrl}/skills/${page.slug}`,
+    description: page.description,
+    inLanguage: "en",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Nishaglobal Education",
+      url: siteUrl,
+    },
+  };
+
   return (
     <div className="space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {faqSchema && (
         <script
           type="application/ld+json"
@@ -97,6 +170,26 @@ export default async function SkillDetailPage({ params }: Props) {
         <p className="mt-4 max-w-4xl text-base leading-8 text-slate-600 sm:text-lg">
           {page.intro}
         </p>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+              Best for
+            </p>
+            <p className="mt-2 text-sm leading-7 text-slate-700">
+              Readers who want a practical, role-based learning guide with clear progression from fundamentals to advanced implementation.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+              Not ideal for
+            </p>
+            <p className="mt-2 text-sm leading-7 text-slate-700">
+              Visitors looking for a short definition page without examples, sections, or a guided learning path.
+            </p>
+          </div>
+        </div>
       </section>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_300px]">

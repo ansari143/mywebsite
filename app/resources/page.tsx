@@ -3,9 +3,9 @@ import { resourcePages } from "@/data/resourcePages";
 import { countryResourcesWithTopics } from "@/data/countryResources";
 
 export const metadata = {
-  title: "Career Resources by Country and Topic | Nishaglobal Education",
+  title: "Global Career Resources by Country and Topic | Nishaglobal Education",
   description:
-    "Explore country-based and topic-based career guidance resources for students, including India, USA, Canada, UK, Australia, and Europe.",
+    "Browse global career resources by country and topic, including study abroad planning, scholarships, exams, and practical decision guides.",
   alternates: {
     canonical: "https://www.nishaglobaleducation.com/resources",
   },
@@ -73,8 +73,10 @@ export default function ResourcesPage() {
             Career Resources: Country-Specific Guidance for Global Students
           </h1>
 
+          <p className="mt-2 text-sm font-medium text-gray-500">Updated: June 2026</p>
+
           <p className="mt-4 text-base leading-7 text-gray-600 sm:text-lg">
-            Navigate international education and career opportunities with targeted resources organized by destination country. Whether you&apos;re exploring study abroad options or planning your professional path, find practical insights tailored to specific markets and requirements.
+            Navigate international education and career opportunities with targeted resources organized by destination country. Whether you&apos;re exploring study abroad options or planning your professional path, find practical insights tailored to specific markets and requirements across the USA, Canada, UK, Australia, Europe, Mexico, and more.
           </p>
 
           <div className="mt-6 space-y-4">

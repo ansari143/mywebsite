@@ -3,7 +3,7 @@ export type TestInsight = {
   schoolFocus: string[];
   careers: string[];
   next90Days: string[];
-  indiaPathway: string[];
+  localPathway: string[];
   globalPathway: string[];
   resources: { label: string; href: string }[];
   blogs: { label: string; href: string }[];
@@ -23,9 +23,9 @@ export const testInsights: Record<string, TestInsight> = {
       "Strengthen Math and Physics fundamentals with a fixed weekly practice routine.",
       "Explore one branch at a time such as CSE, Mechanical, Civil, Electronics, or AI-related fields.",
       "Start one mini project or practical activity to see whether you enjoy applied learning.",
-      "Compare Indian entrance pathways with international undergraduate options if you are considering study abroad.",
+      "Compare local entrance pathways with international undergraduate options if you are considering study abroad.",
     ],
-    indiaPathway: [
+    localPathway: [
       "After 10th: choose a science pathway with strong Math support if engineering is your target.",
       "After 12th: compare JEE-focused routes, state-level entrance options, private college choices, and diploma-to-degree pathways.",
       "Research branch quality, placement data, faculty, labs, and internship exposure before choosing a college.",
@@ -60,7 +60,7 @@ export const testInsights: Record<string, TestInsight> = {
       "Create a science revision schedule with concept tracking and mock questions.",
       "Discuss time commitment, cost, and long-term expectations with family before finalizing a path.",
     ],
-    indiaPathway: [
+    localPathway: [
       "After 10th: build a strong science base and check which healthcare routes require Biology in 11th and 12th.",
       "After 12th: compare entrance-based routes, private institutions, allied healthcare, nursing, pharmacy, and public health options.",
       "Use official eligibility and admission criteria before making a final decision.",
@@ -95,13 +95,13 @@ export const testInsights: Record<string, TestInsight> = {
       "Track official notifications, eligibility, and syllabus changes carefully.",
       "Use weekly mock tests to improve speed, accuracy, and revision quality.",
     ],
-    indiaPathway: [
-      "Government exam planning is highly India-specific, so official portals and updated notifications matter a lot.",
+    localPathway: [
+      "Government exam planning is highly country-specific, so official portals and updated notifications matter a lot.",
       "Focus on eligibility, age limit, language requirements, and attempt limits before preparing seriously.",
       "Keep one backup academic or skill pathway active while preparing.",
     ],
     globalPathway: [
-      "For students outside India, use this result more as a signal for structured careers like compliance, administration, operations, or policy-focused study options.",
+      "For students outside your home country, use this result more as a signal for structured careers like compliance, administration, operations, or policy-focused study options.",
       "You may also explore public administration, law-related support roles, or business operations depending on your location.",
       "Compare local public sector requirements in your country separately.",
     ],
@@ -130,7 +130,7 @@ export const testInsights: Record<string, TestInsight> = {
       "Explore teaching qualifications, B.Ed pathways, and modern online teaching opportunities.",
       "Build speaking confidence and classroom-style communication gradually.",
     ],
-    indiaPathway: [
+    localPathway: [
       "Check subject requirements, graduation paths, B.Ed planning, and teaching eligibility rules.",
       "Understand differences between school teaching, coaching, online tutoring, and training roles.",
       "Research state and institution-specific qualifications before choosing the route.",
@@ -165,7 +165,7 @@ export const testInsights: Record<string, TestInsight> = {
       "Practice customer service scenarios and group interaction skills.",
       "Keep one academic or business backup path active while exploring aviation.",
     ],
-    indiaPathway: [
+    localPathway: [
       "Compare airline-specific hiring, private aviation training institutes, communication training, and airport role options.",
       "Understand that recruitment standards differ by airline and role.",
       "Use verified company and training information rather than only social media promises.",
@@ -200,7 +200,7 @@ export const testInsights: Record<string, TestInsight> = {
       "Talk to current students or verified institution sources about workload and placements.",
       "Start improving English and communication if you are considering global pathways.",
     ],
-    indiaPathway: [
+    localPathway: [
       "Compare BSc Nursing, GNM, and related healthcare support programs carefully.",
       "Use official institution information for seats, eligibility, and practical training expectations.",
       "Check registration and licensing rules from official bodies before enrolling.",
@@ -235,8 +235,8 @@ export const testInsights: Record<string, TestInsight> = {
       "Start learning Excel, business communication, and basic digital tools early.",
       "Compare local degree options with global business and commerce programs.",
     ],
-    indiaPathway: [
-      "Commerce in India offers strong flexibility across accounting, finance, taxation, banking, and business-related preparation.",
+    localPathway: [
+      "Commerce studies can offer strong flexibility across accounting, finance, taxation, banking, and business-related preparation.",
       "Compare degree quality, practical exposure, internships, and certification add-ons before choosing a college.",
       "Keep long-term specialization in mind while selecting your early academic path.",
     ],
