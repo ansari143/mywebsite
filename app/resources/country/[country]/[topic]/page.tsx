@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { countryResourcesWithTopics, getCountryTopic, isCountryUsingDefaultTopics } from "@/data/countryResources";
+import {
+  heroClass,
+  sectionClass,
+  cardClass,
+  amberClass,
+} from "@/lib/theme";
 
 type Props = {
   params: Promise<{ country: string; topic: string }>;
@@ -128,7 +134,7 @@ export default async function CountryTopicPage({ params }: Props) {
         <h2 className="text-2xl font-semibold text-gray-900">Frequently asked questions</h2>
         <div className="mt-4 space-y-4">
           {data.topic.faq.map((item) => (
-            <div key={item.question} className="rounded-2xl border border-gray-200 bg-white p-5">
+            <div key={item.question} className={cardClass}>
               <h3 className="text-lg font-semibold text-gray-900">{item.question}</h3>
               <p className="mt-2 text-sm leading-7 text-gray-700 sm:text-base">{item.answer}</p>
             </div>

@@ -255,7 +255,7 @@ export default function SkillsRoadmapPortal({
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl dark:text-slate-100">AI Career Roadmaps</h2>
-            <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600 dark:text-slate-200">
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600 dark:text-slate-300">
               Explore role-specific pathways with educational milestones, suggested tools, practice projects, and resource placeholders.
             </p>
           </div>
@@ -286,7 +286,7 @@ export default function SkillsRoadmapPortal({
                   className="flex w-full items-center justify-between gap-3 bg-gradient-to-r from-slate-50 via-white to-blue-50 px-5 py-4 text-left dark:from-slate-900 dark:via-slate-900 dark:to-slate-800"
                 >
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-300 dark:text-slate-300">
                       {roadmap.currentRole} to {roadmap.futureRole}
                     </p>
                     <h3 className="mt-1 text-xl font-bold text-slate-900 dark:text-slate-100">{roadmap.futureRole}</h3>
@@ -294,7 +294,7 @@ export default function SkillsRoadmapPortal({
                       🚀 Future Ready 2026
                     </p>
                   </div>
-                  <span className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200">
+                  <span className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300">
                     {expandedRoleId === roadmap.id ? "Collapse" : "Expand"}
                   </span>
                 </button>
@@ -303,11 +303,11 @@ export default function SkillsRoadmapPortal({
                   <div className="space-y-6 p-5 sm:p-6">
                     <div className="grid gap-4 md:grid-cols-2">
                       <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800">
-                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">Current Role</p>
+                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-300 dark:text-slate-300">Current Role</p>
                         <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-slate-100">{roadmap.currentRole}</p>
                       </div>
                       <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800">
-                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">Future Role</p>
+                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-300 dark:text-slate-300">Future Role</p>
                         <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-slate-100">{roadmap.futureRole}</p>
                       </div>
                     </div>
@@ -320,7 +320,7 @@ export default function SkillsRoadmapPortal({
                           <p className="text-xs font-semibold uppercase tracking-wide text-blue-700 dark:text-blue-200">
                             Recommended next step
                           </p>
-                          <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-200">
+                          <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-300">
                             If you are starting the AI Engineer path, begin with AI Agents to understand tool use, step-by-step reasoning, and practical workflow design.
                           </p>
                           <Link
@@ -353,7 +353,7 @@ export default function SkillsRoadmapPortal({
                         <p className="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-300">{roadmap.learningTimeline}</p>
                         <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-indigo-600 dark:text-indigo-300">8-14 Weeks per role</p>
                         <div className="mt-4 space-y-3">
-                          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">Progress Tracker</p>
+                          <p className="text-xs font-semibold uppercase tracking-wide text-slate-300 dark:text-slate-300">Progress Tracker</p>
                           {roadmap.skillLevels.map((level) => (
                             <div key={level.label}>
                               <div className="mb-1 flex items-center justify-between text-xs font-semibold text-slate-600 dark:text-slate-300">
@@ -381,7 +381,7 @@ export default function SkillsRoadmapPortal({
                           {roadmap.toolsUsed.map((tool) => (
                             <span
                               key={tool}
-                              className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200"
+                              className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-slate-300"
                             >
                               {tool}
                             </span>
@@ -407,7 +407,7 @@ export default function SkillsRoadmapPortal({
                       <div className="mt-4 overflow-x-auto">
                         <table className="min-w-[980px] border-collapse text-left text-sm">
                           <thead>
-                            <tr className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+                            <tr className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
                               <th className="border border-slate-200 px-3 py-2.5 font-semibold dark:border-slate-700/70">Step</th>
                               <th className="border border-slate-200 px-3 py-2.5 font-semibold dark:border-slate-700/70">Phase / Week</th>
                               <th className="border border-slate-200 px-3 py-2.5 font-semibold dark:border-slate-700/70">Skill Area</th>
@@ -420,11 +420,11 @@ export default function SkillsRoadmapPortal({
                             {roadmap.roadmapSteps.map((step) => (
                               <tr key={`${roadmap.id}-${step.step}`} className="odd:bg-white even:bg-slate-50 dark:odd:bg-slate-900 dark:even:bg-slate-800/60">
                                 <td className="border border-slate-200 px-3 py-2.5 font-semibold leading-6 text-slate-800 dark:border-slate-700/70 dark:text-slate-100">{step.step}</td>
-                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-200">{step.phase}</td>
-                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-200">{step.skillArea}</td>
-                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-200">{step.whatYouLearn}</td>
-                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-200">{step.whyItMatters}</td>
-                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-200">{step.recommendedResource}</td>
+                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-300">{step.phase}</td>
+                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-300">{step.skillArea}</td>
+                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-300">{step.whatYouLearn}</td>
+                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-300">{step.whyItMatters}</td>
+                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-300">{step.recommendedResource}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -449,7 +449,7 @@ export default function SkillsRoadmapPortal({
                             className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
                               selectedTab === tab
                                 ? "border-blue-600 bg-blue-600 text-white"
-                                : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+                                : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
                             }`}
                           >
                             {tab}
@@ -466,11 +466,11 @@ export default function SkillsRoadmapPortal({
                             rel="nofollow sponsored noopener noreferrer"
                             className="rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-blue-300 hover:bg-blue-50 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-blue-500 dark:hover:bg-slate-700"
                           >
-                            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-slate-300 dark:text-slate-300">
                               {resource.provider}
                             </p>
                             <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-slate-100">{resource.title}</p>
-                            <p className="mt-2 inline-flex rounded-full border border-slate-300 bg-white px-2 py-0.5 text-xs font-semibold text-slate-700 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200">
+                            <p className="mt-2 inline-flex rounded-full border border-slate-300 bg-white px-2 py-0.5 text-xs font-semibold text-slate-700 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-300">
                               {resource.level}
                             </p>
                             <span className="mt-3 inline-flex rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white">
@@ -483,7 +483,7 @@ export default function SkillsRoadmapPortal({
                       <div className="mt-5 overflow-x-auto">
                         <table className="min-w-[760px] border-collapse text-left text-sm">
                           <thead>
-                            <tr className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+                            <tr className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
                               <th className="border border-slate-200 px-3 py-2.5 font-semibold dark:border-slate-700/70">#</th>
                               <th className="border border-slate-200 px-3 py-2.5 font-semibold dark:border-slate-700/70">Course</th>
                               <th className="border border-slate-200 px-3 py-2.5 font-semibold dark:border-slate-700/70">Level</th>
@@ -493,9 +493,9 @@ export default function SkillsRoadmapPortal({
                           <tbody>
                             {selectedResources.map((resource, resourceIndex) => (
                               <tr key={`${roadmap.id}-${selectedTab}-table-${resource.title}`} className="odd:bg-white even:bg-slate-50 dark:odd:bg-slate-900 dark:even:bg-slate-800/60">
-                                <td className="border border-slate-200 px-3 py-2.5 font-semibold leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-200">{resourceIndex + 1}</td>
-                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-200">{resource.title}</td>
-                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-200">{resource.level}</td>
+                                <td className="border border-slate-200 px-3 py-2.5 font-semibold leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-300">{resourceIndex + 1}</td>
+                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-300">{resource.title}</td>
+                                <td className="border border-slate-200 px-3 py-2.5 leading-6 text-slate-700 dark:border-slate-700/70 dark:text-slate-300">{resource.level}</td>
                                 <td className="border border-slate-200 px-3 py-2.5 dark:border-slate-700/70">
                                   <a
                                     href={resource.url}
@@ -577,16 +577,16 @@ export default function SkillsRoadmapPortal({
           Explore more educational resources and guidance pages.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
-          <Link href="/blog" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+          <Link href="/blog" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
             Blog
           </Link>
-          <Link href="/contact" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+          <Link href="/contact" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
             Contact
           </Link>
-          <Link href="/practice-tests" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+          <Link href="/practice-tests" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
             Practice Tests
           </Link>
-          <Link href="/career-guidance" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+          <Link href="/career-guidance" className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
             Career Guidance
           </Link>
         </div>

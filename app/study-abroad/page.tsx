@@ -9,11 +9,6 @@ export const metadata = {
   },
 };
 
-export const generateViewport = () => ({
-  width: "device-width",
-  initialScale: 1,
-});
-
 const destinations = [
   {
     href: "/study-in-usa",
@@ -47,193 +42,194 @@ const destinations = [
     href: "/study-in-europe",
     title: "Study in Europe 🇪🇺",
     desc: "Low-cost education in countries like Germany and Netherlands, multicultural exposure, and EU-wide mobility.",
-    for: "Students seeking affordable education and cultural diversity with EU citizenship benefits.",
+    for: "Students seeking affordable education and cultural diversity with EU mobility benefits.",
     avoid: "Those requiring extensive English-language support or preferring North American accreditation.",
   },
+];
+
+const roadmap = [
+  ["1. Define Your Goals and Budget", "Clarify why you are studying abroad: career advancement, cultural experience, or academic excellence. Set a realistic budget including tuition, living costs, and emergencies."],
+  ["2. Research Destinations Thoroughly", "Compare rankings, courses, costs, and post-study options. Visit university websites, read student reviews, and check visa policies."],
+  ["3. Prepare Academic and Language Requirements", "Gather transcripts, take standardized tests such as IELTS, TOEFL, SAT, GRE, or GMAT, and prepare personal statements."],
+  ["4. Secure Funding and Scholarships", "Apply for university scholarships, government grants, and external funding. Explore education loans if needed."],
+  ["5. Apply and Obtain Visa", "Submit applications to multiple universities, accept offers, and apply for student visas with complete documents."],
+  ["6. Plan Arrival and Integration", "Arrange accommodation, health insurance, orientation, and connect with international student communities for support."],
+];
+
+const faqs = [
+  ["Which country might suit my field?", "Consider USA for research-intensive programs, UK for shorter business-focused degrees, Canada for co-op opportunities, Australia for vocational healthcare training, and Europe for affordable study options."],
+  ["What are the typical costs?", "Annual expenses vary widely. Europe can be more affordable, while USA, UK, Canada, and Australia may require higher tuition and living budgets."],
+  ["Can I work while studying?", "Most countries allow part-time work during studies, but rules depend on your visa type and destination country."],
+  ["Are scholarships available?", "Some universities offer merit-based aid, but scholarships are competitive. Students should apply early and prepare strong academic documents."],
 ];
 
 export default function StudyAbroadPage() {
   return (
     <div className="site-page">
-      <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-blue-50 via-white to-violet-50 p-6 shadow-sm sm:p-8 lg:p-10 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
-        <div className="inline-flex rounded-full border border-blue-100 bg-white px-3 py-1 text-sm font-medium text-blue-700">
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8 lg:p-10">
+        <span className="inline-flex rounded-full border border-blue-500 bg-blue-950/60 px-3 py-1 text-sm font-semibold text-blue-200">
           Global Education
-        </div>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        </span>
+
+        <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
           Study Abroad Guidance for Students Worldwide
         </h1>
-        <p className="mt-2 text-sm font-medium text-slate-500">Updated: June 2026</p>
-        <p className="mt-4 max-w-4xl text-base leading-8 text-slate-700 sm:text-lg">
-          Use this section to compare study destinations based on your academic goals, budget, and career plans. Each country has specific strengths and requirements that may or may not align with your situation.
+
+        <p className="mt-3 text-sm font-semibold text-slate-300">Updated: June 2026</p>
+
+        <p className="mt-5 max-w-4xl text-base leading-8 text-slate-300 sm:text-lg">
+          Use this section to compare study destinations based on your academic goals,
+          budget, and career plans. Each country has specific strengths and requirements
+          that may or may not align with your situation.
         </p>
-        <div className="mt-6">
-          <h2 className="text-lg font-semibold text-slate-900">Who This Guide Is For</h2>
-          <p className="mt-2 text-slate-700">
-            Students researching specific countries for their study needs, those comparing practical factors like costs and work rights, and individuals seeking realistic assessments of international education options.
-          </p>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5">
+            <h2 className="text-lg font-semibold text-white">Who This Guide Is For</h2>
+            <p className="mt-2 text-sm leading-7 text-slate-300">
+              Students researching specific countries, comparing practical factors like costs
+              and work rights, and seeking realistic international education options.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5">
+            <h2 className="text-lg font-semibold text-white">Who Should Avoid This Path</h2>
+            <p className="mt-2 text-sm leading-7 text-slate-300">
+              Students who are not prepared for additional costs, visa complexity, or
+              international study planning should explore local education options first.
+            </p>
+          </div>
         </div>
-        <div className="mt-4">
-          <h2 className="text-lg font-semibold text-slate-900">Who Should Avoid This Path</h2>
-          <p className="mt-2 text-slate-700">
-            Students who are not prepared for the additional costs and complexities of international study, those who prefer local education systems, or individuals facing visa restrictions that limit their options.
-          </p>
-        </div>
+
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <Link href="/international-students" className="site-btn-primary px-5 py-3 text-center">
+          <Link href="/international-students" className="site-btn-primary text-center">
             International Student Guide
           </Link>
-          <Link href="/global-careers" className="site-btn-secondary px-5 py-3 text-center">
+          <Link href="/global-careers" className="site-btn-secondary text-center">
             Explore Global Careers
           </Link>
-          <Link href="/skills" className="site-btn-secondary px-5 py-3 text-center">
+          <Link href="/skills" className="site-btn-secondary text-center">
             Explore AI Skills
           </Link>
         </div>
       </section>
 
-      <section className="site-section">
-        <h2 className="text-2xl font-bold text-slate-900">Quick Country Comparison</h2>
-        <p className="mt-2 text-slate-700">Overview of key factors for top study destinations:</p>
+      <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Quick Country Comparison</h2>
+        <p className="mt-2 text-slate-300">Overview of key factors for top study destinations.</p>
+
         <div className="mt-6 overflow-x-auto">
-          <table className="min-w-full table-auto border-collapse border border-slate-300">
+          <table className="w-full border-collapse text-sm">
             <thead>
-              <tr className="bg-slate-100">
-                <th className="border border-slate-300 px-4 py-2 text-left">Country</th>
-                <th className="border border-slate-300 px-4 py-2 text-left">Avg. Tuition (USD/year)</th>
-                <th className="border border-slate-300 px-4 py-2 text-left">Degree Duration</th>
-                <th className="border border-slate-300 px-4 py-2 text-left">Post-Study Work</th>
-                <th className="border border-slate-300 px-4 py-2 text-left">English Requirement</th>
+              <tr className="bg-slate-800">
+                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">Country</th>
+                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">Avg. Tuition</th>
+                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">Degree Duration</th>
+                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">Post-Study Work</th>
+                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">English Requirement</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="border border-slate-300 px-4 py-2 font-semibold">USA</td>
-                <td className="border border-slate-300 px-4 py-2">$25,000-50,000</td>
-                <td className="border border-slate-300 px-4 py-2">4 years (Bachelor)</td>
-                <td className="border border-slate-300 px-4 py-2">1-3 years OPT</td>
-                <td className="border border-slate-300 px-4 py-2">TOEFL/IELTS</td>
-              </tr>
-              <tr className="bg-slate-50">
-                <td className="border border-slate-300 px-4 py-2 font-semibold">Canada</td>
-                <td className="border border-slate-300 px-4 py-2">$15,000-30,000</td>
-                <td className="border border-slate-300 px-4 py-2">4 years (Bachelor)</td>
-                <td className="border border-slate-300 px-4 py-2">1-3 years</td>
-                <td className="border border-slate-300 px-4 py-2">TOEFL/IELTS</td>
-              </tr>
-              <tr>
-                <td className="border border-slate-300 px-4 py-2 font-semibold">UK</td>
-                <td className="border border-slate-300 px-4 py-2">$20,000-35,000</td>
-                <td className="border border-slate-300 px-4 py-2">3 years (Bachelor)</td>
-                <td className="border border-slate-300 px-4 py-2">2-5 years</td>
-                <td className="border border-slate-300 px-4 py-2">IELTS</td>
-              </tr>
-              <tr className="bg-slate-50">
-                <td className="border border-slate-300 px-4 py-2 font-semibold">Australia</td>
-                <td className="border border-slate-300 px-4 py-2">$20,000-40,000</td>
-                <td className="border border-slate-300 px-4 py-2">3 years (Bachelor)</td>
-                <td className="border border-slate-300 px-4 py-2">2-4 years</td>
-                <td className="border border-slate-300 px-4 py-2">TOEFL/IELTS/PTE</td>
-              </tr>
-              <tr>
-                <td className="border border-slate-300 px-4 py-2 font-semibold">Europe</td>
-                <td className="border border-slate-300 px-4 py-2">$8,000-20,000</td>
-                <td className="border border-slate-300 px-4 py-2">3-4 years (Bachelor)</td>
-                <td className="border border-slate-300 px-4 py-2">6-18 months</td>
-                <td className="border border-slate-300 px-4 py-2">Varies</td>
-              </tr>
+              {[
+                ["USA", "$25,000-50,000/year", "4 years Bachelor", "1-3 years OPT", "TOEFL/IELTS"],
+                ["Canada", "$15,000-30,000/year", "4 years Bachelor", "1-3 years", "TOEFL/IELTS"],
+                ["UK", "$20,000-35,000/year", "3 years Bachelor", "2-5 years", "IELTS"],
+                ["Australia", "$20,000-40,000/year", "3 years Bachelor", "2-4 years", "TOEFL/IELTS/PTE"],
+                ["Europe", "$8,000-20,000/year", "3-4 years Bachelor", "6-18 months", "Varies"],
+              ].map((row) => (
+                <tr key={row[0]} className="odd:bg-[#0b1220] even:bg-slate-800/60">
+                  {row.map((cell, index) => (
+                    <td key={cell} className="border border-slate-700 px-4 py-3 text-slate-300">
+                      {index === 0 ? <strong className="text-white">{cell}</strong> : cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
-        <p className="mt-4 text-sm text-slate-600">*Approximate figures; check official sources for current rates and requirements.</p>
+
+        <p className="mt-4 text-sm text-slate-300">
+          *Approximate figures; check official sources for current rates and requirements.
+        </p>
       </section>
 
-      <section className="site-section">
-        <h2 className="text-2xl font-bold text-slate-900">Step-by-Step Roadmap for Studying Abroad</h2>
-        <div className="mt-6 space-y-6">
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h3 className="text-lg font-semibold text-slate-900">1. Define Your Goals and Budget</h3>
-            <p className="mt-2 text-slate-700">Clarify why you&apos;re studying abroad: career advancement, cultural experience, or academic excellence. Set a realistic budget including tuition, living costs, and emergencies.</p>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h3 className="text-lg font-semibold text-slate-900">2. Research Destinations Thoroughly</h3>
-            <p className="mt-2 text-slate-700">Compare rankings, courses, costs, and post-study options. Visit university websites, read student reviews, and check visa policies.</p>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h3 className="text-lg font-semibold text-slate-900">3. Prepare Academic and Language Requirements</h3>
-            <p className="mt-2 text-slate-700">Gather transcripts, take standardized tests (SAT, IELTS), and write personal statements. Start early as scores take time.</p>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h3 className="text-lg font-semibold text-slate-900">4. Secure Funding and Scholarships</h3>
-            <p className="mt-2 text-slate-700">Apply for university scholarships, government grants, and external funding. Explore education loans if needed.</p>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h3 className="text-lg font-semibold text-slate-900">5. Apply and Obtain Visa</h3>
-            <p className="mt-2 text-slate-700">Submit applications to multiple universities, accept offers, and apply for student visas. Provide all required documents promptly.</p>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h3 className="text-lg font-semibold text-slate-900">6. Plan Arrival and Integration</h3>
-            <p className="mt-2 text-slate-700">Arrange accommodation, health insurance, and orientation. Connect with international student communities for support.</p>
-          </div>
-        </div>
-      </section>
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Step-by-Step Roadmap for Studying Abroad</h2>
 
-      <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {destinations.map((item) => (
-          <Link key={item.href} href={item.href} className="site-section p-6 transition hover:-translate-y-1 hover:shadow-md">
-            <h2 className="text-xl font-bold text-slate-900">{item.title}</h2>
-            <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.desc}</p>
-            <div className="mt-4 space-y-2">
-              <p className="text-xs text-green-700"><strong>For:</strong> {item.for}</p>
-              <p className="text-xs text-red-700"><strong>Avoid if:</strong> {item.avoid}</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {roadmap.map(([title, desc]) => (
+            <div key={title} className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5">
+              <h3 className="text-lg font-semibold text-white">{title}</h3>
+              <p className="mt-2 text-sm leading-7 text-slate-300">{desc}</p>
             </div>
-            <span className="mt-5 inline-flex text-sm font-semibold text-blue-700">Read full guide →</span>
-          </Link>
-        ))}
-      </section>
-
-      <section className="site-section">
-        <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
-        <div className="mt-6 space-y-4">
-          <div>
-            <h3 className="font-semibold text-slate-900">Which country might suit my field?</h3>
-            <p className="mt-1 text-slate-700">Consider USA for research-intensive programs, UK for shorter business-focused degrees, Canada for co-op opportunities, Australia for vocational healthcare training. Check specific university offerings in your area of interest.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-slate-900">What are the typical costs?</h3>
-            <p className="mt-1 text-slate-700">Annual expenses vary widely: Europe ($8,000-20,000), Canada ($15,000-30,000), UK ($20,000-35,000), Australia ($20,000-40,000), USA ($25,000-50,000). Include living costs, which can add 30-50% to tuition.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-slate-900">Can I work while studying?</h3>
-            <p className="mt-1 text-slate-700">Most countries allow part-time work (10-20 hours/week) during terms. Check specific visa conditions and restrictions in your chosen destination.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-slate-900">Are scholarships available?</h3>
-            <p className="mt-1 text-slate-700">Some universities offer merit-based aid, but most international students fund their own education. Government scholarships are competitive and limited.</p>
-          </div>
+          ))}
         </div>
       </section>
 
-      <section className="grid gap-6 md:grid-cols-3">
-        {[
-          {
-            title: "Compare costs",
-            desc: "Review tuition and living expenses before selecting a country.",
-          },
-          {
-            title: "Understand exams",
-            desc: "Know which English and admission tests may apply to your target course.",
-          },
-          {
-            title: "Plan outcomes",
-            desc: "Compare work options, long-term pathways, and skills needed for global employability.",
-          },
-        ].map((item) => (
-          <div key={item.title} className="site-section p-6">
-            <h2 className="text-lg font-semibold text-slate-900">{item.title}</h2>
-            <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.desc}</p>
-          </div>
-        ))}
+      <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Country Study Guides</h2>
+        <p className="mt-2 text-slate-300">
+          Explore detailed study abroad guidance by destination.
+        </p>
+
+        <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {destinations.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="rounded-2xl border border-slate-700 bg-[#0b1220] p-5 transition hover:-translate-y-1 hover:border-blue-500"
+            >
+              <h3 className="text-xl font-bold text-white">{item.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-slate-300">{item.desc}</p>
+
+              <div className="mt-4 space-y-2">
+                <p className="text-xs leading-6 text-slate-300">
+                  <strong>For:</strong> {item.for}
+                </p>
+                <p className="text-xs leading-6 text-slate-300">
+                  <strong>Avoid if:</strong> {item.avoid}
+                </p>
+              </div>
+
+              <span className="mt-5 inline-flex text-sm font-semibold text-blue-300">
+                Read full guide →
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-700 bg-amber-950/40 p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Important Study Abroad Checklist</h2>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {[
+            ["Compare costs", "Review tuition and living expenses before selecting a country."],
+            ["Understand exams", "Know which English and admission tests may apply to your target course."],
+            ["Plan outcomes", "Compare work options, long-term pathways, and skills needed for global employability."],
+          ].map(([title, desc]) => (
+            <div key={title} className="rounded-2xl border border-amber-800 bg-[#0b1220] p-5">
+              <h3 className="text-lg font-semibold text-white">{title}</h3>
+              <p className="mt-3 text-sm leading-7 text-slate-300">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Frequently Asked Questions</h2>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {faqs.map(([q, a]) => (
+            <div key={q} className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5">
+              <h3 className="text-lg font-semibold text-white">{q}</h3>
+              <p className="mt-2 text-sm leading-7 text-slate-300">{a}</p>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );
 }
+

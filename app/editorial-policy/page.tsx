@@ -91,7 +91,7 @@ export default function EditorialPolicyPage() {
   };
 
   return (
-    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300">
+    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-300 dark:[&_.text-slate-600]:text-slate-300">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -111,7 +111,7 @@ export default function EditorialPolicyPage() {
 
       <section className="grid gap-5 md:grid-cols-2">
         {principles.map((item) => (
-          <article key={item.title} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <article key={item.title} className={sectionClass}>
             <h2 className="text-xl font-semibold text-slate-900">{item.title}</h2>
             <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.detail}</p>
           </article>

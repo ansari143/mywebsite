@@ -199,7 +199,7 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
   };
 
   return (
-    <main className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.bg-emerald-50]:bg-emerald-900/20 dark:[&_.bg-rose-50]:bg-rose-900/20 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300 dark:[&_.text-slate-500]:text-slate-400 dark:[&_.text-emerald-900]:text-emerald-200 dark:[&_.text-rose-900]:text-rose-200">
+    <main className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.bg-emerald-50]:bg-emerald-900/20 dark:[&_.bg-rose-50]:bg-rose-900/20 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-300 dark:[&_.text-slate-600]:text-slate-300 dark:[&_.text-slate-300]:text-slate-300 dark:[&_.text-emerald-900]:text-slate-300 dark:[&_.text-rose-900]:text-slate-300">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
@@ -215,7 +215,7 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
           </p>
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{post.title}</h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">{post.description}</p>
-          <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-500">
+          <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-300">
             <span>Author: {post.author}</span>
             <span>Updated: {new Date(post.updatedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
             <span>{post.readingTime}</span>

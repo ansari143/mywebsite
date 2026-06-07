@@ -92,7 +92,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="mt-6 border-t border-slate-200 pt-4 text-center text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400">
+        <div className="mt-6 border-t border-slate-200 pt-4 text-center text-sm text-slate-300 dark:border-slate-700 dark:text-slate-300">
           © 2026 Nishaglobal Education. All rights reserved.
         </div>
       </div>

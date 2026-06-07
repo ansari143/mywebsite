@@ -3,7 +3,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PracticeTestClient from "@/components/PracticeTestClient";
 import PracticeQuiz from "@/components/PracticeQuiz";
-import { getPracticeSetBySlug, getGovPracticeSet, getGovPracticeCategoryBySlug } from "@/data/practiceTests";
+import {
+  getPracticeSetBySlug,
+  getGovPracticeSet,
+  getGovPracticeCategoryBySlug,
+} from "@/data/practiceTests";
 import type { PracticeSet } from "@/data/practiceTests";
 
 type Props = {
@@ -23,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         robots: "noindex",
       };
     }
+
     return {
       title: govSet.title,
       description: `Practice ${govSet.title} with ${govSet.questionCount} questions.`,
@@ -54,20 +59,34 @@ export default async function PracticeSetStartPage({ params }: Props) {
   if (govSet) {
     if (!govSet.isLive) {
       return (
-        <div className="space-y-6">
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm text-center">
-            <h1 className="text-2xl font-bold text-slate-900">{govSet.title}</h1>
-            <p className="mt-2 text-sm text-slate-600">{govSet.titleHi}</p>
-            <p className="mt-4 text-slate-600">
-              This practice set is currently under development. The structure is ready, but question bank is not added yet.
+        <div className="site-page">
+          <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 text-center shadow-sm sm:p-8 lg:p-10">
+            <span className="inline-flex rounded-full border border-amber-500 bg-amber-950/60 px-3 py-1 text-sm font-semibold text-amber-200">
+              Coming Soon
+            </span>
+
+            <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              {govSet.title}
+            </h1>
+
+            <p className="mt-2 text-sm font-semibold text-slate-300">
+              {govSet.titleHi}
             </p>
-            <Link
-              href={`/practice-tests/${category}`}
-              className="mt-6 inline-block rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
-            >
-              Back to {category} Practice
-            </Link>
-          </div>
+
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-slate-300">
+              This practice set is currently under development. The structure is ready,
+              but the question bank is not added yet.
+            </p>
+
+            <div className="mt-6">
+              <Link
+                href={`/practice-tests/${category}`}
+                className="site-btn-primary px-6 py-3 text-center"
+              >
+                Back to {category} Practice
+              </Link>
+            </div>
+          </section>
         </div>
       );
     }
@@ -84,8 +103,8 @@ export default async function PracticeSetStartPage({ params }: Props) {
           govSet.difficulty === "Easy"
             ? "beginner"
             : govSet.difficulty === "Medium"
-            ? "intermediate"
-            : "advanced",
+              ? "intermediate"
+              : "advanced",
         questionCount: govSet.questionCount,
         estimatedMinutes: govSet.durationMin,
         seoTitle: govSet.title,
@@ -95,7 +114,10 @@ export default async function PracticeSetStartPage({ params }: Props) {
         questions: (govSet.questions || []).map((q) => ({
           id: q.id,
           question: q.text,
-          options: q.options.map((opt) => ({ id: opt.id, text: opt.text })),
+          options: q.options.map((opt) => ({
+            id: opt.id,
+            text: opt.text,
+          })),
           correctAnswer: q.correct,
           explanation: q.explanation,
           topic: q.chapter,
@@ -103,19 +125,129 @@ export default async function PracticeSetStartPage({ params }: Props) {
             govSet.difficulty === "Easy"
               ? "easy"
               : govSet.difficulty === "Medium"
-              ? "medium"
-              : "hard",
+                ? "medium"
+                : "hard",
         })),
-            };
+      };
 
-      return <PracticeTestClient set={mappedMedicalSet} />;
+      return (
+        <div className="site-page">
+          <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8 lg:p-10">
+            <span className="inline-flex rounded-full border border-blue-500 bg-blue-950/60 px-3 py-1 text-sm font-semibold text-blue-200">
+              Medical NEET Practice
+            </span>
+
+            <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              {mappedMedicalSet.title}
+            </h1>
+
+            <p className="mt-5 max-w-4xl text-base leading-8 text-slate-300 sm:text-lg">
+              {mappedMedicalSet.description}
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-2 text-sm font-semibold">
+              <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
+                {mappedMedicalSet.questionCount} Questions
+              </span>
+              <span className="rounded-full border border-slate-700 bg-emerald-950/40 px-3 py-1 text-slate-300">
+                {mappedMedicalSet.estimatedMinutes} Minutes
+              </span>
+              <span className="rounded-full border border-slate-600 bg-slate-800 px-3 py-1 text-slate-300">
+                {mappedMedicalSet.level}
+              </span>
+            </div>
+          </section>
+
+          <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+            <PracticeTestClient set={mappedMedicalSet} />
+          </section>
+        </div>
+      );
     }
 
-    return <PracticeQuiz categorySlug={category} categoryTitle={category} set={govSet} categoryData={categoryData} />;
+    return (
+      <div className="site-page">
+        <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8 lg:p-10">
+          <span className="inline-flex rounded-full border border-blue-500 bg-blue-950/60 px-3 py-1 text-sm font-semibold text-blue-200">
+            Practice Test
+          </span>
+
+          <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            {govSet.title}
+          </h1>
+
+          {govSet.titleHi && (
+            <p className="mt-2 text-sm font-semibold text-slate-300">
+              {govSet.titleHi}
+            </p>
+          )}
+
+          <p className="mt-5 max-w-4xl text-base leading-8 text-slate-300 sm:text-lg">
+            Practice {govSet.title} with {govSet.questionCount} questions and
+            instant feedback.
+          </p>
+
+          <div className="mt-5 flex flex-wrap gap-2 text-sm font-semibold">
+            <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
+              {govSet.questionCount} Questions
+            </span>
+            <span className="rounded-full border border-slate-700 bg-emerald-950/40 px-3 py-1 text-slate-300">
+              {govSet.durationMin} Minutes
+            </span>
+            {govSet.difficulty && (
+              <span className="rounded-full border border-slate-600 bg-slate-800 px-3 py-1 text-slate-300">
+                {govSet.difficulty}
+              </span>
+            )}
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+          <PracticeQuiz
+            categorySlug={category}
+            categoryTitle={category}
+            set={govSet}
+            categoryData={categoryData}
+          />
+        </section>
+      </div>
+    );
   }
 
   if (set) {
-    return <PracticeTestClient set={set} />;
+    return (
+      <div className="site-page">
+        <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8 lg:p-10">
+          <span className="inline-flex rounded-full border border-blue-500 bg-blue-950/60 px-3 py-1 text-sm font-semibold text-blue-200">
+            {set.examType}
+          </span>
+
+          <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            {set.title}
+          </h1>
+
+          <p className="mt-5 max-w-4xl text-base leading-8 text-slate-300 sm:text-lg">
+            {set.description}
+          </p>
+
+          <div className="mt-5 flex flex-wrap gap-2 text-sm font-semibold">
+            <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
+              {set.questionCount} Questions
+            </span>
+            <span className="rounded-full border border-slate-700 bg-emerald-950/40 px-3 py-1 text-slate-300">
+              {set.estimatedMinutes} Minutes
+            </span>
+            <span className="rounded-full border border-slate-600 bg-slate-800 px-3 py-1 text-slate-300">
+              {set.level}
+            </span>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+          <PracticeTestClient set={set} />
+        </section>
+      </div>
+    );
   }
 
   return notFound();

@@ -162,7 +162,7 @@ export default function AustraliaVsCanadaPage() {
           websites for Australia (immi.homeaffairs.gov.au) and Canada (canada.ca/immigration) before making any application decisions.
           This article is for educational guidance only.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: April 2026 · Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-300">Last reviewed: April 2026 · Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6">

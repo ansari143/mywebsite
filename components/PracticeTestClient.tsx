@@ -23,9 +23,7 @@ export default function PracticeTestClient({ set }: Props) {
   const allAnswered = answeredCount === total;
 
   const pageQuestions = useMemo(() => {
-    if (!isLongTest) {
-      return set.questions;
-    }
+    if (!isLongTest) return set.questions;
 
     const startIndex = (currentPage - 1) * questionsPerPage;
     return set.questions.slice(startIndex, startIndex + questionsPerPage);
@@ -47,17 +45,11 @@ export default function PracticeTestClient({ set }: Props) {
     set.questions.forEach((question, index) => {
       let label = "";
 
-      if (question.id.includes("-math-")) {
-        label = "Mathematics";
-      } else if (question.id.includes("-phys-")) {
-        label = "Physics";
-      } else if (question.id.includes("-chem-")) {
-        label = "Chemistry";
-      }
+      if (question.id.includes("-math-")) label = "Mathematics";
+      else if (question.id.includes("-phys-")) label = "Physics";
+      else if (question.id.includes("-chem-")) label = "Chemistry";
 
-      if (!label || seen.has(label)) {
-        return;
-      }
+      if (!label || seen.has(label)) return;
 
       seen.add(label);
 
@@ -68,7 +60,7 @@ export default function PracticeTestClient({ set }: Props) {
       links.push({
         label,
         page,
-        range: `Questions ${startQuestion}-${endQuestion}`,
+        range: `Q${startQuestion}-${endQuestion}`,
       });
     });
 
@@ -76,80 +68,83 @@ export default function PracticeTestClient({ set }: Props) {
   }, [isLongTest, questionsPerPage, set.questions, total]);
 
   const visiblePages = useMemo(() => {
-    if (!isLongTest) {
-      return [] as number[];
+    if (!isLongTest) return [];
+
+    const pages = new Set<number>();
+    pages.add(1);
+    pages.add(totalPages);
+
+    for (let p = currentPage - 1; p <= currentPage + 1; p += 1) {
+      if (p >= 1 && p <= totalPages) pages.add(p);
     }
 
-    const startPage = Math.max(1, currentPage - 2);
-    const endPage = Math.min(totalPages, startPage + 4);
-    const firstPage = Math.max(1, endPage - 4);
-
-    return Array.from({ length: endPage - firstPage + 1 }, (_, index) => firstPage + index);
+    return Array.from(pages).sort((a, b) => a - b);
   }, [currentPage, isLongTest, totalPages]);
 
   const result = useMemo(() => {
-    let correct = 0;
-
-    const topicMap: Record<
-      string,
-      { correct: number; total: number; percent: number }
-    > = {};
-
-    for (const q of set.questions) {
-      if (!topicMap[q.topic]) {
-        topicMap[q.topic] = { correct: 0, total: 0, percent: 0 };
-      }
-
-      topicMap[q.topic].total += 1;
-
-      if (answers[q.id] === q.correctAnswer) {
-        correct += 1;
-        topicMap[q.topic].correct += 1;
-      }
-    }
-
-    Object.keys(topicMap).forEach((key) => {
-      const item = topicMap[key];
-      item.percent = Math.round((item.correct / item.total) * 100);
-    });
+    const correct = set.questions.filter(
+      (q) => answers[q.id] === q.correctAnswer
+    ).length;
 
     const percent = total ? Math.round((correct / total) * 100) : 0;
 
-    let label = "Needs Improvement";
+    let label = "Keep Practicing";
     let message =
-      "Review the explanations carefully and repeat the topics where your score is lower.";
+      "Review the explanations carefully and retry weak topics before moving ahead.";
 
     if (percent >= 80) {
-      label = "Strong Performance";
+      label = "Excellent";
       message =
-        "You have a strong foundation here. Move to the next practice set and keep building consistency.";
+        "Great performance. Continue with higher difficulty sets or full mock tests.";
     } else if (percent >= 60) {
-      label = "Good Start";
+      label = "Good Progress";
       message =
-        "You understand several basics well. Keep improving weak topics and practice regularly.";
+        "You are building confidence. Review weak areas and attempt one more practice round.";
     }
 
-    return {
-      correct,
-      percent,
-      label,
-      message,
-      topicMap,
-    };
+    return { correct, percent, label, message };
   }, [answers, set.questions, total]);
 
-  const strongestTopics = Object.entries(result.topicMap)
+  const topicStats = useMemo(() => {
+    const stats: Record<string, { total: number; correct: number; percent: number }> =
+      {};
+
+    set.questions.forEach((q) => {
+      if (!stats[q.topic]) {
+        stats[q.topic] = { total: 0, correct: 0, percent: 0 };
+      }
+
+      stats[q.topic].total += 1;
+
+      if (answers[q.id] === q.correctAnswer) {
+        stats[q.topic].correct += 1;
+      }
+    });
+
+    Object.keys(stats).forEach((topic) => {
+      const value = stats[topic];
+      value.percent = value.total
+        ? Math.round((value.correct / value.total) * 100)
+        : 0;
+    });
+
+    return stats;
+  }, [answers, set.questions]);
+
+  const strongestTopics = Object.entries(topicStats)
     .sort((a, b) => b[1].percent - a[1].percent)
     .slice(0, 3);
 
-  const weakTopics = Object.entries(result.topicMap)
+  const weakTopics = Object.entries(topicStats)
     .sort((a, b) => a[1].percent - b[1].percent)
     .slice(0, 3);
 
-  const handleSelect = (questionId: string, optionId: "A" | "B" | "C" | "D") => {
+  const handleSelect = (questionId: string, answerId: "A" | "B" | "C" | "D") => {
+    if (submitted) return;
+
     setAnswers((prev) => ({
       ...prev,
-      [questionId]: optionId,
+      [questionId]: answerId,
     }));
   };
 
@@ -158,61 +153,67 @@ export default function PracticeTestClient({ set }: Props) {
   };
 
   return (
-    <div className="space-y-6 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.border-slate-300]:border-slate-600 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.bg-gray-50]:bg-slate-800 dark:[&_.bg-gray-100]:bg-slate-700 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300 dark:[&_.text-gray-700]:text-slate-200 dark:[&_.text-green-700]:text-green-300 dark:[&_.text-red-700]:text-red-300">
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+    <div className="site-page">
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
+        <div className="inline-flex rounded-full border border-blue-500 bg-blue-950/60 px-3 py-1 text-sm font-semibold text-blue-200">
           Free practice test • English only
         </div>
 
-        <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
           {set.title}
         </h1>
 
-        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
+        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300">
           {set.description}
         </p>
 
-        <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700">
-          <span className="rounded-full bg-slate-100 px-3 py-1">
+        <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-300">
+          <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
             {set.questionCount} Questions
           </span>
-          <span className="rounded-full bg-slate-100 px-3 py-1">
+          <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
             ~{set.estimatedMinutes} min
           </span>
-          <span className="rounded-full bg-slate-100 px-3 py-1 capitalize">
+          <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200 capitalize">
             {set.level}
           </span>
-          <span className="rounded-full bg-slate-100 px-3 py-1">
+          <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
             {set.examType}
           </span>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-xl font-bold text-slate-900">Your progress</h2>
-            <p className="mt-1 text-sm text-slate-600">
+            <h2 className="text-xl font-bold text-white">Your progress</h2>
+            <p className="mt-1 text-sm text-slate-300">
               Answer all questions, then submit to see your score and explanations.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700">
+
+          <div className="rounded-2xl border border-slate-700 bg-slate-800/70 px-4 py-3 text-sm font-medium text-slate-300">
             Answered: {answeredCount}/{total}
           </div>
         </div>
 
         {isLongTest && (
           <div className="mt-5 space-y-4">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="rounded-2xl border border-slate-700 bg-slate-800/70 p-4">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">Long-test navigation</p>
-                  <p className="mt-1 text-sm leading-6 text-slate-600">
-                    Use subject jump links or page buttons to move through the 180-question paper without losing answers.
+                  <p className="text-sm font-semibold text-white">
+                    Long-test navigation
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-slate-300">
+                    Use subject jump links or page buttons to move through the
+                    paper without losing answers.
                   </p>
                 </div>
-                <div className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-slate-700">
-                  Page {currentPage} of {totalPages} • {pageAnsweredCount}/{pageQuestions.length} answered on this page
+
+                <div className="rounded-xl border border-slate-700 bg-[#0b1220] px-4 py-2 text-sm font-medium text-slate-300">
+                  Page {currentPage} of {totalPages} • {pageAnsweredCount}/
+                  {pageQuestions.length} answered on this page
                 </div>
               </div>
 
@@ -226,8 +227,8 @@ export default function PracticeTestClient({ set }: Props) {
                       className={[
                         "rounded-full border px-4 py-2 text-sm font-semibold transition",
                         currentPage === item.page
-                          ? "border-blue-600 bg-blue-600 text-white"
-                          : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100",
+                          ? "border-blue-500 bg-blue-600 text-white"
+                          : "border-slate-700 bg-[#0b1220] text-slate-300 hover:border-blue-500 hover:bg-slate-800/70",
                       ].join(" ")}
                     >
                       {item.label} • {item.range}
@@ -241,10 +242,11 @@ export default function PracticeTestClient({ set }: Props) {
                   type="button"
                   onClick={() => goToPage(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
-                  className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-2 text-sm font-semibold text-slate-300 hover:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Previous Page
                 </button>
+
                 {visiblePages.map((page) => (
                   <button
                     key={page}
@@ -253,18 +255,19 @@ export default function PracticeTestClient({ set }: Props) {
                     className={[
                       "rounded-xl border px-4 py-2 text-sm font-semibold transition",
                       currentPage === page
-                        ? "border-blue-600 bg-blue-600 text-white"
-                        : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100",
+                        ? "border-blue-500 bg-blue-600 text-white"
+                        : "border-slate-700 bg-[#0b1220] text-slate-300 hover:border-blue-500 hover:bg-slate-800/70",
                     ].join(" ")}
                   >
                     Page {page}
                   </button>
                 ))}
+
                 <button
                   type="button"
                   onClick={() => goToPage(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-2 text-sm font-semibold text-slate-300 hover:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Next Page
                 </button>
@@ -285,23 +288,23 @@ export default function PracticeTestClient({ set }: Props) {
           return (
             <section
               key={q.id}
-              className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
+              className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm"
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-blue-700">
+                  <p className="text-sm font-semibold text-blue-300">
                     Question {questionNumber}
                   </p>
-                  <h3 className="mt-2 text-lg font-semibold text-slate-900">
+                  <h3 className="mt-2 text-lg font-semibold text-white">
                     {q.question}
                   </h3>
                 </div>
 
                 <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-wide">
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-600">
+                  <span className="rounded-full border border-slate-600 bg-slate-800 px-3 py-1 text-slate-300">
                     {q.topic}
                   </span>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-600">
+                  <span className="rounded-full border border-slate-600 bg-slate-800 px-3 py-1 text-slate-300">
                     {q.difficulty}
                   </span>
                 </div>
@@ -311,7 +314,8 @@ export default function PracticeTestClient({ set }: Props) {
                 {q.options.map((opt) => {
                   const active = userAnswer === opt.id;
                   const showCorrect = submitted && opt.id === q.correctAnswer;
-                  const showWrong = submitted && active && opt.id !== q.correctAnswer;
+                  const showWrong =
+                    submitted && active && opt.id !== q.correctAnswer;
 
                   return (
                     <button
@@ -319,21 +323,29 @@ export default function PracticeTestClient({ set }: Props) {
                       type="button"
                       onClick={() => handleSelect(q.id, opt.id)}
                       className={[
-                        "rounded-2xl border p-4 text-left transition",
-                        active ? "border-blue-600 bg-blue-50" : "border-gray-200 bg-white hover:bg-gray-50",
-                        showCorrect ? "border-green-500 bg-green-50" : "",
-                        showWrong ? "border-red-500 bg-red-50" : "",
+                        "rounded-2xl border p-4 text-left text-sm leading-7 transition sm:text-base",
+                        active
+                          ? "border-blue-400 bg-blue-50 text-blue-950"
+                          : "border-slate-700 bg-[#0b1220] text-slate-300 hover:border-blue-500 hover:bg-slate-800/70 hover:text-white",
+                        showCorrect
+                          ? "border-slate-700 bg-emerald-950/40 text-slate-300"
+                          : "",
+                        showWrong
+                          ? "border-slate-700 bg-rose-950/40 text-slate-300"
+                          : "",
                       ].join(" ")}
                     >
                       <span className="font-semibold">{opt.id}.</span>{" "}
                       <span>{opt.text}</span>
+
                       {submitted && showCorrect && (
-                        <span className="ml-2 font-semibold text-green-700">
+                        <span className="ml-2 font-semibold text-slate-300">
                           ✓ Correct
                         </span>
                       )}
+
                       {submitted && showWrong && (
-                        <span className="ml-2 font-semibold text-red-700">
+                        <span className="ml-2 font-semibold text-slate-300">
                           ✗ Your choice
                         </span>
                       )}
@@ -343,24 +355,22 @@ export default function PracticeTestClient({ set }: Props) {
               </div>
 
               {submitted && (
-                <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-sm font-semibold text-slate-900">
+                <div className="mt-5 rounded-2xl border border-blue-500 bg-blue-950/30 p-4">
+                  <p className="text-sm font-semibold text-white">
                     Explanation
                   </p>
-                  <p className="mt-2 text-sm leading-7 text-slate-700">
+                  <p className="mt-2 text-sm leading-7 text-slate-300">
                     {q.explanation}
                   </p>
-                  <p className="mt-3 text-sm">
-                    <span className="font-semibold text-slate-900">
+                  <p className="mt-3 text-sm text-slate-300">
+                    <span className="font-semibold text-white">
                       Correct answer:
                     </span>{" "}
-                    <span className="text-slate-700">{q.correctAnswer}</span>
+                    {q.correctAnswer}
                   </p>
-                  <p className="mt-1 text-sm">
-                    <span className="font-semibold text-slate-900">
-                      Result:
-                    </span>{" "}
-                    <span className={isCorrect ? "text-green-700" : "text-red-700"}>
+                  <p className="mt-1 text-sm text-slate-300">
+                    <span className="font-semibold text-white">Result:</span>{" "}
+                    <span className={isCorrect ? "text-slate-300" : "text-slate-300"}>
                       {isCorrect ? "Correct" : "Incorrect"}
                     </span>
                   </p>
@@ -372,96 +382,29 @@ export default function PracticeTestClient({ set }: Props) {
       </div>
 
       {isLongTest && (
-        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-xl font-bold text-slate-900">Your progress</h2>
-              <p className="mt-1 text-sm text-slate-600">
+              <h2 className="text-xl font-bold text-white">Your progress</h2>
+              <p className="mt-1 text-sm text-slate-300">
                 Answer all questions, then submit to see your score and explanations.
               </p>
             </div>
-            <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700">
+
+            <div className="rounded-2xl border border-slate-700 bg-slate-800/70 px-4 py-3 text-sm font-medium text-slate-300">
               Answered: {answeredCount}/{total}
-            </div>
-          </div>
-
-          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <p className="text-sm font-semibold text-slate-900">Long-test navigation</p>
-                <p className="mt-1 text-sm leading-6 text-slate-600">
-                  Use subject jump links or page buttons to move through the 180-question paper without losing answers.
-                </p>
-              </div>
-              <div className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-slate-700">
-                Page {currentPage} of {totalPages} • {pageAnsweredCount}/{pageQuestions.length} answered on this page
-              </div>
-            </div>
-
-            {subjectJumpLinks.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
-                {subjectJumpLinks.map((item) => (
-                  <button
-                    key={item.label}
-                    type="button"
-                    onClick={() => goToPage(item.page)}
-                    className={[
-                      "rounded-full border px-4 py-2 text-sm font-semibold transition",
-                      currentPage === item.page
-                        ? "border-blue-600 bg-blue-600 text-white"
-                        : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100",
-                    ].join(" ")}
-                  >
-                    {item.label} • {item.range}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            <div className="mt-4 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={() => goToPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                Previous Page
-              </button>
-              {visiblePages.map((page) => (
-                <button
-                  key={page}
-                  type="button"
-                  onClick={() => goToPage(page)}
-                  className={[
-                    "rounded-xl border px-4 py-2 text-sm font-semibold transition",
-                    currentPage === page
-                      ? "border-blue-600 bg-blue-600 text-white"
-                      : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100",
-                  ].join(" ")}
-                >
-                  Page {page}
-                </button>
-              ))}
-              <button
-                type="button"
-                onClick={() => goToPage(Math.min(totalPages, currentPage + 1))}
-                disabled={currentPage === totalPages}
-                className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                Next Page
-              </button>
             </div>
           </div>
         </section>
       )}
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-amber-700 bg-amber-950/40 p-6 shadow-sm sm:p-8">
         <div className="flex flex-col gap-4 sm:flex-row">
           <button
             type="button"
             onClick={() => setSubmitted(true)}
             disabled={!allAnswered}
-            className="w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+            className="site-btn-primary w-full px-5 py-3 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
           >
             Submit Practice Test
           </button>
@@ -473,20 +416,21 @@ export default function PracticeTestClient({ set }: Props) {
               setSubmitted(false);
               setCurrentPage(1);
             }}
-            className="w-full rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto"
+            className="site-btn-secondary w-full px-5 py-3 sm:w-auto"
           >
             Reset Answers
           </button>
         </div>
 
         {isLongTest && !allAnswered && (
-          <p className="mt-3 text-sm text-slate-600">
-            You can move page by page while your answers stay saved. Submission remains available after all {total} questions are answered.
+          <p className="mt-3 text-sm text-slate-300">
+            You can move page by page while your answers stay saved. Submission remains
+            available after all {total} questions are answered.
           </p>
         )}
 
         {!allAnswered && (
-          <p className="mt-3 text-sm text-amber-700">
+          <p className="mt-3 text-sm text-amber-300">
             Please answer all questions before submitting.
           </p>
         )}
@@ -494,34 +438,37 @@ export default function PracticeTestClient({ set }: Props) {
 
       {submitted && (
         <>
-          <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+          <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-3xl">
-                <div className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
+                <div className="inline-flex rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-sm font-semibold text-blue-200">
                   {result.label}
                 </div>
-                <h2 className="mt-4 text-2xl font-bold text-slate-900">
+
+                <h2 className="mt-4 text-2xl font-bold text-white">
                   Your practice result
                 </h2>
-                <p className="mt-3 text-base leading-7 text-slate-600">
+
+                <p className="mt-3 text-base leading-7 text-slate-300">
                   {result.message}
                 </p>
               </div>
 
               <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-xs uppercase tracking-wide text-slate-500">
+                <div className="rounded-2xl border border-slate-700 bg-slate-800/70 p-4">
+                  <p className="text-xs uppercase tracking-wide text-slate-300">
                     Score
                   </p>
-                  <p className="mt-1 text-2xl font-bold text-slate-900">
+                  <p className="mt-1 text-2xl font-bold text-white">
                     {result.percent}%
                   </p>
                 </div>
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-xs uppercase tracking-wide text-slate-500">
+
+                <div className="rounded-2xl border border-slate-700 bg-slate-800/70 p-4">
+                  <p className="text-xs uppercase tracking-wide text-slate-300">
                     Correct
                   </p>
-                  <p className="mt-1 text-2xl font-bold text-slate-900">
+                  <p className="mt-1 text-2xl font-bold text-white">
                     {result.correct}/{total}
                   </p>
                 </div>
@@ -530,18 +477,22 @@ export default function PracticeTestClient({ set }: Props) {
           </section>
 
           <section className="grid gap-6 lg:grid-cols-2">
-            <div className="rounded-3xl border border-emerald-200 bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-slate-900">Strongest topics</h3>
+            <div className="rounded-3xl border border-emerald-700 bg-[#111827] p-6 shadow-sm">
+              <h3 className="text-xl font-bold text-white">
+                Strongest topics
+              </h3>
+
               <div className="mt-4 space-y-4">
                 {strongestTopics.map(([topic, value]) => (
                   <div key={topic}>
                     <div className="flex items-center justify-between gap-3 text-sm">
-                      <span className="font-medium capitalize text-slate-800">
+                      <span className="font-medium capitalize text-slate-300">
                         {topic}
                       </span>
-                      <span className="text-slate-600">{value.percent}%</span>
+                      <span className="text-slate-300">{value.percent}%</span>
                     </div>
-                    <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
+
+                    <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-700">
                       <div
                         className="h-full rounded-full bg-emerald-500"
                         style={{ width: `${value.percent}%` }}
@@ -552,18 +503,22 @@ export default function PracticeTestClient({ set }: Props) {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-slate-900">Topics to improve</h3>
+            <div className="rounded-3xl border border-amber-700 bg-[#111827] p-6 shadow-sm">
+              <h3 className="text-xl font-bold text-white">
+                Topics to improve
+              </h3>
+
               <div className="mt-4 space-y-4">
                 {weakTopics.map(([topic, value]) => (
                   <div key={topic}>
                     <div className="flex items-center justify-between gap-3 text-sm">
-                      <span className="font-medium capitalize text-slate-800">
+                      <span className="font-medium capitalize text-slate-300">
                         {topic}
                       </span>
-                      <span className="text-slate-600">{value.percent}%</span>
+                      <span className="text-slate-300">{value.percent}%</span>
                     </div>
-                    <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
+
+                    <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-700">
                       <div
                         className="h-full rounded-full bg-amber-500"
                         style={{ width: `${value.percent}%` }}
@@ -575,30 +530,32 @@ export default function PracticeTestClient({ set }: Props) {
             </div>
           </section>
 
-          <section className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm sm:p-8">
-            <h3 className="text-2xl font-bold text-slate-900">
+          <section className="rounded-3xl border border-blue-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
+            <h3 className="text-2xl font-bold text-white">
               Turn practice into career guidance
             </h3>
-            <p className="mt-3 max-w-3xl text-base leading-7 text-slate-700">
-              Practice tests help you improve performance, but your main website
-              strength is career guidance. Use that advantage and move students from
-              practice into your free stream selection tools.
+
+            <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">
+              Practice tests help you improve performance, but career guidance helps
+              students choose the right direction. Use both together on Nishaglobal
+              Education.
             </p>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
-                href={set.category === "engineering-entrance" ? "/tests/engineering" : "/study-abroad"}
-                className="rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white hover:bg-blue-700"
+                href={
+                  set.category === "engineering-entrance"
+                    ? "/tests/engineering"
+                    : "/study-abroad"
+                }
+                className="site-btn-primary px-5 py-3 text-center"
               >
                 {set.category === "engineering-entrance"
                   ? "Take Engineering Career Test"
                   : "Explore Study Abroad Pages"}
               </Link>
 
-              <Link
-                href="/tests"
-                className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center font-semibold text-slate-700 hover:bg-slate-50"
-              >
+              <Link href="/tests" className="site-btn-secondary px-5 py-3 text-center">
                 View All Career Tests
               </Link>
             </div>

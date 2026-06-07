@@ -99,7 +99,7 @@ export default function BestCoursesUKPage() {
             </tbody>
           </table>
         </div>
-        <p className="mt-3 text-xs text-slate-500">University examples are illustrative. Rankings and program quality change annually. Always verify directly from university and UCAS sources.</p>
+        <p className="mt-3 text-xs text-slate-300">University examples are illustrative. Rankings and program quality change annually. Always verify directly from university and UCAS sources.</p>
       </section>
 
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
@@ -186,7 +186,7 @@ export default function BestCoursesUKPage() {
           annually. This article is for educational guidance only. Always verify current requirements from official UKVI
           (UK Visas and Immigration), UCAS, and individual university sources before making any application decisions.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: May 2026 | Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-300">Last reviewed: May 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-purple-100 bg-purple-50 p-6">

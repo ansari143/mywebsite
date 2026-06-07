@@ -35,7 +35,7 @@ export default function Navbar() {
             <span className="block text-lg font-semibold text-slate-900 dark:text-slate-100">
               Nishaglobal Education
             </span>
-            <span className="block text-xs text-slate-500 dark:text-slate-300">
+            <span className="block text-xs text-slate-300 dark:text-slate-300">
               Learn AI skills for every career role with career guidance for students worldwide
             </span>
           </div>
@@ -46,7 +46,7 @@ export default function Navbar() {
             {navLinks.map((item) => (
               <Link
                 key={item.href}
-                className="text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-300"
+                className="text-slate-700 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-300"
                 href={item.href}
               >
                 {item.label}
@@ -63,7 +63,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 md:hidden dark:border-slate-600 dark:text-slate-200"
+          className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 md:hidden dark:border-slate-600 dark:text-slate-300"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -88,7 +88,7 @@ export default function Navbar() {
                 key={item.href}
                 onClick={() => setOpen(false)}
                 href={item.href}
-                className="text-slate-700 dark:text-slate-200"
+                className="text-slate-700 dark:text-slate-300"
               >
                 {item.label}
               </Link>

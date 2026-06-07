@@ -99,7 +99,7 @@ export default function TopCareersCanadaPage() {
             </tbody>
           </table>
         </div>
-        <p className="mt-3 text-xs text-slate-500">Salary figures are approximate estimates based on publicly available Canadian labor market data for 2026. Actual salaries vary by employer, location, and experience.</p>
+        <p className="mt-3 text-xs text-slate-300">Salary figures are approximate estimates based on publicly available Canadian labor market data for 2026. Actual salaries vary by employer, location, and experience.</p>
       </section>
 
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
@@ -187,7 +187,7 @@ export default function TopCareersCanadaPage() {
           educational guidance only. Always verify immigration and work permit rules from official IRCC (Immigration, Refugees
           and Citizenship Canada) sources before making any application decisions.
         </p>
-        <p className="mt-2 text-sm text-slate-500">Last reviewed: May 2026 | Author: Nishaglobal Education editorial team</p>
+        <p className="mt-2 text-sm text-slate-300">Last reviewed: May 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
       <section className="rounded-3xl border border-emerald-100 bg-emerald-50 p-6">

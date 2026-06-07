@@ -217,11 +217,11 @@ export default function ResultPage() {
 
           <div className="grid min-w-[240px] gap-3 sm:grid-cols-3 lg:grid-cols-1">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Best fit stream</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">Best fit stream</p>
               <p className="mt-2 text-lg font-bold text-slate-900">{currentTest?.title}</p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Student-friendly takeaway</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">Student-friendly takeaway</p>
               <p className="mt-2 text-sm leading-6 text-slate-700">
                 {data.percent >= 80
                   ? "You can move ahead with confidence and now focus on pathway planning."
@@ -367,7 +367,7 @@ export default function ResultPage() {
 
           {insight && (
             <section className="grid gap-6 xl:grid-cols-2">
-              <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className={sectionClass}>
                 <h2 className="text-xl font-bold text-slate-900">Next 90 days action plan</h2>
                 <div className="mt-4 space-y-3 text-sm leading-7 text-slate-600">
                   {insight.next90Days.map((item, index) => (
@@ -381,7 +381,7 @@ export default function ResultPage() {
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className={sectionClass}>
                 <h2 className="text-xl font-bold text-slate-900">Backup streams to compare</h2>
                 <div className="mt-4 space-y-3">
                   {backup.map((item) => (
@@ -402,7 +402,7 @@ export default function ResultPage() {
 
           {insight && (
             <section className="grid gap-6 xl:grid-cols-2">
-              <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className={sectionClass}>
                 <h2 className="text-xl font-bold text-slate-900">Local pathway guidance</h2>
                 <div className="mt-4 space-y-3 text-sm leading-7 text-slate-600">
                   {insight.localPathway.map((item) => (
@@ -414,7 +414,7 @@ export default function ResultPage() {
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className={sectionClass}>
                 <h2 className="text-xl font-bold text-slate-900">Global / study abroad pathway</h2>
                 <div className="mt-4 space-y-3 text-sm leading-7 text-slate-600">
                   {insight.globalPathway.map((item) => (

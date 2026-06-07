@@ -1,397 +1,310 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { resourcePages } from "@/data/resourcePages";
-import { streamResourceDetails } from "@/data/streamResourceDetails";
+import type { Metadata } from "next";
+import {
+  practiceCategories,
+  practiceSets,
+  govPracticeCategories,
+} from "@/data/practiceTests";
 
-type Props = {
-  params: Promise<{ slug: string }>;
+export const metadata: Metadata = {
+  title:
+    "Free Practice Tests for Engineering Entrance, IELTS, TOEFL, CTET, SSC, Railway, Medical NEET and Aviation Careers",
+  description:
+    "Take free original practice tests with instant scoring and explanations for JEE Main, JEE Advanced, COMEDK, WBJEE, KCET, IELTS, TOEFL, CTET, SSC, Railway, Medical NEET, and Aviation career roles.",
+  alternates: {
+    canonical: "https://www.nishaglobaleducation.com/practice-tests",
+  },
 };
 
-export async function generateStaticParams() {
-  return resourcePages.map((page) => ({
-    slug: page.slug,
-  }));
-}
+export default function PracticeTestsHubPage() {
+  const govSlugs = ["ctet", "ssc", "railway"];
 
-export async function generateMetadata({ params }: Props) {
-  const { slug } = await params;
-  const page = resourcePages.find((item) => item.slug === slug);
-
-  if (!page) {
-    return {
-      title: "Resource Not Found | Nishaglobal Education",
-      description: "The requested resource page could not be found.",
-    };
-  }
-
-  return {
-    title: `${page.title} | Nishaglobal Education`,
-    description: page.description,
-    alternates: {
-      canonical: `https://www.nishaglobaleducation.com/resources/${page.slug}`,
-    },
-  };
-}
-
-function BulletList({ items }: { items: string[] }) {
-  return (
-    <ul className="space-y-3 text-sm leading-7 text-gray-700 sm:text-base">
-      {items.map((item) => (
-        <li key={item} className="flex gap-3">
-          <span className="mt-2 h-2 w-2 rounded-full bg-blue-600" />
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
+  const generalCategories = practiceCategories.filter(
+    (category) => !govSlugs.includes(category.slug)
   );
-}
 
-export default async function ResourceDetailPage({ params }: Props) {
-  const { slug } = await params;
-  const page = resourcePages.find((item) => item.slug === slug);
+  const govCategories = practiceCategories.filter((category) =>
+    govSlugs.includes(category.slug)
+  );
 
-  if (!page) return notFound();
+  const renderCard = (category: (typeof practiceCategories)[number]) => {
+    const govCategory = govPracticeCategories.find(
+      (item) => item.slug === category.slug
+    );
 
-  const streamDetail = page.resourceDetailKey
-    ? streamResourceDetails[page.resourceDetailKey]
-    : null;
+    const count = govCategory
+      ? govCategory.sets.filter((set) => set.isLive).length
+      : practiceSets.filter((item) => item.category === category.slug).length;
 
-  const faqSchema = page.faq
-    ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: page.faq.map((item) => ({
-          "@type": "Question",
-          name: item.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: item.answer,
-          },
-        })),
-      }
-    : null;
+    return (
+      <div
+        key={category.slug}
+        className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5"
+      >
+        <h3 className="text-xl font-bold text-white">{category.title}</h3>
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://www.nishaglobaleducation.com",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Resources",
-        item: "https://www.nishaglobaleducation.com/resources",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: page.title,
-        item: `https://www.nishaglobaleducation.com/resources/${page.slug}`,
-      },
-    ],
+        <p className="mt-3 text-sm leading-7 text-slate-300">
+          {category.description}
+        </p>
+
+        <div className="mt-4 flex flex-wrap gap-2 text-sm">
+          <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
+            {count} practice set{count > 1 ? "s" : ""}
+          </span>
+
+          <span className="rounded-full border border-slate-700 bg-emerald-950/40 px-3 py-1 text-slate-300">
+            Instant feedback
+          </span>
+        </div>
+
+        <div className="mt-6">
+          <Link
+            href={`/practice-tests/${category.slug}`}
+            className="site-btn-primary px-5 py-3 text-center"
+          >
+            Explore {category.shortTitle}
+          </Link>
+        </div>
+      </div>
+    );
   };
 
   return (
-    <div className="space-y-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+    <div className="site-page">
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8 lg:p-10">
+        <span className="inline-flex rounded-full border border-blue-500 bg-blue-950/60 px-3 py-1 text-sm font-semibold text-blue-200">
+          Practice Zone
+        </span>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <div className="max-w-4xl">
-          <Link
-            href="/resources"
-            className="inline-flex text-sm font-medium text-blue-700 hover:underline"
-          >
-            ← Back to Resources
-          </Link>
+        <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+          Practice Tests: Master Exams with Targeted Preparation
+        </h1>
 
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            {page.title}
-          </h1>
+        <p className="mt-5 max-w-4xl text-base leading-8 text-slate-300 sm:text-lg">
+          Access original practice question sets with instant scoring, detailed explanations,
+          and performance analytics. Focus your preparation on specific exam patterns and
+          question types.
+        </p>
 
-          <p className="mt-4 text-base leading-7 text-gray-600 sm:text-lg">
-            {page.intro}
-          </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5">
+            <h2 className="text-lg font-semibold text-white">
+              Who These Practice Tests Are For
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-slate-300">
+              Students preparing for competitive exams, test-takers seeking realistic practice,
+              and learners who want detailed feedback on their performance.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5">
+            <h2 className="text-lg font-semibold text-white">
+              Who Should Consider Alternatives
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-slate-300">
+              Learners seeking full video courses or complete study materials should combine
+              these tests with structured lessons and official resources.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-5 flex flex-wrap gap-2 text-sm font-semibold">
+          {["100% Free", "Original Questions", "Instant Scoring", "Detailed Explanations"].map(
+            (item) => (
+              <span
+                key={item}
+                className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200"
+              >
+                {item}
+              </span>
+            )
+          )}
         </div>
       </section>
 
-      {streamDetail && (
-        <section className="space-y-6 rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 sm:p-8">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex rounded-full border border-blue-200 bg-white px-3 py-1 text-sm font-semibold text-blue-700">
-              {streamDetail.label} Resource Snapshot
-            </span>
-            <span className="text-sm text-gray-600">
-              Practical planning details students and parents usually ask for
-            </span>
-          </div>
+      <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">
+          Practice Test Methodology
+        </h2>
 
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {streamDetail.quickFacts.map((fact) => (
-              <div
-                key={fact.label}
-                className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm"
-              >
-                <div className="text-xs font-semibold uppercase tracking-wide text-blue-700">
-                  {fact.label}
-                </div>
-                <div className="mt-2 text-sm font-semibold leading-6 text-gray-900">
-                  {fact.value}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+        <p className="mt-3 text-slate-300">
+          Our practice tests mirror exam-style conditions with original questions,
+          accurate timing, and answer explanations. Each test helps identify improvement areas.
+        </p>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
-        <div className="space-y-6">
-          {page.sections.map((section) => (
-            <section
-              key={section.title}
-              className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["📝", "Exam-Accurate", "Questions match real exam patterns and difficulty."],
+            ["⏱️", "Timed Practice", "Experience real exam time pressure and pacing."],
+            ["📊", "Instant Results", "Immediate scoring with detailed performance breakdown."],
+            ["💡", "Smart Explanations", "Learn from mistakes with clear solution walkthroughs."],
+          ].map(([icon, title, desc]) => (
+            <div
+              key={title}
+              className="rounded-2xl border border-slate-700 bg-[#0b1220] p-5 text-center"
             >
-              <h2 className="text-xl font-semibold text-gray-900">
-                {section.title}
-              </h2>
-
-              <div className="mt-4 space-y-4 text-gray-700 leading-7">
-                {section.content.map((para, index) => (
-                  <p key={index}>{para}</p>
-                ))}
-              </div>
-            </section>
+              <div className="text-3xl">{icon}</div>
+              <h3 className="mt-3 font-semibold text-white">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-300">{desc}</p>
+            </div>
           ))}
-
-          {streamDetail && (
-            <>
-              <section className="grid gap-6 lg:grid-cols-2">
-                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <h2 className="text-xl font-semibold text-gray-900">Eligibility</h2>
-                  <div className="mt-4">
-                    <BulletList items={streamDetail.eligibility} />
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <h2 className="text-xl font-semibold text-gray-900">10th / 12th Percentage Guidance</h2>
-                  <div className="mt-4">
-                    <BulletList items={streamDetail.percentageGuidance} />
-                  </div>
-                </div>
-              </section>
-
-              <section className="grid gap-6 lg:grid-cols-2">
-                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <h2 className="text-xl font-semibold text-gray-900">Age Limit and Entrance Exams</h2>
-                  <div className="mt-4 space-y-6">
-                    <div>
-                      <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">Age limit</h3>
-                      <div className="mt-3">
-                        <BulletList items={streamDetail.ageLimit} />
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">Entrance exams</h3>
-                      <div className="mt-3">
-                        <BulletList items={streamDetail.entranceExams} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <h2 className="text-xl font-semibold text-gray-900">Course Length and Fee Structure</h2>
-                  <div className="mt-4 space-y-6">
-                    <div>
-                      <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">Length of course</h3>
-                      <div className="mt-3">
-                        <BulletList items={streamDetail.courseLength} />
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">Fee structure range</h3>
-                      <div className="mt-3">
-                        <BulletList items={streamDetail.feeStructure} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <section className="grid gap-6 lg:grid-cols-2">
-                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <h2 className="text-xl font-semibold text-gray-900">Recommended Colleges and Institutes</h2>
-                  <div className="mt-4">
-                    <BulletList items={streamDetail.topColleges} />
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <h2 className="text-xl font-semibold text-gray-900">Online vs Offline Availability</h2>
-                  <div className="mt-4">
-                    <BulletList items={streamDetail.onlineOffline} />
-                  </div>
-                </div>
-              </section>
-
-              <section className="grid gap-6 lg:grid-cols-2">
-                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <h2 className="text-xl font-semibold text-gray-900">Abroad Opportunities</h2>
-                  <div className="mt-4">
-                    <BulletList items={streamDetail.abroadOpportunities} />
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <h2 className="text-xl font-semibold text-gray-900">Placement Preparation</h2>
-                  <div className="mt-4">
-                    <BulletList items={streamDetail.placementPreparation} />
-                  </div>
-                </div>
-              </section>
-
-              <section className="grid gap-6 lg:grid-cols-2">
-                <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-6">
-                  <h2 className="text-xl font-semibold text-gray-900">How to Improve Job Chances</h2>
-                  <div className="mt-4">
-                    <BulletList items={streamDetail.jobSuggestions} />
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-amber-100 bg-amber-50 p-6">
-                  <h2 className="text-xl font-semibold text-gray-900">Advertisement and Sponsored Content</h2>
-                  <div className="mt-4">
-                    <BulletList items={streamDetail.advertisementNote} />
-                  </div>
-                </div>
-              </section>
-
-              <section className="rounded-2xl border border-blue-100 bg-blue-50 p-6">
-                <h2 className="text-xl font-semibold text-gray-900">Need More Help?</h2>
-                <p className="mt-3 text-sm leading-7 text-gray-700 sm:text-base">
-                  If you still have questions about eligibility, fees, colleges, institutes, or the right path for your profile, use the Contact section and mention your class, stream, marks, and goal so you can get more relevant guidance.
-                </p>
-                <div className="mt-4 flex flex-wrap gap-3">
-                  <Link
-                    href="/contact"
-                    className="inline-flex rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-                  >
-                    Contact for Guidance
-                  </Link>
-                  <Link
-                    href="/tests"
-                    className="inline-flex rounded-xl border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-100"
-                  >
-                    Take Free Career Test
-                  </Link>
-                </div>
-              </section>
-            </>
-          )}
-
-          {page.faq && (
-            <section className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
-              <h2 className="text-xl font-semibold text-gray-900">
-                Frequently Asked Questions
-              </h2>
-
-              <div className="mt-5 space-y-5">
-                {page.faq.map((item) => (
-                  <div
-                    key={item.question}
-                    className="rounded-xl border border-gray-200 bg-white p-4"
-                  >
-                    <h3 className="font-semibold text-gray-900">
-                      {item.question}
-                    </h3>
-                    <p className="mt-2 text-gray-600 leading-7">
-                      {item.answer}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          <section className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
-            <h2 className="text-lg font-semibold text-gray-900">Disclaimer</h2>
-            <div className="mt-3 space-y-3 text-sm leading-7 text-gray-600">
-              <p>
-                This content is provided for educational and informational purposes only.
-              </p>
-              <p>
-                Eligibility, age rules, entrance exams, fee structure, counselling, admissions, and placement trends may change over time and may differ across states, institutes, and categories.
-              </p>
-              {streamDetail && <p>{streamDetail.officialNote}</p>}
-              <p>
-                Students and parents should always verify final details from official boards, examination authorities, universities, colleges, regulators, and government portals before making academic, payment, or career decisions.
-              </p>
-            </div>
-          </section>
         </div>
+      </section>
 
-        <aside className="space-y-6">
-          <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Related Guides
-            </h2>
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">
+          Available Practice Categories
+        </h2>
 
-            <div className="mt-4 grid gap-3">
-              {resourcePages
-                .filter((item) => item.slug !== page.slug)
-                .slice(0, 18)
-                .map((item) => (
-                  <Link
-                    key={item.slug}
-                    href={`/resources/${item.slug}`}
-                    className="rounded-xl border border-gray-200 px-4 py-3 text-sm font-medium text-gray-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+        <p className="mt-2 text-slate-300">
+          Choose from comprehensive practice test collections covering major competitive
+          exams. Each category includes question sets with different difficulty levels.
+        </p>
+
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          {generalCategories.map(renderCard)}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-700 bg-amber-950/40 p-6 shadow-sm sm:p-8">
+        <span className="inline-flex rounded-full border border-amber-500 bg-amber-950/60 px-3 py-1 text-sm font-semibold text-amber-200">
+          Government Jobs
+        </span>
+
+        <h2 className="mt-4 text-2xl font-bold text-white">
+          Government Jobs Practice Tests
+        </h2>
+
+        <p className="mt-2 text-slate-300">
+          Bilingual practice sets for CTET, SSC, and Railway recruitment exams with
+          full-length mocks, instant scoring, and Hindi-English support.
+        </p>
+
+        <div className="mt-6 grid gap-5 md:grid-cols-3">
+          {govCategories.map(renderCard)}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">
+          Practice Test Categories Comparison
+        </h2>
+
+        <div className="mt-6 overflow-x-auto">
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr className="bg-slate-800">
+                {["Exam Type", "Question Format", "Duration", "Best For"].map((header) => (
+                  <th
+                    key={header}
+                    className="border border-slate-700 px-4 py-3 text-left font-semibold text-white"
                   >
-                    {item.title}
-                  </Link>
+                    {header}
+                  </th>
                 ))}
-            </div>
-          </section>
+              </tr>
+            </thead>
 
-          <section className="rounded-2xl border border-blue-100 bg-blue-50 p-5">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Need Career Guidance?
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-gray-600">
-              Explore career paths, stream comparisons, fee ranges, entrance exam basics, and planning support to make a smarter decision after 10th or 12th.
-            </p>
-            <div className="mt-4 flex flex-col gap-3">
-              <Link
-                href="/tests"
-                className="inline-flex rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-              >
-                Take Career Test
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex rounded-xl border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-100"
-              >
-                Ask a Question
-              </Link>
-            </div>
-          </section>
+            <tbody>
+              {[
+                ["IELTS", "Reading, Listening, Writing, Speaking", "2.5-3 hours", "Study abroad applicants"],
+                ["TOEFL iBT", "Reading, Listening, Speaking, Writing, Integrated Tasks", "About 2 hours", "University-focused English proficiency candidates"],
+                ["Engineering Entrance", "MCQs in Physics, Chemistry, Math", "3 hours", "Engineering aspirants"],
+                ["CTET", "MCQs in Child Development, Teaching", "2.5 hours", "Teaching certification candidates"],
+                ["SSC Exams", "MCQs in General Knowledge, Reasoning", "1-2 hours", "Government job aspirants"],
+                ["Medical NEET", "MCQs in Physics, Chemistry, Biology", "3 hours", "Medical aspirants"],
+                ["Aviation Careers", "Role-wise MCQs and interview scenarios", "15-20 min per set", "Cabin crew, ground, and support staff aspirants"],
+              ].map((row) => (
+                <tr key={row[0]} className="odd:bg-[#0b1220] even:bg-slate-800/60">
+                  {row.map((cell, index) => (
+                    <td
+                      key={cell}
+                      className="border border-slate-700 px-4 py-3 text-slate-300"
+                    >
+                      {index === 0 ? (
+                        <strong className="text-white">{cell}</strong>
+                      ) : (
+                        cell
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-          <section className="rounded-2xl border border-amber-100 bg-amber-50 p-5">
-            <h2 className="text-lg font-semibold text-gray-900">For Institutes and Advertisers</h2>
-            <p className="mt-2 text-sm leading-6 text-gray-700">
-              Colleges, coaching institutes, and educational partners can connect through the Contact section for transparent featured listings, sponsored content, or collaboration enquiries.
-            </p>
-          </section>
-        </aside>
-      </div>
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">
+          Frequently Asked Questions
+        </h2>
+
+        <div className="mt-6 space-y-3">
+          {[
+            [
+              "Are these official practice tests?",
+              "No, these are original practice tests designed to simulate exam conditions. They help you prepare but are not affiliated with official exam bodies.",
+            ],
+            [
+              "Can I review my answers after submitting?",
+              "Yes, after completing any test, you can review all questions with correct answers, explanations, and your performance analysis.",
+            ],
+            [
+              "How often are new tests added?",
+              "We regularly add new question sets based on the latest exam patterns. Check back frequently for updated content.",
+            ],
+            [
+              "Are practice tests available in multiple languages?",
+              "English is the primary language. Some government exam categories include bilingual support for regional language speakers.",
+            ],
+          ].map(([q, a]) => (
+            <details
+              key={q}
+              className="rounded-2xl border border-slate-700 bg-slate-800/70 p-4"
+            >
+              <summary className="cursor-pointer text-sm font-semibold text-white">
+                {q}
+              </summary>
+              <p className="mt-3 text-sm leading-7 text-slate-300">{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-700 bg-amber-950/40 p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">
+          Start Your Practice Journey
+        </h2>
+
+        <p className="mt-4 text-slate-300">
+          Choose your exam category and begin practicing with confidence. Regular practice
+          with detailed feedback is the key to exam success.
+        </p>
+
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <Link
+            href="/practice-tests/ielts"
+            className="site-btn-primary px-5 py-3 text-center text-sm"
+          >
+            Practice IELTS Tests
+          </Link>
+
+          <Link
+            href="/practice-tests/toefl"
+            className="site-btn-secondary px-5 py-3 text-center text-sm"
+          >
+            Practice TOEFL Tests
+          </Link>
+
+          <Link
+            href="/practice-tests/engineering-entrance"
+            className="site-btn-secondary px-5 py-3 text-center text-sm"
+          >
+            Try Engineering Entrance
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

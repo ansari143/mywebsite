@@ -27,7 +27,7 @@ export default function BlogCard({ post }: BlogCardProps) {
               {post.category}
             </span>
             {post.popularUSA && (
-              <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200">
+              <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/30 dark:text-slate-300">
                 Popular in USA
               </span>
             )}
@@ -41,7 +41,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             {post.description}
           </p>
 
-          <div className="mt-4 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+          <div className="mt-4 flex items-center justify-between text-xs text-slate-300 dark:text-slate-300">
             <span>{new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
             <span>{post.readingTime}</span>
           </div>

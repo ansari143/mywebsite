@@ -32,7 +32,7 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300">
+    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-300 dark:[&_.text-slate-600]:text-slate-300">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
@@ -86,7 +86,7 @@ export default function AboutPage() {
             desc: "We focus on practical, easy-to-understand information. We aim to guide users responsibly while encouraging them to verify final details from official sources.",
           },
         ].map((item) => (
-          <div key={item.title} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div key={item.title} className={sectionClass}>
             <h2 className="text-lg font-semibold text-slate-900">{item.title}</h2>
             <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.desc}</p>
           </div>

@@ -173,11 +173,11 @@ export default function HomePage() {
               Learn AI skills for every career role
             </h2>
 
-            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg dark:text-slate-200">
+            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg dark:text-slate-300">
               Whether you are a developer, QA engineer, DevOps professional, business analyst, project manager, or product manager, explore practical AI roadmaps that help you transition from traditional work to AI-driven execution.
             </p>
 
-            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700 dark:text-slate-300">
               <span className="rounded-full bg-white px-3 py-1 shadow-sm dark:bg-slate-800">AI Engineer roadmap</span>
               <span className="rounded-full bg-white px-3 py-1 shadow-sm dark:bg-slate-800">AI Agents learning path</span>
               <span className="rounded-full bg-white px-3 py-1 shadow-sm dark:bg-slate-800">Role-based transition plans</span>

@@ -99,7 +99,7 @@ export default function BlogIndexClient({
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Find the right blog quickly</h2>
         <div className="mt-5 grid gap-4">
-          <label className="text-sm font-semibold text-slate-700 dark:text-slate-200" htmlFor="blog-search">
+          <label className="text-sm font-semibold text-slate-700 dark:text-slate-300" htmlFor="blog-search">
             Search blogs by title, topic, or keyword
           </label>
           <input
@@ -108,7 +108,7 @@ export default function BlogIndexClient({
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search: study in USA, AI careers, scholarships, SAT, IELTS..."
-            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none ring-blue-500 placeholder:text-slate-400 focus:ring-2 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-400"
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none ring-blue-500 placeholder:text-slate-300 focus:ring-2 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-300"
           />
           <CategoryFilter
             categories={[...BLOG_CATEGORIES]}

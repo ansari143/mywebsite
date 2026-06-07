@@ -67,7 +67,7 @@ export default function SkillsRoadmapPreview() {
           <p className="text-xs font-semibold uppercase tracking-wide text-violet-700 dark:text-violet-200">
             AI Engineer quick start
           </p>
-          <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-200">
+          <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-300">
             If you want to become an AI Engineer, start with the AI Agents guide to build practical workflow thinking early.
           </p>
           <div className="mt-3 flex flex-wrap gap-3">
@@ -100,7 +100,7 @@ export default function SkillsRoadmapPreview() {
               </div>
 
               {index < roadmapSteps.length - 1 && (
-                <span className="hidden text-slate-300 lg:block dark:text-slate-500">→</span>
+                <span className="hidden text-slate-300 lg:block dark:text-slate-300">→</span>
               )}
             </div>
 
@@ -120,7 +120,7 @@ export default function SkillsRoadmapPreview() {
       </div>
 
       <div className="mt-6 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-600/50 dark:bg-amber-900/20">
-        <p className="text-sm leading-7 text-slate-700 dark:text-slate-200">
+        <p className="text-sm leading-7 text-slate-700 dark:text-slate-300">
           <span className="font-semibold text-slate-900 dark:text-slate-100">Simple advice:</span>{" "}
           Do not try to learn everything together. First build your Python base,
           then learn how prompts work, then move into LangChain, AI agents, and

@@ -1,13 +1,19 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { countryResourcesWithTopics, getCountryResource, isCountryUsingDefaultTopics } from "@/data/countryResources";
+import {
+  countryResourcesWithTopics,
+  getCountryResource,
+  isCountryUsingDefaultTopics,
+} from "@/data/countryResources";
 
 type Props = {
   params: Promise<{ country: string }>;
 };
 
 export async function generateStaticParams() {
-  return countryResourcesWithTopics.map((country) => ({ country: country.slug }));
+  return countryResourcesWithTopics.map((country) => ({
+    country: country.slug,
+  }));
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -63,62 +69,86 @@ export default async function CountryResourcePage({ params }: Props) {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="site-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <Link href="/resources" className="inline-flex text-sm font-medium text-blue-700 hover:underline">
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8 lg:p-10">
+        <Link
+          href="/resources"
+          className="inline-flex text-sm font-semibold text-blue-300 hover:text-blue-200 hover:underline"
+        >
           ← Back to Resources
         </Link>
 
-        <div className="mt-4 max-w-4xl space-y-4">
-          <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
+        <div className="mt-5 max-w-4xl">
+          <span className="inline-flex rounded-full border border-blue-500 bg-blue-950/60 px-3 py-1 text-sm font-semibold text-blue-200">
             {item.flag} {item.name} Resource Hub
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          </span>
+
+          <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             {item.heroTitle}
           </h1>
-          <p className="text-base leading-7 text-gray-600 sm:text-lg">
+
+          <p className="mt-5 text-base leading-8 text-slate-300 sm:text-lg">
             {item.description}
           </p>
         </div>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[1.5fr,1fr]">
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-2xl font-semibold text-gray-900">Overview</h2>
-          <div className="mt-4 space-y-4 text-sm leading-7 text-gray-700 sm:text-base">
+        <div className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-white">Overview</h2>
+
+          <div className="mt-4 space-y-4 text-sm leading-7 text-slate-300 sm:text-base">
             {item.overview.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p key={paragraph} className="text-slate-300">
+                {paragraph}
+              </p>
             ))}
           </div>
         </div>
 
-        <div className="rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 sm:p-8">
-          <h2 className="text-2xl font-semibold text-gray-900">Why students explore {item.name}</h2>
-          <ul className="mt-4 space-y-3 text-sm leading-7 text-gray-700 sm:text-base">
+        <div className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-white">
+            Why students explore {item.name}
+          </h2>
+
+          <ul className="mt-5 space-y-3 text-sm leading-7 sm:text-base">
             {item.highlights.map((highlight) => (
-              <li key={highlight} className="flex gap-3">
-                <span className="mt-2 h-2.5 w-2.5 rounded-full bg-blue-600" />
-                <span>{highlight}</span>
+              <li
+                key={highlight}
+                className="rounded-2xl border border-slate-700 bg-slate-800/70 p-4"
+              >
+                <div className="flex gap-3">
+                  <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-blue-500" />
+                  <span className="text-slate-300">{highlight}</span>
+                </div>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold text-gray-900">Popular resource topics</h2>
-            <p className="mt-2 text-sm leading-6 text-gray-600 sm:text-base">
-              Use country-specific pages so visitors can find study, visa, scholarship, and work guidance faster.
+            <h2 className="text-2xl font-bold text-white">
+              Popular resource topics
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-slate-300 sm:text-base">
+              Use country-specific pages so visitors can find study, visa,
+              scholarship, and work guidance faster.
             </p>
           </div>
-          <Link href="/study-abroad" className="text-sm font-medium text-blue-700 hover:underline">
+
+          <Link
+            href="/study-abroad"
+            className="text-sm font-semibold text-blue-300 hover:text-blue-200 hover:underline"
+          >
             Explore full study abroad section →
           </Link>
         </div>
@@ -128,24 +158,39 @@ export default async function CountryResourcePage({ params }: Props) {
             <Link
               key={topic.slug}
               href={`/resources/country/${item.slug}/${topic.slug}`}
-              className="group rounded-2xl border border-gray-200 bg-gray-50 p-5 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-md"
+              className="rounded-2xl border border-slate-700 bg-[#0b1220] p-5 transition hover:-translate-y-1 hover:border-blue-500"
             >
-              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-700">{topic.label}</h3>
-              <p className="mt-2 text-sm leading-6 text-gray-600">{topic.short}</p>
-              <div className="mt-4 text-sm font-medium text-blue-700">Open guide →</div>
+              <h3 className="text-lg font-semibold text-white">
+                {topic.label}
+              </h3>
+
+              <p className="mt-2 text-sm leading-7 text-slate-300">
+                {topic.short}
+              </p>
+
+              <div className="mt-4 text-sm font-semibold text-blue-300">
+                Open guide →
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 sm:p-8">
-        <h2 className="text-xl font-semibold text-gray-900">Important note</h2>
-        <div className="mt-3 space-y-3 text-sm leading-7 text-gray-700">
+      <section className="rounded-3xl border border-amber-700 bg-amber-950/40 p-6 shadow-sm sm:p-8">
+        <h2 className="text-xl font-bold text-white">Important note</h2>
+
+        <div className="mt-3 space-y-3 text-sm leading-7 text-slate-300">
           <p>
-            Country requirements can change. Tuition, visa rules, scholarships, work rights, living costs, and program eligibility should always be verified from official university, embassy, government, or examination sources.
+            Country requirements can change. Tuition, visa rules, scholarships,
+            work rights, living costs, and program eligibility should always be
+            verified from official university, embassy, government, or
+            examination sources.
           </p>
+
           <p>
-            Nishaglobal Education provides educational guidance to help students compare options more clearly. It does not provide admission guarantees or visa approvals.
+            Nishaglobal Education provides educational guidance to help students
+            compare options more clearly. It does not provide admission
+            guarantees or visa approvals.
           </p>
         </div>
       </section>

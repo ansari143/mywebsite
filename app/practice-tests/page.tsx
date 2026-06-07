@@ -16,269 +16,255 @@ export const metadata: Metadata = {
   },
 };
 
+const methodology = [
+  ["📝", "Exam-Accurate", "Questions match real exam patterns and difficulty."],
+  ["⏱️", "Timed Practice", "Experience real exam time pressure and pacing."],
+  ["📊", "Instant Results", "Immediate scoring with detailed performance breakdown."],
+  ["💡", "Smart Explanations", "Learn from mistakes with clear solution walkthroughs."],
+];
+
+const comparisonRows = [
+  ["IELTS", "Reading, Listening, Writing, Speaking", "2.5-3 hours", "Study abroad applicants"],
+  ["TOEFL iBT", "Reading, Listening, Speaking, Writing", "About 2 hours", "University English proficiency"],
+  ["Engineering Entrance", "Physics, Chemistry, Math MCQs", "3 hours", "Engineering aspirants"],
+  ["CTET", "Child Development and Teaching MCQs", "2.5 hours", "Teaching certification candidates"],
+  ["SSC Exams", "GK, Reasoning, Quant, English MCQs", "1-2 hours", "Government job aspirants"],
+  ["Medical NEET", "Physics, Chemistry, Biology MCQs", "3 hours", "Medical aspirants"],
+  ["Aviation Careers", "Role-wise MCQs and interview scenarios", "15-20 min", "Cabin crew and airport roles"],
+];
+
+const faqs = [
+  ["Are these official practice tests?", "No. These are original practice questions designed for preparation and guidance. Always check official exam websites for final syllabus and exam rules."],
+  ["Are the tests free?", "Yes. These practice tests are designed as free learning resources for students and career learners."],
+  ["Do I get instant score?", "Yes. Practice tests are designed to provide instant scoring and useful feedback where available."],
+  ["Which test should I start with?", "Choose the category that matches your target exam. For engineering, start with JEE or state-level tests. For abroad, start with IELTS or TOEFL."],
+];
+
 export default function PracticeTestsHubPage() {
+  const govSlugs = ["ctet", "ssc", "railway"];
+
+  const generalCategories = practiceCategories.filter(
+    (category) => !govSlugs.includes(category.slug)
+  );
+
+  const govCategories = practiceCategories.filter((category) =>
+    govSlugs.includes(category.slug)
+  );
+
+  const renderCard = (category: (typeof practiceCategories)[number]) => {
+    const govCategory = govPracticeCategories.find(
+      (item) => item.slug === category.slug
+    );
+
+    const count = govCategory
+      ? govCategory.sets.filter((set) => set.isLive).length
+      : practiceSets.filter((item) => item.category === category.slug).length;
+
+    return (
+      <div
+        key={category.slug}
+        className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5"
+      >
+        <h3 className="text-xl font-bold text-white">{category.title}</h3>
+
+        <p className="mt-3 text-sm leading-7 text-slate-300">
+          {category.description}
+        </p>
+
+        <div className="mt-4 flex flex-wrap gap-2 text-sm">
+          <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
+            {count} practice set{count > 1 ? "s" : ""}
+          </span>
+
+          <span className="rounded-full border border-slate-700 bg-emerald-950/40 px-3 py-1 text-slate-300">
+            Instant feedback
+          </span>
+        </div>
+
+        <div className="mt-6">
+          <Link
+            href={`/practice-tests/${category.slug}`}
+            className="site-btn-primary text-center"
+          >
+            Explore {category.shortTitle}
+          </Link>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="site-page">
-      <section className="site-section">
-        <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8 lg:p-10">
+        <span className="inline-flex rounded-full border border-blue-500 bg-blue-950/60 px-3 py-1 text-sm font-semibold text-blue-200">
           Practice Zone
-        </div>
-        <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">
+        </span>
+
+        <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
           Practice Tests: Master Exams with Targeted Preparation
         </h1>
-        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-          Access original practice question sets with instant scoring, detailed explanations, and performance analytics. Focus your preparation on specific exam patterns and question types.
+
+        <p className="mt-5 max-w-4xl text-base leading-8 text-slate-300 sm:text-lg">
+          Access original practice question sets with instant scoring, detailed explanations,
+          and performance analytics. Focus your preparation on specific exam patterns and
+          question types.
         </p>
 
-        <div className="mt-6 space-y-4">
-          <div>
-            <h3 className="text-lg font-semibold text-slate-900">Who These Practice Tests Are For</h3>
-            <p className="mt-2 leading-7 text-slate-600">
-              Students preparing for competitive exams, test-takers seeking realistic practice, and learners who want detailed feedback on their performance. Ideal for those who benefit from structured, exam-specific preparation.
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5">
+            <h2 className="text-lg font-semibold text-white">
+              Who These Practice Tests Are For
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-slate-300">
+              Students preparing for competitive exams, test-takers seeking realistic practice,
+              and learners who want detailed feedback on their performance.
             </p>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold text-slate-900">Who Should Consider Alternatives</h3>
-            <p className="mt-2 leading-7 text-slate-600">
-              Those seeking comprehensive study materials or video lessons. These tests focus on practice questions and explanations rather than full course content.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700">
-          <span className="rounded-full bg-slate-100 px-3 py-1">100% free</span>
-          <span className="rounded-full bg-slate-100 px-3 py-1">Original questions</span>
-          <span className="rounded-full bg-slate-100 px-3 py-1">Instant scoring</span>
-          <span className="rounded-full bg-slate-100 px-3 py-1">Detailed explanations</span>
-        </div>
-      </section>
-
-      <section className="site-section-muted">
-        <h2 className="text-2xl font-bold text-slate-900">Practice Test Methodology</h2>
-        <p className="mt-3 text-slate-600">
-          Our practice tests mirror actual exam conditions with original questions, accurate timing, and comprehensive answer explanations. Each test includes performance analysis to help you identify improvement areas.
-        </p>
-
-        <div className="mt-6 grid gap-4 sm:grid-cols-4">
-          <div className="rounded-xl bg-white p-4 text-center">
-            <div className="text-2xl">📝</div>
-            <h3 className="mt-2 font-semibold text-slate-900">Exam-Accurate</h3>
-            <p className="mt-1 text-sm text-slate-600">
-              Questions match real exam patterns and difficulty.
-            </p>
-          </div>
-          <div className="rounded-xl bg-white p-4 text-center">
-            <div className="text-2xl">⏱️</div>
-            <h3 className="mt-2 font-semibold text-slate-900">Timed Practice</h3>
-            <p className="mt-1 text-sm text-slate-600">
-              Experience real exam time pressure and pacing.
-            </p>
-          </div>
-          <div className="rounded-xl bg-white p-4 text-center">
-            <div className="text-2xl">📊</div>
-            <h3 className="mt-2 font-semibold text-slate-900">Instant Results</h3>
-            <p className="mt-1 text-sm text-slate-600">
-              Immediate scoring with detailed performance breakdown.
-            </p>
-          </div>
-          <div className="rounded-xl bg-white p-4 text-center">
-            <div className="text-2xl">💡</div>
-            <h3 className="mt-2 font-semibold text-slate-900">Smart Explanations</h3>
-            <p className="mt-1 text-sm text-slate-600">
-              Learn from mistakes with clear solution walkthroughs.
+          <div className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5">
+            <h2 className="text-lg font-semibold text-white">
+              Who Should Consider Alternatives
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-slate-300">
+              Learners seeking full video courses or complete study materials should combine
+              these tests with structured lessons and official resources.
             </p>
           </div>
         </div>
-      </section>
 
-      <section className="space-y-5">
-        <div>
-          <h2 className="text-2xl font-semibold text-slate-900">Available Practice Categories</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-600 sm:text-base">
-            Choose from comprehensive practice test collections covering major competitive exams. Each category includes multiple question sets with varying difficulty levels.
-          </p>
-        </div>
-
-        {(() => {
-          const govSlugs = ["ctet", "ssc", "railway"];
-          const generalCategories = practiceCategories.filter(
-            (c) => !govSlugs.includes(c.slug)
-          );
-          const govCategories = practiceCategories.filter((c) =>
-            govSlugs.includes(c.slug)
-          );
-
-          const renderCard = (category: (typeof practiceCategories)[number]) => {
-            const govCategory = govPracticeCategories.find(
-              (item) => item.slug === category.slug
-            );
-            const count = govCategory
-              ? govCategory.sets.filter((set) => set.isLive).length
-              : practiceSets.filter((item) => item.category === category.slug).length;
-
-            return (
-              <div
-                key={category.slug}
-                className="site-section p-6"
+        <div className="mt-5 flex flex-wrap gap-2 text-sm font-semibold">
+          {["100% Free", "Original Questions", "Instant Scoring", "Detailed Explanations"].map(
+            (item) => (
+              <span
+                key={item}
+                className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200"
               >
-                <h2 className="text-2xl font-bold text-slate-900">
-                  {category.title}
-                </h2>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
-                  {category.description}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-2 text-sm">
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-                    {count} practice set{count > 1 ? "s" : ""}
-                  </span>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-                    Instant feedback
-                  </span>
-                </div>
-                <div className="mt-6">
-                  <Link
-                    href={`/practice-tests/${category.slug}`}
-                    className="site-btn-primary inline-block px-5 py-3"
-                  >
-                    Explore {category.shortTitle}
-                  </Link>
-                </div>
-              </div>
-            );
-          };
-
-          return (
-            <>
-              <div className="grid gap-4 md:grid-cols-2">
-                {generalCategories.map(renderCard)}
-              </div>
-
-              <div className="site-section-accent-amber">
-                <div className="inline-flex rounded-full border border-amber-300 bg-white px-3 py-1 text-sm font-medium text-amber-800">
-                  Government Jobs
-                </div>
-                <h2 className="mt-4 text-2xl font-bold text-slate-900">
-                  Government Jobs Practice Tests
-                </h2>
-                <p className="mt-2 text-sm leading-7 text-slate-600">
-                  Bilingual practice sets for CTET, SSC, and Railway recruitment exams with full-length mocks, instant scoring, and Hindi–English support.
-                </p>
-                <div className="mt-6 grid gap-4 md:grid-cols-3">
-                  {govCategories.map(renderCard)}
-                </div>
-              </div>
-            </>
-          );
-        })()}
+                {item}
+              </span>
+            )
+          )}
+        </div>
       </section>
 
-      <section className="site-section-accent-blue">
-        <h2 className="text-2xl font-bold text-slate-900">Practice Test Categories Comparison</h2>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full border-collapse border border-slate-200 text-sm">
+      <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">
+          Practice Test Methodology
+        </h2>
+
+        <p className="mt-3 text-slate-300">
+          Our practice tests mirror exam-style conditions with original questions, accurate
+          timing, and answer explanations. Each test helps identify improvement areas.
+        </p>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {methodology.map(([icon, title, desc]) => (
+            <div
+              key={title}
+              className="rounded-2xl border border-slate-700 bg-[#0b1220] p-5 text-center"
+            >
+              <div className="text-3xl">{icon}</div>
+              <h3 className="mt-3 font-semibold text-white">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-300">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">
+          Available Practice Categories
+        </h2>
+
+        <p className="mt-2 text-slate-300">
+          Choose from comprehensive practice test collections covering major competitive
+          exams. Each category includes question sets with different difficulty levels.
+        </p>
+
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          {generalCategories.map(renderCard)}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-700 bg-amber-950/40 p-6 shadow-sm sm:p-8">
+        <span className="inline-flex rounded-full border border-amber-500 bg-amber-950/60 px-3 py-1 text-sm font-semibold text-amber-200">
+          Government Jobs
+        </span>
+
+        <h2 className="mt-4 text-2xl font-bold text-white">
+          Government Jobs Practice Tests
+        </h2>
+
+        <p className="mt-2 text-slate-300">
+          Bilingual practice sets for CTET, SSC, and Railway recruitment exams with
+          full-length mocks, instant scoring, and Hindi-English support.
+        </p>
+
+        <div className="mt-6 grid gap-5 md:grid-cols-3">
+          {govCategories.map(renderCard)}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">
+          Practice Test Categories Comparison
+        </h2>
+
+        <div className="mt-6 overflow-x-auto">
+          <table className="w-full border-collapse text-sm">
             <thead>
-              <tr className="bg-slate-100">
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Exam Type</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Question Format</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Duration</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Best For</th>
+              <tr className="bg-slate-800">
+                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">
+                  Exam Type
+                </th>
+                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">
+                  Question Format
+                </th>
+                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">
+                  Duration
+                </th>
+                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">
+                  Best For
+                </th>
               </tr>
             </thead>
+
             <tbody>
-              <tr className="border-b border-slate-200">
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">IELTS</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Reading, Listening, Writing, Speaking</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">2.5-3 hours</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Study abroad applicants</td>
-              </tr>
-              <tr className="border-b border-slate-200">
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">TOEFL iBT</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Reading, Listening, Speaking, Writing, Integrated Tasks</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">About 2 hours</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">University-focused English proficiency candidates</td>
-              </tr>
-              <tr className="border-b border-slate-200">
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Engineering Entrance</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">MCQs in Physics, Chemistry, Math</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">3 hours</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Engineering aspirants</td>
-              </tr>
-              <tr className="border-b border-slate-200">
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">CTET</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">MCQs in Child Development, Teaching</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">2.5 hours</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Teaching certification candidates</td>
-              </tr>
-              <tr className="border-b border-slate-200">
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">SSC Exams</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">MCQs in General Knowledge, Reasoning</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">1-2 hours</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Government job aspirants</td>
-              </tr>
-              <tr className="border-b border-slate-200">
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Medical NEET</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">MCQs in Physics, Chemistry, Biology</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">3 hours</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Medical aspirants</td>
-              </tr>
-              <tr className="border-b border-slate-200">
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Aviation Careers</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Role-wise MCQs and interview scenarios</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">15-20 min per set</td>
-                <td className="border-r border-slate-200 px-4 py-3 text-slate-700">Cabin crew, ground, and support staff aspirants</td>
-              </tr>
+              {comparisonRows.map((row) => (
+                <tr key={row[0]} className="odd:bg-[#0b1220] even:bg-slate-800/60">
+                  {row.map((cell, index) => (
+                    <td
+                      key={cell}
+                      className="border border-slate-700 px-4 py-3 text-slate-300"
+                    >
+                      {index === 0 ? (
+                        <strong className="text-white">{cell}</strong>
+                      ) : (
+                        cell
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </section>
 
-      <section className="site-section">
-        <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
-        <div className="mt-6 space-y-3">
-          <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <summary className="cursor-pointer text-sm font-semibold text-slate-900">Are these official practice tests?</summary>
-            <p className="mt-3 text-sm leading-7 text-slate-600">No, these are original practice tests designed to simulate exam conditions. They help you prepare but are not affiliated with official exam bodies.</p>
-          </details>
-          <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <summary className="cursor-pointer text-sm font-semibold text-slate-900">Can I review my answers after submitting?</summary>
-            <p className="mt-3 text-sm leading-7 text-slate-600">Yes, after completing any test, you can review all questions with correct answers, explanations, and your performance analysis.</p>
-          </details>
-          <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <summary className="cursor-pointer text-sm font-semibold text-slate-900">How often are new tests added?</summary>
-            <p className="mt-3 text-sm leading-7 text-slate-600">We regularly add new question sets based on the latest exam patterns. Check back frequently for updated content.</p>
-          </details>
-          <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <summary className="cursor-pointer text-sm font-semibold text-slate-900">Are practice tests available in multiple languages?</summary>
-            <p className="mt-3 text-sm leading-7 text-slate-600">English is the primary language. Some government exam categories include bilingual support for regional language speakers.</p>
-          </details>
-        </div>
-      </section>
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">
+          Frequently Asked Questions
+        </h2>
 
-      <section className="site-section-accent-amber">
-        <h2 className="text-2xl font-bold text-slate-900">Start Your Practice Journey</h2>
-        <p className="mt-4 text-slate-700">
-          Choose your exam category and begin practicing with confidence. Regular practice with detailed feedback is the key to exam success.
-        </p>
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/practice-tests/ielts"
-            className="site-btn-primary px-5 py-3 text-center text-sm"
-          >
-            Practice IELTS Tests
-          </Link>
-          <Link
-            href="/practice-tests/toefl"
-            className="site-btn-secondary px-5 py-3 text-center text-sm"
-          >
-            Practice TOEFL Tests
-          </Link>
-          <Link
-            href="/practice-tests/engineering-entrance"
-            className="site-btn-secondary px-5 py-3 text-center text-sm"
-          >
-            Try Engineering Entrance
-          </Link>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {faqs.map(([q, a]) => (
+            <div
+              key={q}
+              className="rounded-2xl border border-slate-700 bg-slate-800/70 p-5"
+            >
+              <h3 className="text-lg font-semibold text-white">{q}</h3>
+              <p className="mt-2 text-sm leading-7 text-slate-300">{a}</p>
+            </div>
+          ))}
         </div>
       </section>
     </div>

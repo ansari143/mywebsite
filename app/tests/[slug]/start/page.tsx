@@ -52,15 +52,15 @@ export default async function StartPage({
 
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
           <div className="rounded-2xl border bg-slate-50 p-4">
-            <p className="text-xs uppercase tracking-wide text-slate-500">Questions</p>
+            <p className="text-xs uppercase tracking-wide text-slate-300">Questions</p>
             <p className="mt-1 text-lg font-bold text-slate-900">{test.questions.length}</p>
           </div>
           <div className="rounded-2xl border bg-slate-50 p-4">
-            <p className="text-xs uppercase tracking-wide text-slate-500">Estimated time</p>
+            <p className="text-xs uppercase tracking-wide text-slate-300">Estimated time</p>
             <p className="mt-1 text-lg font-bold text-slate-900">~{test.durationMin} min</p>
           </div>
           <div className="rounded-2xl border bg-slate-50 p-4">
-            <p className="text-xs uppercase tracking-wide text-slate-500">Result style</p>
+            <p className="text-xs uppercase tracking-wide text-slate-300">Result style</p>
             <p className="mt-1 text-lg font-bold text-slate-900">Score + roadmap</p>
           </div>
         </div>

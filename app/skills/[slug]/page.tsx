@@ -173,7 +173,7 @@ export default async function SkillDetailPage({ params }: Props) {
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">
               Best for
             </p>
             <p className="mt-2 text-sm leading-7 text-slate-700">
@@ -182,7 +182,7 @@ export default async function SkillDetailPage({ params }: Props) {
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">
               Not ideal for
             </p>
             <p className="mt-2 text-sm leading-7 text-slate-700">

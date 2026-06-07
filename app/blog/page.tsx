@@ -75,7 +75,7 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
   };
 
   return (
-    <main className="space-y-10 pb-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300">
+    <main className="space-y-10 pb-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-300 dark:[&_.text-slate-600]:text-slate-300">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
@@ -90,7 +90,7 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
             <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">
               Updated weekly with practical guidance on AI skills, scholarships, global careers, and study abroad strategy.
             </p>
-            <p className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">Updated: June 2026</p>
+            <p className="mt-1 text-sm font-medium text-slate-300 dark:text-slate-300">Updated: June 2026</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link href="/skills" className="site-btn-primary">
