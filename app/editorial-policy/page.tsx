@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  heroClass,
+  sectionClass,
+  cardClass,
+  amberClass,
+} from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Editorial Policy | Nishaglobal Education",

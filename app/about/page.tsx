@@ -1,4 +1,10 @@
 import TrustComponent from "@/components/TrustComponent";
+import {
+  heroClass,
+  sectionClass,
+  cardClass,
+  amberClass,
+} from "@/lib/theme";
 
 export const metadata = {
   title: "About Us | Nishaglobal Education",

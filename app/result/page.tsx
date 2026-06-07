@@ -8,6 +8,12 @@ import { testInsights } from "@/data/testInsights";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { QRCodeSVG as QRCode } from "qrcode.react";
+import {
+  heroClass,
+  sectionClass,
+  cardClass,
+  amberClass,
+} from "@/lib/theme";
 
 type ResultPayload = {
   slug: string;
