@@ -65,7 +65,7 @@ export default function CareerGuideTemplate({ guide }: CareerGuideTemplateProps)
   } : null;
 
   return (
-    <div className="space-y-8">
+    <div className="site-page">
       {faqSchema && (
         <script
           type="application/ld+json"
@@ -74,7 +74,7 @@ export default function CareerGuideTemplate({ guide }: CareerGuideTemplateProps)
       )}
 
       {/* Overview Section */}
-      <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-blue-50 p-6 shadow-sm sm:p-8 lg:p-10">
+      <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-blue-50 p-6 shadow-sm sm:p-8 lg:p-10 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
         <div className="inline-flex rounded-full border border-sky-100 bg-white px-3 py-1 text-sm font-medium text-sky-700">
           {guide.badge}
         </div>
@@ -109,7 +109,7 @@ export default function CareerGuideTemplate({ guide }: CareerGuideTemplateProps)
       {guide.sections
         .filter(section => !['overview', 'who-should-choose', 'who-should-avoid', 'faq', 'cta'].includes(section.type))
         .map((section, index) => (
-          <section key={index} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+          <section key={index} className="site-section">
             {section.title && (
               <h2 className="text-2xl font-bold text-slate-900">{section.title}</h2>
             )}
@@ -163,7 +163,7 @@ export default function CareerGuideTemplate({ guide }: CareerGuideTemplateProps)
             {section.roadmap && (
               <div className="mt-6 space-y-6">
                 {section.roadmap.map((step, i) => (
-                  <div key={i} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                  <div key={i} className="site-card">
                     <div className="flex items-start gap-4">
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
                         {step.step}
@@ -187,11 +187,11 @@ export default function CareerGuideTemplate({ guide }: CareerGuideTemplateProps)
 
       {/* FAQ Section */}
       {faqSection?.faqs && (
-        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <section className="site-section">
           <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
           <div className="mt-6 space-y-4">
             {faqSection.faqs.map((faq, i) => (
-              <div key={i} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <div key={i} className="site-card">
                 <h3 className="text-base font-semibold text-slate-900">{faq.question}</h3>
                 <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">{faq.answer}</p>
               </div>
@@ -202,7 +202,7 @@ export default function CareerGuideTemplate({ guide }: CareerGuideTemplateProps)
 
       {/* CTA Section */}
       {guide.sections.find(s => s.type === 'cta')?.cta && (
-        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm sm:p-8">
+        <section className="site-section-accent-amber dark:border-amber-700 dark:bg-amber-950/30">
           <h2 className="text-2xl font-bold text-slate-900">Next Steps</h2>
           <p className="mt-4 text-slate-700">
             Ready to take action? Here are your best next steps based on your interests and goals.
@@ -210,14 +210,14 @@ export default function CareerGuideTemplate({ guide }: CareerGuideTemplateProps)
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href={guide.sections.find(s => s.type === 'cta')!.cta!.primary.href}
-              className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
+              className="site-btn-primary px-5 py-3 text-center"
             >
               {guide.sections.find(s => s.type === 'cta')!.cta!.primary.text}
             </Link>
             {guide.sections.find(s => s.type === 'cta')!.cta!.secondary && (
               <Link
                 href={guide.sections.find(s => s.type === 'cta')!.cta!.secondary!.href}
-                className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                className="site-btn-secondary px-5 py-3 text-center"
               >
                 {guide.sections.find(s => s.type === 'cta')!.cta!.secondary!.text}
               </Link>
@@ -227,7 +227,7 @@ export default function CareerGuideTemplate({ guide }: CareerGuideTemplateProps)
       )}
 
       {/* Disclaimer */}
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm sm:p-8">
+      <section className="site-section-accent-amber dark:border-amber-700 dark:bg-amber-950/30">
         <h2 className="text-2xl font-bold text-slate-900">Important Note</h2>
         <p className="mt-4 text-sm leading-7 text-slate-700 sm:text-base">
           This guide is designed for educational purposes only. Career requirements, job markets, salary ranges, and industry trends can change.

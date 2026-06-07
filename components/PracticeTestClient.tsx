@@ -158,7 +158,7 @@ export default function PracticeTestClient({ set }: Props) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.border-slate-300]:border-slate-600 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.bg-gray-50]:bg-slate-800 dark:[&_.bg-gray-100]:bg-slate-700 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300 dark:[&_.text-gray-700]:text-slate-200 dark:[&_.text-green-700]:text-green-300 dark:[&_.text-red-700]:text-red-300">
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
           Free practice test • English only

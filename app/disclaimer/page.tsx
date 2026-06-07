@@ -32,7 +32,7 @@ export default function DisclaimerPage() {
   };
 
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(disclaimerSchema) }}

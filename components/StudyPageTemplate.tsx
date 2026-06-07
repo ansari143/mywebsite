@@ -16,13 +16,13 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="site-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-6 shadow-sm sm:p-8 lg:p-10">
+      <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-6 shadow-sm sm:p-8 lg:p-10 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
         <div className="inline-flex rounded-full border border-blue-100 bg-white px-3 py-1 text-sm font-medium text-blue-700">
           Study Abroad Guide
         </div>
@@ -35,13 +35,13 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/global-careers"
-            className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
+            className="site-btn-primary px-5 py-3 text-center"
           >
             Explore Global Careers
           </Link>
           <Link
             href="/tests"
-            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            className="site-btn-secondary px-5 py-3 text-center"
           >
             Take Free Career Test
           </Link>
@@ -51,7 +51,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
       {(guide.whoShouldChoose?.length || guide.whoShouldAvoid?.length) && (
         <section className="grid gap-6 lg:grid-cols-2">
           {guide.whoShouldChoose?.length ? (
-            <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm">
+            <div className="site-section p-6">
               <h2 className="text-2xl font-bold text-slate-900">Who Should Choose {guide.country}</h2>
               <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-700 sm:text-base">
                 {guide.whoShouldChoose.map((item) => (
@@ -65,7 +65,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
           ) : null}
 
           {guide.whoShouldAvoid?.length ? (
-            <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6 shadow-sm">
+            <div className="site-section p-6">
               <h2 className="text-2xl font-bold text-slate-900">Who Should Avoid This Path</h2>
               <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-700 sm:text-base">
                 {guide.whoShouldAvoid.map((item) => (
@@ -81,7 +81,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
       )}
 
       <section className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="site-section p-6">
           <h2 className="text-2xl font-bold text-slate-900">Eligibility</h2>
           <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-600 sm:text-base">
             {guide.eligibility.map((item) => (
@@ -93,7 +93,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
           </ul>
         </div>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="site-section p-6">
           <h2 className="text-2xl font-bold text-slate-900">Required Exams</h2>
           <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-600 sm:text-base">
             {guide.exams.map((item) => (
@@ -107,7 +107,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
       </section>
 
       <section className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="site-section p-6">
           <h2 className="text-2xl font-bold text-slate-900">Estimated Cost</h2>
           <div className="mt-4 space-y-4 text-sm leading-7 text-slate-600 sm:text-base">
             <p>
@@ -122,7 +122,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="site-section p-6">
           <h2 className="text-2xl font-bold text-slate-900">Scholarship Options</h2>
           <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-600 sm:text-base">
             {guide.scholarships.map((item) => (
@@ -136,7 +136,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
       </section>
 
       {guide.commonMistakes?.length ? (
-        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <section className="site-section">
           <h2 className="text-2xl font-bold text-slate-900">Common Mistakes Students Make</h2>
           <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-600 sm:text-base">
             {guide.commonMistakes.map((item) => (
@@ -150,11 +150,11 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
       ) : null}
 
       {guide.realExamples?.length ? (
-        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <section className="site-section">
           <h2 className="text-2xl font-bold text-slate-900">Real Student Planning Examples</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {guide.realExamples.map((item) => (
-              <article key={item.scenario} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <article key={item.scenario} className="site-card">
                 <h3 className="text-base font-semibold text-slate-900">Scenario</h3>
                 <p className="mt-2 text-sm leading-7 text-slate-600">{item.scenario}</p>
                 <h4 className="mt-4 text-sm font-semibold text-slate-900">Takeaway</h4>
@@ -166,7 +166,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
       ) : null}
 
       <section className="grid gap-6 lg:grid-cols-3">
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm lg:col-span-2">
+        <div className="site-section p-6 lg:col-span-2">
           <h2 className="text-2xl font-bold text-slate-900">Top Courses</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             {guide.topCourses.map((course) => (
@@ -180,7 +180,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="site-section p-6">
           <h2 className="text-2xl font-bold text-slate-900">Example Universities</h2>
           <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-600 sm:text-base">
             {guide.universities.map((uni) => (
@@ -191,7 +191,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
       </section>
 
       <section className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="site-section p-6">
           <h2 className="text-2xl font-bold text-slate-900">Work While Studying</h2>
           <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-600 sm:text-base">
             {guide.work.map((item) => (
@@ -203,7 +203,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
           </ul>
         </div>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="site-section p-6">
           <h2 className="text-2xl font-bold text-slate-900">PR and Settlement Perspective</h2>
           <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-600 sm:text-base">
             {guide.settlement.map((item) => (
@@ -216,11 +216,11 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="site-section">
         <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
         <div className="mt-6 space-y-4">
           {guide.faqs.map((faq) => (
-            <div key={faq.question} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <div key={faq.question} className="site-card">
               <h3 className="text-base font-semibold text-slate-900">{faq.question}</h3>
               <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">{faq.answer}</p>
             </div>
@@ -228,7 +228,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
         </div>
       </section>
 {guide.relatedBlogs && guide.relatedBlogs.length > 0 && (
-  <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+  <section className="site-section">
     <h2 className="text-2xl font-bold text-slate-900">
       Related Articles
     </h2>
@@ -238,7 +238,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
         <Link
           key={index}
           href={blog.link}
-          className="rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:shadow-md"
+          className="site-card p-4 transition hover:shadow-md"
         >
           <h3 className="text-base font-semibold text-slate-900">
             {blog.title}
@@ -252,7 +252,7 @@ export default function StudyPageTemplate({ guide }: { guide: CountryGuide }) {
   </section>
 )}
 
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm sm:p-8">
+      <section className="site-section-accent-amber">
         <h2 className="text-2xl font-bold text-slate-900">Important Note</h2>
         <p className="mt-4 text-sm leading-7 text-slate-700 sm:text-base">
           This page is designed for educational guidance only. Admission rules, visa requirements, work rights, tuition fees,

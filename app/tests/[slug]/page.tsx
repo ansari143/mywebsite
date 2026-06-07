@@ -61,7 +61,7 @@ export default async function StreamDetail({
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.bg-gray-100]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300 dark:[&_.text-gray-700]:text-slate-300 dark:[&_.text-gray-600]:text-slate-400 dark:[&_.border-emerald-200]:border-emerald-700 dark:[&_.bg-emerald-50]:bg-emerald-900/20 dark:[&_.text-emerald-900]:text-emerald-200 dark:[&_.border-rose-200]:border-rose-700 dark:[&_.bg-rose-50]:bg-rose-900/20 dark:[&_.text-rose-900]:text-rose-200">
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
           Free career assessment
@@ -165,7 +165,7 @@ export default async function StreamDetail({
 
         <Link
           href={`/tests/${test.slug}/start`}
-          className="mt-5 inline-block w-full rounded-xl bg-blue-600 px-4 py-3 text-center text-white hover:bg-blue-700"
+          className="site-btn-primary mt-5 w-full px-4 py-3 text-center"
         >
           Start Test
         </Link>

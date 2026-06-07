@@ -54,8 +54,8 @@ const destinations = [
 
 export default function StudyAbroadPage() {
   return (
-    <div className="space-y-8">
-      <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-blue-50 via-white to-violet-50 p-6 shadow-sm sm:p-8 lg:p-10">
+    <div className="site-page">
+      <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-blue-50 via-white to-violet-50 p-6 shadow-sm sm:p-8 lg:p-10 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
         <div className="inline-flex rounded-full border border-blue-100 bg-white px-3 py-1 text-sm font-medium text-blue-700">
           Global Education
         </div>
@@ -79,19 +79,19 @@ export default function StudyAbroadPage() {
           </p>
         </div>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <Link href="/international-students" className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700">
+          <Link href="/international-students" className="site-btn-primary px-5 py-3 text-center">
             International Student Guide
           </Link>
-          <Link href="/global-careers" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">
+          <Link href="/global-careers" className="site-btn-secondary px-5 py-3 text-center">
             Explore Global Careers
           </Link>
-          <Link href="/skills" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">
+          <Link href="/skills" className="site-btn-secondary px-5 py-3 text-center">
             Explore AI Skills
           </Link>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="site-section">
         <h2 className="text-2xl font-bold text-slate-900">Quick Country Comparison</h2>
         <p className="mt-2 text-slate-700">Overview of key factors for top study destinations:</p>
         <div className="mt-6 overflow-x-auto">
@@ -147,7 +147,7 @@ export default function StudyAbroadPage() {
         <p className="mt-4 text-sm text-slate-600">*Approximate figures; check official sources for current rates and requirements.</p>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="site-section">
         <h2 className="text-2xl font-bold text-slate-900">Step-by-Step Roadmap for Studying Abroad</h2>
         <div className="mt-6 space-y-6">
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
@@ -179,7 +179,7 @@ export default function StudyAbroadPage() {
 
       <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {destinations.map((item) => (
-          <Link key={item.href} href={item.href} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <Link key={item.href} href={item.href} className="site-section p-6 transition hover:-translate-y-1 hover:shadow-md">
             <h2 className="text-xl font-bold text-slate-900">{item.title}</h2>
             <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.desc}</p>
             <div className="mt-4 space-y-2">
@@ -191,7 +191,7 @@ export default function StudyAbroadPage() {
         ))}
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="site-section">
         <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
         <div className="mt-6 space-y-4">
           <div>
@@ -228,7 +228,7 @@ export default function StudyAbroadPage() {
             desc: "Compare work options, long-term pathways, and skills needed for global employability.",
           },
         ].map((item) => (
-          <div key={item.title} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div key={item.title} className="site-section p-6">
             <h2 className="text-lg font-semibold text-slate-900">{item.title}</h2>
             <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.desc}</p>
           </div>

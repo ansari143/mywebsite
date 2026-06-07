@@ -59,11 +59,11 @@ export default function ResourcesPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="site-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="site-section">
         <div className="max-w-4xl">
           <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
             Country-Based Resource Library
@@ -97,7 +97,7 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-slate-50 p-6 sm:p-8">
+      <section className="site-section-muted">
         <h2 className="text-2xl font-bold text-gray-900">Resource Organization Strategy</h2>
         <p className="mt-3 text-gray-600">
           Our resources follow user search patterns: most students start with country intent (&quot;study in Canada&quot; or &quot;jobs in Australia&quot;), then explore specific topics. This structure provides faster access to relevant information and better supports informed decision-making.
@@ -203,7 +203,7 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-blue-50 p-6 sm:p-8">
+      <section className="site-section-accent-blue">
         <h2 className="text-2xl font-bold text-gray-900">How to Use These Resources Effectively</h2>
         <div className="mt-4 space-y-4">
           <div className="flex gap-4">
@@ -230,7 +230,7 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 sm:p-8">
+      <section className="site-section">
         <h2 className="text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
         <div className="mt-6 space-y-4">
           <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
@@ -248,7 +248,7 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm sm:p-8">
+      <section className="site-section-accent-amber">
         <h2 className="text-2xl font-bold text-slate-900">Ready to Start Your Research?</h2>
         <p className="mt-4 text-slate-700">
           Choose your target country or explore a specific topic to begin building your international education and career plan.
@@ -256,20 +256,20 @@ export default function ResourcesPage() {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/study-abroad"
-            className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
+            className="site-btn-primary px-5 py-3 text-center"
           >
             Explore Study Abroad Options
           </Link>
           <Link
             href="/tests"
-            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            className="site-btn-secondary px-5 py-3 text-center"
           >
             Take Career Assessment
           </Link>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-gray-50 p-6 sm:p-8">
+      <section className="site-section-muted">
         <h2 className="text-xl font-semibold text-gray-900">Educational Disclaimer</h2>
         <div className="mt-3 space-y-3 text-sm leading-7 text-gray-600">
           <p>

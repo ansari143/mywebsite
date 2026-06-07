@@ -18,8 +18,8 @@ export const generateViewport = () => ({
 
 export default function TestsHub() {
   return (
-    <div className="space-y-8">
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+    <div className="site-page">
+      <section className="site-section">
         <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
           Free Career Assessment Tools
         </div>
@@ -31,14 +31,14 @@ export default function TestsHub() {
         <div className="mt-6 space-y-4">
           <div>
             <h3 className="text-lg font-semibold text-slate-900">Who These Tests Are For</h3>
-            <p className="mt-2 text-slate-600">
+            <p className="mt-2 leading-7 text-slate-600">
               Students choosing academic streams, graduates planning career transitions, and professionals seeking skill development. Perfect for those who want data-driven insights into their aptitudes and preferences.
             </p>
           </div>
 
           <div>
             <h3 className="text-lg font-semibold text-slate-900">Who Should Consider Other Options</h3>
-            <p className="mt-2 text-slate-600">
+            <p className="mt-2 leading-7 text-slate-600">
               Those seeking immediate career counseling or therapy. These assessments provide guidance but are not substitutes for professional advice from career counselors or psychologists.
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function TestsHub() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-slate-50 p-6 sm:p-8">
+      <section className="site-section-muted">
         <h2 className="text-2xl font-bold text-slate-900">How Career Assessments Work</h2>
         <p className="mt-3 text-slate-600">
           Our tests combine psychometric principles with career research to provide actionable insights. Each assessment takes 10-15 minutes and generates a detailed report with recommendations.
@@ -93,10 +93,10 @@ export default function TestsHub() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {tests.map((t) => (
-            <div key={t.slug} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div key={t.slug} className="site-card p-6 shadow-sm">
               <div className="text-3xl">{t.icon}</div>
               <h2 className="mt-3 text-xl font-semibold text-slate-900">{t.title}</h2>
-              <p className="mt-2 text-sm leading-6 text-gray-600">{t.summary}</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">{t.summary}</p>
 
               <div className="mt-4 flex flex-wrap gap-2 text-sm text-gray-600">
                 {t.bestFor.map((b) => (
@@ -105,10 +105,10 @@ export default function TestsHub() {
               </div>
 
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                <Link href={`/tests/${t.slug}`} className="w-full rounded-xl border px-4 py-2 text-center hover:bg-gray-50 sm:w-auto">
+                <Link href={`/tests/${t.slug}`} className="site-btn-secondary w-full px-4 py-2 text-center sm:w-auto">
                   View Details
                 </Link>
-                <Link href={`/tests/${t.slug}/start`} className="w-full rounded-xl bg-blue-600 px-4 py-2 text-center font-medium text-white hover:bg-blue-700 sm:w-auto">
+                <Link href={`/tests/${t.slug}/start`} className="site-btn-primary w-full px-4 py-2 text-center sm:w-auto">
                   Start Free Test
                 </Link>
               </div>
@@ -117,10 +117,10 @@ export default function TestsHub() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-blue-50 p-6 sm:p-8">
+      <section className="site-section-accent-blue">
         <h2 className="text-2xl font-bold text-slate-900">Test Comparison Guide</h2>
         <div className="mt-4 overflow-x-auto">
-          <table className="w-full border-collapse border border-slate-200 text-sm">
+          <table className="site-table">
             <thead>
               <tr className="bg-slate-100">
                 <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Test Type</th>
@@ -153,7 +153,7 @@ export default function TestsHub() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 sm:p-8">
+      <section className="site-section">
         <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
         <div className="mt-6 space-y-4">
           <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
@@ -175,7 +175,7 @@ export default function TestsHub() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm sm:p-8">
+      <section className="site-section-accent-amber">
         <h2 className="text-2xl font-bold text-slate-900">Ready to Discover Your Path?</h2>
         <p className="mt-4 text-slate-700">
           Take the first step towards your ideal career with our free assessments. Choose the test that matches your current stage and goals.
@@ -183,13 +183,13 @@ export default function TestsHub() {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/tests/engineering/start"
-            className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
+            className="site-btn-primary px-5 py-3 text-center text-sm"
           >
             Start Engineering Test
           </Link>
           <Link
             href="/tests/medical/start"
-            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            className="site-btn-secondary px-5 py-3 text-center text-sm"
           >
             Take Medical Career Test
           </Link>

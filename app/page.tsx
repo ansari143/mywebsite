@@ -156,44 +156,44 @@ export default function HomePage() {
   };
 
   return (
-    <div className="space-y-10">
+    <div className="site-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <section className="rounded-3xl border border-violet-200 bg-gradient-to-br from-violet-50 via-white to-cyan-50 p-6 shadow-sm sm:p-8 lg:p-10">
+      <section className="rounded-3xl border border-violet-200 bg-gradient-to-br from-violet-50 via-white to-cyan-50 p-6 shadow-sm sm:p-8 lg:p-10 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-4xl">
-            <div className="inline-flex rounded-full border border-violet-200 bg-white px-3 py-1 text-sm font-medium text-violet-700">
+            <div className="inline-flex rounded-full border border-violet-200 bg-white px-3 py-1 text-sm font-medium text-violet-700 dark:border-violet-400/50 dark:bg-slate-800 dark:text-violet-200">
               Learn AI skills for every career role with career guidance for students worldwide
             </div>
 
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl dark:text-slate-100">
               Learn AI skills for every career role
             </h2>
 
-            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg dark:text-slate-200">
               Whether you are a developer, QA engineer, DevOps professional, business analyst, project manager, or product manager, explore practical AI roadmaps that help you transition from traditional work to AI-driven execution.
             </p>
 
-            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700">
-              <span className="rounded-full bg-white px-3 py-1 shadow-sm">AI Engineer roadmap</span>
-              <span className="rounded-full bg-white px-3 py-1 shadow-sm">AI Agents learning path</span>
-              <span className="rounded-full bg-white px-3 py-1 shadow-sm">Role-based transition plans</span>
+            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+              <span className="rounded-full bg-white px-3 py-1 shadow-sm dark:bg-slate-800">AI Engineer roadmap</span>
+              <span className="rounded-full bg-white px-3 py-1 shadow-sm dark:bg-slate-800">AI Agents learning path</span>
+              <span className="rounded-full bg-white px-3 py-1 shadow-sm dark:bg-slate-800">Role-based transition plans</span>
             </div>
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
             <Link
               href="/skills"
-              className="rounded-xl bg-violet-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-violet-700"
+              className="site-btn-primary px-5 py-3 text-center"
             >
               Explore AI Skills
             </Link>
             <Link
               href="/skills/ai-agents"
-              className="rounded-xl border border-violet-300 bg-white px-5 py-3 text-center text-sm font-semibold text-violet-700 hover:bg-violet-50"
+              className="site-btn-secondary px-5 py-3 text-center"
             >
               Start AI Agents
             </Link>
@@ -237,7 +237,7 @@ export default function HomePage() {
             <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
             <Link
               href={item.href}
-              className="mt-5 inline-flex rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              className="site-btn-secondary mt-5 px-4 py-2 text-sm"
             >
               {item.cta}
             </Link>
@@ -291,7 +291,7 @@ export default function HomePage() {
 
             <Link
               href="/practice-tests"
-              className="inline-flex rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+              className="site-btn-primary px-4 py-2 text-sm"
             >
               View All Practice Tests
             </Link>
@@ -346,7 +346,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="site-section">
         <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
           How students should use the website
         </div>
@@ -372,7 +372,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="site-section">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold text-slate-900">Explore by destination</h2>
@@ -382,7 +382,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/global-careers"
-            className="inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+            className="site-btn-primary"
           >
             View Global Careers
           </Link>
@@ -406,7 +406,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="site-section">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-3xl">
             <div className="inline-flex rounded-full border border-violet-100 bg-violet-50 px-3 py-1 text-sm font-medium text-violet-700">
@@ -423,13 +423,13 @@ export default function HomePage() {
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
             <Link
               href="/resources"
-              className="rounded-xl border border-slate-300 px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              className="site-btn-secondary px-5 py-3 text-center"
             >
               Browse Resources
             </Link>
             <Link
               href="/contact"
-              className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
+              className="site-btn-primary px-5 py-3 text-center"
             >
               Contact for Guidance
             </Link>
@@ -437,7 +437,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="site-section">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold text-slate-900">Popular USA Career Guides</h2>
@@ -476,19 +476,19 @@ export default function HomePage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/tests"
-            className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+            className="site-btn-primary px-5 py-3"
           >
             Start Free Career Test
           </Link>
           <Link
             href="/blog"
-            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            className="site-btn-secondary px-5 py-3"
           >
             Read Career Blogs
           </Link>
           <Link
             href="/study-abroad"
-            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            className="site-btn-secondary px-5 py-3"
           >
             Explore Study Abroad
           </Link>
@@ -504,7 +504,7 @@ export default function HomePage() {
           Choose the right career path after 10th, 12th, or graduation — with guidance that fits students worldwide
         </h1>
 
-        <p className="mx-auto mt-4 max-w-4xl text-base leading-7 text-gray-600 sm:text-lg">
+        <p className="mx-auto mt-4 max-w-4xl text-base leading-8 text-slate-600 sm:text-lg">
           Unlike generic sites, Nishaglobal combines practical education guidance with global options, offering free tests, practical guides, and real student examples. Whether you&apos;re comparing pathways, preparing for admissions, or planning study abroad, get trustworthy guidance that saves time and reduces confusion.
         </p>
 
@@ -518,26 +518,26 @@ export default function HomePage() {
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href="/tests"
-            className="w-full rounded-xl bg-blue-600 px-6 py-3 text-center font-semibold text-white hover:bg-blue-700 sm:w-auto"
+            className="site-btn-primary w-full px-6 py-3 text-center sm:w-auto"
           >
             Start Free Career Test
           </Link>
           <Link
             href="/study-abroad"
-            className="w-full rounded-xl border border-gray-300 bg-white px-6 py-3 text-center font-medium text-slate-700 hover:bg-gray-50 sm:w-auto"
+            className="site-btn-secondary w-full px-6 py-3 text-center sm:w-auto"
           >
             Explore Study Abroad
           </Link>
           <Link
             href="/blog"
-            className="w-full rounded-xl border border-gray-300 bg-white px-6 py-3 text-center font-medium text-slate-700 hover:bg-gray-50 sm:w-auto"
+            className="site-btn-secondary w-full px-6 py-3 text-center sm:w-auto"
           >
             Read Career Blogs
           </Link>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="site-section">
         <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
         <div className="mt-6 space-y-3">
           {faqs.map((faq) => (

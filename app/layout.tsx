@@ -110,7 +110,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         ></script>
       </head>
-      <body className="bg-gray-50 text-gray-900">
+      <body className="site-shell min-h-screen">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -122,7 +122,7 @@ export default function RootLayout({
 
         <Navbar />
 
-        <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+        <main className="site-container py-6">
           {children}
         </main>
 

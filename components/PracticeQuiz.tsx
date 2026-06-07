@@ -89,7 +89,7 @@ export default function PracticeQuiz({ categorySlug, categoryTitle, set, categor
 
   if (submitted && result) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.border-slate-300]:border-slate-600 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.bg-gray-50]:bg-slate-800 dark:[&_.bg-gray-200]:bg-slate-700 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300 dark:[&_.text-gray-700]:text-slate-200">
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm text-center">
           <h2 className="text-2xl font-bold text-slate-900">Quiz Complete!</h2>
           <p className="mt-2 text-lg text-slate-600">
@@ -98,19 +98,19 @@ export default function PracticeQuiz({ categorySlug, categoryTitle, set, categor
           <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <button
               onClick={handleRetry}
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
+              className="site-btn-primary px-6 py-3"
             >
               Retry Quiz
             </button>
             <Link
               href={`/practice-tests/${categorySlug}`}
-              className="rounded-xl border border-gray-300 px-6 py-3 font-semibold text-slate-700 hover:bg-gray-50 text-center"
+              className="site-btn-secondary px-6 py-3 text-center"
             >
               Back to {categoryTitle} Practice
             </Link>
             <Link
               href="/practice-tests"
-              className="rounded-xl border border-gray-300 px-6 py-3 font-semibold text-slate-700 hover:bg-gray-50 text-center"
+              className="site-btn-secondary px-6 py-3 text-center"
             >
               All Practice Tests
             </Link>
@@ -208,7 +208,7 @@ export default function PracticeQuiz({ categorySlug, categoryTitle, set, categor
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.border-slate-300]:border-slate-600 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.bg-gray-50]:bg-slate-800 dark:[&_.bg-gray-200]:bg-slate-700 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300 dark:[&_.text-gray-700]:text-slate-200">
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-slate-900">

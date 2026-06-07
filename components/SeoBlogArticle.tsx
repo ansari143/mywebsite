@@ -51,7 +51,7 @@ export default function SeoBlogArticle({
   faqs,
 }: SeoBlogArticleProps) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300">
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
           {badge}
@@ -141,7 +141,7 @@ export default function SeoBlogArticle({
         ))}
       </article>
 
-      <section className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm sm:p-8 dark:border-blue-700 dark:bg-blue-900/30">
         <h2 className="text-2xl font-bold text-slate-900">{ctaTitle}</h2>
         <p className="mt-3 max-w-3xl text-base leading-7 text-slate-700">
           {ctaText}
@@ -150,7 +150,7 @@ export default function SeoBlogArticle({
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href={ctaPrimaryHref}
-            className="rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white hover:bg-blue-700"
+            className="site-btn-primary px-5 py-3 text-center"
           >
             {ctaPrimaryLabel}
           </Link>
@@ -158,7 +158,7 @@ export default function SeoBlogArticle({
           {ctaSecondaryHref && ctaSecondaryLabel && (
             <Link
               href={ctaSecondaryHref}
-              className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center font-semibold text-slate-700 hover:bg-slate-50"
+              className="site-btn-secondary px-5 py-3 text-center"
             >
               {ctaSecondaryLabel}
             </Link>
@@ -181,7 +181,7 @@ export default function SeoBlogArticle({
       )}
 
       {trustInfo && (
-        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm">
+        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm dark:border-amber-700 dark:bg-amber-950/30">
           <h2 className="text-xl font-bold text-slate-900">Trust &amp; Transparency</h2>
           <div className="mt-3 space-y-2 text-sm leading-7 text-slate-700">
             {trustInfo.author && <p><span className="font-semibold">Author:</span> {trustInfo.author}</p>}

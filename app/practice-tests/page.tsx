@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 
 export default function PracticeTestsHubPage() {
   return (
-    <div className="space-y-8">
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+    <div className="site-page">
+      <section className="site-section">
         <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
           Practice Zone
         </div>
@@ -33,14 +33,14 @@ export default function PracticeTestsHubPage() {
         <div className="mt-6 space-y-4">
           <div>
             <h3 className="text-lg font-semibold text-slate-900">Who These Practice Tests Are For</h3>
-            <p className="mt-2 text-slate-600">
+            <p className="mt-2 leading-7 text-slate-600">
               Students preparing for competitive exams, test-takers seeking realistic practice, and learners who want detailed feedback on their performance. Ideal for those who benefit from structured, exam-specific preparation.
             </p>
           </div>
 
           <div>
             <h3 className="text-lg font-semibold text-slate-900">Who Should Consider Alternatives</h3>
-            <p className="mt-2 text-slate-600">
+            <p className="mt-2 leading-7 text-slate-600">
               Those seeking comprehensive study materials or video lessons. These tests focus on practice questions and explanations rather than full course content.
             </p>
           </div>
@@ -54,7 +54,7 @@ export default function PracticeTestsHubPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-slate-50 p-6 sm:p-8">
+      <section className="site-section-muted">
         <h2 className="text-2xl font-bold text-slate-900">Practice Test Methodology</h2>
         <p className="mt-3 text-slate-600">
           Our practice tests mirror actual exam conditions with original questions, accurate timing, and comprehensive answer explanations. Each test includes performance analysis to help you identify improvement areas.
@@ -120,7 +120,7 @@ export default function PracticeTestsHubPage() {
             return (
               <div
                 key={category.slug}
-                className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
+                className="site-section p-6"
               >
                 <h2 className="text-2xl font-bold text-slate-900">
                   {category.title}
@@ -139,7 +139,7 @@ export default function PracticeTestsHubPage() {
                 <div className="mt-6">
                   <Link
                     href={`/practice-tests/${category.slug}`}
-                    className="inline-block rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700"
+                    className="site-btn-primary inline-block px-5 py-3"
                   >
                     Explore {category.shortTitle}
                   </Link>
@@ -154,7 +154,7 @@ export default function PracticeTestsHubPage() {
                 {generalCategories.map(renderCard)}
               </div>
 
-              <div className="rounded-3xl border border-amber-200 bg-amber-50 p-6 sm:p-8">
+              <div className="site-section-accent-amber">
                 <div className="inline-flex rounded-full border border-amber-300 bg-white px-3 py-1 text-sm font-medium text-amber-800">
                   Government Jobs
                 </div>
@@ -173,7 +173,7 @@ export default function PracticeTestsHubPage() {
         })()}
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-blue-50 p-6 sm:p-8">
+      <section className="site-section-accent-blue">
         <h2 className="text-2xl font-bold text-slate-900">Practice Test Categories Comparison</h2>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full border-collapse border border-slate-200 text-sm">
@@ -233,7 +233,7 @@ export default function PracticeTestsHubPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 sm:p-8">
+      <section className="site-section">
         <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
         <div className="mt-6 space-y-3">
           <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -255,7 +255,7 @@ export default function PracticeTestsHubPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm sm:p-8">
+      <section className="site-section-accent-amber">
         <h2 className="text-2xl font-bold text-slate-900">Start Your Practice Journey</h2>
         <p className="mt-4 text-slate-700">
           Choose your exam category and begin practicing with confidence. Regular practice with detailed feedback is the key to exam success.
@@ -263,19 +263,19 @@ export default function PracticeTestsHubPage() {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/practice-tests/ielts"
-            className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
+            className="site-btn-primary px-5 py-3 text-center text-sm"
           >
             Practice IELTS Tests
           </Link>
           <Link
             href="/practice-tests/toefl"
-            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            className="site-btn-secondary px-5 py-3 text-center text-sm"
           >
             Practice TOEFL Tests
           </Link>
           <Link
             href="/practice-tests/engineering-entrance"
-            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            className="site-btn-secondary px-5 py-3 text-center text-sm"
           >
             Try Engineering Entrance
           </Link>

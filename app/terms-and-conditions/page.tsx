@@ -32,7 +32,7 @@ export default function TermsAndConditionsPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-600]:text-slate-300">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(termsSchema) }}

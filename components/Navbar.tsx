@@ -20,8 +20,8 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-white/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur dark:border-slate-700 dark:bg-slate-950/90">
+      <div className="site-container flex items-center justify-between py-3">
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/logo.png"
@@ -32,10 +32,10 @@ export default function Navbar() {
             className="h-11 w-11 object-contain"
           />
           <div className="hidden sm:block">
-            <span className="block text-lg font-semibold text-slate-900">
+            <span className="block text-lg font-semibold text-slate-900 dark:text-slate-100">
               Nishaglobal Education
             </span>
-            <span className="block text-xs text-slate-500">
+            <span className="block text-xs text-slate-500 dark:text-slate-300">
               Learn AI skills for every career role with career guidance for students worldwide
             </span>
           </div>
@@ -46,7 +46,7 @@ export default function Navbar() {
             {navLinks.map((item) => (
               <Link
                 key={item.href}
-                className="text-slate-700 hover:text-blue-600"
+                className="text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-300"
                 href={item.href}
               >
                 {item.label}
@@ -56,28 +56,29 @@ export default function Navbar() {
 
           <Link
             href="/tests"
-            className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            className="site-btn-primary"
           >
             Free Test
           </Link>
         </div>
 
         <button
-          className="rounded-lg border px-3 py-2 text-sm md:hidden"
+          className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 md:hidden dark:border-slate-600 dark:text-slate-200"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
+          aria-expanded={open}
         >
           ☰
         </button>
       </div>
 
       {open && (
-        <div className="border-t bg-white md:hidden">
-          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 text-sm">
+        <div className="border-t border-slate-200 bg-white md:hidden dark:border-slate-700 dark:bg-slate-900">
+          <div className="site-container flex flex-col gap-3 py-3 text-sm">
             <Link
               href="/tests"
               onClick={() => setOpen(false)}
-              className="rounded-xl bg-blue-600 px-4 py-2 text-center font-semibold text-white"
+              className="site-btn-primary text-center"
             >
               Start Free Career Test
             </Link>
@@ -87,7 +88,7 @@ export default function Navbar() {
                 key={item.href}
                 onClick={() => setOpen(false)}
                 href={item.href}
-                className="text-slate-700"
+                className="text-slate-700 dark:text-slate-200"
               >
                 {item.label}
               </Link>

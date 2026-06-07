@@ -199,7 +199,7 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
   };
 
   return (
-    <main className="space-y-8">
+    <main className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.bg-emerald-50]:bg-emerald-900/20 dark:[&_.bg-rose-50]:bg-rose-900/20 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300 dark:[&_.text-slate-500]:text-slate-400 dark:[&_.text-emerald-900]:text-emerald-200 dark:[&_.text-rose-900]:text-rose-200">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
@@ -353,7 +353,7 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
 
         <RelatedBlogs slugs={post.relatedSlugs ?? []} />
 
-        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm">
+        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm dark:border-amber-700 dark:bg-amber-950/30">
           <h2 className="text-xl font-bold text-slate-900">Content trust note</h2>
           <p className="mt-3 text-sm leading-7 text-slate-700 sm:text-base">
             This article is for educational guidance and student planning support. Verify final admission, fee, scholarship, and visa decisions from official sources before taking action.

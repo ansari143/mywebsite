@@ -91,7 +91,7 @@ export default function EditorialPolicyPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-200 dark:[&_.text-slate-600]:text-slate-300">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -152,13 +152,13 @@ export default function EditorialPolicyPage() {
         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/contact"
-            className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700"
+            className="site-btn-primary px-5 py-3 text-center"
           >
             Report a Content Issue
           </Link>
           <Link
             href="/about"
-            className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            className="site-btn-secondary px-5 py-3 text-center"
           >
             Learn About Our Team
           </Link>
