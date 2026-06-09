@@ -19,7 +19,7 @@ function CodeBlock({ code }: { code: string }) {
 
 function DiagramBlock({ lines }: { lines: string[] }) {
   return (
-    <pre className="overflow-x-auto rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm leading-6 text-slate-800">
+    <pre className="overflow-x-auto rounded-2xl border border-blue-100 bg-[#15233d] p-4 text-sm leading-6 text-slate-800">
       <code>{lines.join("\n")}</code>
     </pre>
   );
@@ -151,7 +151,7 @@ export default async function SkillDetailPage({ params }: Props) {
         />
       )}
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
         <Link
           href="/skills"
           className="inline-flex text-sm font-medium text-blue-700 hover:underline"
@@ -159,33 +159,33 @@ export default async function SkillDetailPage({ params }: Props) {
           ← Back to Skills
         </Link>
 
-        <div className="mt-4 inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+        <div className="mt-4 inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
           {page.badge}
         </div>
 
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
           {page.title}
         </h1>
 
-        <p className="mt-4 max-w-4xl text-base leading-8 text-slate-600 sm:text-lg">
+        <p className="mt-4 max-w-4xl text-base leading-8 text-white sm:text-lg">
           {page.intro}
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+          <div className="rounded-2xl border border-slate-200 bg-[#15233d] p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">
               Best for
             </p>
-            <p className="mt-2 text-sm leading-7 text-slate-700">
+            <p className="mt-2 text-sm leading-7 text-white">
               Readers who want a practical, role-based learning guide with clear progression from fundamentals to advanced implementation.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+          <div className="rounded-2xl border border-slate-200 bg-[#15233d] p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">
               Not ideal for
             </p>
-            <p className="mt-2 text-sm leading-7 text-slate-700">
+            <p className="mt-2 text-sm leading-7 text-white">
               Visitors looking for a short definition page without examples, sections, or a guided learning path.
             </p>
           </div>
@@ -197,13 +197,13 @@ export default async function SkillDetailPage({ params }: Props) {
           {page.sections.map((section) => (
             <section
               key={section.title}
-              className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8"
+              className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8"
             >
-              <h2 className="text-2xl font-bold text-slate-900">
+              <h2 className="text-2xl font-bold text-white">
                 {section.title}
               </h2>
 
-              <div className="mt-5 space-y-4 text-slate-700 leading-7">
+              <div className="mt-5 space-y-4 text-white leading-7">
                 {section.content.map((para, index) => (
                   <p key={index}>{para}</p>
                 ))}
@@ -225,7 +225,7 @@ export default async function SkillDetailPage({ params }: Props) {
 
           {page.faq && (
             <section className="rounded-3xl border border-gray-200 bg-gray-50 p-6 sm:p-8">
-              <h2 className="text-2xl font-bold text-slate-900">
+              <h2 className="text-2xl font-bold text-white">
                 Frequently Asked Questions
               </h2>
 
@@ -233,12 +233,12 @@ export default async function SkillDetailPage({ params }: Props) {
                 {page.faq.map((item) => (
                   <div
                     key={item.question}
-                    className="rounded-2xl border border-gray-200 bg-white p-4"
+                    className="rounded-2xl border border-gray-200 bg-[#15233d] p-4"
                   >
-                    <h3 className="font-semibold text-slate-900">
+                    <h3 className="font-semibold text-white">
                       {item.question}
                     </h3>
-                    <p className="mt-2 text-slate-600 leading-7">
+                    <p className="mt-2 text-white leading-7">
                       {item.answer}
                     </p>
                   </div>
@@ -249,8 +249,8 @@ export default async function SkillDetailPage({ params }: Props) {
         </div>
 
         <aside className="space-y-6 xl:sticky xl:top-24 xl:self-start">
-          <section className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900">
+          <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-5 shadow-sm">
+            <h2 className="text-lg font-semibold text-white">
               Related Skills
             </h2>
 
@@ -261,7 +261,7 @@ export default async function SkillDetailPage({ params }: Props) {
                   <Link
                     key={item.slug}
                     href={`/skills/${item.slug}`}
-                    className="rounded-xl border border-gray-200 px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                    className="rounded-xl border border-gray-200 px-4 py-3 text-sm font-medium text-white transition hover:border-blue-200 hover:bg-[#15233d] hover:text-blue-700"
                   >
                     {item.title}
                   </Link>
@@ -269,11 +269,11 @@ export default async function SkillDetailPage({ params }: Props) {
             </div>
           </section>
 
-          <section className="rounded-3xl border border-blue-100 bg-blue-50 p-5">
-            <h2 className="text-lg font-semibold text-slate-900">
+          <section className="rounded-3xl border border-blue-100 bg-[#15233d] p-5">
+            <h2 className="text-lg font-semibold text-white">
               Recommended Progression Path
             </h2>
-            <p className="mt-2 text-sm leading-7 text-slate-700">
+            <p className="mt-2 text-sm leading-7 text-white">
               Start with fundamentals, move into intermediate framework usage,
               and then build advanced workflows with monitoring and evaluation.
             </p>

@@ -20,7 +20,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur dark:border-slate-700 dark:bg-slate-950/90">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-[#15233d]/90 backdrop-blur dark:border-slate-700 dark:bg-slate-950/90">
       <div className="site-container flex items-center justify-between py-3">
         <Link href="/" className="flex items-center gap-3">
           <Image
@@ -32,7 +32,7 @@ export default function Navbar() {
             className="h-11 w-11 object-contain"
           />
           <div className="hidden sm:block">
-            <span className="block text-lg font-semibold text-slate-900 dark:text-slate-100">
+            <span className="block text-lg font-semibold text-white dark:text-slate-100">
               Nishaglobal Education
             </span>
             <span className="block text-xs text-slate-300 dark:text-slate-300">
@@ -46,7 +46,7 @@ export default function Navbar() {
             {navLinks.map((item) => (
               <Link
                 key={item.href}
-                className="text-slate-700 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-300"
+                className="text-white hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-300"
                 href={item.href}
               >
                 {item.label}
@@ -63,7 +63,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 md:hidden dark:border-slate-600 dark:text-slate-300"
+          className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-white md:hidden dark:border-slate-600 dark:text-slate-300"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -73,7 +73,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-slate-200 bg-white md:hidden dark:border-slate-700 dark:bg-slate-900">
+        <div className="border-t border-slate-200 bg-[#15233d] md:hidden dark:border-slate-700 dark:bg-slate-900">
           <div className="site-container flex flex-col gap-3 py-3 text-sm">
             <Link
               href="/tests"
@@ -88,7 +88,7 @@ export default function Navbar() {
                 key={item.href}
                 onClick={() => setOpen(false)}
                 href={item.href}
-                className="text-slate-700 dark:text-slate-300"
+                className="text-white dark:text-slate-300"
               >
                 {item.label}
               </Link>

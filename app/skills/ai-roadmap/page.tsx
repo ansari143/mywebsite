@@ -88,33 +88,33 @@ const weeklyTimeline = [
 export default function AIRoadmapPage() {
   return (
     <div className="space-y-10">
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
         <div className="max-w-3xl">
-          <div className="inline-flex rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700">
+          <div className="inline-flex rounded-full border border-indigo-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-indigo-700">
             AI Career Guide
           </div>
 
-          <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
             AI Engineer Roadmap (Beginner to Advanced)
           </h1>
 
-          <p className="mt-4 text-base leading-8 text-slate-600">
+          <p className="mt-4 text-base leading-8 text-white">
             Follow this phase-wise AI Engineering roadmap with exact Udemy course links.
             It starts with programming and AI fundamentals, moves into RAG and
             agentic systems, and ends with an enterprise-level final portfolio project.
           </p>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-800">Phase 1: Foundations</div>
-            <div className="rounded-xl border border-blue-200 bg-blue-50 px-3 py-2 text-sm font-semibold text-blue-800">Phase 2-3: Build & Agents</div>
+            <div className="rounded-xl border border-emerald-200 bg-[#15233d] px-3 py-2 text-sm font-semibold text-emerald-800">Phase 1: Foundations</div>
+            <div className="rounded-xl border border-blue-200 bg-[#15233d] px-3 py-2 text-sm font-semibold text-blue-800">Phase 2-3: Build & Agents</div>
             <div className="rounded-xl border border-violet-200 bg-violet-50 px-3 py-2 text-sm font-semibold text-violet-800">Phase 4-5: Advanced + Project</div>
           </div>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-slate-50 p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Week 1 to Week 14 Timeline</h2>
-        <p className="mt-2 text-sm leading-7 text-slate-600">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Week 1 to Week 14 Timeline</h2>
+        <p className="mt-2 text-sm leading-7 text-white">
           Follow each milestone in order. Complete one card before moving to the next.
         </p>
 
@@ -124,18 +124,18 @@ export default function AIRoadmapPage() {
           {weeklyTimeline.map((item, index) => (
             <article
               key={`${item.week}-${item.title}`}
-              className="relative rounded-2xl border border-slate-200 bg-white p-4 sm:pl-12"
+              className="relative rounded-2xl border border-slate-200 bg-[#15233d] p-4 sm:pl-12"
             >
-              <div className="absolute left-3 top-6 hidden h-4 w-4 rounded-full border-2 border-indigo-600 bg-white sm:block" aria-hidden="true" />
+              <div className="absolute left-3 top-6 hidden h-4 w-4 rounded-full border-2 border-indigo-600 bg-[#15233d] sm:block" aria-hidden="true" />
 
               <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full border border-slate-300 bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-700">
+                <span className="rounded-full border border-slate-300 bg-slate-100 px-2 py-0.5 text-xs font-semibold text-white">
                   Step {index + 1}
                 </span>
-                <span className="rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700">
+                <span className="rounded-full border border-indigo-200 bg-[#15233d] px-2 py-0.5 text-xs font-semibold text-indigo-700">
                   {item.phase}
                 </span>
-                <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700">
+                <span className="rounded-full border border-emerald-200 bg-[#15233d] px-2 py-0.5 text-xs font-semibold text-emerald-700">
                   {item.week}
                 </span>
               </div>
@@ -150,14 +150,14 @@ export default function AIRoadmapPage() {
                   {item.title}
                 </a>
               ) : (
-                <h3 className="mt-2 text-base font-semibold text-slate-900">{item.title}</h3>
+                <h3 className="mt-2 text-base font-semibold text-white">{item.title}</h3>
               )}
 
               <div className="mt-3 flex flex-wrap gap-2">
                 {item.skills.map((skill) => (
                   <span
                     key={`${item.title}-${skill}`}
-                    className="rounded-full border border-slate-300 bg-white px-2 py-0.5 text-xs font-semibold text-slate-700"
+                    className="rounded-full border border-slate-300 bg-[#15233d] px-2 py-0.5 text-xs font-semibold text-white"
                   >
                     {skill}
                   </span>
@@ -169,17 +169,17 @@ export default function AIRoadmapPage() {
       </section>
 
       <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-white">
           Learning Advice
         </h2>
 
-        <p className="mt-3 text-sm leading-7 text-slate-700">
+        <p className="mt-3 text-sm leading-7 text-white">
           Focus on one phase at a time and complete the linked course projects.
           Keep weekly notes on what you built, what failed, and what you improved.
           This creates portfolio proof, not just course completion certificates.
         </p>
 
-        <p className="mt-3 text-sm leading-7 text-slate-700">
+        <p className="mt-3 text-sm leading-7 text-white">
           Use this roadmap for educational guidance only. Final hiring outcomes depend on your project quality, interview performance, and market demand.
         </p>
       </section>

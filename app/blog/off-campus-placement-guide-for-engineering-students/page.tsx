@@ -84,19 +84,19 @@ export default function OffCampusPlacementGuidePage() {
       />
 
       <section className="rounded-3xl border border-orange-100 bg-gradient-to-br from-orange-50 via-white to-amber-50 p-6 shadow-sm sm:p-8">
-        <div className="inline-flex rounded-full border border-orange-100 bg-white px-3 py-1 text-sm font-medium text-orange-700">
+        <div className="inline-flex rounded-full border border-orange-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-orange-700">
           Off-campus engineering jobs
         </div>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
           Off-Campus Placement Guide for Engineering Students
         </h1>
-        <p className="mt-4 text-base leading-7 text-slate-700 sm:text-lg">
+        <p className="mt-4 text-base leading-7 text-white sm:text-lg">
           Not getting placed in college can feel personal, but it is usually a market and preparation problem, not a permanent verdict on your career. Students who recover well do three things: they stop waiting for campus systems to save them, they build evidence that they can do the job, and they apply in a focused way instead of spamming the same resume everywhere.
         </p>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+        <div className="rounded-3xl border border-emerald-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-emerald-950">Who should read this first</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
             <li>Final-year students with no offer yet.</li>
@@ -105,7 +105,7 @@ export default function OffCampusPlacementGuidePage() {
             <li>Parents who want a practical recovery plan after rejection.</li>
           </ul>
         </div>
-        <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+        <div className="rounded-3xl border border-rose-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-rose-950">What to avoid immediately</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
             <li>Doing nothing for weeks after one rejection cycle.</li>
@@ -116,9 +116,9 @@ export default function OffCampusPlacementGuidePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">First principle: off-campus hiring rewards proof, not only potential</h2>
-        <div className="mt-4 space-y-4 text-sm leading-7 text-slate-600 sm:text-base">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">First principle: off-campus hiring rewards proof, not only potential</h2>
+        <div className="mt-4 space-y-4 text-sm leading-7 text-white sm:text-base">
           <p>
             On campus, a company may interview students partly because the college already filtered the batch. Off campus, you have to earn attention. That means your resume, portfolio, GitHub, LinkedIn, internship work, project depth, and referrals matter more.
           </p>
@@ -128,36 +128,36 @@ export default function OffCampusPlacementGuidePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">What to do in the first 30 days if you are unplaced</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">What to do in the first 30 days if you are unplaced</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <h3 className="font-bold text-slate-900">Week 1: Reset your documents</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <h3 className="font-bold text-white">Week 1: Reset your documents</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-white">
               <li>Rewrite your resume for one target role, not all roles.</li>
               <li>Clean your LinkedIn headline, summary, and project section.</li>
               <li>Create a tracker for applications, referrals, tests, and outcomes.</li>
             </ul>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <h3 className="font-bold text-slate-900">Week 2: Build proof</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <h3 className="font-bold text-white">Week 2: Build proof</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-white">
               <li>Finish one project that solves a real problem and can be demoed.</li>
               <li>Publish the code, screenshots, or explanation if relevant.</li>
               <li>Revise fundamentals expected for your role.</li>
             </ul>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <h3 className="font-bold text-slate-900">Week 3: Open job channels</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <h3 className="font-bold text-white">Week 3: Open job channels</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-white">
               <li>Apply through company career pages, LinkedIn Jobs, Naukri, Indeed, and startup job boards.</li>
               <li>Message alumni and seniors with a clear, respectful referral request.</li>
               <li>Search for internship-to-full-time and trainee roles, not only high-salary openings.</li>
             </ul>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <h3 className="font-bold text-slate-900">Week 4: Tighten interview readiness</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <h3 className="font-bold text-white">Week 4: Tighten interview readiness</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-white">
               <li>Practice five mock interviews and record weak answers.</li>
               <li>Revise your project explanations until they are simple and confident.</li>
               <li>Review rejection patterns and fix the one that repeats most.</li>
@@ -166,71 +166,71 @@ export default function OffCampusPlacementGuidePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Best off-campus channels for engineering students in India</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Best off-campus channels for engineering students in India</h2>
         <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200">
           <table className="min-w-full divide-y divide-slate-200 text-sm">
-            <thead className="bg-slate-50 text-left text-slate-700">
+            <thead className="bg-[#15233d] text-left text-white">
               <tr>
                 <th className="px-4 py-3 font-semibold">Channel</th>
                 <th className="px-4 py-3 font-semibold">Why it matters</th>
                 <th className="px-4 py-3 font-semibold">How to use it well</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 bg-white">
+            <tbody className="divide-y divide-slate-100 bg-[#15233d]">
               <tr>
-                <td className="px-4 py-3 font-semibold text-slate-900">Company career pages</td>
-                <td className="px-4 py-3 text-slate-600">Direct applications avoid noise from reposted jobs.</td>
-                <td className="px-4 py-3 text-slate-600">Track target companies weekly and apply early.</td>
+                <td className="px-4 py-3 font-semibold text-white">Company career pages</td>
+                <td className="px-4 py-3 text-white">Direct applications avoid noise from reposted jobs.</td>
+                <td className="px-4 py-3 text-white">Track target companies weekly and apply early.</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-semibold text-slate-900">LinkedIn</td>
-                <td className="px-4 py-3 text-slate-600">Useful for jobs, networking, and recruiter visibility.</td>
-                <td className="px-4 py-3 text-slate-600">Post credible project work and send thoughtful referral requests.</td>
+                <td className="px-4 py-3 font-semibold text-white">LinkedIn</td>
+                <td className="px-4 py-3 text-white">Useful for jobs, networking, and recruiter visibility.</td>
+                <td className="px-4 py-3 text-white">Post credible project work and send thoughtful referral requests.</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-semibold text-slate-900">Naukri and Indeed</td>
-                <td className="px-4 py-3 text-slate-600">Large volume, especially for entry-level and support roles.</td>
-                <td className="px-4 py-3 text-slate-600">Use role filters carefully and refresh profile keywords honestly.</td>
+                <td className="px-4 py-3 font-semibold text-white">Naukri and Indeed</td>
+                <td className="px-4 py-3 text-white">Large volume, especially for entry-level and support roles.</td>
+                <td className="px-4 py-3 text-white">Use role filters carefully and refresh profile keywords honestly.</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-semibold text-slate-900">Alumni and seniors</td>
-                <td className="px-4 py-3 text-slate-600">Referrals can improve response rates.</td>
-                <td className="px-4 py-3 text-slate-600">Ask only after your resume and profile are ready.</td>
+                <td className="px-4 py-3 font-semibold text-white">Alumni and seniors</td>
+                <td className="px-4 py-3 text-white">Referrals can improve response rates.</td>
+                <td className="px-4 py-3 text-white">Ask only after your resume and profile are ready.</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-semibold text-slate-900">Startups and internships</td>
-                <td className="px-4 py-3 text-slate-600">Faster entry for students who need experience.</td>
-                <td className="px-4 py-3 text-slate-600">Evaluate mentorship, work quality, and conversion potential.</td>
+                <td className="px-4 py-3 font-semibold text-white">Startups and internships</td>
+                <td className="px-4 py-3 text-white">Faster entry for students who need experience.</td>
+                <td className="px-4 py-3 text-white">Evaluate mentorship, work quality, and conversion potential.</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">How to make your profile stronger without wasting time</h2>
-        <div className="mt-4 space-y-5 text-sm leading-7 text-slate-600 sm:text-base">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">How to make your profile stronger without wasting time</h2>
+        <div className="mt-4 space-y-5 text-sm leading-7 text-white sm:text-base">
           <div>
-            <h3 className="font-bold text-slate-900">Choose one job family</h3>
+            <h3 className="font-bold text-white">Choose one job family</h3>
             <p className="mt-2">
               Pick a lane such as software developer, data analyst, QA engineer, embedded systems trainee, design engineer, or support engineer. A focused profile is easier to explain and easier to match with openings.
             </p>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900">Build one interview-worthy project</h3>
+            <h3 className="font-bold text-white">Build one interview-worthy project</h3>
             <p className="mt-2">
               Recruiters do not need ten shallow mini-projects. They need evidence that you can define a problem, make decisions, use tools correctly, and explain results.
             </p>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900">Use internships and freelance work strategically</h3>
+            <h3 className="font-bold text-white">Use internships and freelance work strategically</h3>
             <p className="mt-2">
               A small but real work experience can be more useful than another generic certificate. If you take a freelance or internship role, document outcomes and what you learned.
             </p>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900">Keep applying, but review pattern failures</h3>
+            <h3 className="font-bold text-white">Keep applying, but review pattern failures</h3>
             <p className="mt-2">
               If you get no calls, the issue is usually resume, targeting, or visibility. If you get calls but fail tests, the issue is skill depth or speed. If you clear tests but fail interviews, the issue is explanation, confidence, or fundamentals.
             </p>
@@ -248,9 +248,9 @@ export default function OffCampusPlacementGuidePage() {
         </ul>
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Trust and verification note</h2>
-        <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Trust and verification note</h2>
+        <p className="mt-3 text-sm leading-7 text-white sm:text-base">
           Job openings, fresher hiring patterns, salary ranges, and recruitment tests change quickly. Students should verify job descriptions, compensation, work location, bond terms, and company legitimacy from official employer pages before accepting any opportunity.
         </p>
         <div className="mt-5">
@@ -263,15 +263,15 @@ export default function OffCampusPlacementGuidePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Frequently asked questions</h2>
         <div className="mt-5 space-y-3">
           {faqs.map((faq) => (
-            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <summary className="cursor-pointer text-sm font-semibold text-slate-900 sm:text-base">
+            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-[#15233d] p-4">
+              <summary className="cursor-pointer text-sm font-semibold text-white sm:text-base">
                 {faq.q}
               </summary>
-              <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{faq.a}</p>
+              <p className="mt-3 text-sm leading-7 text-white sm:text-base">{faq.a}</p>
             </details>
           ))}
         </div>
@@ -286,7 +286,7 @@ export default function OffCampusPlacementGuidePage() {
           <Link href="/blog/how-to-prepare-for-campus-placement-during-engineering" className="rounded-xl bg-orange-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-orange-700">
             Read Campus Placement Guide
           </Link>
-          <Link href="/blog/global-job-search-guide-for-engineering-students" className="rounded-xl border border-orange-200 bg-white px-5 py-3 text-center text-sm font-semibold text-orange-700 hover:bg-orange-100">
+          <Link href="/blog/global-job-search-guide-for-engineering-students" className="rounded-xl border border-orange-200 bg-[#15233d] px-5 py-3 text-center text-sm font-semibold text-orange-700 hover:bg-orange-100">
             Read Global Job Search Guide
           </Link>
         </div>

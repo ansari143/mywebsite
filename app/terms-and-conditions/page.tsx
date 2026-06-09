@@ -32,39 +32,39 @@ export default function TermsAndConditionsPage() {
   };
 
   return (
-    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-600]:text-slate-300">
+    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.bg-[#15233d]]:bg-slate-900 dark:[&_.text-white]:text-slate-100 dark:[&_.text-white]:text-slate-300">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(termsSchema) }}
       />
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">
           Terms & Conditions
         </h1>
 
-        <div className="mt-6 space-y-5 text-sm leading-7 text-slate-600 sm:text-base">
+        <div className="mt-6 space-y-5 text-sm leading-7 text-white sm:text-base">
 
   <p>
     By accessing or using Nishaglobal Education, you agree to these Terms & Conditions.
     If you do not agree with any part of these terms, please discontinue use of the website.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Purpose of the Website</h2>
+  <h2 className="font-semibold text-white">Purpose of the Website</h2>
   <p>
     Nishaglobal Education is a global career guidance platform providing career tests,
     study abroad information, educational resources, blog articles, and skill-based content.
     The platform is designed for informational and educational purposes only.
   </p>
 
-  <h2 className="font-semibold text-slate-900">No Professional Advice</h2>
+  <h2 className="font-semibold text-white">No Professional Advice</h2>
   <p>
     The content provided on this website does not constitute professional, legal, financial,
     immigration, or academic counseling advice. Users should always verify information
     from official sources or consult qualified professionals before making decisions.
   </p>
 
-  <h2 className="font-semibold text-slate-900">No Guarantee of Outcome</h2>
+  <h2 className="font-semibold text-white">No Guarantee of Outcome</h2>
   <p>
     All content including career tests, recommendations, country guides, eligibility criteria,
     fee estimates, salary examples, scholarships, and blog content is provided for guidance only.
@@ -78,82 +78,82 @@ export default function TermsAndConditionsPage() {
     <li>Licensing or certification success</li>
   </ul>
 
-  <h2 className="font-semibold text-slate-900">User Responsibility</h2>
+  <h2 className="font-semibold text-white">User Responsibility</h2>
   <p>
     Users are responsible for verifying all critical information through official sources
     such as universities, government websites, embassies, and authorized institutions
     before making academic, financial, or career decisions.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Use of Career Tests and Content</h2>
+  <h2 className="font-semibold text-white">Use of Career Tests and Content</h2>
   <p>
     Career tests and recommendations are designed to provide general insights based on user input.
     These results are not definitive evaluations and should not be treated as guaranteed outcomes.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Blog and Content Usage</h2>
+  <h2 className="font-semibold text-white">Blog and Content Usage</h2>
   <p>
     Blog articles, guides, and educational content are intended to provide general awareness.
     Content may not always reflect the latest policy changes or personal circumstances.
   </p>
 
-  <h2 className="font-semibold text-slate-900">User Conduct</h2>
+  <h2 className="font-semibold text-white">User Conduct</h2>
   <p>
     Users agree not to misuse the website, attempt unauthorized access, submit false information,
     or engage in activities that may harm the platform or other users.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Global Use</h2>
+  <h2 className="font-semibold text-white">Global Use</h2>
   <p>
     This website is accessible worldwide. Users are responsible for complying with local laws,
     regulations, and eligibility requirements in their respective countries.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Contact and Communication</h2>
+  <h2 className="font-semibold text-white">Contact and Communication</h2>
   <p>
     When you submit information through forms or email, you agree that we may use your details
     to respond to enquiries or provide guidance. This does not establish any formal advisory,
     consulting, or contractual relationship.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Accuracy of Information</h2>
+  <h2 className="font-semibold text-white">Accuracy of Information</h2>
   <p>
     While we aim to provide accurate and useful information, requirements, fees, visa rules,
     and career opportunities may change over time. We do not guarantee completeness or accuracy at all times.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Advertisements and Third-Party Content</h2>
+  <h2 className="font-semibold text-white">Advertisements and Third-Party Content</h2>
   <p>
     The website may display advertisements or sponsored content (including Google AdSense).
     These do not represent endorsements, guarantees, or official partnerships unless explicitly stated.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Intellectual Property</h2>
+  <h2 className="font-semibold text-white">Intellectual Property</h2>
   <p>
     All content including text, design, branding, and educational materials belongs to Nishaglobal Education.
     Unauthorized reproduction, distribution, or copying is prohibited.
   </p>
 
-  <h2 className="font-semibold text-slate-900">External Links</h2>
+  <h2 className="font-semibold text-white">External Links</h2>
   <p>
     The website may include links to external websites. We are not responsible for the content,
     policies, or services of third-party platforms.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Limitation of Liability</h2>
+  <h2 className="font-semibold text-white">Limitation of Liability</h2>
   <p>
     Nishaglobal Education is not liable for any direct or indirect loss resulting from
     reliance on website content, including but not limited to application outcomes,
     visa decisions, financial losses, or third-party actions.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Changes to Terms</h2>
+  <h2 className="font-semibold text-white">Changes to Terms</h2>
   <p>
     These Terms & Conditions may be updated periodically. Continued use of the website
     indicates acceptance of any updates.
   </p>
 
-  <h2 className="font-semibold text-slate-900">Contact</h2>
+  <h2 className="font-semibold text-white">Contact</h2>
           <p>
             For any questions regarding these terms, please contact:
             <a className="ml-1 font-medium text-blue-700 hover:underline" href="mailto:nishaglobaleducation@gmail.com">nishaglobaleducation@gmail.com</a>

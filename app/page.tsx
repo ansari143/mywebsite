@@ -165,22 +165,22 @@ export default function HomePage() {
       <section className="rounded-3xl border border-violet-200 bg-gradient-to-br from-violet-50 via-white to-cyan-50 p-6 shadow-sm sm:p-8 lg:p-10 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-4xl">
-            <div className="inline-flex rounded-full border border-violet-200 bg-white px-3 py-1 text-sm font-medium text-violet-700 dark:border-violet-400/50 dark:bg-slate-800 dark:text-violet-200">
+            <div className="inline-flex rounded-full border border-violet-200 bg-[#15233d] px-3 py-1 text-sm font-medium text-violet-700 dark:border-violet-400/50 dark:bg-slate-800 dark:text-violet-200">
               Learn AI skills for every career role with career guidance for students worldwide
             </div>
 
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl dark:text-slate-100">
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl dark:text-slate-100">
               Learn AI skills for every career role
             </h2>
 
-            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg dark:text-slate-300">
+            <p className="mt-4 text-base leading-7 text-white sm:text-lg dark:text-slate-300">
               Whether you are a developer, QA engineer, DevOps professional, business analyst, project manager, or product manager, explore practical AI roadmaps that help you transition from traditional work to AI-driven execution.
             </p>
 
-            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700 dark:text-slate-300">
-              <span className="rounded-full bg-white px-3 py-1 shadow-sm dark:bg-slate-800">AI Engineer roadmap</span>
-              <span className="rounded-full bg-white px-3 py-1 shadow-sm dark:bg-slate-800">AI Agents learning path</span>
-              <span className="rounded-full bg-white px-3 py-1 shadow-sm dark:bg-slate-800">Role-based transition plans</span>
+            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-white dark:text-slate-300">
+              <span className="rounded-full bg-[#15233d] px-3 py-1 shadow-sm dark:bg-slate-800">AI Engineer roadmap</span>
+              <span className="rounded-full bg-[#15233d] px-3 py-1 shadow-sm dark:bg-slate-800">AI Agents learning path</span>
+              <span className="rounded-full bg-[#15233d] px-3 py-1 shadow-sm dark:bg-slate-800">Role-based transition plans</span>
             </div>
           </div>
 
@@ -223,18 +223,18 @@ export default function HomePage() {
             desc: "Learn in-demand skills like AI basics, Python programming, and data analysis through beginner-friendly tutorials and projects that boost employability.",
           },
         ].map((item) => (
-          <div key={item.title} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-            <p className="font-semibold text-gray-900">{item.title}</p>
-            <p className="mt-2 text-sm leading-6 text-gray-600">{item.desc}</p>
+          <div key={item.title} className="rounded-2xl border border-gray-200 bg-[#15233d] p-6 shadow-sm">
+            <p className="font-semibold text-white">{item.title}</p>
+            <p className="mt-2 text-sm leading-6 text-white">{item.desc}</p>
           </div>
         ))}
       </section>
 
       <section className="grid gap-6 lg:grid-cols-3">
         {keyJourneys.map((item) => (
-          <div key={item.title} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-            <h2 className="text-2xl font-bold text-slate-900">{item.title}</h2>
-            <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
+          <div key={item.title} className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+            <h2 className="text-2xl font-bold text-white">{item.title}</h2>
+            <p className="mt-3 text-sm leading-7 text-white sm:text-base">{item.description}</p>
             <Link
               href={item.href}
               className="site-btn-secondary mt-5 px-4 py-2 text-sm"
@@ -246,12 +246,12 @@ export default function HomePage() {
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-          <div className="inline-flex rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700">
+        <div className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+          <div className="inline-flex rounded-full border border-slate-700 bg-[#15233d] px-3 py-1 text-sm font-medium text-emerald-700">
             Popular student routes
           </div>
 
-          <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+          <h2 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl">
             Start with the most searched tests on your platform
           </h2>
 
@@ -260,10 +260,10 @@ export default function HomePage() {
               <Link
                 key={item.title}
                 href={item.href}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
+                className="rounded-2xl border border-slate-200 bg-[#15233d] p-5 transition hover:-translate-y-0.5 hover:shadow-md"
               >
-                <p className="font-semibold text-slate-900">{item.title}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{item.description}</p>
+                <p className="font-semibold text-white">{item.title}</p>
+                <p className="mt-2 text-sm leading-6 text-white">{item.description}</p>
                 <span className="mt-3 inline-block text-sm font-medium text-blue-700">
                   Open test →
                 </span>
@@ -272,18 +272,18 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-          <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+        <div className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+          <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
             Practice Tests Section
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl">
+              <h2 className="mt-4 text-2xl font-bold text-white sm:text-3xl">
                 Practice Tests to build real confidence
               </h2>
 
-              <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
+              <p className="mt-2 max-w-3xl text-sm leading-7 text-white sm:text-base">
                 Students can now practice IELTS, TOEFL, and engineering entrance questions with instant scoring,
                 detailed explanations, and topic-wise improvement tracking.
               </p>
@@ -300,12 +300,12 @@ export default function HomePage() {
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <Link
               href="/practice-tests/ielts"
-              className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
+              className="rounded-2xl border border-slate-200 bg-[#15233d] p-5 transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <p className="text-lg font-semibold text-slate-900">
+              <p className="text-lg font-semibold text-white">
                 IELTS Practice Tests
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <p className="mt-2 text-sm leading-6 text-white">
                 Improve grammar, vocabulary, reading, and speaking with structured IELTS practice sets.
               </p>
               <span className="mt-3 inline-block text-sm font-medium text-blue-700">
@@ -315,12 +315,12 @@ export default function HomePage() {
 
             <Link
               href="/practice-tests/toefl"
-              className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
+              className="rounded-2xl border border-slate-200 bg-[#15233d] p-5 transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <p className="text-lg font-semibold text-slate-900">
+              <p className="text-lg font-semibold text-white">
                 TOEFL Practice Tests
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <p className="mt-2 text-sm leading-6 text-white">
                 Train Reading, Listening, Speaking, Writing, and integrated tasks with TOEFL-style section practice.
               </p>
               <span className="mt-3 inline-block text-sm font-medium text-blue-700">
@@ -330,12 +330,12 @@ export default function HomePage() {
 
             <Link
               href="/practice-tests/engineering-entrance"
-              className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
+              className="rounded-2xl border border-slate-200 bg-[#15233d] p-5 transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <p className="text-lg font-semibold text-slate-900">
+              <p className="text-lg font-semibold text-white">
                 Engineering Entrance Practice
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <p className="mt-2 text-sm leading-6 text-white">
                 Practice math, physics, chemistry, and logical reasoning questions designed for beginners.
               </p>
               <span className="mt-3 inline-block text-sm font-medium text-blue-700">
@@ -347,27 +347,27 @@ export default function HomePage() {
       </section>
 
       <section className="site-section">
-        <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+        <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
           How students should use the website
         </div>
         <div className="mt-6">
-          <ol className="space-y-4 text-sm leading-7 text-slate-600 sm:text-base">
+          <ol className="space-y-4 text-sm leading-7 text-white sm:text-base">
             <li>
-              <span className="font-semibold text-slate-900">Step 1:</span> Take a test based on your interest.
+              <span className="font-semibold text-white">Step 1:</span> Take a test based on your interest.
             </li>
             <li>
-              <span className="font-semibold text-slate-900">Step 2:</span> Read the matching stream or country guide.
+              <span className="font-semibold text-white">Step 2:</span> Read the matching stream or country guide.
             </li>
             <li>
-              <span className="font-semibold text-slate-900">Step 3:</span> Use blogs and skills pages to plan your next move.
+              <span className="font-semibold text-white">Step 3:</span> Use blogs and skills pages to plan your next move.
             </li>
             <li>
-              <span className="font-semibold text-slate-900">Step 4:</span> Verify final admissions, exams, visa, and fee details from official sources.
+              <span className="font-semibold text-white">Step 4:</span> Verify final admissions, exams, visa, and fee details from official sources.
             </li>
           </ol>
 
-          <div className="mt-6 rounded-2xl border border-amber-100 bg-amber-50 p-4 text-sm leading-7 text-slate-700">
-            <span className="font-semibold text-slate-900">Important:</span> The website should guide students clearly, but final career and study decisions should always be cross-checked with official sources, institutions, and exam authorities.
+          <div className="mt-6 rounded-2xl border border-amber-100 bg-amber-50 p-4 text-sm leading-7 text-white">
+            <span className="font-semibold text-white">Important:</span> The website should guide students clearly, but final career and study decisions should always be cross-checked with official sources, institutions, and exam authorities.
           </div>
         </div>
       </section>
@@ -375,8 +375,8 @@ export default function HomePage() {
       <section className="site-section">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-slate-900">Explore by destination</h2>
-            <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
+            <h2 className="text-2xl font-bold text-white">Explore by destination</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-white sm:text-base">
                 Choose your study destination based on budget, career goals, and lifestyle. Each guide includes visa timelines, scholarship tips, and success stories from students who&apos;ve studied there.
             </p>
           </div>
@@ -395,11 +395,11 @@ export default function HomePage() {
               href={item.href}
               className="rounded-2xl border border-slate-200 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <div className="flex items-center gap-2 text-lg font-semibold text-slate-900">
+              <div className="flex items-center gap-2 text-lg font-semibold text-white">
                 <span>{item.flag}</span>
                 <span>{item.name}</span>
               </div>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{item.text}</p>
+              <p className="mt-2 text-sm leading-6 text-white">{item.text}</p>
               <span className="mt-3 inline-block text-sm font-medium text-blue-700">Explore guide →</span>
             </Link>
           ))}
@@ -412,10 +412,10 @@ export default function HomePage() {
             <div className="inline-flex rounded-full border border-violet-100 bg-violet-50 px-3 py-1 text-sm font-medium text-violet-700">
               Integrated learning path
             </div>
-            <h2 className="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl">
+            <h2 className="mt-4 text-2xl font-bold text-white sm:text-3xl">
               From career test to job-ready: Your complete guidance roadmap
             </h2>
-            <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+            <p className="mt-3 text-sm leading-7 text-white sm:text-base">
               Start with a test, explore country options, read targeted blogs, and build skills—all in one connected experience designed for real student journeys.
             </p>
           </div>
@@ -440,8 +440,8 @@ export default function HomePage() {
       <section className="site-section">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-slate-900">Popular USA Career Guides</h2>
-            <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">
+            <h2 className="text-2xl font-bold text-white">Popular USA Career Guides</h2>
+            <p className="mt-2 text-sm leading-7 text-white sm:text-base">
               Most-read USA career blogs for students planning high-paying and future-ready pathways.
             </p>
           </div>
@@ -459,8 +459,8 @@ export default function HomePage() {
       <section className="rounded-3xl border border-gray-200 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-6 shadow-sm sm:p-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-slate-900">Study Abroad Guides</h2>
-            <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">
+            <h2 className="text-2xl font-bold text-white">Study Abroad Guides</h2>
+            <p className="mt-2 text-sm leading-7 text-white sm:text-base">
               Start with practical guides for study in USA planning, scholarships, and decision-ready roadmaps.
             </p>
           </div>
@@ -495,24 +495,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-6 text-center shadow-sm sm:p-8 lg:p-10">
-        <div className="inline-flex rounded-full border border-blue-100 bg-white px-3 py-1 text-sm font-medium text-blue-700">
+      <section className="rounded-3xl border border-gray-200 bg-gradient-to-br from-[#071226] via-[#0B1730] to-[#112240] p-6 text-center shadow-sm sm:p-8 lg:p-10">
+        <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
           Global student guidance 🌍
         </div>
 
-        <h1 className="mx-auto mt-4 max-w-5xl text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+        <h1 className="mx-auto mt-4 max-w-5xl text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
           Choose the right career path after 10th, 12th, or graduation — with guidance that fits students worldwide
         </h1>
 
-        <p className="mx-auto mt-4 max-w-4xl text-base leading-8 text-slate-600 sm:text-lg">
+        <p className="mx-auto mt-4 max-w-4xl text-base leading-8 text-white sm:text-lg">
           Unlike generic sites, Nishaglobal combines practical education guidance with global options, offering free tests, practical guides, and real student examples. Whether you&apos;re comparing pathways, preparing for admissions, or planning study abroad, get trustworthy guidance that saves time and reduces confusion.
         </p>
 
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-slate-700">
-          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Free career tests</span>
-          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Country-specific guidance</span>
-          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Global study options</span>
-          <span className="rounded-full bg-white px-3 py-1 shadow-sm">Practice + tests + skills</span>
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-white">
+          <span className="rounded-full bg-[#15233d] px-3 py-1 shadow-sm">Free career tests</span>
+          <span className="rounded-full bg-[#15233d] px-3 py-1 shadow-sm">Country-specific guidance</span>
+          <span className="rounded-full bg-[#15233d] px-3 py-1 shadow-sm">Global study options</span>
+          <span className="rounded-full bg-[#15233d] px-3 py-1 shadow-sm">Practice + tests + skills</span>
         </div>
 
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
@@ -538,12 +538,12 @@ export default function HomePage() {
       </section>
 
       <section className="site-section">
-        <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+        <h2 className="text-2xl font-bold text-white">Frequently asked questions</h2>
         <div className="mt-6 space-y-3">
           {faqs.map((faq) => (
-            <details key={faq.question} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <summary className="cursor-pointer text-sm font-semibold text-slate-900 sm:text-base">{faq.question}</summary>
-              <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{faq.answer}</p>
+            <details key={faq.question} className="rounded-2xl border border-slate-200 bg-[#15233d] p-4">
+              <summary className="cursor-pointer text-sm font-semibold text-white sm:text-base">{faq.question}</summary>
+              <p className="mt-3 text-sm leading-7 text-white sm:text-base">{faq.answer}</p>
             </details>
           ))}
         </div>

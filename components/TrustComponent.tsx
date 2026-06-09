@@ -15,8 +15,8 @@ export default function TrustComponent({
 }: TrustComponentProps) {
   return (
     <div className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm sm:p-8">
-      <h2 className="text-2xl font-bold text-slate-900 mb-4">Trust & Transparency</h2>
-      <div className="space-y-3 text-sm leading-7 text-slate-700">
+      <h2 className="text-2xl font-bold text-black mb-4">Trust & Transparency</h2>
+      <div className="space-y-3 text-sm leading-7 text-black">
         {author && (
           <p>
             <span className="font-semibold">Author:</span> {author}
@@ -34,7 +34,7 @@ export default function TrustComponent({
         )}
         {disclaimer && (
           <div className="mt-4 pt-4 border-t border-amber-200">
-            <p className="text-slate-600 italic">{disclaimer}</p>
+            <p className="text-black italic">{disclaimer}</p>
           </div>
         )}
       </div>

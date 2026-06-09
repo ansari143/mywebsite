@@ -37,38 +37,38 @@ export default async function StartPage({
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
-      <section className="rounded-3xl bg-white p-6 shadow-sm sm:p-8">
-        <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+      <section className="rounded-3xl bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
           Free career test • instant guidance
         </div>
 
         <div className="mt-4 flex items-start gap-4">
           <div className="text-4xl">{test.icon}</div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">{test.title}</h1>
-            <p className="mt-3 text-gray-600">{test.summary}</p>
+            <h1 className="text-2xl font-bold text-white sm:text-3xl">{test.title}</h1>
+            <p className="mt-3 text-white">{test.summary}</p>
           </div>
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl border bg-slate-50 p-4">
+          <div className="rounded-2xl border bg-[#15233d] p-4">
             <p className="text-xs uppercase tracking-wide text-slate-300">Questions</p>
-            <p className="mt-1 text-lg font-bold text-slate-900">{test.questions.length}</p>
+            <p className="mt-1 text-lg font-bold text-white">{test.questions.length}</p>
           </div>
-          <div className="rounded-2xl border bg-slate-50 p-4">
+          <div className="rounded-2xl border bg-[#15233d] p-4">
             <p className="text-xs uppercase tracking-wide text-slate-300">Estimated time</p>
-            <p className="mt-1 text-lg font-bold text-slate-900">~{test.durationMin} min</p>
+            <p className="mt-1 text-lg font-bold text-white">~{test.durationMin} min</p>
           </div>
-          <div className="rounded-2xl border bg-slate-50 p-4">
+          <div className="rounded-2xl border bg-[#15233d] p-4">
             <p className="text-xs uppercase tracking-wide text-slate-300">Result style</p>
-            <p className="mt-1 text-lg font-bold text-slate-900">Score + roadmap</p>
+            <p className="mt-1 text-lg font-bold text-white">Score + roadmap</p>
           </div>
         </div>
       </section>
 
-      <section className="rounded-3xl bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-xl font-bold text-slate-900">Before you begin</h2>
-        <ul className="mt-4 space-y-3 text-gray-700">
+      <section className="rounded-3xl bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-xl font-bold text-white">Before you begin</h2>
+        <ul className="mt-4 space-y-3 text-white">
           <li>• Answer honestly for the most useful guidance.</li>
           <li>• Choose the best answer from A, B, C, or D for each question.</li>
           <li>• You will get instant score-based guidance, topic-wise strengths, and practical next steps.</li>
@@ -77,7 +77,7 @@ export default async function StartPage({
 
         <div className="mt-6 flex flex-wrap gap-2">
           {test.bestFor.map((item) => (
-            <span key={item} className="rounded-full bg-blue-50 px-3 py-1 text-sm text-blue-700">
+            <span key={item} className="rounded-full bg-[#15233d] px-3 py-1 text-sm text-blue-700">
               {item}
             </span>
           ))}
@@ -92,7 +92,7 @@ export default async function StartPage({
           </Link>
           <Link
             href="/tests"
-            className="w-full rounded-xl border border-slate-300 px-5 py-3 text-center font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto"
+            className="w-full rounded-xl border border-slate-300 px-5 py-3 text-center font-semibold text-white hover:bg-[#15233d] sm:w-auto"
           >
             Back to All Tests
           </Link>

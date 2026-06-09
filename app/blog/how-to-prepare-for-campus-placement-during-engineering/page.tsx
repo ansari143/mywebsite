@@ -86,22 +86,22 @@ export default function CampusPlacementGuidePage() {
       />
 
       <section className="rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-cyan-50 p-6 shadow-sm sm:p-8">
-        <div className="inline-flex rounded-full border border-blue-100 bg-white px-3 py-1 text-sm font-medium text-blue-700">
+        <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
           Engineering placement guide
         </div>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
           How to Prepare for Campus Placement During Engineering
         </h1>
-        <p className="mt-4 text-base leading-7 text-slate-700 sm:text-lg">
+        <p className="mt-4 text-base leading-7 text-white sm:text-lg">
           Campus placement preparation is not a one-month activity. Students who usually perform best build their profile over time: they keep marks under control, learn role-relevant skills, practice aptitude and interviews, and avoid copying projects. This guide is for engineering students in India who want a high-probability placement strategy based on consistent preparation rather than luck.
         </p>
-        <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+        <p className="mt-4 text-sm leading-7 text-white sm:text-base">
           No preparation plan can guarantee a job in every market, but students can sharply improve their chances by preparing early, targeting the right roles, and improving after every rejection.
         </p>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+        <div className="rounded-3xl border border-emerald-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-emerald-950">Who should follow this guide</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
             <li>Second-year, third-year, and final-year engineering students targeting campus placements.</li>
@@ -110,7 +110,7 @@ export default function CampusPlacementGuidePage() {
             <li>Parents trying to understand what matters beyond marks.</li>
           </ul>
         </div>
-        <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+        <div className="rounded-3xl border border-rose-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-rose-950">Who should avoid weak shortcuts</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
             <li>Students depending only on last-minute placement coaching.</li>
@@ -121,9 +121,9 @@ export default function CampusPlacementGuidePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">The core rule: build for placement before placement season starts</h2>
-        <div className="mt-4 space-y-4 text-sm leading-7 text-slate-600 sm:text-base">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">The core rule: build for placement before placement season starts</h2>
+        <div className="mt-4 space-y-4 text-sm leading-7 text-white sm:text-base">
           <p>
             Many students make the same mistake. They spend most of engineering without a clear direction, then try to fix everything in the final semester. That usually leads to weak resumes, poor aptitude performance, interview anxiety, and random applications. The stronger approach is to build placement readiness in layers.
           </p>
@@ -133,39 +133,39 @@ export default function CampusPlacementGuidePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Semester-wise roadmap</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Semester-wise roadmap</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <h3 className="font-bold text-slate-900">First year</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <h3 className="font-bold text-white">First year</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-white">
               <li>Learn how placement works in your college: cutoff, branches, top recruiters, salary bands, and rejection rules.</li>
               <li>Build study discipline and avoid backlogs.</li>
               <li>Improve English communication and presentation comfort.</li>
               <li>Explore one technical track without rushing to master everything.</li>
             </ul>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <h3 className="font-bold text-slate-900">Second year</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <h3 className="font-bold text-white">Second year</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-white">
               <li>Choose a realistic role path such as software, data, core engineering, analytics, testing, or operations.</li>
               <li>Start aptitude, logical reasoning, and quantitative practice every week.</li>
               <li>Build one meaningful project with clear ownership.</li>
               <li>Join hackathons, labs, or technical clubs if they give real output.</li>
             </ul>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <h3 className="font-bold text-slate-900">Third year</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <h3 className="font-bold text-white">Third year</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-white">
               <li>Prepare seriously for coding rounds, technical interviews, and resume shortlisting.</li>
               <li>Get one internship, training outcome, or advanced project if possible.</li>
               <li>Start mock interviews and group discussion practice.</li>
               <li>Build a clean LinkedIn profile and connect with alumni.</li>
             </ul>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <h3 className="font-bold text-slate-900">Final year before drives</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <h3 className="font-bold text-white">Final year before drives</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-white">
               <li>Keep a shortlist of companies by role, eligibility, and salary.</li>
               <li>Revise projects and fundamentals until you can explain them clearly.</li>
               <li>Practice company-level tests under time pressure.</li>
@@ -175,66 +175,66 @@ export default function CampusPlacementGuidePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">What companies usually check on campus</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">What companies usually check on campus</h2>
         <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200">
           <table className="min-w-full divide-y divide-slate-200 text-sm">
-            <thead className="bg-slate-50 text-left text-slate-700">
+            <thead className="bg-[#15233d] text-left text-white">
               <tr>
                 <th className="px-4 py-3 font-semibold">Stage</th>
                 <th className="px-4 py-3 font-semibold">What gets evaluated</th>
                 <th className="px-4 py-3 font-semibold">What students should do</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 bg-white">
+            <tbody className="divide-y divide-slate-100 bg-[#15233d]">
               <tr>
-                <td className="px-4 py-3 font-semibold text-slate-900">Eligibility screen</td>
-                <td className="px-4 py-3 text-slate-600">CGPA, backlogs, branch, passing year, sometimes Class 10 and 12 marks</td>
-                <td className="px-4 py-3 text-slate-600">Know your eligibility early and avoid hidden disqualification risks.</td>
+                <td className="px-4 py-3 font-semibold text-white">Eligibility screen</td>
+                <td className="px-4 py-3 text-white">CGPA, backlogs, branch, passing year, sometimes Class 10 and 12 marks</td>
+                <td className="px-4 py-3 text-white">Know your eligibility early and avoid hidden disqualification risks.</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-semibold text-slate-900">Aptitude round</td>
-                <td className="px-4 py-3 text-slate-600">Quantitative ability, reasoning, verbal ability, speed, accuracy</td>
-                <td className="px-4 py-3 text-slate-600">Practice timed sets weekly and review mistakes by topic.</td>
+                <td className="px-4 py-3 font-semibold text-white">Aptitude round</td>
+                <td className="px-4 py-3 text-white">Quantitative ability, reasoning, verbal ability, speed, accuracy</td>
+                <td className="px-4 py-3 text-white">Practice timed sets weekly and review mistakes by topic.</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-semibold text-slate-900">Technical round</td>
-                <td className="px-4 py-3 text-slate-600">Coding, branch fundamentals, tools, projects, debugging, application logic</td>
-                <td className="px-4 py-3 text-slate-600">Revise fundamentals and learn to explain your own work simply.</td>
+                <td className="px-4 py-3 font-semibold text-white">Technical round</td>
+                <td className="px-4 py-3 text-white">Coding, branch fundamentals, tools, projects, debugging, application logic</td>
+                <td className="px-4 py-3 text-white">Revise fundamentals and learn to explain your own work simply.</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-semibold text-slate-900">HR or managerial round</td>
-                <td className="px-4 py-3 text-slate-600">Communication, motivation, integrity, teamwork, flexibility</td>
-                <td className="px-4 py-3 text-slate-600">Practice concise, truthful answers and avoid scripted exaggeration.</td>
+                <td className="px-4 py-3 font-semibold text-white">HR or managerial round</td>
+                <td className="px-4 py-3 text-white">Communication, motivation, integrity, teamwork, flexibility</td>
+                <td className="px-4 py-3 text-white">Practice concise, truthful answers and avoid scripted exaggeration.</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">High-probability preparation areas</h2>
-        <div className="mt-4 space-y-5 text-sm leading-7 text-slate-600 sm:text-base">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">High-probability preparation areas</h2>
+        <div className="mt-4 space-y-5 text-sm leading-7 text-white sm:text-base">
           <div>
-            <h3 className="font-bold text-slate-900">1. Resume that can survive shortlisting</h3>
+            <h3 className="font-bold text-white">1. Resume that can survive shortlisting</h3>
             <p className="mt-2">
               Keep it honest, compact, and role-focused. A campus resume should not read like a copy-paste template full of buzzwords. Projects, internship work, certifications, and achievements should connect to the role you want.
             </p>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900">2. Aptitude consistency</h3>
+            <h3 className="font-bold text-white">2. Aptitude consistency</h3>
             <p className="mt-2">
               Aptitude eliminates large numbers of students early. Even technically strong students lose opportunities because they ignore time pressure. Practice percentages, ratios, speed-distance, probability, logic puzzles, and verbal basics until your speed becomes dependable.
             </p>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900">3. Technical depth in one clear lane</h3>
+            <h3 className="font-bold text-white">3. Technical depth in one clear lane</h3>
             <p className="mt-2">
               A software candidate should know programming, data structures, DBMS, OOP, OS, and project design at an interview level. A core engineering candidate should know branch concepts, industrial applications, and practical problem solving. One clear lane is better than weak preparation across ten lanes.
             </p>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900">4. Interview communication</h3>
+            <h3 className="font-bold text-white">4. Interview communication</h3>
             <p className="mt-2">
               Interviewers are not only checking knowledge. They also watch clarity, honesty, listening, structure, and calmness. Students improve faster when they record mock answers and notice filler words, weak structure, or vague examples.
             </p>
@@ -253,9 +253,9 @@ export default function CampusPlacementGuidePage() {
         </ul>
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Trust and verification note</h2>
-        <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Trust and verification note</h2>
+        <p className="mt-3 text-sm leading-7 text-white sm:text-base">
           Placement eligibility rules, company test patterns, salary bands, and recruitment cycles vary by college and employer. Students should verify campus policy, recruiter eligibility, and offer terms directly from their training and placement cell or the employer before making decisions.
         </p>
         <div className="mt-5">
@@ -268,51 +268,51 @@ export default function CampusPlacementGuidePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Simple weekly plan students can actually follow</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Simple weekly plan students can actually follow</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <p className="text-sm font-semibold text-slate-900">Three technical sessions</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <p className="text-sm font-semibold text-white">Three technical sessions</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               One for fundamentals, one for practice, and one for project work or revision.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <p className="text-sm font-semibold text-slate-900">Two aptitude sessions</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <p className="text-sm font-semibold text-white">Two aptitude sessions</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               One speed round and one analysis round where you classify mistakes by topic.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <p className="text-sm font-semibold text-slate-900">One communication session</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <p className="text-sm font-semibold text-white">One communication session</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               Practice introduction, project explanation, and HR answers out loud.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-5">
-            <p className="text-sm font-semibold text-slate-900">One review session</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-5">
+            <p className="text-sm font-semibold text-white">One review session</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               Update resume, track company timelines, and fix one weak area from the week.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Frequently asked questions</h2>
         <div className="mt-5 space-y-3">
           {faqs.map((faq) => (
-            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <summary className="cursor-pointer text-sm font-semibold text-slate-900 sm:text-base">
+            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-[#15233d] p-4">
+              <summary className="cursor-pointer text-sm font-semibold text-white sm:text-base">
                 {faq.q}
               </summary>
-              <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{faq.a}</p>
+              <p className="mt-3 text-sm leading-7 text-white sm:text-base">{faq.a}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <section className="rounded-3xl border border-blue-200 bg-blue-50 p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-blue-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
         <h2 className="text-2xl font-bold text-blue-950">Next step</h2>
         <p className="mt-3 text-sm leading-7 text-blue-900 sm:text-base">
           If your college placement season is already close, start with resume cleanup, aptitude practice, project revision, and five mock HR answers this week. Small disciplined improvements usually outperform panic preparation.
@@ -321,7 +321,7 @@ export default function CampusPlacementGuidePage() {
           <Link href="/blog/off-campus-placement-guide-for-engineering-students" className="rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700">
             Read Off-Campus Strategy
           </Link>
-          <Link href="/blog/global-job-search-guide-for-engineering-students" className="rounded-xl border border-blue-200 bg-white px-5 py-3 text-center text-sm font-semibold text-blue-700 hover:bg-blue-50">
+          <Link href="/blog/global-job-search-guide-for-engineering-students" className="rounded-xl border border-blue-200 bg-[#15233d] px-5 py-3 text-center text-sm font-semibold text-blue-700 hover:bg-[#15233d]">
             Read Global Job Search Guide
           </Link>
         </div>

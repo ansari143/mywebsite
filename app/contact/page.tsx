@@ -86,7 +86,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
         <h2 className="text-2xl font-bold text-white">How we support you</h2>
         <p className="mt-3 text-sm leading-7 text-slate-200">
           Our team reviews messages from students and parents, and we respond within 3 working days. We do not share your personal details without consent.
@@ -300,7 +300,7 @@ export default function ContactPage() {
             </p>
           </section>
 
-          <section className="rounded-3xl border border-emerald-100 bg-emerald-50 p-6">
+          <section className="rounded-3xl border border-slate-700 bg-[#15233d] p-6">
             <h2 className="text-lg font-semibold text-slate-300">
               What You Can Contact Us About
             </h2>
@@ -316,10 +316,10 @@ export default function ContactPage() {
           </section>
 
           <section className="rounded-3xl border border-purple-100 bg-purple-50 p-6">
-            <h2 className="text-lg font-semibold text-white">
+            <h2 className="text-lg font-semibold text-black">
               Popular Countries
             </h2>
-            <ul className="mt-3 space-y-2 text-sm leading-7 text-slate-300">
+            <ul className="mt-3 space-y-2 text-sm leading-7 text-black-300">
               <li>• USA</li>
               <li>• Canada</li>
               <li>• UK</li>
@@ -330,17 +330,17 @@ export default function ContactPage() {
           </section>
 
           <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6">
-            <h2 className="text-lg font-semibold text-white">
+            <h2 className="text-lg font-semibold text-black">
               Before You Message
             </h2>
-            <p className="mt-3 text-sm leading-7 text-slate-300">
+            <p className="mt-3 text-sm leading-7 text-black-300">
               To help us understand your question better, you can mention your
               current class or qualification, country of interest, preferred
               course or career, and the guidance you need.
             </p>
           </section>
 
-          <section className="rounded-3xl border border-gray-200 bg-slate-50 p-6">
+          <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6">
             <h2 className="text-lg font-semibold text-white">
               Important Note
             </h2>
@@ -353,7 +353,7 @@ export default function ContactPage() {
               decisions.
             </p>
           </section>
-          <section className="rounded-3xl border border-indigo-100 bg-indigo-50 p-6">
+          <section className="rounded-3xl border border-indigo-100 bg-[#15233d] p-6">
   <h2 className="text-lg font-semibold text-white">
     Explore Important Pages
   </h2>

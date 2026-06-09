@@ -47,13 +47,13 @@ export default function BlogIndexClient({
   return (
     <div className="space-y-10">
       <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
-        <p className="inline-flex rounded-full border border-blue-100 bg-white px-3 py-1 text-sm font-semibold text-blue-700 dark:border-blue-700 dark:bg-blue-900/30 dark:text-blue-200">
+        <p className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-semibold text-blue-700 dark:border-blue-700 dark:bg-blue-900/30 dark:text-blue-200">
           Nishaglobal Education Blog
         </p>
-        <h1 className="mt-4 max-w-4xl text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-slate-100">
+        <h1 className="mt-4 max-w-4xl text-3xl font-bold tracking-tight text-white sm:text-4xl dark:text-slate-100">
           Study in USA, USA Careers, AI Careers, Scholarships, and Student Guidance
         </h1>
-        <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-white sm:text-base dark:text-slate-300">
           Read practical guides built for students, parents, and international learners. Every blog is designed to help you make better decisions with real steps, clear comparisons, and action-ready roadmaps.
         </p>
 
@@ -74,14 +74,14 @@ export default function BlogIndexClient({
       </section>
 
       {featured.map((post) => (
-        <section key={post.slug} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
+        <section key={post.slug} className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:items-center">
             <div>
               <p className="inline-flex rounded-full bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-800 dark:bg-amber-900/30 dark:text-amber-200">
                 Featured Blog
               </p>
-              <h2 className="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl dark:text-slate-100">{post.title}</h2>
-              <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">{post.description}</p>
+              <h2 className="mt-4 text-2xl font-bold text-white sm:text-3xl dark:text-slate-100">{post.title}</h2>
+              <p className="mt-3 text-sm leading-7 text-white sm:text-base dark:text-slate-300">{post.description}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link href={`/blog/${post.slug}`} className="site-btn-primary">
                   Read Featured Guide
@@ -96,10 +96,10 @@ export default function BlogIndexClient({
         </section>
       ))}
 
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Find the right blog quickly</h2>
+      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
+        <h2 className="text-2xl font-bold text-white dark:text-slate-100">Find the right blog quickly</h2>
         <div className="mt-5 grid gap-4">
-          <label className="text-sm font-semibold text-slate-700 dark:text-slate-300" htmlFor="blog-search">
+          <label className="text-sm font-semibold text-white dark:text-slate-300" htmlFor="blog-search">
             Search blogs by title, topic, or keyword
           </label>
           <input
@@ -108,7 +108,7 @@ export default function BlogIndexClient({
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search: study in USA, AI careers, scholarships, SAT, IELTS..."
-            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none ring-blue-500 placeholder:text-slate-300 focus:ring-2 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-300"
+            className="w-full rounded-xl border border-slate-300 bg-[#15233d] px-4 py-3 text-sm text-slate-800 outline-none ring-blue-500 placeholder:text-slate-300 focus:ring-2 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-300"
           />
           <CategoryFilter
             categories={[...BLOG_CATEGORIES]}
@@ -118,8 +118,8 @@ export default function BlogIndexClient({
         </div>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Latest Blogs</h2>
+      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
+        <h2 className="text-2xl font-bold text-white dark:text-slate-100">Latest Blogs</h2>
         <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {latest.map((post) => (
             <BlogCard key={`latest-${post.slug}`} post={post} />
@@ -127,8 +127,8 @@ export default function BlogIndexClient({
         </div>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Popular in USA</h2>
+      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
+        <h2 className="text-2xl font-bold text-white dark:text-slate-100">Popular in USA</h2>
         <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {popularUSA.map((post) => (
             <BlogCard key={`usa-${post.slug}`} post={post} />
@@ -136,9 +136,9 @@ export default function BlogIndexClient({
         </div>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Browse all blogs</h2>
-        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
+        <h2 className="text-2xl font-bold text-white dark:text-slate-100">Browse all blogs</h2>
+        <p className="mt-2 text-sm text-white dark:text-slate-300">
           Showing {filteredPosts.length} of {blogPosts.length} articles.
         </p>
         <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">

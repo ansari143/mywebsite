@@ -14,21 +14,21 @@ export default function TrendingBlogs({
   const posts = getLatestBlogs(limit);
 
   return (
-    <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+    <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+          <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
             Blog
           </div>
-          <h2 className="mt-3 text-2xl font-bold text-slate-900">{title}</h2>
-          <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">
+          <h2 className="mt-3 text-2xl font-bold text-white">{title}</h2>
+          <p className="mt-2 text-sm leading-7 text-white sm:text-base">
             Read practical articles on global careers, study abroad, and future-ready opportunities.
           </p>
         </div>
 
         <Link
           href="/blog"
-          className="hidden rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:inline-block"
+          className="hidden rounded-xl border border-slate-300 bg-[#15233d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#15233d] sm:inline-block"
         >
           View All
         </Link>
@@ -43,7 +43,7 @@ export default function TrendingBlogs({
       <div className="mt-5 sm:hidden">
         <Link
           href="/blog"
-          className="inline-block rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+          className="inline-block rounded-xl border border-slate-300 bg-[#15233d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#15233d]"
         >
           View All Articles
         </Link>

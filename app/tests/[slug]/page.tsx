@@ -61,37 +61,37 @@ export default async function StreamDetail({
   ];
 
   return (
-    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.bg-gray-100]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-300 dark:[&_.text-slate-600]:text-slate-300 dark:[&_.text-gray-700]:text-slate-300 dark:[&_.text-gray-600]:text-slate-300 dark:[&_.border-emerald-200]:border-emerald-700 dark:[&_.bg-emerald-50]:bg-emerald-900/20 dark:[&_.text-emerald-900]:text-slate-300 dark:[&_.border-rose-200]:border-rose-700 dark:[&_.bg-rose-50]:bg-rose-900/20 dark:[&_.text-rose-900]:text-slate-300">
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-[#15233d]]:bg-slate-900 dark:[&_.bg-[#15233d]]:bg-slate-800 dark:[&_.bg-gray-100]:bg-slate-800 dark:[&_.text-white]:text-slate-100 dark:[&_.text-white]:text-slate-300 dark:[&_.text-white]:text-slate-300 dark:[&_.text-gray-700]:text-slate-300 dark:[&_.text-white]:text-slate-300 dark:[&_.border-emerald-200]:border-emerald-700 dark:[&_.bg-[#15233d]]:bg-emerald-900/20 dark:[&_.text-emerald-900]:text-slate-300 dark:[&_.border-rose-200]:border-rose-700 dark:[&_.bg-[#15233d]]:bg-rose-900/20 dark:[&_.text-rose-900]:text-slate-300">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
           Free career assessment
         </div>
         <div className="mt-4 flex items-start gap-4">
           <div className="text-4xl">{test.icon}</div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">{test.title}</h1>
-            <p className="mt-3 text-gray-600">{test.summary}</p>
+            <h1 className="text-2xl font-bold text-white sm:text-3xl">{test.title}</h1>
+            <p className="mt-3 text-white">{test.summary}</p>
           </div>
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl border bg-slate-50 p-4">
+          <div className="rounded-2xl border bg-[#15233d] p-4">
             <p className="text-xs uppercase tracking-wide text-slate-300">Questions</p>
-            <p className="mt-1 text-lg font-bold text-slate-900">{test.questions.length}</p>
+            <p className="mt-1 text-lg font-bold text-white">{test.questions.length}</p>
           </div>
-          <div className="rounded-2xl border bg-slate-50 p-4">
+          <div className="rounded-2xl border bg-[#15233d] p-4">
             <p className="text-xs uppercase tracking-wide text-slate-300">Estimated time</p>
-            <p className="mt-1 text-lg font-bold text-slate-900">~{test.durationMin} min</p>
+            <p className="mt-1 text-lg font-bold text-white">~{test.durationMin} min</p>
           </div>
-          <div className="rounded-2xl border bg-slate-50 p-4">
+          <div className="rounded-2xl border bg-[#15233d] p-4">
             <p className="text-xs uppercase tracking-wide text-slate-300">Result style</p>
-            <p className="mt-1 text-lg font-bold text-slate-900">Score + roadmap</p>
+            <p className="mt-1 text-lg font-bold text-white">Score + roadmap</p>
           </div>
         </div>
       </section>
 
       <section className="grid gap-4 lg:grid-cols-2">
-        <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+        <div className="rounded-3xl border border-emerald-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-emerald-900">Who should choose this</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
             <li>Students unsure which stream or career path fits their strengths.</li>
@@ -99,7 +99,7 @@ export default async function StreamDetail({
             <li>Parents who want a structured discussion starter with their child.</li>
           </ul>
         </div>
-        <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+        <div className="rounded-3xl border border-rose-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-rose-900">Who should avoid this format</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
             <li>Users expecting guaranteed admissions, jobs, or salary outcomes.</li>
@@ -109,33 +109,33 @@ export default async function StreamDetail({
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Step-by-step roadmap after this test</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Step-by-step roadmap after this test</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 1: Take the test honestly</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">Avoid random guessing. Realistic answers create a more reliable profile.</p>
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 1: Take the test honestly</p>
+            <p className="mt-2 text-sm leading-7 text-white">Avoid random guessing. Realistic answers create a more reliable profile.</p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 2: Review score + topic pattern</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">Focus on strong and weak themes instead of only total percentage.</p>
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 2: Review score + topic pattern</p>
+            <p className="mt-2 text-sm leading-7 text-white">Focus on strong and weak themes instead of only total percentage.</p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 3: Compare backup paths</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">Check alternate streams so you do not lock into one option too early.</p>
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 3: Compare backup paths</p>
+            <p className="mt-2 text-sm leading-7 text-white">Check alternate streams so you do not lock into one option too early.</p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 4: Follow 90-day actions</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">Use small weekly goals to improve weak areas before final decisions.</p>
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 4: Follow 90-day actions</p>
+            <p className="mt-2 text-sm leading-7 text-white">Use small weekly goals to improve weak areas before final decisions.</p>
           </div>
         </div>
       </section>
 
       <div className="grid gap-6 md:grid-cols-[2fr_1fr]">
-        <div className="rounded-2xl bg-white p-6 sm:p-8 shadow-sm">
+        <div className="rounded-2xl bg-[#15233d] p-6 sm:p-8 shadow-sm">
         <div className="text-4xl">{test.icon}</div>
         <h2 className="mt-2 text-2xl font-bold">Test overview</h2>
-        <p className="mt-3 text-gray-600">{test.summary}</p>
+        <p className="mt-3 text-white">{test.summary}</p>
 
         <h3 className="mt-6 font-semibold">Skills Required</h3>
         <div className="mt-2 flex flex-wrap gap-2">
@@ -155,8 +155,8 @@ export default async function StreamDetail({
         </ul>
       </div>
 
-      <aside className="rounded-2xl bg-white p-6 shadow-sm h-fit md:sticky md:top-24">
-        <p className="text-sm text-gray-600">Test Info</p>
+      <aside className="rounded-2xl bg-[#15233d] p-6 shadow-sm h-fit md:sticky md:top-24">
+        <p className="text-sm text-white">Test Info</p>
         <div className="mt-2 space-y-1 text-sm">
           <p>✅ Questions: {test.questions.length}</p>
           <p>⏱️ Time: ~{test.durationMin} minutes</p>
@@ -172,29 +172,29 @@ export default async function StreamDetail({
       </aside>
       </div>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Frequently asked questions</h2>
         <div className="mt-4 space-y-3">
           {testFaqs.map((faq) => (
-            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-[#15233d] p-4">
+              <summary className="cursor-pointer text-sm font-semibold text-white">{faq.q}</summary>
+              <p className="mt-3 text-sm leading-7 text-white">{faq.a}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-xl font-bold text-slate-900">Compare with related tests</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-xl font-bold text-white">Compare with related tests</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
           {relatedTests.map((item) => (
             <Link
               key={item.slug}
               href={`/tests/${item.slug}`}
-              className="rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:bg-white hover:shadow-sm"
+              className="rounded-2xl border border-slate-200 bg-[#15233d] p-4 transition hover:bg-[#15233d] hover:shadow-sm"
             >
-              <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{item.summary}</p>
+              <p className="text-sm font-semibold text-white">{item.title}</p>
+              <p className="mt-2 text-sm leading-6 text-white">{item.summary}</p>
               <span className="mt-3 inline-block text-sm font-medium text-blue-700">View details →</span>
             </Link>
           ))}

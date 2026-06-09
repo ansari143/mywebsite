@@ -150,46 +150,46 @@ export default function SkillsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(roleListSchema) }}
       />
 
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
+      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
         <div className="max-w-4xl space-y-5">
-          <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700 dark:border-blue-700 dark:bg-blue-900/30 dark:text-blue-200">
+          <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700 dark:border-blue-700 dark:bg-blue-900/30 dark:text-blue-200">
             AI skills guidance for students and professionals
           </div>
 
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-slate-100">
+          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl dark:text-slate-100">
             AI Skills Portal: Role-Based Transformation Roadmaps
           </h1>
 
           <p className="text-sm font-medium text-slate-300 dark:text-slate-300">Updated: June 2026</p>
 
-          <p className="text-base leading-8 text-slate-600 sm:text-lg dark:text-slate-300">
+          <p className="text-base leading-8 text-white sm:text-lg dark:text-slate-300">
             Use this page if you want a practical path into AI-driven work. It is built for developers, testers, operations teams, analysts, and managers who need role-based learning instead of generic AI course lists.
           </p>
 
           <div className="grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800">
+            <div className="rounded-2xl border border-slate-200 bg-[#15233d] p-4 dark:border-slate-700 dark:bg-slate-800">
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-300 dark:text-slate-300">Who should choose this</p>
-              <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-300">
+              <p className="mt-2 text-sm leading-7 text-white dark:text-slate-300">
                 People who want a clear roadmap for AI Engineer, AI DevOps Engineer, AI Architect, AI Business Analyst, AI Project Manager, AI Technical Project Manager, and AI Scrum Master.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800">
+            <div className="rounded-2xl border border-slate-200 bg-[#15233d] p-4 dark:border-slate-700 dark:bg-slate-800">
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-300 dark:text-slate-300">Who should avoid this</p>
-              <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-300">
+              <p className="mt-2 text-sm leading-7 text-white dark:text-slate-300">
                 People looking for a short course catalog without role context, project checkpoints, or a structured transition plan.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800">
+            <div className="rounded-2xl border border-slate-200 bg-[#15233d] p-4 dark:border-slate-700 dark:bg-slate-800">
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-300 dark:text-slate-300">How to use it</p>
-              <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-300">
+              <p className="mt-2 text-sm leading-7 text-white dark:text-slate-300">
                 Pick your current role, open the matching roadmap, read the guidance section, and follow the practice projects and FAQ before moving to the next stage.
               </p>
             </div>
           </div>
 
-          <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm leading-7 text-slate-700 dark:border-blue-700 dark:bg-blue-900/30 dark:text-slate-300">
+          <div className="rounded-2xl border border-blue-100 bg-[#15233d] p-4 text-sm leading-7 text-white dark:border-blue-700 dark:bg-blue-900/30 dark:text-slate-300">
             The page also includes FAQs, internal guidance, and role-specific learning steps so search engines can understand the topic clearly and users can scan the page quickly.
           </div>
         </div>

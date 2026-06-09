@@ -13,9 +13,9 @@ type CTABoxProps = {
 
 export default function CTABox({ title, description, links }: CTABoxProps) {
   return (
-    <section className="rounded-3xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm sm:p-8">
-      <h2 className="text-2xl font-bold text-slate-900">{title}</h2>
-      <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-700 sm:text-base">{description}</p>
+    <section className="rounded-3xl border border-blue-200 bg-gradient-to-br from-[#1E3A5F] to-[#2B4C7E] p-6 shadow-sm sm:p-8">
+      <h2 className="text-2xl font-bold text-white">{title}</h2>
+      <p className="mt-3 max-w-3xl text-sm leading-7 text-white sm:text-base">{description}</p>
       <div className="mt-5 flex flex-wrap gap-3">
         {links.map((link, index) => (
           <Link
@@ -24,7 +24,7 @@ export default function CTABox({ title, description, links }: CTABoxProps) {
             className={
               index === 0
                 ? "rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
-                : "rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                : "rounded-xl border border-slate-300 bg-[#15233d] px-5 py-3 text-sm font-semibold text-white hover:bg-[#15233d]"
             }
           >
             {link.label}

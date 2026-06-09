@@ -56,29 +56,29 @@ export default function AustraliaVsCanadaPage() {
     <div className="space-y-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
         <div className="inline-flex rounded-full border border-amber-100 bg-amber-50 px-3 py-1 text-sm font-medium text-amber-700">
           Student Comparison Guide
         </div>
-        <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
           Study in Australia vs Canada: A Practical Comparison for International Students
         </h1>
-        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
+        <p className="mt-4 max-w-3xl text-base leading-7 text-white">
           Australia and Canada are two of the most popular destinations for international students. Both offer English-language
           education, multicultural environments, and strong post-study work pathways. But the right choice depends on your field,
           budget, career goal, and long-term plan. This guide helps you compare them honestly.
         </p>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Side-by-side comparison</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Side-by-side comparison</h2>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full border-collapse border border-slate-200 text-sm">
             <thead>
-              <tr className="bg-slate-50">
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Factor</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Australia 🇦🇺</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Canada 🇨🇦</th>
+              <tr className="bg-[#15233d]">
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Factor</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Australia 🇦🇺</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Canada 🇨🇦</th>
               </tr>
             </thead>
             <tbody>
@@ -94,8 +94,8 @@ export default function AustraliaVsCanadaPage() {
               ].map(([factor, aus, can]) => (
                 <tr key={factor} className="border-b border-slate-200">
                   <td className="border-r border-slate-200 px-4 py-3 font-medium text-slate-800">{factor}</td>
-                  <td className="border-r border-slate-200 px-4 py-3 text-slate-700">{aus}</td>
-                  <td className="px-4 py-3 text-slate-700">{can}</td>
+                  <td className="border-r border-slate-200 px-4 py-3 text-white">{aus}</td>
+                  <td className="px-4 py-3 text-white">{can}</td>
                 </tr>
               ))}
             </tbody>
@@ -104,7 +104,7 @@ export default function AustraliaVsCanadaPage() {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-2">
-        <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+        <div className="rounded-3xl border border-emerald-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-emerald-900">Australia may suit you better if…</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
             <li>You are in healthcare, hospitality, applied sciences, or vocational training.</li>
@@ -114,7 +114,7 @@ export default function AustraliaVsCanadaPage() {
             <li>You want practical work-integrated learning in your course.</li>
           </ul>
         </div>
-        <div className="rounded-3xl border border-blue-200 bg-blue-50 p-6">
+        <div className="rounded-3xl border border-blue-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-blue-900">Canada may suit you better if…</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-blue-900">
             <li>You are targeting tech, analytics, business, or public systems careers.</li>
@@ -126,8 +126,8 @@ export default function AustraliaVsCanadaPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">How to make the final decision</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">How to make the final decision</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {[
             ["Step 1: Lock in your career goal", "Decide what field or role you want. Then check job market demand in that field separately for each country."],
@@ -135,29 +135,29 @@ export default function AustraliaVsCanadaPage() {
             ["Step 3: Check post-study options", "Read about the PGWP for Canada and the 485 visa for Australia on official government websites before applying."],
             ["Step 4: Consider personal factors", "Climate preference, family connections, language communities, and mental health support all matter for a multi-year decision."],
           ].map(([step, desc]) => (
-            <div key={step} className="rounded-2xl bg-slate-50 p-4">
-              <p className="text-sm font-semibold text-slate-900">{step}</p>
-              <p className="mt-2 text-sm leading-7 text-slate-600">{desc}</p>
+            <div key={step} className="rounded-2xl bg-[#15233d] p-4">
+              <p className="text-sm font-semibold text-white">{step}</p>
+              <p className="mt-2 text-sm leading-7 text-white">{desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Frequently asked questions</h2>
         <div className="mt-4 space-y-3">
           {faqs.map((faq) => (
-            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-[#15233d] p-4">
+              <summary className="cursor-pointer text-sm font-semibold text-white">{faq.q}</summary>
+              <p className="mt-3 text-sm leading-7 text-white">{faq.a}</p>
             </details>
           ))}
         </div>
       </section>
 
       <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm">
-        <h2 className="text-xl font-bold text-slate-900">Important note</h2>
-        <p className="mt-3 text-sm leading-7 text-slate-600">
+        <h2 className="text-xl font-bold text-white">Important note</h2>
+        <p className="mt-3 text-sm leading-7 text-white">
           Visa rules, work rights, tuition fees, and PR policies change frequently. Always check official government immigration
           websites for Australia (immi.homeaffairs.gov.au) and Canada (canada.ca/immigration) before making any application decisions.
           This article is for educational guidance only.
@@ -166,15 +166,15 @@ export default function AustraliaVsCanadaPage() {
       </section>
 
       <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6">
-        <h2 className="text-xl font-semibold text-slate-900">Explore deeper guides</h2>
+        <h2 className="text-xl font-semibold text-white">Explore deeper guides</h2>
         <div className="mt-3 flex flex-col gap-3 sm:flex-row">
           <Link href="/study-in-australia" className="rounded-xl bg-amber-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-amber-700">
             Study in Australia Guide
           </Link>
-          <Link href="/study-in-canada" className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 border border-slate-300 hover:bg-slate-50">
+          <Link href="/study-in-canada" className="rounded-xl bg-[#15233d] px-5 py-3 text-center text-sm font-semibold text-white border border-slate-300 hover:bg-[#15233d]">
             Study in Canada Guide
           </Link>
-          <Link href="/tests" className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 border border-slate-300 hover:bg-slate-50">
+          <Link href="/tests" className="rounded-xl bg-[#15233d] px-5 py-3 text-center text-sm font-semibold text-white border border-slate-300 hover:bg-[#15233d]">
             Take Free Career Test
           </Link>
         </div>

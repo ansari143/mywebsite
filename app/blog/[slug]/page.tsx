@@ -199,7 +199,7 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
   };
 
   return (
-    <main className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.bg-emerald-50]:bg-emerald-900/20 dark:[&_.bg-rose-50]:bg-rose-900/20 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-300 dark:[&_.text-slate-600]:text-slate-300 dark:[&_.text-slate-300]:text-slate-300 dark:[&_.text-emerald-900]:text-slate-300 dark:[&_.text-rose-900]:text-slate-300">
+    <main className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-[#15233d]]:bg-slate-900 dark:[&_.bg-[#15233d]]:bg-slate-800 dark:[&_.bg-[#15233d]]:bg-emerald-900/20 dark:[&_.bg-[#15233d]]:bg-rose-900/20 dark:[&_.text-white]:text-slate-100 dark:[&_.text-white]:text-slate-300 dark:[&_.text-white]:text-slate-300 dark:[&_.text-slate-300]:text-slate-300 dark:[&_.text-emerald-900]:text-slate-300 dark:[&_.text-rose-900]:text-slate-300">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
@@ -209,12 +209,12 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
       )}
 
       <article className="space-y-8">
-        <header className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <p className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
+        <header className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+          <p className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-semibold text-blue-700">
             {post.category}
           </p>
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{post.title}</h1>
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">{post.description}</p>
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">{post.title}</h1>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-white sm:text-base">{post.description}</p>
           <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-300">
             <span>Author: {post.author}</span>
             <span>Updated: {new Date(post.updatedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
@@ -222,8 +222,8 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
           </div>
         </header>
 
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-2xl font-bold text-slate-900">Table of Contents</h2>
+        <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-white">Table of Contents</h2>
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             {tocItems.map((item) => (
               <a key={item.id} href={`#${item.id}`} className="text-sm font-semibold text-blue-700 hover:underline">
@@ -233,9 +233,9 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
           </div>
         </section>
 
-        <section id="introduction" className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-2xl font-bold text-slate-900">Introduction</h2>
-          <div className="mt-4 space-y-4 text-sm leading-7 text-slate-700 sm:text-base">
+        <section id="introduction" className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-white">Introduction</h2>
+          <div className="mt-4 space-y-4 text-sm leading-7 text-white sm:text-base">
             {post.content.introduction.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -243,7 +243,7 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
         </section>
 
         <section className="grid gap-5 lg:grid-cols-2">
-          <div id="who-this-guide-is-for" className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+          <div id="who-this-guide-is-for" className="rounded-3xl border border-emerald-200 bg-[#15233d] p-6">
             <h2 className="text-xl font-bold text-emerald-900">Who this guide is for</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900 sm:text-base">
               {post.content.whoThisGuideIsFor.map((item) => (
@@ -252,7 +252,7 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
             </ul>
           </div>
 
-          <div id="who-should-avoid-this" className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+          <div id="who-should-avoid-this" className="rounded-3xl border border-rose-200 bg-[#15233d] p-6">
             <h2 className="text-xl font-bold text-rose-900">Who should avoid this</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900 sm:text-base">
               {post.content.whoShouldAvoid.map((item) => (
@@ -263,9 +263,9 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
         </section>
 
         {post.content.mainExplanation.map((section) => (
-          <section key={section.heading} id={slugToId(section.heading)} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-            <h2 className="text-2xl font-bold text-slate-900">{section.heading}</h2>
-            <div className="mt-4 space-y-4 text-sm leading-7 text-slate-700 sm:text-base">
+          <section key={section.heading} id={slugToId(section.heading)} className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+            <h2 className="text-2xl font-bold text-white">{section.heading}</h2>
+            <div className="mt-4 space-y-4 text-sm leading-7 text-white sm:text-base">
               {section.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -273,27 +273,27 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
           </section>
         ))}
 
-        <section id="step-by-step-guidance" className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-2xl font-bold text-slate-900">Step-by-step guidance</h2>
+        <section id="step-by-step-guidance" className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-white">Step-by-step guidance</h2>
           <div className="mt-5 space-y-3">
             {post.content.stepByStepGuidance.map((step) => (
-              <div key={step.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-base font-semibold text-slate-900 sm:text-lg">{step.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">{step.detail}</p>
+              <div key={step.title} className="rounded-2xl border border-slate-200 bg-[#15233d] p-4">
+                <h3 className="text-base font-semibold text-white sm:text-lg">{step.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-white sm:text-base">{step.detail}</p>
               </div>
             ))}
           </div>
         </section>
 
         {post.content.comparisonTable && (
-          <section id="comparison-table" className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-            <h2 className="text-2xl font-bold text-slate-900">{post.content.comparisonTable.title}</h2>
+          <section id="comparison-table" className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+            <h2 className="text-2xl font-bold text-white">{post.content.comparisonTable.title}</h2>
             <div className="mt-5 overflow-x-auto">
               <table className="w-full border-collapse border border-slate-200 text-sm">
                 <thead>
-                  <tr className="bg-slate-50">
+                  <tr className="bg-[#15233d]">
                     {post.content.comparisonTable.headers.map((header) => (
-                      <th key={header} className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">
+                      <th key={header} className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">
                         {header}
                       </th>
                     ))}
@@ -303,7 +303,7 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
                   {post.content.comparisonTable.rows.map((row, rowIndex) => (
                     <tr key={`${row[0]}-${rowIndex}`}>
                       {row.map((cell, cellIndex) => (
-                        <td key={`${cell}-${cellIndex}`} className="border border-slate-200 px-4 py-3 text-slate-700">
+                        <td key={`${cell}-${cellIndex}`} className="border border-slate-200 px-4 py-3 text-white">
                           {cell}
                         </td>
                       ))}
@@ -315,23 +315,23 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
           </section>
         )}
 
-        <section id="common-mistakes" className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-2xl font-bold text-slate-900">Common mistakes</h2>
-          <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-700 sm:text-base">
+        <section id="common-mistakes" className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-white">Common mistakes</h2>
+          <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-7 text-white sm:text-base">
             {post.content.commonMistakes.map((mistake) => (
               <li key={mistake}>{mistake}</li>
             ))}
           </ul>
         </section>
 
-        <section id="final-tips" className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-2xl font-bold text-slate-900">Final tips</h2>
-          <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-700 sm:text-base">
+        <section id="final-tips" className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-bold text-white">Final tips</h2>
+          <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-7 text-white sm:text-base">
             {post.content.finalTips.map((tip) => (
               <li key={tip}>{tip}</li>
             ))}
           </ul>
-          <p className="mt-5 text-sm leading-7 text-slate-700 sm:text-base">
+          <p className="mt-5 text-sm leading-7 text-white sm:text-base">
             Continue your next step from this guide: <Link href={internalDestination} className="font-semibold text-blue-700 hover:underline">open the related action page</Link>.
           </p>
         </section>
@@ -354,8 +354,8 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
         <RelatedBlogs slugs={post.relatedSlugs ?? []} />
 
         <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm dark:border-amber-700 dark:bg-amber-950/30">
-          <h2 className="text-xl font-bold text-slate-900">Content trust note</h2>
-          <p className="mt-3 text-sm leading-7 text-slate-700 sm:text-base">
+          <h2 className="text-xl font-bold text-white">Content trust note</h2>
+          <p className="mt-3 text-sm leading-7 text-white sm:text-base">
             This article is for educational guidance and student planning support. Verify final admission, fee, scholarship, and visa decisions from official sources before taking action.
           </p>
           <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">

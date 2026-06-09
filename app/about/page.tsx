@@ -38,23 +38,23 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-300 dark:[&_.text-slate-600]:text-slate-300">
+    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-[#15233d]]:bg-slate-900 dark:[&_.bg-[#15233d]]:bg-slate-800 dark:[&_.text-white]:text-slate-100 dark:[&_.text-white]:text-slate-300 dark:[&_.text-white]:text-slate-300">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
       />
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
         <div className="max-w-4xl">
-          <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+          <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
             About Nishaglobal Education
           </div>
 
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Helping students make better academic and career decisions worldwide
           </h1>
 
-          <p className="mt-4 text-base leading-8 text-slate-600 sm:text-lg">
+          <p className="mt-4 text-base leading-8 text-white sm:text-lg">
             Nishaglobal Education is a student-focused guidance platform designed to make career planning easier,
             clearer, and more practical. We aim to simplify confusing choices by offering accessible career tests,
             educational resources, study abroad content, and future-ready skills guidance in a format students and families can understand.
@@ -62,10 +62,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
         <div className="max-w-4xl">
-          <h2 className="text-2xl font-bold text-slate-900">Trusted guidance for students and parents</h2>
-          <p className="mt-3 text-slate-600">
+          <h2 className="text-2xl font-bold text-white">Trusted guidance for students and parents</h2>
+          <p className="mt-3 text-white">
             We review content with education specialists, focus on verified sources, and update our guidance regularly so students and families can make confident decisions.
           </p>
           <TrustComponent
@@ -93,14 +93,14 @@ export default function AboutPage() {
           },
         ].map((item) => (
           <div key={item.title} className={sectionClass}>
-            <h2 className="text-lg font-semibold text-slate-900">{item.title}</h2>
-            <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.desc}</p>
+            <h2 className="text-lg font-semibold text-white">{item.title}</h2>
+            <p className="mt-3 text-sm leading-7 text-white sm:text-base">{item.desc}</p>
           </div>
         ))}
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">What you can find on this website</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">What you can find on this website</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {[
             "Free career tests and score-based guidance",
@@ -110,16 +110,16 @@ export default function AboutPage() {
             "Skill-learning content for AI and future-ready careers",
             "Simple educational guidance designed for students and families",
           ].map((point) => (
-            <div key={point} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-700">
+            <div key={point} className="rounded-2xl border border-slate-200 bg-[#15233d] p-4 text-sm leading-7 text-white">
               {point}
             </div>
           ))}
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Future-ready skills and global direction</h2>
-        <p className="mt-4 text-sm leading-7 text-slate-700 sm:text-base">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Future-ready skills and global direction</h2>
+        <p className="mt-4 text-sm leading-7 text-white sm:text-base">
           Today’s students need more than subject knowledge. They also need practical, modern skills that align with changing industries and global opportunities.
           That is why Nishaglobal Education combines traditional career guidance with skill-focused learning in areas such as AI, automation, Python, prompt engineering,
           and digital career growth.
@@ -133,7 +133,7 @@ export default function AboutPage() {
             "Awareness of global education and international career opportunities",
             "A clear bridge between career choice and skill building",
           ].map((point) => (
-            <div key={point} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-700">
+            <div key={point} className="rounded-2xl border border-slate-200 bg-[#15233d] p-4 text-sm leading-7 text-white">
               {point}
             </div>
           ))}
@@ -141,8 +141,8 @@ export default function AboutPage() {
       </section>
 
       <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Important note</h2>
-        <p className="mt-4 text-sm leading-7 text-slate-700 sm:text-base">
+        <h2 className="text-2xl font-bold text-white">Important note</h2>
+        <p className="mt-4 text-sm leading-7 text-white sm:text-base">
           Nishaglobal Education provides educational and informational guidance. We are not a government body,
           university, college, recruiter, immigration authority, or official counselling agency unless explicitly stated.
           Final decisions related to admissions, fees, visas, scholarships, jobs, licensing, and institutions should always be verified through official sources.

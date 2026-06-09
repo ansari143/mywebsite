@@ -3,12 +3,12 @@ import { FaEnvelope } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="mt-12 border-t border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900">
+    <footer className="mt-12 border-t border-slate-200 bg-[#15233d] dark:border-slate-700 dark:bg-slate-900">
       <div className="site-container py-8">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Nishaglobal Education</h3>
-            <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+            <h3 className="text-lg font-semibold text-white dark:text-slate-100">Nishaglobal Education</h3>
+            <p className="mt-3 text-sm leading-7 text-white dark:text-slate-300">
               Learn AI skills for every career role with career guidance for students worldwide, including free career tests,
               global education guidance, practical resources, and future-ready skills.
             </p>
@@ -21,8 +21,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-900 dark:text-slate-100">Explore</h4>
-            <div className="mt-3 flex flex-col gap-2 text-sm text-slate-600 dark:text-slate-300">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-white dark:text-slate-100">Explore</h4>
+            <div className="mt-3 flex flex-col gap-2 text-sm text-white dark:text-slate-300">
               <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-300">Home</Link>
               <Link href="/tests" className="hover:text-blue-600 dark:hover:text-blue-300">Career Tests</Link>
               <Link href="/global-careers" className="hover:text-blue-600 dark:hover:text-blue-300">Global Careers</Link>
@@ -36,8 +36,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-900 dark:text-slate-100">Guides & Policies</h4>
-            <div className="mt-3 flex flex-col gap-2 text-sm text-slate-600 dark:text-slate-300">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-white dark:text-slate-100">Guides & Policies</h4>
+            <div className="mt-3 flex flex-col gap-2 text-sm text-white dark:text-slate-300">
               <Link href="/blog" className="hover:text-blue-600 dark:hover:text-blue-300">Blog</Link>
               <Link href="/study-in-usa" className="hover:text-blue-600 dark:hover:text-blue-300">Study in USA</Link>
               <Link href="/blog?category=USA%20Careers" className="hover:text-blue-600 dark:hover:text-blue-300">USA Careers</Link>
@@ -54,12 +54,12 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-900 dark:text-slate-100">Get Support</h4>
-            <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-white dark:text-slate-100">Get Support</h4>
+            <p className="mt-3 text-sm leading-6 text-white dark:text-slate-300">
               Reach out for guidance related to tests, resources, and study planning.
             </p>
 
-            <div className="mt-4 flex flex-col gap-3 text-sm text-slate-600 dark:text-slate-300">
+            <div className="mt-4 flex flex-col gap-3 text-sm text-white dark:text-slate-300">
               <a href="mailto:nishaglobaleducation@gmail.com" className="flex items-center gap-2 hover:text-blue-700 dark:hover:text-blue-300">
                 <FaEnvelope /> nishaglobaleducation@gmail.com
               </a>
@@ -72,8 +72,8 @@ export default function Footer() {
         <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-100 p-5 dark:border-slate-700 dark:bg-slate-800">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="font-semibold text-slate-900 dark:text-slate-100">Need help after taking a test?</p>
-              <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+              <p className="font-semibold text-white dark:text-slate-100">Need help after taking a test?</p>
+              <p className="mt-1 text-sm leading-6 text-white dark:text-slate-300">
                 Use the contact page to ask questions, explore resources, or continue with country guides and blogs.
               </p>
             </div>
@@ -85,8 +85,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-900/30">
-          <p className="text-sm leading-7 text-slate-700 dark:text-slate-300">
-            <span className="font-semibold text-slate-900 dark:text-slate-100">Important:</span>{" "}
+          <p className="text-sm leading-7 text-white dark:text-slate-300">
+            <span className="font-semibold text-white dark:text-slate-100">Important:</span>{" "}
             The tests, resources, country guides, and skill content on this website are for educational and informational purposes only.
             Final decisions related to admissions, fees, scholarships, visas, work rights, or institutions should always be verified from official sources.
           </p>

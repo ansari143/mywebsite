@@ -97,20 +97,20 @@ export default function EditorialPolicyPage() {
   };
 
   return (
-    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-white]:bg-slate-900 dark:[&_.bg-slate-50]:bg-slate-800 dark:[&_.text-slate-900]:text-slate-100 dark:[&_.text-slate-700]:text-slate-300 dark:[&_.text-slate-600]:text-slate-300">
+    <div className="space-y-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-[#15233d]]:bg-slate-900 dark:[&_.bg-[#15233d]]:bg-slate-800 dark:[&_.text-white]:text-slate-100 dark:[&_.text-white]:text-slate-300 dark:[&_.text-white]:text-slate-300">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
           Trust and Quality
         </div>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
           Editorial Policy
         </h1>
-        <p className="mt-4 max-w-4xl text-base leading-8 text-slate-700 sm:text-lg">
+        <p className="mt-4 max-w-4xl text-base leading-8 text-white sm:text-lg">
           This policy explains how Nishaglobal Education creates, reviews, and updates content for students and parents. Our goal is to publish practical educational guidance that is clear, original, and decision-friendly.
         </p>
       </section>
@@ -118,15 +118,15 @@ export default function EditorialPolicyPage() {
       <section className="grid gap-5 md:grid-cols-2">
         {principles.map((item) => (
           <article key={item.title} className={sectionClass}>
-            <h2 className="text-xl font-semibold text-slate-900">{item.title}</h2>
-            <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.detail}</p>
+            <h2 className="text-xl font-semibold text-white">{item.title}</h2>
+            <p className="mt-3 text-sm leading-7 text-white sm:text-base">{item.detail}</p>
           </article>
         ))}
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Minimum Content Standard for Core Guides</h2>
-        <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-600 sm:text-base">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Minimum Content Standard for Core Guides</h2>
+        <ul className="mt-5 space-y-3 text-sm leading-7 text-white sm:text-base">
           {qualityChecklist.map((item) => (
             <li key={item} className="flex gap-3">
               <span className="mt-2 h-2.5 w-2.5 rounded-full bg-blue-600" />
@@ -136,23 +136,23 @@ export default function EditorialPolicyPage() {
         </ul>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">How Content Is Updated</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">How Content Is Updated</h2>
         <div className="mt-6 space-y-4">
           {updateWorkflow.map((item, index) => (
-            <div key={item.step} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-              <h3 className="text-base font-semibold text-slate-900">
+            <div key={item.step} className="rounded-2xl border border-slate-200 bg-[#15233d] p-5">
+              <h3 className="text-base font-semibold text-white">
                 {index + 1}. {item.step}
               </h3>
-              <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">{item.text}</p>
+              <p className="mt-2 text-sm leading-7 text-white sm:text-base">{item.text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Corrections and Feedback</h2>
-        <p className="mt-4 text-sm leading-7 text-slate-700 sm:text-base">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Corrections and Feedback</h2>
+        <p className="mt-4 text-sm leading-7 text-white sm:text-base">
           If you find outdated information, factual errors, or unclear guidance, contact us and mention the page URL plus the issue. We review correction requests and update content where needed.
         </p>
         <div className="mt-5 flex flex-col gap-3 sm:flex-row">

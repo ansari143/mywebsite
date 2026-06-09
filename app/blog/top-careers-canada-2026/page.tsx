@@ -52,30 +52,30 @@ export default function TopCareersCanadaPage() {
     <div className="space-y-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <div className="inline-flex rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <div className="inline-flex rounded-full border border-slate-700 bg-[#15233d] px-3 py-1 text-sm font-medium text-emerald-700">
           Canada Careers
         </div>
-        <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
           Top Careers in Canada for International Students
         </h1>
-        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
+        <p className="mt-4 max-w-3xl text-base leading-7 text-white">
           Canada combines quality education, multicultural cities, co-op programs, and practical post-study work pathways.
           The right course and province combination can lead to strong employment, long-term career growth, and PR pathways.
           This guide explains the top career areas for international students with honest context on what each requires.
         </p>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Top career areas with demand and salary context</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Top career areas with demand and salary context</h2>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full border-collapse border border-slate-200 text-sm">
             <thead>
-              <tr className="bg-slate-50">
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Career Area</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Typical Salary (CAD/yr)</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Strong Provinces</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Demand</th>
+              <tr className="bg-[#15233d]">
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Career Area</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Typical Salary (CAD/yr)</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Strong Provinces</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Demand</th>
               </tr>
             </thead>
             <tbody>
@@ -91,9 +91,9 @@ export default function TopCareersCanadaPage() {
               ].map(([career, salary, province, trend]) => (
                 <tr key={career} className="border-b border-slate-200">
                   <td className="border-r border-slate-200 px-4 py-3 font-medium text-slate-800">{career}</td>
-                  <td className="border-r border-slate-200 px-4 py-3 text-slate-700">{salary}</td>
-                  <td className="border-r border-slate-200 px-4 py-3 text-slate-700">{province}</td>
-                  <td className="px-4 py-3 text-slate-700">{trend}</td>
+                  <td className="border-r border-slate-200 px-4 py-3 text-white">{salary}</td>
+                  <td className="border-r border-slate-200 px-4 py-3 text-white">{province}</td>
+                  <td className="px-4 py-3 text-white">{trend}</td>
                 </tr>
               ))}
             </tbody>
@@ -102,15 +102,15 @@ export default function TopCareersCanadaPage() {
         <p className="mt-3 text-xs text-slate-300">Salary figures are approximate estimates based on publicly available Canadian labor market data for 2026. Actual salaries vary by employer, location, and experience.</p>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Why Canada attracts international students</h2>
-        <p className="mt-3 text-base leading-7 text-slate-600">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Why Canada attracts international students</h2>
+        <p className="mt-3 text-base leading-7 text-white">
           Canada offers co-op integrated programs that let students combine classroom learning with paid work experience.
           This is particularly valuable for software, business, and engineering students who want employer connections
           before graduation. Post-study work rights through the PGWP allow you to convert that experience into Canadian
           work history, which significantly improves Express Entry immigration scores.
         </p>
-        <p className="mt-3 text-base leading-7 text-slate-600">
+        <p className="mt-3 text-base leading-7 text-white">
           However, students should not choose a course only because it seems popular. Province, tuition, institution quality,
           co-op availability, and field demand all vary significantly. Choosing a program in a smaller city with lower costs
           and strong local employer connections can sometimes outperform a high-cost program in a major city.
@@ -118,7 +118,7 @@ export default function TopCareersCanadaPage() {
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+        <div className="rounded-3xl border border-emerald-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-emerald-950">Who should prefer Canada pathway</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
             <li>Students targeting co-op driven employability and practical work rights.</li>
@@ -127,7 +127,7 @@ export default function TopCareersCanadaPage() {
             <li>Families seeking predictable post-study transition planning.</li>
           </ul>
         </div>
-        <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+        <div className="rounded-3xl border border-rose-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-rose-950">Who should be cautious</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
             <li>Students selecting programs without PGWP or employer demand checks.</li>
@@ -138,51 +138,51 @@ export default function TopCareersCanadaPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Step-by-step planning roadmap for Canada careers</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Step-by-step planning roadmap for Canada careers</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 1: Pick role and province together</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 1: Pick role and province together</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               Match target role demand with province-specific employer clusters and salary-cost balance.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 2: Choose a program with employability evidence</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 2: Choose a program with employability evidence</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               Prefer courses with co-op, internship links, and local employer engagement.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 3: Build work profile during study</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 3: Build work profile during study</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               Gain project and part-time experience early, then move to stronger internship applications.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 4: Plan PGWP to PR timeline realistically</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 4: Plan PGWP to PR timeline realistically</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               Track work experience, language score readiness, and pathway eligibility before deadlines.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Frequently asked questions</h2>
         <div className="mt-4 space-y-3">
           {faqs.map((faq) => (
-            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-[#15233d] p-4">
+              <summary className="cursor-pointer text-sm font-semibold text-white">{faq.q}</summary>
+              <p className="mt-3 text-sm leading-7 text-white">{faq.a}</p>
             </details>
           ))}
         </div>
       </section>
 
       <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm">
-        <h2 className="text-xl font-bold text-slate-900">Important note</h2>
-        <p className="mt-3 text-sm leading-7 text-slate-600">
+        <h2 className="text-xl font-bold text-white">Important note</h2>
+        <p className="mt-3 text-sm leading-7 text-white">
           Immigration rules, PGWP eligibility, Express Entry cutoffs, and salary data change frequently. This article is for
           educational guidance only. Always verify immigration and work permit rules from official IRCC (Immigration, Refugees
           and Citizenship Canada) sources before making any application decisions.
@@ -190,16 +190,16 @@ export default function TopCareersCanadaPage() {
         <p className="mt-2 text-sm text-slate-300">Last reviewed: May 2026 | Author: Nishaglobal Education editorial team</p>
       </section>
 
-      <section className="rounded-3xl border border-emerald-100 bg-emerald-50 p-6">
-        <h2 className="text-xl font-semibold text-slate-900">Explore more</h2>
+      <section className="rounded-3xl border border-slate-700 bg-[#15233d] p-6">
+        <h2 className="text-xl font-semibold text-white">Explore more</h2>
         <div className="mt-3 flex flex-col gap-3 sm:flex-row">
           <Link href="/study-in-canada" className="rounded-xl bg-emerald-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-emerald-700">
             Study in Canada Guide
           </Link>
-          <Link href="/resources/country/canada" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">
+          <Link href="/resources/country/canada" className="rounded-xl border border-slate-300 bg-[#15233d] px-5 py-3 text-center text-sm font-semibold text-white hover:bg-[#15233d]">
             Canada Career Resources
           </Link>
-          <Link href="/tests" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">
+          <Link href="/tests" className="rounded-xl border border-slate-300 bg-[#15233d] px-5 py-3 text-center text-sm font-semibold text-white hover:bg-[#15233d]">
             Take Free Career Test
           </Link>
         </div>

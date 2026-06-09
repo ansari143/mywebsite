@@ -52,30 +52,30 @@ export default function BestCoursesUKPage() {
     <div className="space-y-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
         <div className="inline-flex rounded-full border border-purple-100 bg-purple-50 px-3 py-1 text-sm font-medium text-purple-700">
           UK Courses Guide
         </div>
-        <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
           Best Courses in the UK for Global Job Opportunities
         </h1>
-        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
+        <p className="mt-4 max-w-3xl text-base leading-7 text-white">
           The UK is known for globally recognized degrees, shorter program durations, and strong international employer networks.
           Choosing the right course and university combination can open doors not just in the UK, but across global markets.
           This guide covers the most valuable course areas with honest context on graduate demand and how to choose wisely.
         </p>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Course areas with strong global job prospects</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Course areas with strong global job prospects</h2>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full border-collapse border border-slate-200 text-sm">
             <thead>
-              <tr className="bg-slate-50">
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Course Area</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Strong UK Universities</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Global Job Markets</th>
-                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-slate-900">Demand</th>
+              <tr className="bg-[#15233d]">
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Course Area</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Strong UK Universities</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Global Job Markets</th>
+                <th className="border border-slate-200 px-4 py-3 text-left font-semibold text-white">Demand</th>
               </tr>
             </thead>
             <tbody>
@@ -91,9 +91,9 @@ export default function BestCoursesUKPage() {
               ].map(([course, unis, markets, trend]) => (
                 <tr key={course} className="border-b border-slate-200">
                   <td className="border-r border-slate-200 px-4 py-3 font-medium text-slate-800">{course}</td>
-                  <td className="border-r border-slate-200 px-4 py-3 text-slate-700">{unis}</td>
-                  <td className="border-r border-slate-200 px-4 py-3 text-slate-700">{markets}</td>
-                  <td className="px-4 py-3 text-slate-700">{trend}</td>
+                  <td className="border-r border-slate-200 px-4 py-3 text-white">{unis}</td>
+                  <td className="border-r border-slate-200 px-4 py-3 text-white">{markets}</td>
+                  <td className="px-4 py-3 text-white">{trend}</td>
                 </tr>
               ))}
             </tbody>
@@ -102,14 +102,14 @@ export default function BestCoursesUKPage() {
         <p className="mt-3 text-xs text-slate-300">University examples are illustrative. Rankings and program quality change annually. Always verify directly from university and UCAS sources.</p>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Why these courses help globally</h2>
-        <p className="mt-3 text-base leading-7 text-slate-600">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Why these courses help globally</h2>
+        <p className="mt-3 text-base leading-7 text-white">
           UK-based courses in business, technology, and law tend to align with international employer expectations because
           many global companies have UK headquarters or strong UK operations. The emphasis on employability skills, project
           work, and networking events at UK universities also builds practical readiness that goes beyond academic credentials.
         </p>
-        <p className="mt-3 text-base leading-7 text-slate-600">
+        <p className="mt-3 text-base leading-7 text-white">
           A prestigious university helps, but the combination of course relevance, personal skills, and networking during study
           matters more for long-term career outcomes. Students who build real experience during their UK study, through
           internships, projects, and professional events, tend to outperform those who only rely on their degree brand.
@@ -117,7 +117,7 @@ export default function BestCoursesUKPage() {
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+        <div className="rounded-3xl border border-emerald-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-emerald-950">Who should choose this UK route</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-emerald-900">
             <li>Students who want a one-year master&apos;s with faster return-to-work timeline.</li>
@@ -126,7 +126,7 @@ export default function BestCoursesUKPage() {
             <li>Families comparing UK ROI against Canada, Australia, and Europe pathways.</li>
           </ul>
         </div>
-        <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6">
+        <div className="rounded-3xl border border-rose-200 bg-[#15233d] p-6">
           <h2 className="text-xl font-bold text-rose-950">Who should avoid rushed applications</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-rose-900">
             <li>Students selecting a course only by university rank without role fit.</li>
@@ -137,51 +137,51 @@ export default function BestCoursesUKPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">How to shortlist the right UK course</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">How to shortlist the right UK course</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 1: Define the target role first</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 1: Define the target role first</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               Start from the job outcome you want, then map courses that directly support that role.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 2: Compare course structure</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 2: Compare course structure</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               Check modules, projects, placement support, and dissertation format for employability value.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 3: Verify city-level job reality</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 3: Verify city-level job reality</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               A good course in a city with stronger employer clusters can outperform a better rank in weak location fit.
             </p>
           </div>
-          <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Step 4: Plan post-study pathway</p>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+          <div className="rounded-2xl bg-[#15233d] p-4">
+            <p className="text-sm font-semibold text-white">Step 4: Plan post-study pathway</p>
+            <p className="mt-2 text-sm leading-7 text-white">
               Evaluate graduate route, sponsorship viability, and fallback country options before final commitment.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+        <h2 className="text-2xl font-bold text-white">Frequently asked questions</h2>
         <div className="mt-4 space-y-3">
           {faqs.map((faq) => (
-            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <summary className="cursor-pointer text-sm font-semibold text-slate-900">{faq.q}</summary>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{faq.a}</p>
+            <details key={faq.q} className="rounded-2xl border border-slate-200 bg-[#15233d] p-4">
+              <summary className="cursor-pointer text-sm font-semibold text-white">{faq.q}</summary>
+              <p className="mt-3 text-sm leading-7 text-white">{faq.a}</p>
             </details>
           ))}
         </div>
       </section>
 
       <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm">
-        <h2 className="text-xl font-bold text-slate-900">Important note</h2>
-        <p className="mt-3 text-sm leading-7 text-slate-600">
+        <h2 className="text-xl font-bold text-white">Important note</h2>
+        <p className="mt-3 text-sm leading-7 text-white">
           University rankings, visa rules, graduate route eligibility, and tuition fees for international students change
           annually. This article is for educational guidance only. Always verify current requirements from official UKVI
           (UK Visas and Immigration), UCAS, and individual university sources before making any application decisions.
@@ -190,15 +190,15 @@ export default function BestCoursesUKPage() {
       </section>
 
       <section className="rounded-3xl border border-purple-100 bg-purple-50 p-6">
-        <h2 className="text-xl font-semibold text-slate-900">Explore more</h2>
+        <h2 className="text-xl font-semibold text-white">Explore more</h2>
         <div className="mt-3 flex flex-col gap-3 sm:flex-row">
           <Link href="/study-in-uk" className="rounded-xl bg-purple-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-purple-700">
             Study in UK Guide
           </Link>
-          <Link href="/global-careers" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">
+          <Link href="/global-careers" className="rounded-xl border border-slate-300 bg-[#15233d] px-5 py-3 text-center text-sm font-semibold text-white hover:bg-[#15233d]">
             Global Careers Guide
           </Link>
-          <Link href="/tests" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">
+          <Link href="/tests" className="rounded-xl border border-slate-300 bg-[#15233d] px-5 py-3 text-center text-sm font-semibold text-white hover:bg-[#15233d]">
             Take Free Career Test
           </Link>
         </div>

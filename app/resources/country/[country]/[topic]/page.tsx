@@ -98,7 +98,7 @@ export default async function CountryTopicPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
         <div className="flex flex-wrap gap-3 text-sm font-medium">
           <Link href="/resources" className="text-blue-700 hover:underline">Resources</Link>
           <span className="text-gray-400">/</span>
@@ -106,18 +106,18 @@ export default async function CountryTopicPage({ params }: Props) {
         </div>
 
         <div className="mt-4 max-w-4xl space-y-4">
-          <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
+          <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-semibold text-blue-700">
             {data.country.flag} {data.country.name}
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{data.topic.title}</h1>
-          <p className="text-base leading-7 text-gray-600 sm:text-lg">{data.topic.intro}</p>
+          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{data.topic.title}</h1>
+          <p className="text-base leading-7 text-white sm:text-lg">{data.topic.intro}</p>
         </div>
       </section>
 
       <section className="space-y-6">
         {data.topic.sections.map((section) => (
-          <div key={section.title} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-            <h2 className="text-2xl font-semibold text-gray-900">{section.title}</h2>
+          <div key={section.title} className="rounded-3xl border border-gray-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
+            <h2 className="text-2xl font-semibold text-white">{section.title}</h2>
             <ul className="mt-4 space-y-3 text-sm leading-7 text-gray-700 sm:text-base">
               {section.points.map((point) => (
                 <li key={point} className="flex gap-3">
@@ -131,27 +131,27 @@ export default async function CountryTopicPage({ params }: Props) {
       </section>
 
       <section className="rounded-3xl border border-gray-200 bg-gray-50 p-6 sm:p-8">
-        <h2 className="text-2xl font-semibold text-gray-900">Frequently asked questions</h2>
+        <h2 className="text-2xl font-semibold text-white">Frequently asked questions</h2>
         <div className="mt-4 space-y-4">
           {data.topic.faq.map((item) => (
             <div key={item.question} className={cardClass}>
-              <h3 className="text-lg font-semibold text-gray-900">{item.question}</h3>
+              <h3 className="text-lg font-semibold text-white">{item.question}</h3>
               <p className="mt-2 text-sm leading-7 text-gray-700 sm:text-base">{item.answer}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 sm:p-8">
-        <h2 className="text-xl font-semibold text-gray-900">Continue exploring</h2>
+      <section className="rounded-3xl border border-blue-100 bg-gradient-to-br from-[#1E3A5F] to-[#2B4C7E] p-6 sm:p-8">
+        <h2 className="text-xl font-semibold text-white">Continue exploring</h2>
         <div className="mt-4 flex flex-wrap gap-3 text-sm font-medium">
-          <Link href={`/resources/country/${data.country.slug}`} className="rounded-full border border-blue-200 bg-white px-4 py-2 text-blue-700 hover:bg-blue-100">
+          <Link href={`/resources/country/${data.country.slug}`} className="rounded-full border border-blue-200 bg-[#15233d] px-4 py-2 text-blue-700 hover:bg-blue-100">
             {data.country.name} resource hub
           </Link>
-          <Link href="/global-careers" className="rounded-full border border-blue-200 bg-white px-4 py-2 text-blue-700 hover:bg-blue-100">
+          <Link href="/global-careers" className="rounded-full border border-blue-200 bg-[#15233d] px-4 py-2 text-blue-700 hover:bg-blue-100">
             Global careers
           </Link>
-          <Link href="/tests" className="rounded-full border border-blue-200 bg-white px-4 py-2 text-blue-700 hover:bg-blue-100">
+          <Link href="/tests" className="rounded-full border border-blue-200 bg-[#15233d] px-4 py-2 text-blue-700 hover:bg-blue-100">
             Free career tests
           </Link>
         </div>

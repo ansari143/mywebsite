@@ -110,7 +110,7 @@ h6 {
 .site-section {
   @apply rounded-3xl border p-6 shadow-sm sm:p-8;
   border-color: var(--site-border);
-  background: var(--site-surface);
+  background: #15233d;
 }
 
 .site-section-muted {
