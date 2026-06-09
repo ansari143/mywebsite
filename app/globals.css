@@ -40,6 +40,9 @@ p {
   color: var(--site-text-muted);
 }
 
+:root {
+  --site-text-muted: #e2e8f0;
+}
 h1,
 h2,
 h3,
