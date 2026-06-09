@@ -547,7 +547,7 @@ export default function EngineeringEntranceExamsIndiaPage() {
           </p>
         </div>
         <div className="mt-6 rounded-2xl border border-blue-100 bg-[#15233d] p-5">
-          <h3 className="font-bold text-blue-950">Practice on Nishaglobal Education</h3>
+          <h3 className="font-bold text-white">Practice on Nishaglobal Education</h3>
           <p className="mt-2 text-sm leading-7 text-blue-900">
             Nishaglobal Education provides engineering entrance practice support for students who want to improve speed, accuracy and subject confidence before exams.
           </p>
@@ -579,7 +579,7 @@ export default function EngineeringEntranceExamsIndiaPage() {
       </section>
 
       <section className="rounded-3xl border border-blue-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-blue-950">Final Advice</h2>
+        <h2 className="text-2xl font-bold text-white">Final Advice</h2>
         <p className="mt-3 text-sm leading-7 text-blue-900 sm:text-base">
           Engineering admission in India is not about one exam only. JEE Main and JEE Advanced are powerful routes, but state exams, private university exams, lateral entry routes and counselling-based admissions also matter. Choose exams based on your goal, location, budget, preparation level and backup plan. A student who prepares smartly and applies carefully has more chances than a student who follows random advice.
         </p>

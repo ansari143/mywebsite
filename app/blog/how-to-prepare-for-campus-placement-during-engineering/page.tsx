@@ -313,7 +313,7 @@ export default function CampusPlacementGuidePage() {
       </section>
 
       <section className="rounded-3xl border border-blue-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-blue-950">Next step</h2>
+        <h2 className="text-2xl font-bold text-white">Next step</h2>
         <p className="mt-3 text-sm leading-7 text-blue-900 sm:text-base">
           If your college placement season is already close, start with resume cleanup, aptitude practice, project revision, and five mock HR answers this week. Small disciplined improvements usually outperform panic preparation.
         </p>

@@ -325,7 +325,7 @@ export default function PracticeTestClient({ set }: Props) {
                       className={[
                         "rounded-2xl border p-4 text-left text-sm leading-7 transition sm:text-base",
                         active
-                          ? "border-blue-400 bg-[#15233d] text-blue-950"
+                          ? "border-blue-400 bg-[#15233d] text-white"
                           : "border-slate-700 bg-[#0b1220] text-slate-300 hover:border-blue-500 hover:bg-slate-800/70 hover:text-white",
                         showCorrect
                           ? "border-slate-700 bg-emerald-950/40 text-slate-300"

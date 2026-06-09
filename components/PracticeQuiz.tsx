@@ -2,531 +2,425 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import type { PracticeSet } from "@/data/practiceTests";
+import type { GovPracticeSet, GovPracticeCategory } from "@/data/practiceTests";
 
 type Props = {
-  set: PracticeSet;
+  categorySlug: string;
+  categoryTitle: string;
+  set: GovPracticeSet;
+  categoryData?: GovPracticeCategory;
 };
 
-export default function PracticeTestClient({ set }: Props) {
+export default function PracticeQuiz({
+  categorySlug,
+  categoryTitle,
+  set,
+  categoryData,
+}: Props) {
   const [answers, setAnswers] = useState<Record<string, "A" | "B" | "C" | "D">>({});
   const [submitted, setSubmitted] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [navigatorPage, setNavigatorPage] = useState(1);
+  const [reviewPage, setReviewPage] = useState(1);
+  const [language, setLanguage] = useState<"en" | "hi" | "both">("en");
 
-  const total = set.questions.length;
-  const isLongTest = total >= 120;
-  const questionsPerPage = isLongTest ? 20 : total;
-  const totalPages = Math.max(1, Math.ceil(total / questionsPerPage));
+  const otherLiveSets =
+    categoryData?.sets.filter((s) => s.isLive && s.slug !== set.slug) || [];
+
+  const questions = useMemo(() => set.questions || [], [set.questions]);
+  const total = questions.length;
+  const isLongQuiz = total > 40;
+  const navigatorSize = isLongQuiz ? 25 : total;
+  const totalNavigatorPages = Math.max(1, Math.ceil(total / navigatorSize));
+  const reviewPageSize = 20;
+  const totalReviewPages = Math.max(1, Math.ceil(total / reviewPageSize));
   const answeredCount = Object.keys(answers).length;
   const allAnswered = answeredCount === total;
 
-  const pageQuestions = useMemo(() => {
-    if (!isLongTest) return set.questions;
-    const startIndex = (currentPage - 1) * questionsPerPage;
-    return set.questions.slice(startIndex, startIndex + questionsPerPage);
-  }, [currentPage, isLongTest, questionsPerPage, set.questions]);
+  const currentQuestion = questions[currentQuestionIndex];
 
-  const pageAnsweredCount = useMemo(
-    () => pageQuestions.filter((question) => answers[question.id]).length,
-    [answers, pageQuestions]
-  );
+  const currentNavigatorQuestions = useMemo(() => {
+    const start = (navigatorPage - 1) * navigatorSize;
+    return questions.slice(start, start + navigatorSize);
+  }, [navigatorPage, navigatorSize, questions]);
 
-  const subjectJumpLinks = useMemo(() => {
-    if (!isLongTest) return [] as Array<{ label: string; page: number; range: string }>;
-
-    const links: Array<{ label: string; page: number; range: string }> = [];
-    const seen = new Set<string>();
-
-    set.questions.forEach((question, index) => {
-      let label = "";
-
-      if (question.id.includes("-math-")) label = "Mathematics";
-      else if (question.id.includes("-phys-")) label = "Physics";
-      else if (question.id.includes("-chem-")) label = "Chemistry";
-
-      if (!label || seen.has(label)) return;
-
-      seen.add(label);
-
-      const page = Math.floor(index / questionsPerPage) + 1;
-      const startQuestion = index + 1;
-      const endQuestion = Math.min(index + 60, total);
-
-      links.push({
-        label,
-        page,
-        range: `Questions ${startQuestion}-${endQuestion}`,
-      });
-    });
-
-    return links;
-  }, [isLongTest, questionsPerPage, set.questions, total]);
-
-  const visiblePages = useMemo(() => {
-    if (!isLongTest) return [] as number[];
-
-    const startPage = Math.max(1, currentPage - 2);
-    const endPage = Math.min(totalPages, startPage + 4);
-    const firstPage = Math.max(1, endPage - 4);
-
-    return Array.from(
-      { length: endPage - firstPage + 1 },
-      (_, index) => firstPage + index
-    );
-  }, [currentPage, isLongTest, totalPages]);
+  const currentReviewQuestions = useMemo(() => {
+    const start = (reviewPage - 1) * reviewPageSize;
+    return questions.slice(start, start + reviewPageSize);
+  }, [questions, reviewPage]);
 
   const result = useMemo(() => {
+    if (!submitted) return null;
+
     let correct = 0;
-
-    const topicMap: Record<
-      string,
-      { correct: number; total: number; percent: number }
-    > = {};
-
-    for (const q of set.questions) {
-      if (!topicMap[q.topic]) {
-        topicMap[q.topic] = { correct: 0, total: 0, percent: 0 };
-      }
-
-      topicMap[q.topic].total += 1;
-
-      if (answers[q.id] === q.correctAnswer) {
-        correct += 1;
-        topicMap[q.topic].correct += 1;
-      }
+    for (const q of questions) {
+      if (answers[q.id] === q.correct) correct += 1;
     }
-
-    Object.keys(topicMap).forEach((key) => {
-      const item = topicMap[key];
-      item.percent = Math.round((item.correct / item.total) * 100);
-    });
 
     const percent = total ? Math.round((correct / total) * 100) : 0;
+    return { correct, percent };
+  }, [submitted, answers, questions, total]);
 
-    let label = "Needs Improvement";
-    let message =
-      "Review the explanations carefully and repeat the topics where your score is lower.";
-
-    if (percent >= 80) {
-      label = "Strong Performance";
-      message =
-        "You have a strong foundation here. Move to the next practice set and keep building consistency.";
-    } else if (percent >= 60) {
-      label = "Good Start";
-      message =
-        "You understand several basics well. Keep improving weak topics and practice regularly.";
-    }
-
-    return {
-      correct,
-      percent,
-      label,
-      message,
-      topicMap,
-    };
-  }, [answers, set.questions, total]);
-
-  const strongestTopics = Object.entries(result.topicMap)
-    .sort((a, b) => b[1].percent - a[1].percent)
-    .slice(0, 3);
-
-  const weakTopics = Object.entries(result.topicMap)
-    .sort((a, b) => a[1].percent - b[1].percent)
-    .slice(0, 3);
-
-  const handleSelect = (questionId: string, optionId: "A" | "B" | "C" | "D") => {
-    if (submitted) return;
-
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: optionId,
-    }));
+  const handleAnswer = (questionId: string, answer: "A" | "B" | "C" | "D") => {
+    setAnswers((prev) => ({ ...prev, [questionId]: answer }));
   };
 
-  const goToPage = (page: number) => {
-    setCurrentPage(page);
+  const handleSubmit = () => {
+    if (allAnswered) setSubmitted(true);
   };
+
+  const handleRetry = () => {
+    setAnswers({});
+    setSubmitted(false);
+    setCurrentQuestionIndex(0);
+    setNavigatorPage(1);
+    setReviewPage(1);
+  };
+
+  const jumpToQuestion = (index: number) => {
+    setCurrentQuestionIndex(index);
+    const page = Math.floor(index / navigatorSize) + 1;
+    setNavigatorPage(page);
+  };
+
+  const renderQuestionText = (q: (typeof questions)[number]) => {
+    if (language === "hi") return q.hi;
+    if (language === "both") return `${q.text} (${q.hi})`;
+    return q.text;
+  };
+
+  const renderOptionText = (opt: (typeof currentQuestion.options)[number]) => {
+    if (language === "hi") return opt.hi;
+    if (language === "both") return `${opt.text} (${opt.hi})`;
+    return opt.text;
+  };
+
+  const renderExplanation = (q: (typeof questions)[number]) => {
+    if (language === "hi") return q.explanationHi;
+    if (language === "both") return `${q.explanation} (${q.explanationHi})`;
+    return q.explanation;
+  };
+
+  if (!questions.length) {
+    return (
+      <div className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm">
+        <p className="text-center text-slate-300">
+          No questions available for this set.
+        </p>
+      </div>
+    );
+  }
+
+  if (submitted && result) {
+    return (
+      <div className="space-y-6">
+        <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 text-center shadow-sm sm:p-8">
+          <span className="inline-flex rounded-full border border-slate-700 bg-emerald-950/40 px-3 py-1 text-sm font-semibold text-slate-300">
+            Quiz Complete
+          </span>
+
+          <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Your Score: {result.percent}%
+          </h2>
+
+          <p className="mt-3 text-lg text-slate-300">
+            You scored {result.correct} out of {total}
+          </p>
+
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <button onClick={handleRetry} className="site-btn-primary px-6 py-3">
+              Retry Quiz
+            </button>
+
+            <Link
+              href={`/practice-tests/${categorySlug}`}
+              className="site-btn-secondary px-6 py-3 text-center"
+            >
+              Back to {categoryTitle} Practice
+            </Link>
+
+            <Link href="/practice-tests" className="site-btn-secondary px-6 py-3 text-center">
+              All Practice Tests
+            </Link>
+          </div>
+
+          {otherLiveSets.length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-lg font-semibold text-white">Try Another Set</h3>
+
+              <div className="mt-4 flex flex-wrap justify-center gap-2">
+                {otherLiveSets.slice(0, 3).map((otherSet) => (
+                  <Link
+                    key={otherSet.slug}
+                    href={`/practice-tests/${categorySlug}/${otherSet.slug}`}
+                    className="rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-2 text-sm font-semibold text-slate-300 hover:border-blue-500 hover:text-blue-200"
+                  >
+                    {otherSet.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+
+        <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+          <h3 className="text-2xl font-bold text-white">Review Answers</h3>
+
+          {isLongQuiz && (
+            <div className="mt-5 rounded-2xl border border-slate-700 bg-[#0b1220] p-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-slate-300">
+                  Reviewing questions {(reviewPage - 1) * reviewPageSize + 1} to{" "}
+                  {Math.min(reviewPage * reviewPageSize, total)} of {total}
+                </p>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    onClick={() => setReviewPage(Math.max(1, reviewPage - 1))}
+                    disabled={reviewPage === 1}
+                    className="rounded-lg border border-slate-700 bg-slate-800/70 px-3 py-1 text-sm font-semibold text-slate-300 hover:border-blue-500 disabled:opacity-50"
+                  >
+                    Previous Page
+                  </button>
+
+                  <span className="text-sm font-medium text-slate-300">
+                    Page {reviewPage} of {totalReviewPages}
+                  </span>
+
+                  <button
+                    onClick={() =>
+                      setReviewPage(Math.min(totalReviewPages, reviewPage + 1))
+                    }
+                    disabled={reviewPage === totalReviewPages}
+                    className="rounded-lg border border-slate-700 bg-slate-800/70 px-3 py-1 text-sm font-semibold text-slate-300 hover:border-blue-500 disabled:opacity-50"
+                  >
+                    Next Page
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="mt-5 space-y-4">
+            {currentReviewQuestions.map((q, index) => {
+              const userAnswer = answers[q.id];
+              const questionNumber = (reviewPage - 1) * reviewPageSize + index + 1;
+
+              return (
+                <div
+                  key={q.id}
+                  className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm"
+                >
+                  <h4 className="font-semibold text-white">Question {questionNumber}</h4>
+
+                  <p className="mt-3 text-sm leading-7 text-slate-300 sm:text-base">
+                    {renderQuestionText(q)}
+                  </p>
+
+                  <div className="mt-4 space-y-2">
+                    {q.options.map((opt) => (
+                      <div
+                        key={opt.id}
+                        className={`rounded-xl border p-3 text-sm leading-7 ${
+                          opt.id === q.correct
+                            ? "border-slate-700 bg-emerald-950/40 text-slate-300"
+                            : opt.id === userAnswer
+                              ? "border-slate-700 bg-rose-950/40 text-slate-300"
+                              : "border-slate-700 bg-slate-800/70 text-slate-300"
+                        }`}
+                      >
+                        <span className="font-semibold">{opt.id}.</span>{" "}
+                        {language === "hi"
+                          ? opt.hi
+                          : language === "en"
+                            ? opt.text
+                            : `${opt.text} (${opt.hi})`}
+                      </div>
+                    ))}
+                  </div>
+
+                  <p className="mt-4 rounded-2xl border border-blue-500 bg-blue-950/40 p-4 text-sm leading-7 text-blue-100">
+                    <strong className="text-white">Explanation:</strong>{" "}
+                    {renderExplanation(q)}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
-    <div className="site-page">
-      <section className="rounded-3xl border border-slate-700 bg-gradient-to-br from-[#071226] via-[#0B1730] to-[#112240] p-6 shadow-sm sm:p-8 lg:p-10">
-        <div className="inline-flex rounded-full border border-blue-500 bg-blue-950/60 px-3 py-1 text-sm font-semibold text-blue-200">
-          Free practice test • English only
-        </div>
-
-        <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
-          {set.title}
-        </h1>
-
-        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-200">
-          {set.description}
-        </p>
-
-        <div className="mt-5 flex flex-wrap gap-2 text-sm font-semibold">
-          <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
-            {set.questionCount} Questions
-          </span>
-          <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
-            ~{set.estimatedMinutes} min
-          </span>
-          <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200 capitalize">
-            {set.level}
-          </span>
-          <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
-            {set.examType}
-          </span>
-        </div>
-      </section>
-
-      <section className="rounded-3xl border border-slate-700 bg-gradient-to-br from-[#0B1730] to-[#16213E] p-6 shadow-sm sm:p-8">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div className="space-y-6">
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <h2 className="text-xl font-bold text-white">Your progress</h2>
-            <p className="mt-1 text-sm text-slate-300">
-              Answer all questions, then submit to see your score and explanations.
-            </p>
-          </div>
+            <span className="inline-flex rounded-full border border-blue-500 bg-blue-950/60 px-3 py-1 text-sm font-semibold text-blue-200">
+              Practice Quiz
+            </span>
 
-          <div className="rounded-2xl border border-slate-700 bg-[#15233d] px-4 py-3 text-sm font-semibold text-slate-200">
-            Answered: {answeredCount}/{total}
-          </div>
-        </div>
+            <h1 className="mt-4 text-2xl font-bold text-white sm:text-3xl">
+              {set.title} - {categoryTitle}
+            </h1>
 
-        {isLongTest && (
-          <div className="mt-5 rounded-2xl border border-slate-700 bg-[#15233d] p-4">
-            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <p className="text-sm font-semibold text-white">Long-test navigation</p>
-                <p className="mt-1 text-sm leading-6 text-slate-300">
-                  Use subject jump links or page buttons to move through the paper without losing answers.
-                </p>
-              </div>
+            <div className="mt-4 flex flex-wrap gap-2 text-sm font-semibold">
+              <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-blue-200">
+                Question {currentQuestionIndex + 1} of {total}
+              </span>
 
-              <div className="rounded-xl border border-slate-700 bg-[#0b1220] px-4 py-2 text-sm font-medium text-slate-200">
-                Page {currentPage} of {totalPages} • {pageAnsweredCount}/
-                {pageQuestions.length} answered on this page
-              </div>
+              <span className="rounded-full border border-slate-700 bg-emerald-950/40 px-3 py-1 text-slate-300">
+                Answered: {answeredCount}/{total}
+              </span>
+
+              {isLongQuiz && (
+                <span className="rounded-full border border-slate-600 bg-slate-800 px-3 py-1 text-slate-300">
+                  Navigator Page: {navigatorPage}/{totalNavigatorPages}
+                </span>
+              )}
             </div>
+          </div>
 
-            {subjectJumpLinks.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
-                {subjectJumpLinks.map((item) => (
-                  <button
-                    key={item.label}
-                    type="button"
-                    onClick={() => goToPage(item.page)}
-                    className={[
-                      "rounded-full border px-4 py-2 text-sm font-semibold transition",
-                      currentPage === item.page
-                        ? "border-blue-500 bg-blue-600 text-white"
-                        : "border-slate-700 bg-[#0b1220] text-slate-200 hover:border-blue-500 hover:bg-slate-800",
-                    ].join(" ")}
-                  >
-                    {item.label} • {item.range}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            <div className="mt-4 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={() => goToPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                className="rounded-xl border border-slate-700 bg-[#0b1220] px-4 py-2 text-sm font-semibold text-slate-200 hover:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                Previous Page
-              </button>
-
-              {visiblePages.map((page) => (
+          {set.bilingual && (
+            <div className="flex flex-wrap gap-2">
+              {[
+                ["en", "English"],
+                ["hi", "Hindi"],
+                ["both", "Both"],
+              ].map(([value, label]) => (
                 <button
-                  key={page}
-                  type="button"
-                  onClick={() => goToPage(page)}
-                  className={[
-                    "rounded-xl border px-4 py-2 text-sm font-semibold transition",
-                    currentPage === page
-                      ? "border-blue-500 bg-blue-600 text-white"
-                      : "border-slate-700 bg-[#0b1220] text-slate-200 hover:border-blue-500 hover:bg-slate-800",
-                  ].join(" ")}
+                  key={value}
+                  onClick={() => setLanguage(value as "en" | "hi" | "both")}
+                  className={`rounded-xl px-3 py-2 text-sm font-semibold ${
+                    language === value
+                      ? "bg-blue-600 text-white"
+                      : "border border-slate-700 bg-slate-800/70 text-slate-300 hover:border-blue-500"
+                  }`}
                 >
-                  Page {page}
+                  {label}
                 </button>
               ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-slate-700 bg-[#111827] p-6 shadow-sm sm:p-8">
+        <h2 className="text-xl font-semibold text-white">
+          Question {currentQuestionIndex + 1}
+        </h2>
+
+        <p className="mt-4 text-lg leading-8 text-slate-300">
+          {renderQuestionText(currentQuestion)}
+        </p>
+
+        <div className="mt-6 space-y-3">
+      {currentQuestion.options.map((opt) => (
+  <button
+    key={opt.id}
+    onClick={() => handleAnswer(currentQuestion.id, opt.id)}
+    className={`w-full rounded-2xl border p-4 text-left text-sm leading-7 transition sm:text-base ${
+      answers[currentQuestion.id] === opt.id
+        ? "border-blue-500 bg-gradient-to-r from-blue-900/70 to-indigo-900/70 text-white shadow-lg shadow-blue-900/20"
+        : "border-slate-700 bg-[#15233d] text-slate-200 hover:border-blue-500 hover:bg-slate-800 hover:text-white"
+    }`}
+  >
+    <span className="font-semibold">{opt.id}.</span>{" "}
+    <span className="text-inherit">{renderOptionText(opt)}</span>
+  </button>
+))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-5 shadow-sm">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <button
+            onClick={() => jumpToQuestion(Math.max(0, currentQuestionIndex - 1))}
+            disabled={currentQuestionIndex === 0}
+            className="rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-2 font-semibold text-slate-300 hover:border-blue-500 disabled:opacity-50"
+          >
+            Previous
+          </button>
+
+          <div className="flex flex-wrap justify-center gap-2">
+            {currentNavigatorQuestions.map((question, localIndex) => {
+              const index = (navigatorPage - 1) * navigatorSize + localIndex;
+
+              return (
+                <button
+                  key={index}
+                  onClick={() => jumpToQuestion(index)}
+                  className={`h-9 w-9 rounded-full text-sm font-semibold ${
+                    index === currentQuestionIndex
+                      ? "bg-blue-600 text-white"
+                      : answers[question.id]
+                        ? "bg-emerald-600 text-white"
+                        : "border border-slate-700 bg-slate-800 text-slate-300"
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            onClick={() => jumpToQuestion(Math.min(total - 1, currentQuestionIndex + 1))}
+            disabled={currentQuestionIndex === total - 1}
+            className="rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-2 font-semibold text-slate-300 hover:border-blue-500 disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
+      </section>
+
+      {isLongQuiz && (
+        <section className="rounded-2xl border border-slate-700 bg-[#111827] p-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-slate-300">
+              Showing question buttons {(navigatorPage - 1) * navigatorSize + 1} to{" "}
+              {Math.min(navigatorPage * navigatorSize, total)}.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => setNavigatorPage(Math.max(1, navigatorPage - 1))}
+                disabled={navigatorPage === 1}
+                className="rounded-lg border border-slate-700 bg-slate-800/70 px-3 py-1 text-sm font-semibold text-slate-300 hover:border-blue-500 disabled:opacity-50"
+              >
+                Prev Buttons
+              </button>
+
+              <span className="text-sm font-medium text-slate-300">
+                Page {navigatorPage} of {totalNavigatorPages}
+              </span>
 
               <button
-                type="button"
-                onClick={() => goToPage(Math.min(totalPages, currentPage + 1))}
-                disabled={currentPage === totalPages}
-                className="rounded-xl border border-slate-700 bg-[#0b1220] px-4 py-2 text-sm font-semibold text-slate-200 hover:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+                onClick={() =>
+                  setNavigatorPage(Math.min(totalNavigatorPages, navigatorPage + 1))
+                }
+                disabled={navigatorPage === totalNavigatorPages}
+                className="rounded-lg border border-slate-700 bg-slate-800/70 px-3 py-1 text-sm font-semibold text-slate-300 hover:border-blue-500 disabled:opacity-50"
               >
-                Next Page
+                Next Buttons
               </button>
             </div>
           </div>
-        )}
-      </section>
+        </section>
+      )}
 
-      <div className="space-y-5">
-        {pageQuestions.map((q, index) => {
-          const userAnswer = answers[q.id];
-          const isCorrect = userAnswer === q.correctAnswer;
-          const questionNumber = isLongTest
-            ? (currentPage - 1) * questionsPerPage + index + 1
-            : index + 1;
-
-          return (
-            <section
-              key={q.id}
-              className="rounded-3xl border border-slate-700 bg-gradient-to-br from-[#0B1730] to-[#16213E] p-6 shadow-sm"
-            >
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-blue-300">
-                    Question {questionNumber}
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold text-white">
-                    {q.question}
-                  </h3>
-                </div>
-
-                <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-wide">
-                  <span className="rounded-full border border-slate-700 bg-[#15233d] px-3 py-1 text-slate-200">
-                    {q.topic}
-                  </span>
-                  <span className="rounded-full border border-slate-700 bg-[#15233d] px-3 py-1 text-slate-200">
-                    {q.difficulty}
-                  </span>
-                </div>
-              </div>
-
-              <div className="mt-5 grid gap-3">
-                {q.options.map((opt) => {
-                  const active = userAnswer === opt.id;
-                  const showCorrect = submitted && opt.id === q.correctAnswer;
-                  const showWrong = submitted && active && opt.id !== q.correctAnswer;
-
-                  return (
-                    <button
-                      key={opt.id}
-                      type="button"
-                      onClick={() => handleSelect(q.id, opt.id)}
-                      className={[
-                        "rounded-2xl border p-4 text-left text-sm leading-7 transition sm:text-base",
-                        active
-                          ? "border-blue-500 bg-gradient-to-r from-blue-900/70 to-indigo-900/70 text-white"
-                          : "border-slate-700 bg-[#15233d] text-slate-200 hover:border-blue-500 hover:bg-slate-800 hover:text-white",
-                        showCorrect
-                          ? "border-emerald-500 bg-emerald-950/40 text-emerald-200"
-                          : "",
-                        showWrong
-                          ? "border-rose-500 bg-rose-950/40 text-rose-200"
-                          : "",
-                      ].join(" ")}
-                    >
-                      <span className="font-semibold">{opt.id}.</span>{" "}
-                      <span>{opt.text}</span>
-
-                      {submitted && showCorrect && (
-                        <span className="ml-2 font-semibold text-emerald-300">
-                          ✓ Correct
-                        </span>
-                      )}
-
-                      {submitted && showWrong && (
-                        <span className="ml-2 font-semibold text-rose-300">
-                          ✗ Your choice
-                        </span>
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {submitted && (
-                <div className="mt-5 rounded-2xl border border-blue-500 bg-blue-950/30 p-4">
-                  <p className="text-sm font-semibold text-white">Explanation</p>
-                  <p className="mt-2 text-sm leading-7 text-slate-300">
-                    {q.explanation}
-                  </p>
-
-                  <p className="mt-3 text-sm text-slate-300">
-                    <span className="font-semibold text-white">Correct answer:</span>{" "}
-                    {q.correctAnswer}
-                  </p>
-
-                  <p className="mt-1 text-sm text-slate-300">
-                    <span className="font-semibold text-white">Result:</span>{" "}
-                    <span className={isCorrect ? "text-emerald-300" : "text-rose-300"}>
-                      {isCorrect ? "Correct" : "Incorrect"}
-                    </span>
-                  </p>
-                </div>
-              )}
-            </section>
-          );
-        })}
-      </div>
-
-      <section className="rounded-3xl border border-amber-700 bg-amber-950/40 p-6 shadow-sm sm:p-8">
-        <div className="flex flex-col gap-4 sm:flex-row">
-          <button
-            type="button"
-            onClick={() => setSubmitted(true)}
-            disabled={!allAnswered}
-            className="site-btn-primary w-full px-5 py-3 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-          >
-            Submit Practice Test
-          </button>
+      {allAnswered && (
+        <section className="rounded-3xl border border-amber-700 bg-amber-950/40 p-6 text-center shadow-sm">
+          <p className="text-slate-300">All questions answered. Ready to submit?</p>
 
           <button
-            type="button"
-            onClick={() => {
-              setAnswers({});
-              setSubmitted(false);
-              setCurrentPage(1);
-            }}
-            className="site-btn-secondary w-full px-5 py-3 sm:w-auto"
+            onClick={handleSubmit}
+            className="mt-4 rounded-xl bg-emerald-600 px-6 py-3 font-semibold text-white hover:bg-emerald-700"
           >
-            Reset Answers
+            Submit Quiz
           </button>
-        </div>
-
-        {isLongTest && !allAnswered && (
-          <p className="mt-3 text-sm text-slate-300">
-            You can move page by page while your answers stay saved. Submission remains
-            available after all {total} questions are answered.
-          </p>
-        )}
-
-        {!allAnswered && (
-          <p className="mt-3 text-sm text-amber-200">
-            Please answer all questions before submitting.
-          </p>
-        )}
-      </section>
-
-      {submitted && (
-        <>
-          <section className="rounded-3xl border border-slate-700 bg-gradient-to-br from-[#0B1730] to-[#16213E] p-6 shadow-sm sm:p-8">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-              <div className="max-w-3xl">
-                <div className="inline-flex rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-sm font-semibold text-blue-200">
-                  {result.label}
-                </div>
-
-                <h2 className="mt-4 text-2xl font-bold text-white">
-                  Your practice result
-                </h2>
-
-                <p className="mt-3 text-base leading-7 text-slate-300">
-                  {result.message}
-                </p>
-              </div>
-
-              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                <div className="rounded-2xl border border-slate-700 bg-[#15233d] p-4">
-                  <p className="text-xs uppercase tracking-wide text-slate-400">
-                    Score
-                  </p>
-                  <p className="mt-1 text-2xl font-bold text-white">
-                    {result.percent}%
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-slate-700 bg-[#15233d] p-4">
-                  <p className="text-xs uppercase tracking-wide text-slate-400">
-                    Correct
-                  </p>
-                  <p className="mt-1 text-2xl font-bold text-white">
-                    {result.correct}/{total}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="grid gap-6 lg:grid-cols-2">
-            <div className="rounded-3xl border border-slate-700 bg-gradient-to-br from-[#0B1730] to-[#16213E] p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-white">Strongest topics</h3>
-
-              <div className="mt-4 space-y-4">
-                {strongestTopics.map(([topic, value]) => (
-                  <div key={topic}>
-                    <div className="flex items-center justify-between gap-3 text-sm">
-                      <span className="font-medium capitalize text-slate-200">
-                        {topic}
-                      </span>
-                      <span className="text-slate-300">{value.percent}%</span>
-                    </div>
-
-                    <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-700">
-                      <div
-                        className="h-full rounded-full bg-emerald-500"
-                        style={{ width: `${value.percent}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-3xl border border-slate-700 bg-gradient-to-br from-[#0B1730] to-[#16213E] p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-white">Topics to improve</h3>
-
-              <div className="mt-4 space-y-4">
-                {weakTopics.map(([topic, value]) => (
-                  <div key={topic}>
-                    <div className="flex items-center justify-between gap-3 text-sm">
-                      <span className="font-medium capitalize text-slate-200">
-                        {topic}
-                      </span>
-                      <span className="text-slate-300">{value.percent}%</span>
-                    </div>
-
-                    <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-700">
-                      <div
-                        className="h-full rounded-full bg-amber-500"
-                        style={{ width: `${value.percent}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="rounded-3xl border border-blue-700 bg-[#0b1220] p-6 shadow-sm sm:p-8">
-            <h3 className="text-2xl font-bold text-white">
-              Turn practice into career guidance
-            </h3>
-
-            <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">
-              Practice tests help you improve performance, but career guidance helps
-              students choose the right direction. Use both together on Nishaglobal
-              Education.
-            </p>
-
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href={
-                  set.category === "engineering-entrance"
-                    ? "/tests/engineering"
-                    : "/study-abroad"
-                }
-                className="site-btn-primary px-5 py-3 text-center"
-              >
-                {set.category === "engineering-entrance"
-                  ? "Take Engineering Career Test"
-                  : "Explore Study Abroad Pages"}
-              </Link>
-
-              <Link href="/tests" className="site-btn-secondary px-5 py-3 text-center">
-                View All Career Tests
-              </Link>
-            </div>
-          </section>
-        </>
+        </section>
       )}
     </div>
   );
