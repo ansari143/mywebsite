@@ -19,7 +19,7 @@ function CodeBlock({ code }: { code: string }) {
 
 function DiagramBlock({ lines }: { lines: string[] }) {
   return (
-    <pre className="overflow-x-auto rounded-2xl border border-blue-100 bg-[#15233d] p-4 text-sm leading-6 text-slate-800">
+    <pre className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm leading-6 text-slate-100">
       <code>{lines.join("\n")}</code>
     </pre>
   );
