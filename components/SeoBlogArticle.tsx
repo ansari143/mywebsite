@@ -181,7 +181,7 @@ export default function SeoBlogArticle({
       )}
 
       {trustInfo && (
-        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm dark:border-amber-700 dark:bg-amber-950/30">
+        <section className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-900/30 p-4 text-sm leading-7 text-white">
           <h2 className="text-xl font-bold text-black">Trust &amp; Transparency</h2>
           <div className="mt-3 space-y-2 text-sm leading-7 text-white">
             {trustInfo.author && <p><span className="font-semibold">Author:</span> {trustInfo.author}</p>}

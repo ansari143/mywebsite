@@ -366,7 +366,7 @@ export default function HomePage() {
             </li>
           </ol>
 
-          <div className="mt-6 rounded-2xl border border-amber-100 bg-amber-50 p-4 text-sm leading-7 text-white">
+          <div className="mt-8 rounded-2xl border border-amber-100 bg-[#15233d] p-4 text-sm leading-7 text-white">
             <span className="font-semibold text-white">Important:</span> The website should guide students clearly, but final career and study decisions should always be cross-checked with official sources, institutions, and exam authorities.
           </div>
         </div>
@@ -456,7 +456,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-6 shadow-sm sm:p-8">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] from-[#071226] via-[#0B1730] to-[#112240] p-6 shadow-sm sm:p-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold text-white">Study Abroad Guides</h2>
@@ -495,7 +495,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-gradient-to-br from-[#071226] via-[#0B1730] to-[#112240] p-6 text-center shadow-sm sm:p-8 lg:p-10">
+      <section className="rounded-3xl border border-gray-200 bg-[#15233d] from-[#071226] via-[#0B1730] to-[#112240] p-6 text-center shadow-sm sm:p-8 lg:p-10">
         <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700">
           Global student guidance 🌍
         </div>

@@ -14,7 +14,7 @@ export default function TrustComponent({
   disclaimer = "This content is for educational purposes only and should not be considered professional advice. Always consult with qualified experts for personal guidance."
 }: TrustComponentProps) {
   return (
-    <div className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm sm:p-8">
+    <div className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-900/30">
       <h2 className="text-2xl font-bold text-black mb-4">Trust & Transparency</h2>
       <div className="space-y-3 text-sm leading-7 text-black">
         {author && (

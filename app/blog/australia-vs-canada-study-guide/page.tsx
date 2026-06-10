@@ -155,7 +155,7 @@ export default function AustraliaVsCanadaPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm">
+      <section className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-900/30 shadow-sm">
         <h2 className="text-xl font-bold text-white">Important note</h2>
         <p className="mt-3 text-sm leading-7 text-white">
           Visa rules, work rights, tuition fees, and PR policies change frequently. Always check official government immigration
@@ -165,7 +165,7 @@ export default function AustraliaVsCanadaPage() {
         <p className="mt-2 text-sm text-slate-300">Last reviewed: April 2026 · Author: Nishaglobal Education editorial team</p>
       </section>
 
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6">
+      <section className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-900/30">
         <h2 className="text-xl font-semibold text-white">Explore deeper guides</h2>
         <div className="mt-3 flex flex-col gap-3 sm:flex-row">
           <Link href="/study-in-australia" className="rounded-xl bg-amber-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-amber-700">

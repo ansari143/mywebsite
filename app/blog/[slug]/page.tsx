@@ -353,7 +353,7 @@ export default async function BlogDetailPage({ params }: BlogPageParams) {
 
         <RelatedBlogs slugs={post.relatedSlugs ?? []} />
 
-        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm dark:border-amber-700 dark:bg-amber-950/30">
+        <section className="mt-8 rounded-2xl border border-amber-100 bg-[#15233d] p-4 text-sm leading-7 text-white">
           <h2 className="text-xl font-bold text-white">Content trust note</h2>
           <p className="mt-3 text-sm leading-7 text-white sm:text-base">
             This article is for educational guidance and student planning support. Verify final admission, fee, scholarship, and visa decisions from official sources before taking action.

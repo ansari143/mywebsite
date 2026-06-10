@@ -168,7 +168,7 @@ export default function AIRoadmapPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6">
+      <section className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-900/30">
         <h2 className="text-xl font-semibold text-white">
           Learning Advice
         </h2>

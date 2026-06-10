@@ -179,7 +179,7 @@ export default function BestCoursesUKPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 shadow-sm">
+      <section className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-900/30 shadow-sm">
         <h2 className="text-xl font-bold text-white">Important note</h2>
         <p className="mt-3 text-sm leading-7 text-white">
           University rankings, visa rules, graduate route eligibility, and tuition fees for international students change

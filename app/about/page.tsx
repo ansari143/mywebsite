@@ -140,7 +140,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 sm:p-8">
+      <section className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-900/30 sm:p-8">
         <h2 className="text-2xl font-bold text-white">Important note</h2>
         <p className="mt-4 text-sm leading-7 text-white sm:text-base">
           Nishaglobal Education provides educational and informational guidance. We are not a government body,
