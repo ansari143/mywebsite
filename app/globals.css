@@ -30,25 +30,36 @@ body {
   @apply antialiased;
   background: var(--site-bg);
   color: var(--site-text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a {
   @apply transition-colors;
 }
 
-p {
+p,
+li,
+td,
+th {
   color: var(--site-text-muted);
 }
 
-:root {
-  --site-text-muted: #e2e8f0;
-}
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+  color: var(--site-text);
+}
+
+::selection {
+  background: rgba(37, 99, 235, 0.2);
   color: var(--site-text);
 }
 
@@ -108,13 +119,13 @@ h6 {
 
 .site-page {
   @apply space-y-10 pb-8;
-  background: #15233d;
+  background: transparent;
 }
 
 .site-section {
   @apply rounded-3xl border p-6 shadow-sm sm:p-8;
   border-color: var(--site-border);
-  background: #15233d;
+  background: var(--site-surface);
 }
 
 .site-section-muted {
@@ -132,13 +143,17 @@ h6 {
 .site-section-accent-amber {
   @apply rounded-3xl border p-6 shadow-sm sm:p-8;
   border-color: #fde68a;
-  background: #640a0aee;
+  background: #fff7ed;
 }
 
 .site-card {
-  @apply rounded-2xl border p-5;
+  @apply rounded-2xl border p-5 shadow-sm;
   border-color: var(--site-border);
-  background: #15233d;
+  background: var(--site-surface);
+}
+
+.site-card strong {
+  color: var(--site-text);
 }
 
 .site-table {
@@ -166,24 +181,129 @@ h6 {
   background: color-mix(in srgb, var(--site-surface-muted) 55%, var(--site-surface));
 }
 
-@media print {
+tr.odd\:bg-\[\#0b1220\]:nth-child(odd),
+tr.even\:bg-slate-800\/60:nth-child(even),
+tr.odd\:bg-\[\#15233d\]:nth-child(odd),
+tr.even\:bg-\[\#15233d\]:nth-child(even) {
+  background-color: var(--site-surface) !important;
+}
 
-  /* hide buttons, navigation, social links */
+tr.odd\:bg-\[\#0b1220\]:nth-child(odd) .text-white,
+tr.even\:bg-slate-800\/60:nth-child(even) .text-white,
+tr.odd\:bg-\[\#15233d\]:nth-child(odd) .text-white,
+tr.even\:bg-\[\#15233d\]:nth-child(even) .text-white {
+  color: var(--site-text) !important;
+}
+
+tr.odd\:bg-\[\#0b1220\]:nth-child(odd) .text-slate-300,
+tr.even\:bg-slate-800\/60:nth-child(even) .text-slate-300,
+tr.odd\:bg-\[\#15233d\]:nth-child(odd) .text-slate-300,
+tr.even\:bg-\[\#15233d\]:nth-child(even) .text-slate-300 {
+  color: var(--site-text-muted) !important;
+}
+
+.bg-\[\#15233d\] {
+  background-color: var(--site-surface) !important;
+  color: var(--site-text) !important;
+}
+
+.bg-\[\#15233d\] .text-white,
+.bg-\[\#15233d\].text-white {
+  color: var(--site-text) !important;
+}
+
+.bg-\[\#15233d\] .text-slate-100,
+.bg-\[\#15233d\] .text-slate-200,
+.bg-\[\#15233d\] .text-slate-300 {
+  color: var(--site-text-muted) !important;
+}
+
+.bg-\[\#15233d\] .border-slate-200,
+.bg-\[\#15233d\] .border-gray-200,
+.bg-\[\#15233d\] .border-slate-700 {
+  border-color: var(--site-border) !important;
+}
+
+.bg-\[\#0b1220\],
+.bg-\[\#111827\],
+.bg-slate-900,
+.bg-slate-800,
+.bg-slate-800\/70,
+.bg-slate-800\/60,
+.bg-slate-950,
+.bg-slate-950\/70,
+.from-slate-900,
+.via-slate-900,
+.to-slate-800 {
+  background-color: var(--site-surface) !important;
+  color: var(--site-text) !important;
+}
+
+.bg-\[\#0b1220\] .text-white,
+.bg-\[\#111827\] .text-white,
+.bg-slate-900 .text-white,
+.bg-slate-800 .text-white,
+.bg-slate-950 .text-white,
+.bg-slate-900.text-white,
+.bg-slate-800.text-white,
+.bg-slate-950.text-white,
+.bg-\[\#0b1220\].text-white,
+.bg-\[\#111827\].text-white {
+  color: var(--site-text) !important;
+}
+
+.bg-\[\#0b1220\] .text-slate-100,
+.bg-\[\#0b1220\] .text-slate-200,
+.bg-\[\#0b1220\] .text-slate-300,
+.bg-\[\#111827\] .text-slate-100,
+.bg-\[\#111827\] .text-slate-200,
+.bg-\[\#111827\] .text-slate-300,
+.bg-slate-900 .text-slate-100,
+.bg-slate-900 .text-slate-200,
+.bg-slate-900 .text-slate-300,
+.bg-slate-800 .text-slate-100,
+.bg-slate-800 .text-slate-200,
+.bg-slate-800 .text-slate-300,
+.bg-slate-950 .text-slate-100,
+.bg-slate-950 .text-slate-200,
+.bg-slate-950 .text-slate-300 {
+  color: var(--site-text-muted) !important;
+}
+
+.bg-\[\#0b1220\] .border-slate-700,
+.bg-\[\#111827\] .border-slate-700,
+.bg-slate-900 .border-slate-700,
+.bg-slate-800 .border-slate-700,
+.bg-slate-950 .border-slate-700 {
+  border-color: var(--site-border) !important;
+}
+
+.home-page .text-white {
+  color: var(--site-text) !important;
+}
+
+.home-page .text-slate-100,
+.home-page .text-slate-300 {
+  color: var(--site-text-muted) !important;
+}
+
+.home-page .border-slate-700 {
+  border-color: var(--site-border) !important;
+}
+
+@media print {
   .no-print {
     display: none !important;
   }
 
-  /* make certificate full white */
   body {
     background: white !important;
     color: #111827 !important;
   }
 
-  /* remove shadows when printing */
   .shadow-sm,
   .shadow,
   .shadow-lg {
     box-shadow: none !important;
   }
-
 }

@@ -156,31 +156,84 @@ export default function HomePage() {
   };
 
   return (
-    <div className="site-page">
+    <div className="site-page home-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <section className="rounded-3xl border border-violet-200 bg-gradient-to-br from-violet-50 via-white to-cyan-50 p-6 shadow-sm sm:p-8 lg:p-10 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
+      <section className="site-section">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-white">Explore by destination</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-white sm:text-base">
+                Choose your study destination based on budget, career goals, and lifestyle. Each guide includes visa timelines, scholarship tips, and success stories from students who&apos;ve studied there.
+            </p>
+          </div>
+          <Link
+            href="/global-careers"
+            className="site-btn-primary"
+          >
+            View Global Careers
+          </Link>
+        </div>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {destinations.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="rounded-2xl border border-slate-200 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <div className="flex items-center gap-2 text-lg font-semibold text-white">
+                <span>{item.flag}</span>
+                <span>{item.name}</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-white">{item.text}</p>
+              <span className="mt-3 inline-block text-sm font-medium text-blue-700">Explore guide →</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="site-section">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-white">Popular USA Career Guides</h2>
+            <p className="mt-2 text-sm leading-7 text-white sm:text-base">
+              Most-read USA career blogs for students planning high-paying and future-ready pathways.
+            </p>
+          </div>
+          <Link href="/blog" className="text-sm font-semibold text-blue-700 hover:underline">
+            View all blogs
+          </Link>
+        </div>
+        <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {popularUSACareerGuides.map((post) => (
+            <BlogCard key={post.slug} post={post} />
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-violet-200 bg-gradient-to-br from-violet-50 via-white to-cyan-50 p-6 shadow-sm sm:p-8 lg:p-10">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-4xl">
-            <div className="inline-flex rounded-full border border-violet-200 bg-[#15233d] px-3 py-1 text-sm font-medium text-violet-700 dark:border-violet-400/50 dark:bg-slate-800 dark:text-violet-200">
+            <div className="inline-flex rounded-full border border-violet-200 bg-white px-3 py-1 text-sm font-medium text-violet-700">
               Learn AI skills for every career role with career guidance for students worldwide
             </div>
 
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl dark:text-slate-100">
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               Learn AI skills for every career role
             </h2>
 
-            <p className="mt-4 text-base leading-7 text-white sm:text-lg dark:text-slate-300">
+            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
               Whether you are a developer, QA engineer, DevOps professional, business analyst, project manager, or product manager, explore practical AI roadmaps that help you transition from traditional work to AI-driven execution.
             </p>
 
-            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-white dark:text-slate-300">
-              <span className="rounded-full bg-[#15233d] px-3 py-1 shadow-sm dark:bg-slate-800">AI Engineer roadmap</span>
-              <span className="rounded-full bg-[#15233d] px-3 py-1 shadow-sm dark:bg-slate-800">AI Agents learning path</span>
-              <span className="rounded-full bg-[#15233d] px-3 py-1 shadow-sm dark:bg-slate-800">Role-based transition plans</span>
+            <div className="mt-5 flex flex-wrap gap-2 text-sm font-medium text-slate-700">
+              <span className="rounded-full bg-white px-3 py-1 shadow-sm">AI Engineer roadmap</span>
+              <span className="rounded-full bg-white px-3 py-1 shadow-sm">AI Agents learning path</span>
+              <span className="rounded-full bg-white px-3 py-1 shadow-sm">Role-based transition plans</span>
             </div>
           </div>
 
@@ -200,6 +253,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       <TrendingBlogs title="Latest Career and Study Abroad Articles" limit={3} />
       <SkillsRoadmapPreview />
       <SkillsPreview />
@@ -372,39 +426,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="site-section">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-white">Explore by destination</h2>
-            <p className="mt-2 max-w-3xl text-sm leading-7 text-white sm:text-base">
-                Choose your study destination based on budget, career goals, and lifestyle. Each guide includes visa timelines, scholarship tips, and success stories from students who&apos;ve studied there.
-            </p>
-          </div>
-          <Link
-            href="/global-careers"
-            className="site-btn-primary"
-          >
-            View Global Careers
-          </Link>
-        </div>
-
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {destinations.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="rounded-2xl border border-slate-200 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
-            >
-              <div className="flex items-center gap-2 text-lg font-semibold text-white">
-                <span>{item.flag}</span>
-                <span>{item.name}</span>
-              </div>
-              <p className="mt-2 text-sm leading-6 text-white">{item.text}</p>
-              <span className="mt-3 inline-block text-sm font-medium text-blue-700">Explore guide →</span>
-            </Link>
-          ))}
-        </div>
-      </section>
 
       <section className="site-section">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -434,25 +455,6 @@ export default function HomePage() {
               Contact for Guidance
             </Link>
           </div>
-        </div>
-      </section>
-
-      <section className="site-section">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-white">Popular USA Career Guides</h2>
-            <p className="mt-2 text-sm leading-7 text-white sm:text-base">
-              Most-read USA career blogs for students planning high-paying and future-ready pathways.
-            </p>
-          </div>
-          <Link href="/blog" className="text-sm font-semibold text-blue-700 hover:underline">
-            View all blogs
-          </Link>
-        </div>
-        <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {popularUSACareerGuides.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
         </div>
       </section>
 

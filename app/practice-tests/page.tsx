@@ -210,19 +210,19 @@ export default function PracticeTestsHubPage() {
         </h2>
 
         <div className="mt-6 overflow-x-auto">
-          <table className="w-full border-collapse text-sm">
+          <table className="site-table">
             <thead>
-              <tr className="bg-slate-800">
-                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">
+              <tr>
+                <th>
                   Exam Type
                 </th>
-                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">
+                <th>
                   Question Format
                 </th>
-                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">
+                <th>
                   Duration
                 </th>
-                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">
+                <th>
                   Best For
                 </th>
               </tr>
@@ -230,14 +230,11 @@ export default function PracticeTestsHubPage() {
 
             <tbody>
               {comparisonRows.map((row) => (
-                <tr key={row[0]} className="odd:bg-[#0b1220] even:bg-slate-800/60">
+                <tr key={row[0]}>
                   {row.map((cell, index) => (
-                    <td
-                      key={cell}
-                      className="border border-slate-700 px-4 py-3 text-slate-300"
-                    >
+                    <td key={cell}>
                       {index === 0 ? (
-                        <strong className="text-white">{cell}</strong>
+                        <strong className="text-slate-900">{cell}</strong>
                       ) : (
                         cell
                       )}

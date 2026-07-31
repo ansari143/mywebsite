@@ -64,17 +64,17 @@ const gradients = [
 export default function SkillsPreview() {
   return (
     <section className="space-y-6">
-      <div className="rounded-3xl border border-gray-200 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/40 p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
+      <div className="rounded-3xl border border-gray-200 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/40 p-6 shadow-sm sm:p-8">
         <div className="max-w-3xl">
-          <div className="inline-flex rounded-full border border-blue-100 bg-[#15233d] px-3 py-1 text-sm font-medium text-blue-700 dark:border-blue-500/50 dark:bg-blue-900/30 dark:text-blue-200">
+          <div className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
             Future-Ready Skills
           </div>
 
-          <h2 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl dark:text-slate-100">
+          <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
             High-Demand Tech Skills
           </h2>
 
-          <p className="mt-3 text-base leading-7 text-white dark:text-slate-300">
+          <p className="mt-3 text-base leading-7 text-slate-600">
             Explore beginner-friendly guides on AI agents, LangChain, LangGraph,
             prompt engineering, and Python concepts. These modern skills are
             useful for AI projects, automation, and future tech careers.
@@ -87,7 +87,7 @@ export default function SkillsPreview() {
           <Link
             key={skill.title}
             href={skill.href}
-            className="group rounded-2xl border border-gray-200 bg-[#15233d] p-5 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-blue-400/50"
+            className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-md"
           >
             <div
               className={`inline-flex rounded-xl bg-gradient-to-br px-3 py-2 text-sm font-semibold text-black ${
@@ -97,15 +97,15 @@ export default function SkillsPreview() {
               {skill.badge}
             </div>
 
-            <h3 className="mt-4 text-lg font-semibold text-white group-hover:text-blue-700 dark:text-slate-100 dark:group-hover:text-blue-300">
+            <h3 className="mt-4 text-lg font-semibold text-slate-900 group-hover:text-blue-700">
               {skill.title}
             </h3>
 
-            <p className="mt-3 text-sm leading-6 text-white dark:text-slate-300">
+            <p className="mt-3 text-sm leading-6 text-slate-600">
               {skill.description}
             </p>
 
-            <div className="mt-4 text-sm font-medium text-blue-700 dark:text-blue-300">
+            <div className="mt-4 text-sm font-medium text-blue-700">
               Explore →
             </div>
           </Link>

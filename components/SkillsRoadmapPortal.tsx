@@ -91,28 +91,28 @@ export default function SkillsRoadmapPortal({
 
   return (
     <div className="space-y-10">
-      <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-[radial-gradient(circle_at_15%_10%,rgba(186,230,253,0.35),transparent_35%),radial-gradient(circle_at_95%_5%,rgba(191,219,254,0.4),transparent_30%),linear-gradient(140deg,#0b1f44_0%,#112f63_45%,#16428e_100%)] p-6 text-white shadow-sm sm:p-10 dark:border-slate-700">
+      <section className="site-section overflow-hidden bg-[radial-gradient(circle_at_15%_10%,rgba(219,234,254,0.7),transparent_35%),radial-gradient(circle_at_95%_5%,rgba(191,219,254,0.5),transparent_30%),linear-gradient(140deg,#eff6ff_0%,#dbeafe_45%,#f8fafc_100%)] p-6 sm:p-10">
         <div className="relative z-10 mx-auto max-w-6xl space-y-6">
-          <div className="inline-flex items-center rounded-full border border-white/30 bg-[#15233d]/10 px-4 py-1 text-sm font-semibold tracking-wide">
+          <div className="inline-flex items-center rounded-full border border-blue-200 bg-white px-4 py-1 text-sm font-semibold tracking-wide text-blue-700">
             AI Career Guidance Portal
           </div>
 
-          <div className="inline-flex items-center rounded-full border border-emerald-200/60 bg-emerald-500/20 px-4 py-1 text-sm font-semibold text-emerald-100">
+          <div className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-sm font-semibold text-emerald-700">
             🚀 Future Ready 2026
           </div>
 
           <div className="space-y-3">
-            <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
               AI Skills Roadmap for Modern Careers
             </h1>
-            <p className="max-w-3xl text-base leading-8 text-blue-100 sm:text-lg">
+            <p className="max-w-3xl text-base leading-8 text-slate-700 sm:text-lg">
               Learn step-by-step roadmaps to transform traditional careers into AI-driven careers.
             </p>
           </div>
 
-          <div className="grid gap-4 rounded-2xl border border-white/20 bg-[#15233d]/10 p-4 backdrop-blur md:grid-cols-[2fr_1fr_1fr]">
+          <div className="grid gap-4 rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm backdrop-blur md:grid-cols-[2fr_1fr_1fr]">
             <label className="block">
-              <span className="mb-2 block text-xs font-semibold uppercase tracking-widest text-blue-100">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-widest text-slate-500">
                 Search roadmap
               </span>
               <input
@@ -120,19 +120,19 @@ export default function SkillsRoadmapPortal({
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
                 placeholder="Search by role, skills, tools, or overview"
-                className="w-full rounded-xl border border-white/30 bg-[#15233d]/95 px-4 py-3 text-sm text-white outline-none ring-blue-300 transition focus:ring dark:border-slate-500 dark:bg-slate-800 dark:text-slate-100"
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-blue-300 transition focus:ring"
               />
             </label>
 
             <label className="block">
-              <span className="mb-2 block text-xs font-semibold uppercase tracking-widest text-blue-100">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-widest text-slate-500">
                 Role filter
               </span>
               <select
                 suppressHydrationWarning
                 value={roleFilter}
                 onChange={(event) => setRoleFilter(event.target.value)}
-                className="w-full rounded-xl border border-white/30 bg-[#15233d]/95 px-4 py-3 text-sm text-white outline-none ring-blue-300 transition focus:ring dark:border-slate-500 dark:bg-slate-800 dark:text-slate-100"
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-blue-300 transition focus:ring"
               >
                 <option>All Roles</option>
                 {roadmaps.map((roadmap) => (
@@ -144,7 +144,7 @@ export default function SkillsRoadmapPortal({
             </label>
 
             <div>
-              <span className="mb-2 block text-xs font-semibold uppercase tracking-widest text-blue-100">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-widest text-slate-500">
                 Career categories
               </span>
               <div className="flex flex-wrap gap-2">
@@ -156,8 +156,8 @@ export default function SkillsRoadmapPortal({
                     onClick={() => setCategoryFilter(category)}
                     className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
                       categoryFilter === category
-                        ? "border-white bg-[#15233d] text-blue-900"
-                        : "border-white/30 bg-[#15233d]/10 text-white hover:bg-[#15233d]/20"
+                        ? "border-blue-600 bg-blue-600 text-white"
+                        : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
                     }`}
                   >
                     {category}
@@ -168,7 +168,7 @@ export default function SkillsRoadmapPortal({
           </div>
 
           <div className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-widest text-blue-100">Role tabs</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">Role tabs</p>
             <div className="flex flex-wrap gap-2">
               {filteredRoadmaps.map((roadmap) => (
                 <button
@@ -181,8 +181,8 @@ export default function SkillsRoadmapPortal({
                   }}
                   className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
                     expandedRoleId === roadmap.id
-                      ? "border-white bg-[#15233d] text-blue-900"
-                      : "border-white/30 bg-[#15233d]/10 text-white hover:bg-[#15233d]/20"
+                      ? "border-blue-600 bg-blue-600 text-white"
+                      : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
                   }`}
                   aria-label={`Open ${roadmap.futureRole} roadmap`}
                 >
@@ -197,19 +197,19 @@ export default function SkillsRoadmapPortal({
               suppressHydrationWarning
               type="button"
               onClick={() => scrollToSection("roadmaps")}
-              className="rounded-xl bg-[#15233d] px-5 py-3 text-sm font-semibold text-blue-900 transition hover:bg-[#15233d]"
+              className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
             >
               Explore Roadmaps
             </button>
             <Link
               href="/blog"
-              className="rounded-xl border border-white/35 bg-[#15233d]/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#15233d]/20"
+              className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
             >
               View Blogs
             </Link>
             <Link
               href="/contact"
-              className="rounded-xl border border-white/35 bg-[#15233d]/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#15233d]/20"
+              className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
             >
               Contact Us
             </Link>
@@ -220,7 +220,7 @@ export default function SkillsRoadmapPortal({
               suppressHydrationWarning
               type="button"
               onClick={() => scrollToSection("roadmaps")}
-              className="rounded-full border border-white/25 px-3 py-1 text-xs font-medium text-blue-100 transition hover:bg-[#15233d]/15"
+              className="rounded-full border border-slate-300 px-3 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-50"
             >
               Roadmaps
             </button>
@@ -228,7 +228,7 @@ export default function SkillsRoadmapPortal({
               suppressHydrationWarning
               type="button"
               onClick={() => scrollToSection("seo-content")}
-              className="rounded-full border border-white/25 px-3 py-1 text-xs font-medium text-blue-100 transition hover:bg-[#15233d]/15"
+              className="rounded-full border border-slate-300 px-3 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-50"
             >
               Career Guidance
             </button>
@@ -236,7 +236,7 @@ export default function SkillsRoadmapPortal({
               suppressHydrationWarning
               type="button"
               onClick={() => scrollToSection("faq")}
-              className="rounded-full border border-white/25 px-3 py-1 text-xs font-medium text-blue-100 transition hover:bg-[#15233d]/15"
+              className="rounded-full border border-slate-300 px-3 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-50"
             >
               FAQ
             </button>
@@ -418,7 +418,7 @@ export default function SkillsRoadmapPortal({
                           </thead>
                           <tbody>
                             {roadmap.roadmapSteps.map((step) => (
-                              <tr key={`${roadmap.id}-${step.step}`} className="odd:bg-[#15233d] even:bg-[#15233d] dark:odd:bg-slate-900 dark:even:bg-slate-800/60">
+                              <tr key={`${roadmap.id}-${step.step}`} className="odd:bg-white even:bg-slate-50/70">
                                 <td className="border border-slate-200 px-3 py-2.5 font-semibold leading-6 text-slate-800 dark:border-slate-700/70 dark:text-slate-100">{step.step}</td>
                                 <td className="border border-slate-200 px-3 py-2.5 leading-6 text-white dark:border-slate-700/70 dark:text-slate-300">{step.phase}</td>
                                 <td className="border border-slate-200 px-3 py-2.5 leading-6 text-white dark:border-slate-700/70 dark:text-slate-300">{step.skillArea}</td>
@@ -492,7 +492,7 @@ export default function SkillsRoadmapPortal({
                           </thead>
                           <tbody>
                             {selectedResources.map((resource, resourceIndex) => (
-                              <tr key={`${roadmap.id}-${selectedTab}-table-${resource.title}`} className="odd:bg-[#15233d] even:bg-[#15233d] dark:odd:bg-slate-900 dark:even:bg-slate-800/60">
+                              <tr key={`${roadmap.id}-${selectedTab}-table-${resource.title}`} className="odd:bg-white even:bg-slate-50/70">
                                 <td className="border border-slate-200 px-3 py-2.5 font-semibold leading-6 text-white dark:border-slate-700/70 dark:text-slate-300">{resourceIndex + 1}</td>
                                 <td className="border border-slate-200 px-3 py-2.5 leading-6 text-white dark:border-slate-700/70 dark:text-slate-300">{resource.title}</td>
                                 <td className="border border-slate-200 px-3 py-2.5 leading-6 text-white dark:border-slate-700/70 dark:text-slate-300">{resource.level}</td>

@@ -119,14 +119,14 @@ export default function StudyAbroadPage() {
         <p className="mt-2 text-slate-300">Overview of key factors for top study destinations.</p>
 
         <div className="mt-6 overflow-x-auto">
-          <table className="w-full border-collapse text-sm">
+          <table className="site-table">
             <thead>
-              <tr className="bg-slate-800">
-                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">Country</th>
-                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">Avg. Tuition</th>
-                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">Degree Duration</th>
-                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">Post-Study Work</th>
-                <th className="border border-slate-700 px-4 py-3 text-left font-semibold text-white">English Requirement</th>
+              <tr>
+                <th>Country</th>
+                <th>Avg. Tuition</th>
+                <th>Degree Duration</th>
+                <th>Post-Study Work</th>
+                <th>English Requirement</th>
               </tr>
             </thead>
             <tbody>
@@ -137,10 +137,10 @@ export default function StudyAbroadPage() {
                 ["Australia", "$20,000-40,000/year", "3 years Bachelor", "2-4 years", "TOEFL/IELTS/PTE"],
                 ["Europe", "$8,000-20,000/year", "3-4 years Bachelor", "6-18 months", "Varies"],
               ].map((row) => (
-                <tr key={row[0]} className="odd:bg-[#0b1220] even:bg-slate-800/60">
+                <tr key={row[0]}>
                   {row.map((cell, index) => (
-                    <td key={cell} className="border border-slate-700 px-4 py-3 text-slate-300">
-                      {index === 0 ? <strong className="text-white">{cell}</strong> : cell}
+                    <td key={cell}>
+                      {index === 0 ? <strong className="text-slate-900">{cell}</strong> : cell}
                     </td>
                   ))}
                 </tr>

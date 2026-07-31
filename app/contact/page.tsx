@@ -1,13 +1,10 @@
 import TrustComponent from "@/components/TrustComponent";
 
 const heroClass =
-  "rounded-3xl border border-slate-700 bg-gradient-to-br from-[#071226] via-[#0B1730] to-[#112240] p-6 shadow-sm sm:p-8 lg:p-10";
+  "site-section";
 
 const sectionClass =
-  "rounded-3xl border border-slate-700 bg-gradient-to-br from-[#0B1730] to-[#16213E] p-6 shadow-sm sm:p-8";
-
-const cardClass =
-  "rounded-2xl border border-slate-700 bg-[#15233d] p-5";
+  "site-section";
 
 export const metadata = {
   title: "Contact | Nishaglobal Education",
@@ -65,11 +62,11 @@ export default function ContactPage() {
             Contact Nishaglobal Education
           </div>
 
-          <h1 className="mt-4 text-2xl font-bold text-white sm:text-4xl">
+          <h1 className="mt-4 text-2xl font-bold text-slate-900 sm:text-4xl">
             Contact Us for Career Guidance, Study Abroad Support, and Global Opportunities
           </h1>
 
-          <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
+          <p className="mt-4 text-sm leading-7 text-slate-700 sm:text-base">
             Nishaglobal Education supports students, parents, and learners who
             are exploring career options worldwide. You can contact us for
             stream selection after 10th or 12th, study abroad guidance, global
@@ -78,7 +75,7 @@ export default function ContactPage() {
             enquiries.
           </p>
 
-          <p className="mt-3 text-sm leading-7 text-slate-300 sm:text-base">
+          <p className="mt-3 text-sm leading-7 text-slate-700 sm:text-base">
             We aim to make career guidance simple, practical, and globally
             relevant for students planning their future in countries such as the
             USA, Canada, the UK, Australia, Europe, and Mexico.
@@ -86,9 +83,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8">
-        <h2 className="text-2xl font-bold text-white">How we support you</h2>
-        <p className="mt-3 text-sm leading-7 text-slate-200">
+      <section className="site-section">
+        <h2 className="text-2xl font-bold text-slate-900">How we support you</h2>
+        <p className="mt-3 text-sm leading-7 text-slate-700">
           Our team reviews messages from students and parents, and we respond within 3 working days. We do not share your personal details without consent.
         </p>
         <TrustComponent
@@ -101,16 +98,16 @@ export default function ContactPage() {
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
         <section className={sectionClass}>
-          <h2 className="text-xl font-semibold text-white">
+          <h2 className="text-xl font-semibold text-slate-900">
             Send Your Message
           </h2>
 
-          <p className="mt-2 text-sm leading-7 text-slate-300">
+          <p className="mt-2 text-sm leading-7 text-slate-700">
             Use this form if you need guidance about careers, study abroad,
             global skills, scholarships, admissions, country-specific education
             options, or partnership opportunities.
           </p>
-          <p className="mt-3 text-sm leading-7 text-slate-200">
+          <p className="mt-3 text-sm leading-7 text-slate-700">
             Please do not share sensitive personal documents here. Provide enough detail for us to understand your goals, and we will reply with helpful next steps.
           </p>
 
@@ -123,7 +120,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="name"
-                  className="mb-2 block text-sm font-medium text-white"
+                  className="mb-2 block text-sm font-medium text-slate-900"
                 >
                   Full Name
                 </label>
@@ -132,7 +129,7 @@ export default function ContactPage() {
                   name="name"
                   type="text"
                   placeholder="Enter your full name"
-                  className="w-full rounded-xl border border-slate-600 bg-[#15233d] px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                   required
                 />
               </div>
@@ -140,7 +137,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-2 block text-sm font-medium text-white"
+                  className="mb-2 block text-sm font-medium text-slate-900"
                 >
                   Email Address
                 </label>
@@ -149,7 +146,7 @@ export default function ContactPage() {
                   name="email"
                   type="email"
                   placeholder="Enter your email address"
-                  className="w-full rounded-xl border border-slate-600 bg-[#15233d] px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                   required
                 />
               </div>
@@ -159,7 +156,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="country"
-                  className="mb-2 block text-sm font-medium text-white"
+                  className="mb-2 block text-sm font-medium text-slate-900"
                 >
                   Country
                 </label>
@@ -168,21 +165,21 @@ export default function ContactPage() {
                   name="country"
                   type="text"
                   placeholder="Your country"
-                  className="w-full rounded-xl border border-slate-600 bg-[#15233d] px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="userType"
-                  className="mb-2 block text-sm font-medium text-white"
+                  className="mb-2 block text-sm font-medium text-slate-900"
                 >
                   I Am
                 </label>
                 <select
                   id="userType"
                   name="userType"
-                  className="w-full rounded-xl border border-slate-600 bg-[#15233d] px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                   defaultValue=""
                 >
                   <option value="" disabled>
@@ -202,14 +199,14 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="subject"
-                className="mb-2 block text-sm font-medium text-white"
+                className="mb-2 block text-sm font-medium text-slate-900"
               >
                 Subject
               </label>
               <select
                 id="subject"
                 name="subject"
-                className="w-full rounded-xl border border-slate-600 bg-[#15233d] px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                 required
                 defaultValue=""
               >
@@ -254,7 +251,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="message"
-                className="mb-2 block text-sm font-medium text-white"
+                className="mb-2 block text-sm font-medium text-slate-900"
               >
                 Message
               </label>
@@ -263,7 +260,7 @@ export default function ContactPage() {
                 name="message"
                 rows={7}
                 placeholder="Write your question here. You can include your class, stream, country of interest, preferred course, or the type of guidance you need."
-                className="w-full rounded-xl border border-slate-600 bg-[#15233d] px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                 required
               />
             </div>
@@ -284,8 +281,8 @@ export default function ContactPage() {
         </section>
 
         <aside className="space-y-6">
-          <section className="rounded-3xl border border-slate-700 bg-[#15233d] p-6">
-            <h2 className="text-lg font-semibold text-white">
+          <section className="site-card">
+            <h2 className="text-lg font-semibold text-slate-900">
               Contact Email
             </h2>
             <a
@@ -294,17 +291,17 @@ export default function ContactPage() {
             >
               nishaglobaleducation@gmail.com
             </a>
-            <p className="mt-3 text-sm leading-7 text-slate-200">
+            <p className="mt-3 text-sm leading-7 text-slate-700">
               Contact us directly for career support, study abroad questions,
               collaborations, partnerships, or educational enquiries.
             </p>
           </section>
 
-          <section className="rounded-3xl border border-slate-700 bg-[#15233d] p-6">
-            <h2 className="text-lg font-semibold text-slate-300">
+          <section className="site-card">
+            <h2 className="text-lg font-semibold text-slate-900">
               What You Can Contact Us About
             </h2>
-            <ul className="mt-3 space-y-2 text-sm leading-7 text-slate-300">
+            <ul className="mt-3 space-y-2 text-sm leading-7 text-slate-700">
               <li>• Stream selection after 10th or 12th</li>
               <li>• Study abroad options by country</li>
               <li>• Scholarships and admission guidance</li>
@@ -316,10 +313,10 @@ export default function ContactPage() {
           </section>
 
           <section className="rounded-3xl border border-purple-100 bg-purple-50 p-6">
-            <h2 className="text-lg font-semibold text-black">
+            <h2 className="text-lg font-semibold text-slate-900">
               Popular Countries
             </h2>
-            <ul className="mt-3 space-y-2 text-sm leading-7 text-black-300">
+            <ul className="mt-3 space-y-2 text-sm leading-7 text-slate-700">
               <li>• USA</li>
               <li>• Canada</li>
               <li>• UK</li>
@@ -329,22 +326,22 @@ export default function ContactPage() {
             </ul>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-900/30">
-            <h2 className="text-lg font-semibold text-black">
+          <section className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4">
+            <h2 className="text-lg font-semibold text-slate-900">
               Before You Message
             </h2>
-            <p className="mt-3 text-sm leading-7 text-black-300">
+            <p className="mt-3 text-sm leading-7 text-slate-700">
               To help us understand your question better, you can mention your
               current class or qualification, country of interest, preferred
               course or career, and the guidance you need.
             </p>
           </section>
 
-          <section className="rounded-3xl border border-gray-200 bg-[#15233d] p-6">
-            <h2 className="text-lg font-semibold text-white">
+          <section className="site-card">
+            <h2 className="text-lg font-semibold text-slate-900">
               Important Note
             </h2>
-            <p className="mt-3 text-sm leading-7 text-slate-300">
+            <p className="mt-3 text-sm leading-7 text-slate-700">
               Nishaglobal Education provides educational and informational
               guidance only. We do not guarantee admission, visa approval,
               scholarships, job placement, or immigration outcomes. Users should
@@ -353,12 +350,12 @@ export default function ContactPage() {
               decisions.
             </p>
           </section>
-          <section className="rounded-3xl border border-indigo-100 bg-[#15233d] p-6">
-  <h2 className="text-lg font-semibold text-white">
+          <section className="rounded-3xl border border-indigo-100 bg-indigo-50 p-6">
+  <h2 className="text-lg font-semibold text-slate-900">
     Explore Important Pages
   </h2>
 
-  <p className="mt-2 text-sm text-slate-300">
+  <p className="mt-2 text-sm text-slate-700">
     You can also explore these pages for detailed guidance before contacting us.
   </p>
 
