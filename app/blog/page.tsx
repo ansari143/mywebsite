@@ -75,22 +75,22 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
   };
 
   return (
-    <main className="space-y-10 pb-8 dark:[&_.border-gray-200]:border-slate-700 dark:[&_.border-slate-200]:border-slate-700 dark:[&_.bg-[#15233d]]:bg-slate-900 dark:[&_.bg-[#15233d]]:bg-slate-800 dark:[&_.text-white]:text-slate-100 dark:[&_.text-white]:text-slate-300 dark:[&_.text-white]:text-slate-300">
+    <main className="site-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
 
-      <section className="rounded-3xl border border-slate-200 bg-[#15233d] p-6 shadow-sm sm:p-8 dark:border-slate-700 dark:bg-slate-900">
+      <section className="site-section bg-gradient-to-br from-blue-50 via-white to-indigo-50">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white sm:text-3xl dark:text-slate-100">
+            <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
               Latest Career and Study Abroad Articles
             </h1>
-            <p className="mt-2 text-sm leading-7 text-white sm:text-base dark:text-slate-300">
+            <p className="mt-2 text-sm leading-7 text-slate-700 sm:text-base">
               Updated weekly with practical guidance on AI skills, scholarships, global careers, and study abroad strategy.
             </p>
-            <p className="mt-1 text-sm font-medium text-slate-300 dark:text-slate-300">Updated: June 2026</p>
+            <p className="mt-1 text-sm font-medium text-slate-600">Updated: June 2026</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link href="/skills" className="site-btn-primary">

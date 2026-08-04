@@ -577,16 +577,16 @@ export default function SkillsRoadmapPortal({
           Explore more educational resources and guidance pages.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
-          <Link href="/blog" className="rounded-xl border border-slate-300 bg-[#15233d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#15233d] dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
+          <Link href="/blog" className="site-btn-secondary px-4 py-2 text-sm">
             Blog
           </Link>
-          <Link href="/contact" className="rounded-xl border border-slate-300 bg-[#15233d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#15233d] dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
+          <Link href="/contact" className="site-btn-secondary px-4 py-2 text-sm">
             Contact
           </Link>
-          <Link href="/practice-tests" className="rounded-xl border border-slate-300 bg-[#15233d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#15233d] dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
+          <Link href="/practice-tests" className="site-btn-secondary px-4 py-2 text-sm">
             Practice Tests
           </Link>
-          <Link href="/career-guidance" className="rounded-xl border border-slate-300 bg-[#15233d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#15233d] dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
+          <Link href="/career-guidance" className="site-btn-secondary px-4 py-2 text-sm">
             Career Guidance
           </Link>
         </div>

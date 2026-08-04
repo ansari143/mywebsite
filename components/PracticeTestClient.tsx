@@ -322,30 +322,37 @@ export default function PracticeTestClient({ set }: Props) {
                       key={opt.id}
                       type="button"
                       onClick={() => handleSelect(q.id, opt.id)}
+                      aria-pressed={active}
                       className={[
-                        "rounded-2xl border p-4 text-left text-sm leading-7 transition sm:text-base",
+                        "rounded-2xl border p-4 text-left text-sm leading-7 transition duration-150 sm:text-base",
                         active
-                          ? "border-blue-400 bg-[#15233d] text-white"
-                          : "border-slate-700 bg-[#0b1220] text-slate-300 hover:border-blue-500 hover:bg-slate-800/70 hover:text-white",
+                          ? "border-blue-500 bg-blue-50 text-slate-900 ring-2 ring-blue-200 shadow-sm"
+                          : "border-slate-200 bg-white text-slate-700 hover:border-blue-300 hover:bg-blue-50/50 hover:text-slate-900",
                         showCorrect
-                          ? "border-slate-700 bg-emerald-950/40 text-slate-300"
+                          ? "border-emerald-300 bg-emerald-50 text-emerald-900"
                           : "",
                         showWrong
-                          ? "border-slate-700 bg-rose-950/40 text-slate-300"
+                          ? "border-rose-300 bg-rose-50 text-rose-900"
                           : "",
                       ].join(" ")}
                     >
                       <span className="font-semibold">{opt.id}.</span>{" "}
                       <span>{opt.text}</span>
 
+                      {active && !submitted && (
+                        <span className="ml-2 inline-flex items-center rounded-full bg-blue-600 px-2 py-0.5 text-xs font-semibold text-white">
+                          Selected
+                        </span>
+                      )}
+
                       {submitted && showCorrect && (
-                        <span className="ml-2 font-semibold text-slate-300">
+                        <span className="ml-2 font-semibold text-emerald-700">
                           ✓ Correct
                         </span>
                       )}
 
                       {submitted && showWrong && (
-                        <span className="ml-2 font-semibold text-slate-300">
+                        <span className="ml-2 font-semibold text-rose-700">
                           ✗ Your choice
                         </span>
                       )}

@@ -86,13 +86,13 @@ export default async function StartPage({
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
             href={`/tests/${test.slug}/quiz`}
-            className="w-full rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white hover:bg-blue-700 sm:w-auto"
+            className="site-btn-primary w-full px-5 py-3 text-center sm:w-auto"
           >
             Begin Test
           </Link>
           <Link
             href="/tests"
-            className="w-full rounded-xl border border-slate-300 px-5 py-3 text-center font-semibold text-white hover:bg-[#15233d] sm:w-auto"
+            className="site-btn-secondary w-full px-5 py-3 text-center sm:w-auto"
           >
             Back to All Tests
           </Link>

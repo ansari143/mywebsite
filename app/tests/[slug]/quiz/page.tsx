@@ -22,7 +22,7 @@ export default function QuizPage() {
   if (!test || questions.length === 0) {
     return (
       <div className="site-page">
-        <section className="rounded-3xl border border-slate-700 bg-[#0b1220] p-6 text-white shadow-sm sm:p-8">
+        <section className="site-section text-slate-700">
           Test not found.
         </section>
       </div>
@@ -117,26 +117,26 @@ export default function QuizPage() {
   return (
     <div className="site-page">
       <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
-        <section className="rounded-3xl border border-slate-700 bg-gradient-to-br from-[#071226] via-[#0B1730] to-[#112240] p-6 shadow-sm sm:p-8 lg:p-10">
-          <div className="border-b border-slate-700 pb-4">
-            <p className="text-sm font-semibold text-white">🎓 Nishaglobal Education</p>
-            <p className="mt-1 text-xs text-slate-300">
+        <section className="site-section p-6 sm:p-8 lg:p-10">
+          <div className="border-b border-slate-200 pb-4">
+            <p className="text-sm font-semibold text-slate-900">🎓 Nishaglobal Education</p>
+            <p className="mt-1 text-xs text-slate-600">
               Career guidance, mock tests, global student planning
             </p>
           </div>
 
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm font-semibold text-white">
+            <p className="text-sm font-semibold text-slate-900">
               {test.title} • Question {index + 1}/{questions.length}
             </p>
 
-            <p className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-sm font-semibold text-blue-200">
+            <p className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-800">
               Answered: {answeredCount}/{questions.length}
             </p>
           </div>
 
           <div className="mt-4 flex flex-wrap items-center gap-3">
-            <div className="inline-flex rounded-xl border border-slate-600 bg-[#15233d] p-1">
+            <div className="inline-flex rounded-xl border border-slate-200 bg-slate-50 p-1">
               {(["EN", "HI", "BOTH"] as const).map((l) => (
                 <button
                   key={l}
@@ -145,7 +145,7 @@ export default function QuizPage() {
                     "rounded-lg px-3 py-1 text-sm font-semibold transition",
                     lang === l
                       ? "bg-blue-600 text-white"
-                      : "text-slate-300 hover:bg-slate-700 hover:text-white",
+                      : "text-slate-700 hover:bg-white hover:text-slate-900",
                   ].join(" ")}
                   type="button"
                 >
@@ -154,16 +154,16 @@ export default function QuizPage() {
               ))}
             </div>
 
-            <span className="rounded-full border border-blue-500 bg-blue-950/50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-200">
+            <span className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-800">
               Instant result with topic-wise analysis
             </span>
           </div>
 
-          <h2 className="mt-6 text-xl font-bold leading-8 text-white">
+          <h2 className="mt-6 text-xl font-bold leading-8 text-slate-900">
             {(lang === "EN" || lang === "BOTH") && <div>{q.text}</div>}
 
             {(lang === "HI" || lang === "BOTH") && q.hi && (
-              <div className="mt-2 text-base font-medium leading-8 text-slate-200">
+              <div className="mt-2 text-base font-medium leading-8 text-slate-600">
                 {q.hi}
               </div>
             )}
@@ -181,8 +181,8 @@ export default function QuizPage() {
                   className={[
                     "rounded-2xl border p-4 text-left text-sm leading-7 transition active:scale-[0.99] sm:text-base",
                     active
-                      ? "border-blue-500 bg-gradient-to-r from-blue-900/70 to-indigo-900/70 text-white"
-                      : "border-slate-600 bg-[#15233d] text-slate-200 hover:border-blue-500 hover:bg-slate-800 hover:text-white",
+                      ? "border-blue-500 bg-blue-50 text-blue-900"
+                      : "border-slate-200 bg-white text-slate-700 hover:border-blue-300 hover:bg-blue-50/50 hover:text-slate-900",
                   ].join(" ")}
                 >
                   <span className="mr-2 font-bold">{opt.id}.</span>
@@ -196,7 +196,7 @@ export default function QuizPage() {
                       <span
                         className={[
                           "mt-1 text-sm",
-                          active ? "text-blue-900" : "text-slate-300",
+                          active ? "text-blue-700" : "text-slate-500",
                         ].join(" ")}
                       >
                         {opt.hi}
@@ -212,7 +212,7 @@ export default function QuizPage() {
             <button
               disabled={index === 0}
               onClick={() => setIndex((i) => Math.max(0, i - 1))}
-              className="w-full rounded-xl border border-slate-600 bg-[#15233d] px-4 py-2 font-semibold text-slate-200 transition hover:border-blue-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+              className="site-btn-secondary w-full disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
               type="button"
             >
               Previous
@@ -237,9 +237,9 @@ export default function QuizPage() {
           </div>
         </section>
 
-        <aside className="h-fit space-y-6 rounded-3xl border border-slate-700 bg-gradient-to-br from-[#071226] via-[#0B1730] to-[#112240] p-6 shadow-sm lg:sticky lg:top-24">
+        <aside className="site-section h-fit space-y-6 p-6 lg:sticky lg:top-24">
           <div>
-            <p className="font-semibold text-white">Question palette</p>
+            <p className="font-semibold text-slate-900">Question palette</p>
 
             <div className="mt-3 grid grid-cols-5 gap-2 sm:grid-cols-8 lg:grid-cols-5">
               {questions.map((qq, i) => {
@@ -254,9 +254,9 @@ export default function QuizPage() {
                     className={[
                       "rounded-lg border py-2 text-xs font-semibold transition",
                       done
-                        ? "border-emerald-500 bg-emerald-950/40 text-emerald-200"
-                        : "border-slate-600 bg-[#15233d] text-slate-300 hover:border-blue-500 hover:text-white",
-                      active ? "ring-2 ring-blue-500" : "",
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                        : "border-slate-200 bg-white text-slate-700 hover:border-blue-300 hover:text-slate-900",
+                      active ? "ring-2 ring-blue-400" : "",
                     ].join(" ")}
                   >
                     {i + 1}
@@ -266,12 +266,12 @@ export default function QuizPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-blue-500 bg-blue-950/30 p-4 text-sm leading-7 text-slate-200">
+          <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-sm leading-7 text-slate-700">
             Your result page will show score, stronger topics, areas to improve,
             action plan, and backup stream suggestions.
           </div>
 
-          <div className="rounded-2xl border border-amber-700 bg-amber-950/40 p-4 text-sm leading-7 text-slate-200">
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-7 text-slate-700">
             Guidance only: final stream or course decisions should always be verified
             with parents, teachers, counselors, and official sources.
           </div>
@@ -279,22 +279,22 @@ export default function QuizPage() {
       </div>
 
       {showMissing && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto p-4 sm:items-center sm:p-6">
           <button
             type="button"
             onClick={() => setShowMissing(false)}
-            className="absolute inset-0 bg-black/60"
+            className="absolute inset-0 bg-slate-900/45"
             aria-label="Close"
           />
 
-          <div className="relative w-full max-w-lg rounded-3xl border border-slate-700 bg-[#0b1220] p-6 shadow-xl">
+          <div className="relative my-auto w-full max-w-lg max-h-[calc(100vh-2rem)] overflow-y-auto rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:max-h-[calc(100vh-3rem)]">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-lg font-semibold text-white">
+                <p className="text-lg font-semibold text-slate-900">
                   ⚠️ Incomplete Quiz
                 </p>
 
-                <p className="mt-2 text-sm leading-7 text-slate-300">
+                <p className="mt-2 text-sm leading-7 text-slate-600">
                   You have not attempted the following questions. Please attempt
                   them before submitting.
                 </p>
@@ -303,7 +303,7 @@ export default function QuizPage() {
               <button
                 type="button"
                 onClick={() => setShowMissing(false)}
-                className="rounded-lg border border-slate-600 bg-[#15233d] px-3 py-1 text-sm font-semibold text-slate-200 hover:border-blue-500 hover:text-white"
+                className="site-btn-secondary px-3 py-1 text-sm"
               >
                 Close
               </button>
@@ -318,7 +318,7 @@ export default function QuizPage() {
                     setIndex(n - 1);
                     setShowMissing(false);
                   }}
-                  className="rounded-lg border border-amber-600 bg-amber-950/40 px-3 py-2 text-sm font-semibold text-amber-200 hover:border-amber-400"
+                  className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-semibold text-amber-800 hover:border-amber-400"
                 >
                   Question {n}
                 </button>

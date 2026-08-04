@@ -320,14 +320,20 @@ export default function PracticeQuiz({
   <button
     key={opt.id}
     onClick={() => handleAnswer(currentQuestion.id, opt.id)}
+    aria-pressed={answers[currentQuestion.id] === opt.id}
     className={`w-full rounded-2xl border p-4 text-left text-sm leading-7 transition sm:text-base ${
       answers[currentQuestion.id] === opt.id
-        ? "border-blue-500 bg-gradient-to-r from-blue-900/70 to-indigo-900/70 text-white shadow-lg shadow-blue-900/20"
-        : "border-slate-700 bg-[#15233d] text-slate-200 hover:border-blue-500 hover:bg-slate-800 hover:text-white"
+        ? "border-blue-500 bg-blue-50 text-slate-900 ring-2 ring-blue-200 shadow-sm"
+        : "border-slate-200 bg-white text-slate-700 hover:border-blue-300 hover:bg-blue-50/50 hover:text-slate-900"
     }`}
   >
     <span className="font-semibold">{opt.id}.</span>{" "}
     <span className="text-inherit">{renderOptionText(opt)}</span>
+    {answers[currentQuestion.id] === opt.id && (
+      <span className="ml-2 inline-flex items-center rounded-full bg-blue-600 px-2 py-0.5 text-xs font-semibold text-white">
+        Selected
+      </span>
+    )}
   </button>
 ))}
         </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { tests } from "@/data/tests";
 import { testInsights } from "@/data/testInsights";
@@ -451,10 +450,10 @@ export default function ResultPage() {
               <button onClick={downloadPDF} className="w-full rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700">
                 Download PDF Result
               </button>
-              <button onClick={() => window.print()} className="w-full rounded-xl border border-slate-300 px-4 py-3 font-semibold text-white hover:bg-[#15233d]">
+              <button onClick={() => window.print()} className="site-btn-secondary w-full px-4 py-3 font-semibold">
                 Print Result
               </button>
-              <Link href="/tests" className="block w-full rounded-xl border border-slate-300 px-4 py-3 text-center font-semibold text-white hover:bg-[#15233d]">
+              <Link href="/tests" className="site-btn-secondary block w-full px-4 py-3 text-center font-semibold">
                 Take Another Test
               </Link>
             </div>
@@ -462,10 +461,10 @@ export default function ResultPage() {
             {insight && (
               <>
                 <div className="mt-6 border-t border-slate-200 pt-6">
-                  <p className="text-sm font-semibold text-white">Helpful next pages</p>
+                  <p className="text-sm font-semibold text-slate-900">Helpful next pages</p>
                   <div className="mt-3 space-y-2">
                     {insight.resources.map((item) => (
-                      <Link key={item.href} href={item.href} className="block rounded-xl bg-[#15233d] px-4 py-3 text-sm text-white hover:bg-slate-100">
+                      <Link key={item.href} href={item.href} className="site-btn-secondary block px-4 py-3 text-sm">
                         {item.label}
                       </Link>
                     ))}
@@ -473,10 +472,10 @@ export default function ResultPage() {
                 </div>
 
                 <div className="mt-6 border-t border-slate-200 pt-6">
-                  <p className="text-sm font-semibold text-white">Related blog reads</p>
+                  <p className="text-sm font-semibold text-slate-900">Related blog reads</p>
                   <div className="mt-3 space-y-2">
                     {insight.blogs.map((item) => (
-                      <Link key={item.href} href={item.href} className="block rounded-xl bg-[#15233d] px-4 py-3 text-sm text-white hover:bg-slate-100">
+                      <Link key={item.href} href={item.href} className="site-btn-secondary block px-4 py-3 text-sm">
                         {item.label}
                       </Link>
                     ))}
@@ -485,7 +484,7 @@ export default function ResultPage() {
               </>
             )}
 
-            <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-white">
+            <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-slate-700">
               This result is for guidance purposes only. Final academic and career decisions should be verified with parents, teachers, counselors, institutions, and official sources.
             </div>
           </section>
@@ -498,7 +497,9 @@ export default function ResultPage() {
         style={{ border: "8px solid #D4AF37" }}
       >
         <div className="flex justify-center pt-8">
-          <Image src="/logo.png" alt="Nishaglobal Education" width={120} height={120} style={{ objectFit: "contain" }} />
+          <div className="inline-flex h-24 w-24 items-center justify-center rounded-full border-4 border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-100 text-4xl" aria-hidden="true">
+            🧭
+          </div>
         </div>
         <div className="mt-4 border-y bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-6 sm:px-10">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
